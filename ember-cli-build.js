@@ -4,6 +4,10 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+    'ember-font-awesome': {
+      useScss: true, // for ember-cli-sass
+      useLess: true  // for ember-cli-less
+    }
     // Add options here
   });
 

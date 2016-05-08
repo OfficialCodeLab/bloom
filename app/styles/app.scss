@@ -1,0 +1,349 @@
+
+/*================================================================
+  ____                                
+ |  _ \ ___  __ _ _ __    ___ ___ ___ 
+ | |_) / _ \/ _` | '__|  / __/ __/ __|
+ |  __/  __/ (_| | |    | (__\__ \__ \
+ |_|   \___|\__,_|_|     \___|___/___/
+
+================================================================
+Created By: CodeLab - www.codelab.io
+Version: v1.1
+================================================================*/
+
+@import "font-awesome";
+@import "bootstrap";
+
+
+#menu-button {
+    cursor: pointer;
+    position: absolute;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    border: 3px solid #fff;
+    display: block;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    font-size: 1.625rem;
+    padding-top: 4px;
+    z-index: 11;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+    font-size:2.55rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+#menu-button:hover {
+    color: #000;
+    border: 3px solid #000;
+
+}
+
+@font-face {
+    font-family: antipasto;
+    src: url(fonts/Antipasto_regular.otf);
+}
+
+h1, h2, h3, h4, h5, h6, p, a{
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+	color: rgb(88,89,91);
+}
+
+.fullscreen{
+	height: 100vh;
+	width: 100vw;
+	max-width: 100%;
+	max-height:100%;
+	position: relative;
+}
+.cheeseburger{
+	font-size: 50px;
+	padding: 10px 0px 0px 15px;
+	color: #fff;
+    text-shadow: 1px 1px 1px #000;
+}
+#section1{
+	background-image: url(images/couple.jpg);
+	background-size:     cover;
+	background-repeat:   no-repeat;
+	/*background-position: center center;*/
+	background-position: 0% 30%;
+	color: white;
+	max-width: 100%;
+}
+#section1 a{
+	color: white;
+}
+#section1 a:hover{
+	color: brightgreen;
+}
+
+#section2 {
+	background: rgba(29, 31, 32, 0.9);
+}
+
+/*This is the main pear logo*/
+#s1-overlay1{
+	width: 50vw;
+	height: 20vw;
+	display: block;
+	margin-left: 20%;
+	position: absolute;             
+	top: 40%;                       
+	transform: translate(0, -50%);  
+	background-image: url(images/pearwhite-full.svg);
+    background-size:     contain;      
+    background-repeat:   no-repeat;
+    background-position: center center; 
+}
+#s1-overlay2{
+	position: absolute;
+	top: 60%;
+	width: 99vw;
+	/*max-width: 100%;*/
+	margin-left: auto;
+	margin-right: auto;
+
+}
+#s2-overlay1{
+    height:230px;           
+	top: 35%;         
+    right:25%;
+    left:25%;
+    /*margin-left:-150px;*/
+	display: block;
+	/*text-align:center;*/
+	position: absolute;                
+}
+.unselectable{
+	user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+#searchbox {
+    border-radius: 25px;
+    border: 1px solid #88B991;
+    padding: 20px;
+    width: 200px;
+    height: 150px;
+}
+
+.right-inner-addon input {
+    padding-right: 30px;  
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+
+.right-inner-addon {
+    position: relative;
+    height:80px;
+}
+
+.left-inner-addon {
+    position: relative;
+    height:80px;
+}
+
+.fixed {
+  backface-visibility: hidden;
+  position: fixed;
+  z-index:2;
+  transition: transform 300ms ease;
+}
+
+.fixed-open {
+  transform: translate3d(256px, 0px, 0px);
+}
+
+.btn-hamburger {
+  position: static;
+  height: 40px;
+  width: 40px;
+}
+
+.header-hamburger {
+  background-color: red;
+  width: 100%;
+  height: 50px;
+}
+
+hr.style-two {
+    border: 0;
+    height: 1px;
+    color: #fff;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.bottom-center {
+	position: absolute; 
+    width:300px;
+    height:230px;
+    bottom:0px;
+    right:25%;
+    left:50%;
+    margin-left:-150px;	
+    text-align: center;
+}
+
+h2.white{
+	color:#fff;
+	text-align:center;
+	font-family: 'antipasto';
+    text-shadow: 1px 1px 1px #000;
+}
+
+.center-icon{
+	color:white;
+	font-size: 50px;
+	display: inline-block;
+    background: #1D1F20;
+    box-shadow: 2px 2px 2px #000;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    line-height: 100px;
+    vertical-align: middle;
+    padding-top:4px;
+}
+
+.center-icon:hover{
+    background: white;
+	color:#1D1F20;
+
+}
+
+.close-popup{
+	font-size: 55px;
+	color: white;
+}
+
+.close-popup:hover{
+	color: #ff0000;
+}
+
+.top-right-box{
+    position: absolute;
+	top:15px;
+	right:15px;
+}
+
+.login-buttons{
+	text-align:center;
+	padding-top: 30px;
+}
+
+.clbutton-main{
+	margin-top: 7px;
+	margin-bottom: 7px;
+	display: inline-block;
+	max-width: 500px;
+	min-width: 150px;
+	height: 5vh;
+	min-height: 40px;
+
+	/*Styling*/
+	border: 3px solid white;
+	border-radius: 5px;
+	color: white;
+	background-color: rgba(0,0,0,0);
+	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+
+}
+
+.clbutton-main:hover{
+	background-color:rgba(255,255,255,0.95);
+	border: 3px rgba(255,255,255,0.95);
+}
+
+.clbutton-main:active{
+	background-color: white !important;
+	border: 3px rgba(255,255,255,1);
+}
+
+.clbutton-main:focus{
+
+	background-color: white !important;
+	border: 3px rgba(255,255,255,1);
+}
+
+
+/*=======MEDIA QUERIES=======*/
+@media (max-width:1281px) { /* hi-res laptops and desktops */ 
+
+}
+@media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+/*This is the main pear logo*/
+	#s1-overlay1{
+		height: 500px;
+	}
+}
+@media (max-width:980px) { /* Custom */ 
+/*	.clbutton-main{
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		display: inline-block;
+	}*/
+}
+@media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+
+}
+@media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+/*This is the main pear logo*/
+	#s1-overlay1{
+		height: 500px;
+		width: 70vw;
+		margin-left:7%;
+	}
+}
+@media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+
+}
+@media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
+
+}
+
+.visible,
+.hidden {
+  overflow: hidden;
+  /* This container should not have padding, borders, etc. */
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
+}
+.visible > div,
+.hidden > div {
+  /* Put any padding, border, min-height, etc. here. */
+}
+.hidden > div {
+  margin-top: -10000px;
+  transition: margin-top 0s 2s;
+}
+
+
+#menu-overlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(0,0,0,0.9);
+}
