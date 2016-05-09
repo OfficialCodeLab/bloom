@@ -1,4 +1,13 @@
 <a id="menu-button" class="menu-button" {{action 'toggleMenu'}}>
 	<i id="menu-icon" class="{{'fa'}} {{if menuOpen 'fa-close' 'fa-bars'}}"></i>
 </a>
-<div id="menu-overlay" class={{if menuOpen 'visible' 'hidden' }}></div>
+<div id="menu-overlay" style="display:none">
+	<div id="menu-items">
+		<ul>
+			{{#link-to 'index'}}<h2>Home</h2>{{/link-to}}
+			{{#link-to 'index'}}<h2>About</h2>{{/link-to}}
+			{{#link-to 'index'}}<h2>Categories</h2>{{/link-to}}
+			{{#link-to 'index'}}<h2>Contact</h2>{{/link-to}}
+		</ul>
+	</div>
+</div>

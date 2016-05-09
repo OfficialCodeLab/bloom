@@ -37,9 +37,8 @@ Version: v1.1
 }
 
 #menu-button:hover {
-    color: #000;
-    border: 3px solid #000;
-
+    color: #F3EA5D;
+    border: 3px solid #F3EA5D;
 }
 
 @font-face {
@@ -346,4 +345,35 @@ h2.white{
   left: 0;
   z-index: 10;
   background: rgba(0,0,0,0.9);
+}
+
+#menu-items{
+  width: 80%; 
+  left:10%;
+  position: relative;
+  top: 50%;
+  height: 250px;
+  text-align: center;
+  transform: translateY(-125px);
+  h2 {
+    color: #F7F19D;
+    margin: 35px 0px 35px 0px;
+    font-family: antipasto;
+
+  }
+  ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+  }
+  a{    
+    text-decoration: none;
+  }
+  h2:hover{
+    color: #D9C756;
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    transform: scale(1.25);
+  }
 }
