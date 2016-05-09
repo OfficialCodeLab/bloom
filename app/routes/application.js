@@ -10,6 +10,16 @@ export default Ember.Route.extend({
    				Ember.$('#menu-overlay').fadeIn("slow");
 				this.controller.toggleProperty('menuOpen');
 			}
+		},
+		facebookLogin: function (){
+			var ref = new Firebase("https://pear-server.firebaseio.com");
+			ref.authWithOAuthPopup("facebook", function(error, authData) {
+			  if (error) {
+			    console.log("Login Failed!", error);
+			  } else {
+			    console.log("Authenticated successfully with payload:", authData);
+			  }
+			});
 		}
 	}/*,
 	
