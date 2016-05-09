@@ -260,19 +260,19 @@ h2.white{
 }
 
 .clbutton-main:hover{
-	background-color:rgba(255,255,255,0.95);
-	border: 3px rgba(255,255,255,0.95);
+	background-color:rgba(255,255,255,0.1);
+  border: 3px solid white;
 }
 
 .clbutton-main:active{
-	background-color: white !important;
-	border: 3px rgba(255,255,255,1);
+  background-color:rgba(255,255,255,0.1);
+  border: 3px solid white;
 }
 
 .clbutton-main:focus{
 
-	background-color: white !important;
-	border: 3px rgba(255,255,255,1);
+  background-color:rgba(255,255,255,0.1);
+  border: 3px solid white;
 }
 
 
@@ -348,6 +348,8 @@ h2.white{
 }
 
 #menu-items{
+
+  font-family: antipasto; 
   width: 80%; 
   left:10%;
   position: relative;
@@ -355,10 +357,9 @@ h2.white{
   height: 250px;
   text-align: center;
   transform: translateY(-125px);
-  h2 {
+  h1, h2 {
     color: #F7F19D;
     margin: 35px 0px 35px 0px;
-    font-family: antipasto;
 
   }
   ul {

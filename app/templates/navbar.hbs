@@ -3,11 +3,19 @@
 </a>
 <div id="menu-overlay" style="display:none">
 	<div id="menu-items">
+		{{#if session.isAuthenticated}}
 		<ul>
 			{{#link-to 'index'}}<h2>Home</h2>{{/link-to}}
 			{{#link-to 'index'}}<h2>About</h2>{{/link-to}}
 			{{#link-to 'index'}}<h2>Categories</h2>{{/link-to}}
 			{{#link-to 'index'}}<h2>Contact</h2>{{/link-to}}
 		</ul>
+{{!-- <a>Logged in as {{session.currentUser.displayName}}</a> --}}
+		{{else}}
+		<h1>You need to log in to continue</h1>
+			{{#link-to 'login'}}
+				<button class="clbutton-main">Log in</button>
+			{{/link-to}}
+		{{/if}}
 	</div>
 </div>

@@ -11,16 +11,33 @@ export default Ember.Route.extend({
 				this.controller.toggleProperty('menuOpen');
 			}
 		},
-		facebookLogin: function (){
+		willTransition() {
+   				Ember.$('#menu-overlay').fadeOut("slow");
+   				this.controller.set('menuOpen', false);
+		}/*
+		login: function (provider){	
 			var ref = new Firebase("https://pear-server.firebaseio.com");
-			ref.authWithOAuthPopup("facebook", function(error, authData) {
+			ref.authWithOAuthPopup(provider, function(error, authData) {
 			  if (error) {
 			    console.log("Login Failed!", error);
 			  } else {
-			    console.log("Authenticated successfully with payload:", authData);
+			    // the access token will allow us to make Open Graph API calls
+			    console.log("LOGGED IN AS: " + authData.name);
 			  }
-			});
-		}
+			});		
+		    // this.get("session").open("firebase", { provider: provider}).then((data) => {
+		    //   this.transitionTo('index');
+		  //}); 
+		}*/
+		// login: function(provider) {
+  //   	  this.get("session").open("firebase", { provider: provider}).then((data) => {
+  //         console.log("LOGGED IN AS: " + data.name);
+	 //      });
+	 //    },
+	 //    logout: function() {
+	 //      this.get("session").close();
+	 //      this.transitionTo('index');
+	 //    }
 	}/*,
 	
 	setupController: function(controller, model) {
