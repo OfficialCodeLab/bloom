@@ -370,6 +370,7 @@ h2.white{
     text-decoration: none;
   }
   h2:hover{
+    transition: 0.5s;
     color: #D9C756;
     -webkit-transform: scale(1.25);
     -moz-transform: scale(1.25);
