@@ -1,8 +1,21 @@
-{{#if session.isAuthenticated}}
-  Logged in as {{session.currentUser.displayName}}
-  <button {{action "logout"}}>Sign out</button>
-  {{outlet}}
-{{else}}
-  {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-  <button {{action "login" "facebook"}}>Sign in with Facebook</button>
-{{/if}}
+
+<main id="panel">
+         <div class="fullscreen" id="section1">
+			  <div style="text-align:center;" id="s2-overlay1">
+			    {{#if session.isAuthenticated}}					
+			  		<h1 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h1>
+					<button class="btn btn-default clbutton-main" {{action "logout"}}>Sign out</button>
+				{{else}}
+					{{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
+			  		<h1 style="text-align:center; color:#fff">Sign in: </h1>
+					<button class="btn btn-default clbutton-main" {{action "login" "facebook"}}>Using Facebook
+					</button>
+				{{/if}}
+				
+			  </div>
+		  </div>
+            <!-- Columns for the cheeseburger menu and search bar -->
+            
+            <!-- End of columns for top elements -->
+            
+      </main>
