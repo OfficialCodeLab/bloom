@@ -3,11 +3,11 @@
          <div class="fullscreen" id="section1">
 			  <div style="text-align:center;" id="s2-overlay1">
 			    {{#if session.isAuthenticated}}					
-			  		<h1 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h1>
+			  		<h2 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h2>
 					<button class="btn btn-default clbutton-main" {{action "logout"}}>Sign out</button>
 				{{else}}
 					{{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-			  		<h1 style="text-align:center; color:#fff">Sign in: </h1>
+			  		<h2 style="text-align:center; color:#fff">Sign in: </h2>
 					<button class="btn btn-default clbutton-main" {{action "login" "facebook"}}>Using Facebook
 					</button>
 				{{/if}}
