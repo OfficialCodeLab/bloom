@@ -1,22 +1,23 @@
 <a id="menu-button" {{action 'toggleMenu'}}>
-	<i id="menu-icon" class="{{'fa'}} {{if menuOpen 'fa-close' 'fa-bars'}}"></i>
+  <i id="menu-icon-o" class="fa fa-bars"></i>
+  <i id="menu-icon-c" style="display:none" class="fa fa-close"></i>
 </a>
 
 <div id="menu-overlay" style="display:none">
-	<div id="menu-items">
-	{{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
-		{{#if session.isAuthenticated}}
-		<ul>
-			{{#link-to 'index'}}<h2>Home</h2>{{/link-to}}
-			{{#link-to 'index'}}<h2>About</h2>{{/link-to}}
-			{{#link-to 'index'}}<h2>Categories</h2>{{/link-to}}
-			{{#link-to 'index'}}<h2>Contact</h2>{{/link-to}}
-		</ul>
-		{{else}}
-		<h1>You need to log in to continue</h1>
-			{{#link-to 'login'}}
-				<button class="clbutton-main">Log in</button>
-			{{/link-to}}
-		{{/if}}
-	</div>
+  <div id="menu-items">
+  {{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
+    {{#if session.isAuthenticated}}
+    <ul>
+      {{#link-to 'index'}}<h2>Home</h2>{{/link-to}}
+      {{#link-to 'index'}}<h2>About</h2>{{/link-to}}
+      {{#link-to 'index'}}<h2>Categories</h2>{{/link-to}}
+      {{#link-to 'index'}}<h2>Contact</h2>{{/link-to}}
+    </ul>
+    {{else}}
+    <h1>You need to log in to continue</h1>
+      {{#link-to 'login'}}
+        <button class="clbutton-main">Log in</button>
+      {{/link-to}}
+    {{/if}}
+  </div>
 </div>

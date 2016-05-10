@@ -2,26 +2,29 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	beforeModel: function() {
-    return this.get("session").fetch().catch(function() {});
-  },
+    	return this.get("session").fetch().catch(function() {});
+  	},
 
 	actions: {
 		toggleMenu: function () {
 			if(this.controller.get('menuOpen')){
    				Ember.$('#menu-overlay').fadeOut("slow");
+   				Ember.$('#menu-icon-c').fadeOut(0);
+   				Ember.$('#menu-icon-o').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
-				console.log("MENU CLOSED " + this.controller.get('menuOpen'));
+				console.log("TEST" + this.controller.menuOpen);
 			} else{
    				Ember.$('#menu-overlay').fadeIn("slow");
+   				Ember.$('#menu-icon-o').fadeOut(0);
+   				Ember.$('#menu-icon-c').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
-				console.log("MENU OPENED " + this.controller.get('menuOpen'));
+				console.log("TEST" + this.controller);
 			}
 		},
 		willTransition() {
    				Ember.$('#menu-overlay').fadeOut("slow");
    				this.controller.set('menuOpen', false);
-				console.log("MENU CLOSED " + this.controller.get('menuOpen'));
-		}
+		},
 	
 
 

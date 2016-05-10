@@ -5,6 +5,7 @@ export default Ember.Route.extend({
     return this.get("session").fetch().catch(function() {});
   },
   afterModel: function() {
+    //Ember.$('#menu-button').fadeOut("fast");
     return this.get("session").fetch().catch(function() {});
   },
   actions: {
@@ -16,6 +17,13 @@ export default Ember.Route.extend({
     logout: function() {
       this.get("session").close();
       this.transitionTo('index');
-    }
+    },
+    willTransition(){     
+      Ember.$('#menu-button').fadeIn("fast"); 
+    },
+    didTransition(){
+      Ember.$('#menu-button').fadeOut("fast");
+      console.log("TEST");
+    },
   }
 });
