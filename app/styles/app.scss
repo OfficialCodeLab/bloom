@@ -15,6 +15,11 @@ Version: v1.1
 @import "bootstrap";
 
 
+@font-face {
+    font-family: antipasto;
+    src: url(fonts/Antipasto_regular.otf);
+}
+
 #menu-button {
     cursor: pointer;
     position: absolute;
@@ -41,13 +46,32 @@ Version: v1.1
     border: 3px solid #F3EA5D;
 }
 
-@font-face {
-    font-family: antipasto;
-    src: url(fonts/Antipasto_regular.otf);
+.text-top-right {
+    text-decoration: none;  
+    cursor: pointer;
+    position: absolute;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    display: block;
+    text-align: center;
+    // border-radius: 25px;
+    padding-top: 4px;
+    z-index: 9;
+    // box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+    font-size:2.55rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+.text-top-right:hover {
+    text-decoration: none;  
+    color: #F3EA5D;
+    //border: 3px solid #F3EA5D;
 }
 
 h1, h2, h3, h4, h5, h6, p, a{
-	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-family: antipasto; 
 	color: rgb(88,89,91);
 }
 
@@ -242,6 +266,7 @@ h2.white{
 }
 
 .clbutton-main{
+    font-family: antipasto; 
 	margin-top: 7px;
 	margin-bottom: 7px;
 	display: inline-block;
@@ -255,7 +280,6 @@ h2.white{
 	border-radius: 5px;
 	color: white;
 	background-color: rgba(0,0,0,0);
-	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
 
 }
 
@@ -349,7 +373,6 @@ h2.white{
 
 #menu-items{
 
-  font-family: antipasto; 
   width: 80%; 
   left:10%;
   position: relative;
@@ -358,16 +381,16 @@ h2.white{
   text-align: center;
   transform: translateY(-125px);
   h1, h2 {
+    font-family: antipasto; 
     color: #F7F19D;
     margin: 35px 0px 35px 0px;
-
   }
   ul {
     list-style: none;
     padding: 0px;
     margin: 0px;
   }
-  a{    
+  a{   
     text-decoration: none;
   }
   h2:hover{

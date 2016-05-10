@@ -1,20 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+	beforeModel: function() {
+    return this.get("session").fetch().catch(function() {});
+  },
+
 	actions: {
 		toggleMenu: function () {
 			if(this.controller.get('menuOpen')){
    				Ember.$('#menu-overlay').fadeOut("slow");
 				this.controller.toggleProperty('menuOpen');
+				console.log("MENU CLOSED " + this.controller.get('menuOpen'));
 			} else{
    				Ember.$('#menu-overlay').fadeIn("slow");
 				this.controller.toggleProperty('menuOpen');
+				console.log("MENU OPENED " + this.controller.get('menuOpen'));
 			}
 		},
 		willTransition() {
    				Ember.$('#menu-overlay').fadeOut("slow");
    				this.controller.set('menuOpen', false);
-		}/*
+				console.log("MENU CLOSED " + this.controller.get('menuOpen'));
+		}
+	
+
+
+
+		/*
 		login: function (provider){	
 			var ref = new Firebase("https://pear-server.firebaseio.com");
 			ref.authWithOAuthPopup(provider, function(error, authData) {

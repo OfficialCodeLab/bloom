@@ -1,6 +1,7 @@
-<a id="menu-button" class="menu-button" {{action 'toggleMenu'}}>
+<a id="menu-button" {{action 'toggleMenu'}}>
 	<i id="menu-icon" class="{{'fa'}} {{if menuOpen 'fa-close' 'fa-bars'}}"></i>
 </a>
+
 <div id="menu-overlay" style="display:none">
 	<div id="menu-items">
 	{{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
