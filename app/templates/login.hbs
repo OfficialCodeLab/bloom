@@ -1,27 +1,52 @@
 
-
-  {{#loaded-component}}{{/loaded-component}}
-
-{{#link-to 'index'}}<a id="menu-button">
-  <i class="fa fa-arrow-left"></i>
-</a>{{/link-to}}
+  {{!-- TODO:
+ - ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
 <main id="panel">
          <div class="fullscreen" id="section1">
-			  <div style="text-align:center;" id="s2-overlay1">
-			    {{#if session.isAuthenticated}}					
-			  		<h2 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h2>
-					<button class="btn btn-default clbutton-main" {{action "logout"}}>Sign out</button>
-				{{else}}
-					{{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-			  		<h2 style="text-align:center; color:#fff">Sign in: </h2>
-					<button class="btn btn-default clbutton-main" {{action "login" "facebook"}}>Using Facebook
-					</button>
-				{{/if}}
-				
+			  <div class="fullscreen" id="section2" style="display:none;">
+				  <div class="top-right-box">
+				  	<a id="close-sec2"><i class="fa fa-times-circle-o close-popup"></i></a>
+			  </div>
+			  <div id="s2-overlay1">
+			  	<h1 style="text-align:center; color:#fff">Please Sign in to Continue</h1>
+			  	<div class="login-buttons">
+					<button type="button" class="btn btn-default clbutton-main">LOGIN</button>
+					<div class="cl-spacing" style="display: inline-block; min-width: 2%;"></div>
+					<button type="button" class="btn btn-default clbutton-main">SIGN UP</button>
+				</div>
 			  </div>
 		  </div>
             <!-- Columns for the cheeseburger menu and search bar -->
             
             <!-- End of columns for top elements -->
-            
+            <div id="splash-content">
+            <div id class="">
+            </div>
+            <div id="s1-overlay1">
+            </div>
+            <div id="s1-overlay2">
+               <div class="container">
+               </div>
+            </div>
+            <div class="bottom-center">
+              {{!-- <h2 class="white unselectable">PLAN MY WEDDING</h2> 
+              <div class="">
+               <!-- data-toggle="modal" data-target="#myModal" -->
+                {{#link-to 'login'}}<a id="open-sec2">
+                 <i class="fa fa-heart-o center-icon unselectable" aria-hidden="true"></i>
+                </a>{{/link-to}}
+               </div>--}}
+                {{#if session.isAuthenticated}}          
+            <h2 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h2>
+          <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button> 
+        {{else}}
+          {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
+            <h2 style="text-align:center; color:#fff">Sign in: </h2>
+          <button class="btn btn-default clbutton-main" {{action "login" "facebook"}}>Using Facebook
+          </button>
+        {{/if}}
+            </div>
+        	</div>
+         </div>
       </main>
+

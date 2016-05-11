@@ -20,6 +20,15 @@ Version: v1.1
     src: url(fonts/Antipasto_regular.otf);
 }
 
+@font-face {
+    font-family: antipastoLight;
+    src: url(fonts/Antipasto_extralight.otf);
+}
+@font-face {
+    font-family: antipastoBold;
+    src: url(fonts/Antipasto_extrabold.otf);
+}
+
 #menu-button {
     cursor: pointer;
     position: absolute;
@@ -365,6 +374,7 @@ h2.white{
   width: 100%;
   height: 100%;
   position: absolute;
+    position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
@@ -402,3 +412,68 @@ h2.white{
     transform: scale(1.25);
   }
 }
+
+
+
+.top-content {
+  //width: 400px;
+  margin: 50px auto;
+  padding: 25px;
+  // background: white;
+  -moz-box-shadow: 0 0 20px black;
+  -webkit-box-shadow: 0 0 20px black;
+  box-shadow: 0 0 20px black;
+  // top: 25px;
+  background: #f8fcef;
+  // -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  // -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  // box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
+  // height:100vh;
+  h1{
+  text-align: center;
+    font-size:6.5rem;
+  }
+}
+
+// html{ 
+//   background: url(images/invites.jpg) no-repeat center center fixed; 
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   -o-background-size: cover;
+//   background-size: cover;
+// }
+
+body{    
+  background-color: rgba(0,0,0,0) !important
+}
+
+#main-navbar {
+  height:50px;
+  width:100%;
+  position: absolute;
+  position: fixed;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+}
+
+.navbar {
+  position: absolute;
+  position: fixed;
+  width:100%;
+  margin-bottom: 0px !important;
+  //background-color: rgba(231, 231, 231, 0.3) !important;
+  a:hover, a:active, a:focus{
+    text-decoration: none;
+    color: #000;
+  }
+  a:visited{
+    text-decoration: none;
+    color: #777;
+  }
+} 
+
+.navbar-brand {
+  padding:2px;
+  margin-right:25px;
+}
+
+  

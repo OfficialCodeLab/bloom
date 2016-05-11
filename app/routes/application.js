@@ -12,19 +12,30 @@ export default Ember.Route.extend({
    				Ember.$('#menu-icon-c').fadeOut(0);
    				Ember.$('#menu-icon-o').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
-				console.log("TEST" + this.controller.menuOpen);
+				//console.log("TEST" + this.controller.menuOpen);
 			} else{
    				Ember.$('#menu-overlay').fadeIn("slow");
    				Ember.$('#menu-icon-o').fadeOut(0);
    				Ember.$('#menu-icon-c').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
-				console.log("TEST" + this.controller);
+				//console.log("TEST" + this.controller);
 			}
 		},
 		willTransition() {
-   				Ember.$('#menu-overlay').fadeOut("slow");
-   				this.controller.set('menuOpen', false);
+			Ember.$('#menu-overlay').fadeOut("slow");
+			Ember.$('#menu-icon-c').fadeOut(0);
+			Ember.$('#menu-icon-o').fadeIn("fast");
+			this.controller.set('menuOpen', false);
 		},
+		login: function(provider) {
+        this.get("session").open("firebase", { provider: provider}).then((data) => {
+          this.transitionTo('index');
+      	});
+	    },
+	    logout: function() {
+	      this.get("session").close();
+	      this.transitionTo('login');
+	    },
 	
 
 
