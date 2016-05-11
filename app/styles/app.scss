@@ -33,26 +33,27 @@ Version: v1.1
     cursor: pointer;
     position: absolute;
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 10px;
+    left: 10px;
     color: #fff;
-    border: 3px solid #fff;
-    display: block;
+    //border: 3px solid #000;
+    display: none;
     text-align: center;
-    height: 50px;
-    width: 50px;
+    height: 30px;
+    width: 30px;
     border-radius: 25px;
-    font-size: 1.625rem;
-    padding-top: 4px;
+    //font-size: 1.625rem;
+    //padding-top: 4px;
     z-index: 11;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
-    font-size:2.55rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+    //box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+    font-size:2.0rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
 #menu-button:hover {
-    color: #F3EA5D;
-    border: 3px solid #F3EA5D;
+    color: #eee;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    //border: 3px solid #F3EA5D;
 }
 
 .text-top-right {
@@ -328,10 +329,26 @@ h2.white{
 	}*/
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+  .navbar{
+    background-color: #F3EA5D;
+
+  }
+
+  #nav-content {
+    display: none;
+  }
+
+#menu-button {
+  display:block;
+}
 
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
 /*This is the main pear logo*/
+
+
+
+
 	#s1-overlay1{
 		height: 500px;
 		width: 70vw;
@@ -447,12 +464,12 @@ body{
   background-color: rgba(0,0,0,0) !important
 }
 
-#main-navbar {
+#navbar-sm {
   height:50px;
   width:100%;
   position: absolute;
   position: fixed;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
 }
 
 .navbar {
@@ -476,4 +493,12 @@ body{
   margin-right:25px;
 }
 
-  
+
+#loading-overlay{
+  position: absolute;
+  position: fixed;
+  z-index:100;
+  width:100%;
+  height:100%;
+  background-color: #777;
+}

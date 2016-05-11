@@ -1,5 +1,9 @@
 
+
 {{#if session.isAuthenticated}}
 	{{partial 'navbar'}} 
 {{/if}}
 {{outlet}}
+{{#if currentlyLoading}}
+<div id="loading-overlay"></div>
+{{/if}}

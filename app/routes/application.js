@@ -4,7 +4,15 @@ export default Ember.Route.extend({
 	beforeModel: function() {
     	return this.get("session").fetch().catch(function() {});
   	},
+	model: function() {
+    return new Ember.RSVP.Promise(function(resolve) {
+      setTimeout(resolve, 3000);
+    });
+  },
 
+  afterModel: function (model, transition) {
+    Ember.$('.loading-overlay').fadeOut("fast");
+  },
 	actions: {
 		toggleMenu: function () {
 			if(this.controller.get('menuOpen')){
@@ -36,6 +44,19 @@ export default Ember.Route.extend({
 	      this.get("session").close();
 	      this.transitionTo('login');
 	    },
+	    loading: function(transition, originRoute) {
+		   //this.controller.set('currentlyLoading', true);
+		   let controller = this.controllerFor('loading');
+		   alert("loading: " + controller.get('model').get('currentlyLoading'));
+	      // displayLoadingSpinner();
+
+	      // Return true to bubble this event to `FooRoute`
+	      // or `ApplicationRoute`.
+	      transition.promise.finally(function() {
+		   controller.set('currentlyLoading', false);
+		   alert("loading: " + controller.get('currentlyLoading'));
+	      });
+	    }
 	
 
 
