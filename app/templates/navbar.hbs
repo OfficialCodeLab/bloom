@@ -20,20 +20,20 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         {{#nav-link-to 'index'}}Home{{/nav-link-to}}
-        {{#nav-link-to 'about'}}About{{/nav-link-to}}
-        {{#nav-link-to 'categories'}}Categories{{/nav-link-to}}
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        
+        <li class="dropdown">{{#link-to 'categories'}}
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="#">Culinary</a></li>
+            <li><a href="#">Decor</a></li>
+            <li><a href="#">Dresses</a></li>
+            <li><a href="#">Flowers</a></li>
+            <li><a href="#">Venues</a></li>
+            <li><a href="#">Wedding Planners</a></li>
+            {{!-- <li role="separator" class="divider"></li> --}}
           </ul>
-        </li>
+        {{/link-to}}</li>
+            <li><a href="#" {{action 'showId'}}>My Wedding</a></li>
       </ul>
       {{!-- <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
@@ -42,6 +42,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form> --}}
       <ul class="nav navbar-nav navbar-right">
+        {{!-- {{#nav-link-to 'user'}}My Account{{/nav-link-to}} --}}
         <li><a href="#" {{action 'logout'}}>Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

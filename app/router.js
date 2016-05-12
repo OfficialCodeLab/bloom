@@ -10,6 +10,10 @@ Router.map(function() {
   this.route('about');
   this.route('home');
   this.route('categories');
+  this.route('user', function() {
+    this.route('new');
+    this.route('account');
+  });
 });
 
 export default Router;

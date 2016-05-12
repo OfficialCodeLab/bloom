@@ -37,26 +37,30 @@ export default Ember.Route.extend({
 		},
 		login: function(provider) {
         this.get("session").open("firebase", { provider: provider}).then((data) => {
-          this.transitionTo('index');
+          alert(JSON.stringify(data));
+          this.transitionTo('user/new');
       	});
 	    },
 	    logout: function() {
 	      this.get("session").close();
 	      this.transitionTo('login');
 	    },
-	    loading: function(transition, originRoute) {
-		   //this.controller.set('currentlyLoading', true);
-		   let controller = this.controllerFor('loading');
-		   alert("loading: " + controller.get('model').get('currentlyLoading'));
-	      // displayLoadingSpinner();
-
-	      // Return true to bubble this event to `FooRoute`
-	      // or `ApplicationRoute`.
-	      transition.promise.finally(function() {
-		   controller.set('currentlyLoading', false);
-		   alert("loading: " + controller.get('currentlyLoading'));
-	      });
+	    showId: function(){
+	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));
 	    }
+	    // loading: function(transition, originRoute) {
+		   // //this.controller.set('currentlyLoading', true);
+		   // let controller = this.controllerFor('loading');
+		   // alert("loading: " + controller.get('model').get('currentlyLoading'));
+	    //   // displayLoadingSpinner();
+
+	    //   // Return true to bubble this event to `FooRoute`
+	    //   // or `ApplicationRoute`.
+	    //   transition.promise.finally(function() {
+		   // controller.set('currentlyLoading', false);
+		   // alert("loading: " + controller.get('currentlyLoading'));
+	    //   });
+	    // }
 	
 
 
