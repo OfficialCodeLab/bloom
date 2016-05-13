@@ -20,6 +20,12 @@ export default Ember.Route.extend({
     },
     beforeModel() {
     	//Get the user ID
+	    var sesh = this.get("session").fetch().catch(function() {});
+	    if(!this.get('session.isAuthenticated')){
+	        // transition.abort();
+	        // Default back to homepage
+	        this.transitionTo('login');
+	    } 
     	let _id = this.get("session").content.currentUser.id + "";
 
     	//Check the local store first for record of the user
@@ -29,9 +35,9 @@ export default Ember.Route.extend({
     	}
 
     	//Else check server for the record
-   //  	this.store.findRecord('user', _id).then((response) => {
-			// this.transitionTo('index');
-   //  	}).catch((err)=>{});
+    	this.store.findRecord('user', _id).then((response) => {
+			 this.transitionTo('index');
+     	}).catch((err)=>{});
   },
     actions: {
     	
