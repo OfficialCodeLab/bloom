@@ -1,7 +1,12 @@
 {{#if session.isAuthenticated}}
 	{{partial 'navbar'}} 
+	<div class="pear-app-content">
+		{{outlet}}
+	</div>
+	{{else}}
+	{{outlet}}
 {{/if}}
-{{outlet}}
+
 {{#if currentlyLoading}}
 <div id="loading-overlay"></div>
 {{/if}}

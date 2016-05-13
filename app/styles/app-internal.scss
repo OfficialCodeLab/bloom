@@ -19,7 +19,53 @@
 */
 body {
 	// background-color: #272822;
+	background-color: white;
 
 	/* This is spacing to place the body underneath the navbar */
 	// margin-top: 50px;
+}
+
+/* 	
+	This class is basically a body replacement,
+	for all pages that have the navbar. If you 
+	want to set a body background colour, 
+	set it here.
+*/
+.pear-app-content{
+	margin-top: 50px;
+	// background-color: #272822; //Sublime background color
+	// bottom: 0px;
+}
+
+.category-block{
+	//Defaults
+	margin: auto;
+
+	//To create space between rows
+	margin-bottom: 15px; 
+
+	//Take up the full column
+	width: 100%;
+
+	//But not too big!
+	max-width: 360px;
+	min-height: 300px;
+
+	text-align: center;
+	background-color: #f8f8f8;
+	// border: 1px solid #272822; //Sublime color
+	border-radius: 15px;
+
+	h2{
+		padding-top: 10px;
+	}
+
+	//Card stuff
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+	&:hover{
+  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	}
+
 }
