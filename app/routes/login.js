@@ -1,8 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  beforeModel: function() {
-    return this.get("session").fetch().catch(function() {});
+  beforeModel: function(transition) {
+    var sesh = this.get("session").fetch().catch(function() {});
+    if(this.get('session.isAuthenticated')){
+        // transition.abort();
+        // Default back to homepage
+        this.transitionTo('index');
+    } 
+    return sesh;
   }
   // afterModel: function() {
   //   //Ember.$('#menu-button').fadeOut("fast");

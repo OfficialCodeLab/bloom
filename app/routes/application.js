@@ -29,7 +29,7 @@ export default Ember.Route.extend({
 				//console.log("TEST" + this.controller);
 			}
 		},
-		willTransition() {
+		didTransition() {
 			Ember.$('#menu-overlay').fadeOut("slow");
 			Ember.$('#menu-icon-c').fadeOut(0);
 			Ember.$('#menu-icon-o').fadeIn("fast");
@@ -37,8 +37,8 @@ export default Ember.Route.extend({
 		},
 		login: function(provider) {
         this.get("session").open("firebase", { provider: provider}).then((data) => {
-          alert(JSON.stringify(data));
-          this.transitionTo('user/new');
+          // alert(JSON.stringify(data));
+          this.transitionTo('user.new');
       	});
 	    },
 	    logout: function() {

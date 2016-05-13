@@ -11,8 +11,8 @@ Router.map(function() {
   this.route('home');
   this.route('categories');
   this.route('user', function() {
-    this.route('new');
-    this.route('account');
+    this.route('new', {path: '/new'});
+    this.route('account', {path: '/:user_id'});
   });
 });
 

@@ -2,34 +2,47 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model() {
-		var user = this.store.createRecord('user', {
-		  name: this.get("session").content.currentUser.cachedUserProfile.first_name,
-		  surname: this.get("session").content.currentUser.cachedUserProfile.last_name,
-		  id: this.get("session").content.currentUser.id
-		});
-	    //return this.store.createRecord('user');
-	    return user;
+		//Before creating the record, clear the DS Store
+		this.store.unloadAll('user');
+        try {
+			var user = this.store.createRecord('user', {
+			  name: this.get("session").content.currentUser.cachedUserProfile.first_name,
+			  surname: this.get("session").content.currentUser.cachedUserProfile.last_name,
+			  id: this.get("session").content.currentUser.id
+			});
+
+	    	return user;
+
+		} catch(ex){
+			//If any problems occur, just navigate to index
+			this.transitionTo('index');
+		}
     },
     beforeModel() {
-	
-      //this.set("user.name", this.get("session").content.currentUser.name);
+    	//Get the user ID
+    	let _id = this.get("session").content.currentUser.id + "";
+
+    	//Check the local store first for record of the user
+    	var localusr = this.store.peekRecord('user', _id);
+    	if(localusr !== null){
+			this.transitionTo('index');
+    	}
+
+    	//Else check server for the record
+    	this.store.findRecord('user', _id).then((response) => {
+			this.transitionTo('index');
+    	}).catch((err)=>{});
   },
     actions: {
-
-    saveUser(newUser) {
-      newUser.set("id", this.get("session").content.currentUser.id);
-
-      newUser.save().then(() => this.transitionTo('index'));
+    	
+	//If the save user button is clicked
+    saveUser(newUser) { 
+      this.transitionTo('index');
     },
 
     willTransition() {
-      // rollbackAttributes() removes the record from the store
-      // if the model 'isNew'
-      this.controller.get('model').rollbackAttributes();
-    },
-    testA(){
-
-		alert(this.controller.get('model').get("name"));
+    	//Saves the model regardless of how the user navigates
+    	this.controller.get('model').save();
     }
   }
 
