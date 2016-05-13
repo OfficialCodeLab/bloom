@@ -16,5 +16,15 @@ export default Ember.Route.extend({
 	    this._super(controller, model);
 	    Ember.set(controller, 'userext', model.userext);
 	    Ember.set(controller, 'user', model.user);
+	  },
+	  actions : {
+	  	saveUser(usr) { 
+	      usr.save().then(() => {
+        		this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
+	      });
+	    },
+	    closeMessage() {
+	    	this.controller.get('model.userext').set('responseMessage', '');
+	    }
 	  }
 });

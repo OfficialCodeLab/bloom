@@ -1,13 +1,72 @@
 <div class="container" style="padding-top:80px">
-<div class="card" style="text-align:center;">
-    <h1>My Account</h1>
-    <hr>
-    <h3>We are setting this up now</h3><br>
-    <div class="col-sm-4">
-	    <div class="profile-pic-outer">
-	    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+	<div class="card" style="text-align:center;">
+	    <h1>My Account</h1>
+	    <hr>
+	    <h3>Update your account details</h3><br>
+	    <div class="col-sm-4">
+		    <div class="profile-pic-outer">
+		    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+		    </div>
+		    <h3>{{model.user.name}} {{model.user.surname}}</h3>
+		    <p><i>Registered user</i></p>
 	    </div>
-    </div>
+	    <div class="col-sm-8">
+			<div class="form-horizontal">
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">Email</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.email class="form-control" placeholder="Your Email Address"}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">Cellphone Number</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.cell class="form-control" placeholder="So that we can call you when we are lonely :("}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">Address Line 1</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.addressL1 class="form-control" placeholder="Your Address"}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">Address Line 2</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.addressL2 class="form-control" placeholder="Your Address"}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">City</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.city class="form-control" placeholder="Your City"}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
+			        <div class="form-group has-feedback">
+			            <label class="col-sm-3 control-label">Postal Code</label>
+			            <div class="col-sm-6">
+			              {{input type="text" value=model.user.postalCode class="form-control" placeholder="Your Postal Code"}}
+			              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			            </div>
+			        </div>
 
-</div>
+			        {{#if model.userext.responseMessage}}
+				      <div class="col-sm-offset-3 col-sm-6 alert alert-success" {{action 'closeMessage'}}>{{model.userext.responseMessage}}
+				      <p class="tiny-text">Tap this message to close it</p></div>
+				    {{/if}}
+
+			        <div class="form-group">
+			            <div class="col-sm-offset-5 col-sm-4">
+			                <button type="submit" style="width:100%" class="btn btn-success-thin" {{action 'saveUser' model.user}}>Save Changes</button>
+			            </div>
+			        </div>
+			    </div>
+	    </div>
+
+	</div>
 </div>
