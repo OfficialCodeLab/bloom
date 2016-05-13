@@ -29,9 +29,9 @@ export default Ember.Route.extend({
     	}
 
     	//Else check server for the record
-   //  	this.store.findRecord('user', _id).then((response) => {
-			// this.transitionTo('index');
-   //  	}).catch((err)=>{});
+    	this.store.findRecord('user', _id).then((response) => {
+			 this.transitionTo('index');
+     	}).catch((err)=>{});
   },
     actions: {
     	
