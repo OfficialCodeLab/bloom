@@ -560,3 +560,51 @@ body{
   background-color: #4CAE4C;
   border-color: #4CAE4C;
 }
+
+.card {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    //height: 304px;
+    min-height: 304px;
+    will-change: transform;
+    margin: 8px;
+    position: relative;
+    border-radius: 5px;
+    overflow:  hidden;
+    background-color: #fafafa;
+    //height: 35%;
+    //width: 344px;
+    transition: all 400ms cubic-bezier(0.165, 0.840, 0.440, 1.000); 
+    // hover status
+    &:hover {
+      cursor: pointer; }
+} 
+
+.profile-pic {
+  overflow:hidden;
+  left: 10px;
+  height:150px;
+  width:150px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  img {
+    min-height:100%;
+    min-width:100%;
+  }
+}
+
+.profile-pic-outer {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #fff;
+  padding: 10px 10px 10px 10px;
+  height:170px;
+  width:170px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
+  box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
+
+}

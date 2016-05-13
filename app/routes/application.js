@@ -5,9 +5,18 @@ export default Ember.Route.extend({
     	return this.get("session").fetch().catch(function() {});
   	},
 	model: function() {
-    return new Ember.RSVP.Promise(function(resolve) {
-      setTimeout(resolve, 3000);
-    });
+		//check server for the record of self
+		try
+		{
+			let _id = this.get("session").content.currentUser.id + "";
+			this.store.findRecord('user', _id).then((response) => {
+				//this.transitionTo('index');
+			}).catch((err)=>{});			
+		} catch(ex) {}
+		
+	    return new Ember.RSVP.Promise(function(resolve) {
+	      setTimeout(resolve, 3000);
+	    });
   },
 
   afterModel: function (model, transition) {
