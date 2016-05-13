@@ -20,6 +20,12 @@ export default Ember.Route.extend({
     },
     beforeModel() {
     	//Get the user ID
+	    var sesh = this.get("session").fetch().catch(function() {});
+	    if(!this.get('session.isAuthenticated')){
+	        // transition.abort();
+	        // Default back to homepage
+	        this.transitionTo('login');
+	    } 
     	let _id = this.get("session").content.currentUser.id + "";
 
     	//Check the local store first for record of the user
