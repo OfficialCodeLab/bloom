@@ -39,6 +39,9 @@ export default Ember.Route.extend({
 			 this.transitionTo('index');
      	}).catch((err)=>{});
   },
+  didInsertElement(){
+  	Ember.$('#usernew').fadeIn("fast");
+  },
     actions: {
     	
 	//If the save user button is clicked
