@@ -39,20 +39,20 @@ export default Ember.Route.extend({
 			 this.transitionTo('index');
      	}).catch((err)=>{});
   },
-  didInsertElement(){
-  	Ember.$('#usernew').fadeIn("fast");
-  },
     actions: {
     	
-	//If the save user button is clicked
-    saveUser(newUser) { 
-      this.transitionTo('index');
-    },
+		//If the save user button is clicked
+		saveUser(newUser) { 
+			this.transitionTo('index');
+		},
 
-    willTransition() {
-    	//Saves the model regardless of how the user navigates
-    	this.controller.get('model').save();
-    }
+		willTransition() {
+			//Saves the model regardless of how the user navigates
+			this.controller.get('model').save();
+		},
+		didInsertElement(){
+			Ember.$('#usernew').fadeIn("fast");
+		}
   }
 
 });
