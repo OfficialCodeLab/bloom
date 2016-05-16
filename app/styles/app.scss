@@ -17,6 +17,35 @@ Version: v1.1
 @import "app-internal.scss";
 
 
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+} 
+
+@mixin box-shadow($var) {
+  -webkit-box-shadow: $var;
+     -moz-box-shadow: $var;
+      -ms-box-shadow: $var;
+          box-shadow: $var;
+} 
+
+
+@mixin transform($var) {
+    -webkit-transform: $var;
+    -moz-transform: $var;
+    -o-transform: $var;
+    transform: $var;
+}
+
+@mixin text-shadow($var) {  
+  -webkit-text-shadow: $var;
+     -moz-text-shadow: $var;
+      -ms-text-shadow: $var;
+          text-shadow: $var;
+}
+
 @font-face {
     font-family: antipasto;
     src: url(fonts/Antipasto_regular.otf);
@@ -31,6 +60,7 @@ Version: v1.1
     src: url(fonts/Antipasto_extrabold.otf);
 }
 
+
 #menu-button {
     cursor: pointer;
     position: absolute;
@@ -43,18 +73,18 @@ Version: v1.1
     text-align: center;
     height: 30px;
     width: 30px;
-    border-radius: 25px;
+    @include border-radius (25px);
     //font-size: 1.625rem;
     //padding-top: 4px;
     z-index: 11;
     //box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
     font-size:2.0rem;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    @include text-shadow (1px 1px 1px rgba(0, 0, 0, 0.4));
 }
 
 #menu-button:hover {
     color: #eee;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    @include text-shadow (1px 1px 2px rgba(0, 0, 0, 0.7));
     //border: 3px solid #F3EA5D;
 }
 
@@ -73,7 +103,7 @@ Version: v1.1
     z-index: 9;
     // box-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
     font-size:2.55rem;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+    @include text-shadow (1px 1px 2px rgba(0, 0, 0, 1));
 }
 
 .text-top-right:hover {
@@ -94,14 +124,24 @@ h1, h2, h3, h4, h5, h6, p, a{
 	max-height:100%;
 	position: relative;
 }
+
+.fullscreen-overlay {
+  z-index: 10px;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100%;
+  max-height:100%;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .cheeseburger{
 	font-size: 50px;
 	padding: 10px 0px 0px 15px;
 	color: #fff;
-    text-shadow: 1px 1px 1px #000;
+    @include text-shadow(1px 1px 1px #000);
 }
 #section1{
-	background-image: url(images/couple.jpg);
+	background-image: url(images/splash1.jpg);
 	background-size:     cover;
 	background-repeat:   no-repeat;
 	/*background-position: center center;*/
@@ -122,14 +162,16 @@ h1, h2, h3, h4, h5, h6, p, a{
 
 /*This is the main pear logo*/
 #s1-overlay1{
+  //background-color: rgba(0, 0, 0, 0.15);
+  @include border-radius (3px);
 	width: 50vw;
 	height: 20vw;
+  margin-left: 25vw;
 	display: block;
-	margin-left: 20%;
 	position: absolute;             
 	top: 40%;                       
-	transform: translate(0, -50%);  
-	background-image: url(images/pearwhite-full.svg);
+	@include transform (translate(0, -50%));  
+	background-image: url(images/pear-splash.png);
     background-size:     contain;      
     background-repeat:   no-repeat;
     background-position: center center; 
@@ -162,7 +204,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 }
 
 #searchbox {
-    border-radius: 25px;
+    @include border-radius (25px);
     border: 1px solid #88B991;
     padding: 20px;
     width: 200px;
@@ -197,7 +239,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 }
 
 .fixed-open {
-  transform: translate3d(256px, 0px, 0px);
+    @include transform (translate3d(256px, 0px, 0px));
 }
 
 .btn-hamburger {
@@ -221,6 +263,7 @@ hr.style-two {
 
 .bottom-center {
 	position: absolute; 
+    @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
     width:300px;
     height:230px;
     bottom:0px;
@@ -234,7 +277,7 @@ h2.white{
 	color:#fff;
 	text-align:center;
 	font-family: 'antipasto';
-    text-shadow: 1px 1px 1px #000;
+  @include text-shadow (1px 1px 1px #000);
 }
 
 .center-icon{
@@ -242,10 +285,10 @@ h2.white{
 	font-size: 50px;
 	display: inline-block;
     background: #1D1F20;
-    box-shadow: 2px 2px 2px #000;
+    @include box-shadow (2px 2px 2px #000);
     width: 100px;
     height: 100px;
-    border-radius: 50%;
+    @include border-radius (50%);
     line-height: 100px;
     vertical-align: middle;
     padding-top:4px;
@@ -279,6 +322,9 @@ h2.white{
 
 .clbutton-main{
     font-family: antipasto; 
+    font-size: 18px;
+    @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+    @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
 	margin-top: 7px;
 	margin-bottom: 7px;
 	display: inline-block;
@@ -289,26 +335,14 @@ h2.white{
 
 	/*Styling*/
 	border: 3px solid white;
-	border-radius: 5px;
+	@include border-radius (5px);
 	color: white;
 	background-color: rgba(0,0,0,0);
-
-}
-
-.clbutton-main:hover{
-	background-color:rgba(255,255,255,0.1);
-  border: 3px solid white;
-}
-
-.clbutton-main:active{
-  background-color:rgba(255,255,255,0.1);
-  border: 3px solid white;
-}
-
-.clbutton-main:focus{
-
-  background-color:rgba(255,255,255,0.1);
-  border: 3px solid white;
+  &:active, &:hover, &:focus {
+    background-color:rgba(255,255,255,0.1);
+    border: 4px solid white;
+    color: white;
+  }
 }
 
 
@@ -319,7 +353,7 @@ h2.white{
 @media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
 /*This is the main pear logo*/
 	#s1-overlay1{
-		height: 500px;
+		height: 300px;
 	}
 }
 @media (max-width:980px) { /* Custom */ 
@@ -352,9 +386,9 @@ h2.white{
 
 
 	#s1-overlay1{
-		height: 500px;
+		height: 250px;
 		width: 70vw;
-		margin-left:7%;
+		margin-left:15vw;
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
@@ -425,10 +459,7 @@ h2.white{
   h2:hover{
     transition: 0.5s;
     color: #D9C756;
-    -webkit-transform: scale(1.25);
-    -moz-transform: scale(1.25);
-    -o-transform: scale(1.25);
-    transform: scale(1.25);
+    @include transform (scale(1.25));
   }
 }
 
@@ -439,9 +470,7 @@ h2.white{
   margin: 50px auto;
   padding: 25px;
   // background: white;
-  -moz-box-shadow: 0 0 20px black;
-  -webkit-box-shadow: 0 0 20px black;
-  box-shadow: 0 0 20px black;
+  @include box-shadow (0 0 20px black);
   // top: 25px;
   background: #f8fcef;
   // -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.75);
@@ -472,7 +501,7 @@ body{
   width:100%;
   position: absolute;
   position: fixed;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 1);
+  @include box-shadow (0px 0px 1px rgba(0, 0, 0, 1));
 }
 
 .navbar {
@@ -571,15 +600,15 @@ body{
     will-change: transform;
     margin: 8px;
     position: relative;
-    border-radius: 5px;
+    @include border-radius (5px);
     overflow:  hidden;
     background-color: #fafafa;
     //height: 35%;
     //width: 344px;
     transition: all 400ms cubic-bezier(0.165, 0.840, 0.440, 1.000); 
     // hover status
-    &:hover {
-      cursor: pointer; }
+    // &:hover {
+    //   cursor: pointer; }
 } 
 
 .profile-pic {
@@ -587,9 +616,7 @@ body{
   left: 10px;
   height:150px;
   width:150px;
-  border-radius:50%;
-  -moz-border-radius:50%;
-  -webkit-border-radius:50%;
+  @include border-radius(50%);
   img {
     min-height:100%;
     min-width:100%;
@@ -597,21 +624,52 @@ body{
 }
 
 .profile-pic-outer {
+  &:hover {
+    cursor: pointer; 
+    @include box-shadow(0px 0px 8px 2px rgba(0,0,0,0.7));
+    @include transform (scale(1.05));
+   }
   margin-left: auto;
   margin-right: auto;
   background-color: #fff;
   padding: 10px 10px 10px 10px;
   height:170px;
   width:170px;
-  border-radius:50%;
-  -moz-border-radius:50%;
-  -webkit-border-radius:50%;
-  -webkit-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
-  -moz-box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
-  box-shadow: 0px 0px 8px 1px rgba(0,0,0,0.6);
-
+  @include border-radius(50%);
+  @include box-shadow(0px 0px 8px 1px rgba(0,0,0,0.6));
 }
 
 .tiny-text {
   font-size: 11px;
+}
+ 
+/*
+@mixin ($var) {
+  -webkit-: $var;
+     -moz-: $var;
+      -ms-: $var;
+          : $var;
+} */
+
+#about-top {
+  height: 200px;
+  padding-top: 50px;
+  background-color: #fff;
+  z-index: 3;
+  //@include box-shadow(1px 2px 7px 2px rgba(0,0,0,0.75));  
+}
+
+.about-section-grey {
+  z-index: 2;
+  height: 500px;
+  background-color: #EEE;
+  @include box-shadow(inset 1px 0px 3px 1px rgba(0,0,0,0.5));  
+
+}
+
+.about-section-white {
+  z-index: 3;
+  height: 500px;
+  background-color: #fff;
+  //@include box-shadow(1px 2px 7px 2px rgba(0,0,0,0.75));  
 }
