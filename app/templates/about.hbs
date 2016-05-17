@@ -1,11 +1,51 @@
-<div id="about-top"></div>
-<div class="about-section-grey"></div>
-<div class="about-section-white"></div>
-	{{!-- <div class="container" style="text-align: center;">
-	        <div class="col-sm-12"><div class="top-content">
-	        	<h1>About</h1>
+<div id="about-top">
+	<h1>Welcome to Pear</h1><hr class="style-two"><h3>The Wedding Planner</h3>
+</div>
+<div class="about-section-grey">
+	<div class="container inner-sec">
+		<div class="card inner-sec">
+			<h1>We want to make things easy for you.</h1>
 	        	<hr>
-	        	<br>
-	        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eros ligula, sit amet lacinia tortor sagittis non. Nullam vehicula augue nisl, placerat bibendum velit convallis quis. Curabitur eu ligula varius, scelerisque mi vel, volutpat tellus. Donec pulvinar diam vitae ipsum imperdiet, eget fermentum ante finibus. Mauris aliquam sapien lacinia ante dignissim congue. Integer ut ante justo. Proin cursus metus at risus faucibus bibendum.</p><hr><p>In feugiat, quam at blandit euismod, sapien eros molestie est, et porttitor augue eros non orci. Curabitur eget nibh tincidunt ligula maximus imperdiet sed eget ipsum. Aenean nisl lectus, faucibus vitae convallis eget, porttitor nec nisl. Ut fringilla nisi elit, id lobortis massa sollicitudin et. Fusce at maximus dolor. Proin rutrum aliquet urna. Sed in maximus odio. Donec posuere arcu vel diam auctor, ut porttitor mauris condimentum. Suspendisse efficitur aliquam libero, nec fermentum ex vestibulum at. Sed sodales ex ligula, ut sodales diam posuere viverra. Quisque faucibus tincidunt purus vitae condimentum.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eros ligula, sit amet lacinia tortor sagittis non. Nullam vehicula augue nisl, placerat bibendum velit convallis quis. Curabitur eu ligula varius, scelerisque mi vel, volutpat tellus. Donec pulvinar diam vitae ipsum imperdiet, eget fermentum ante finibus. Mauris aliquam sapien lacinia ante dignissim congue. Integer ut ante justo. Proin cursus metus at risus faucibus bibendum.</p><hr><p>In feugiat, quam at blandit euismod, sapien eros molestie est, et porttitor augue eros non orci. Curabitur eget nibh tincidunt ligula maximus imperdiet sed eget ipsum. Aenean nisl lectus, faucibus vitae convallis eget, porttitor nec nisl. Ut fringilla nisi elit, id lobortis massa sollicitudin et. Fusce at maximus dolor. Proin rutrum aliquet urna. Sed in maximus odio. Donec posuere arcu vel diam auctor, ut porttitor mauris condimentum. Suspendisse efficitur aliquam libero, nec fermentum ex vestibulum at. Sed sodales ex ligula, ut sodales diam posuere viverra. Quisque faucibus tincidunt purus vitae condimentum.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eros ligula, sit amet lacinia tortor sagittis non. Nullam vehicula augue nisl, placerat bibendum velit convallis quis. Curabitur eu ligula varius, scelerisque mi vel, volutpat tellus. Donec pulvinar diam vitae ipsum imperdiet, eget fermentum ante finibus. Mauris aliquam sapien lacinia ante dignissim congue. Integer ut ante justo. Proin cursus metus at risus faucibus bibendum.</p><hr><p>In feugiat, quam at blandit euismod, sapien eros molestie est, et porttitor augue eros non orci. Curabitur eget nibh tincidunt ligula maximus imperdiet sed eget ipsum. Aenean nisl lectus, faucibus vitae convallis eget, porttitor nec nisl. Ut fringilla nisi elit, id lobortis massa sollicitudin et. Fusce at maximus dolor. Proin rutrum aliquet urna. Sed in maximus odio. Donec posuere arcu vel diam auctor, ut porttitor mauris condimentum. Suspendisse efficitur aliquam libero, nec fermentum ex vestibulum at. Sed sodales ex ligula, ut sodales diam posuere viverra. Quisque faucibus tincidunt purus vitae condimentum.</p>
-	        </div></div>
-	</div>  --}}
+	        	<div class="row">
+	        		<div class="col-sm-4 border-box">
+	        			<h1>Plan</h1><div class="circle-link"><div class="circle"><i class="fa fa-calendar"></i></div></div><h4>Plan your wedding and keep track of all the details all in one place.</h4>
+	        		</div>
+
+	        			<div class="col-sm-4 border-box"><h1>Connect</h1><div class="circle-link"><div class="circle"><i class="fa fa-link"></i></div></div><h4>Find suppliers for every aspect of your wedding.</h4></div>
+
+	        			<div class="col-sm-4 border-box"><h1>Share</h1><div class="circle-link"><div class="circle"><i class="fa fa-users"></i></div></div><h4>Let your inner circle in on all the juicy details of your wedding.</h4></div>
+	        	</div>
+	        	<h3>Click the button below to get started right away.</h3><hr>
+          		<button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Search</button>
+		</div>
+	</div>
+</div>
+<div class="about-section-white">
+	<h1>Contact Us</h1><hr class="style-two"><h3>We would like to hear from you!</h3>
+	<br>
+	<div class="container">
+	    <div class="form-horizontal form-group form-group-lg row">
+	        <div class="col-md-offset-2 col-md-8">
+	        	<div class="has-feedback {{if model.isValid 'has-success'}}">
+				  <div class="input-group">
+				    <span class="input-group-addon">@</span>
+				    {{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
+				  </div>
+				  <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
+				</div>
+	        	{{!-- <div class="">
+		        	{{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
+        		</div> --}}
+		        <br>
+	        	<div class="{{if model.isLong 'has-success'}}">
+	        		{{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
+	        	</div>
+		        <br>
+			    {{#if model.responseMessage}}
+			      <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}<p>Click this popup to close it</p></div>
+			    {{/if}}
+		    	<button class="btn btn-success-thin btn-lg btn-block" style="bottom:0px; float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
+	        </div>
+	    </div>
+	</div>
+</div>

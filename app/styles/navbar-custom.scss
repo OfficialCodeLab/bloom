@@ -7,3 +7,85 @@
                                                                                
 ==============================================================================*/
 
+// #navbar-sm {
+  
+//   height:40px;
+//   width:100%;
+//   position: absolute;
+//   position: fixed;
+//   @include box-shadow (0px 0px 1px rgba(0, 0, 0, 1));
+//   background-color: rgba(0,0,0,0.8);
+// }
+
+.navbar {
+  z-index: 9;
+  position: absolute;
+  position: fixed;
+  width:100%;
+  margin-bottom: 0px !important;
+  //background-color: rgba(231, 231, 231, 0.3) !important;
+  a:hover, a:active, a:focus{
+    text-decoration: none;
+    color: #000;
+  }
+  a:visited{
+    text-decoration: none;
+  }
+} 
+
+.navbar-brand {
+  padding:7px;
+  margin-right:25px;
+}
+
+
+#navbar-g.navbar-default .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+#navbar-g.navbar-default {
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border-bottom-width: 0px;
+}
+#navbar-g.navbar-default .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(0, 0, 0, 0);
+}
+#navbar-g.navbar-default .navbar-nav>li>a:hover,
+#navbar-g.navbar-default .navbar-nav>li>a:focus {
+    color: rgba(204, 204, 204, 1);
+    background-color: rgba(0, 0, 0, 0.85);
+}
+#navbar-g.navbar-default .navbar-nav>.active>a,
+#navbar-g.navbar-default .navbar-nav>.active>a:hover,
+#navbar-g.navbar-default .navbar-nav>.active>a:focus {
+    color: rgba(23, 23, 23, 1);
+    background-color: rgba(255, 255, 255, 0.95);
+}
+#navbar-g a:hover, .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: #fff;
+    background-color: #252525;
+}
+#navbar-g.navbar-default .navbar-toggle {
+    border-color: #ffffff;
+}
+#navbar-g.navbar-default .navbar-toggle:hover,
+#navbar-g.navbar-default .navbar-toggle:focus {
+    background-color: #ffffff;
+}
+#navbar-g.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+#navbar-g.navbar-default .navbar-toggle:hover .icon-bar,
+#navbar-g.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+// li.dropdown {
+// 	color: #fff;
+// 	&:hover{
+//     	color: rgba(204, 204, 204, 1);
+// 		text-decoration: none;
+// 	}
+// }

@@ -43,7 +43,8 @@ export default Ember.Route.extend({
     	
 		//If the save user button is clicked
 		saveUser(newUser) { 
-			this.transitionTo('index');
+    		window.scrollTo(0,0);
+			this.transitionTo('about');
 		},
 
 		willTransition() {
