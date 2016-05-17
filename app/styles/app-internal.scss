@@ -33,9 +33,16 @@ body {
 */
 .pear-app-content{
 	margin-top: 50px;
+	// background-image: url("../assets/images/backgrounds/flowers2.jpg");
+	background-attachment: fixed;
+	background-position: center;
+	min-height: 100vh !important;
 	// background-color: #dbcb55;
 	// background-color: #272822; //Sublime background color
 	// bottom: 0px;
+}
+.index-main{
+	background-color: rgba(255,255,255,0.9);
 }
 
 //Provides the styling for the category blocks. (Just the styling)
@@ -58,7 +65,7 @@ body {
 	text-align: center;
 	background-color: #f8f8f8;
 	// border: 1px solid #272822; //Sublime color
-	border-radius: 15px;
+	border-radius: 10px;
 
 	h2{
 		// padding-top: 10px;
