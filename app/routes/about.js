@@ -26,8 +26,8 @@ export default Ember.Route.extend({
 	    willTransition() {
 	      // rollbackAttributes() removes the record from the store
 	      // if the model 'isNew'
-	      this.controller.get('model').rollbackAttributes();
 		  this.controller.get('model').set('responseMessage', '');
+	      this.controller.get('model').rollbackAttributes();
 	    },
 	    closeMessage() {
 	    	this.controller.get('model').set('responseMessage', '');

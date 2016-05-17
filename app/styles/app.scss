@@ -366,8 +366,8 @@ h2.white{
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
   .navbar{
-    background-color: #F3EA5D;
-
+    background-color: rgba(0,0,0,0.8);
+    height:40px;
   }
 
   #nav-content {
@@ -494,36 +494,6 @@ h2.white{
 body{    
   // background-color: rgba(0,0,0,0) !important
   // This is never smart.
-}
-
-#navbar-sm {
-  height:50px;
-  width:100%;
-  position: absolute;
-  position: fixed;
-  @include box-shadow (0px 0px 1px rgba(0, 0, 0, 1));
-}
-
-.navbar {
-  z-index: 9;
-  position: absolute;
-  position: fixed;
-  width:100%;
-  margin-bottom: 0px !important;
-  //background-color: rgba(231, 231, 231, 0.3) !important;
-  a:hover, a:active, a:focus{
-    text-decoration: none;
-    color: #000;
-  }
-  a:visited{
-    text-decoration: none;
-    color: #777;
-  }
-} 
-
-.navbar-brand {
-  padding:2px;
-  margin-right:25px;
 }
 
 
