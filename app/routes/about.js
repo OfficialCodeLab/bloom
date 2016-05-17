@@ -31,6 +31,10 @@ export default Ember.Route.extend({
 	    },
 	    closeMessage() {
 	    	this.controller.get('model').set('responseMessage', '');
+	    },
+	    guidedSearch(){	    	
+    		window.scrollTo(0,0);
+			this.transitionTo('index');
 	    }
 
 	}
