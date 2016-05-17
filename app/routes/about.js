@@ -7,5 +7,31 @@ export default Ember.Route.extend({
       this.transitionTo('login');
     }
     return sesh;
-  }
+  },
+  	model() {
+    	return this.store.createRecord('contact');
+  	},
+
+
+	actions: {
+
+		saveContact(newContact) {
+			newContact.save().then(() => {
+        		this.controller.get('model').set('email', '');
+        		this.controller.get('model').set('message', '');
+        		this.controller.get('model').set('responseMessage', 'KTHNXBAI');
+			});
+	    },
+
+	    willTransition() {
+	      // rollbackAttributes() removes the record from the store
+	      // if the model 'isNew'
+	      this.controller.get('model').rollbackAttributes();
+		  this.controller.get('model').set('responseMessage', '');
+	    },
+	    closeMessage() {
+	    	this.controller.get('model').set('responseMessage', '');
+	    }
+
+	}
 });
