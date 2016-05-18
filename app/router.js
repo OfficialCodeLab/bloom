@@ -16,6 +16,7 @@ Router.map(function() {
   });
   this.route('myaccount');
   this.route('not-found', { path: '/*path' });
+  this.route('admin');
 });
 
 export default Router;
