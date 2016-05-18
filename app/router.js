@@ -16,6 +16,11 @@ Router.map(function() {
   });
   this.route('myaccount');
   this.route('not-found', { path: '/*path' });
+
+  this.route('index', {path: '/' }, function() {
+    this.route('favourites', {path: '/' });
+    this.route('mywedding');
+  });
 });
 
 export default Router;
