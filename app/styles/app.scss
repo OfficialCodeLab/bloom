@@ -585,8 +585,8 @@ body{
 .profile-pic {
   overflow:hidden;
   left: 10px;
-  height:150px;
-  width:150px;
+  height:200px;
+  width:200px;
   @include border-radius(50%);
   img {
     min-height:100%;
@@ -604,8 +604,8 @@ body{
   margin-right: auto;
   background-color: #fff;
   padding: 10px 10px 10px 10px;
-  height:170px;
-  width:170px;
+  height:220px;
+  width:220px;
   @include border-radius(50%);
   @include box-shadow(0px 0px 8px 1px rgba(0,0,0,0.6));
 }
