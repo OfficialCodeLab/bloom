@@ -16,7 +16,7 @@
 //   @include box-shadow (0px 0px 1px rgba(0, 0, 0, 1));
 //   background-color: rgba(0,0,0,0.8);
 // }
-
+@import "mixins.scss";
 .navbar {
   z-index: 9;
   position: absolute;
