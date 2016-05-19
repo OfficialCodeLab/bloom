@@ -17,6 +17,7 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
+    filepickerKey: 'Ab8b55laiRbuJG3a8E2o6z',
 
     APP: {
       // Here you can pass flags/options to your application instance
