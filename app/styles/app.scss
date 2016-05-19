@@ -693,6 +693,20 @@ hr.style-two {
   right: 10px !important;
 }
 
+.delete-box {
+  text-align: right;
+  width:100%;
+  height:100%;
+  padding-right:60px;
+  position: absolute;
+}
+
+.pnl-wrap {
+  word-wrap:break-word;
+  padding-right:40px;
+}
+
+
 html {
     overflow: auto;
 }

@@ -20,7 +20,12 @@ Router.map(function() {
     this.route('favourites', {path: '/' });
     this.route('mywedding');
   });
-  this.route('admin');
+  this.route('admin', {path:'/admin'}, function() {
+    this.route('requests');
+    this.route('messages');
+    this.route('users');
+    this.route('vendors');
+  });
 });
 
 export default Router;
