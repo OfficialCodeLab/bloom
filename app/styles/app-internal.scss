@@ -175,6 +175,7 @@ body {
 }
 .cat-image{
 	display: inline-block;
+	cursor: pointer;
 
 	position: relative;
 	top: 50%;
@@ -189,7 +190,7 @@ body {
 	padding: 0px;
 
 	&:hover{
-
+		cursor: pointer;
 	}
 }
 
