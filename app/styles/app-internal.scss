@@ -50,22 +50,49 @@ body {
 	background-color: rgba(255,255,255,0.9);
 }
 .pear-main-well{
-	margin-top: 30px;
 	text-align: center;
+	margin-top: 30px;
 }
 .pear-main-pills{
 	display: inline-block;
 	li{
-		// border: 1px solid black;
-		&.active{
-
-		}
-
+		// width: auto;
+		min-width: 170px;
 		a{
-			&:link, &:visited, &:hover, &:active{
-
+			background-color: white;
+			&:link{
+				background-color: white;
+				color: #272727;
+			}
+			&:visited{
+				background-color: white;
+				color: #272727;
+			}
+			&:hover{
+				background-color: #f5f5f5;
+				color: #272727;
+			}
+			&:active{
+				background-color: white;
+				color: #272727;				
 			}
 		}
+		&.active{
+			color: white;
+			a{
+				background-color: #272727;			
+				color: inherit;
+
+				//Reset, leave as-is
+				&:link, &:visited, &:hover, &:active{
+					background-color: #272727;
+					color: inherit;
+				}
+			}
+
+		}
+
+		
 	}
 }
 
