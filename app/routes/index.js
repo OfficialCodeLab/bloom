@@ -24,13 +24,8 @@ beforeModel: function() {
 
 
   actions: {
-    
-    // willTransition(){     
-    //   Ember.$('#menu-button').fadeIn("fast"); 
-    // },
-    // didTransition(){
-    //   Ember.$('#menu-button').fadeOut("fast");
-    //   console.log("TEST");
-    // },
+      showSingle: function(){
+        this.transitionTo('index.item-single');
+      }
   }
 });

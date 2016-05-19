@@ -19,6 +19,7 @@ Router.map(function() {
   this.route('index', {path: '/' }, function() {
     this.route('favourites', {path: '/' });
     this.route('mywedding');
+    this.route('item-single');
   });
   this.route('admin');
 });

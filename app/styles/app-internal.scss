@@ -335,6 +335,47 @@ body {
 	display: inline-block;
 
 }
+/*==============================================================================*\
+  ____  _             _        ___ _                     
+ / ___|(_)_ __   __ _| | ___  |_ _| |_ ___ _ __ ___  ___ 
+ \___ \| | '_ \ / _` | |/ _ \  | || __/ _ \ '_ ` _ \/ __|
+  ___) | | | | | (_| | |  __/  | || ||  __/ | | | | \__ \
+ |____/|_|_| |_|\__, |_|\___| |___|\__\___|_| |_| |_|___/
+                |___/                                    
+\*==============================================================================*/
+
+
+.single-img-container{
+	background-color: black;
+	// width: 100%;
+	// height: 100%;
+	// line-height: 117px;
+	// display: inline-block;
+	text-align: center;
+	// overflow-y: hidden;
+
+	margin: 0px;
+	padding: 0px;
+	img{
+		display: inline-block;
+
+		position: relative;
+		// top: 50%;
+		// transform: translateY(-50%);
+
+		// max-height: 100%;
+		max-width: 100%;
+		height: auto;
+		width: auto;
+
+		margin: 0px;
+		padding: 0px;
+	}
+}
+
+
+
+
 
 /*==============================================================================*\
   _   _ _   _ _ _ _         
