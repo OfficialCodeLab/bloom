@@ -4,5 +4,7 @@ import { hasMany } from 'ember-data/relationships';
 
 export default Model.extend({
   name: attr('string'),
-  catItems: hasMany('cat-item')
+  desc: attr('string'),
+  email: attr('string'),
+  catItems: hasMany('cat-item', {inverse: 'vendor', async: true}),
 });

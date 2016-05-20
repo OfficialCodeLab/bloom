@@ -3,28 +3,28 @@
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Item Name</label>
 			<div class="col-sm-6">
-				{{input type="text" value=model.name class="form-control" placeholder="Name of new item"}}
+				{{input type="text" value=name class="form-control" placeholder="Name of new item"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Item Type</label>
 			<div class="col-sm-6">
-				{{input type="text" value=model.category class="form-control disabled" placeholder="Category of new item"}}
+				{{input type="text" value=category class="form-control disabled" placeholder="Category of new item"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Item Vendor</label>
 			<div class="col-sm-6">
-				{{input type="text" value=model.vendor class="form-control disabled" placeholder="Vendor of new item"}}
+				{{input type="text" value=vendor class="form-control disabled" placeholder="Vendor of new item"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>		
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Image URL</label>
 			<div class="col-sm-6">
-				{{input type="text" value=model.imageURL class="form-control" placeholder="URL of image"}}
+				{{input type="text" value=imageURL class="form-control" placeholder="URL of image"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
@@ -34,7 +34,6 @@
 
 		</div>
 		<div class="col-sm-6">
-			<button class="btn btn-default" {{action 'saveItem' model}}>Create new item</button>
+			<button class="btn btn-default" {{action 'createItem'}}>Create new item</button>
 		</div>
 	</div>
-{{outlet}}

@@ -1,0 +1,32 @@
+<h1 class="text-center">Category Seeder</h1>
+	<div class="form-horizontal">
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Category Name</label>
+			<div class="col-sm-6">
+				{{input type="text" value=name class="form-control" placeholder="Name of new category"}}
+				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Description</label>
+			<div class="col-sm-6">
+				{{input type="text" value=desc class="form-control disabled" placeholder="Description of category"}}
+				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			</div>
+		</div>		
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Image URL</label>
+			<div class="col-sm-6">
+				{{input type="text" value=imageURL class="form-control" placeholder="URL of image"}}
+				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-default" {{action 'createItem'}}>Create new category</button>
+		</div>
+	</div>

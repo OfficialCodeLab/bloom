@@ -4,7 +4,7 @@ import { belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
   name: attr('string'),
-  category: belongsTo('category'),
-  vendor: belongsTo('vendor'),
+  category: belongsTo('category', {inverse: 'catItems', async: true}),
+  vendor: belongsTo('vendor', {inverse: 'catItems', async: true}),
   imageURL: attr('string')
 });
