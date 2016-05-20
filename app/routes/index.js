@@ -22,6 +22,10 @@ beforeModel: function() {
     return sesh;
   },
 
+  model() {
+    return this.store.findAll('cat-item');
+  },
+
 
   actions: {
       showSingle: function(){

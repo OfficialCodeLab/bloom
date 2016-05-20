@@ -5,5 +5,6 @@ import { belongsTo } from 'ember-data/relationships';
 export default Model.extend({
   name: attr('string'),
   category: belongsTo('category'),
-  vendor: belongsTo('vendor')
+  vendor: belongsTo('vendor'),
+  imageURL: attr('string')
 });
