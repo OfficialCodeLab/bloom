@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('about');
   this.route('home');
   this.route('categories');
+  this.route('category', {path: '/category/:category_id'});
   this.route('user', function() {
     this.route('new', {path: '/new'});
     this.route('account', {path: '/:user_id'});
@@ -32,6 +33,7 @@ Router.map(function() {
       this.route('vendor');
     });
   });
+  this.route('listings');
 });
 
 export default Router;

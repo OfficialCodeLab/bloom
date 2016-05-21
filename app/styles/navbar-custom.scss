@@ -51,6 +51,7 @@
     color: rgba(255, 255, 255, 1);
     background-color: rgba(0, 0, 0, 0);
 }
+
 #navbar-g.navbar-default .navbar-nav>li>a:hover,
 #navbar-g.navbar-default .navbar-nav>li>a:focus {
     color: rgba(204, 204, 204, 1);
@@ -61,6 +62,12 @@
 #navbar-g.navbar-default .navbar-nav>.active>a:focus {
     color: rgba(23, 23, 23, 1);
     background-color: rgba(255, 255, 255, 0.95);
+}
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:focus {
+    color: #fff;
+    text-decoration: none;
+    outline: 0;
+    background-color: #9C9C9C;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
     text-decoration: none;

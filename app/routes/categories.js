@@ -7,5 +7,8 @@ export default Ember.Route.extend({
       this.transitionTo('login');
     }
     return sesh;
+  },
+  model (){
+  	return this.store.findAll('category');
   }
 });

@@ -29,11 +29,11 @@ export default Ember.Route.extend({
 				  vendor: vndr,
 				  imageURL: this.controller.get('imageURL')
 				});
+				newItem.save();
 				cat.get('catItems').pushObject(newItem);
 				cat.save();			
 				vndr.get('catItems').pushObject(newItem);
 				vndr.save();
-				newItem.save();
 				this.controller.set('name', '');
 				this.controller.set('imageURL', '');
 			} catch(ex){

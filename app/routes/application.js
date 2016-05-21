@@ -56,6 +56,9 @@ export default Ember.Route.extend({
 	    },
 	    showId: function(){
 	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));
+	    },
+	    navigateCat: function(){
+	    	this.transitionTo("categories");
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);

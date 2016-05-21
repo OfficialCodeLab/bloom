@@ -2,9 +2,16 @@
 <h4 class="text-center">Please note, there are no success messages, fields will clear on success</h4>
 	<div class="form-horizontal">
 		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Category ID</label>
+			<div class="col-sm-6">
+				{{input type="text" value=catID class="form-control" placeholder="Url/query name of new category (no spaces)"}}
+				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+			</div>
+		</div>
+		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Category Name</label>
 			<div class="col-sm-6">
-				{{input type="text" value=name class="form-control" placeholder="Name of new category"}}
+				{{input type="text" value=name class="form-control" placeholder="Display name of new category"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
@@ -18,7 +25,7 @@
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Image URL</label>
 			<div class="col-sm-6">
-				{{input type="text" value=imageURL class="form-control" placeholder="URL of image"}}
+				{{input type="text" value=imageURL class="form-control" placeholder="(../assets/images/categories/<image name.jpg>)"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
