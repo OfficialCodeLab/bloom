@@ -26,6 +26,11 @@ Router.map(function() {
     this.route('messages');
     this.route('users');
     this.route('vendors');
+    this.route('seeder', function() {
+      this.route('cat-item');
+      this.route('category');
+      this.route('vendor');
+    });
   });
 });
 

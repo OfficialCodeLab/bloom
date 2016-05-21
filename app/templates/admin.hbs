@@ -4,12 +4,13 @@
 
 <div class="container index-main">
 	{{!-- Main content of the site goes here  --}}
-	<div class="pear-main-well">
+	<div class="well pear-main-well">
 	    <ul class="nav nav-pills pear-main-pills unselectable">
 	      {{#link-to 'admin.requests' tagName="li"}}<a href>Requests</a>{{/link-to}}
 	      {{#link-to 'admin.messages' tagName="li"}}<a href>Messages</a>{{/link-to}}
 	      {{#link-to 'admin.users' tagName="li"}}<a href>Users</a>{{/link-to}}
 	      {{#link-to 'admin.vendors' tagName="li"}}<a href>Vendors</a>{{/link-to}}
+	      {{#link-to 'admin.seeder' tagName="li"}}<a href>Seeder</a>{{/link-to}}
 	    </ul>
 	</div>
 	{{outlet}}
