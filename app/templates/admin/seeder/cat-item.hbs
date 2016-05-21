@@ -1,26 +1,35 @@
 <h1 class="text-center">Category Item Seeder</h1>
+<h4 class="text-center">Please note, there are no success messages, fields will clear on success</h4>
 	<div class="form-horizontal">
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Item Name</label>
+			<label class="col-sm-3 control-label">Name</label>
 			<div class="col-sm-6">
 				{{input type="text" value=name class="form-control" placeholder="Name of new item"}}
 				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
 			</div>
 		</div>
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Item Type</label>
+			<label class="col-sm-3 control-label">Category</label>
 			<div class="col-sm-6">
-				{{input type="text" value=category class="form-control disabled" placeholder="Category of new item"}}
-				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+				<select onchange={{action "selectCat" value="target.value"}} class="form-control">
+    				<option value="" selected="selected">Select a category</option>
+				  {{#each model.category as |cat|}}
+				    <option value={{cat.id}}>{{cat.name}}</option>
+				  {{/each}}
+				</select>
 			</div>
 		</div>
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Item Vendor</label>
+			<label class="col-sm-3 control-label">Vendor</label>
 			<div class="col-sm-6">
-				{{input type="text" value=vendor class="form-control disabled" placeholder="Vendor of new item"}}
-				{{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+				<select onchange={{action "selectVndr" value="target.value"}} class="form-control">
+				  <option value="" selected="selected">Select a vendor</option>
+				  {{#each model.vendor as |vndr|}}
+				    <option value={{vndr.id}}>{{vndr.name}}</option>
+				  {{/each}}
+				</select>
 			</div>
-		</div>		
+		</div>	
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Image URL</label>
 			<div class="col-sm-6">

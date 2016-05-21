@@ -13,7 +13,10 @@ export default Ember.Route.extend({
 			  email: this.controller.get('email'),
 			});
 
-			newItem.save();
+			newItem.save();			
+			this.controller.set('name', '');
+			this.controller.set('desc', '');
+			this.controller.set('email', '');
 		}
 	}
 });

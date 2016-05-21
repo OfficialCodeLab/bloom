@@ -8,11 +8,15 @@ export default Ember.Route.extend({
 
 		createItem(){
 			var newItem = this.store.createRecord('category', {				
-			  name: this.controller.get('name'),			
-			  imageUrl: this.controller.get('imageUrl')
+			  name: this.controller.get('name'),		
+			  desc: this.controller.get('desc'),	
+			  imageURL: this.controller.get('imageURL')
 			});
 
-			newItem.save();
+			newItem.save();	
+			this.controller.set('name', '');
+			this.controller.set('imageURL',  '');
+			this.controller.set('desc',  '');
 		}
 	}
 });

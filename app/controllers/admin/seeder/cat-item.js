@@ -4,5 +4,15 @@ export default Ember.Controller.extend({
   name: '',
   category: '',
   vendor: '',
-  imageURL: ''
+  imageURL: '',
+  names: [], 
+
+  actions: {  	
+		selectCat(value){
+			this.set('category', value);
+		},
+		selectVndr(value){
+			this.set('vendor', value);
+		}
+  }
 });

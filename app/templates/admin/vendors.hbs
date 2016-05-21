@@ -1,1 +1,21 @@
 <div class="header-top"><h1>Vendors</h1></div>
+
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>E-mail</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each model as |vendor|}}
+        <tr>
+            <td>{{vendor.name}}</td>
+            <td>{{vendor.desc}}</td>
+            <td>{{vendor.email}}</td>
+        </tr>
+    {{/each}}
+
+    </tbody>
+</table>
