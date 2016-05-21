@@ -1,18 +1,3 @@
-<div class="row">
-    {{#each model as |favourite|}}
-	<div class="col-lg-4 col-md-6">
-		<div class="category-block">
-			<h2>{{favourite.name}}</h2>
-			<div class="text-center cat-img-container">
-				{{!-- Later on this will show the correct image, stored in a variable --}}
-				<img src="../assets/images/sample-content/dress1.jpg" class="img-responsive cat-image" {{action 'showSingle'}}>
-			</div>
-			<button type="button" class="btn btn-danger cat-heart-button"><i class="fa fa-heart-o"></i></button>
-		</div>
-	</div>
-    {{/each}}
-</div>
-
 
 
 <h1 class="text-center">Dresses</h1>
