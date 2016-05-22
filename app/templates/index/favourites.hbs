@@ -1,3 +1,14 @@
+<div class="header-top">
+	<h1>Your Favourites</h1><hr class="style-two">
+	{{#if model.favourites}}
+	<h3>Click to unfavourite</h3>
+	{{else}}
+	<h3>It looks like you don't have any favourites yet!</h3>
+	<h3>Click here to explore</h3>
+	{{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
+	{{/if}}
+</div>
+
 <div class="container">
 	<div class="row">
 	    {{#each model.favourites as |cat-item|}}
@@ -13,7 +24,7 @@
 	    {{/each}}
 	</div>
 </div>
-
+{{!-- 
 <h1 class="text-center">Dresses</h1>
 <div class="row">
 	<div class="col-lg-4 col-md-6">
@@ -91,4 +102,4 @@
 			<h2>Item Name</h2>	
 		</div>
 	</div> 
-</div>
+</div> --}}
