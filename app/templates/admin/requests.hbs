@@ -1,1 +1,25 @@
 <div class="header-top"><h1>Requests</h1></div>
+<table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+          <th>Full Name</th>
+          <th>E-mail</th>
+          <th>Facebook</th>
+          <th>Respond to Request</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each model as |user|}}
+    	{{#if user.vendorRequest}}
+        <tr>
+            <td>{{user.name}} {{user.surname}}</td>
+            <td>{{user.email}}</td>
+            <td><a href="http://facebook.com/{{user.id}}">View Profile</a></td>            
+      		<td><button class="btn btn-default"{{action 'acceptReq' user.id}}>Accept</button> 
+      		<button class="btn btn-default" {{action 'declineReq' user.id}}>Decline</button></td>
+        </tr>
+        {{/if}}
+    {{/each}}
+
+    </tbody>
+</table>
