@@ -23,7 +23,7 @@ beforeModel: function() {
   },
 
   model() {
-    return this.store.findAll('cat-item');
+    return this.store.peekRecord('user', this.get("session").content.currentUser.id);
   },
 
 

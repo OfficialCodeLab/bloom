@@ -1,4 +1,18 @@
-
+<div class="container">
+	<div class="row">
+	    {{#each model.favourites as |cat-item|}}
+		<div class="col-lg-4 col-md-6">
+			<div class="category-block">
+				<h2>{{cat-item.name}}</h2>
+				<div class="text-center cat-img-container">
+					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+				</div>
+				<button type="button" class="btn btn-danger cat-heart-button" {{action 'removeFavourite' cat-item.id}}><i class="fa fa-heart-o"></i></button>
+			</div>
+		</div>
+	    {{/each}}
+	</div>
+</div>
 
 <h1 class="text-center">Dresses</h1>
 <div class="row">

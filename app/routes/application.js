@@ -59,6 +59,18 @@ export default Ember.Route.extend({
 	    },
 	    navigateCat: function(){
 	    	this.transitionTo("categories");
+	    },
+	    addFavourite: function(id){
+	    	let user = this.store.peekRecord('user', this.get("session").content.currentUser.id);
+	    	let item = this.store.peekRecord('cat-item', id);
+	    	user.get('favourites').pushObject(item);
+	    	user.save();
+	    },
+	    removeFavourite: function(id){
+	    	let user = this.store.peekRecord('user', this.get("session").content.currentUser.id);
+	    	let item = this.store.peekRecord('cat-item', id);
+	    	user.get('favourites').removeObject(item);
+	    	user.save();
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
