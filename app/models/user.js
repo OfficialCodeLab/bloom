@@ -13,5 +13,6 @@ export default Model.extend({
   postalcode: attr('string'),
   cell: attr('string'),
   accountType: attr('string'),  
-  favourites: hasMany('cat-item')
+  favourites: hasMany('cat-item'),
+  vendorRequest: attr('boolean')
 });

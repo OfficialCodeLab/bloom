@@ -9,6 +9,8 @@
 		    </div>
 		    <h3>{{model.user.name}} {{model.user.surname}}</h3>
 		    <p><i>Registered user</i></p>
+		    <p>Request vendor status</p>
+		    {{x-toggle value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
 	    </div>
 	    <div class="col-sm-8">
 			<div class="form-horizontal">
