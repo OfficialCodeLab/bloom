@@ -18,8 +18,8 @@ Router.map(function() {
   this.route('myaccount');
   this.route('not-found', { path: '/*path' });
   this.route('index', {path: '/' }, function() {
-    this.route('favourites', {path: '/' });
-    this.route('mywedding');
+    this.route('favourites');
+    this.route('mywedding', {path: '/' });
     this.route('item-single');
     this.route('vendor');
   });
