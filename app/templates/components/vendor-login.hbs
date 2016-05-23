@@ -1,10 +1,18 @@
 <div style="text-align:center">
-	{{#if login}}
+	{{#if showButtons}}	
+    	{{#if login}}
+    		{{#vendor-login-form}}
+    			{{yield}}
+    		{{/vendor-login-form}}
+    	{{else}}
+    		{{#vendor-signup-form}}
+    			{{yield}}
+    		{{/vendor-signup-form}}
+    	{{/if}}
+    <button class="btn btn-default" {{action 'backBtn'}}>Back</button>
+    {{else}}
 	<h1>Log in or create vendor account:</h1>
     <button class="btn btn-default" {{action 'loginRoute'}}>Log in</button>
-    <button class="btn btn-default">Create</button>
-    {{else}}
-    <h1>Enter details:</h1>
-    <button class="btn btn-default" {{action 'backBtn'}}>Back</button>
+    <button class="btn btn-default" {{action 'signupRoute'}}>Create</button>
     {{/if}}
 </div>
