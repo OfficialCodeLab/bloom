@@ -2,8 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	beforeModel: function() {
-    	return this.get("session").fetch().catch(function() {});
-  	},
+	  	var sesh = this.get("session").fetch().catch(function() {});
+	  	if(!this.get('session.isAuthenticated')){
+	        this.transitionTo('login');
+	      }
+	      return sesh;
+    },
 	model: function() {
 		//check server for the record of self
 		try
