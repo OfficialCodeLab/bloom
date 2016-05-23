@@ -7,5 +7,11 @@ export default Model.extend({
   name: attr('string'),
   desc: attr('string'),
   email: attr('string'),
+  addressL1: attr('string'),
+  addressL2: attr('string'),
+  city: attr('string'),
+  country: attr('string'),
+  postalcode: attr('string'),
+  cell: attr('string'),
   catItems: hasMany('cat-item', {inverse: 'vendor', async: true}),
 });

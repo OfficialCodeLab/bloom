@@ -1,9 +1,42 @@
 
 <h1>Enter details:</h1>
-<div class="form-group has-feedback">
+{{!-- <div class="form-group has-feedback">
     <label class="col-sm-3 control-label">Email</label>
     <div class="col-sm-6">
       {{input type="text" class="form-control" placeholder="Your Email Address"}}
-      {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+    </div>
+</div>
+ --}}
+
+{{!--  <div class="form-horizontal form-group form-group-lg row">
+        <div class="col-md-offset-2 col-md-8">
+        {{input type="email" class="form-control" placeholder="Please type your e-mail address." autofocus="autofocus"}}
+        <br>
+        {{input type="password" class="form-control" placeholder="Please type your password."}}
+        <br>
+    	<button class="btn btn-primary" style="bottom:0px; float:right; max-width:180px;">Submit</button>	
+        </div>
+
+</div> --}}
+
+
+<div class="form-horizontal">
+    <div class="form-group has-feedback">
+        <label class="col-sm-3 control-label">Email</label>
+        <div class="col-sm-6">
+          {{input type="email" class="form-control" placeholder="Your Email"}}
+        </div>
+    </div>
+    <div class="form-group has-feedback">
+        <label class="col-sm-3 control-label">Password</label>
+        <div class="col-sm-6">
+          {{input type="password" class="form-control" placeholder="Your Password"}}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+            <button type="submit" style="width:100%" class="btn btn-success-thin">Confirm</button>
+        </div>
     </div>
 </div>
