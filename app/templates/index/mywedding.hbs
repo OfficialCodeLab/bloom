@@ -1,11 +1,12 @@
 <div class="wedding-first-time text-center">
 	<h1>Wedding Overview</h1>
 	<div class="mywedding-img-background">
-		<img src="../assets/images/sample-content/profile1.jpg" class="img-responsive">
+		<img src={{model.userext.imgurl}} class="img-responsive">
 	</div>
 </div>
+<hr>
 <div class="row">
-	<div class="col-sm-2">
+	<div class="col-md-2">
 		<div>
 			<ul class="nav pear-sidebar">
 				{{#link-to 'index.mywedding.overview' tagName="li"}}<a href>Overview</a>{{/link-to}}
@@ -15,7 +16,7 @@
 			</ul>
 		</div>
 	</div>
-	<div class="col-sm-10">
+	<div class="col-md-10">
 		{{outlet}}
 	</div>
 </div>

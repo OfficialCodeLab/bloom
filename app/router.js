@@ -20,7 +20,7 @@ Router.map(function() {
   this.route('index', {path: '/' }, function() {
     this.route('favourites');
     this.route('mywedding', {path: '/' }, function() {
-      this.route('overview');
+      this.route('overview', {path: '/' });
       this.route('guests');
       this.route('bride');
       this.route('groom');
