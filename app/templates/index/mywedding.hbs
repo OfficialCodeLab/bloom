@@ -5,26 +5,18 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-3 bordered">
+	<div class="col-sm-2">
 		<div>
 			<ul class="nav pear-sidebar">
-				<li>
-					<a href="#">Test</a>
-				</li>
-				<li>
-					<a href="#">Test</a>
-				</li>
-				<li>
-					<a href="#">Test</a>
-				</li>
-				<li>
-					<a href="#">Test</a>
-				</li>
+				{{#link-to 'index.mywedding.overview' tagName="li"}}<a href>Overview</a>{{/link-to}}
+				{{#link-to 'index.mywedding.guests' tagName="li"}}<a href>Guests</a>{{/link-to}}
+				{{#link-to 'index.mywedding.bride' tagName="li"}}<a href>Bride</a>{{/link-to}}
+				{{#link-to 'index.mywedding.groom' tagName="li"}}<a href>Groom</a>{{/link-to}}
 			</ul>
 		</div>
 	</div>
-	<div class="col-sm-9 bordered">
-		<p>Details go here.</p>
+	<div class="col-sm-10">
+		{{outlet}}
 	</div>
 </div>
-{{outlet}}
+
