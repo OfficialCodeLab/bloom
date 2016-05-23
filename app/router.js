@@ -19,7 +19,12 @@ Router.map(function() {
   this.route('not-found', { path: '/*path' });
   this.route('index', {path: '/' }, function() {
     this.route('favourites');
-    this.route('mywedding', {path: '/' });
+    this.route('mywedding', {path: '/' }, function() {
+      this.route('overview');
+      this.route('guests');
+      this.route('bride');
+      this.route('groom');
+    });
     this.route('item-single');
     this.route('vendor');
   });
