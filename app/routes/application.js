@@ -9,14 +9,12 @@ export default Ember.Route.extend({
 		try
 		{
 			let _id = this.get("session").content.currentUser.id + "";
-			this.store.findRecord('user', _id).then((response) => {
-				//this.transitionTo('index');
-			}).catch((err)=>{});			
+			return this.store.findRecord('user', _id);			
 		} catch(ex) {}
 		
-	    return new Ember.RSVP.Promise(function(resolve) {
-	      setTimeout(resolve, 3000);
-	    });
+	    // return new Ember.RSVP.Promise(function(resolve) {
+	    //   setTimeout(resolve, 3000);
+	    // });
   },
 
   afterModel: function (model, transition) {

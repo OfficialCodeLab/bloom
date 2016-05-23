@@ -14,5 +14,6 @@ export default Model.extend({
   cell: attr('string'),
   accountType: attr('string'),  
   favourites: hasMany('cat-item'),
-  vendorRequest: attr('boolean')
+  vendorRequest: attr('boolean'),
+  vendorAccount: attr('string')
 });

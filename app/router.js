@@ -21,6 +21,7 @@ Router.map(function() {
     this.route('favourites', {path: '/' });
     this.route('mywedding');
     this.route('item-single');
+    this.route('vendor');
   });
   this.route('admin', {path:'/admin'}, function() {
     this.route('requests');

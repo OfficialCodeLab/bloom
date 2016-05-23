@@ -1,0 +1,11 @@
+<div class="header-top">
+	<h1>Your Vendor Account</h1><hr class="style-two">
+	<h3>Create listings and such</h3>
+</div>
+{{#if model.vendorAccount}}
+ {{!-- SHOW ACCOUNT STUFF HERE --}}
+{{else}}
+	{{#vendor-login}}
+		{{yield}}
+	{{/vendor-login}}
+{{/if}}

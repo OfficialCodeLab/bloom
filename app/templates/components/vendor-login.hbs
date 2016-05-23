@@ -1,0 +1,10 @@
+<div style="text-align:center">
+	{{#if login}}
+	<h1>Log in or create vendor account:</h1>
+    <button class="btn btn-default" {{action 'loginRoute'}}>Log in</button>
+    <button class="btn btn-default">Create</button>
+    {{else}}
+    <h1>Enter details:</h1>
+    <button class="btn btn-default" {{action 'backBtn'}}>Back</button>
+    {{/if}}
+</div>
