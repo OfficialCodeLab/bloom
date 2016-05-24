@@ -16,7 +16,20 @@
 	Navbar Hover Text Color:	#000;
 
 	Border Color:				#e7e7e7;
+
+	CodeLab Color: 				#272727;
+
+	Pear Yellow Light:			rgb(243,227,97);
+	Pear Yellow Dark:			rgb(219,203,85);
+	Pear Light Grey:			rgb(88,89,91);
+	Pear Dark Grey:				rgb(62,62,63);
+
 */
+
+	//Color Variables:
+	$primary-color: #272727;
+	$link-text-color: #272727;
+	$navbar-color: #272727;
 
 /*==============================================================================*/
 @import "mixins.scss";
@@ -65,31 +78,31 @@ body {
 			background-color: white;
 			&:link{
 				background-color: #f5f5f5;
-				color: #272727;
+				color: $link-text-color;
 			}
 			&:visited{
 				background-color: #f5f5f5;
-				color: #272727;
+				color: $link-text-color;
 			}
 			&:hover{
 				background-color: #fff;
-				color: #272727;
+				color: $link-text-color;
 			}
 			&:active{
 				background-color: #f5f5f5;
-				color: #272727;				
+				color: $link-text-color;				
 			}
 		}
 		&.active{
 			color: white;
 			margin-left: 0px;
 			a{
-				background-color: #272727;			
+				background-color: $primary-color;			
 				color: inherit;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover, &:active{
-					background-color: #272727;
+					background-color: $primary-color;
 					color: inherit;
 				}
 			}
@@ -153,31 +166,31 @@ body {
 			background-color: white;
 			&:link{
 				background-color: #f5f5f5;
-				color: #272727;
+				color: $primary-color;
 			}
 			&:visited{
 				background-color: #f5f5f5;
-				color: #272727;
+				color: $primary-color;
 			}
 			&:hover{
 				background-color: #fff;
-				color: #272727;
+				color: $primary-color;
 			}
 			&:active{
 				background-color: #f5f5f5;
-				color: #272727;				
+				color: $primary-color;				
 			}
 		}
 		&.active{
 			color: white;
 			margin-left: 0px;
 			a{
-				background-color: #272727;			
+				background-color: $primary-color;			
 				color: inherit;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover, &:active{
-					background-color: #272727;
+					background-color: $primary-color;
 					color: inherit;
 				}
 			}
