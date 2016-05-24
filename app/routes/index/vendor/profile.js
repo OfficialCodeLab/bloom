@@ -22,7 +22,10 @@ export default Ember.Route.extend({
     },
     actions: {
     	saveChanges(model) {
-    		model.save();
+    		model.save().then(()=>this.controller.set('responseMessage', 'Your info has been updated!'));
+    	},
+    	closeMessage(){
+    		this.controller.set('responseMessage', '');
     	}
     }
 });
