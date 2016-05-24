@@ -37,6 +37,8 @@ export default Ember.Route.extend({
     	//Else check server for the record
     	this.store.findRecord('user', _id).then((response) => {
 			 this.transitionTo('index');
+     	}, () => {
+			Ember.$('#usernew').fadeIn("fast");  //Run relevant jquery methods in component
      	}).catch((err)=>{});
   },
     actions: {
@@ -52,7 +54,7 @@ export default Ember.Route.extend({
 			this.controller.get('model').save();
 		},
 		didInsertElement(){
-			Ember.$('#usernew').fadeIn("fast");
+			Ember.$('#usernew').fadeOut(0);    //Run relevant jquery methods in component
 		}
   }
 

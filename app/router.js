@@ -16,7 +16,6 @@ Router.map(function() {
     this.route('account', {path: '/:user_id'});
   });
   this.route('myaccount');
-  this.route('not-found', { path: '/*path' });
   this.route('index', {path: '/' }, function() {
     this.route('favourites');
     this.route('mywedding', {path: '/' }, function() {
@@ -29,6 +28,9 @@ Router.map(function() {
     this.route('vendor', function() {
       this.route('signup');
       this.route('login');
+      this.route('listings', {path: '/' });
+      this.route('new-listing');
+      this.route('profile');
     });
   });
   this.route('admin', {path:'/admin'}, function() {
@@ -39,10 +41,11 @@ Router.map(function() {
     this.route('seeder', function() {
       this.route('cat-item');
       this.route('category');
-      this.route('vendor');
+      this.route('vendor', function() {});
     });
   });
   this.route('listings');
+  this.route('not-found', { path: '/*path' });
 });
 
 export default Router;

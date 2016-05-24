@@ -3,7 +3,11 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 	beforeModel: function() {
-	  	return this.get("session").fetch().catch(function() {});
+        var sesh = this.get("session").fetch().catch(function() {});
+        if(!this.get('session.isAuthenticated')){
+            this.transitionTo('login');
+          }
+          return sesh;
     },
     actions: {
         signBtn() {
@@ -21,7 +25,7 @@ export default Ember.Route.extend({
                                 this.store.findRecord('vendor', customID).then(() => {						//Check if ID exists already
                                     alert("User ID Already exists");
                                 }, () => {
-                                    this.store.find('vendorLogin', hash).then(() => {						//Check if email is in use
+                                    this.store.findRecord('vendorLogin', hash).then(() => {						//Check if email is in use
                                         alert("Email address already in use");
                                     }, () => {
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
@@ -42,6 +46,7 @@ export default Ember.Route.extend({
                                                 cell: this.controller.get('cell')
                                             });
 	                                        vendor.save().then(()=>	{										//Save vendor
+                                                this.transitionTo('index.vendor.new-listing');
 	                                        	let _vendorid = vendor.get('id');										
 	                                        	this.assignToUser(_vendorid);								//Add id to user
 	                                        	vendorLogin.set('vendorID', _vendorid);						//Add id to vendorLogin
@@ -51,7 +56,7 @@ export default Ember.Route.extend({
                                     });
                                 });
                             } else {
-                                this.store.find('vendorLogin', hash).then(() => {							//Check if email is in use
+                                this.store.findRecord('vendorLogin', hash).then(() => {							//Check if email is in use
                                     alert("Email address already in use");
                                 }, () => {
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
@@ -71,6 +76,7 @@ export default Ember.Route.extend({
                                             cell: this.controller.get('cell')
                                         });
                                         vendor.save().then(()=>	{											//Save vendor
+                                            this.transitionTo('index.vendor.new-listing');
                                         	let _vendorid = vendor.get('id');												
                                         	this.assignToUser(_vendorid);									//Add id to user
                                         	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin

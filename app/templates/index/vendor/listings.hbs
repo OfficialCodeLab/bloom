@@ -1,0 +1,17 @@
+<div style="text-align:center">
+	<div class="container">
+		<div class="row">
+		    {{#each model.catItems as |cat-item|}}
+			<div class="col-lg-4 col-md-6">
+				<div class="category-block">
+					<h2>{{cat-item.name}}</h2>
+					<div class="text-center cat-img-container">
+						<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+					</div>
+					<label style="margin-top:10px;">R {{cat-item.price}}</label>
+				</div>
+			</div>
+		    {{/each}}
+		</div>
+	</div>
+</div>

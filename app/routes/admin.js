@@ -5,8 +5,24 @@ export default Ember.Route.extend({
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){
 	        this.transitionTo('login');
-	      }
-	      return sesh;
+        }
+
+        //First tier authentication:
+        let id = this.get("session").content.currentUser.id;
+        let user = this.store.peekRecord('user', id);
+        if(user.get('accountType') !== 'admin'){
+  			this.transitionTo('/404');
+    	} else {
+    		//Second tier auth (check admin table)
+    		this.store.findRecord('adminLogin', id).then(()=>{
+    			//found
+    		},()=>{
+    			//notfound
+  				this.transitionTo('/404');
+    		});
+    	}
+
+        return sesh;
     },
 	filepicker: Ember.inject.service(),
 

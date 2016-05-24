@@ -2,11 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	beforeModel: function() {
-	  	var sesh = this.get("session").fetch().catch(function() {});
-	  	if(!this.get('session.isAuthenticated')){
-	        this.transitionTo('login');
-	      }
-	      return sesh;
+        return this.get("session").fetch().catch(function() {});
     },
 	model: function() {
 		//check server for the record of self
@@ -73,6 +69,12 @@ export default Ember.Route.extend({
 	    	let item = this.store.peekRecord('cat-item', id);
 	    	user.get('favourites').removeObject(item);
 	    	user.save();
+	    },
+	    error: function(error) {
+	      //Ember.Logger.error(error);
+	      this.get("session").invalidate().then(()=> {
+	      	this.transitionTo('login');
+	      });
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
