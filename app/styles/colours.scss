@@ -1,0 +1,54 @@
+/*==============================================================================*\
+   ____      _                      _ _ _ _ _ 
+  / ___|___ | | ___  _   _ _ __ ___| | | | | |
+ | |   / _ \| |/ _ \| | | | '__/ __| | | | | |
+ | |__| (_) | | (_) | |_| | |  \__ \_|_|_|_|_|
+  \____\___/|_|\___/ \__,_|_|  |___(_|_|_|_|_)
+                                              
+\*==============================================================================*/
+/*
+  Colours:
+
+  Navbar background color:    #f8f8f8;
+  Navbar active link color: #e7e7e7;
+  Navbar Text Color:      #777;
+  Navbar Hover Text Color:  #000;
+
+  Border Color:       #e7e7e7;
+
+  CodeLab Color:        #272727;
+
+  Pear Yellow Light:      rgb(243,227,97);
+  Pear Yellow Dark:     rgb(219,203,85);
+  Pear Light Grey:      rgb(88,89,91);
+  Pear Dark Grey:       rgb(62,62,63);
+
+*/
+/*==============================================================================*/
+
+//Background for navbar and active items
+//1 MAIN COLOR
+$primary-color: #009688;
+
+//Hover for navbar and buttons
+//2 LIGHT COLOR 
+$hover-color: #80CBC4;
+
+//Default Button State
+//3 NEUTRAL
+$secondary-color: #f5f5f5;
+
+//Button Text (light) / navbar active
+//4 USUALLY WHITE
+$button-text-color: #ffffff;
+
+//Active button Text
+//5 USUALLY BLACK / not used
+$button-text-color-active: #000000;
+
+//Button Click
+//6 VERY DARK
+$button-click-color: #004D40;
+
+//Shouldn't do anything
+$link-text-color: #272727;

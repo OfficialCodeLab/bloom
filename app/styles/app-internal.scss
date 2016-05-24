@@ -7,32 +7,12 @@
                                                           
 ==============================================================================*/
 
-/*
-	Colours:
 
-	Navbar background color:  	#f8f8f8;
-	Navbar active link color:	#e7e7e7;
-	Navbar Text Color:			#777;
-	Navbar Hover Text Color:	#000;
-
-	Border Color:				#e7e7e7;
-
-	CodeLab Color: 				#272727;
-
-	Pear Yellow Light:			rgb(243,227,97);
-	Pear Yellow Dark:			rgb(219,203,85);
-	Pear Light Grey:			rgb(88,89,91);
-	Pear Dark Grey:				rgb(62,62,63);
-
-*/
-
-	//Color Variables:
-	$primary-color: #272727;
-	$link-text-color: #272727;
-	$navbar-color: #272727;
 
 /*==============================================================================*/
 @import "mixins.scss";
+@import "colours.scss";
+
 
 body {
 	background-color: white;
@@ -77,33 +57,37 @@ body {
 		a{
 			background-color: white;
 			&:link{
-				background-color: #f5f5f5;
-				color: $link-text-color;
+				background-color: $secondary-color;
+				color: $primary-color;
 			}
 			&:visited{
-				background-color: #f5f5f5;
-				color: $link-text-color;
+				background-color: $secondary-color;
+				color: $primary-color;
 			}
 			&:hover{
-				background-color: #fff;
-				color: $link-text-color;
+				background-color: $hover-color;
+				color: $button-text-color;
 			}
 			&:active{
-				background-color: #f5f5f5;
-				color: $link-text-color;				
+				background-color: $button-click-color;
+				color: $button-text-color;				
 			}
 		}
 		&.active{
-			color: white;
+			color: $button-text-color;
 			margin-left: 0px;
 			a{
 				background-color: $primary-color;			
 				color: inherit;
 
 				//Reset, leave as-is
-				&:link, &:visited, &:hover, &:active{
+				&:link, &:visited, &:hover{
 					background-color: $primary-color;
 					color: inherit;
+				}
+				&:active{
+					background-color: $button-click-color;
+					color: $button-text-color;	
 				}
 			}
 
@@ -165,20 +149,20 @@ body {
 		a{
 			background-color: white;
 			&:link{
-				background-color: #f5f5f5;
+				background-color: $secondary-color;
 				color: $primary-color;
 			}
 			&:visited{
-				background-color: #f5f5f5;
+				background-color: $secondary-color;
 				color: $primary-color;
 			}
 			&:hover{
-				background-color: #fff;
-				color: $primary-color;
+				background-color: $hover-color;
+				color: $button-text-color;
 			}
 			&:active{
-				background-color: #f5f5f5;
-				color: $primary-color;				
+				background-color: $button-click-color;
+				color: $button-text-color;				
 			}
 		}
 		&.active{
@@ -189,9 +173,13 @@ body {
 				color: inherit;
 
 				//Reset, leave as-is
-				&:link, &:visited, &:hover, &:active{
+				&:link, &:visited, &:hover{
 					background-color: $primary-color;
 					color: inherit;
+				}
+				&:active{
+					background-color: $button-click-color;
+					color: $button-text-color;		
 				}
 			}
 
@@ -487,6 +475,15 @@ body {
 }
 .bootstrap-touchspin-down{
 	// height: 20px !important;
+}
+.btn-success-thin{
+	border-color: $primary-color !important;
+	color: $primary-color !important;
+	// background-color: $primary-color;
+	&:hover, &:focus{
+		background-color: $primary-color !important;
+		color: $button-text-color !important;
+	}
 }
 
 /*==============================================================================*\

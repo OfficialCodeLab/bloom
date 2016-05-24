@@ -18,8 +18,10 @@ You're an fagit.
 @import "font-awesome";
 @import "bootstrap";
 //@import "material.min.scss";
-@import "navbar-custom.scss";
 @import "app-internal.scss";
+@import "navbar-custom.scss";
+@import "colours.scss";
+
 @font-face {
     font-family: antipasto;
     src: url(fonts/Antipasto_regular.otf);
