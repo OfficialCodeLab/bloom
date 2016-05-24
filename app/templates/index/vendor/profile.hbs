@@ -10,7 +10,7 @@
     <div class="form-group has-feedback">
         <label class="col-sm-3 control-label">Email*</label>
         <div class="col-sm-6">
-          {{input type="email" value=model.email class="form-control" placeholder="This will be used to log in and for password recovery"}}
+          {{input type="email" disabled="true" value=model.email class="form-control" placeholder="This will be used to log in and for password recovery"}}
         </div>
     </div>
     <div class="form-group has-feedback">
@@ -49,6 +49,10 @@
           {{input type="text" value=model.postalcode class="form-control" placeholder="Your postal code"}}
         </div>
     </div>
+    {{#if responseMessage}}
+      <div class="col-sm-offset-3 col-sm-6 alert alert-success" {{action 'closeMessage'}}>{{responseMessage}}
+      <p class="tiny-text">Tap this message to close it</p></div>
+    {{/if}}
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-4">

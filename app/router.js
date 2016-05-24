@@ -31,6 +31,7 @@ Router.map(function() {
       this.route('listings', {path: '/' });
       this.route('new-listing');
       this.route('profile');
+      this.route('security');
     });
   });
   this.route('admin', {path:'/admin'}, function() {
