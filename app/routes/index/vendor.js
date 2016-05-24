@@ -6,6 +6,16 @@ export default Ember.Route.extend({
 	  	if(!this.get('session.isAuthenticated')){
 	        this.transitionTo('login');
 	      }
-	      return sesh;
+
+		let id = this.get("session").content.currentUser.id;
+        let user = this.store.peekRecord('user', id);
+        //First tier auth
+        if(!user.get('accountType')){
+  			this.transitionTo('/404');
+    	} else {
+    		//Second tier auth
+    	}
+
+        return sesh;
     },
 });
