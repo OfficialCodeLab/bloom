@@ -7,6 +7,9 @@ module.exports = function(defaults) {
     'ember-font-awesome': {
       useScss: true, // for ember-cli-sass
       useLess: true  // for ember-cli-less
+    },
+    fingerprint: {
+      exclude: ['apple-touch', 'favicon', 'mstile', 'open-graph', 'firefox_app', 'coast', 'android-chrome', 'yandex-browser', 'twitter']
     }
     // Add options here
   });

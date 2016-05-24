@@ -6,7 +6,11 @@
 	</div>
  {{!-- SHOW ACCOUNT STUFF HERE --}}
 {{else}}
-	{{#vendor-login}}
-		{{yield}}
-	{{/vendor-login}}
+	<div style="text-align:center">
+	    <ul class="nav nav-pills pear-main-pills unselectable">
+	      {{#link-to 'index.vendor.login' tagName="li"}}<a href>Log In</a>{{/link-to}}
+	      {{#link-to 'index.vendor.signup' tagName="li"}}<a href>Sign Up</a>{{/link-to}}
+	    </ul>
+    {{outlet}}
+    </div>
 {{/if}}

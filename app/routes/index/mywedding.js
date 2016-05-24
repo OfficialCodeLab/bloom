@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-
 	model () {
 	  //Before creating the record, clear the DS Store
 	  this.store.unloadAll('userext');
@@ -14,4 +13,11 @@ export default Ember.Route.extend({
 	      user: this.store.peekRecord('user', _id)
 	    });
 	}
+	beforeModel: function() {
+	  	var sesh = this.get("session").fetch().catch(function() {});
+	  	if(!this.get('session.isAuthenticated')){
+	        this.transitionTo('login');
+	      }
+	      return sesh;
+    },
 });
