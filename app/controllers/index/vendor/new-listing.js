@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
 	imageURL: '', //Probably make a regex in future or file selection
 	isCreating: '',
 	responseMessage: '',
-	isNumber: Ember.computed.match('price', /^(([1-9]*)|(([1-9]*)\.([0-9]*)))$/),
+	isNumber: Ember.computed.match('price', /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/),
 	isValidNumber: Ember.computed.and('isNumber', 'price'),
 	isLongName: Ember.computed.gte('name.length', 5),
 	isLongDesc: Ember.computed.gte('desc.length', 5),
