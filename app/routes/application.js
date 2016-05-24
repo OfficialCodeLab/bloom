@@ -72,9 +72,8 @@ export default Ember.Route.extend({
 	    },
 	    error: function(error) {
 	      //Ember.Logger.error(error);
-	      this.get("session").invalidate().then(()=> {
-	      	this.transitionTo('login');
-	      });
+	      this.get("session").close();
+      	  this.transitionTo('login');
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
