@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 			}),
 	      user: this.store.peekRecord('user', _id)
 	    });
-	}
+	},
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){
