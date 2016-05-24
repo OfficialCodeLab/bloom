@@ -28,6 +28,9 @@ Router.map(function() {
     this.route('vendor', function() {
       this.route('signup');
       this.route('login');
+      this.route('listings', {path: '/' });
+      this.route('new-listing');
+      this.route('profile');
     });
   });
   this.route('admin', {path:'/admin'}, function() {
@@ -38,7 +41,7 @@ Router.map(function() {
     this.route('seeder', function() {
       this.route('cat-item');
       this.route('category');
-      this.route('vendor');
+      this.route('vendor', function() {});
     });
   });
   this.route('listings');

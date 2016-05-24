@@ -3,7 +3,11 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 	beforeModel: function() {
-	  	return this.get("session").fetch().catch(function() {});
+        var sesh = this.get("session").fetch().catch(function() {});
+        if(!this.get('session.isAuthenticated')){
+            this.transitionTo('login');
+          }
+          return sesh;
     },
     actions: {
         signBtn() {
@@ -42,6 +46,7 @@ export default Ember.Route.extend({
                                                 cell: this.controller.get('cell')
                                             });
 	                                        vendor.save().then(()=>	{										//Save vendor
+                                                this.transitionTo('index.vendor.new-listing');
 	                                        	let _vendorid = vendor.get('id');										
 	                                        	this.assignToUser(_vendorid);								//Add id to user
 	                                        	vendorLogin.set('vendorID', _vendorid);						//Add id to vendorLogin
@@ -71,6 +76,7 @@ export default Ember.Route.extend({
                                             cell: this.controller.get('cell')
                                         });
                                         vendor.save().then(()=>	{											//Save vendor
+                                            this.transitionTo('index.vendor.new-listing');
                                         	let _vendorid = vendor.get('id');												
                                         	this.assignToUser(_vendorid);									//Add id to user
                                         	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin

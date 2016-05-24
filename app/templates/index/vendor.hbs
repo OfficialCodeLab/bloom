@@ -2,8 +2,22 @@
 {{#if model.vendorAccount}}
 	<div class="header-top">
 		<h1>Your Vendor Account</h1><hr class="style-two">
-		<h3>Create listings and such</h3>
 	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<div>
+				<ul class="nav pear-sidebar">
+					{{#link-to 'index.vendor.listings' tagName="li"}}<a href>Listings</a>{{/link-to}}
+					{{#link-to 'index.vendor.new-listing' tagName="li"}}<a href>New Listing</a>{{/link-to}}
+					{{#link-to 'index.vendor.profile' tagName="li"}}<a href>Profile</a>{{/link-to}}
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-10">
+		{{outlet}}
+	</div>
+</div>
+
  {{!-- SHOW ACCOUNT STUFF HERE --}}
 {{else}}
 	<div style="text-align:center">

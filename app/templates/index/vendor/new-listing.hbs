@@ -1,0 +1,69 @@
+<div style="text-align:center">
+<h1>New Listing</h1>
+<div class="form-horizontal">
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Name</label>
+			<div class="col-sm-6 {{if isLongName 'has-success'}}">
+				{{input type="text" value=name class="form-control" placeholder="Name of new item"}}
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Category</label>
+			<div class="col-sm-6 {{if category 'has-success'}}">
+				<select onchange={{action "selectCat" value="target.value"}} class="form-control">
+    				<option value="" selected="selected">Select a category</option>
+				  {{#each model as |cat|}}
+				    <option value={{cat.id}}>{{cat.name}}</option>
+				  {{/each}}
+				</select>
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Price</label>
+			<div class="col-sm-6">
+				<div class="has-feedback {{if isValidNumber 'has-success'}}">
+				  <div class="input-group">
+				    <span class="input-group-addon">R</span>
+				    {{input type="text" value=price class="form-control" placeholder="Eg: 500 or 450.23"}}
+				  </div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Image URL</label>
+			<div class="col-sm-6">
+				<div class="has-feedback {{if imageURL 'has-success'}}">
+				  <div class="input-group">
+				    <span class="input-group-addon">http://</span>
+				    {{input type="text" value=imageURL class="form-control" placeholder="Eg: imgur/image.jpg"}}
+				  </div>
+				</div>
+			</div>
+		</div>
+		{{!-- <div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Price</label>
+			<div class="col-sm-6">
+				<div class="input-group">
+					<span class="input-group-addon">R</span>
+					<div class="{{if isValidNumber 'has-success'}}">
+					{{input type="text" value=price class="form-control" placeholder="Eg: 500.00 or 350"}}</div>
+				</div>
+			</div>
+		</div> --}}
+
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Description</label>
+			<div class="col-sm-6 {{if isLongDesc 'has-success'}}">
+	        		{{textarea class="form-control" value=desc placeholder="Your message. (At least 5 characters.)" rows="7"}}
+        	</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-3">
+
+		</div>
+		<div class="col-sm-6">
+			<button class="btn btn-default" disabled={{isNotValid}} {{action 'createItem'}}>Create new item</button>
+		</div>
+	</div>
+</div>
