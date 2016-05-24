@@ -1,1 +1,40 @@
+{{!-- When the "Add Guest" button is clicked, this will show. --}}
+<h1 class="text-center">Add Guests</h1>
+<div class="form-horizontal">
+	<div class="form-group has-feedback">
+		<label class="col-sm-3 control-label">Name &amp; Surname</label>
+		<div class="col-sm-6">
+			{{input type="text" value=name class="form-control" placeholder="Name of guest"}}
+		</div>
+	</div>
+	<div class="form-group has-feedback">
+		<label class="col-sm-3 control-label">Email Address</label>
+		<div class="col-sm-6">
+			{{input type="text" value=email class="form-control disabled" placeholder="Email address of guest"}}
+		</div>
+	</div>
+	<div class="form-group has-feedback">
+		<label class="col-sm-3 control-label">Contact Number</label>
+		<div class="col-sm-6">
+			{{input type="text" value=email class="form-control disabled" placeholder="Contact details of guest"}}
+		</div>
+	</div>
+	<div class="form-group has-feedback">
+		<label class="col-sm-3 control-label">Number of additional guests?</label>
+		<div class="col-sm-6">
+			{{#touch-spin}}
+				<input id="guestNumberBox" type="text" value="0" name="demo1">
+			{{/touch-spin}}
+			{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-3">
+	</div>
+	<div class="col-sm-6">
+		<button class="btn btn-default" {{action 'noActionAtTheMoment'}}>Add Guest to guest list</button>
+	</div>
+</div>
+{{!-- End of guest add section --}}
 {{outlet}}

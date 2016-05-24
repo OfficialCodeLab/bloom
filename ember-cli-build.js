@@ -14,6 +14,10 @@ module.exports = function(defaults) {
     // Add options here
   });
 
+  app.import('vendor/touchspin/jquery.bootstrap-touchspin.min.css');
+  app.import('vendor/touchspin/jquery.bootstrap-touchspin.min.js');
+
+
   // Use `app.import` to add additional libraries to the generated
   // output files.
   //
