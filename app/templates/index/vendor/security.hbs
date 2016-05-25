@@ -1,5 +1,33 @@
 <div style="text-align:center">
-	<h1>Security</h1>
-	<button class="btn btn-default" {{action 'logout'}}>Log out</button>
+	<h1>Security</h1><hr class="style-two">
+	{{!-- {{partial 'partials/security/change-email'}} --}}
+
+	{{#if showPartial}}
+		{{#if showPasswordPartial}}
+			{{partial 'partials/security/change-password'}}
+		{{/if}}
+		{{#if showEmailPartial}}
+			{{partial 'partials/security/change-email'}}
+		{{/if}}
+		<button class="btn btn-default" style="width:150px;" {{action 'backBtn'}}>Back</button>
+	{{else}}
+	<div class="form-horizontal">
+		<div class="form-group">
+	        <div class="col-sm-offset-4 col-sm-4">
+				<button class="btn btn-default" style="width:150px;" {{action 'showPasswordChangePartial'}}>Change Password</button>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-offset-4 col-sm-4">
+				<button class="btn btn-default" style="width:150px;" {{action 'showEmailChangePartial'}}>Change Email</button>
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-offset-4 col-sm-4">
+				<button class="btn btn-default" style="width:150px;" {{action 'logout'}}>Log out</button>
+	        </div>
+	    </div>
+    </div>
+    {{/if}}
 	        
 </div>
