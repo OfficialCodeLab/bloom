@@ -1,11 +1,12 @@
 <div class="header-top">
-	<h1>Your Favourites</h1><hr class="style-two">
+	<h1>Your Favourites</h1>
+	<hr class="style-two">
 	{{#if model.favourites}}
-	<h3>Click to unfavourite</h3>
+		<h3>Click to unfavourite</h3>
 	{{else}}
-	<h3>It looks like you don't have any favourites yet!</h3>
-	<h3>Click here to explore</h3>
-	{{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
+		<h3>It looks like you don't have any favourites yet!</h3>
+		<h3>Click here to explore</h3>
+		{{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
 	{{/if}}
 </div>
 
