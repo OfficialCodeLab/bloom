@@ -16,6 +16,7 @@ export default Ember.Route.extend({
             let customID = this.controller.get('customID');
             let email = this.controller.get('email');
             let hash = this.hashCode(email);
+            let passhash = this.hashCode(this.controller.get('password'));
 
             if (this.controller.get('name')) {  															//Check name field
                 if (passLength) {																			//Check password length
@@ -31,7 +32,7 @@ export default Ember.Route.extend({
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
                                             id: hash,
                                             email: email,
-                                            password: this.controller.get('password')
+                                            password: passhash
                                         });
                                         vendorLogin.save().then(() => {										//Save vendorLogin
                                             let vendor = this.store.createRecord('vendor', {				//Create vendor record
@@ -62,7 +63,7 @@ export default Ember.Route.extend({
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
                                         id: hash,
                                         email: email,
-                                        password: this.controller.get('password')
+                                        password: passhash
                                     });
                                     vendorLogin.save().then(() => {											//Save vendorLogin
                                         let vendor = this.store.createRecord('vendor', {					//Create vendor record
