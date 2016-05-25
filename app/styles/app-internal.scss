@@ -337,11 +337,11 @@ body {
 	margin-bottom: 15px; 
 
 	//Take up the full column...
-	width: 380px;
+	//width: 380px;
 
 	//But not too big!
 	//max-width: 360px;
-	height: 326px;
+	height: auto;
 
 	text-align: center;
 	background-color: #f8f8f8;
@@ -399,7 +399,7 @@ body {
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
-    overflow: hidden; 
+    //overflow: hidden; 
 }
 .cat-image-m{
 	display: inherit;
