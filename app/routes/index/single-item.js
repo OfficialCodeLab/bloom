@@ -8,6 +8,19 @@ export default Ember.Route.extend({
 	      }
 	      return sesh;
     },
+    model(params) {
+    	return this.store.findRecord('catItem', params.catItem_id);
+  	},
+  	setupController(controller, model) {
+	    this._super(controller, model);
+
+	    // controller.set('title', 'Edit library');
+	    // controller.set('buttonLabel', 'Save changes');
+  	},
+ //  	renderTemplate() {
+	//     this.render('libraries/form');
+	// },
+
 	actions: {
 		goBack: function(){
 			window.history.go(-1);

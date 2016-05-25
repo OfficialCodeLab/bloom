@@ -24,7 +24,6 @@ Router.map(function() {
       this.route('bride');
       this.route('groom');
     });
-    this.route('item-single');
     this.route('vendor', function() {
       this.route('signup');
       this.route('login');
@@ -33,6 +32,7 @@ Router.map(function() {
       this.route('profile');
       this.route('security');
     });
+    this.route('single-item', { path: '/item/:catItem_id' });
   });
   this.route('admin', {path:'/admin'}, function() {
     this.route('requests');
