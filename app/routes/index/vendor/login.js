@@ -13,10 +13,12 @@ export default Ember.Route.extend({
 		login: function (){
 			let hash = this.hashCode(this.controller.get('email'));					//Hash the email address
 			this.store.findRecord('vendorLogin', hash).then((vendor) => {			//Find the vendor account login
-				if(vendor.get('password') === this.controller.get('password')){		//Compare passwords
+                let _passhash = vendor.get('password') + "";
+                let passhash = this.hashCode(this.controller.get('password')) + "";      //Hash the password
+				if(_passhash === passhash) {		                    //Compare passwords
 					this.assignToUser(vendor.get('vendorID'));						//Assign vendor account to user
 				} else {
-					alert("Incorrect password!");
+					alert("Incorrect password:\n" + vendor.get('password') + "\n" + passhash);
 				}
 			}, () => {
 				alert("Account does not exist!");
@@ -28,7 +30,7 @@ export default Ember.Route.extend({
             i, chr, len;
         if (str.length === 0) {
             return hash;
-        }
+        }   
         for (i = 0, len = str.length; i < len; i++) {
             chr = str.charCodeAt(i);
             hash = ((hash << 5) - hash) + chr;
