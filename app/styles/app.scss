@@ -297,6 +297,7 @@ h2.white{
 }
 
 .clbutton-main{
+  padding:0px;
     font-family: antipasto; 
     font-size: 18px;
     @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
