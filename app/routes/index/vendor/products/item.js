@@ -31,7 +31,12 @@ export default Ember.Route.extend({
 			model.save().then(() => {
 				this.transitionTo('index.vendor');
 			});
-		}
+		},
+		willTransition() {
+	      // rollbackAttributes() removes the record from the store
+	      // if the model 'isNew'
+	      this.controller.get('model.catItem').rollbackAttributes();
+	    }
 	},
 	uiSetup: function(){
 	   // do magic here...
