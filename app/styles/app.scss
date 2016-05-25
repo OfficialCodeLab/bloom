@@ -540,6 +540,25 @@ body{
   border-color: #4CAE4C;
 }
 
+.btn-danger-thin {
+  color: #d43f3a;
+  background-color: rgba(0,0,0,0);
+  border-color: #d43f3a;
+  
+}
+
+.btn-danger-thin:hover {
+  color: #fff;
+  background-color: #d43f3a;
+  border-color: #d43f3a;
+}
+
+.btn-danger-thin:focus {
+  color: #fff;
+  background-color: #d43f3a;
+  border-color: #d43f3a;
+}
+
 .card {
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     //height: 304px;

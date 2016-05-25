@@ -8,5 +8,12 @@ export default Model.extend({
   price: attr('string'),
   category: belongsTo('category', {inverse: 'catItems', async: true}),
   vendor: belongsTo('vendor', {inverse: 'catItems', async: true}),
-  imageURL: attr('string')
+  imageURL: attr('string'),
+  isNumber: Ember.computed.match('price', /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/),
+  isValidNumber: Ember.computed.and('isNumber', 'price'),
+  isLongName: Ember.computed.gte('name.length', 5),
+  isLongDesc: Ember.computed.gte('desc.length', 5),
+  isCreating: '',
+  isNotCreating: Ember.computed.not('isCreating'),
+  isValid: Ember.computed.and('isLongName', 'isLongDesc', 'isValidNumber', 'imageURL', 'isNotCreating'),
 });

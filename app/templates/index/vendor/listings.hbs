@@ -7,9 +7,9 @@
 			<div class="col-md-6">
 				<div class="category-block">
 					<h2>{{cat-item.name}}</h2>
-					<div class="text-center cat-img-container">
+					{{#link-to 'index.vendor.products.item' cat-item.id tagname='div' class="text-center cat-img-container"}}
 						<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
-					</div>
+					{{/link-to}}
 					<label style="margin-top:10px;">R {{cat-item.price}}</label>
 				</div>
 			</div>

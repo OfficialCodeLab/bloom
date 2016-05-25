@@ -1,0 +1,69 @@
+<div style="text-align:left;">
+	<button class="btn btn-default" {{action 'goBack'}}>Back</button>
+</div>
+<div class="row text-center">
+	<div class="col-lg-12">
+		<h1>{{model.catItem.name}}</h1>
+		<div class="single-img-container">
+			<img src={{model.catItem.imageURL}} class="img-responsive">
+		</div>
+	</div>
+	<div class="col-lg-12" style="padding-bottom: 100px">
+
+		<div class="form-horizontal">
+			<h1>Update Details</h1>
+			<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Name</label>
+			<div class="col-sm-6 {{if model.catItem.isLongName 'has-success'}}">
+				{{input type="text" value=model.catItem.name class="form-control" placeholder="Name of new item"}}
+			</div>
+		</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Description</label>
+				<div class="col-sm-6 {{if model.catItem.isLongDesc 'has-success'}}">
+		        		{{textarea class="form-control" value=model.catItem.desc placeholder="Your product description. (At least 5 characters.)" rows="7"}}
+	        	</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Category</label>
+				<div class="col-sm-6 {{if category 'has-success'}}">
+					<select onchange={{action "selectCat" value="target.value"}} class="form-control">
+						<option value={{model.catItem.category.id}} selected="selected">{{model.catItem.category.name}}</option>
+						<option style="text-align:center;" disabled>────────────────────</option>
+					  {{#each model.category as |cat|}}
+					    <option value={{cat.id}}>{{cat.name}}</option>
+					  {{/each}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Price</label>
+				<div class="col-sm-6">
+					<div class="has-feedback {{if model.catItem.isValidNumber 'has-success'}}">
+					  <div class="input-group">
+					    <span class="input-group-addon">R</span>
+					    {{input type="text" value=model.catItem.price class="form-control" placeholder="Eg: 500 or 450.23"}}
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Image URL</label>
+				<div class="col-sm-6">
+					<div class="has-feedback {{if model.catItem.imageURL 'has-success'}}">
+					  <div class="input-group">
+					    <span class="input-group-addon">http://</span>
+					    {{input type="text" value=model.catItem.imageURL class="form-control" placeholder="Eg: imgur/image.jpg"}}
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-offset-3 col-sm-6">
+				<button class="btn btn-success-thin" style="width:100%;" disabled={{model.catItem.isNotValid}} {{action 'updateItem' model.catItem}}>Update Product Listing</button>
+			</div><br><br>
+			<div class="col-sm-offset-3 col-sm-6">
+				<button class="btn btn-danger-thin" style="width:100%;" {{action 'destroyItem' model.catItem}}>Remove Product Listing</button>
+			</div>
+		</div>
+	</div>
+</div>
