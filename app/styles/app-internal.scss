@@ -29,7 +29,7 @@ body {
 	margin-top: 50px;
 	min-height: 100vh !important;
 	// background-image: url(images/flowers1.jpg);
-	background-color: $button-click-color;
+	// background-color: $button-click-color;
 }
 
 /*==============================================================================*\
@@ -423,11 +423,15 @@ body {
  |____/|_|_| |_|\__, |_|\___| |___|\__\___|_| |_| |_|___/
                 |___/                                    
 \*==============================================================================*/
-
+.single-item-imageheader{
+	h1{
+		font-size: 3em;
+	}
+}
 
 .single-img-container{
-	background-color: black;
-	border-radius: 15px;
+	// background-color: black;
+	// border-radius: 15px;
 	// border-top-left-radius: 15px;
 	// border-top-right-radius: 15px;
 	// width: 100%;
@@ -435,28 +439,37 @@ body {
 	// line-height: 117px;
 	// display: inline-block;
 	text-align: center;
+	// max-height: 500px;
 	// overflow-y: hidden;
 
 	margin: 0px;
 	padding: 0px;
 	img{
 		display: inline-block;
+		cursor: pointer;
+		border-radius: 15px;
+
 
 		position: relative;
 		// top: 50%;
 		// transform: translateY(-50%);
 
-		// max-height: 100%;
+		max-height: inherit;
 		max-width: 100%;
 		height: auto;
 		width: auto;
 
 		margin: 0px;
 		padding: 0px;
+
+		user-drag: none; 
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
 	}
 }
-
-
 
 
 
@@ -491,6 +504,9 @@ body {
 		background-color: $primary-color !important;
 		color: $button-text-color !important;
 	}
+}
+.pear-footer-padding{
+	margin-bottom: 20vh;
 }
 
 /*==============================================================================*\

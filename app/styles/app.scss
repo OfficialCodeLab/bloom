@@ -22,6 +22,8 @@ You're an fagit.
 @import "navbar-custom.scss";
 @import "colours.scss";
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 @font-face {
     font-family: antipasto;
     src: url(fonts/Antipasto_regular.otf);
@@ -91,6 +93,10 @@ You're an fagit.
 h1, h2, h3, h4, h5, h6, p, a{
   font-family: antipasto; 
 	color: rgb(88,89,91);
+}
+
+p{
+  font-family: 'Open Sans', sans-serif;
 }
 
 .fullscreen{
