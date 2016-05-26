@@ -1,7 +1,7 @@
 <div class="header-top">
 	<h1>Your Favourites</h1>
 	<hr class="style-two">
-	{{#if model.favourites}}
+	{{#if model.user.favourites}}
 		<h3>Click to unfavourite</h3>
 	{{else}}
 		<h3>It looks like you don't have any favourites yet!</h3>
@@ -12,7 +12,7 @@
 
 <div class="">
 	<div class="row">
-	    {{#each model.favourites as |cat-item|}}
+	    {{#each model.user.favourites as |cat-item|}}
 		<div class="col-lg-4 col-md-6">
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>
