@@ -10,7 +10,7 @@
 				<div class="text-center cat-img-container">
 					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
 				</div>
-				<button type="button" class="btn btn-danger cat-heart-button" {{action 'addFavourite' cat-item.id}}><i class="fa fa-heart-o"></i></button>
+				{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
 			</div>
 		</div>
 	    {{/each}}

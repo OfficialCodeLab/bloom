@@ -52,6 +52,7 @@ Router.map(function() {
   });
   this.route('listings');
   this.route('not-found', { path: '/*path' });
+  this.route('vendor-profile', { path: '/vendor/:vendor_id' });
 });
 
 export default Router;

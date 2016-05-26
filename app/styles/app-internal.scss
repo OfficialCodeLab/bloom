@@ -309,6 +309,10 @@ body {
 	padding: 0px;
 	border: none;
 }
+
+.favourited {
+	background-color: $hover-color !important;
+}
 .cat-button-circle{
 	border: 2px solid white;
 	border-radius: 100%;
@@ -320,7 +324,6 @@ body {
 }
 .pear-heart-icon{
 	display: inline-block;
-
 }
 
 /*==============================================================================*\

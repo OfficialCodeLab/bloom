@@ -1,0 +1,6 @@
+{{!-- {{#if favourited}}
+<p>FAVOURITED</p>
+{{else}}
+<p>Nobody loves you</p>
+{{/if}} --}}
+<button type="button" class="btn btn-danger cat-heart-button {{if favourited 'favourited'}}" {{action 'toggleFavourite'}}><i class="fa fa-heart-o"></i></button>
