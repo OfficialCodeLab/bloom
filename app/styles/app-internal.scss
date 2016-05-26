@@ -28,12 +28,14 @@ body {
 	/* This is spacing to place the body underneath the navbar */
 	margin-top: 50px;
 	min-height: 100vh !important;
-	background-image: url(images/wood.jpg);
-	background-position: fixed;
+	background-image: url(images/Picture1.jpg);
+	background-attachment: fixed;
 	background-repeat: no-repeat;
-	background-size: 100%;
-	// background-attachment:
-	// background-color: $button-click-color;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
 }
 
 /*==============================================================================*\

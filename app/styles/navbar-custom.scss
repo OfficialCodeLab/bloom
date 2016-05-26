@@ -47,7 +47,7 @@
 #navbar-g.navbar-default {
     font-size: 16px;
     //background-color: rgba(0, 0, 0, 0.85);
-    background-color: $primary-color;
+    background-color: $button-click-color;
     border-bottom-width: 0px;
 }
 #navbar-g.navbar-default .navbar-nav>li>a {
@@ -72,7 +72,7 @@
     color: #fff;
     text-decoration: none;
     outline: 0;
-    background-color: $primary-color;
+    background-color: $button-click-color;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
     text-decoration: none;
@@ -95,7 +95,7 @@
 }
 .navbar-brand{
     &:hover{
-      background-color: $primary-color !important;
+      background-color: $button-click-color !important;
     }
 }
 
