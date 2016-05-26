@@ -16,11 +16,14 @@ export default Ember.Route.extend({
 	actions: {
 
 		saveContact(newContact) {
-			newContact.save().then(() => {
-        		this.controller.get('model').set('email', '');
-        		this.controller.get('model').set('message', '');
-        		this.controller.get('model').set('responseMessage', 'KTHNXBAI');
-			});
+			if(this.controller.get('captchaVerified'))
+			{
+				newContact.save().then(() => {
+	        		this.controller.get('model').set('email', '');
+	        		this.controller.get('model').set('message', '');
+	        		this.controller.get('model').set('responseMessage', 'KTHNXBAI');
+				});				
+			}
 	    },
 
 	    willTransition() {

@@ -18,8 +18,12 @@ export default Ember.Route.extend({
 			window.history.go(-1);
 		},
 		destroyItem: function(model){
-			model.destroyRecord();
-			this.transitionTo('index.vendor');
+			let confirmation = confirm('Are you sure?');
+
+	        if (confirmation) {
+				model.destroyRecord();
+				this.transitionTo('index.vendor');
+	        }
 		},
 		updateItem: function(model){
 			let _cat = this.controller.get('category') + "";
@@ -31,7 +35,12 @@ export default Ember.Route.extend({
 			model.save().then(() => {
 				this.transitionTo('index.vendor');
 			});
-		}
+		},
+		willTransition() {
+	      // rollbackAttributes() removes the record from the store
+	      // if the model 'isNew'
+	      this.controller.get('model.catItem').rollbackAttributes();
+	    }
 	},
 	uiSetup: function(){
 	   // do magic here...

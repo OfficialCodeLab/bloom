@@ -41,10 +41,13 @@
 	        		{{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
 	        	</div>
 		        <br>
-			    {{#if model.responseMessage}}
+		        {{#if model.responseMessage}}
 			      <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}<p>Click this popup to close it</p></div>
 			    {{/if}}
-		    	<button class="btn btn-success-thin btn-lg btn-block" style="bottom:0px; float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
+			    <div style="float:right;">
+		        	{{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
+		    		<button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
+		        </div>
 	        </div>
 	    </div>
 	</div>

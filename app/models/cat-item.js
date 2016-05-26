@@ -16,4 +16,5 @@ export default Model.extend({
   isCreating: '',
   isNotCreating: Ember.computed.not('isCreating'),
   isValid: Ember.computed.and('isLongName', 'isLongDesc', 'isValidNumber', 'imageURL', 'isNotCreating'),
+  isNotValid: Ember.computed.not('isValid'),
 });
