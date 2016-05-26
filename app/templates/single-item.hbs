@@ -52,6 +52,15 @@
 								{{#link-to 'category' model.category.id}}{{model.category.name}}{{/link-to}}
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<p>Favourite</p>
+							</td>
+							<td>
+								{{#favourite-button model.id session.currentUser.id}}{{/favourite-button}}
+							</td>
+						</tr>
+
 					</tbody>
 				</table>
 			</div>
