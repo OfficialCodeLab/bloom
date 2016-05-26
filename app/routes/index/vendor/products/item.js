@@ -18,8 +18,12 @@ export default Ember.Route.extend({
 			window.history.go(-1);
 		},
 		destroyItem: function(model){
-			model.destroyRecord();
-			this.transitionTo('index.vendor');
+			let confirmation = confirm('Are you sure?');
+
+	        if (confirmation) {
+				model.destroyRecord();
+				this.transitionTo('index.vendor');
+	        }
 		},
 		updateItem: function(model){
 			let _cat = this.controller.get('category') + "";
