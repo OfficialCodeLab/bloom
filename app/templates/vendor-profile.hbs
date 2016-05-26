@@ -3,4 +3,18 @@
 		<h1>{{model.name}}</h1><hr class="style-two">
 		<h3>Product Listings</h3>
 	</div>
+
+	<div class="row">
+	    {{#each model.catItems as |cat-item|}}
+		<div class="col-lg-4 col-md-6">
+			<div class="category-block">
+				<h2>{{cat-item.name}}</h2>
+				<div class="text-center cat-img-container">
+					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+				</div>
+				{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
+			</div>
+		</div>
+	    {{/each}}
+	</div>
 </div>
