@@ -1,4 +1,4 @@
-<div class="header-top">
+<div class="container header-top">
 	<h1>Listings</h1><hr class="style-two"><h3>Click the heart to favourite!</h3>
 </div>
 
@@ -11,7 +11,7 @@
 				<div class="text-center cat-img-container">
 					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
 				</div>
-				<button type="button" class="btn btn-danger cat-heart-button"><i class="fa fa-heart-o"></i></button>
+				<button type="button" class="btn btn-danger cat-heart-button" {{action 'addFavourite' cat-item.id}}><i class="fa fa-heart-o"></i></button>
 			</div>
 		</div>
 	    {{/each}}

@@ -36,8 +36,9 @@ Router.map(function() {
         this.route('item', {path: '/item/:catItem_id'});
       });
     });
-    this.route('single-item', { path: '/item/:catItem_id' });
+    
   });
+  this.route('single-item', { path: '/item/:catItem_id' });
   this.route('admin', {path:'/admin'}, function() {
     this.route('requests');
     this.route('messages');

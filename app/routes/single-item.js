@@ -17,9 +17,9 @@ export default Ember.Route.extend({
 	    // controller.set('title', 'Edit library');
 	    // controller.set('buttonLabel', 'Save changes');
   	},
- //  	renderTemplate() {
-	//     this.render('libraries/form');
-	// },
+  	activate: function(){
+  		window.scrollTo(0,0);
+  	},
 
 	actions: {
 		goBack: function(){

@@ -7,7 +7,7 @@
 		<div class="col-lg-4 col-md-6">
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>
-				{{#link-to 'index.single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
+				{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
 					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
 				{{/link-to}}
 				<button type="button" class="btn btn-danger cat-heart-button" {{action 'addFavourite' cat-item.id}}><i class="fa fa-heart-o"></i></button>

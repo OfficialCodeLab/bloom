@@ -5,6 +5,9 @@ import config from './config/environment';
 
 let App;
 
+var globalScrollX = 0;
+var globalScrollY = 0;
+
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 App = Ember.Application.extend({

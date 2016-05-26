@@ -1,0 +1,53 @@
+<div class="container index-main">
+	<div class="row page-navigation">
+		<div class="col-md-3">
+			<button class="btn btn-default" {{action 'goBack'}} style="width: 100%">Back</button>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-lg-12 single-item-imageheader unselectable">
+			<h1>{{model.name}}</h1>
+			<div class="single-img-container">
+				<img src={{model.imageURL}}>
+			</div>
+		</div>
+		<div class="col-lg-12">
+			<div class="col-md-6">
+				<h1>Description</h1>
+				<p style="text-align: justify">{{model.desc}}</p>
+			</div>
+			<div class="col-md-6">
+				<h1>More Info</h1>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<p>Price</p>
+							</td>
+							<td>
+								R&nbsp;{{model.price}}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Vendor</p>
+							</td>
+							<td>
+								{{model.vendor}}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<p>Category</p>
+							</td>
+							<td>
+								{{model.category}}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+</div>
