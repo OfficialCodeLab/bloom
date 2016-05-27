@@ -13,6 +13,7 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'catItem', model.catItem);
 	    Ember.set(controller, 'category', model.category);
 	  },
+	filepicker: Ember.inject.service(),
 	actions: {
 		goBack: function(){
 			window.history.go(-1);
@@ -21,8 +22,13 @@ export default Ember.Route.extend({
 			let confirmation = confirm('Are you sure?');
 
 	        if (confirmation) {
-				model.destroyRecord();
-				this.transitionTo('index.vendor');
+	        	let _blob = model.get('imageBlob');
+	            if(_blob){	            	
+			  		this.destroyBlob(_blob);
+	            } 
+				model.destroyRecord().then(()=>{
+					this.transitionTo('index.vendor');
+				});
 	        }
 		},
 		updateItem: function(model){
@@ -32,15 +38,67 @@ export default Ember.Route.extend({
 				let cat = this.store.peekRecord('category', this.controller.get('category'));
 				model.set('category', cat);
 			}
+		    let _blob = model.get('imageBlob');
+		    let _imgurl = model.get('imageURL');
+		    if (_blob.url !== _imgurl){
+				this.destroyBlob(_blob);
+		  	    //this.destroyBlob(_blob);
+		    }
 			model.save().then(() => {
 				this.transitionTo('index.vendor');
 			});
 		},
-		willTransition() {
+		willTransition(transition) {
+			let model = this.controller.get('model.catItem');
+
+			if (model.get('hasDirtyAttributes')) {
+				let confirmation = confirm("Your changes haven't saved yet. Would you like to leave this form?");
+
+				if (confirmation) {
+				  let _blob = model.get('imageBlob');
+				  let _imgurl = model.get('imageURL');
+				  if (_blob.url !== _imgurl){
+				  	this.destroyBlob(_blob);
+				  }
+				  model.rollbackAttributes();
+				} else {
+				  transition.abort();
+				}
+			}
 	      // rollbackAttributes() removes the record from the store
 	      // if the model 'isNew'
-	      this.controller.get('model.catItem').rollbackAttributes();
+	    },
+	    openFilePicker: function(){
+    		let picker_options = {mimetype: 'image/*'};
+    		let catItem = this.controller.get('model.catItem');
+	    	this.get('filepicker.promise').then((filepicker) => {
+	            //do something with filepicker
+	            filepicker.pick(picker_options, function(Blob){
+	            	let _imgBlob = catItem.get('imageBlob');
+		            if(_imgBlob){
+		            	filepicker.remove(
+					      _imgBlob,
+					      function(){
+					        //console.log("Removed");
+					      }
+					    );
+		            } 
+	            	catItem.set('imageBlob', Blob);
+	            	catItem.set('imageURL', Blob.url);
+		        });
+	        });
 	    }
+	},
+	destroyBlob(blob){
+
+	  	this.get('filepicker.promise').then((filepicker) => {
+        	filepicker.remove(
+		      blob,
+		      function(){
+		        //console.log("Removed");
+		      }
+		    );
+        }); 
 	},
 	uiSetup: function(){
 	   // do magic here...

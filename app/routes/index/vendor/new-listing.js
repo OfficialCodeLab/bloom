@@ -55,17 +55,7 @@ export default Ember.Route.extend({
 							this.controller.set('isCreating', false);
 
 			    	if(_blob){		
-
-		    			this.get('filepicker.promise').then((filepicker) => {
-				            if(_blob){
-				            	filepicker.remove(
-							      _blob,
-							      function(){
-							        //console.log("Removed");
-							      }
-							    );
-				            } 
-				        });	        
+		            	destroyBlob(_blob);    
 			    	}
 		    	} else {
 			          transition.abort();
@@ -105,16 +95,9 @@ export default Ember.Route.extend({
 								this.controller.set('imgBlob', '');
 								this.controller.set('itemCreated', true);
 								if(_blob.url !== _imgurl){
-					    			this.get('filepicker.promise').then((filepicker) => {
-							            if(_blob){
-							            	filepicker.remove(
-										      _blob,
-										      function(){
-										        //console.log("Removed");
-										      }
-										    );
-							            } 
-							        });	        
+						            if(_blob){
+						            	this.destroyBlob(_blob)
+						            } 
 						    	}
 								this.transitionTo('index.vendor');
 							});
@@ -126,5 +109,16 @@ export default Ember.Route.extend({
 				alert("Please select a category or there was a problem");
 			}
 		}
-	}
+	},
+	destroyBlob(blob){
+
+	  	this.get('filepicker.promise').then((filepicker) => {
+        	filepicker.remove(
+		      blob,
+		      function(){
+		        //console.log("Removed");
+		      }
+		    );
+        });
+	},
 });
