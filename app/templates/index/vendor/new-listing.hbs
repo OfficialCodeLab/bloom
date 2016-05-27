@@ -30,7 +30,13 @@
 			</div>
 		</div>
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Image URL</label>
+			<label class="col-sm-3 control-label">Upload Image</label>
+			<div class="col-sm-6">
+				<button class="btn btn-default" style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button>
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Or Image URL</label>
 			<div class="col-sm-6">
 				<div class="has-feedback {{if imageURL 'has-success'}}">
 				  <div class="input-group">
@@ -63,7 +69,7 @@
 
 		</div>
 		<div class="col-sm-6">
-			<button class="btn btn-default" disabled={{isNotValid}} {{action 'createItem'}}>Create new item</button>
+			<button class="btn btn-success-thin" disabled={{isNotValid}} {{action 'createItem'}}>Create new item</button>
 		</div>
 	</div>
 </div>
