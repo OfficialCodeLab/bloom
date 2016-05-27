@@ -214,6 +214,8 @@ body {
 .category-block{
 	//Defaults
 	margin: auto;
+	margin-left: 4px;
+	margin-right: 4px;
 
 	//To create space between rows
 	margin-bottom: 15px; 
@@ -223,7 +225,7 @@ body {
 
 	//But not too big!
 	max-width: 360px;
-	height: 322px;
+	min-height: 322px;
 
 	text-align: center;
 	background-color: #f8f8f8;
@@ -269,7 +271,7 @@ body {
 .cat-img-container{
 	background-color: #000000;
 	width: 100%;
-	height: 234px;
+	min-height: 234px;
 	// line-height: 117px;
 	display: inline-block;
 	text-align: center;
@@ -283,10 +285,10 @@ body {
 	cursor: pointer;
 
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	// top: 50%;
+	// transform: translateY(-50%);
 
-	max-height: 100%;
+	max-height: inherit;
 	max-width: 100%;
 	height: auto;
 	width: auto;
@@ -324,6 +326,38 @@ body {
 }
 .pear-heart-icon{
 	display: inline-block;
+}
+
+/*==============================================================================*\
+  __  __                                  
+ |  \/  | __ _ ___  ___  _ __  _ __ _   _ 
+ | |\/| |/ _` / __|/ _ \| '_ \| '__| | | |
+ | |  | | (_| \__ \ (_) | | | | |  | |_| |
+ |_|  |_|\__,_|___/\___/|_| |_|_|   \__, |
+                                    |___/ 
+\*==============================================================================*/
+
+.masonry-grid-container{
+	display: inline-block;
+	width: 100%;
+}
+.masonry-grid{
+	// width: 100%;
+	margin: 0 auto;
+	&:after{
+		content: '';
+		display: block;
+		clear: both;
+	}
+}
+.masonry-item{
+	// width: 180px;
+	// // height: 120px;
+	// float: left;
+	// background: #D26;
+	// border: 2px solid #333;
+	// border-color: hsla(0, 0%, 0%, 0.5);
+	// border-radius: 5px;
 }
 
 /*==============================================================================*\
