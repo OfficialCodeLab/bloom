@@ -23,13 +23,15 @@ export default Ember.Route.extend({
 			this.controller.get('model.catItem').set('isDeleting', true);
 
 	        if (confirmation) {
-	        	let _blob = model.get('imageBlob');
-	            if(_blob){	            	
-			  		this.destroyBlob(_blob);
-	            } 
 				model.destroyRecord().then(()=>{
 					this.controller.get('model.catItem').set('isDeleting', false);
 					this.transitionTo('index.vendor');
+					try{
+			        	let _blob = model.get('imageBlob');
+			            if(_blob){	            	
+					  		this.destroyBlob(_blob);
+			            } 						
+					} catch(ex){}
 				});
 	        }
 		},
@@ -41,15 +43,17 @@ export default Ember.Route.extend({
 				let cat = this.store.peekRecord('category', this.controller.get('category'));
 				model.set('category', cat);
 			}
-		    let _blob = model.get('imageBlob');
-		    let _imgurl = model.get('imageURL');
-		    if (_blob.url !== _imgurl){
-				this.destroyBlob(_blob);
-		  	    //this.destroyBlob(_blob);
-		    }
 			model.save().then(() => {
 				this.controller.get('model.catItem').set('isUpdating', false);
 				this.transitionTo('index.vendor');
+				try{
+				    let _blob = model.get('imageBlob');
+				    let _imgurl = model.get('imageURL');
+				    if (_blob.url !== _imgurl){
+						this.destroyBlob(_blob);
+				  	    //this.destroyBlob(_blob);
+				    }					
+				} catch(ex){}
 			});
 		},
 		willTransition(transition) {
@@ -59,11 +63,14 @@ export default Ember.Route.extend({
 				let confirmation = confirm("Your changes haven't saved yet. Would you like to leave this form?");
 
 				if (confirmation) {
-				  let _blob = model.get('imageBlob');
-				  let _imgurl = model.get('imageURL');
-				  if (_blob.url !== _imgurl){
-				  	this.destroyBlob(_blob);
-				  }
+					try{
+						let _blob = model.get('imageBlob');
+						let _imgurl = model.get('imageURL');
+						if (_blob.url !== _imgurl){
+							this.destroyBlob(_blob);
+						}
+					}
+					catch(ex){}
 				  model.rollbackAttributes();
 				} else {
 				  transition.abort();
