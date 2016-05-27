@@ -1,8 +1,17 @@
 <div class="container index-main">
 	<div class="header-top">
 		<h1>{{model.name}}</h1><hr class="style-two">
-		<h3>Product Listings</h3>
 	</div>
+
+	<div class="card" style="text-align:center;">
+		<h3>Vendor Details:</h3><hr>
+		<h4>Description:</h4><p>{{model.description}}</p>
+		<br>
+		<h4>Email:</h4>{{model.email}}
+		<br>
+		<h4>Cellphone:</h4>{{model.cell}}
+	</div><br>
+
 
 	<div class="row">
 	    {{#each model.catItems as |cat-item|}}
@@ -10,7 +19,9 @@
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>
 				<div class="text-center cat-img-container">
-					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+					{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
+						<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+					{{/link-to}}
 				</div>
 				{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
 			</div>

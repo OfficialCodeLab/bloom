@@ -1,5 +1,5 @@
 <div style="text-align:left;">
-	<button class="btn btn-default" {{action 'goBack'}}>Back</button>
+	{{#link-to 'index.vendor'}}<button class="btn btn-default">Back</button>{{/link-to}}
 </div>
 <div class="row text-center">
 	<div class="col-lg-12">
@@ -45,6 +45,12 @@
 					    {{input type="text" value=model.catItem.price class="form-control" placeholder="Eg: 500 or 450.23"}}
 					  </div>
 					</div>
+				</div>
+			</div>			
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Upload Image</label>
+				<div class="col-sm-6">
+					<button class="btn btn-default" style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button>
 				</div>
 			</div>
 			<div class="form-group has-feedback">
