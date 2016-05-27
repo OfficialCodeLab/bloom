@@ -10,19 +10,16 @@
 	{{/if}}
 </div>
 
-<div class="">
-	<div class="row">
-	    {{#each model.user.favourites as |cat-item|}}
-		<div class="col-lg-4 col-md-6">
+<div class="text-center">
+	{{#masonry-grid items=model.user.favourites isFitWidth=true columnWidth=360 gutter=8 as |cat-item|}}
+		<div>
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>
-				{{!-- <div class="text-center cat-img-container"> --}}
 				{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
 					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
 				{{/link-to}}
 				{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
 			</div>
 		</div>
-	    {{/each}}
-	</div>
+	{{/masonry-grid}} 	
 </div>
