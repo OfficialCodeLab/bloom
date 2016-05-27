@@ -14,8 +14,10 @@ export default Model.extend({
   isValidNumber: Ember.computed.and('isNumber', 'price'),
   isLongName: Ember.computed.gte('name.length', 5),
   isLongDesc: Ember.computed.gte('desc.length', 5),
-  isCreating: '',
-  isNotCreating: Ember.computed.not('isCreating'),
-  isValid: Ember.computed.and('isLongName', 'isLongDesc', 'isValidNumber', 'imageURL', 'isNotCreating'),
+  updating: Ember.computed.or('isUpdating', 'isDeleting'),
+  isUpdating: '',
+  isDeleting: '',
+  isNotUpdating: Ember.computed.not('updating'),
+  isValid: Ember.computed.and('isLongName', 'isLongDesc', 'isValidNumber', 'imageURL', 'isNotUpdating'),
   isNotValid: Ember.computed.not('isValid'),
 });

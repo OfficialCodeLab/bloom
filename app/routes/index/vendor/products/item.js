@@ -20,6 +20,7 @@ export default Ember.Route.extend({
 		},
 		destroyItem: function(model){
 			let confirmation = confirm('Are you sure?');
+			this.controller.get('model.catItem').set('isDeleting', true);
 
 	        if (confirmation) {
 	        	let _blob = model.get('imageBlob');
@@ -27,12 +28,14 @@ export default Ember.Route.extend({
 			  		this.destroyBlob(_blob);
 	            } 
 				model.destroyRecord().then(()=>{
+					this.controller.get('model.catItem').set('isDeleting', false);
 					this.transitionTo('index.vendor');
 				});
 	        }
 		},
 		updateItem: function(model){
 			let _cat = this.controller.get('category') + "";
+			this.controller.get('model.catItem').set('isUpdating', true);
 			if(_cat.charAt(0) != '<'){
 				//alert(_cat);
 				let cat = this.store.peekRecord('category', this.controller.get('category'));
@@ -45,6 +48,7 @@ export default Ember.Route.extend({
 		  	    //this.destroyBlob(_blob);
 		    }
 			model.save().then(() => {
+				this.controller.get('model.catItem').set('isUpdating', false);
 				this.transitionTo('index.vendor');
 			});
 		},
