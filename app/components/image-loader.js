@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	didRender(){
+	didInsertElement(){
 		// this.$('.cat-img-container').imagesLoaded( function() {
 		// 	console.log("Images have all loaded!");
 		// })
