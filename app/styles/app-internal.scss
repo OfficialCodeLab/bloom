@@ -48,7 +48,8 @@ body {
 \*==============================================================================*/
 
 .index-main{
-	background-color: rgba(255,255,255,0.99);
+	// background-color: rgba(255,255,255,0.99);
+	background-color: white;
 	min-height: 100vh;
 	// padding-bottom: 200px;
 	// box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 31, 31, 0.8), -12px 0 15px -4px rgba(31, 31, 31, 0.8);
@@ -225,27 +226,58 @@ body {
 
 	//But not too big!
 	max-width: 360px;
-	min-height: 322px;
+	// min-height: 322px;
 
 	text-align: center;
-	background-color: #f8f8f8;
-	// border: 1px solid #272822; //Sublime color
+	// background-color: #f8f8f8;
 	border-radius: 2px;
-
-	h2{
-		// padding-top: 10px;
-		margin-top: 5px;
-		overflow: hidden;
-  		text-overflow: ellipsis;
-  		white-space: nowrap;
-	}
 
 	//Card stuff
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
+	.cat-overlay-1{
+		position: absolute;
+		// width: inherit;
+		left: 10px;
+		right: 10px;
+	  	display: inline-block;
+	  	opacity: 0;
+	  	transition: .8s opacity;
+
+  		h2{
+			margin-top: 5px;
+			overflow: hidden;
+	  		text-overflow: ellipsis;
+	  		white-space: nowrap;
+	  		color: white;
+	  		text-align: center;
+
+		}
+	}
+	.cat-overlay-2{
+		position: absolute;
+		display: inline-block;
+		bottom: 30px;
+		// left: 5%;
+		width: 60px;
+		height: 60px;
+		left: 154px;
+		border-radius: 50%;
+		text-align: center;
+		overflow: hidden;
+	}
 	&:hover{
   		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  		.cat-overlay-1{
+  			display: inline-block;
+  			z-index: 10;
+  			text-align: center;
+  			opacity: 1;
+  		}
+  		img{
+  			opacity: 0.5;
+  		}
 	}
 
 	img{
@@ -255,6 +287,7 @@ body {
 		-webkit-user-drag: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
+		transition: .8s opacity;
 	}
 
 	/* None of these should be selectable */
@@ -268,6 +301,7 @@ body {
     overflow: hidden;
 
 }
+
 .cat-img-container{
 	background-color: #000000;
 	width: 100%;
@@ -279,6 +313,7 @@ body {
 
 	margin: 0px;
 	padding: 0px;
+	transition: 0.8s;
 }
 .cat-image{
 	display: inline-block;
@@ -302,8 +337,8 @@ body {
 }
 
 .cat-heart-button{
-	width: 100%;
-	height: 40px;
+	width: 60px;
+	height: 60px;
 	border-radius: 0px;
 	bottom: 0%;
 	// line-height: 20px;
@@ -326,6 +361,14 @@ body {
 }
 .pear-heart-icon{
 	display: inline-block;
+}
+.vendor-block{
+	color: #272727;
+	text-align: center;
+	h2{
+		color: #272727;
+		display: inline-block;
+	}
 }
 
 /*==============================================================================*\
