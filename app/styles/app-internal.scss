@@ -403,6 +403,108 @@ body {
 }
 
 /*==============================================================================*\
+   *                             (                          
+ (  `            )     (         )\ )    )                  
+ )\))(        ( /( (   )\   (   (()/( ( /(   (     )        
+((_)()\   (   )\()))\ ((_) ))\   /(_)))\()) ))\   (     (   
+(_()((_)  )\ ((_)\((_) _  /((_) (_)) (_))/ /((_)  )\  ' )\  
+|  \/  | ((_)| |(_)(_)| |(_))   |_ _|| |_ (_))  _((_)) ((_) 
+| |\/| |/ _ \| '_ \| || |/ -_)   | | |  _|/ -_)| '  \()(_-< 
+|_|  |_|\___/|_.__/|_||_|\___|  |___| \__|\___||_|_|_| /__/ 
+                                                            
+\*==============================================================================*/
+.category-block-mobile{
+	//Defaults
+	margin: auto;
+	margin-left: 4px;
+	margin-right: 4px;
+
+	//To create space between rows
+	margin-bottom: 15px; 
+
+	//Take up the full column...
+	width: 100%;
+
+	//But not too big!
+	max-width: 360px;
+	// min-width: 320px;
+	// min-height: 322px;
+
+	text-align: center;
+	// background-color: #f8f8f8;
+	border-radius: 2px;
+
+	//Card stuff
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+	.cat-overlay-1{
+		position: absolute;
+		// width: inherit;
+		left: 10px;
+		right: 10px;
+	  	display: inline-block;
+	  	opacity: 0;
+	  	transition: .8s opacity;
+
+  		h2{
+			margin-top: 5px;
+			overflow: hidden;
+	  		text-overflow: ellipsis;
+	  		white-space: nowrap;
+	  		color: white;
+	  		text-align: center;
+
+		}
+	}
+	.cat-overlay-2{
+		position: absolute;
+		display: inline-block;
+		bottom: 30px;
+		// left: 5%;
+		width: 60px;
+		height: 60px;
+		left: 154px;
+		border-radius: 50%;
+		text-align: center;
+		overflow: hidden;
+	}
+	&:hover{
+  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  		.cat-overlay-1{
+  			display: inline-block;
+  			z-index: 10;
+  			text-align: center;
+  			opacity: 1;
+  		}
+  		img{
+  			opacity: 0.5;
+  		}
+	}
+
+
+	img{
+		user-drag: none; 
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		transition: .8s opacity;
+	}
+
+	/* None of these should be selectable */
+	user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: default;
+
+    overflow: hidden;
+
+}
+/*==============================================================================*\
   __  __                                  
  |  \/  | __ _ ___  ___  _ __  _ __ _   _ 
  | |\/| |/ _` / __|/ _ \| '_ \| '__| | | |
