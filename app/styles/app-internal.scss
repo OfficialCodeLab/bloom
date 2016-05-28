@@ -108,6 +108,22 @@ body {
 		
 	}
 }
+.pear-text-logo{
+	color: $button-click-color;
+	padding: 0px;
+	font-size: 20em;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	// z-index: 2 !important;
+}
+.index-logo-container{
+	background-image: url("../assets/images/pear2main.png");
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center;
+	background-size:contain;
+}
 .favourites-padder{
 	padding-top: 50px;
 }
@@ -352,7 +368,7 @@ body {
 }
 
 .favourited {
-	background-color: $hover-color !important;
+	background-color: $button-favourited !important;
 }
 .cat-button-circle{
 	border: 2px solid white;
@@ -623,13 +639,20 @@ body {
 
 }
 @media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
-
+	.pear-text-logo{
+		font-size: 14em;
+	}
 }
 @media (max-width:980px) { /* Custom */ 
 
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 
+}
+@media (max-width:772px) { /* Our definition of really small */ 
+	.hideOnMobile{
+		display: none;
+	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
 	.pear-main-well{

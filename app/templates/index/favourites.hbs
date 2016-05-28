@@ -1,22 +1,32 @@
 <div class="favourites-padder">
-{{#image-loader}}
-<div class="text-center" id="#imageLoaderDiv">
-		{{#masonry-grid items=model.user.favourites isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
-			<div>
-				<div class="category-block">
-					<div class="cat-overlay-1">
-						<h2>{{cat-item.name}}</h2>
+	<div class="text-center">
+		<hr class="style-two">
+		{{#if model.user.favourites}}
+			<h3>Favourites</h3>
+		{{else}}
+			<h3>It looks like you don't have any favourites yet!</h3>
+			<h3>Click here to explore</h3>
+			{{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
+		{{/if}}
+	</div>
+	{{#image-loader}}
+	<div class="text-center" id="#imageLoaderDiv">
+			{{#masonry-grid items=model.user.favourites isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
+				<div>
+					<div class="category-block">
+						<div class="cat-overlay-1">
+							<h2>{{cat-item.name}}</h2>
+						</div>
+						{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
+							{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+						{{/link-to}}
+						<div class="cat-overlay-2">
+							{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
+						</div>
+						
 					</div>
-					{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
-						{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-					{{/link-to}}
-					<div class="cat-overlay-2">
-						{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
-					</div>
-					
 				</div>
-			</div>
-		{{/masonry-grid}} 	
-</div>
-{{/image-loader}}
+			{{/masonry-grid}} 	
+	</div>
+	{{/image-loader}}
 </div>
