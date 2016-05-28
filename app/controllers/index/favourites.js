@@ -7,8 +7,10 @@ export default Ember.Controller.extend({
 			this.set('masonryRef', ref);
 		},
 		loadedImg(){
-		  	var $container = this.get('masonryRef');
-		  	$container.layout();
+			try{
+			  	var $container = this.get('masonryRef');
+			  	$container.layout();				
+			} catch(ex){}
 			//console.log("THIS WORKS");
 		},
 	    removedFavourite(){
