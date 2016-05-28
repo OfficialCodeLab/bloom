@@ -12,7 +12,7 @@
 
 {{#image-loader}}
 <div class="text-center" id="#imageLoaderDiv">
-	{{#masonry-grid items=model.user.favourites isFitWidth=true columnWidth=360 gutter=8 as |cat-item|}}
+	{{#masonry-grid items=model.user.favourites isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
 		<div>
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>

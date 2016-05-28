@@ -16,8 +16,8 @@ export default Ember.Component.extend({
         this.$().off('load', 'error');
     },
     imageLoaded: function(event){
-    	//this.sendAction('loadedImg');
-        console.log("loaded the image didn't I! - 1");
+    	this.sendAction('loadedImg');
+        //console.log("loaded the image didn't I! - 1");
     },
     imageError: function(event){
         //console.log("there was an error wasn't there! - 1");
