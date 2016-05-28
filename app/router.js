@@ -17,9 +17,9 @@ Router.map(function() {
   });
   this.route('myaccount');
   this.route('index', {path: '/' }, function() {
-    this.route('favourites');
-    this.route('mywedding', {path: '/' }, function() {
-      this.route('overview', {path: '/' });
+    this.route('favourites', {path: '/' });
+    this.route('mywedding', function() {
+      this.route('overview');
       this.route('guests');
       this.route('bride');
       this.route('groom');
