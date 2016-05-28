@@ -300,6 +300,7 @@ body {
   		}
 	}
 
+
 	img{
 		user-drag: none; 
 		user-select: none;
@@ -365,6 +366,16 @@ body {
 	text-align: center;
 	padding: 0px;
 	border: none;
+	background-color: $button-unfavourited !important;
+	&:hover{
+		background-color: $hover-color !important;
+	}
+	&:active{
+		background-color: $button-click-color !important;	
+	}
+	&:focus{
+		outline: none;
+	}
 }
 
 .favourited {
@@ -563,7 +574,7 @@ body {
 	padding: 0px;
 	img{
 		display: inline-block;
-		cursor: pointer;
+		cursor: default;
 		border-radius: 15px;
 
 
