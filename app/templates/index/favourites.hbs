@@ -17,7 +17,7 @@
 			<div class="category-block">
 				<h2>{{cat-item.name}}</h2>
 				{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
-					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+					{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
 				{{/link-to}}
 				{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
 			</div>
