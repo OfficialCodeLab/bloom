@@ -782,7 +782,9 @@ body {
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-
+	.pear-text-logo{
+		font-size: 7em;
+	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
 
