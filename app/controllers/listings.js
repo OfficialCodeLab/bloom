@@ -6,17 +6,10 @@ export default Ember.Controller.extend({
 		storeMasonryRef(ref){
 			this.set('masonryRef', ref);
 		},
-		loadedImg(){
-			try{
-			  	var $container = this.get('masonryRef');
-			  	$container.layout();				
-			} catch(ex){}
-			//console.log("THIS WORKS");
-		},
-	    removedFavourite(){
-	    	//console.log("TESTERINO");
-		  	var $container = this.get('masonryRef');
-		  	$container.masonry('layout');
-	    },
+    removedFavourite(){
+    	//console.log("TESTERINO");
+	  	var $container = this.get('masonryRef');
+	  	$container.masonry('layout');
+    },
 	}
 });

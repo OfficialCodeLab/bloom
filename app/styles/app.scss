@@ -21,24 +21,14 @@ You're an fagit.
 @import "app-internal.scss";
 @import "navbar-custom.scss";
 @import "colours.scss";
-@import "masonry.scss";
+@import "bricks.scss";
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 
-@font-face {
-    font-family: antipasto;
-    src: url(fonts/Antipasto_regular.otf);
+body {
+  font-family: 'Lato', sans-serif;
+	color: rgb(88,89,91);
 }
-
-@font-face {
-    font-family: antipastoLight;
-    src: url(fonts/Antipasto_extralight.otf);
-}
-@font-face {
-    font-family: antipastoBold;
-    src: url(fonts/Antipasto_extrabold.otf);
-}
-
 
 #menu-button {
     cursor: pointer;
@@ -91,15 +81,6 @@ You're an fagit.
     //border: 3px solid #F3EA5D;
 }
 
-h1, h2, h3, h4, h5, h6, p, a{
-  font-family: antipasto;
-	color: rgb(88,89,91);
-}
-
-p{
-  font-family: 'Open Sans', sans-serif;
-}
-
 .fullscreen{
 	height: 100vh;
 	width: 100vw;
@@ -121,7 +102,7 @@ p{
 	font-size: 50px;
 	padding: 10px 0px 0px 15px;
 	color: #fff;
-    @include text-shadow(1px 1px 1px #000);
+  @include text-shadow(1px 1px 1px #000);
 }
 #section1{
 	background-image: url(images/splash1.jpg);
@@ -259,7 +240,6 @@ hr.style-two {
 h2.white{
 	color:#fff;
 	text-align:center;
-	font-family: 'antipasto';
   @include text-shadow (1px 1px 1px #000);
 }
 
@@ -305,7 +285,6 @@ h2.white{
 
 .clbutton-main{
   padding:0px;
-    font-family: antipasto;
     font-size: 18px;
     @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
     @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
@@ -428,7 +407,6 @@ h2.white{
   text-align: center;
   transform: translateY(-160px);
   h1, h2 {
-    font-family: antipasto;
     color: #F7F19D;
     margin: 35px 0px 35px 0px;
   }
@@ -627,6 +605,7 @@ body{
 .header-top {
   height: 200px;
   padding-top: 20px;
+  margin-bottom: 20px;
   background-color: #fff;
   z-index: 3;
   text-align: center;
@@ -693,7 +672,6 @@ hr.style-two {
     line-height: 150px;
     font-weight: bold;
     font-size: 80px;
-    font-family: sans-serif;
     margin-left: -75px;
     left: 50%;
     &:hover{
