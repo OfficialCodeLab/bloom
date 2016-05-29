@@ -429,11 +429,8 @@ body {
 
 	//But not too big!
 	max-width: 360px;
-	// min-width: 320px;
-	// min-height: 322px;
 
 	text-align: center;
-	// background-color: #f8f8f8;
 	border-radius: 2px;
 
 	//Card stuff
@@ -785,6 +782,9 @@ body {
 	}
 	.category-block-mobile{
 		display: inline-block;
+	}
+	.cat-img-container{
+		min-height: 30px;
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
