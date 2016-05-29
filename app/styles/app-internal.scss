@@ -414,6 +414,8 @@ body {
                                                             
 \*==============================================================================*/
 .category-block-mobile{
+	display: none;
+	position: relative;
 	//Defaults
 	margin: auto;
 	margin-left: 4px;
@@ -427,59 +429,46 @@ body {
 
 	//But not too big!
 	max-width: 360px;
-	// min-width: 320px;
-	// min-height: 322px;
 
 	text-align: center;
-	// background-color: #f8f8f8;
 	border-radius: 2px;
 
 	//Card stuff
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
-	.cat-overlay-1{
-		position: absolute;
-		// width: inherit;
-		left: 10px;
-		right: 10px;
-	  	display: inline-block;
-	  	opacity: 0;
-	  	transition: .8s opacity;
-
-  		h2{
-			margin-top: 5px;
-			overflow: hidden;
-	  		text-overflow: ellipsis;
-	  		white-space: nowrap;
-	  		color: white;
-	  		text-align: center;
-
-		}
-	}
-	.cat-overlay-2{
-		position: absolute;
-		display: inline-block;
-		bottom: 30px;
-		// left: 5%;
-		width: 60px;
-		height: 60px;
-		left: 154px;
-		border-radius: 50%;
-		text-align: center;
+	h2{
+		margin-top: 5px;
 		overflow: hidden;
+  		text-overflow: ellipsis;
+  		white-space: nowrap;
+  		// color: white;
+  		text-align: center;
+
 	}
-	&:hover{
-  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  		.cat-overlay-1{
-  			display: inline-block;
-  			z-index: 10;
-  			text-align: center;
-  			opacity: 1;
-  		}
-  		img{
-  			opacity: 0.5;
-  		}
+
+	.cat-overlay-2{
+
+	}
+	.cat-overlay-3{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		// bottom: 30px;
+		top: 0;
+		left: 0;
+		text-align: left;
+		.cat-heart-button{
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			text-align: center;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			// vertical-align: bottom;
+			// bottom: 30px;
+		}
 	}
 
 
@@ -782,7 +771,21 @@ body {
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-
+	.pear-text-logo{
+		font-size: 7em;
+	}
+	.hideOnPhones{
+		display: none;
+	}
+	.masonry-grid{
+		display: none;
+	}
+	.category-block-mobile{
+		display: inline-block;
+	}
+	.cat-img-container{
+		min-height: 30px;
+	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
 
