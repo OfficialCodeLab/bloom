@@ -785,6 +785,15 @@ body {
 	.pear-text-logo{
 		font-size: 7em;
 	}
+	.hideOnPhones{
+		display: none;
+	}
+	.masonry-grid{
+		display: none;
+	}
+	.category-block-mobile{
+		display: inline-block;
+	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
 
