@@ -1,0 +1,9 @@
+.bricks {
+  display: flex;
+  flex-flow: column wrap;
+  height: 2000px;
+}
+
+.brick {
+    width: 20%;
+}
