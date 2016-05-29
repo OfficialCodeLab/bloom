@@ -4,15 +4,15 @@
 	</div>
 	<div class="row">
 		{{#each model as |category|}}
-		{{#link-to 'category' category.id}}
-		<div class="col-lg-4 col-md-6">
-			<div class="category-block-m">
-				<div class="text-center cat-img-container-m">
-					<img src="{{category.imageURL}}" class="img-responsive cat-image-m">
+			{{#link-to 'category' category.id}}
+			<div class="col-lg-4 col-md-6">
+				<div class="category-block-m">
+					<div class="text-center cat-img-container-m">
+						<img src="{{category.imageURL}}" class="img-responsive cat-image-m">
+					</div>
+					<div class="overlay-title"><h4>{{category.name}}</h4></div>
 				</div>
-				<div class="overlay-title"><h4>{{category.name}}</h4></div>
-			</div>
-		</div>{{/link-to}}
+			</div>{{/link-to}}
 		{{/each}}
 	</div>
 </div>

@@ -1,10 +1,29 @@
 <div class="container index-main">
 	<div class="header-top">
 		<h1>Listings</h1><hr class="style-two"><h3>Click the heart to favourite!</h3>
-	</div>	
+	</div>
 	<div class="text-center">
 		{{!-- <btn class="btn btn-default" {{action 'logModels'}}>Log the models</btn> --}}
-		{{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
+
+		<div class="ml">
+			{{#each model as |cat-item|}}
+					<div class="ml-pnl ">
+					  <div class="ml-pnl__cntnt">
+							<div class="cat-overlay-1">
+								<h2>{{cat-item.name}}</h2>
+							</div>
+							{{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
+								{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+							{{/link-to}}
+							<div class="cat-overlay-2">
+								{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
+							</div>
+					  </div>
+					</div>
+			{{/each}}
+		</div>
+
+		<!-- {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
 			<div>
 				<div class="category-block">
 					<div class="cat-overlay-1">
@@ -16,11 +35,9 @@
 					<div class="cat-overlay-2">
 						{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
 					</div>
-					
+
 				</div>
 			</div>
-		{{/masonry-grid}} 		
+		{{/masonry-grid}} 		 -->
 	</div>
 </div>
-
-

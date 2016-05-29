@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 	        // transition.abort();
 	        // Default back to homepage
 	        this.transitionTo('login');
-	    } 
+	    }
 	    return sesh;
   	},
 	model () {
@@ -28,7 +28,7 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'user', model.user);
 	  },
 	  actions : {
-	  	saveUser(usr) { 
+	  	saveUser(usr) {
 	      usr.save().then(() => {
         		this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
 	      });
