@@ -31,6 +31,8 @@ export default Ember.Route.extend({
 					this.controller.get('model.catItem').set('isDeleting', false);
 					this.transitionTo('index.vendor');
 				});
+	        } else {
+				this.controller.get('model.catItem').set('isDeleting', false);	        	
 	        }
 		},
 		updateItem: function(model){
