@@ -24,9 +24,19 @@
 	<div class="form-group has-feedback">
 		<label class="col-sm-3 control-label">Number of additional guests?</label>
 		<div class="col-sm-6">
-			{{#touch-spin}}
+
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" {{action 'decrementNumber'}}>-</button>
+				</span>
+				{{input type="text" class="form-control guests-add" value=guestsValue }}
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button" {{action 'incrementNumber'}}>+</button>
+				</span>
+			</div> 
+			{{!-- {{#touch-spin}}
 				<input id="guestNumberBox" type="text" value={{guests}} name="demo1" style="height:33px !important;">
-			{{/touch-spin}}
+			{{/touch-spin}} --}}
 			{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
 		</div>
 	</div>

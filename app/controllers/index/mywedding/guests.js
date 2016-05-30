@@ -8,6 +8,29 @@ export default Ember.Controller.extend({
 	email: '',
 	cell: '',
 	guests: 0,
+	guestsValue: '0',
+	numberObserver: Ember.observer('guestsValue', function() {
+        let num = this.get('guests');
+        let txtvalue = this.get('guestsValue');
+        let numvalue = parseFloat(txtvalue);
+        if(!isNaN(txtvalue)){
+        	if(numvalue % 1 !== 0){
+        		this.set('guests', Math.floor(numvalue));
+        		this.set('guestsValue', Math.floor(numvalue) + "");
+        	} else {
+	        	if(numvalue < 0){
+	        		this.set('guests', 0);
+	        		this.set('guestsValue', '0');
+	        	} else if (numvalue > 20) {
+	        		this.set('guests', 20);
+	        		this.set('guestsValue', '20');
+	        	}        		
+        	}
+        } else {
+    		this.set('guestsValue', num + "");
+        }
+
+	}),
 	actions: {
 		showGuestAdd(){
 			this.set('showAdd', true);
@@ -18,6 +41,18 @@ export default Ember.Controller.extend({
 		backBtn(){
 			this.set('showList', false);
 			this.set('showAdd', false);
+		},
+		incrementNumber(){
+			let num = this.get('guests');
+			num++;
+			this.set('guests', num);
+			this.set('guestsValue', num + "");
+		},
+		decrementNumber(){
+			let num = this.get('guests');
+			num--;
+			this.set('guests', num);
+			this.set('guestsValue', num + "");
 		},
 		addGuest(){
       		let _id = this.get("session").content.currentUser.id + "";
@@ -36,6 +71,7 @@ export default Ember.Controller.extend({
 					this.set('email', '');
 					this.set('cell', '');
 					this.set('guests', 0);
+					this.set('guestsValue', '0');
 				});
 			});		
 		}
