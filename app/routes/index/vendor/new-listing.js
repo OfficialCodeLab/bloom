@@ -96,7 +96,7 @@ export default Ember.Route.extend({
 								this.controller.set('itemCreated', true);
 								if(_blob.url !== _imgurl){
 						            if(_blob){
-						            	this.destroyBlob(_blob)
+						            	this.destroyBlob(_blob);
 						            } 
 						    	}
 								this.transitionTo('index.vendor');
