@@ -220,6 +220,41 @@ body {
 	}
 }
 
+/*================================*\
+Guest List
+\*================================*/
+.add-guest-button-container{
+       text-align: center;
+}
+.btn-guest-add{
+       display: inline-block;
+       &, 
+       &:active,
+       &.active {
+               &:focus,
+               &.focus {
+                       // Default
+                       outline: thin dotted;
+                       // WebKit
+                       outline: 5px auto -webkit-focus-ring-color;
+                       outline-offset: -2px;
+               }
+       }
+       &:hover,
+       &:focus,
+       &.focus {
+               color: $hover-color;
+               text-decoration: none;
+       }
+
+       &:active,
+       &.active {
+               outline: 0;
+               background-image: none;
+               @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+       }
+}
+
 /*==============================================================================*\
    ____      _     ___ _                     
   / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___ 
@@ -748,6 +783,20 @@ body {
 .pear-footer-padding{
 	margin-bottom: 20vh;
 }
+.btn-pear{
+       font-family: antipasto; 
+       background-color: $primary-color;
+       color: $button-text-color;      
+       &:hover{
+               background-color: $hover-color;
+               color: $button-text-color;
+       }
+       &:active{
+               background-color: $button-click-color !important;
+               color: $button-text-color;                              
+       }
+}
+
 
 /*==============================================================================*\
   __  __          _ _          ___                  _           
