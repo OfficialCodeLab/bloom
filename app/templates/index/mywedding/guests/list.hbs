@@ -1,0 +1,29 @@
+
+<button class="btn btn-default" style="float:left;" {{action 'backBtn'}}>Back</button>
+
+<h2 class="text-center">View Guests</h2><br>
+
+
+<table class="table table-bordered table-striped">
+    <thead style="text-align: center;">
+      <tr>
+          <th>Full Name</th>
+          <th>E-mail</th>
+          <th>Contact Number</th>
+          <th>+1's</th>
+          <th>Attending</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each model as |user|}}
+        <tr>
+            <td>{{user.name}} {{user.surname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.cell}}</td>   
+            <td>2</td>            
+      		<td><input type="checkbox" value=""></td>
+        </tr>
+    {{/each}}
+
+    </tbody>
+</table>
