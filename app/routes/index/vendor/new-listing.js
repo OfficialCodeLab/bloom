@@ -55,7 +55,7 @@ export default Ember.Route.extend({
 							this.controller.set('isCreating', false);
 
 			    	if(_blob){		
-		            	destroyBlob(_blob);    
+		            	this.destroyBlob(_blob);    
 			    	}
 		    	} else {
 			          transition.abort();
