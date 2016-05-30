@@ -15,7 +15,7 @@
 
 
 body {
-	background-color: white;
+	background-color: #EDEDED;
 }
 
 /* 	
@@ -28,7 +28,8 @@ body {
 	/* This is spacing to place the body underneath the navbar */
 	margin-top: 50px;
 	min-height: 100vh !important;
-	background-image: url(images/6.jpg);
+	// background-image: url(images/6.jpg);
+	background-color: #EDEDED;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
