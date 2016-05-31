@@ -33,12 +33,14 @@ export default Ember.Route.extend({
 			            } 						
 					} catch(ex){}
 				});
+	        } else {
+				this.controller.get('model.catItem').set('isDeleting', false);	        	
 	        }
 		},
 		updateItem: function(model){
 			let _cat = this.controller.get('category') + "";
 			this.controller.get('model.catItem').set('isUpdating', true);
-			if(_cat.charAt(0) != '<'){
+			if(_cat.charAt(0) !== '<'){
 				//alert(_cat);
 				let cat = this.store.peekRecord('category', this.controller.get('category'));
 				model.set('category', cat);

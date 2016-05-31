@@ -15,7 +15,7 @@
 
 
 body {
-	background-color: white;
+	background-color: #EDEDED;
 }
 
 /* 	
@@ -28,7 +28,8 @@ body {
 	/* This is spacing to place the body underneath the navbar */
 	margin-top: 50px;
 	min-height: 100vh !important;
-	background-image: url(images/Picture1.jpg);
+	// background-image: url(images/6.jpg);
+	background-color: #EDEDED;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
@@ -48,7 +49,8 @@ body {
 \*==============================================================================*/
 
 .index-main{
-	background-color: rgba(255,255,255,0.99);
+	// background-color: rgba(255,255,255,0.99);
+	background-color: white;
 	min-height: 100vh;
 	// padding-bottom: 200px;
 	// box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 12px 0 15px -4px rgba(31, 31, 31, 0.8), -12px 0 15px -4px rgba(31, 31, 31, 0.8);
@@ -107,6 +109,25 @@ body {
 		
 	}
 }
+.pear-text-logo{
+	color: $button-click-color;
+	padding: 0px;
+	font-size: 20em;
+	text-align: center;
+	display: inline-block;
+	vertical-align: top;
+	// z-index: 2 !important;
+}
+.index-logo-container{
+	background-image: url("../assets/images/pear2main.png");
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center;
+	background-size:contain;
+}
+.favourites-padder{
+	padding-top: 50px;
+}
 /*==============================================================================*\
   __  __        __        __       _     _ _             
  |  \/  |_   _  \ \      / /__  __| | __| (_)_ __   __ _ 
@@ -131,8 +152,8 @@ body {
 	margin: 0px;
 	padding: 0px;
 
-	margin-top: 50px;
-	margin-bottom: 15px;
+	margin-top: 15px;
+	margin-bottom: 5px;
 
 	img{
 		display: inline-block;
@@ -199,6 +220,41 @@ body {
 	}
 }
 
+/*================================*\
+Guest List
+\*================================*/
+.add-guest-button-container{
+       text-align: center;
+}
+.btn-guest-add{
+       display: inline-block;
+       &, 
+       &:active,
+       &.active {
+               &:focus,
+               &.focus {
+                       // Default
+                       outline: thin dotted;
+                       // WebKit
+                       outline: 5px auto -webkit-focus-ring-color;
+                       outline-offset: -2px;
+               }
+       }
+       &:hover,
+       &:focus,
+       &.focus {
+               color: $hover-color;
+               text-decoration: none;
+       }
+
+       &:active,
+       &.active {
+               outline: 0;
+               background-image: none;
+               @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+       }
+}
+
 /*==============================================================================*\
    ____      _     ___ _                     
   / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___ 
@@ -225,28 +281,61 @@ body {
 
 	//But not too big!
 	max-width: 360px;
-	min-height: 322px;
+	// min-width: 320px;
+	// min-height: 322px;
 
 	text-align: center;
-	background-color: #f8f8f8;
-	// border: 1px solid #272822; //Sublime color
-	border-radius: 10px;
-
-	h2{
-		// padding-top: 10px;
-		margin-top: 5px;
-		overflow: hidden;
-  		text-overflow: ellipsis;
-  		white-space: nowrap;
-	}
+	// background-color: #f8f8f8;
+	border-radius: 2px;
 
 	//Card stuff
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
+	.cat-overlay-1{
+		position: absolute;
+		// width: inherit;
+		left: 10px;
+		right: 10px;
+	  	display: inline-block;
+	  	opacity: 0;
+	  	transition: .8s opacity;
+
+  		h2{
+			margin-top: 5px;
+			overflow: hidden;
+	  		text-overflow: ellipsis;
+	  		white-space: nowrap;
+	  		color: white;
+	  		text-align: center;
+
+		}
+	}
+	.cat-overlay-2{
+		position: absolute;
+		display: inline-block;
+		bottom: 30px;
+		// left: 5%;
+		width: 60px;
+		height: 60px;
+		left: 154px;
+		border-radius: 50%;
+		text-align: center;
+		overflow: hidden;
+	}
 	&:hover{
   		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  		.cat-overlay-1{
+  			display: inline-block;
+  			z-index: 10;
+  			text-align: center;
+  			opacity: 1;
+  		}
+  		img{
+  			opacity: 0.5;
+  		}
 	}
+
 
 	img{
 		user-drag: none; 
@@ -255,6 +344,7 @@ body {
 		-webkit-user-drag: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
+		transition: .8s opacity;
 	}
 
 	/* None of these should be selectable */
@@ -268,6 +358,7 @@ body {
     overflow: hidden;
 
 }
+
 .cat-img-container{
 	background-color: #000000;
 	width: 100%;
@@ -279,6 +370,7 @@ body {
 
 	margin: 0px;
 	padding: 0px;
+	transition: 0.8s;
 }
 .cat-image{
 	display: inline-block;
@@ -302,18 +394,28 @@ body {
 }
 
 .cat-heart-button{
-	width: 100%;
-	height: 40px;
+	width: 60px;
+	height: 60px;
 	border-radius: 0px;
 	bottom: 0%;
 	// line-height: 20px;
 	text-align: center;
 	padding: 0px;
 	border: none;
+	background-color: $button-unfavourited !important;
+	&:hover{
+		background-color: $hover-color !important;
+	}
+	&:active{
+		background-color: $button-click-color !important;	
+	}
+	&:focus{
+		outline: none;
+	}
 }
 
 .favourited {
-	background-color: $hover-color !important;
+	background-color: $button-favourited !important;
 }
 .cat-button-circle{
 	border: 2px solid white;
@@ -327,7 +429,115 @@ body {
 .pear-heart-icon{
 	display: inline-block;
 }
+.vendor-block{
+	color: #272727;
+	text-align: center;
+	h2{
+		color: #272727;
+		display: inline-block;
 
+		margin-top: 5px;
+		margin-left: 5px;
+		margin-right: 5px;
+		overflow: hidden;
+  		text-overflow: ellipsis;
+  		white-space: nowrap;
+  		// color: white;
+  		text-align: center;
+	}
+}
+
+/*==============================================================================*\
+   *                             (                          
+ (  `            )     (         )\ )    )                  
+ )\))(        ( /( (   )\   (   (()/( ( /(   (     )        
+((_)()\   (   )\()))\ ((_) ))\   /(_)))\()) ))\   (     (   
+(_()((_)  )\ ((_)\((_) _  /((_) (_)) (_))/ /((_)  )\  ' )\  
+|  \/  | ((_)| |(_)(_)| |(_))   |_ _|| |_ (_))  _((_)) ((_) 
+| |\/| |/ _ \| '_ \| || |/ -_)   | | |  _|/ -_)| '  \()(_-< 
+|_|  |_|\___/|_.__/|_||_|\___|  |___| \__|\___||_|_|_| /__/ 
+                                                            
+\*==============================================================================*/
+.category-block-mobile{
+	display: none;
+	position: relative;
+	//Defaults
+	margin: auto;
+	margin-left: 4px;
+	margin-right: 4px;
+
+	//To create space between rows
+	margin-bottom: 15px; 
+
+	//Take up the full column...
+	width: 100%;
+
+	//But not too big!
+	max-width: 360px;
+
+	text-align: center;
+	border-radius: 2px;
+
+	//Card stuff
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
+	h2{
+		margin-top: 5px;
+		overflow: hidden;
+  		text-overflow: ellipsis;
+  		white-space: nowrap;
+  		// color: white;
+  		text-align: center;
+
+	}
+
+	.cat-overlay-2{
+
+	}
+	.cat-overlay-3{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		// bottom: 30px;
+		top: 0;
+		left: 0;
+		text-align: left;
+		.cat-heart-button{
+			display: block;
+			position: absolute;
+			border-radius: 50%;
+			text-align: center;
+			bottom: 30px;
+			left: 50%;
+			transform: translateX(-50%);
+			// vertical-align: bottom;
+			// bottom: 30px;
+		}
+	}
+
+
+	img{
+		user-drag: none; 
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+		transition: .8s opacity;
+	}
+
+	/* None of these should be selectable */
+	user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    cursor: default;
+
+    overflow: hidden;
+
+}
 /*==============================================================================*\
   __  __                                  
  |  \/  | __ _ ___  ___  _ __  _ __ _   _ 
@@ -392,7 +602,7 @@ body {
 	text-align: center;
 	background-color: #f8f8f8;
 	// border: 1px solid #272822; //Sublime color
-	@include border-radius (3px);
+	@include border-radius (2px);
 
 	h2{
 		// padding-top: 10px;
@@ -500,7 +710,7 @@ body {
 	padding: 0px;
 	img{
 		display: inline-block;
-		cursor: pointer;
+		cursor: default;
 		border-radius: 15px;
 
 
@@ -523,6 +733,17 @@ body {
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
+}
+
+
+/*==============================================================================*\
+  	Vendor (fuck you im too lazy to make a fancy ascii title)
+\*==============================================================================*/
+
+.vendor-card {
+	text-align:center; 
+	margin-top: 50px !important;
+	padding: 15px 25px 25px 25px;
 }
 
 
@@ -562,6 +783,20 @@ body {
 .pear-footer-padding{
 	margin-bottom: 20vh;
 }
+.btn-pear{
+       font-family: antipasto; 
+       background-color: $primary-color;
+       color: $button-text-color;      
+       &:hover{
+               background-color: $hover-color;
+               color: $button-text-color;
+       }
+       &:active{
+               background-color: $button-click-color !important;
+               color: $button-text-color;                              
+       }
+}
+
 
 /*==============================================================================*\
   __  __          _ _          ___                  _           
@@ -576,13 +811,20 @@ body {
 
 }
 @media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
-
+	.pear-text-logo{
+		font-size: 14em;
+	}
 }
 @media (max-width:980px) { /* Custom */ 
 
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
 
+}
+@media (max-width:772px) { /* Our definition of really small */ 
+	.hideOnMobile{
+		display: none;
+	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
 	.pear-main-well{
@@ -599,7 +841,21 @@ body {
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-
+	.pear-text-logo{
+		font-size: 7em;
+	}
+	.hideOnPhones{
+		display: none;
+	}
+	.masonry-grid{
+		display: none;
+	}
+	.category-block-mobile{
+		display: inline-block;
+	}
+	.cat-img-container{
+		min-height: 30px;
+	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
 
