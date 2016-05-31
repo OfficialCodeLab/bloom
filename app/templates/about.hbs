@@ -1,12 +1,54 @@
 <div class="about-page">
 	{{#j-query.slider-component}}
-		<div class="about-slider">
-			
+		<div class="about-slider-container">
+			<div class="about-slider">
+			  <div class="slick-content" style="background-image: url('../assets/images/6.jpg');">
+
+			  </div>
+			  <div class="slick-content" style="background-image: url('../assets/images/6.jpg');">
+
+			  </div>
+			  <div class="slick-content" style="background-image: url('../assets/images/6.jpg');">
+
+			  </div>
+			</div>
 		</div>
 	{{/j-query.slider-component}}
 	<div class="header-top">
 		<h1>Welcome to Pear</h1><hr class="style-two">
 		<h3>The Wedding Planner</h3>
+	</div>
+	<div class="about-section-white">
+		<h1>Contact Us</h1><hr class="style-two"><h3>We would like to hear from you!</h3>
+		<br>
+		<div class="container">
+		    <div class="form-horizontal form-group form-group-lg row">
+		        <div class="col-md-offset-2 col-md-8">
+		        	<div class="has-feedback {{if model.isValid 'has-success'}}">
+					  <div class="input-group">
+					    <span class="input-group-addon">@</span>
+					    {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
+					  </div>
+					  <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
+					</div>
+		        	{{!-- <div class="">
+			        	{{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
+	        		</div> --}}
+			        <br>
+		        	<div class="{{if model.isLong 'has-success'}}">
+		        		{{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
+		        	</div>
+			        <br>
+			        {{#if model.responseMessage}}
+				      <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}<p>Click this popup to close it</p></div>
+				    {{/if}}
+				    <div style="float:right;">
+			        	{{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
+			    		<button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
+			        </div>
+		        </div>
+		    </div>
+		</div>
 	</div>
 </div>
 
@@ -40,35 +82,3 @@
 	</div>
 </div>
  --}}
-<div class="about-section-white">
-	<h1>Contact Us</h1><hr class="style-two"><h3>We would like to hear from you!</h3>
-	<br>
-	<div class="container">
-	    <div class="form-horizontal form-group form-group-lg row">
-	        <div class="col-md-offset-2 col-md-8">
-	        	<div class="has-feedback {{if model.isValid 'has-success'}}">
-				  <div class="input-group">
-				    <span class="input-group-addon">@</span>
-				    {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
-				  </div>
-				  <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
-				</div>
-	        	{{!-- <div class="">
-		        	{{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
-        		</div> --}}
-		        <br>
-	        	<div class="{{if model.isLong 'has-success'}}">
-	        		{{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
-	        	</div>
-		        <br>
-		        {{#if model.responseMessage}}
-			      <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}<p>Click this popup to close it</p></div>
-			    {{/if}}
-			    <div style="float:right;">
-		        	{{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
-		    		<button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
-		        </div>
-	        </div>
-	    </div>
-	</div>
-</div>

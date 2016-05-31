@@ -752,8 +752,65 @@ Guest List
 .about-page{
 
 }
+.about-slider-container{
+
+}
 .about-slider{
-	min-height: 33vh;
+	// min-height: 33vh;
+}
+.slick-content{
+	height: 600px;
+	width: 100%;
+}
+.slick-prev {
+	left: 40px;
+	z-index: 4;
+	&:before {
+		// color: red !important;
+	}
+}
+.slick-next {
+	right: 40px;
+	z-index: 4;
+	&:before {
+		// color: red !important;
+	}
+}
+/*==============================================================================*\
+	Leave these
+\*==============================================================================*/
+//fonts
+$font_0: FontAwesome;
+
+//@extend-elements
+//original selectors
+//.slick-prev:before, .slick-next:before
+%extend_1 {
+   font-family: $font_0;
+   font-size: 40px;
+   line-height: 1;
+   color: white;
+   opacity: 0.75;
+}
+
+
+[dir="rtl"] {
+   .slick-next {
+      &:before {
+         content: "\f053";
+      }
+   }
+   .slick-prev:before {
+      content: "\f054";
+   }
+}
+.slick-prev:before {
+   @extend %extend_1;
+   content: "\f053";
+}
+.slick-next:before {
+   @extend %extend_1;
+   content: "\f054";
 }
 
 
