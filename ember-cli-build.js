@@ -17,6 +17,9 @@ module.exports = function(defaults) {
   app.import('vendor/touchspin/jquery.bootstrap-touchspin.min.css');
   app.import('vendor/touchspin/jquery.bootstrap-touchspin.min.js');
   app.import('vendor/images-loaded/imagesloaded.pkgd.min.js');
+  app.import('bower_components/slick-carousel/slick.scss');
+  app.import('bower_components/slick-carousel/slick-theme.scss');
+  app.import('bower_components/slick-carousel/slick.min.js');
 
 
   // Use `app.import` to add additional libraries to the generated
