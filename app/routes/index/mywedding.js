@@ -10,9 +10,16 @@ export default Ember.Route.extend({
 	      userext: this.store.createRecord('userext', {
 			  imgurl: imgStr
 			}),
-	      user: this.store.peekRecord('user', _id)
+	      user: this.store.peekRecord('user', _id),
+	      wedding: this.store.findRecord('wedding', _id)
 	    });
 	},
+	setupController(controller, model) {
+	    this._super(controller, model);
+	    Ember.set(controller, 'userext', model.userext);
+	    Ember.set(controller, 'user', model.user);
+	    Ember.set(controller, 'wedding', model.wedding);
+    },
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){

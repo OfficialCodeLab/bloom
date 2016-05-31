@@ -5,11 +5,22 @@ export default Ember.Route.extend({
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('user');
         try {
+        	let _id = this.get("session").content.currentUser.id;
 			var user = this.store.createRecord('user', {
 			  name: this.get("session").content.currentUser.cachedUserProfile.first_name,
 			  surname: this.get("session").content.currentUser.cachedUserProfile.last_name,
-			  id: this.get("session").content.currentUser.id
+			  id: _id
 			});
+
+			let wedding = this.store.createRecord('wedding', 
+				{
+					id: _id,
+					user: user
+				}
+			);
+			wedding.save();
+			user.get('wedding').pushObject(wedding);
+			user.save();
 
 	    	return user;
 
@@ -40,6 +51,8 @@ export default Ember.Route.extend({
      	}, () => {
 			Ember.$('#usernew').fadeIn("fast");  //Run relevant jquery methods in component
      	}).catch((err)=>{});
+
+    	
   },
     actions: {
     	
