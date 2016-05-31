@@ -16,7 +16,7 @@
             <td>{{guest.email}}</td>
             <td>{{guest.cell}}</td>   
             <td>{{guest.guests}}</td>            
-      		  <td><input type="checkbox" onclick={{action "checkBox" guest.id}} value={{guest.rsvp}}></td>
+      		  <td><input type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}></td>
             <td><button class="btn btn-danger" {{action "destroyGuest" guest.id}}>X</button></td>
         </tr>
     {{/each}}

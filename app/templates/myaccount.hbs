@@ -13,7 +13,7 @@
 		    {{else}}
 		    	<p><i>Registered user</i></p>
 		    	<p>Request vendor status</p>
-		    	{{x-toggle value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
+		    	{{x-toggle toggled=model.user.vendorRequest value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
 		    {{/if}}
 	    </div>
 	    <div class="col-sm-8">

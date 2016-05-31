@@ -37,7 +37,7 @@ export default Ember.Route.extend({
 	    },
 	    guidedSearch(){	    	
     		window.scrollTo(0,0);
-			this.transitionTo('index');
+			this.transitionTo('guide');
 	    }
 
 	}
