@@ -20,7 +20,7 @@ export default Ember.Route.extend({
 			);
 			wedding.save();
 			user.get('wedding').pushObject(wedding);
-			user.save();
+			//user.save();
 
 	    	return user;
 
