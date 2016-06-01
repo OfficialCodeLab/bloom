@@ -486,6 +486,11 @@ Guest List
 	}
 }
 
+.guide-xs-card{	
+    margin-bottom: 10px;
+    word-wrap: break-word;
+}
+
 .guide-container{
 	
     overflow-x: auto;
@@ -997,6 +1002,9 @@ $font_0: FontAwesome;
   \___/ \__|_|_|_|\__|\__, |
                       |___/ 
 \*==============================================================================*/
+.showOnMobile{
+	display: none;		
+}
 .unselectable{
 	user-select: none;
     -moz-user-select: none;
@@ -1074,6 +1082,10 @@ $font_0: FontAwesome;
 	.hideOnMobile{
 		display: none;
 	}
+	.showOnMobile{
+		display: block;		
+	}
+
 	.slick-content{
 		height: 40vh;
 		width: 100%;

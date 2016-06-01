@@ -11,7 +11,8 @@ export default Ember.Controller.extend({
 	guests: 0,
 	guestsValue: '0',
 	responseMessage: '',
-	isNotValid: Ember.computed.not('name'),
+	isValid: Ember.computed.and('name', 'email', 'cell'),
+	isNotValid: Ember.computed.not('isValid'),
 	numberObserver: Ember.observer('guestsValue', function() {
         let num = this.get('guests');
         let txtvalue = this.get('guestsValue');
