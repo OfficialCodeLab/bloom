@@ -122,10 +122,10 @@
 	<br>
 
 	<div class="card" style=" padding:0px 20px 20px 20px">
-		<h3>Your Favourited Items</h3><hr><p>Click the hearts to unfavourite</p>
+		<h3>Add Guests</h3><hr><p>Add guests here and they will appear in the table below</p>
 		<div class="form-horizontal row">
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Name &amp; Surname</label>
+				<label class="col-sm-3 control-label">Name &amp; Surname*</label>
 				<div class="col-sm-6">
 					{{input type="text" value=name class="form-control" placeholder="Name of guest"}}
 				</div>
@@ -163,9 +163,12 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
-			</div>
-			<div class="col-sm-6">
+			
+	        {{#if responseMessage}}
+		      <div class="col-sm-offset-3 col-sm-6 alert alert-success" {{action 'closeMessage'}}>{{responseMessage}}
+		      <p class="tiny-text">Tap this message to close it</p></div>
+		    {{/if}}
+			<div class="col-sm-offset-3 col-sm-6">
 				<button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list</button>
 			</div>
 		</div>
