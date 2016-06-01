@@ -186,38 +186,40 @@
 		<div class="showOnMobile container">
 		    {{#each guestsA as |guest|}}
 				<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
-				<div class="row">
-					<div class="col-xs-9">
-						<div class="col-xs-offset-4 col-xs-8"><h4><strong>Guest:</strong></h4></div>
-						<div class="col-xs-4">
+					<div class="row">
+						<div class="col-xs-9">
+							<div class="col-xs-offset-4 col-xs-8" style="text-align: left;"><h4><strong>Guest:</strong></h4></div>
+						</div>
+						<div class="col-xs-3" style="text-align: right; height: 40px;">
+							<a href='' {{action "destroyGuest" guest}}><i class="fa fa-times" aria-hidden="true"></i></a>
+						</div>
+
+						<div class="col-xs-3">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-8">{{guest.name}}</div>
+						<div class="col-xs-9" style="text-align: left;">{{guest.name}}</div>
 
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<i class="fa fa-envelope-o" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-8">{{guest.email}}</div>
+						<div class="col-xs-9" style="text-align: left;">{{guest.email}}</div>
 
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<i class="fa fa-phone" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-8">{{guest.cell}}</div>
+						<div class="col-xs-9" style="text-align: left;">{{guest.cell}}</div>
 
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<i class="fa fa-user-plus" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-8">Guests: {{guest.guests}}</div>
+						<div class="col-xs-9" style="text-align: left;">Guests: {{guest.guests}}</div>
 
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<i class="fa fa-ticket" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-8">RSVP: <input type="checkbox"></div>
-					</div> 
-					<div class="col-xs-3" style="text-align: right;">
-						<a href='' {{action "destroyGuest" guest}}><i class="fa fa-times" aria-hidden="true"></i></a>
+						<div class="col-xs-9" style="text-align: left;">RSVP: <input type="checkbox"></div>
+						
 					</div>
-				</div>
 				</div>
 			{{/each}}
 		</div>
