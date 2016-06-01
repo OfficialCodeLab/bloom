@@ -837,20 +837,38 @@ Guest List
 .pear-slide-1{
 
 }
-.pear-slide-2{
+.pear-slide-2, .pear-slide-3{
 	background-color: rgba(0,0,0,0.8);
 	color: white;
 	h1{
 		color: white;
 		font-size: 13em;
+		// font-family: 'Abel', sans-serif;
+		font-weight: 300;
+		// font-style: italic;
+		margin: 0px;
 	}
 	h4{
 		color: white;
 		font-size: 3em;
+		// font-family: 'Open Sans', sans-serif;
+		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+		font-style: italic;
+		font-weight: 300;
 	}
 }
-.pear-slide-3{
-	
+.about-center-me{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.about-font-stretch{
+    display:inline-block;
+    -webkit-transform:scale(1,1.2); /* Safari and Chrome */
+    -moz-transform:scale(1,1.2); /* Firefox */
+    -ms-transform:scale(1,1.2); /* IE 9 */
+    -o-transform:scale(1,1.2); /* Opera */
+    transform:scale(1,1.2); /* W3C */
 }
 .slick-content{
 	height: 60vh;
