@@ -459,11 +459,11 @@ Guest List
 	}
 }
 
-.guide-card{
-	height:300px;
-	cursor: pointer;
-	margin-bottom:15px;
-
+.guide-content {
+	position:relative;
+	background-color:black;
+	display:inline-block;
+	
 	.cat-overlay-3{
 		width: 100%;
 		height: 100%;
@@ -480,13 +480,21 @@ Guest List
 			position: absolute;
 			border-radius: 50%;
 			text-align: center;
-			bottom: 20%;
+			bottom: 10%;
 			left: 50%;
 			transform: translateX(-50%);
 			// vertical-align: bottom;
 			// bottom: 30px;
 		}
 	}
+}
+
+.guide-card{
+	height:300px;
+	cursor: pointer;
+	margin-bottom:15px;
+
+	
 }
 
 .guide-row{

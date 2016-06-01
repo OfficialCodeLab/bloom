@@ -15,30 +15,30 @@
 		<h3>Try Favourite some items!</h3><hr><p>Click the hearts to favourite or unfavourite</p>
 		<div class="row guide-row">
 			<div class="col-lg-4 col-md-6 guide-card">					
-				<div style="background-color:black; display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
 				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
-						<i class="fa fa-heart-o"></i></button>
-				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 guide-card">
-				<div style="background-color:black;display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
 				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
-						<i class="fa fa-heart-o"></i></button>
-				</div>
 			</div>
 			<div class="col-lg-4 col-md-6 guide-card">
-				<div style="background-color:black; display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
-				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
-						<i class="fa fa-heart-o"></i></button>
 				</div>
 			</div>
 		</div>
@@ -56,34 +56,34 @@
 		<div class="row guide-row">
 			{{#if dress}}
 			<div class="col-lg-4 col-md-6 guide-card">					
-				<div style="background-color:black; display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
-				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
-						<i class="fa fa-heart-o"></i></button>
 				</div>
 			</div>
 			{{/if}}
 			{{#if culinary}}
 			<div class="col-lg-4 col-md-6 guide-card">
-				<div style="background-color:black;display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
-				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
-						<i class="fa fa-heart-o"></i></button>
 				</div>
 			</div>
 			{{/if}}
 			{{#if venue}}
 			<div class="col-lg-4 col-md-6 guide-card">
-				<div style="background-color:black; display:inline-block;">
+				<div class="guide-content">
+					<div class="cat-overlay-3">
+						<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
+							<i class="fa fa-heart-o"></i></button>
+					</div>
 					<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
-				</div>
-				<div class="cat-overlay-3">
-					<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
-						<i class="fa fa-heart-o"></i></button>
 				</div>
 			</div>
 			{{/if}}
@@ -160,11 +160,10 @@
 		<table class="table table-bordered table-striped" style="background-color:white;">
 		    <thead style="text-align: center;">
 		      <tr>
-		          <th>Full Name</th>
-		          <th>E-mail</th>
-		          <th>Contact Number</th>
+		          <th>Name</th>
+		          <th>Contacts</th>
 		          <th>+1's</th>
-		          <th>Attending</th>
+		          <th>RSVP</th>
 		          <th>Delete</th>
 		      </tr>
 		    </thead>
@@ -172,8 +171,7 @@
 		    {{#each guestsA as |guest|}}
 		        <tr>
 		            <td>{{guest.name}}</td>
-		            <td>{{guest.email}}</td>
-		            <td>{{guest.cell}}</td>   
+		            <td>{{guest.email}}<br>{{guest.cell}}</td>
 		            <td>{{guest.guests}}</td>            
 		      		<td><input type="checkbox"></td>
 		            <td><button class="btn btn-danger" {{action "destroyGuest" guest}}>X</button></td>
