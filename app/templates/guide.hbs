@@ -157,29 +157,31 @@
 
 	<div class="card" style=" padding:0px 20px 20px 20px">
 		<h3>Your Guests</h3><hr><p>Click the X to remove or click the checkbox to confirm RSVP</p>
-		<table class="table table-bordered table-striped" style="background-color:white;">
-		    <thead style="text-align: center;">
-		      <tr>
-		          <th>Name</th>
-		          <th>Contacts</th>
-		          <th>+1's</th>
-		          <th>RSVP</th>
-		          <th>Delete</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    {{#each guestsA as |guest|}}
-		        <tr>
-		            <td>{{guest.name}}</td>
-		            <td>{{guest.email}}<br>{{guest.cell}}</td>
-		            <td>{{guest.guests}}</td>            
-		      		<td><input type="checkbox"></td>
-		            <td><button class="btn btn-danger" {{action "destroyGuest" guest}}>X</button></td>
-		        </tr>
-		    {{/each}}
+		<div class="guide-container">
+			<table class="table table-bordered table-striped" style="background-color:white;">
+			    <thead style="text-align: center;">
+			      <tr>
+			          <th class="text-center">Name</th>
+			          <th class="text-center">Contact</th>
+			          <th class="text-center">+1's</th>
+			          <th class="text-center">RSVP</th>
+			          <th class="text-center">Delete</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			    {{#each guestsA as |guest|}}
+			        <tr>
+			            <td>{{guest.name}}</td>
+			            <td>{{guest.email}}<br>{{guest.cell}}</td>
+			            <td>{{guest.guests}}</td>            
+			      		<td><input type="checkbox"></td>
+			            <td><button class="btn btn-danger" {{action "destroyGuest" guest}}>X</button></td>
+			        </tr>
+			    {{/each}}
 
-		    </tbody>
-		</table>
+			    </tbody>
+			</table>
+		</div>
 	</div>
 	<br>
 	<h3>El Finito!</h3>
