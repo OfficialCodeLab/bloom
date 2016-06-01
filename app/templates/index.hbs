@@ -1,21 +1,19 @@
-<div class="container index-main">
+<div class="container-fluid index-main">
 	{{!-- Main content of the site goes here  --}}
-	<div class="row">
+	<div class="row pear-index-top">
 		<div class="col-sm-2">
 				
 		</div>
 		<div class="col-sm-8 text-center index-logo-container">
-			<h1 class="pear-text-logo unselectable">pear</h1>
-			{{!-- <div class=""> --}}
-{{!-- 				<img src="../assets/images/pear2main.png" class="img-responsive"> --}}
-			{{!-- </div> --}}
+			{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
+			<img src="../assets/images/hires-logo.png" class="img-responsive" style="max-width:100%; max-height:100%;">
 		</div>
-		<div class="col-sm-2 text-center">
-			<div class="index-profile-image-container hideOnMobile">
-				<img src={{model.userext.imgurl}} class="img-responsive">
+		<div class="col-sm-2 text-center hideOnMobile">
+			<div class="index-profile-image-container">
+				{{#link-to 'myaccount'}}<img src={{model.userext.imgurl}} class="img-responsive" style="background-color:white !important;">{{/link-to}}
 			</div>
-			<h4 style="margin: 0px" class="hideOnMobile">Logged in as:</h4>
-			<h4 style="margin: 0px" class="hideOnMobile">{{model.user.name}}&nbsp;{{model.user.surname}}</h4>
+			<h4 style="margin: 0px; color:white;">Logged in as:</h4>
+			<h4 style="margin: 0px; color:white;">{{model.user.name}}&nbsp;{{model.user.surname}}</h4>
 		</div>
 	</div>
 	<div class="pear-main-well">
