@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
 	cell: '',
 	guests: 0,
 	guestsValue: '0',
+	responseMessage: '',
 	isNotValid: Ember.computed.not('name'),
 	numberObserver: Ember.observer('guestsValue', function() {
         let num = this.get('guests');
@@ -68,7 +69,10 @@ export default Ember.Controller.extend({
 			this.set('cell', '');
 			this.set('guests', 0);
 			this.set('guestsValue', '0');
-
+			this.set('responseMessage', 'Guest has been added to the guest list!');
+		},
+		closeMessage(){
+			this.set('responseMessage', '');
 		},
 		// addGuest(){
 		// 	this.set('addingGuest', true);

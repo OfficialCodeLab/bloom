@@ -480,6 +480,7 @@ Guest List
 	display:inline-block;
 
 	.cat-overlay-3{
+		z-index:4;
 		width: 100%;
 		height: 100%;
 		position: absolute;
@@ -488,6 +489,7 @@ Guest List
 		left: 0;
 		text-align: left;
 		.cat-heart-button{
+			z-index:6;
 			&:active,&:focus{
 				outline:none !important;
 			}
@@ -501,7 +503,39 @@ Guest List
 			// vertical-align: bottom;
 			// bottom: 30px;
 		}
+		.cat-overlay-1{
+			position: absolute;
+			// width: inherit;
+			z-index: 2;
+			left: 0px;
+			width:100%;
+			height:100%;
+			background-color: rgba(0,0,0,0.6);
+		  	display: inline-block;
+		  	opacity: 0;
+		  	transition: .8s opacity;
+	  		h2{
+				margin-top: 5px;
+				overflow: hidden;
+		  		text-overflow: ellipsis;
+		  		white-space: nowrap;
+		  		color: white;
+		  		text-align: center;
+
+			}
+		
+		}
+		&:hover{
+			.cat-overlay-1{
+	  			z-index:5;
+	  			display: inline-block;
+	  			text-align: center;
+	  			opacity: 1;
+
+			}
+		}
 	}
+	
 }
 
 .guide-card{
