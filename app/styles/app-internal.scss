@@ -995,6 +995,14 @@ $font_0: FontAwesome;
 	.pear-text-logo{
 		font-size: 14em;
 	}
+	.pear-slide-2, .pear-slide-3{
+		h1{
+			font-size: 12em;
+		}
+		h4{
+			font-size: 2em;
+		}
+	}
 }
 @media (max-width:980px) { /* Custom */ 
 
@@ -1005,6 +1013,18 @@ $font_0: FontAwesome;
 @media (max-width:772px) { /* Our definition of really small */ 
 	.hideOnMobile{
 		display: none;
+	}
+	.slick-content{
+		height: 40vh;
+		width: 100%;
+	}
+	.pear-slide-2, .pear-slide-3{
+		h1{
+			font-size: 12em;
+		}
+		h4{
+			font-size: 1.5em;
+		}
 	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
@@ -1018,6 +1038,20 @@ $font_0: FontAwesome;
 		li{
 			min-width: 0px;
 			width: 100%;
+		}
+	}
+	.pear-slide-2, .pear-slide-3{
+		h1{
+			font-size: 9em;
+		}
+		h4{
+			font-size: 1em;
+		}
+	}
+	//Hide font awesome buttons on slider here
+	.slick-prev, .slick-next {
+		&:before{
+			display: none;
 		}
 	}
 }
@@ -1039,5 +1073,12 @@ $font_0: FontAwesome;
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
-
+	.pear-slide-2, .pear-slide-3{
+		h1{
+			font-size: 7em;
+		}
+		h4{
+			display: none;
+		}
+	}
 }
