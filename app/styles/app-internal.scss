@@ -486,6 +486,17 @@ Guest List
 	}
 }
 
+.pear-guide-top{
+	background: url(../assets/images/pear2main.png);
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center center;
+	background-size: contain;
+	h1{
+		color: $primary-color !important;
+	}
+}
+
 .guide-xs-card{	
     margin-bottom: 10px;
     word-wrap: break-word;
