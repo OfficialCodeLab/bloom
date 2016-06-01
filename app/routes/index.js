@@ -11,6 +11,9 @@ init: function(){
   	var sesh = this.get("session").fetch().catch(function() {});
   	if(!this.get('session.isAuthenticated')){
         this.transitionTo('login');
+      } else{
+        this.store.findRecord('user', this.get("session").content.currentUser.id).then(()=>{},()=>this.transitionTo('user.new'));
+
       }
       return sesh;
   },
