@@ -740,6 +740,10 @@ hr.style-two {
    display: block;
 }
 
+[data-ember-action], a, .link {
+  cursor: pointer;
+}
+
 
 html {
     overflow: auto;
