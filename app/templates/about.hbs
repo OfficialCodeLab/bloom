@@ -1,106 +1,125 @@
 <div class="about-page">
-	{{#j-query.slider-component}}
-		<div class="about-slider-container">
-			<div class="about-slider">
-				<div class="slick-content pear-slide-1" style="background-image: url('../assets/images/slider-images/slider1.jpg');">
-					<div class="row" style="height: 100%;">
-						<div class="col-xs-2">
-							{{!-- Nothing here --}}
-						</div>
-						<div class="col-xs-8 text-center index-logo-container-2">
-							{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
-						</div>
-						<div class="col-xs-2 text-center">
-							{{!-- Nothing here either --}}
-						</div>
-					</div>
-				</div>
-				<div class="slick-content pear-slide-2" style="background-image: url('../assets/images/slider-images/slider2.jpg');">
-					<div class="about-center-me text-center">
-						<h1 class="text-center"><span>Plan</span></h1>
-						<div class="about-font-stretch">
-							<h4 class="text-center"><span>Wedding planning can be tough.
+    {{#j-query.slider-component}}
+    <div class="about-slider-container">
+        <div class="about-slider">
+            <div class="slick-content pear-slide-1" style="background-image: url('../assets/images/slider-images/slider1.jpg');">
+                <div class="row" style="height: 100%;">
+                    <div class="col-xs-2">
+                        {{!-- Nothing here --}}
+                    </div>
+                    <div class="col-xs-8 text-center index-logo-container-2">
+                        {{!--
+                        <h1 class="pear-text-logo unselectable">pear</h1> --}}
+                    </div>
+                    <div class="col-xs-2 text-center">
+                        {{!-- Nothing here either --}}
+                    </div>
+                </div>
+            </div>
+            <div class="slick-content pear-slide-2" style="background-image: url('../assets/images/slider-images/slider2.jpg');">
+                <div class="about-center-me text-center">
+                    <h1 class="text-center"><span>Plan</span></h1>
+                    <div class="about-font-stretch">
+                        <h4 class="text-center"><span>Wedding planning can be tough.
 							<br />We're here to change that.</span></h4>
-						</div>
-					</div>
-				</div>
-				<div class="slick-content pear-slide-3" style="background-image: url('../assets/images/slider-images/slider3.jpg');">
-					<div class="about-center-me text-center">
-						<h1 class="text-center"><span>Share</span></h1>
-						<div class="about-font-stretch">
-							<h4 class="text-center"><span>Share your ideas and favourites with your friends,<br />and invite them to view your Pear Wedding Profile.
+                    </div>
+                </div>
+            </div>
+            <div class="slick-content pear-slide-3" style="background-image: url('../assets/images/slider-images/slider3.jpg');">
+                <div class="about-center-me text-center">
+                    <h1 class="text-center"><span>Share</span></h1>
+                    <div class="about-font-stretch">
+                        <h4 class="text-center"><span>Share your ideas and favourites with your friends,<br />and invite them to view your Pear Wedding Profile.
 							<br /></span></h4>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	{{/j-query.slider-component}}
-	<div class="header-top">
-		<h1>Welcome to Pear</h1><hr class="style-two">
-		<h3>The Wedding Planner</h3>
-	</div>
-	<div class="about-section-white">
-		<h1>Contact Us</h1><hr class="style-two"><h3>We would like to hear from you!</h3>
-		<br>
-		<div class="container">
-		    <div class="form-horizontal form-group form-group-lg row">
-		        <div class="col-md-offset-2 col-md-8">
-		        	<div class="has-feedback {{if model.isValid 'has-success'}}">
-					  <div class="input-group">
-					    <span class="input-group-addon">@</span>
-					    {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
-					  </div>
-					  <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
-					</div>
-		        	{{!-- <div class="">
-			        	{{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
-	        		</div> --}}
-			        <br>
-		        	<div class="{{if model.isLong 'has-success'}}">
-		        		{{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
-		        	</div>
-			        <br>
-			        {{#if model.responseMessage}}
-				      <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}<p>Click this popup to close it</p></div>
-				    {{/if}}
-				    <div style="float:right;">
-			        	{{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
-			    		<button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}}  {{action 'saveContact' model}}>Submit</button>	
-			        </div>
-		        </div>
-		    </div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/j-query.slider-component}}
+    <div class="about-section-white">
+        <div class="container">
+            <div class="header-top">
+                <h1>Welcome to Pear</h1>
+                <hr class="style-two">
+                <h3>The Wedding Planner</h3>
+            </div>
+            <h1>Contact Us</h1>
+            <hr class="style-two">
+            <h3>We would like to hear from you!</h3>
+            <br>
+            <div>
+                <div class="form-horizontal form-group form-group-lg row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <div class="has-feedback {{if model.isValid 'has-success'}}">
+                            <div class="input-group">
+                                <span class="input-group-addon">@</span> {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
+                            </div>
+                            <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
+                        </div>
+                        {{!--
+                        <div class="">
+                            {{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
+                        </div> --}}
+                        <br>
+                        <div class="{{if model.isLong 'has-success'}}">
+                            {{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
+                        </div>
+                        <br> {{#if model.responseMessage}}
+                        <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}
+                            <p>Click this popup to close it</p>
+                        </div>
+                        {{/if}}
+                        <div style="float:right;">
+                            {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
+                            <button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}} {{action 'saveContact' model}}>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 
 
 
 
-
-
-
-
-
-{{!-- 
+{{!--
 <div class="about-section-grey">
-	<div class="container inner-sec">
-		<div class="card inner-sec">
-			<h1>We want to make things easy for you.</h1>
-	        	<hr>
-	        	<div class="row">
-	        		<div class="col-sm-4 border-box">
-	        			<h1>Plan</h1><div class="circle-link"><div class="circle"><i class="fa fa-calendar"></i></div></div><h4>Plan your wedding and keep track of all the details all in one place.</h4>
-	        		</div>
+    <div class="container inner-sec">
+        <div class="card inner-sec">
+            <h1>We want to make things easy for you.</h1>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4 border-box">
+                    <h1>Plan</h1>
+                    <div class="circle-link">
+                        <div class="circle"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    <h4>Plan your wedding and keep track of all the details all in one place.</h4>
+                </div>
 
-	        			<div class="col-sm-4 border-box"><h1>Connect</h1><div class="circle-link"><div class="circle"><i class="fa fa-link"></i></div></div><h4>Find suppliers for every aspect of your wedding.</h4></div>
+                <div class="col-sm-4 border-box">
+                    <h1>Connect</h1>
+                    <div class="circle-link">
+                        <div class="circle"><i class="fa fa-link"></i></div>
+                    </div>
+                    <h4>Find suppliers for every aspect of your wedding.</h4></div>
 
-	        			<div class="col-sm-4 border-box"><h1>Share</h1><div class="circle-link"><div class="circle"><i class="fa fa-users"></i></div></div><h4>Let your inner circle in on all the juicy details of your wedding.</h4></div>
-	        	</div>
-	        	<h3>Click the button below to learn more!</h3><hr>
-          		<button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Tour</button>
-		</div>
-	</div>
+                <div class="col-sm-4 border-box">
+                    <h1>Share</h1>
+                    <div class="circle-link">
+                        <div class="circle"><i class="fa fa-users"></i></div>
+                    </div>
+                    <h4>Let your inner circle in on all the juicy details of your wedding.</h4></div>
+            </div>
+            <h3>Click the button below to learn more!</h3>
+            <hr>
+            <button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Tour</button>
+        </div>
+    </div>
 </div>
- --}}
+--}}

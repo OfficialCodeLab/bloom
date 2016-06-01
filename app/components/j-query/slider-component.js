@@ -4,7 +4,7 @@ export default Ember.Component.extend({
 	didInsertElement: function(){
 		  this.$('.about-slider').slick({
 			arrows: true,
-			autoplay: false,
+			autoplay: true,
 			autoplaySpeed: 3000
 		  });
 
