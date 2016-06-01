@@ -11,5 +11,19 @@ export default Ember.Route.extend({
 	model(){
 
     	return this.store.findAll('user');
+	},
+	actions: {
+		addWedding(id){
+			let user = this.store.peekRecord('user', id);
+			let wedding = this.store.createRecord('wedding', 
+				{
+					id: id,
+					user: user
+				}
+			);
+			wedding.save();
+			user.get('wedding').pushObject(wedding);
+			user.save();
+		}
 	}
 });

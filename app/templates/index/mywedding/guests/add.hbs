@@ -1,24 +1,27 @@
 {{!-- When the "Add Guest" button is clicked, this will show. --}}
-<button class="btn btn-default" style="float:left;" {{action 'backBtn'}}>Back</button>
-<h2 class="text-center">Add Guests</h2><br>
+<div class="row">
+<button class="col-sm-3 btn btn-default" {{action 'backBtn'}}>Back</button>
+<h2 class="col-sm-6 text-center" style="margin-top:0px; padding-top:0px;">Add Guests</h2>
+</div>
+<br>
 
-<div class="form-horizontal">
+<div class="form-horizontal row">
 	<div class="form-group has-feedback">
 		<label class="col-sm-3 control-label">Name &amp; Surname</label>
 		<div class="col-sm-6">
-			{{input type="text" value=name class="form-control" placeholder="Name of guest"}}
+			{{input type="text" disabled=addingGuest value=name class="form-control" placeholder="Name of guest"}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
 		<label class="col-sm-3 control-label">Email Address</label>
 		<div class="col-sm-6">
-			{{input type="text" value=email class="form-control disabled" placeholder="Email address of guest"}}
+			{{input type="text" disabled=addingGuest value=email class="form-control disabled" placeholder="Email address of guest"}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
 		<label class="col-sm-3 control-label">Contact Number</label>
 		<div class="col-sm-6">
-			{{input type="text" value=cell class="form-control disabled" placeholder="Contact details of guest"}}
+			{{input type="text" disabled=addingGuest value=cell class="form-control disabled" placeholder="Contact details of guest"}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
@@ -27,11 +30,11 @@
 
 			<div class="input-group">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" {{action 'decrementNumber'}}>-</button>
+					<button class="btn btn-default" type="button" disabled={{addingGuest}} {{action 'decrementNumber'}}>-</button>
 				</span>
-				{{input type="text" class="form-control guests-add" value=guestsValue }}
+				{{input type="text" disabled=addingGuest class="form-control guests-add" value=guestsValue }}
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" {{action 'incrementNumber'}}>+</button>
+					<button class="btn btn-default" type="button" disabled={{addingGuest}} {{action 'incrementNumber'}}>+</button>
 				</span>
 			</div> 
 			{{!-- {{#touch-spin}}
@@ -45,7 +48,7 @@
 	<div class="col-sm-3">
 	</div>
 	<div class="col-sm-6">
-		<button class="btn btn-default" {{action 'addGuest'}}>Add Guest to guest list</button>
+		<button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list {{#if addingGuest}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>
 	</div>
 </div>
 {{!-- End of guest add section --}}

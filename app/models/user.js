@@ -15,5 +15,6 @@ export default Model.extend({
   accountType: attr('string'),  
   favourites: hasMany('cat-item'),
   vendorRequest: attr('boolean'),
-  vendorAccount: attr('string')
+  vendorAccount: attr('string'),
+  wedding: hasMany('wedding', {inverse: 'user', async: true})
 });

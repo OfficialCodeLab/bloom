@@ -1,9 +1,3 @@
-
-<button class="btn btn-default" style="float:left;" {{action 'backBtn'}}>Back</button>
-
-<h2 class="text-center">View Guests</h2><br>
-
-<h2>{{model.id}}</h2>
 <table class="table table-bordered table-striped">
     <thead style="text-align: center;">
       <tr>
@@ -12,6 +6,7 @@
           <th>Contact Number</th>
           <th>+1's</th>
           <th>Attending</th>
+          <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +16,8 @@
             <td>{{guest.email}}</td>
             <td>{{guest.cell}}</td>   
             <td>{{guest.guests}}</td>            
-      		<td><input type="checkbox" value={{guest.rsvp}}></td>
+      		  <td><input type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}></td>
+            <td><button class="btn btn-danger" {{action "destroyGuest" guest.id}}>X</button></td>
         </tr>
     {{/each}}
 

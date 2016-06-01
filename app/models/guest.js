@@ -8,5 +8,5 @@ export default Model.extend({
   cell: attr('string'),
   guests: attr('string'),
   rsvp: attr('boolean'),
-  guestList: belongsTo('guest-list', {inverse: 'guests', async: true})
+  wedding: belongsTo('wedding', {inverse: 'guests', async: true})
 });

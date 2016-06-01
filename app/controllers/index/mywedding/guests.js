@@ -9,6 +9,8 @@ export default Ember.Controller.extend({
 	cell: '',
 	guests: 0,
 	guestsValue: '0',
+	addingGuest: '',
+	isNotValid: Ember.computed.not('name'),
 	numberObserver: Ember.observer('guestsValue', function() {
         let num = this.get('guests');
         let txtvalue = this.get('guestsValue');
@@ -55,18 +57,20 @@ export default Ember.Controller.extend({
 			this.set('guestsValue', num + "");
 		},
 		addGuest(){
+			this.set('addingGuest', true);
       		let _id = this.get("session").content.currentUser.id + "";
-			let guestList = this.store.peekRecord('guestList', _id);
+			let wedding = this.store.peekRecord('wedding', _id);
 			let guest = this.store.createRecord('guest', {
 				name: this.get('name'),
 				email: this.get('email'),
 				cell: this.get('cell'),
 				guests: this.get('guests') + "",
-				guestList: guestList
+				wedding: wedding
 			});
-			guestList.get('guests').pushObject(guest);
-			guestList.save().then(()=>{
+			wedding.get('guests').pushObject(guest);
+			wedding.save().then(()=>{
 				guest.save().then(()=>{
+					this.set('addingGuest', false);
 					this.set('name', '');
 					this.set('email', '');
 					this.set('cell', '');
@@ -74,6 +78,25 @@ export default Ember.Controller.extend({
 					this.set('guestsValue', '0');
 				});
 			});		
+		},
+		checkBox(id){
+			let model = this.store.peekRecord('guest', id);
+			let rsvp = model.get('rsvp');
+			if(rsvp){
+				rsvp = false;
+			} else {
+				rsvp = true;
+			}
+			model.set('rsvp', rsvp);
+			model.save();
+		},
+		destroyGuest(id){
+			let confirmation = confirm("Are you sure?");
+
+			if(confirmation){
+				let model = this.store.peekRecord('guest', id);
+				model.destroyRecord();
+			}
 		}
 	}
 });
