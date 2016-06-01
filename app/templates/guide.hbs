@@ -3,6 +3,13 @@
 		<hr class="style-two">
 		<h3>Welcome</h3>
 		<p>Welcome to Pear, the wedding planner.<br>Scroll down to learn more about how to use Pear! :)</p><br>
+		<hr><br>
+
+		<h3>Categories</h3>
+		<p>If you go to one of the categories, you can see all the listings from that category</p><p>Then just click the heart to add something to your favourites</p>
+	    <div class="form-group">
+			{{#link-to 'categories'}}<button class="btn btn-default">Categories</button>{{/link-to}}
+		</div><br>
 
 	<div class="card" style="padding-right:10px	">
 		<h3>Try Favourite some items!</h3><hr><p>Click the hearts to favourite or unfavourite</p>
@@ -37,12 +44,12 @@
 		</div>
 	</div>
 	<br>
-		<h3>Favouriting</h3>
-		<p>If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab.</p>
-        <div class="form-group">
-			<button class="btn btn-default">Favourites</button>
-		</div>
-		<br>
+	<h3>Favouriting</h3>
+	<p>If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab.</p>
+    <div class="form-group">
+		{{#link-to 'index'}}<button class="btn btn-default">Favourites</button>{{/link-to}}
+	</div>
+	<br>
 
 	<div class="card" style=" padding-right:10px">
 		<h3>Your Favourited Items</h3><hr><p>Click the hearts to unfavourite</p>
@@ -83,4 +90,108 @@
 		</div>
 
 	</div>
+	<br>
+	<h3>Add Guests to your wedding</h3>
+	<p>If you want to get your guest list started, just head to the my wedding section</p><p>Here is an example of one of the features, or you can head there now!</p>
+    <div class="form-group">
+		{{#link-to 'index.mywedding'}}<button class="btn btn-default">My Wedding</button>{{/link-to}}
+	</div>
+	<br>
+
+	<div class="card" style=" padding:0px 20px 20px 20px">
+		<h3>Your Favourited Items</h3><hr><p>Click the hearts to unfavourite</p>
+		<div class="form-horizontal row">
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Name &amp; Surname</label>
+				<div class="col-sm-6">
+					{{input type="text" value=name class="form-control" placeholder="Name of guest"}}
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Email Address</label>
+				<div class="col-sm-6">
+					{{input type="text" value=email class="form-control disabled" placeholder="Email address of guest"}}
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Contact Number</label>
+				<div class="col-sm-6">
+					{{input type="text" value=cell class="form-control disabled" placeholder="Contact details of guest"}}
+				</div>
+			</div>
+			<div class="form-group has-feedback">
+				<label class="col-sm-3 control-label">Number of additional guests?</label>
+				<div class="col-sm-6">
+
+					<div class="input-group">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" {{action 'decrementNumber'}}>-</button>
+						</span>
+						{{input type="text" class="form-control guests-add" value=guestsValue }}
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" {{action 'incrementNumber'}}>+</button>
+						</span>
+					</div> 
+					{{!-- {{#touch-spin}}
+						<input id="guestNumberBox" type="text" value={{guests}} name="demo1" style="height:33px !important;">
+					{{/touch-spin}} --}}
+					{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3">
+			</div>
+			<div class="col-sm-6">
+				<button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list</button>
+			</div>
+		</div>
+	</div>
+	<br>
+	<h3>Your Guest List</h3>
+	<p>Once you have some guests, you can now manage and view them.</p><p>All the guests will be listed in a table and can can RSVP or remove them.</p>
+    <div class="form-group">
+		{{#link-to 'index.mywedding.guests'}}<button class="btn btn-default">Guest List</button>{{/link-to}}
+	</div>
+	<br>
+
+	<div class="card" style=" padding:0px 20px 20px 20px">
+		<h3>Your Guests</h3><hr><p>Click the X to remove or click the checkbox to confirm RSVP</p>
+		<table class="table table-bordered table-striped" style="background-color:white;">
+		    <thead style="text-align: center;">
+		      <tr>
+		          <th>Full Name</th>
+		          <th>E-mail</th>
+		          <th>Contact Number</th>
+		          <th>+1's</th>
+		          <th>Attending</th>
+		          <th>Delete</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    {{#each guestsA as |guest|}}
+		        <tr>
+		            <td>{{guest.name}}</td>
+		            <td>{{guest.email}}</td>
+		            <td>{{guest.cell}}</td>   
+		            <td>{{guest.guests}}</td>            
+		      		<td><input type="checkbox"></td>
+		            <td><button class="btn btn-danger" {{action "destroyGuest" guest}}>X</button></td>
+		        </tr>
+		    {{/each}}
+
+		    </tbody>
+		</table>
+	</div>
+	<br>
+	<h3>El Finito!</h3>
+	<p>That concludes this guided tour of Pear! We hope you liked what you saw.</p><p>Now you can login / sign up or continue exploring the site!</p><br>
+    <div class="form-group">
+		{{#link-to 'login'}}<button class="btn btn-default">Sign Up</button>{{/link-to}}
+	</div>
+	<div class="form-group">
+		{{#link-to 'index'}}<button class="btn btn-default">Home</button>{{/link-to}}
+	</div>
+	<br><hr><br>
+
 </div>

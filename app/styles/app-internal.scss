@@ -473,11 +473,14 @@ Guest List
 		left: 0;
 		text-align: left;
 		.cat-heart-button{
+			&:active,&:focus{
+				outline:none !important;
+			}
 			display: block;
 			position: absolute;
 			border-radius: 50%;
 			text-align: center;
-			bottom: 30px;
+			bottom: 20%;
 			left: 50%;
 			transform: translateX(-50%);
 			// vertical-align: bottom;
