@@ -48,6 +48,22 @@ body {
                                           |___/      
 \*==============================================================================*/
 
+.pear-index-top{
+	padding:15px 15px 70px 15px;
+	background: url("../assets/images/splash-top.jpg") no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.pear-profile-card{
+	//margin: 5px 5px 0px 0px;
+	background-color: #fff;
+	border-radius: 2px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+}
 .index-main{
 	// background-color: rgba(255,255,255,0.99);
 	background-color: white;
@@ -110,7 +126,7 @@ body {
 	}
 }
 .pear-text-logo{
-	color: $button-click-color;
+	color: $button-text-color;
 	padding: 0px;
 	font-size: 20em;
 	text-align: center;
@@ -119,7 +135,7 @@ body {
 	// z-index: 2 !important;
 }
 .index-logo-container{
-	background-image: url("../assets/images/pear2main.png");
+	//background-image: url("../assets/images/pear2main.png");
 	background-repeat: no-repeat;
 	// background-attachment
 	background-position: center;
@@ -164,17 +180,18 @@ body {
 	margin-bottom: 5px;
 
 	img{
+    	transition: transform 600ms ease;
 		display: inline-block;
 		padding: 5px;
     	border: solid 1px #EFEFEF;
     	max-height: 200px;
 
-    	&:hover{
-    		border: solid 1px #CCC;
-		    -moz-box-shadow: 1px 1px 5px #999;
-		    -webkit-box-shadow: 1px 1px 5px #999;
-	        box-shadow: 1px 1px 5px #999;
-    	}
+    	
+		  &:hover {
+		    cursor: pointer; 
+		    @include box-shadow(0px 0px 8px 2px rgba(0,0,0,0.7));
+		    @include transform (scale(1.05));
+		   }
 	}
 }
 
