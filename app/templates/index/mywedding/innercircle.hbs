@@ -1,5 +1,6 @@
-
-	<div class="form-horizontal row">
+<div class="container">
+<h3>Add people to your inner circle</h3>
+	 <div class="form-horizontal row">
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Search</label>
 			<div class="col-sm-6">
@@ -26,14 +27,32 @@
 		      </tr>
 		    </thead>
 		    <tbody>
-		    {{#each searchResults as |guest|}}
+		    {{#each searchResults as |user|}}
 		        <tr>
-		            <td>{{guest.name}}</td>           
-		            <td><button class="btn btn-success">Invite</button></td>
+		            <td>{{user.name}}</td>           
+		            <td><button class="btn btn-success" {{action "addInnerCircle" user}}>Add</button></td>
 		        </tr>
 		    {{/each}}
 
 		    </tbody>
 		</table>
 		{{/if}}
-	</div>
+	</div> 
+<div>
+
+    {{#each model.innercircle as |stats|}}
+	<div class="pear-profile-card guide-xs-card col-md-4 col-sm-6" style="padding: 5px 8px 15px 5px;">
+		<div class="row">
+				<div class="col-xs-9">
+					<div style="text-align: left;"><h4><strong>NAME SURNAME:</strong></h4></div>
+				</div>
+				<div class="col-xs-3" style="text-align: right; height: 40px;">
+					<a href='' {{action "destroyGuest" stats.id}}><i class="fa fa-times" aria-hidden="true"></i></a>
+				</div>
+			</div>
+			
+		</div>
+		{{/each}}
+
+</div>
+</div>

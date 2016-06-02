@@ -1,8 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+	model(){
+		let _id = this.get("session").content.currentUser.id + "";
+		return this.store.findRecord('user', _id);				
+	},
 	actions: {
 		searchUser(){
+			let _id = this.get("session").content.currentUser.id + "";
 			let _name = this.controller.get('name').toLowerCase();
 			if(_name !== '' && _name !== " "){
 				this.controller.set('responseMessage', "");
@@ -28,10 +33,28 @@ export default Ember.Route.extend({
 					this.controller.set('searching', false);
 					this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});
 		  			this.store.unloadAll('user');
+		  			this.store.findRecord('user', _id);
 				});
 			} else {
 
 			}
+		},
+		addInnerCircle(_user){
+			let _id = this.get("session").content.currentUser.id + "";
+			let user = this.store.peekRecord('user', _id);
+			this.store.findRecord('userstat', _user.id).then((stats)=>{
+				user.get('innercircle').pushObject(stats);
+				user.save().then(()=>alert("added"));
+			},()=>{
+				let stats = this.store.createRecord('userstat', {
+					id: _user.id,
+					name: _user.name
+				});
+				stats.save();
+				user.get('innercircle').pushObject(stats);
+				user.save().then(()=>alert("added"));
+			});
+
 		},
 		closeMessage(){
 			this.controller.set('responseMessage', "");

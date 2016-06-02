@@ -7,7 +7,7 @@ export default Model.extend({
   chest: attr('string'),
   waist: attr('string'),
   hips: attr('string'),
-  inseam: attr('string'),
-  gender: attr('string'),
+  inseam: attr('string'),	
+  name: attr('string'),
   shoesize: attr('string')
 });

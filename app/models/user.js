@@ -19,5 +19,6 @@ export default Model.extend({
   hasGender: attr('boolean'),
   vendorRequest: attr('boolean'),
   vendorAccount: attr('string'),
+  innercircle: hasMany('userstats'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });
