@@ -78,15 +78,13 @@
 			{{/if}}
 
 	        {{#if responseMessage}}
-		      <div class="col-sm-8 alert alert-success" {{action 'closeMessage'}}>{{responseMessage}}
-		      <p class="tiny-text">Tap this message to close it</p></div>
+		      <div class="col-sm-8 alert alert-success text-center" {{action 'closeMessage'}}>{{responseMessage}}
+		      <p class="tiny-text text-center">Tap this message to close it</p></div>
 		    {{/if}}
 
-			<div class="form-group has-feedback">
 				<div class="col-sm-offset-4 col-sm-4">
 					<button class="btn btn-success-thin" style="width:100%" {{action 'updateStats'}}>Update</button>
 				</div>
-			</div>
 		</div>
 	</div>
 
@@ -124,8 +122,8 @@
 		</div>
 
         {{#if responseMessage}}
-	      <div class="col-sm-8 alert alert-success" {{action 'closeMessage'}}>{{responseMessage}}
-	      <p class="tiny-text">Tap this message to close it</p></div>
+	      <div class="col-sm-8 alert alert-success text-center" {{action 'closeMessage'}}>{{responseMessage}}
+	      <p class="tiny-text text-center">Tap this message to close it</p></div>
 	    {{/if}}
 
 		<div class="form-group has-feedback text-center">

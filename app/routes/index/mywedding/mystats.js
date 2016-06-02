@@ -45,10 +45,15 @@ export default Ember.Route.extend({
 				stats.set('hips', this.controller.get('hips'));
 				stats.set('inseam', this.controller.get('inseam'));
 				stats.set('shoesize', this.controller.get('shoesize'));
-				stats.save();
+				stats.save().then(()=>{
+					this.controller.set('responseMessage', 'Changes have been saved!');
+				});
 			});
 
 
+		},
+		closeMessage(){
+			this.controller.set('responseMessage', '');
 		}
 	}
 });
