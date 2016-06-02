@@ -1,6 +1,7 @@
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany } from 'ember-data/relationships';
+import Ember from 'ember';
 
 export default Model.extend({
   name: attr('string'),
@@ -14,6 +15,8 @@ export default Model.extend({
   cell: attr('string'),
   accountType: attr('string'),  
   favourites: hasMany('cat-item'),
+  isFemale: attr('boolean'),
+  hasGender: attr('boolean'),
   vendorRequest: attr('boolean'),
   vendorAccount: attr('string'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
