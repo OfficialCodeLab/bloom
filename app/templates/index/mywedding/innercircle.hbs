@@ -1,0 +1,39 @@
+
+	<div class="form-horizontal row">
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Search</label>
+			<div class="col-sm-6">
+				{{input type="text" disabled=searching value=name class="form-control" placeholder="Name to search for"}}
+			</div>
+			<div class="col-sm-3">
+				<button class="btn btn-default" style="width:100%" disabled={{isNotValid}} {{action 'searchUser'}}>Go{{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>
+			</div>
+		</div>
+	</div>
+	{{#if responseMessage}}
+		<div class="row text-center">
+		    <div class="col-sm-offset-2 col-sm-8 alert alert-warning" {{action 'closeMessage'}}>{{responseMessage}}
+		    <p class="tiny-text">Tap this message to close it</p></div>
+	    </div>
+    {{/if}}
+	<div id="searchRes" class="row">
+		{{#if searchResults}}
+		<table class="table table-bordered table-striped">
+		    <thead style="text-align: center;">
+		      <tr>
+		          <th>Full Name</th>
+		          <th>Send Request</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    {{#each searchResults as |guest|}}
+		        <tr>
+		            <td>{{guest.name}}</td>           
+		            <td><button class="btn btn-success">Invite</button></td>
+		        </tr>
+		    {{/each}}
+
+		    </tbody>
+		</table>
+		{{/if}}
+	</div>

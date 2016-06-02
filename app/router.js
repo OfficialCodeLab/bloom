@@ -21,8 +21,8 @@ Router.map(function() {
     this.route('mywedding', function() {
       this.route('overview', {path: '/'});
       this.route('guests');
-      this.route('bride');
-      this.route('groom');
+      this.route('mystats');
+      this.route('innercircle');
     });
     this.route('vendor', function() {
       this.route('signup');

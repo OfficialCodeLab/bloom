@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:index/mywedding/bride', 'Unit | Route | index/mywedding/bride', {
+moduleFor('route:index/mywedding/innercircle', 'Unit | Route | index/mywedding/innercircle', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
