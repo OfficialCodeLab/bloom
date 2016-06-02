@@ -10,6 +10,7 @@
     "firebase": "^2.1.0",
     "masonry": "^4.1.0",
     "imagesloaded": "^4.1.0",
-    "slick-carousel": "^1.6.0"
+    "slick-carousel": "^1.6.0",
+    "chartjs": "1.0.2"
   }
 }
