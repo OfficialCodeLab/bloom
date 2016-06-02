@@ -428,7 +428,7 @@ h2.white{
   transform: translateY(-160px);
   h1, h2 {
     font-family: antipasto; 
-    color: #F7F19D;
+    color: $hover-color;
     margin: 35px 0px 35px 0px;
   }
   ul {
@@ -441,7 +441,7 @@ h2.white{
   }
   h2:hover{
     transition: 0.5s;
-    color: #D9C756;
+    color: $primary-color;
     @include transform (scale(1.25));
   }
 }
@@ -767,4 +767,9 @@ html {
 }
 ::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(100,100,100,0.4); 
+}
+
+//DO NOT FUCKING TOUCH THIS OR YOU WILL BURN IN HELL FOR ETERNITY
+[data-ember-action] {
+    cursor: pointer;
 }
