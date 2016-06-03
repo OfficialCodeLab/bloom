@@ -1,0 +1,51 @@
+<div style="padding: 0px 10px 60px 10px;">
+	<div class="row">
+	<button class="col-sm-3 btn btn-default" {{action 'backBtn'}}>Back</button>
+	<h3 class="col-sm-6 text-center" style="margin-top:0px; padding-top:0px;">Add Inner Circle Members</h3>
+	</div>
+	<br>
+	<div class="form-horizontal row">
+		<div class="form-group has-feedback">
+			<label class="col-sm-3 control-label">Search</label>
+			<div class="col-sm-6" style="padding-top:5px">
+				{{input type="text" disabled=searching value=name class="form-control" placeholder="Name to search for"}}
+			</div>
+			<div class="col-sm-3" style="padding-top:5px">
+				<button class="btn btn-default" style="width:100%" disabled={{isNotValid}} {{action 'searchUser'}}>Go{{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>
+			</div>
+		</div>
+	</div>
+	{{#if responseMessage}}
+		<div class="row text-center">
+		    <div class="col-sm-offset-2 col-sm-8 alert alert-warning" {{action 'closeMessage'}}>{{responseMessage}}
+		    <p class="tiny-text">Tap this message to close it</p></div>
+	    </div>
+	{{/if}}
+	<div id="searchRes" class="row">
+		{{#if searchResults}}
+		<table class="table table-bordered table-striped">
+		    <thead style="text-align: center;">
+		      <tr>
+		          <th>Full Name</th>
+		          <th>Send Request</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    {{#each searchResults as |user|}}
+		        <tr>
+		            <td>{{user.name}}</td>           
+		            <td>
+		            	<button class="btn btn-success" disabled={{user.adding}} {{action "addInnerCircle" user}}>Add{{#if user.adding}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button> 
+							{{#if user.response}}
+					    		<div class="alert alert-success text-center" style="display:inline-block; margin-bottom:0px; padding: 8px; " {{action 'closeMessageAdded' user}}>{{user.response}}</div>
+						{{/if}}
+					</td>
+		        </tr>
+		    {{/each}}
+
+		    </tbody>
+		</table>
+		{{/if}}
+	</div>
+
+</div>
