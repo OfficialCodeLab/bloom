@@ -2,6 +2,12 @@
 	<div class="col-md-12">
 		<h1 class="text-center">Feature Under Construction</h1>
 		<h2 class="text-center">Check back soon!</h2>
-		{{ember-chart type='Pie' data=chartData width=200 height=200}}
+		<div style="width: 100%">
+			<btn class="btn btn-pear" {{action 'startPieChart'}}>Populate Pie Chart</btn>
+		</div>
+		{{#ember-pie session.currentUser.id}}
+			
+		{{/ember-pie}}
 	</div>
 </div>
+

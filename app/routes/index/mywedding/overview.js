@@ -6,8 +6,11 @@ export default Ember.Route.extend({
 		return this.store.findRecord('wedding', _id);	
 	},
 	actions: {
-		searchUser(){
-			let _name = this.controller.get('name').toLowerCase();
+		startPieChart(){
+
+
+
+			/*
 			if(_name !== '' && _name !== " "){
 				this.controller.set('responseMessage', "");
 				console.log("SEARCHING FOR: " + _name);
@@ -36,6 +39,7 @@ export default Ember.Route.extend({
 			} else {
 
 			}
+			*/
 		}
 	}
 });
