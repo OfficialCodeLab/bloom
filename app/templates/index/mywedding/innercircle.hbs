@@ -1,39 +1,46 @@
-
-	<div class="form-horizontal row">
-		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Search</label>
-			<div class="col-sm-6">
-				{{input type="text" disabled=searching value=name class="form-control" placeholder="Name to search for"}}
-			</div>
-			<div class="col-sm-3">
-				<button class="btn btn-default" style="width:100%" disabled={{isNotValid}} {{action 'searchUser'}}>Go{{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>
-			</div>
-		</div>
-	</div>
-	{{#if responseMessage}}
-		<div class="row text-center">
-		    <div class="col-sm-offset-2 col-sm-8 alert alert-warning" {{action 'closeMessage'}}>{{responseMessage}}
-		    <p class="tiny-text">Tap this message to close it</p></div>
+{{#if searchPartial}}
+	 {{partial "index/mywedding/innercircle/search"}}
+{{else}}
+	<h3 class="text-center">Your inner circle</h3>
+	<div class="form-horizontal">
+			<div class="form-group">
+		        <div class="col-sm-offset-4 col-sm-4">
+					<button class="btn btn-default" style="width:100%" {{action 'showSearchPartial'}}>Add</button>
+		        </div>
+		    </div>
 	    </div>
-    {{/if}}
-	<div id="searchRes" class="row">
-		{{#if searchResults}}
-		<table class="table table-bordered table-striped">
-		    <thead style="text-align: center;">
-		      <tr>
-		          <th>Full Name</th>
-		          <th>Send Request</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    {{#each searchResults as |guest|}}
-		        <tr>
-		            <td>{{guest.name}}</td>           
-		            <td><button class="btn btn-success">Invite</button></td>
-		        </tr>
-		    {{/each}}
-
-		    </tbody>
-		</table>
-		{{/if}}
+    {{#each model.innercircle as |stats|}}
+	<div class="col-md-4 col-sm-6" style="padding: 5px;">
+		<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
+			<div class="row">
+				<div class="col-xs-9">
+					<div class="col-xs-offset-4" style="text-align: center;"><h4><strong>{{stats.name}}:</strong></h4></div>
+				</div>
+				<div class="col-xs-3" style="text-align: right; height: 40px;">
+					<a href='' {{action "removeInnerCircle" stats}}><i class="fa fa-times" aria-hidden="true"></i></a>
+				</div>
+				<div class="col-xs-4" style="margin-top: 5px;">
+					<div class="col-xs-offset-1">
+						<p>Height:</p>
+						<p>Shoulders:</p>
+						<p>Chest:</p>
+						<p>Hips:</p>
+						<p>Waist:</p>
+						<p>Inseam:</p>
+						<p>Shoesize:</p>
+					</div>
+				</div>
+				<div class="col-xs-8" style="margin-top:5px">
+					<p>{{stats.height}}</p>
+					<p>{{stats.shoulders}}</p>
+					<p>{{stats.chest}}</p>
+					<p>{{stats.hips}}</p>
+					<p>{{stats.waist}}</p>
+					<p>{{stats.inseam}}</p>
+					<p>{{stats.shoesize}}</p>
+				</div>
+			</div>	
+		</div>		
 	</div>
+	{{/each}}
+{{/if}}
