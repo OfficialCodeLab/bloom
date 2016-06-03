@@ -98,7 +98,7 @@ export default Ember.Route.extend({
                 }
 
             } else {
-                alert("Pls enter naem");
+                alert("Please enter a name");
             }
         }
     },
