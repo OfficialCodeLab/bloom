@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 		// 	console.log("Images have all loaded!");
 		// })
 	    this.$().imagesLoaded( function( $images, $proper, $broken ) {
-	      console.log( $images.length + ' images total have been loaded' );
+	      //console.log( $images.length + ' images total have been loaded' );
 	      // console.log( $broken.length + ' broken images' );
 	    });
 	}
