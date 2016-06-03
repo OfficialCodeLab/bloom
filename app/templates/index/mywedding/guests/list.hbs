@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped hideOnMobile">
     <thead style="text-align: center;">
       <tr>
           <th>Full Name</th>
@@ -23,3 +23,44 @@
 
     </tbody>
 </table>
+
+<div class="showOnMobile container">
+        {{#each model.guests as |guest|}}
+        <div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
+          <div class="row">
+            <div class="col-xs-9">
+              <div class="col-xs-offset-4 col-xs-8" style="text-align: left;"><h4><strong>Guest:</strong></h4></div>
+            </div>
+            <div class="col-xs-3" style="text-align: right; height: 40px;">
+              <a href='' {{action "destroyGuest" guest.id}}><i class="fa fa-times" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="col-xs-3">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9" style="text-align: left;">{{guest.name}}</div>
+
+            <div class="col-xs-3">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9" style="text-align: left;">{{guest.email}}</div>
+
+            <div class="col-xs-3">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9" style="text-align: left;">{{guest.cell}}</div>
+
+            <div class="col-xs-3">
+              <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9" style="text-align: left;">Guests: {{guest.guests}}</div>
+
+            <div class="col-xs-3">
+              <i class="fa fa-ticket" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9" style="text-align: left;">RSVP:   <input type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}></div>
+            
+          </div>
+        </div>
+      {{/each}}
+    </div>

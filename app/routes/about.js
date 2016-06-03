@@ -21,7 +21,7 @@ export default Ember.Route.extend({
 				newContact.save().then(() => {
 	        		this.controller.get('model').set('email', '');
 	        		this.controller.get('model').set('message', '');
-	        		this.controller.get('model').set('responseMessage', 'KTHNXBAI');
+	        		this.controller.get('model').set('responseMessage', 'Message has been sent');
 				});				
 			}
 	    },
