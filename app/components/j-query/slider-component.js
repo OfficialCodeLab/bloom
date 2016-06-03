@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 	},
 	actions: {
 		test: function(){
-			$('.main-slider').slick({
+			Ember.$('.main-slider').slick({
 			    centerMode: true,
 			    centerPadding: '0px',
 			    slidesToShow: 3,
@@ -20,7 +20,7 @@ export default Ember.Component.extend({
 			    slidesToScroll: 1,
 			    infinite: true,
 			    customPaging: function(slick, index) {
-			        return $('.thumbnails').eq(index).find('img').prop('outerHTML');
+			        return Ember.$('.thumbnails').eq(index).find('img').prop('outerHTML');
 			    },
 			    responsive: [{
 			        breakpoint: 640,
