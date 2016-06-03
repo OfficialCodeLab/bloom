@@ -69,10 +69,14 @@ export default Ember.Route.extend({
 
 		},
 		removeInnerCircle(_user){
-			let _id = this.get("session").content.currentUser.id + "";
-			let user = this.store.peekRecord('user', _id);
-			user.get('innercircle').removeObject(_user);
-			user.save();
+			let confirmation = confirm("Are you sure?");
+
+			if (confirmation) {
+				let _id = this.get("session").content.currentUser.id + "";
+				let user = this.store.peekRecord('user', _id);
+				user.get('innercircle').removeObject(_user);
+				user.save();
+			}
 		},
 		closeMessage(){
 			this.controller.set('responseMessage', "");
