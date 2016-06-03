@@ -37,6 +37,7 @@ export default Ember.Route.extend({
 					this.controller.set('searchResults', searchResults);
 					this.controller.set('searching', false);
 					this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});
+  					this.store.unloadAll('user');
 		  			this.store.findRecord('user', _id);
 				});
 			} else {
@@ -92,7 +93,8 @@ export default Ember.Route.extend({
 			this.controller.set('searchPartial', false);			
 		},
 		willTransition(){
-  			this.store.unloadAll('user');			
+			let _id = this.get("session").content.currentUser.id + "";
+  			this.store.findRecord('user', _id);			
 		}
 	}
 });

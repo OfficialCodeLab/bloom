@@ -19,6 +19,9 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+* add the following line above `masonry.layout();` in node_modules/ember-masonry-grid/addon/masonry-grid/component.js:
+* `this.sendAction('storeMasonryRef', masonry);`
+
 
 ## Running / Development
 
