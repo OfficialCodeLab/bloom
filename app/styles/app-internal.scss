@@ -246,6 +246,48 @@ body {
 		}
 	}
 }
+.pear-chart{
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	&::after{
+		display: inline-block;
+		border-radius: 50%;
+		height: 200px;
+		width: 200px;
+		text-align: center;
+		background-color: black;
+	}
+}
+.pie-label{
+	position: relative;
+	width: 100%;
+	height: 30px;
+}
+.pie-label-square{
+	height: 15px;
+	width: 15px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	display: inline-block;
+
+}
+.attending{
+	background-color: rgb(70,191,189);
+}
+.not-attending{
+	background-color: rgb(247,70,74);
+}
+.pie-label-right{
+	text-align: right;
+	height: 100%;
+}
+.pie-label-left{
+	text-align: left;
+	height: 100%;
+	line-height: 30px;
+}
 
 /*================================*\
 Guest List

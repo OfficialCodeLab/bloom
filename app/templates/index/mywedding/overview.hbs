@@ -1,13 +1,33 @@
 <div style="padding-bottom:60px;">
-	<div class="col-md-12">
-		<h1 class="text-center">Feature Under Construction</h1>
-		<h2 class="text-center">Check back soon!</h2>
-		<div style="width: 100%">
-			<btn class="btn btn-pear" {{action 'startPieChart'}}>Populate Pie Chart</btn>
-		</div>
-		{{#ember-pie session.currentUser.id}}
-			
-		{{/ember-pie}}
-	</div>
-</div>
+    <div class="col-md-12">
+        <div class="row">
+        	<div class="col-md-8">
+        		<h3>Guest Tracking</h3>
+        		<p>Start planning your wedding! Add guests in the guest list section, and track them on this page.</p>
+        		
+        	</div>
+            <div class="col-md-4">
+                <h3 class="text-center">Guest Attendance:</h3> 
+                {{#ember-pie session.currentUser.id}} {{/ember-pie}}
 
+                <div class="row pie-label">
+                	<div class="col-xs-6 pie-label-right">
+                		<div class="pie-label-square attending"></div>
+                	</div>
+                	<div class="col-xs-6 pie-label-left">
+                		Attending
+                	</div>
+                </div>
+                <div class="row pie-label">
+                	<div class="col-xs-6 pie-label-right">
+                		<div class="pie-label-square not-attending"></div>
+                	</div>
+                	<div class="col-xs-6 pie-label-left">
+                		Not Attending
+                	</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
