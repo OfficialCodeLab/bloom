@@ -44,8 +44,10 @@ export default Ember.Route.extend({
 		},
 		login: function(provider) {
         this.get("session").open("firebase", { provider: provider}).then((data) => {
-          // alert(JSON.stringify(data));
-          this.transitionTo('index');
+          //alert(JSON.stringify(data));
+          this.store.findRecord('user', data.currentUser.id).then(()=>{
+          	this.transitionTo('index');
+          });
       	});
 	    },
 	    logout: function() {

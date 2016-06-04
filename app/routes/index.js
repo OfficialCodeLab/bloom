@@ -20,7 +20,7 @@ init: function(){
 
   model() {
     //Before creating the record, clear the DS Store
-    this.store.unloadAll('userext');
+    //this.store.unloadAll('userext');
       let _id = this.get("session").content.currentUser.id + "";
       let imgStr = "http://graph.facebook.com/" + this.get("session").content.currentUser.id + "/picture?type=large";
     return Ember.RSVP.hash({
