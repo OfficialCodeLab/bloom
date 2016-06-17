@@ -14,13 +14,15 @@ Version: v1.1
 /*==============================================================================*\
 You're an fagit.
 \*==============================================================================*/
-@import "mixins.scss";
+@import "css-partials/mixins.scss";
 @import "font-awesome";
 @import "bootstrap";
-//@import "material.min.scss";
+@import "css-partials/colours.scss";
+@import "css-partials/navbar-custom.scss";
+
 @import "app-internal.scss";
-@import "navbar-custom.scss";
-@import "colours.scss";
+
+
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
