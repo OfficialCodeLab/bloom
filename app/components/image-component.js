@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     src: null,
     didInsertElement: function(){
         var _this = this;
+        this.sendAction('loadedImg');
         this.$().on('load', function(evt){
             return _this.imageLoaded(evt);
         }).on('error', function(evt){
