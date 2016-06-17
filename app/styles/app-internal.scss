@@ -37,7 +37,7 @@ body {
 
 /*==============================================================================*\
   _   _                        ____                  
- | | | | ___  _ __ ___   ___  |  _ \ __ _  __ _  ___ k
+ | | | | ___  _ __ ___   ___  |  _ \ __ _  __ _  ___ ™
  | |_| |/ _ \| '_ ` _ \ / _ \ | |_) / _` |/ _` |/ _ \
  |  _  | (_) | | | | | |  __/ |  __/ (_| | (_| |  __/
  |_| |_|\___/|_| |_| |_|\___| |_|   \__,_|\__, |\___|
@@ -84,37 +84,37 @@ body {
 		a{
 			background-color: white;
 			&:link{
-				background-color: $secondary-color;
-				color: $primary-color;
+				background-color: $pill-inactive;
+				color: $pill-text-inactive;
 			}
 			&:visited{
-				background-color: $secondary-color;
-				color: $primary-color;
+				background-color: $pill-inactive;
+				color: $pill-text-inactive;
 			}
 			&:hover{
-				background-color: $hover-color;
-				color: $button-text-color;
+				background-color: $pill-hover;
+				color: $pill-text;
 			}
 			&:active{
-				background-color: $button-click-color;
-				color: $button-text-color;				
+				background-color: $pill-click;
+				color: $pill-text;			
 			}
 		}
 		&.active{
 			color: $button-text-color;
 			margin-left: 0px;
 			a{
-				background-color: $primary-color;			
-				color: inherit;
+				background-color: $pill-active;			
+				color: $pill-text;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $primary-color;
+					background-color: $pill-active;
 					color: inherit;
 				}
 				&:active{
-					background-color: $button-click-color;
-					color: $button-text-color;	
+					background-color: $pill-click;
+					color: $pill-text;
 				}
 			}
 
@@ -205,24 +205,23 @@ body {
 		a{
 			background-color: white;
 			&:link{
-				background-color: $secondary-color;
-				color: $primary-color;
+				background-color: $pill-inactive;
+				color: $pill-text-inactive;
 			}
 			&:visited{
-				background-color: $secondary-color;
-				color: $primary-color;
+				background-color: $pill-inactive;
+				color: $pill-text-inactive;
 			}
 			&:hover{
-				background-color: $hover-color;
-				color: $button-text-color;
+				background-color: $pill-hover;
+				color: $pill-text;
 			}
 			&:active{
-				background-color: $button-click-color;
-				color: $button-text-color;				
+				background-color: $pill-click;
+				color: $pill-text;
 			}
 		}
 		&.active{
-			color: white;
 			margin-left: 0px;
 			a{
 				background-color: $primary-color;			
@@ -230,12 +229,12 @@ body {
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $primary-color;
-					color: inherit;
+					background-color: $pill-active;
+					color: $pill-text;
 				}
 				&:active{
-					background-color: $button-click-color;
-					color: $button-text-color;		
+					background-color: $pill-click;
+					color: $pill-text;	
 				}
 			}
 

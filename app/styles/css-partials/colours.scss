@@ -32,13 +32,45 @@
   #4 Linen:           rgb(254,240,223);
   #5 Tomato:          rgb(247,92,85);
 
+  Lighter shade of midnight blue: #627ad0;
   Navbar: Linen
   Navbar Text: Midnight Blue
 
 */
 /*==============================================================================*/
 
-//Background for navbar and active items
+$transparent: rgba(0,0,0,0);
+
+/*==============================================================================*\
+  Navbar Colours
+\*==============================================================================*/
+
+$navbar-background: rgb(254,240,223);
+$navbar-background-active: #ffffff;
+$navbar-text: rgb(21,32,70);
+
+$dropdown-background: rgb(21,32,70);
+$dropdown-text: #ffffff;
+$dropdown-hover-background: #627ad0;
+$dropdown-hover-text: rgb(255,255,255);
+
+/*==============================================================================*\
+  Button Colours
+\*==============================================================================*/
+
+// $favourites-button: rgb(21,32,70);
+// $favourites-button-hover: ;
+// $mywedding-button: ;
+// $mywedding-button-hover: ;
+
+$pill-inactive: #fdced0;
+$pill-active: #f5565c;
+$pill-hover: #fbb7b9;
+$pill-text: #ffffff;
+$pill-text-inactive: #ffffff;
+$pill-click: #f5565c;
+
+//Background for active items and normal buttons
 //1 MAIN COLOR
 $primary-color: #42A5F5;
 
@@ -68,35 +100,3 @@ $link-text-color: #272727;
 //Changes colour of favourited state of circle heart button
 $button-favourited: #d9534f;
 $button-unfavourited: #000000;
-
-/*==============================================================================*\
-Colours Teal theme
-\*==============================================================================*/
-/*
-//Background for navbar and active items
-//1 MAIN COLOR
-$primary-color: #009688;
-
-//Hover for navbar and buttons
-//2 LIGHT COLOR 
-$hover-color: #80CBC4;
-
-//Default Button State
-//3 NEUTRAL
-$secondary-color: #f5f5f5;
-
-//Button Text (light) / navbar active
-//4 USUALLY WHITE
-$button-text-color: #ffffff;
-
-//Active button Text
-//5 USUALLY BLACK / not used
-$button-text-color-active: #000000;
-
-//Button Click
-//6 VERY DARK
-$button-click-color: #004D40;
-
-//Shouldn't do anything
-$link-text-color: #272727;
-*/

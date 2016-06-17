@@ -44,38 +44,45 @@
 }
 #navbar-g.navbar-default {
     font-size: 16px;
-    //background-color: rgba(0, 0, 0, 0.85);
-    background-color: $button-click-color;
+    background-color: $navbar-background;
     border-bottom-width: 0px;
 }
 #navbar-g.navbar-default .navbar-nav>li>a {
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(0, 0, 0, 0);
+    color: $navbar-text;
+    background-color: $transparent;
 }
 
 #navbar-g.navbar-default .navbar-nav>li>a:hover,
 #navbar-g.navbar-default .navbar-nav>li>a:focus {
-    // color: rgba(204, 204, 204, 1);
-    color: $button-text-color;
-    // background-color: rgba(0, 0, 0, 0.85);
-    background-color: $hover-color;
+    color: $navbar-text;
+    background-color: $navbar-background-active;
 }
 #navbar-g.navbar-default .navbar-nav>.active>a,
 #navbar-g.navbar-default .navbar-nav>.active>a:hover,
 #navbar-g.navbar-default .navbar-nav>.active>a:focus {
-    color: rgba(23, 23, 23, 1);
-    background-color: $button-text-color;
+    color: $navbar-text;
+    background-color: $navbar-background-active;
+}
+.dropdown-menu{
+  background-color: $dropdown-background;
+  color: $dropdown-text;
+
+  li{
+    a{
+      color: $dropdown-text;
+    }
+  }
 }
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus {
-    color: #fff;
+    color: $navbar-text;
     text-decoration: none;
     outline: 0;
-    background-color: $button-click-color;
+    background-color: $navbar-background-active;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
     text-decoration: none;
-    color: #fff;
-    background-color: $hover-color;
+    color: $dropdown-hover-text;
+    background-color: $dropdown-hover-background;
 }
 #navbar-g.navbar-default .navbar-toggle {
     border-color: #ffffff;
@@ -93,7 +100,7 @@
 }
 .navbar-brand{
     &:hover{
-      background-color: $button-click-color !important;
+      background-color: $navbar-background-active !important;
     }
 }
 
