@@ -82,6 +82,7 @@ body {
 		margin-bottom: 5px !important;
 		
 		a{
+			border-radius: 0px;
 			background-color: white;
 			&:link{
 				background-color: $pill-inactive;
