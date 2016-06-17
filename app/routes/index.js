@@ -12,7 +12,7 @@ init: function(){
   	if(!this.get('session.isAuthenticated')){
         this.transitionTo('login');
       } else{
-        this.store.findRecord('user', this.get("session").content.currentUser.id).then(()=>{},()=>this.transitionTo('user.new'));
+        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0].uid).then(()=>{},()=>this.transitionTo('user.new'));
 
       }
       return sesh;
@@ -21,8 +21,8 @@ init: function(){
   model() {
     //Before creating the record, clear the DS Store
     this.store.unloadAll('userext');
-      let _id = this.get("session").content.currentUser.id + "";
-      let imgStr = "http://graph.facebook.com/" + this.get("session").content.currentUser.id + "/picture?type=large";
+      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+      let imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
     return Ember.RSVP.hash({
         userext: this.store.createRecord('userext', {
         imgurl: imgStr

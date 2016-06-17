@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('user');
         try {
-        	let _id = this.get("session").content.currentUser.id;
+        	let _id = this.get("session").get('currentUser').providerData[0].uid;
 			var user = this.store.createRecord('user', {
 			  name: this.get("session").content.currentUser.cachedUserProfile.first_name,
 			  surname: this.get("session").content.currentUser.cachedUserProfile.last_name,
@@ -37,7 +37,7 @@ export default Ember.Route.extend({
 	        // Default back to homepage
 	        this.transitionTo('login');
 	    } 
-    	let _id = this.get("session").content.currentUser.id + "";
+    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 
     	//Check the local store first for record of the user
     	var localusr = this.store.peekRecord('user', _id);

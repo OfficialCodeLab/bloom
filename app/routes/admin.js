@@ -8,7 +8,7 @@ export default Ember.Route.extend({
         }
 
         //First tier authentication:
-        let id = this.get("session").content.currentUser.id;
+        let id = this.get("session").get('currentUser').providerData[0].uid;
         let user = this.store.peekRecord('user', id);
         if(user.get('accountType') !== 'admin'){
   			this.transitionTo('/404');

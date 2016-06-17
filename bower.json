@@ -7,7 +7,7 @@
     "ember-qunit-notifications": "0.1.0",
     "bootstrap-sass": "^3.3.6",
     "font-awesome": "~4.5.0",
-    "firebase": "^2.1.0",
+    "firebase": "^3.0.0",
     "masonry": "^4.1.0",
     "imagesloaded": "^4.1.0",
     "slick-carousel": "^1.6.0",

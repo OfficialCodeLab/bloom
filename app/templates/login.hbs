@@ -35,7 +35,7 @@
                 </a>{{/link-to}}
                </div>--}}
                 {{#if session.isAuthenticated}}          
-            <h2 style="text-align:center; color:#fff">Logged in as {{session.currentUser.displayName}}</h2>
+            <h2 style="text-align:center; color:#fff">Logged in as {{session.currentUser.providerData.0.providerData.0.displayName}}</h2>
           <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button> 
         {{else}}
           {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}

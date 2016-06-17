@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 		//check server for the record of self
 		try
 		{
-			let _id = this.get("session").content.currentUser.id + "";
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			return this.store.findRecord('user', _id);			
 		} catch(ex) {}
 		
@@ -43,10 +43,16 @@ export default Ember.Route.extend({
 			this.controller.set('menuOpen', false);
 		},
 		login: function(provider) {
-        this.get("session").open("firebase", { provider: provider}).then((data) => {
-          // alert(JSON.stringify(data));
-          this.transitionTo('index');
-      	});
+			let _that = this;
+	        this.get("session").open("firebase", { 
+	        	provider: provider, 
+	        	settings: {
+	    			scope: 'public_profile,user_friends',
+				}
+			}).then((data) => {
+	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
+				this.transitionTo('index');
+          });
 	    },
 	    logout: function() {
 	      this.get("session").close();
@@ -59,13 +65,13 @@ export default Ember.Route.extend({
 	    	this.transitionTo("categories");
 	    },
 	    addFavourite: function(id){
-	    	let user = this.store.peekRecord('user', this.get("session").content.currentUser.id);
+	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
 	    	let item = this.store.peekRecord('cat-item', id);
 	    	user.get('favourites').pushObject(item);
 	    	user.save();
 	    },
 	    removeFavourite: function(id){
-	    	let user = this.store.peekRecord('user', this.get("session").content.currentUser.id);
+	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
 	    	let item = this.store.peekRecord('cat-item', id);
 	    	user.get('favourites').removeObject(item);
 	    	user.save();

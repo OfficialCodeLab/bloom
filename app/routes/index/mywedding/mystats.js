@@ -2,11 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model(){
-		let _id = this.get("session").content.currentUser.id + "";
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('user', _id);			
 	},
 	afterModel(){
-		let _id = this.get("session").content.currentUser.id + "";
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		this.store.findRecord('userstat', _id).then((stats)=>{
 			this.controller.set('height', stats.get('height'));
 			this.controller.set('shoulders', stats.get('shoulders'));
@@ -19,7 +19,7 @@ export default Ember.Route.extend({
 	},
 	actions:{
 		selectGender(gender){
-			let _id = this.get("session").content.currentUser.id + "";
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let user = this.store.peekRecord('user', _id);
 			if(gender === 'male'){
 				user.set('isFemale', false);
@@ -35,7 +35,7 @@ export default Ember.Route.extend({
 			stats.save();
 		},
 		updateStats(){
-			let _id = this.get("session").content.currentUser.id + "";
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			this.store.findRecord('userstat', _id).then((stats)=>{
 				stats.set('height', this.controller.get('height'));
 				stats.set('shoulders', this.controller.get('shoulders'));
