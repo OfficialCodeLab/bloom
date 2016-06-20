@@ -85,11 +85,11 @@ body {
 			border-radius: 0px;
 			background-color: white;
 			&:link{
-				background-color: $pill-inactive;
+				background-color: $pill-inactive-main;
 				color: $pill-text-inactive;
 			}
 			&:visited{
-				background-color: $pill-inactive;
+				background-color: $pill-inactive-main;
 				color: $pill-text-inactive;
 			}
 			&:hover{
