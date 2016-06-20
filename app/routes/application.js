@@ -52,7 +52,7 @@ export default Ember.Route.extend({
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
 				
-	          this.store.findRecord('user', data.currentUser.id).then(()=>{
+	          this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
 	          	this.transitionTo('index');
 	          });
           });
