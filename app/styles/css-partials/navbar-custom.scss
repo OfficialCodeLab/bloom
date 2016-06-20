@@ -33,51 +33,59 @@
     color: rgba(255, 255, 255, 1);
 }
 #navbar-g.navbar-default {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     font-size: 16px;
     background-color: $navbar-background;
     border-bottom-width: 0px;
 }
 #navbar-g.navbar-default .navbar-nav>li>a {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     color: $navbar-text;
     background-color: $transparent;
 }
 
 #navbar-g.navbar-default .navbar-nav>li>a:hover,
 #navbar-g.navbar-default .navbar-nav>li>a:focus {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     color: $navbar-text;
     background-color: $navbar-background-active;
 }
 #navbar-g.navbar-default .navbar-nav>.active>a,
 #navbar-g.navbar-default .navbar-nav>.active>a:hover,
 #navbar-g.navbar-default .navbar-nav>.active>a:focus {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     color: $navbar-text;
     background-color: $navbar-background-active;
 }
 .dropdown-menu{
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
   background-color: $dropdown-background;
   color: $dropdown-text;
 
   li{
     a{
-      font-family: 'Muli', sans-serif;
+      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      font-weight: 500;
       color: $dropdown-text;
     }
   }
 }
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     color: $navbar-text;
     text-decoration: none;
     outline: 0;
     background-color: $navbar-background-active;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
-  font-family: 'Muli', sans-serif;
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-weight: 500;
     text-decoration: none;
     color: $dropdown-hover-text;
     background-color: $dropdown-hover-background;

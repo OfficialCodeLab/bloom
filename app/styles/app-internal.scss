@@ -149,7 +149,7 @@ body {
 	height: 100%;
 }
 .favourites-padder{
-	padding-top: 50px;
+	padding-top: 20px;
 }
 /*==============================================================================*\
   __  __        __        __       _     _ _             
@@ -1101,6 +1101,30 @@ $font_0: FontAwesome;
                background-color: $button-click-color !important;
                color: $button-text-color;                              
        }
+}
+.font-antipasto{
+	font-family: antipasto;
+}
+.font-century{
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-weight: 500;
+	a{
+		font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+		font-weight: 500;
+	}
+}
+.font-times-header{
+	font-family: "Times New Roman", Times, serif;
+	letter-spacing: 5px;
+	color: black;
+}
+.font-times-subheader{
+	font-family: "Times New Roman", Times, serif;
+	letter-spacing: 2px;
+	color: #999;
+	font-size: 15px;
+	font-style: italic;
+
 }
 
 
