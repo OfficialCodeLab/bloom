@@ -7,7 +7,7 @@ export default Ember.Route.extend({
         if(!this.get('session.isAuthenticated')){
             this.transitionTo('login');
 		}
-		    let _id = this.get("session").content.currentUser.id + "";
+		    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let user = this.store.peekRecord('user', _id);
 		if(!user.get('vendorAccount')){
 			this.transitionTo('index.vendor.login');
@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 		return sesh;
     },
     model() {
-	    let _id = this.get("session").content.currentUser.id + "";
+	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let user = this.store.peekRecord('user', _id);
     	return this.store.findRecord('vendor', user.get('vendorAccount'));
     }

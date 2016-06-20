@@ -14,7 +14,7 @@
 						{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
 					{{/link-to}}
 					<div class="cat-overlay-2">
-						{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
+						{{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
 					</div>
 					
 				</div>
@@ -31,7 +31,7 @@
 				</div>
 				{{!-- <div class="cat-overlay-2"> --}}
 				{{#link-to 'single-item' cat-item.id tagname='div' class="cat-overlay-3"}}
-						{{#favourite-button cat-item.id session.currentUser.id}}{{/favourite-button}}
+						{{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
 				{{/link-to}}
 				{{!-- </div> --}}
 			</div>

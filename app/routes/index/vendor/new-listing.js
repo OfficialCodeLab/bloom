@@ -8,7 +8,7 @@ export default Ember.Route.extend({
             this.transitionTo('login');
           }
 
-      	  let _id = this.get("session").content.currentUser.id + "";
+      	  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
           let user = this.store.peekRecord('user', _id);
           if(!user.get('vendorAccount')){
           	this.transitionTo('index.vendor.login');
@@ -68,7 +68,7 @@ export default Ember.Route.extend({
 			try{
 				this.controller.set('isCreating', true);
 				let cat = this.store.peekRecord('category', this.controller.get('category'));
-				let _id = this.get("session").content.currentUser.id + "";
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');

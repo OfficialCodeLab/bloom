@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model(){
-		let _id = this.get("session").content.currentUser.id + "";
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('user', _id);				
 	},
 	actions: {
 		searchUser(){
-			let _id = this.get("session").content.currentUser.id + "";
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let _name = this.controller.get('name').toLowerCase();
 			let key = 0;
 			if(_name !== '' && _name !== " "){
@@ -47,7 +47,7 @@ export default Ember.Route.extend({
 		addInnerCircle(_user){
 			let searchRes = Ember.get(this.controller.get('searchResults'), _user.key+ "");
 			Ember.set(searchRes, 'adding', true);
-			let _id = this.get("session").content.currentUser.id + "";
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let user = this.store.peekRecord('user', _id);
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
 				user.get('innercircle').pushObject(stats);
@@ -73,7 +73,7 @@ export default Ember.Route.extend({
 			let confirmation = confirm("Are you sure?");
 
 			if (confirmation) {
-				let _id = this.get("session").content.currentUser.id + "";
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let user = this.store.peekRecord('user', _id);
 				user.get('innercircle').removeObject(_user);
 				user.save();

@@ -5,7 +5,12 @@ module.exports = function(environment) {
     modulePrefix: 'pear',
     environment: environment,
     contentSecurityPolicy: { 'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com" },
-    firebase: 'https://pear-server.firebaseio.com/',
+    firebase: {
+        apiKey: 'AIzaSyD48KsmEJvLnldR-7xwKANekixcoLTYW2s',
+        authDomain: 'pear-server.firebaseapp.com',
+        databaseURL: 'https://pear-server.firebaseio.com',
+        storageBucket: 'pear-server.appspot.com',
+    },
     torii: {
       sessionServiceName: 'session'
     },
