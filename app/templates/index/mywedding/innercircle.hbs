@@ -1,7 +1,7 @@
 {{#if searchPartial}}
 	 {{partial "index/mywedding/innercircle/search"}}
 {{else}}
-	<h3 class="text-center">Your inner circle</h3>
+	<h3 class="text-center">Your inner circle</h3><p class="text-center">From your bridal party to your far flung loved ones – add whoever your heart desires, so that they can be a part of your special journey.</p><hr>
 	<div class="form-horizontal">
 			<div class="form-group">
 		        <div class="col-sm-offset-4 col-sm-4">
@@ -19,7 +19,7 @@
 				<div class="col-xs-3" style="text-align: right; height: 40px;">
 					<a href='' {{action "removeInnerCircle" stats}}><i class="fa fa-times" aria-hidden="true"></i></a>
 				</div>
-				<div class="col-xs-4" style="margin-top: 5px;">
+				<div class="col-xs-5" style="margin-top: 5px;">
 					<div class="col-xs-offset-1">
 						<p>Height:</p>
 						<p>Shoulders:</p>
@@ -30,7 +30,7 @@
 						<p>Shoesize:</p>
 					</div>
 				</div>
-				<div class="col-xs-8" style="margin-top:5px">
+				<div class="col-xs-7" style="margin-top:5px">
 					<p>{{stats.height}}</p>
 					<p>{{stats.shoulders}}</p>
 					<p>{{stats.chest}}</p>
