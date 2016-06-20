@@ -6,23 +6,13 @@
  |_|   \___|\__,_|_|    |_| \_|\__,_| \_/ |_.__/ \__,_|_|     \____|____/____/ 
                                                                                
 ==============================================================================*/
-
-// #navbar-sm {
-  
-//   height:40px;
-//   width:100%;
-//   position: absolute;
-//   position: fixed;
-//   @include box-shadow (0px 0px 1px rgba(0, 0, 0, 1));
-//   background-color: rgba(0,0,0,0.8);
-// }
-
 .navbar {
   z-index: 9;
   position: absolute;
   position: fixed;
   width:100%;
   margin-bottom: 0px !important;
+
   //background-color: rgba(231, 231, 231, 0.3) !important;
   a:hover, a:active, a:focus{
     text-decoration: none;
@@ -43,43 +33,51 @@
     color: rgba(255, 255, 255, 1);
 }
 #navbar-g.navbar-default {
+  font-family: 'Muli', sans-serif;
     font-size: 16px;
     background-color: $navbar-background;
     border-bottom-width: 0px;
 }
 #navbar-g.navbar-default .navbar-nav>li>a {
+  font-family: 'Muli', sans-serif;
     color: $navbar-text;
     background-color: $transparent;
 }
 
 #navbar-g.navbar-default .navbar-nav>li>a:hover,
 #navbar-g.navbar-default .navbar-nav>li>a:focus {
+  font-family: 'Muli', sans-serif;
     color: $navbar-text;
     background-color: $navbar-background-active;
 }
 #navbar-g.navbar-default .navbar-nav>.active>a,
 #navbar-g.navbar-default .navbar-nav>.active>a:hover,
 #navbar-g.navbar-default .navbar-nav>.active>a:focus {
+  font-family: 'Muli', sans-serif;
     color: $navbar-text;
     background-color: $navbar-background-active;
 }
 .dropdown-menu{
+  font-family: 'Muli', sans-serif;
   background-color: $dropdown-background;
   color: $dropdown-text;
 
   li{
     a{
+      font-family: 'Muli', sans-serif;
       color: $dropdown-text;
     }
   }
 }
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus {
+  font-family: 'Muli', sans-serif;
     color: $navbar-text;
     text-decoration: none;
     outline: 0;
     background-color: $navbar-background-active;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
+  font-family: 'Muli', sans-serif;
     text-decoration: none;
     color: $dropdown-hover-text;
     background-color: $dropdown-hover-background;
@@ -103,11 +101,3 @@
       background-color: $navbar-background-active !important;
     }
 }
-
-// li.dropdown {
-// 	color: #fff;
-// 	&:hover{
-//     	color: rgba(204, 204, 204, 1);
-// 		text-decoration: none;
-// 	}
-// }
