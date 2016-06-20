@@ -1,6 +1,8 @@
 <div class="container index-main">
 	<div class="header-top">
-		<h1>{{model.name}}</h1><hr class="style-two"><h3>{{model.desc}}</h3>
+		<h1 class="font-times-header text-uppercase">{{model.name}}</h1>
+		<h3 class="font-times-subheader">{{model.desc}}</h3>
+		<hr class="style-two">
 	</div>
 	<div class="text-center">
 		{{#masonry-grid items=model.catItems isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
