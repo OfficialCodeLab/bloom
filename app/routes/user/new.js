@@ -6,9 +6,16 @@ export default Ember.Route.extend({
 		this.store.unloadAll('user');
         try {
         	let _id = this.get("session").get('currentUser').providerData[0].uid;
+            ///return response;
+        	//console.log(request);
+        	//let surname = this.get("session").get('currentUser').providerData[0].last_name;
+        	let full_name = this.get("session").get('currentUser').providerData[0].displayName;
+        	let x = full_name.indexOf(" ");
+        	let name = full_name.substring(0, x);
+        	let surname = full_name.substring(x+1, full_name.length);
 			var user = this.store.createRecord('user', {
-			  name: this.get("session").content.currentUser.cachedUserProfile.first_name,
-			  surname: this.get("session").content.currentUser.cachedUserProfile.last_name,
+			  name: name,
+			  surname: surname,
 			  id: _id
 			});
 

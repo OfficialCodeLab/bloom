@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+
 export default Ember.Route.extend({
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
@@ -43,18 +44,23 @@ export default Ember.Route.extend({
 			this.controller.set('menuOpen', false);
 		},
 		login: function(provider) {
+			Ember.$('#s2-overlay3').fadeOut("fast");	
 			let _that = this;
+			let scope = "";
+			if(provider === "facebook"){
+				scope = 'public_profile,user_friends';
+			}
 	        this.get("session").open("firebase", { 
 	        	provider: provider, 
 	        	settings: {
-	    			scope: 'public_profile,user_friends',
+	    			scope: scope,
 				}
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
 				
 	          this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
 	          	this.transitionTo('index');
-	          });
+	          }, ()=> {this.transitionTo('user.new');});
           });
 	    },
 	    logout: function() {
@@ -83,6 +89,12 @@ export default Ember.Route.extend({
 	      //Ember.Logger.error(error);
 	      this.get("session").close();
       	  this.transitionTo('login');
+	    },
+	    notimplemented: function(){
+	    	alert("Sorry this feature is still under contruction!");
+	    },
+	    showLogins: function(){
+			Ember.$('#s2-overlay3').fadeIn("fast");	    	
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);

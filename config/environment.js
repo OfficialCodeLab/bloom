@@ -24,6 +24,7 @@ module.exports = function(environment) {
     },
     filepickerKey: 'Ab8b55laiRbuJG3a8E2o6z',
 
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
