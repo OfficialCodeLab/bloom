@@ -28,7 +28,8 @@ init: function(){
       if(providerId === "facebook.com"){
         imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
       } else {
-        imgStr = "https://twitter.com/" + this.get("session").get('currentUser').providerData[0].uid + "/profile_image?size=original";
+        let imgStrSM = this.get("session").get('currentUser').photoURL;
+        imgStr = imgStrSM.substring(0, imgStrSM.length-11) + ".png";
       }
     return Ember.RSVP.hash({
         userext: this.store.createRecord('userext', {
