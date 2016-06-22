@@ -32,7 +32,6 @@ body {
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	
 }
 
 /*==============================================================================*\
@@ -643,86 +642,30 @@ Guest List
                                                             
 \*==============================================================================*/
 .category-block-mobile{
-	display: none;
-	position: relative;
-	//Defaults
-	margin: auto;
-	margin-left: 4px;
-	margin-right: 4px;
-
-	//To create space between rows
-	margin-bottom: 15px; 
-
-	//Take up the full column...
-	width: 100%;
-
-	//But not too big!
-	max-width: 360px;
-
-	text-align: center;
-	border-radius: 2px;
-
-	//Card stuff
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-
-	h2{
-		margin-top: 5px;
-		overflow: hidden;
-  		text-overflow: ellipsis;
-  		white-space: nowrap;
-  		// color: white;
-  		text-align: center;
+	.mobile-overlay-1{
 
 	}
-
-	.cat-overlay-2{
+	.mobile-image{
 
 	}
-	.cat-overlay-3{
-		width: 100%;
-		height: 100%;
+	.mobile-overlay-2{
 		position: absolute;
-		z-index: 2;
-		// bottom: 30px;
-		top: 0;
-		left: 0;
-		text-align: left;
-		.cat-heart-button{
-			z-index: 4;
-			display: block;
-			position: absolute;
+		display: inline-block;
+		bottom: 30px;
+		left: 5%;
+		right: 5%;
+
+		text-align: center;
+		.mobile-button-container{
+			position: relative;
+			width: 60px;
+			height: 60px;
 			border-radius: 50%;
-			text-align: center;
-			bottom: 30px;
 			left: 50%;
 			transform: translateX(-50%);
-			// vertical-align: bottom;
-			// bottom: 30px;
+			overflow: hidden;
 		}
 	}
-
-
-	img{
-		user-drag: none; 
-		user-select: none;
-		-moz-user-select: none;
-		-webkit-user-drag: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
-		transition: .8s opacity;
-	}
-
-	/* None of these should be selectable */
-	user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    cursor: default;
-
-    overflow: hidden;
-
 }
 /*==============================================================================*\
   __  __                                  
