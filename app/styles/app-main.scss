@@ -154,6 +154,25 @@ p{
 	/*text-align:center;*/
 	position: absolute;                
 }
+
+#s2-overlay3{
+  background-color: #F1F1F1;
+  // height:80%;    
+  padding-bottom: 50px;       
+  top: 10%;         
+  right:15%;
+  left:15%;
+  border-radius:3px;
+    /*margin-left:-150px;*/
+  display: block;
+  /*text-align:center;*/
+  position: absolute; 
+  text-align: center;
+  z-index: 20;
+  -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
+  box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);               
+}
 .unselectable{
 	user-select: none;
     -moz-user-select: none;
