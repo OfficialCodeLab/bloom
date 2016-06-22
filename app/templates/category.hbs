@@ -22,19 +22,21 @@
 			</div>
 		{{/masonry-grid}} 
 	</div>
-	<div class="row text-center">
+	<div class="row text-center showOnPhones">
 	    {{#each model.catItems as |cat-item|}}
 		<div class="col-lg-4 col-md-6">
 			<div class="category-block-mobile">
-				<h2>{{cat-item.name}}</h2>
-				<div class="text-center cat-img-container">
-					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+				<div class="mobile-overlay-1">
+					<h2>{{cat-item.name}}</h2>
 				</div>
-				{{!-- <div class="cat-overlay-2"> --}}
-				{{#link-to 'single-item' cat-item.id tagname='div' class="cat-overlay-3"}}
-						{{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
+				{{#link-to 'single-item' cat-item.id tagname='div' class=" text-center cat-img-conatiner"}}
+					<img src="{{cat-item.imageURL}}" class="img-responsive mobile-image">
 				{{/link-to}}
-				{{!-- </div> --}}
+				<div class="mobile-overlay-2">
+					<div class="mobile-button-container">	
+						{{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
+					</div>
+				</div>
 			</div>
 		</div>
 	    {{/each}}

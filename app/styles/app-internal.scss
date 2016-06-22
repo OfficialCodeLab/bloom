@@ -372,12 +372,14 @@ Guest List
 	  	transition: .8s opacity;
 
   		h2{
-			margin-top: 5px;
+			margin-top: 10px;
 			overflow: hidden;
 	  		text-overflow: ellipsis;
 	  		white-space: nowrap;
 	  		color: white;
 	  		text-align: center;
+	  		padding-left: 10px;
+	  		padding-right: 10px;
 
 		}
 	}
@@ -514,6 +516,10 @@ Guest List
   		white-space: nowrap;
   		// color: white;
   		text-align: center;
+  		width: 100%;
+
+  		padding-left: 10px;
+  		padding-right: 10px;
 	}
 }
 
@@ -642,18 +648,46 @@ Guest List
                                                             
 \*==============================================================================*/
 .category-block-mobile{
+	max-width: 100%;
 	.mobile-overlay-1{
-
+  		h2{
+			// margin-top: 5px;
+			overflow: hidden;
+	  		text-overflow: ellipsis;
+	  		white-space: nowrap;
+	  		// color: white;
+	  		text-align: center;
+	  		padding-left: 5px;
+	  		padding-right: 5px;
+	  		max-width: 100%;
+		}
 	}
 	.mobile-image{
+		display: inline-block;
+		cursor: pointer;
 
+		position: relative;
+		// top: 50%;
+		// transform: translateY(-50%);
+
+		max-height: inherit;
+		max-width: 100%;
+		// height: auto;
+		// width: auto;
+
+		margin: 0px;
+		padding: 0px;
+
+		&:hover{
+			cursor: pointer;
+		}
 	}
 	.mobile-overlay-2{
 		position: absolute;
 		display: inline-block;
 		bottom: 30px;
-		left: 5%;
-		right: 5%;
+		left: 50%;
+		right: 50%;
 
 		text-align: center;
 		.mobile-button-container{
@@ -1069,6 +1103,9 @@ $font_0: FontAwesome;
 	font-style: italic;
 
 }
+.showOnPhones{
+	display: none;
+}
 
 
 /*==============================================================================*\
@@ -1157,6 +1194,9 @@ $font_0: FontAwesome;
 	}
 	.hideOnPhones{
 		display: none;
+	}
+	.showOnPhones{
+		display: block;
 	}
 	.masonry-grid{
 		display: none;
