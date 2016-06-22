@@ -21,15 +21,18 @@
 			</div>
 		{{/masonry-grid}} 		
 	</div>
-	<div class="row text-center showOnMobile">
+
+
+
+	<div class="row text-center showOnPhones">
 	    {{#each model as |cat-item|}}
 		<div class="col-lg-4 col-md-6">
 			<div class="category-block-mobile">
 				<div class="mobile-overlay-1">
 					<h2>{{cat-item.name}}</h2>
 				</div>
-				{{#link-to 'single-item' cat-item.id tagname='div' class=" text-center cat-img-conatiner"}}
-					<img src="{{cat-item.imageURL}}" class="img-responsive cat-image">
+				{{#link-to 'single-item' cat-item.id tagname='div' class=" text-center cat-img-container"}}
+					<img src="{{cat-item.imageURL}}" class="img-responsive mobile-image">
 				{{/link-to}}
 				<div class="mobile-overlay-2">
 					<div class="mobile-button-container">	
@@ -40,6 +43,9 @@
 		</div>
 	    {{/each}}
 	</div>
+
+
+
 </div>
 
 
