@@ -66,17 +66,15 @@
 		</div>
 		--}}
 		{{#if session.isAuthenticated}}          
-		<h2 style="text-align:center; color:#fff">Logging in {{!-- {{session.currentUser.providerData.0.providerData.0.displayName}} --}}</h2>
-		{{!-- <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button>  --}}
-		{{else}}
-		{{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-		{{!-- 
-		<h2 style="text-align:center; color:#fff">Sign in: </h2>
-		--}}
-		{{#link-to 'guide'}}<button class="btn btn-default clbutton-main">GUIDED TOUR</button>{{/link-to}}
-		<button class="btn btn-default clbutton-main"{{action "showLogins"}}>SIGN IN</button>
-		{{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
-		{{/if}}
+            <h2 style="text-align:center; color:#fff">Logging in {{!-- {{session.currentUser.providerData.0.providerData.0.displayName}} --}}</h2>
+          {{!-- <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button>  --}}
+        {{else}}
+          {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
+            {{!-- <h2 style="text-align:center; color:#fff">Sign in: </h2> --}}
+          	{{#link-to 'guide'}}<button class="btn btn-default clbutton-main">G U I D E D&nbsp;&nbsp;&nbsp;&nbsp;T O U R</button>{{/link-to}}
+            <button class="btn btn-default clbutton-main"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button>
+            {{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
+        {{/if}}
 	</div>
 	</div>
 	</div>

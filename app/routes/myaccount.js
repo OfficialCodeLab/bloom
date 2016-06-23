@@ -11,10 +11,16 @@ export default Ember.Route.extend({
 	    return sesh;
   	},
 	model () {
-	  //Before creating the record, clear the DS Store
-	  this.store.unloadAll('userext');
-      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-      let imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
+		//Before creating the record, clear the DS Store
+		this.store.unloadAll('userext');
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let imgStr;
+		if(_id === "facebook.com"){
+			imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
+		} else {
+			let imgStrSM = this.get("session").get('currentUser').photoURL;
+			imgStr = imgStrSM.substring(0, imgStrSM.length-11) + ".png";
+		}
 		return Ember.RSVP.hash({
 	      userext: this.store.createRecord('userext', {
 			  imgurl: imgStr
