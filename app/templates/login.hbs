@@ -1,72 +1,74 @@
-
-  {{!-- TODO:
- - ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
+{{!-- TODO:
+- ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
 <main id="panel">
-         <div class="fullscreen" id="section1">
-            <div class="fullscreen-overlay">
-            </div>
-			  <div class="fullscreen" id="section2" style="display:none;">
-				  <div class="top-right-box">
-				  	<a id="close-sec2"><i class="fa fa-times-circle-o close-popup"></i></a>
-			  </div>
-			  <div id="s2-overlay1">
-			  	<h1 style="text-align:center; color:#fff">Please Sign in to Continue</h1>
-			  	<div class="login-buttons">
+	<div class="fullscreen" id="section1">
+		<div class="fullscreen-overlay">
+		</div>
+		<div class="fullscreen" id="section2" style="display:none;">
+			<div class="top-right-box">
+				<a id="close-sec2"><i class="fa fa-times-circle-o close-popup"></i></a>
+			</div>
+			<div id="s2-overlay1">
+				<h1 style="text-align:center; color:#fff">Please Sign in to Continue</h1>
+				<div class="login-buttons">
 					<button type="button" class="btn btn-default clbutton-main">LOGIN</button>
 					<div class="cl-spacing" style="display: inline-block; min-width: 2%;"></div>
 					<button type="button" class="btn btn-default clbutton-main">SIGN UP</button>
 				</div>
-        
-			  </div>
-		  </div>
-            <!-- Columns for the cheeseburger menu and search bar -->
-            
-            <!-- End of columns for top elements -->
-            <div id="splash-content">
-            <div id class="">
-            </div>
-            <div id="s1-overlay1">
-            </div>
-            <div id="s2-overlay3" style="display:none">
-              <h1 style="text-align:center;">SELECT LOG IN METHOD</h1>
-              <h3 class="font-times-subheader" style="text-align:center;">An account is required</h3><hr><br>
-              <div class="col-lg-4 col-md-6">
-                <div class="circle-link" {{action "login" "facebook" }}>
-                    <div class="circle"><i class="fa fa-facebook-square"></i></div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6">
-                <div class="circle-link" {{action "login" "twitter" }}>
-                    <div class="circle"><i class="fa fa-twitter-square"></i></div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6">
-                <div class="circle-link" {{action "notimplemented"}}>
-                    <div class="circle"><i class="fa fa-envelope"></i></div>
-                </div>
-              </div>
-                {{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
-            </div>
-            <div class="bottom-center">
-              {{!-- <h2 class="white unselectable">PLAN MY WEDDING</h2> 
-              <div class="">
-               <!-- data-toggle="modal" data-target="#myModal" -->
-                {{#link-to 'login'}}<a id="open-sec2">
-                 <i class="fa fa-heart-o center-icon unselectable" aria-hidden="true"></i>
-                </a>{{/link-to}}
-               </div>--}}
-        {{#if session.isAuthenticated}}          
-            <h2 style="text-align:center; color:#fff">Logging in {{!-- {{session.currentUser.providerData.0.providerData.0.displayName}} --}}</h2>
-          {{!-- <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button>  --}}
-        {{else}}
-          {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-            {{!-- <h2 style="text-align:center; color:#fff">Sign in: </h2> --}}
-          	{{#link-to 'guide'}}<button class="btn btn-default clbutton-main">GUIDED TOUR</button>{{/link-to}}
-            <button class="btn btn-default clbutton-main"{{action "showLogins"}}>SIGN IN</button>
-            {{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
-        {{/if}}
-            </div>
-        	</div>
-         </div>
-      </main>
-
+			</div>
+		</div>
+		<!-- Columns for the cheeseburger menu and search bar -->
+		<!-- End of columns for top elements -->
+		<div id="splash-content">
+			<div id class="">
+			</div>
+			<div id="s1-overlay1">
+			</div>
+			<div id="s2-overlay3" style="display:none">
+				<h1 style="text-align:center;">SELECT LOG IN METHOD</h1>
+				<h3 class="font-times-subheader" style="text-align:center;">An account is required</h3>
+				<hr>
+				<br>
+				<div class="col-lg-4 col-md-6">
+					<div class="circle-link" {{action "login" "facebook" }}>
+					<div class="circle"><i class="fa fa-facebook-square"></i></div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-6">
+				<div class="circle-link" {{action "login" "twitter" }}>
+				<div class="circle"><i class="fa fa-twitter-square"></i></div>
+			</div>
+		</div>
+		<div class="col-lg-4 col-md-6">
+			<div class="circle-link" {{action "notimplemented"}}>
+			<div class="circle"><i class="fa fa-envelope"></i></div>
+		</div>
+	</div>
+	{{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
+	</div>
+	<div class="bottom-center">
+		{{!-- 
+		<h2 class="white unselectable">PLAN MY WEDDING</h2>
+		<div class="">
+			<!-- data-toggle="modal" data-target="#myModal" -->
+			{{#link-to 'login'}}<a id="open-sec2">
+			<i class="fa fa-heart-o center-icon unselectable" aria-hidden="true"></i>
+			</a>{{/link-to}}
+		</div>
+		--}}
+		{{#if session.isAuthenticated}}          
+		<h2 style="text-align:center; color:#fff">Logging in {{!-- {{session.currentUser.providerData.0.providerData.0.displayName}} --}}</h2>
+		{{!-- <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button>  --}}
+		{{else}}
+		{{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
+		{{!-- 
+		<h2 style="text-align:center; color:#fff">Sign in: </h2>
+		--}}
+		{{#link-to 'guide'}}<button class="btn btn-default clbutton-main">GUIDED TOUR</button>{{/link-to}}
+		<button class="btn btn-default clbutton-main"{{action "showLogins"}}>SIGN IN</button>
+		{{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
+		{{/if}}
+	</div>
+	</div>
+	</div>
+</main>

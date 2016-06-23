@@ -12,5 +12,8 @@
     "imagesloaded": "^4.1.0",
     "slick-carousel": "^1.6.0",
     "chartjs": "1.0.2"
+  },
+  "devDependencies": {
+    "bootstrap-social": "^5.0.0"
   }
 }
