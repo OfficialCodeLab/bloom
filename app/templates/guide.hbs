@@ -1,21 +1,21 @@
 <div class="container index-main" style="text-align:center;">
 	<div class="text-center pear-guide-top">
-		<h1 class="pear-text-logo unselectable">pear</h1>
+		{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
 	</div>
-	<h1>Guided Tour</h1>
+	<h1 class="font-times-header">PEAR GUIDED TOUR</h1>
 	<hr class="style-two">
-	<h3>Welcome</h3>
-	<p>Welcome to Pear, the wedding planner.<br>This is where your wedding all comes together.<br>Scroll down for a preview of Pear's capabilities.</p><br>
+	<h3 class="font-times-header">WELCOME</h3>
+	<p class="font-times-subheader">Welcome to Pear, the wedding planner.<br>This is where your wedding all comes together.<br>Scroll down for a preview of Pear's capabilities.</p><br>
 	<hr><br>
 
-	<h3>Categories</h3>
-	<p>Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br>You can also click on the images to find out more about the supplier and get in touch.</p>
+	<h3 class="font-times-header">CATEGORIES</h3>
+	<p class="font-times-subheader">Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br>You can also click on the images to find out more about the supplier and get in touch.</p>
     <div class="form-group">
 		{{#link-to 'categories'}}<button class="btn btn-default">Categories</button>{{/link-to}}
 	</div><br>
 
 	<div class="card" style="padding-right:10px	">
-		<h3>Try Favourite some items!</h3><hr><p>Click the hearts to favourite or unfavourite</p>
+		<h3 class="font-times-header">TRY FAVOURTIE SOME ITEMS!</h3><hr><p class="font-times-subheader">Click the hearts to favourite or unfavourite</p>
 		<div class="row guide-row">
 			<div class="col-lg-4 col-md-6 guide-card">					
 				<div class="guide-content">
@@ -56,15 +56,15 @@
 		</div>
 	</div>
 	<br>
-	<h3>Favouriting</h3>
-	<p>If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab, <strong>in your Hub...</strong></p>
+	<h3 class="font-times-header">FAVOURITING</h3>
+	<p class="font-times-subheader">If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab, <strong>in your Hub...</strong></p>
     <div class="form-group">
 		{{#link-to 'index'}}<button class="btn btn-default">Favourites</button>{{/link-to}}
 	</div>
 	<br>
 
 	<div class="card" style=" padding-right:10px">
-		<h3>Your Favourited Items</h3><hr><p>Click the hearts to unfavourite</p>
+		<h3 class="font-times-header">YOUR FAVOURITED ITEMS</h3><hr><p class="font-times-subheader">Click the hearts to unfavourite</p>
 		<div class="row guide-row">
 			{{#if dress}}
 			<div class="col-lg-4 col-md-6 guide-card">					
@@ -112,15 +112,15 @@
 
 	</div>
 	<br>
-	<h3>Add Guests to your wedding</h3>
-	<p>If you want to get your guest list started, just head to the my wedding section<strong>in your Hub.</strong></p><p>Here is an example of one of the features, or you can head there now!</p>
+	<h3 class="font-times-header">ADD GUESTS TO YOUR WEDDING</h3>
+	<p class="font-times-subheader">If you want to get your guest list started, just head to the my wedding section<strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
     <div class="form-group">
 		{{#link-to 'index.mywedding'}}<button class="btn btn-default">My Wedding</button>{{/link-to}}
 	</div>
 	<br>
 
 	<div class="card" style=" padding:0px 20px 20px 20px">
-		<h3>Add Guests</h3><hr><p>Add guests here and they will appear in the table below</p>
+		<h3 class="font-times-header">ADD GUESTS</h3><hr><p class="font-times-subheader">Add guests here and they will appear in the table below</p>
 		<div class="form-horizontal row">
 			<div class="form-group has-feedback">
 				<label class="col-sm-3 control-label">Name &amp; Surname*</label>
@@ -172,15 +172,15 @@
 		</div>
 	</div>
 	<br>
-	<h3>Your Guest List</h3>
-	<p>Once you have some guests, you can now manage and view them.</p><p>All the guests will be listed in a table and <strong>you can can RSVP or remove them.</strong></p>
+	<h3 class="font-times-header">YOUR GUEST LIST</h3>
+	<p class="font-times-subheader">Once you have some guests, you can now manage and view them.<br>All the guests will be listed in a table and <strong>you can can RSVP or remove them.</strong></p>
     <div class="form-group">
 		{{#link-to 'index.mywedding.guests'}}<button class="btn btn-default">Guest List</button>{{/link-to}}
 	</div>
 	<br>
 
 	<div class="card" style=" padding:0px 20px 20px 20px">
-		<h3>Your Guests</h3><hr><p>Click the X to remove or click the checkbox to confirm RSVP</p>
+		<h3 class="font-times-header">YOUR GUESTS</h3><hr><p class="font-times-subheader">Click the X to remove or click the checkbox to confirm RSVP</p>
 		<div class="showOnMobile container">
 		    {{#each guestsA as |guest|}}
 				<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
@@ -250,13 +250,13 @@
 		</div>
 	</div>
 	<br>
-	<h3>El Finito!</h3>
-	<p>That concludes this guided tour of Pear! We hope you liked what you saw.</p><p>Now you can login / sign up or continue exploring the site!</p><br>
+	<h3 class="font-times-header">EL FINITO!</h3>
+	<p class="font-times-subheader">That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
     <div class="form-group">
-		{{#link-to 'login'}}<button class="btn btn-default" style="width:85px">Sign Up <i class="fa fa-heart-o"></i></button>{{/link-to}}
+		{{#link-to 'login'}}<button class="btn btn-default" style="width:90px">Sign Up <i class="fa fa-heart-o"></i></button>{{/link-to}}
 	</div>
 	<div class="form-group">
-		{{#link-to 'index'}}<button class="btn btn-default" style="width:85px">Hub <i class="fa fa-dashboard"></i></button>{{/link-to}}
+		{{#link-to 'index'}}<button class="btn btn-default" style="width:90px">Hub <i class="fa fa-dashboard"></i></button>{{/link-to}}
 	</div>
 	<br><hr><br>
 

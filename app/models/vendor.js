@@ -13,5 +13,6 @@ export default Model.extend({
   country: attr('string'),
   postalcode: attr('string'),
   cell: attr('string'),
+  maxItems: attr('string'),
   catItems: hasMany('cat-item', {inverse: 'vendor', async: true}),
 });

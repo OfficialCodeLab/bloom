@@ -44,7 +44,8 @@ export default Ember.Route.extend({
                                                 addressL2: this.controller.get('addressL2'),
                                                 city: this.controller.get('city'),
                                                 postalcode: this.controller.get('postalcode'),
-                                                cell: this.controller.get('cell')
+                                                cell: this.controller.get('cell'),
+                                                maxItems: "15"
                                             });
 	                                        vendor.save().then(()=>	{										//Save vendor
                                                 this.transitionTo('index.vendor.new-listing');
@@ -74,7 +75,8 @@ export default Ember.Route.extend({
                                             addressL2: this.controller.get('addressL2'),
                                             city: this.controller.get('city'),
                                             postalcode: this.controller.get('postalcode'),
-                                            cell: this.controller.get('cell')
+                                            cell: this.controller.get('cell'),
+                                            maxItems: "15"
                                         });
                                         vendor.save().then(()=>	{											//Save vendor
                                             this.transitionTo('index.vendor.new-listing');

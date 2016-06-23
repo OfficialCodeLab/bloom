@@ -73,36 +73,47 @@ export default Ember.Route.extend({
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
 				this.store.findRecord('vendor', user.get('vendorAccount')).then((vndr) => {
-					let newItem = this.store.createRecord('cat-item', {				
-					  name: this.controller.get('name'),			
-					  desc: this.controller.get('desc'),			
-					  price: this.controller.get('price'),
-					  category: cat,
-					  vendor: vndr,
-					  imageBlob: _blob,
-					  imageURL: _imgurl
-					});
-					newItem.save().then(()=>{
-						cat.get('catItems').pushObject(newItem);
-						cat.save().then(()=>{		
-							vndr.get('catItems').pushObject(newItem);
-							vndr.save().then(()=>{
-								this.controller.set('name', '');
-								this.controller.set('price', '');
-								this.controller.set('desc', '');
-								this.controller.set('imageURL', '');
-								this.controller.set('isCreating', false);
-								this.controller.set('imgBlob', '');
-								this.controller.set('itemCreated', true);
-								if(_blob.url !== _imgurl){
-						            if(_blob){
-						            	this.destroyBlob(_blob);
-						            } 
-						    	}
-								this.transitionTo('index.vendor');
-							});
-						});	
-					});
+					let itemsC = vndr.get("catItems.length");
+					itemsC = parseInt(itemsC) + 1;
+					let maxCount = parseInt(vndr.get("maxItems"));
+
+					if(!maxCount || maxCount > itemsC){
+						let newItem = this.store.createRecord('cat-item', {				
+						  name: this.controller.get('name'),			
+						  desc: this.controller.get('desc'),			
+						  price: this.controller.get('price'),
+						  category: cat,
+						  vendor: vndr,
+						  imageBlob: _blob,
+						  imageURL: _imgurl
+						});
+						newItem.save().then(()=>{
+							cat.get('catItems').pushObject(newItem);
+							cat.save().then(()=>{		
+								vndr.get('catItems').pushObject(newItem);
+								vndr.save().then(()=>{
+									this.controller.set('name', '');
+									this.controller.set('price', '');
+									this.controller.set('desc', '');
+									this.controller.set('imageURL', '');
+									this.controller.set('isCreating', false);
+									this.controller.set('imgBlob', '');
+									this.controller.set('itemCreated', true);
+									if(_blob.url !== _imgurl){
+							            if(_blob){
+							            	this.destroyBlob(_blob);
+							            } 
+							    	}
+									this.transitionTo('index.vendor');
+								});
+							});	
+						});
+					} else {
+						this.controller.set('isCreating', false);
+						alert("You have reached maximum listings.\nPlease upgrade your plan to post more.");
+					}
+
+					
 				});
 			} catch(ex){
 				this.controller.set('isCreating', false);
