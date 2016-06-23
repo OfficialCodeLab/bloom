@@ -158,12 +158,16 @@ p{
   background-color: rgba(241,241,241,1);
   // height:80%;    
   overflow-y: scroll;
-  min-height: 350px;
+  // min-height: 350px;
+  padding-bottom: 5px;
   max-height: 500px;
   margin-bottom: 50px;       
-  top: 10%;         
-  right:15%;
-  left:15%;
+  top: 10%;
+
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 300px;
   border-radius:3px;
   display: block;
   position: absolute; 
@@ -174,6 +178,27 @@ p{
   -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
   -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
   box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);               
+}
+.pear-social-button{
+  margin-bottom: 10px;
+  &:hover{
+    color: white !important;
+  }
+}
+.pear-social-button2{
+  margin-bottom: 10px;
+  &:hover{
+    color: black !important;
+  }
+  border: 1px solid gray;
+}
+.btn-email{
+  background-color: white;
+  color: black;
+  &:hover{
+    background-color: lightgray;
+    color: black !important;
+  }
 }
 .unselectable{
 	user-select: none;

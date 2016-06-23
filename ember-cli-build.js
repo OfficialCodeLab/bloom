@@ -20,7 +20,7 @@ module.exports = function(defaults) {
   app.import('bower_components/slick-carousel/slick/slick.css');
   app.import('bower_components/slick-carousel/slick/slick-theme.css');
   app.import('bower_components/slick-carousel/slick/slick.min.js');
-  app.import('bower_components/bootstrap-social/bootstrap-social.scss');
+  app.import('bower_components/bootstrap-social/bootstrap-social.css');
 
 
   // Use `app.import` to add additional libraries to the generated

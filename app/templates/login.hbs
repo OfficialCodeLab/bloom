@@ -27,33 +27,33 @@
 
 			</div>
 			<div id="s2-overlay3" style="display:none">
-				<h1 style="text-align:center;">SELECT LOG IN METHOD</h1>
+				<h1 style="text-align:center;" class="font-times-header">LOGIN</h1>
 				<h3 class="font-times-subheader" style="text-align:center;">An account is required</h3>
 
 				<hr>
 
 				<br>
-				<div class="col-lg-4 col-md-6">
-					<div class="circle-link" {{action "login" "facebook" }}>
-						<div class="circle">
-							<i class="fa fa-facebook-square"></i>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="circle-link" {{action "login" "twitter" }}>
-						<div class="circle">
-							<i class="fa fa-twitter-square"></i>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="circle-link" {{action "notimplemented"}}>
-						<div class="circle">
-							<i class="fa fa-envelope"></i>
-						</div>
-					</div>
-				</div>
+			<div class="col-xs-12">
+				{{!-- {{action "login" "facebook" }} --}}
+				<btn class="btn btn-block btn-social btn-facebook pear-social-button" {{action "login" "facebook" }}>
+				  <span class="fa fa-facebook"></span>
+				  Sign in with Facebook
+				</btn>
+			</div>
+			<div class="col-xs-12">
+				 {{!-- {{action "login" "twitter" }} --}}
+				<btn class="btn btn-block btn-social btn-twitter pear-social-button" {{action "login" "twitter" }}>
+				  <span class="fa fa-twitter"></span>
+				  Sign in with Twitter
+				</btn>
+			</div>
+			<div class="col-xs-12">
+				{{!-- k" {{action "notimplemented"}} --}}
+				<btn class="btn btn-block btn-social btn-facebook btn-reddit pear-social-button2" {{action "notimplemented" }}>
+				  <span class="fa fa-envelope"></span>
+				  Sign in with Email &amp; Password
+				</btn>
+			</div>
 		</div>
 	<div class="bottom-center">
 		{{!-- 
