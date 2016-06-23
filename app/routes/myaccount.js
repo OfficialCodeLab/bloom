@@ -10,16 +10,20 @@ export default Ember.Route.extend({
 	    } 
 	    return sesh;
   	},
+
+  	//
 	model () {
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('userext');
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let providerID = this.get("session").get('currentUser').providerData[0].providerId + "";
 		let imgStr;
-		if(_id === "facebook.com"){
-			imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
+		if(providerID === "facebook.com"){
+			imgStr = "http://graph.facebook.com/" + _id + "/picture?type=large";
 		} else {
-			let imgStrSM = this.get("session").get('currentUser').photoURL;
-			imgStr = imgStrSM.substring(0, imgStrSM.length-11) + ".png";
+			let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
+			imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
+			//console.log("Image String: " + imgStrSM);
 		}
 		return Ember.RSVP.hash({
 	      userext: this.store.createRecord('userext', {
