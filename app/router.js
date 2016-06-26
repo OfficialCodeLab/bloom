@@ -54,6 +54,7 @@ Router.map(function() {
   this.route('not-found', { path: '/*path' });
   this.route('vendor-profile', { path: '/vendor/:vendor_id' });
   this.route('guide');
+  this.route('master-admin');
 });
 
 export default Router;
