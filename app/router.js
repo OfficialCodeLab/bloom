@@ -31,12 +31,10 @@ Router.map(function() {
       this.route('new-listing');
       this.route('profile');
       this.route('security');
-
       this.route('products', function() {
         this.route('item', {path: '/item/:catItem_id'});
       });
     });
-    
   });
   this.route('single-item', { path: '/item/:catItem_id' });
   this.route('admin', {path:'/admin'}, function() {
@@ -55,6 +53,7 @@ Router.map(function() {
   this.route('vendor-profile', { path: '/vendor/:vendor_id' });
   this.route('guide');
   this.route('master-admin');
+  this.route('messaging');
 });
 
 export default Router;
