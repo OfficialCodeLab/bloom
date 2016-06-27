@@ -18,11 +18,19 @@ export default Ember.Route.extend({
 		saveContact(newContact) {
 			if(this.controller.get('captchaVerified'))
 			{
+				let message = this.store.createRecord('message', {
+					to: "info@codelab.io",
+					from: this.controller.get('model').get('email'),
+					subject: "New Contact request from " + this.controller.get('model').get('email'),
+					html: this.controller.get('model').get('message')
+				});	
+				message.save();	
+
 				newContact.save().then(() => {
 	        		this.controller.get('model').set('email', '');
 	        		this.controller.get('model').set('message', '');
 	        		this.controller.get('model').set('responseMessage', 'Message has been sent');
-				});				
+				});		
 			}
 	    },
 
