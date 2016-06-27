@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 	actions: {
 		acceptReq: function(id){
 			let user = this.store.peekRecord('user', id);
-			user.set('vendorRequest', false);
+			//user.set('vendorRequest', false);
 			user.set('accountType', 'vendor');
 			user.save();
 		},
