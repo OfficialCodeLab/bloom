@@ -8,8 +8,7 @@
                         {{!-- Nothing here --}}
                     </div>
                     <div class="col-xs-8 text-center index-logo-container-2">
-                        {{!--
-                        <h1 class="pear-text-logo unselectable">pear</h1> --}}
+
                     </div>
                     <div class="col-xs-2 text-center">
                         {{!-- Nothing here either --}}
@@ -46,26 +45,17 @@
                     <div class="col-sm-4 border-box">
                         <img src="../assets/images/plan.png" style="height:150px;">
                         <h1 class="font-times-header">PLAN</h1>
-                        {{!-- <div class="circle-link">
-                            <div class="circle"><i class="fa fa-calendar"></i></div>
-                        </div> --}}
                         <h4 class="font-times-subheader">Info and stats about your wedding are usually all over the place. It’s our mission at Pear to change that. Manage your budget, guest list and so much more in the Hub..</h4>
                     </div>
 
                     <div class="col-sm-4 border-box">
                         <img src="../assets/images/connect.png" style="height:150px;">
                         <h1 class="font-times-header">CONNECT</h1>
-                        {{!-- <div class="circle-link">
-                            <div class="circle"><i class="fa fa-link"></i></div>
-                        </div> --}}
                         <h4 class="font-times-subheader">Pear’s unique product listing allows you to start gathering  your ideas in your hub, by ‘favoriting’ those that appeal to you most. When you’re ready, get in touch with the chosen ones.</h4></div>
 
                     <div class="col-sm-4 border-box">
                         <img src="../assets/images/share.png" style="height:150px;">
                         <h1 class="font-times-header">SHARE</h1>
-                        {{!-- <div class="circle-link">
-                            <div class="circle"><i class="fa fa-users"></i></div>
-                        </div> --}}
                         <h4 class="font-times-subheader">Any wedding these days  requires involvement from loved ones living all over the world. Making them feel a part of the whole process is one of Pear’s biggest priorities.</h4></div>
                 </div>
                 <h3 class="font-times-subheader">Have another look at how it all works with a guided tour.</h3>
@@ -88,10 +78,6 @@
                             </div>
                             <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
                         </div>
-                        {{!--
-                        <div class="">
-                            {{input type="email" value=model.email class="form-control" placeholder="Please type your e-mail address."}}
-                        </div> --}}
                         <br>
                         <div class="{{if model.isLong 'has-success'}}">
                             {{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}

@@ -1,10 +1,10 @@
 /*==============================================================================
-  ___       _                        _    ____ ____ ____  
- |_ _|_ __ | |_ ___ _ __ _ __   __ _| |  / ___/ ___/ ___| 
-  | || '_ \| __/ _ \ '__| '_ \ / _` | | | |   \___ \___ \ 
+  ___       _                        _    ____ ____ ____
+ |_ _|_ __ | |_ ___ _ __ _ __   __ _| |  / ___/ ___/ ___|
+  | || '_ \| __/ _ \ '__| '_ \ / _` | | | |   \___ \___ \
   | || | | | ||  __/ |  | | | | (_| | | | |___ ___) |__) |
- |___|_| |_|\__\___|_|  |_| |_|\__,_|_|  \____|____/____/ 
-                                                          
+ |___|_| |_|\__\___|_|  |_| |_|\__,_|_|  \____|____/____/
+
 ==============================================================================*/
 
 
@@ -14,10 +14,10 @@ body {
 	background-color: #EDEDED;
 }
 
-/* 	
+/*
 	This class is basically a body replacement,
-	for all pages that have the navbar. If you 
-	want to set a body background colour, 
+	for all pages that have the navbar. If you
+	want to set a body background colour,
 	set it here.
 */
 .pear-app-content{
@@ -35,12 +35,12 @@ body {
 }
 
 /*==============================================================================*\
-  _   _                        ____                  
+  _   _                        ____
  | | | | ___  _ __ ___   ___  |  _ \ __ _  __ _  ___ ™
  | |_| |/ _ \| '_ ` _ \ / _ \ | |_) / _` |/ _` |/ _ \
  |  _  | (_) | | | | | |  __/ |  __/ (_| | (_| |  __/
  |_| |_|\___/|_| |_| |_|\___| |_|   \__,_|\__, |\___|
-                                          |___/      
+                                          |___/
 \*==============================================================================*/
 
 .pear-index-top{
@@ -80,7 +80,7 @@ body {
 		min-width: 170px;
 		margin: 0px !important;
 		margin-bottom: 5px !important;
-		
+
 		a{
 			border-radius: 0px;
 			background-color: white;
@@ -98,14 +98,14 @@ body {
 			}
 			&:active{
 				background-color: $pill-click;
-				color: $pill-text;			
+				color: $pill-text;
 			}
 		}
 		&.active{
 			color: $button-text-color;
 			margin-left: 0px;
 			a{
-				background-color: $pill-active;			
+				background-color: $pill-active;
 				color: $pill-text;
 
 				//Reset, leave as-is
@@ -121,7 +121,7 @@ body {
 
 		}
 
-		
+
 	}
 }
 .pear-text-logo{
@@ -162,12 +162,12 @@ body {
 
 
 /*==============================================================================*\
-  __  __        __        __       _     _ _             
- |  \/  |_   _  \ \      / /__  __| | __| (_)_ __   __ _ 
+  __  __        __        __       _     _ _
+ |  \/  |_   _  \ \      / /__  __| | __| (_)_ __   __ _
  | |\/| | | | |  \ \ /\ / / _ \/ _` |/ _` | | '_ \ / _` |
  | |  | | |_| |   \ V  V /  __/ (_| | (_| | | | | | (_| |
  |_|  |_|\__, |    \_/\_/ \___|\__,_|\__,_|_|_| |_|\__, |
-         |___/                                     |___/ 
+         |___/                                     |___/
 \*==============================================================================*/
 .bordered{
 	border: 1px solid black;
@@ -199,11 +199,11 @@ body {
 	    image-rendering:   -o-crisp-edges;
 	    image-rendering: -webkit-optimize-contrast;
 	    image-rendering: crisp-edges;
-	    -ms-interpolation-mode: nearest-neighbor; 
+	    -ms-interpolation-mode: nearest-neighbor;
 
-	
+
 	  &:hover {
-	    cursor: pointer; 
+	    cursor: pointer;
 	    @include box-shadow(0px 0px 8px 2px rgba(0,0,0,0.7));
 	    @include transform (scale(1.05));
 	   }
@@ -218,7 +218,7 @@ body {
 		// min-width: 170px;
 		margin: 0px !important;
 		margin-bottom: 5px !important;
-		
+
 		a{
 			background-color: white;
 			&:link{
@@ -241,7 +241,7 @@ body {
 		&.active{
 			margin-left: 0px;
 			a{
-				background-color: $primary-color;			
+				background-color: $primary-color;
 				color: inherit;
 
 				//Reset, leave as-is
@@ -251,7 +251,7 @@ body {
 				}
 				&:active{
 					background-color: $pill-click;
-					color: $pill-text;	
+					color: $pill-text;
 				}
 			}
 
@@ -309,7 +309,7 @@ Guest List
 }
 .btn-guest-add{
        display: inline-block;
-       &, 
+       &,
        &:active,
        &.active {
                &:focus,
@@ -337,12 +337,12 @@ Guest List
 }
 
 /*==============================================================================*\
-   ____      _     ___ _                     
-  / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___ 
+   ____      _     ___ _
+  / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___
  | |   / _` | __|  | || __/ _ \ '_ ` _ \/ __|
  | |__| (_| | |_   | || ||  __/ | | | | \__ \
   \____\__,_|\__| |___|\__\___|_| |_| |_|___/
-                                             
+
 \*==============================================================================*/
 
 //Provides the styling for the category blocks. (Just the styling)
@@ -355,7 +355,7 @@ Guest List
 	margin-right: 4px;
 
 	//To create space between rows
-	margin-bottom: 8px; 
+	margin-bottom: 8px;
 
 	//Take up the full column...
 	width: 100%;
@@ -421,13 +421,13 @@ Guest List
 
 
 	img{
-		user-drag: none; 
+		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
 		-webkit-user-drag: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
-		transition: .8s opacity; 	
+		transition: .8s opacity;
 	}
 
 	/* None of these should be selectable */
@@ -490,7 +490,7 @@ Guest List
 		background-color: $hover-color !important;
 	}
 	&:active{
-		background-color: $button-click-color !important;	
+		background-color: $button-click-color !important;
 	}
 	&:focus{
 		outline: none;
@@ -537,7 +537,7 @@ Guest List
 .guide-image{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-	
+
 	&:hover{
   		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   		img{
@@ -557,13 +557,13 @@ Guest List
 	}
 }
 
-.guide-xs-card{	
+.guide-xs-card{
     margin-bottom: 10px;
     word-wrap: break-word;
 }
 
 .guide-container{
-	
+
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling:touch;
@@ -618,7 +618,7 @@ Guest List
 		  		text-align: center;
 
 			}
-		
+
 		}
 		&:hover{
 			.cat-overlay-1{
@@ -630,7 +630,7 @@ Guest List
 			}
 		}
 	}
-	
+
 }
 
 .guide-card{
@@ -638,25 +638,25 @@ Guest List
 	cursor: pointer;
 	margin-bottom:15px;
 
-	
+
 }
 
 .guide-row{
-	display:inline-block; 
+	display:inline-block;
 	text-align:center;
 	padding-left:10px;
 	width:100%;
 }
 /*==============================================================================*\
-   *                             (                          
- (  `            )     (         )\ )    )                  
- )\))(        ( /( (   )\   (   (()/( ( /(   (     )        
-((_)()\   (   )\()))\ ((_) ))\   /(_)))\()) ))\   (     (   
-(_()((_)  )\ ((_)\((_) _  /((_) (_)) (_))/ /((_)  )\  ' )\  
-|  \/  | ((_)| |(_)(_)| |(_))   |_ _|| |_ (_))  _((_)) ((_) 
-| |\/| |/ _ \| '_ \| || |/ -_)   | | |  _|/ -_)| '  \()(_-< 
-|_|  |_|\___/|_.__/|_||_|\___|  |___| \__|\___||_|_|_| /__/ 
-                                                            
+   *                             (
+ (  `            )     (         )\ )    )
+ )\))(        ( /( (   )\   (   (()/( ( /(   (     )
+((_)()\   (   )\()))\ ((_) ))\   /(_)))\()) ))\   (     (
+(_()((_)  )\ ((_)\((_) _  /((_) (_)) (_))/ /((_)  )\  ' )\
+|  \/  | ((_)| |(_)(_)| |(_))   |_ _|| |_ (_))  _((_)) ((_)
+| |\/| |/ _ \| '_ \| || |/ -_)   | | |  _|/ -_)| '  \()(_-<
+|_|  |_|\___/|_.__/|_||_|\___|  |___| \__|\___||_|_|_| /__/
+
 \*==============================================================================*/
 .category-block-mobile{
 	max-width: 100%;
@@ -713,12 +713,12 @@ Guest List
 	}
 }
 /*==============================================================================*\
-  __  __                                  
- |  \/  | __ _ ___  ___  _ __  _ __ _   _ 
+  __  __
+ |  \/  | __ _ ___  ___  _ __  _ __ _   _
  | |\/| |/ _` / __|/ _ \| '_ \| '__| | | |
  | |  | | (_| \__ \ (_) | | | | |  | |_| |
  |_|  |_|\__,_|___/\___/|_| |_|_|   \__, |
-                                    |___/ 
+                                    |___/
 \*==============================================================================*/
 
 .masonry-grid-container{
@@ -745,12 +745,12 @@ Guest List
 }
 
 /*==============================================================================*\
-   ____      _     ___ _                     
-  / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___ 
+   ____      _     ___ _
+  / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___
  | |   / _` | __|  | || __/ _ \ '_ ` _ \/ __|
  | |__| (_| | |_   | || ||  __/ | | | | \__ \  (THE BETTER ONES)
   \____\__,_|\__| |___|\__\___|_| |_| |_|___/
-                                             
+
 \*==============================================================================*/
 
 //Provides the styling for the category blocks. (Just the styling)
@@ -762,7 +762,7 @@ Guest List
 	margin: auto;
 
 	//To create space between rows
-	margin-bottom: 15px; 
+	margin-bottom: 15px;
 
 	//Take up the full column...
 	//width: 380px;
@@ -803,7 +803,7 @@ Guest List
 
 	img{
     	transition: 0.5s;
-		user-drag: none; 
+		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
 		-webkit-user-drag: none;
@@ -829,7 +829,7 @@ Guest List
 	text-align: center;
 	margin: 0px;
 	padding: 0px;
-    //overflow: hidden; 
+    //overflow: hidden;
 }
 .cat-image-m{
 	display: inherit;
@@ -837,8 +837,8 @@ Guest List
 	height:100%;
 }
 
-.overlay-title{   
-	transition: 0.5s; 
+.overlay-title{
+	transition: 0.5s;
 	box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
     width: 300px;
     border-top-right-radius: 2px;
@@ -851,12 +851,12 @@ Guest List
 
 }
 /*==============================================================================*\
-  ____  _             _        ___ _                     
- / ___|(_)_ __   __ _| | ___  |_ _| |_ ___ _ __ ___  ___ 
+  ____  _             _        ___ _
+ / ___|(_)_ __   __ _| | ___  |_ _| |_ ___ _ __ ___  ___
  \___ \| | '_ \ / _` | |/ _ \  | || __/ _ \ '_ ` _ \/ __|
   ___) | | | | | (_| | |  __/  | || ||  __/ | | | | \__ \
  |____/|_|_| |_|\__, |_|\___| |___|\__\___|_| |_| |_|___/
-                |___/                                    
+                |___/
 \*==============================================================================*/
 .page-navigation{
 	padding: 15px 15px 15px 15px;
@@ -900,7 +900,7 @@ Guest List
 		margin: 0px;
 		padding: 0px;
 
-		user-drag: none; 
+		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
 		-webkit-user-drag: none;
@@ -915,18 +915,18 @@ Guest List
 \*==============================================================================*/
 
 .vendor-card {
-	text-align:center; 
+	text-align:center;
 	margin-top: 50px !important;
 	padding: 15px 25px 25px 25px;
 }
 
 /*==============================================================================*\
-     _    _                 _     ____                  
-    / \  | |__   ___  _   _| |_  |  _ \ __ _  __ _  ___ 
+     _    _                 _     ____
+    / \  | |__   ___  _   _| |_  |  _ \ __ _  __ _  ___
    / _ \ | '_ \ / _ \| | | | __| | |_) / _` |/ _` |/ _ \
   / ___ \| |_) | (_) | |_| | |_  |  __/ (_| | (_| |  __/
  /_/   \_\_.__/ \___/ \__,_|\__| |_|   \__,_|\__, |\___|
-                                             |___/      
+                                             |___/
 \*==============================================================================*/
 .about-page{
 
@@ -962,7 +962,7 @@ Guest List
 		color: white;
 		font-size: 3em;
 		// font-family: 'Open Sans', sans-serif;
-		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
 		font-style: italic;
 		font-weight: 300;
 	}
@@ -1040,15 +1040,15 @@ $font_0: FontAwesome;
 
 
 /*==============================================================================*\
-  _   _ _   _ _ _ _         
- | | | | |_(_) (_) |_ _   _ 
+  _   _ _   _ _ _ _
+ | | | | |_(_) (_) |_ _   _
  | | | | __| | | | __| | | |
  | |_| | |_| | | | |_| |_| |
   \___/ \__|_|_|_|\__|\__, |
-                      |___/ 
+                      |___/
 \*==============================================================================*/
 .showOnMobile{
-	display: none;		
+	display: none;
 }
 .unselectable{
 	user-select: none;
@@ -1078,16 +1078,16 @@ $font_0: FontAwesome;
 	margin-bottom: 20vh;
 }
 .btn-pear{
-       font-family: antipasto; 
+       font-family: antipasto;
        background-color: $primary-color;
-       color: $button-text-color;      
+       color: $button-text-color;
        &:hover{
                background-color: $hover-color;
                color: $button-text-color;
        }
        &:active{
                background-color: $button-click-color !important;
-               color: $button-text-color;                              
+               color: $button-text-color;
        }
 }
 .font-antipasto{
@@ -1117,21 +1117,24 @@ $font_0: FontAwesome;
 .showOnPhones{
 	display: none;
 }
+.textarea-limited{
+	max-width: 100%;
+}
 
 
 /*==============================================================================*\
-  __  __          _ _          ___                  _           
- |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___ 
+  __  __          _ _          ___                  _
+ |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___
  | |\/| |/ _ \/ _` | |/ _` | | | | | | | |/ _ \ '__| |/ _ \/ __|
  | |  | |  __/ (_| | | (_| | | |_| | |_| |  __/ |  | |  __/\__ \
  |_|  |_|\___|\__,_|_|\__,_|  \__\_\\__,_|\___|_|  |_|\___||___/
-                                                                
+
 \*==============================================================================*/
 
-@media (max-width:1281px) { /* hi-res laptops and desktops */ 
+@media (max-width:1281px) { /* hi-res laptops and desktops */
 
 }
-@media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+@media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */
 	.pear-text-logo{
 		font-size: 14em;
 	}
@@ -1144,18 +1147,18 @@ $font_0: FontAwesome;
 		}
 	}
 }
-@media (max-width:980px) { /* Custom */ 
+@media (max-width:980px) { /* Custom */
 
 }
-@media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+@media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
 
 }
-@media (max-width:772px) { /* Our definition of really small */ 
+@media (max-width:772px) { /* Our definition of really small */
 	.hideOnMobile{
 		display: none;
 	}
 	.showOnMobile{
-		display: block;		
+		display: block;
 	}
 
 	.slick-content{
@@ -1171,7 +1174,7 @@ $font_0: FontAwesome;
 		}
 	}
 }
-@media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+@media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 	.pear-main-well{
 		ul {
 			width: 100%;
@@ -1199,7 +1202,7 @@ $font_0: FontAwesome;
 		}
 	}
 }
-@media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+@media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 	.pear-text-logo{
 		font-size: 7em;
 	}
@@ -1219,7 +1222,7 @@ $font_0: FontAwesome;
 		min-height: 30px;
 	}
 }
-@media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ 
+@media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
 	.pear-slide-2, .pear-slide-3{
 		h1{
 			font-size: 7em;
