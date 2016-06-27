@@ -23,14 +23,14 @@ export default Ember.Route.extend({
 					from: this.controller.get('model').get('email'),
 					subject: "New Contact request from " + this.controller.get('model').get('email'),
 					html: this.controller.get('model').get('message')
-				});	
-				message.save();	
+				});
+				message.save();
 
 				newContact.save().then(() => {
 	        		this.controller.get('model').set('email', '');
 	        		this.controller.get('model').set('message', '');
 	        		this.controller.get('model').set('responseMessage', 'Message has been sent');
-				});		
+				});
 			}
 	    },
 
@@ -43,7 +43,7 @@ export default Ember.Route.extend({
 	    closeMessage() {
 	    	this.controller.get('model').set('responseMessage', '');
 	    },
-	    guidedSearch(){	    	
+	    guidedSearch(){
     		window.scrollTo(0,0);
 			this.transitionTo('guide');
 	    }

@@ -1,0 +1,31 @@
+<div id="master-admin-content" class="container">
+  <div id="master-admin-header">
+    <h1 class="main-header">Master Admin</h1>
+  </div>
+  <div id="master-admin-content" class="container text-center">
+    <h1>Table of all users</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>User Name</th>
+          <th>User Email</th>
+          <th>Account Type</th>
+          <th>Other</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |user|}}
+          <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.accountType}}</td>
+            <td></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <button class="btn btn-default" {{action "prev"}}>Previous</button>
+    <button class="btn btn-default" {{action "next"}}>Next</button>
+    {{outlet}}
+  </div>
+</div>
