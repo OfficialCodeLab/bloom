@@ -158,6 +158,17 @@ body {
 	background-color: white;
 	margin-top: 20px;
 }
+#sendButtonContainer{
+	width: 100%;
+	text-align: center;
+}
+#messageFormSendButton{
+	display: inline-block;
+	text-align: center;
+	min-width: 200px;
+	min-height: 45px;
+	font-size: 18px;
+}
 
 
 
@@ -1119,6 +1130,12 @@ $font_0: FontAwesome;
 }
 .textarea-limited{
 	max-width: 100%;
+}
+.pear-max-width{
+	width: 100% !important;
+}
+.pear-input{
+	border-radius: 4px !important;
 }
 
 

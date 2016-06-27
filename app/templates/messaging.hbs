@@ -5,16 +5,21 @@
 		<div class="col-md-offset-2 col-md-8">
 			<div>
 				<!-- Vendor Name -->
-				<div class="input-group">
-					<span class="input-group-addon">Vendor</span> {{input type="text" value=model.text1 class="form-control" placeholder="Vendor Name" disabled="true"}}
+				<div class="input-group pear-max-width">
+					{{input type="text" value=model.to class="form-control pear-input" placeholder="Vendor Name" disabled="true"}}
 				</div>
 				<br>
 
 				<!-- Email Address -->
 				<div class="input-group">
-					<span class="input-group-addon">@</span> {{input type="email" value=model.text2 class="form-control" placeholder="Your e-mail address."}}
+					<span class="input-group-addon">@</span> {{input type="email" value=model.from class="form-control" placeholder="Your e-mail address."}}
 				</div>
+				<br>
 
+				<!-- Subject -->
+				<div class="input-group pear-max-width">
+					{{input type="text" value=model.subject class="form-control pear-input" placeholder="Subject"}}
+				</div>
 
 				<!-- <span class="glyphicon glyphicon-ok form-control-feedback email-tick"></span> -->
 			</div>
@@ -22,10 +27,12 @@
 
 			<!-- Message Body -->
 			<div>
-				<textarea class="form-control textarea-limited" rows="7"></textarea>
+				<textarea class="form-control textarea-limited" rows="7" value={{model.html}}></textarea>
 			</div>
 			<br/>
-			<button class="btn btn-default btn-pear">Submit</button>
+			<div id="sendButtonContainer">
+				<button class="btn btn-default btn-pear" id="messageFormSendButton" {{action "sendMessage"}}>Submit</button>
+			</div>
 		</div>
 	</div>
 	{{outlet}}

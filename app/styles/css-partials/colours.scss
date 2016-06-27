@@ -1,10 +1,10 @@
 /*==============================================================================*\
-   ____      _                      _ _ _ _ _ 
+   ____      _                      _ _ _ _ _
   / ___|___ | | ___  _   _ _ __ ___| | | | | |
  | |   / _ \| |/ _ \| | | | '__/ __| | | | | |
  | |__| (_) | | (_) | |_| | |  \__ \_|_|_|_|_|
   \____\___/|_|\___/ \__,_|_|  |___(_|_|_|_|_)
-                                              
+
 \*==============================================================================*/
 /*
   Colours:
@@ -69,11 +69,11 @@ $pill-click: #f5565c;
 
 //Background for active items and normal buttons
 //1 MAIN COLOR
-$primary-color: #42A5F5;
+$primary-color: rgb(21,32,70);
 
 //Hover for navbar and buttons
-//2 LIGHT COLOR 
-$hover-color: #90CAF9;
+//2 LIGHT COLOR
+$hover-color: #fb9da2;
 
 //Default Button State
 //3 NEUTRAL
@@ -89,7 +89,7 @@ $button-text-color-active: #000000;
 
 //Button Click
 //6 VERY DARK
-$button-click-color: #42A5F5;
+$button-click-color: #f5565c;
 
 //Shouldn't do anything
 $link-text-color: #272727;
