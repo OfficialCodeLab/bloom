@@ -1,1 +1,23 @@
-{{outlet}}
+<div class="container text-center messaging-content">
+	<h1 class="text-center">Messaging</h1>
+
+    <div class="form-horizontal form-group form-group-lg row">
+        <div class="col-md-offset-2 col-md-8">
+            <div>
+                <div class="input-group">
+                    <span class="input-group-addon">@</span> {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
+                </div>
+                <span class="glyphicon glyphicon-ok form-control-feedback email-tick"></span>
+            </div>
+            <br>
+            <div>
+                <textarea class="form-control" rows="7"></textarea>
+            </div>
+            <div style="float:right;">
+                {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired"}}{{/ember-grecaptcha}}<br>
+                <button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled={{model.isDisabled}} {{action 'saveContact' model}}>Submit</button>
+            </div>
+        </div>
+    </div>
+	{{outlet}}
+</div>
