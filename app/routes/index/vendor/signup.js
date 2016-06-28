@@ -26,13 +26,14 @@ export default Ember.Route.extend({
                                 this.store.findRecord('vendor', customID).then(() => {						//Check if ID exists already
                                     alert("User ID Already exists");
                                 }, () => {
-                                    this.store.findRecord('vendorLogin', hash).then(() => {						//Check if email is in use
+                                    this.store.findRecord('vendorLogin', hash).then(() => {					//Check if email is in use
                                         alert("Email address already in use");
                                     }, () => {
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
                                             id: hash,
                                             email: email,
-                                            password: passhash
+                                            password: passhash,
+                                            passTemp: this.controller.get('password')
                                         });
                                         vendorLogin.save().then(() => {										//Save vendorLogin
                                             let vendor = this.store.createRecord('vendor', {				//Create vendor record
@@ -58,13 +59,14 @@ export default Ember.Route.extend({
                                     });
                                 });
                             } else {
-                                this.store.findRecord('vendorLogin', hash).then(() => {							//Check if email is in use
+                                this.store.findRecord('vendorLogin', hash).then(() => {						//Check if email is in use
                                     alert("Email address already in use");
                                 }, () => {
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
                                         id: hash,
                                         email: email,
-                                        password: passhash
+                                        password: passhash,
+                                        passTemp: this.controller.get('password')
                                     });
                                     vendorLogin.save().then(() => {											//Save vendorLogin
                                         let vendor = this.store.createRecord('vendor', {					//Create vendor record
