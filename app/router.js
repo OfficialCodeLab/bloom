@@ -53,7 +53,7 @@ Router.map(function() {
   this.route('vendor-profile', { path: '/vendor/:vendor_id' });
   this.route('guide');
   this.route('master-admin');
-  this.route('messaging');
+  this.route('messaging', { path: '/messaging/:vendor_id' });
 });
 
 export default Router;
