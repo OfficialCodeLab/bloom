@@ -9,6 +9,8 @@ export default Ember.Route.extend({
     return sesh;
   },
   model (){
-  	return this.store.findAll('category');
+  	return this.store.findAll('category').then(function(items){
+      return items.sortBy('id');
+    });
   }
 });
