@@ -6,5 +6,9 @@ export default Model.extend({
   to: attr('string'),
   from: attr('string'),
   subject: attr('string'),
-  html: attr('string')
+  html: attr('string'),
+  senderName: attr('string'),
+  senderId: attr('string'),  
+  receiverName: attr('string'),
+  receiverId: attr('string')
 });
