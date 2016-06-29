@@ -21,7 +21,8 @@ export default Ember.Route.extend({
           to: "info@codelab.io",
           from: this.controller.get('model').get('email'),
           subject: "New Contact request from " + this.controller.get('model').get('email'),
-          html: this.controller.get('model').get('message')
+          html: this.controller.get('model').get('message'),
+          senderId: this.get("session").get('currentUser').providerData[0].uid
         });
         message.save();
 

@@ -9,8 +9,9 @@ export default Ember.Route.extend({
 	      return sesh;
     },
 	model(){
-
-    	return this.store.findAll('user');
+		return this.store.findAll('user', {reload: true}).then((items) => {
+	      return items.sortBy('name');
+	    });
 	},
 	actions: {
 		addWedding(id){

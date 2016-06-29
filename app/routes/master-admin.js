@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 7;
 
 export default Ember.Route.extend({
   startAt: null,
@@ -16,26 +16,12 @@ export default Ember.Route.extend({
       return sesh;
   },
   model: function() {
-    var query = {
-      limitToFirst: PAGE_SIZE + 1
-    };
-
-    if (this.get('startAt')) {
-      query.startAt = this.get('startAt');
-    }
-
-    if (this.get('endAt')) {
-      query.endAt = this.get('endAt');
-      delete query.limitToFirst;
-      query.limitToLast = PAGE_SIZE + 1;
-    }
-
-    return this.store.findAll('user').then((users) => {
-      if (this.get('startAt')) {
-        return users.slice(1);
-      } else {
-        return users.slice(0, users.get('length') - 1);
+    return this.store.findAll('user', {reload: true}).then((users) => {
+      if (!(this.get('startAt'))) {
+        this.resetIndexes();
       }
+      let sortedUsers = users.sortBy('name');
+      return sortedUsers.slice(this.get('startAt'), this.get('endAt'));
     });
   },
 
@@ -43,17 +29,47 @@ export default Ember.Route.extend({
 
     prev: function() {
       var id = this.get('currentModel').get('firstObject.id');
-      this.set('startAt', null);
-      this.set('endAt', id);
+      var users = this.store.peekAll('user');
+      if(this.get('startAt') - PAGE_SIZE >= 0){
+        let diff = this.get('endAt') - this.get('startAt');
+        if(diff < PAGE_SIZE){
+          this.set('endAt', this.get('startAt'));
+        } else {
+          this.set('endAt', this.get('endAt') - PAGE_SIZE);
+        }
+        this.set('startAt', this.get('startAt') - PAGE_SIZE);
+      } else {        
+        this.resetIndexes();
+      }
+
       this.refresh();
     },
 
     next: function() {
       var id = this.get('currentModel').get('lastObject.id');
-      this.set('startAt', id);
-      this.set('endAt', null);
+      var users = this.store.peekAll('user');
+      if(this.get('startAt') + PAGE_SIZE < users.get('length')){
+        this.set('startAt', this.get('startAt') + PAGE_SIZE);
+        if(this.get('endAt') + PAGE_SIZE < users.get('length')){
+          this.set('endAt', this.get('endAt') + PAGE_SIZE);
+        } else {
+          this.set('endAt', users.get('length'));
+        }
+      } 
+
       this.refresh();
     }
 
+  },
+  resetIndexes: function() { 
+      var users = this.store.peekAll('user');   
+      this.set('startAt', 0);
+      if(PAGE_SIZE < users.get('length')){        
+        this.set('endAt', PAGE_SIZE);
+      }
+      else{
+        this.set('endAt', users.get('length'));
+      }
   }
+  
 });
