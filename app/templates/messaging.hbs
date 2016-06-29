@@ -30,6 +30,12 @@
 				{{textarea class="form-control textarea-limited" rows="7" value=html}}
 			</div>
 			<br/>
+			{{#if messageSent}}
+				<div class="alert alert-success" {{action 'closeMessage'}}>{{model.userext.responseMessage}}
+					<p class="tiny-text">Tap this message to close it</p>
+				</div>
+			{{/if}}
+			<br>
 			<div id="sendButtonContainer">
 				<button class="btn btn-default btn-pear" id="messageFormSendButton" {{action "sendMessage"}}>Submit</button>
 			</div>
