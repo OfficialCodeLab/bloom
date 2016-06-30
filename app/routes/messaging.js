@@ -8,41 +8,53 @@ export default Ember.Route.extend({
     }
     return sesh;
   },
-  // setupController(controller, model) {
-  //   this._super(controller, model);
-  // },
   model: function(params) {
-    // this.controller.set("modelParams", params.id);
-    // return Ember.RSVP.hash({
-    //   vendor:
+  // this.controller.set("modelParams", params.id);
+  // return Ember.RSVP.hash({
+  //   vendor:
     return this.store.findRecord('vendor', params.vendor_id);
     //
     // });
   },
-  afterModel(){
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-		this.store.findRecord('user', _id).then((currentUser)=>{
-			this.controller.set('from', currentUser.get('email'));
-		}, ()=>{});
-	},
+  afterModel() {
+
+  },
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+    this.store.findRecord('user', _id).then((currentUser)=>{
+      this.controller.set('from', currentUser.get('email'));
+    }, ()=>{});
+  },
 
   actions: {
-    sendMessage() {
-      let message = this.store.createRecord('message', {
-        to: this.controller.get('model').get('email'),
-        from: this.controller.get('from'),
-        subject: this.controller.get('subject'),
-        html: this.controller.get('html')
-      });
-      // alert("Message sent! I think.\n" + JSON.stringify(this.controller.get('currentMessage')));
-      // alert("Message sent! I think.\n" + this.model.get('vendor'));
-      message.save();
+    didTransition: function() {
+      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+      this.store.findRecord('user', _id).then((currentUser) => {
+        this.controller.set('from', currentUser.get('email'));
+      }, () => {});
+    },
 
-      // newContact.save().then(() => {
-      //   this.controller.get('model').set('email', '');
-      //   this.controller.get('model').set('message', '');
-      //   this.controller.get('model').set('responseMessage', 'Message has been sent');
-      // });
+    sendMessage() {
+      //Store the current user in a temporary variable
+      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+      let currentUser = this.store.findRecord('user', _id).then((currentUser) => {
+        //Create a message to be sent through
+        let message = this.store.createRecord('message', {
+          to: this.controller.get('model').get('email'),
+          from: this.controller.get('from'),
+          subject: this.controller.get('subject'),
+          html: this.controller.get('html'),
+          senderName: currentUser.get("name"),
+          receiverName: this.controller.get('model').get('name')
+        });
+        // alert("Message sent! I think.\n" + JSON.stringify(this.controller.get('currentMessage')));
+        // alert("Message sent! I think.\n" + this.model.get('vendor'));
+        message.save();
+      }, () => {});
+
+
     },
     goBack: function() {
       window.history.go(-1);

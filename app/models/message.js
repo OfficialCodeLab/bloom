@@ -7,8 +7,12 @@ export default Model.extend({
   from: attr('string'),
   subject: attr('string'),
   html: attr('string'),
+
+  //Your own name
   senderName: attr('string'),
-  senderId: attr('string'),  
+  senderId: attr('string'),
+
+  //Vendor name
   receiverName: attr('string'),
   receiverId: attr('string')
 });
