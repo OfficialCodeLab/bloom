@@ -68,6 +68,19 @@ export default Ember.Route.extend({
 				});
 			});
 
+			this.store.findRecord('user', _user.id).then((__user) => {
+				let message = this.store.createRecord('message', {
+		          to: __user.get('email'),
+		          from: user.get("email"),
+		          subject: "You Have Been Added to an Inner Circle",
+		          html: "Hi, I have added you to my inner circle",
+		          senderId: _id,
+		          senderName: user.get("name"),
+		          receiverName: __user.get("name")
+		        });
+		        message.save();
+			});
+
 		},
 		removeInnerCircle(_user){
 			let confirmation = confirm("Are you sure?");
