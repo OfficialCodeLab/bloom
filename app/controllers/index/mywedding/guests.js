@@ -65,7 +65,8 @@ export default Ember.Controller.extend({
 				email: this.get('email'),
 				cell: this.get('cell'),
 				guests: this.get('guests') + "",
-				wedding: wedding
+				wedding: wedding,
+				mustEmail: true
 			});
 			wedding.get('guests').pushObject(guest);
 			wedding.save().then(()=>{

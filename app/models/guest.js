@@ -8,5 +8,6 @@ export default Model.extend({
   cell: attr('string'),
   guests: attr('string'),
   rsvp: attr('boolean'),
+  mustEmail: attr('boolean'),
   wedding: belongsTo('wedding', {inverse: 'guests', async: true})
 });
