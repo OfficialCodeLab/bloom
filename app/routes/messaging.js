@@ -53,9 +53,15 @@ export default Ember.Route.extend({
         // alert("Message sent! I think.\n" + JSON.stringify(this.controller.get('currentMessage')));
         // alert("Message sent! I think.\n" + this.model.get('vendor'));
         message.save();
+        this.controller.set("messageSent", true);
+        this.controller.set("subject", "");
+        this.controller.set("html", "");
       }, () => {});
 
 
+    },
+    closeMessage: function(){
+      this.controller.set("messageSent", false);
     },
     goBack: function() {
       window.history.go(-1);
