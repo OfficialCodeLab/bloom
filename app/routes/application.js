@@ -87,8 +87,8 @@ export default Ember.Route.extend({
 	    },
 	    error: function(error) {
 	      //Ember.Logger.error(error);
-	      this.get("session").close();
-      	  this.transitionTo('login');
+	      //this.get("session").close();
+      	  //this.transitionTo('login');
 	    },
 	    notimplemented: function(){
 	    	alert("Sorry this feature is still under contruction!");
