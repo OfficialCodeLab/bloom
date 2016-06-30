@@ -47,6 +47,7 @@ export default Ember.Route.extend({
           subject: this.controller.get('subject'),
           html: this.controller.get('html'),
           senderName: currentUser.get("name"),
+          senderId: _id,
           receiverName: this.controller.get('model').get('name')
         });
         // alert("Message sent! I think.\n" + JSON.stringify(this.controller.get('currentMessage')));
