@@ -10,9 +10,9 @@ export default Ember.Route.extend({
 		try
 		{
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			return this.store.findRecord('user', _id);			
+			return this.store.findRecord('user', _id);
 		} catch(ex) {}
-		
+
 	    // return new Ember.RSVP.Promise(function(resolve) {
 	    //   setTimeout(resolve, 3000);
 	    // });
@@ -44,20 +44,20 @@ export default Ember.Route.extend({
 			this.controller.set('menuOpen', false);
 		},
 		login: function(provider) {
-			Ember.$('#s2-overlay3').fadeOut("fast");	
+			Ember.$('#s2-overlay3').fadeOut("fast");
 			let _that = this;
 			let scope = "";
 			if(provider === "facebook"){
 				scope = 'public_profile,user_friends';
 			}
-	        this.get("session").open("firebase", { 
-	        	provider: provider, 
+	        this.get("session").open("firebase", {
+	        	provider: provider,
 	        	settings: {
 	    			scope: scope,
 				}
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
-				
+
 	          this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
 	          	this.transitionTo('index');
 	          }, ()=> {this.transitionTo('user.new');});
@@ -87,14 +87,14 @@ export default Ember.Route.extend({
 	    },
 	    error: function(error) {
 	      //Ember.Logger.error(error);
-	      //this.get("session").close();
-      	  //this.transitionTo('login');
+	      this.get("session").close();
+      	  this.transitionTo('login');
 	    },
 	    notimplemented: function(){
 	    	alert("Sorry this feature is still under contruction!");
 	    },
 	    showLogins: function(){
-			Ember.$('#s2-overlay3').fadeIn("fast");	    	
+			Ember.$('#s2-overlay3').fadeIn("fast");
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
@@ -109,12 +109,12 @@ export default Ember.Route.extend({
 		   // alert("loading: " + controller.get('currentlyLoading'));
 	    //   });
 	    // }
-	
+
 
 
 
 		/*
-		login: function (provider){	
+		login: function (provider){
 			var ref = new Firebase("https://pear-server.firebaseio.com");
 			ref.authWithOAuthPopup(provider, function(error, authData) {
 			  if (error) {
@@ -123,10 +123,10 @@ export default Ember.Route.extend({
 			    // the access token will allow us to make Open Graph API calls
 			    console.log("LOGGED IN AS: " + authData.name);
 			  }
-			});		
+			});
 		    // this.get("session").open("firebase", { provider: provider}).then((data) => {
 		    //   this.transitionTo('index');
-		  //}); 
+		  //});
 		}*/
 		// login: function(provider) {
   //   	  this.get("session").open("firebase", { provider: provider}).then((data) => {
@@ -138,12 +138,12 @@ export default Ember.Route.extend({
 	 //      this.transitionTo('index');
 	 //    }
 	}/*,
-	
+
 	setupController: function(controller, model) {
 		this.controller.set('menuOpen', false)
 		console.log("TEST" + this.controller.get('menuOpen'));
 		Ember.$('#menu-overlay').fadeOut("slow");
-		
+
 
   	}*/
 });
