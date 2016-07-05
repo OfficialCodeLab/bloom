@@ -13,12 +13,13 @@ export default Model.extend({
   country: attr('string'),
   postalcode: attr('string'),
   cell: attr('string'),
-  accountType: attr('string'),  
+  accountType: attr('string'),
   favourites: hasMany('cat-item'),
   isFemale: attr('boolean'),
   hasGender: attr('boolean'),
   vendorRequest: attr('boolean'),
   vendorAccount: attr('string'),
   innercircle: hasMany('userstats'),
+  friends: hasMany('user'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });

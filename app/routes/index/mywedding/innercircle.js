@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 	model(){
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-		return this.store.findRecord('user', _id);				
+		return this.store.findRecord('user', _id);
 	},
 	actions: {
 		searchUser(){
@@ -18,7 +18,7 @@ export default Ember.Route.extend({
 				this.store.query('user',  {}).then((users) =>{
 				  // Do something with `peters`
 				  	users.forEach(function(user){
-						let fullname = user.get('name') + " " + user.get('surname'); 	
+						let fullname = user.get('name') + " " + user.get('surname');
 						if(~fullname.toLowerCase().indexOf(_name)){
 							searchResults.pushObject({
 								name: fullname,
@@ -44,11 +44,15 @@ export default Ember.Route.extend({
 
 			}
 		},
+		//This will run when the add button next to a user name is clicked
 		addInnerCircle(_user){
 			let searchRes = Ember.get(this.controller.get('searchResults'), _user.key+ "");
 			Ember.set(searchRes, 'adding', true);
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let user = this.store.peekRecord('user', _id);
+
+			//Find a user based on search results, and push that user's
+			//userstats record id to the current user's inner circle
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
 				user.get('innercircle').pushObject(stats);
 				user.save().then(()=>{
@@ -68,6 +72,28 @@ export default Ember.Route.extend({
 				});
 			});
 
+			//
+			//
+/*
+			this.store.findRecord('userstat', _user.id).then((stats)=>{
+				user.get('innercircle').pushObject(stats);
+				user.save().then(()=>{
+					Ember.set(searchRes, 'response', 'User added');
+					Ember.set(searchRes, 'adding', '');
+				});
+			},()=>{
+				let stats = this.store.createRecord('userstat', {
+					id: _user.id,
+					name: _user.name
+				});
+				stats.save();
+				user.get('innercircle').pushObject(stats);
+				user.save().then(()=> {
+					Ember.set(searchRes, 'response', 'User added');
+					Ember.set(searchRes, 'adding', '');
+				});
+			});
+*/
 			this.store.findRecord('user', _user.id).then((__user) => {
 				let message = this.store.createRecord('message', {
 		          to: __user.get('email'),
@@ -103,11 +129,11 @@ export default Ember.Route.extend({
 			this.controller.set('searchPartial', true);
 		},
 		backBtn(){
-			this.controller.set('searchPartial', false);			
+			this.controller.set('searchPartial', false);
 		},
 		willTransition(){
 			let _id = this.get("session").content.currentUser.id + "";
-  			this.store.findRecord('user', _id);			
+  			this.store.findRecord('user', _id);
 		}
 	}
 });
