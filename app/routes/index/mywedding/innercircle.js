@@ -72,28 +72,17 @@ export default Ember.Route.extend({
 				});
 			});
 
-			//
-			//
-/*
-			this.store.findRecord('userstat', _user.id).then((stats)=>{
-				user.get('innercircle').pushObject(stats);
-				user.save().then(()=>{
-					Ember.set(searchRes, 'response', 'User added');
-					Ember.set(searchRes, 'adding', '');
+			//TODO: Friends - Add yourself as a friend under a user when you add them to your inner circle.
+
+		this.store.findRecord('user', _user.id).then((fetchedUser)=>{
+				fetchedUser.get('friends').pushObject(user);
+				fetchedUser.save().then(()=>{
+
 				});
 			},()=>{
-				let stats = this.store.createRecord('userstat', {
-					id: _user.id,
-					name: _user.name
-				});
-				stats.save();
-				user.get('innercircle').pushObject(stats);
-				user.save().then(()=> {
-					Ember.set(searchRes, 'response', 'User added');
-					Ember.set(searchRes, 'adding', '');
-				});
+
 			});
-*/
+
 			this.store.findRecord('user', _user.id).then((__user) => {
 				let message = this.store.createRecord('message', {
 		          to: __user.get('email'),

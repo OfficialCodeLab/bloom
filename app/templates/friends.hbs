@@ -3,33 +3,17 @@
   <p class="font-times-subheader text-center">View your friends' weddings!</p>
   <div class="friends-container">
     <div class="row">
-      <div class="col-sm-4">
-        <div class="card-pear card-3 friend-card">
-          <div class="friend-profile-container">
-            <img src="" alt="Profile Image" class="friend-profile-image">
+      {{#each model.friends as |friend|}}
+        <div class="col-sm-4">
+          <div class="card-pear card-3 friend-card">
+            <div class="friend-profile-container">
+              <img src="" alt="Profile Image" class="friend-profile-image">
+            </div>
+            <h3 class="font-times-header">{{friend.name}}</h3>
+            <button class="btn btn-default btn-pear">View Wedding</button>
           </div>
-          <h3 class="font-times-header">Friend Name</h3>
-          <button class="btn btn-default btn-pear">View Wedding</button>
         </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card-pear card-3 friend-card">
-          <div class="friend-profile-container">
-            <img src="" alt="Profile Image" class="friend-profile-image">
-          </div>
-          <h3 class="font-times-header">Friend Name</h3>
-          <button class="btn btn-default btn-pear">View Wedding</button>
-        </div>
-      </div>
-      <div class="col-sm-4">
-        <div class="card-pear card-3 friend-card">
-          <div class="friend-profile-container">
-            <img src="" alt="Profile Image" class="friend-profile-image">
-          </div>
-          <h3 class="font-times-header">Friend Name</h3>
-          <button class="btn btn-default btn-pear">View Wedding</button>
-        </div>
-      </div>
+      {{/each}}
     </div>
   </div>
 </div>
