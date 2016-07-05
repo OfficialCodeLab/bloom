@@ -57,7 +57,9 @@
 
 <div id="menu-overlay" style="display:none">
   <div id="menu-items">
-  {{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
+  {{!--
+    IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN
+  --}}
     {{#if session.isAuthenticated}}
     <ul>
       {{#link-to 'index'}}<h2>Hub</h2>{{/link-to}}
