@@ -3,12 +3,12 @@
 {{else}}
 	<h3 class="text-center">Your inner circle</h3><p class="text-center">From your bridal party to your far flung loved ones – add whoever your heart desires, so that they can be a part of your special journey.</p><hr>
 	<div class="form-horizontal">
-			<div class="form-group">
-		        <div class="col-sm-offset-4 col-sm-4">
-					<button class="btn btn-default" style="width:100%" {{action 'showSearchPartial'}}>Add</button>
-		        </div>
-		    </div>
-	    </div>
+		<div class="form-group">
+        <div class="col-sm-offset-4 col-sm-4">
+			<button class="btn btn-default" style="width:100%" {{action 'showSearchPartial'}}>Add</button>
+        </div>
+    </div>
+  </div>
     {{#each model.innercircle as |stats|}}
 	<div class="col-md-4 col-sm-6" style="padding: 5px;">
 		<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
@@ -39,8 +39,8 @@
 					<p>{{stats.inseam}}</p>
 					<p>{{stats.shoesize}}</p>
 				</div>
-			</div>	
-		</div>		
+			</div>
+		</div>
 	</div>
 	{{/each}}
 {{/if}}
