@@ -72,7 +72,7 @@ export default Ember.Route.extend({
 				});
 			});
 
-			//TODO: Friends - Add yourself as a friend under a user when you add them to your inner circle.
+			//TODO: Friends - Add your account as a friend under a user when you add them to your inner circle.
 
 		this.store.findRecord('user', _user.id).then((fetchedUser)=>{
 				fetchedUser.get('friends').pushObject(user);
@@ -106,6 +106,20 @@ export default Ember.Route.extend({
 				user.get('innercircle').removeObject(_user);
 				user.save();
 			}
+		},
+		debugFriend(){
+			//Create a variable for the current user
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let user = this.store.peekRecord('user', _id);
+
+			this.store.findRecord('user', _id).then((currentlyLoggedInUser)=>{
+							currentlyLoggedInUser.get('friends').pushObject(user);
+							currentlyLoggedInUser.save().then(()=>{
+
+							});
+					},()=>{
+
+					});
 		},
 		closeMessage(){
 			this.controller.set('responseMessage', "");
