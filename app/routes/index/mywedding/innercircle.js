@@ -72,7 +72,7 @@ export default Ember.Route.extend({
 				});
 			});
 
-			//TODO: Friends - Add your account as a friend under a user when you add them to your inner circle.
+			//Friends - Add your account as a friend under a user when you add them to your inner circle.
 
 		this.store.findRecord('user', _user.id).then((fetchedUser)=>{
 				fetchedUser.get('friends').pushObject(user);

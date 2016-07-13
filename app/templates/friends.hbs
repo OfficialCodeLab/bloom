@@ -7,10 +7,13 @@
         <div class="col-sm-4">
           <div class="card-pear card-3 friend-card">
             <div class="friend-profile-container">
-              <img src="" alt="Profile Image" class="friend-profile-image">
+              {{!--
+                TODO: Add function for profile image of another user to be easily shown.
+              --}}
+              {{!-- <img src="" alt="Profile Image" class="friend-profile-image" /> --}}
             </div>
-            <h3 class="font-times-header">{{friend.name}}</h3>
-            <button class="btn btn-default btn-pear">View Wedding</button>
+            <h3 class="font-times-header">{{friend.name}}&nbsp;{{friend.surname}}</h3>
+            <button class="btn btn-default btn-pear" {{action "showWedding" friend.id}}>View Wedding</button>
           </div>
         </div>
       {{/each}}
