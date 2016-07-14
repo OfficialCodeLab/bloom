@@ -44,8 +44,7 @@ body {
 \*==============================================================================*/
 
 .pear-index-top{
-	padding:25px;
-	background: url("../assets/images/splash-top.jpg") no-repeat;
+	background: url("../assets/images/splash-top-new.jpg") no-repeat;
 	//background-attachment: fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -134,6 +133,7 @@ body {
 	// z-index: 2 !important;
 }
 .index-logo-container{
+	padding: 10px;
 	//background-image: url("../assets/images/pear2main.png");
 	background-repeat: no-repeat;
 	// background-attachment
@@ -147,6 +147,13 @@ body {
 	background-position: center center;
 	background-size: contain;
 	height: 100%;
+}
+.splash-overlay{
+	padding: 25px;
+    background: rgba(0,0,0,0.4);
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
 .favourites-padder{
 	padding-top: 20px;
