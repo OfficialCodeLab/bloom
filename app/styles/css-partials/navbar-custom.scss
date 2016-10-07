@@ -12,6 +12,9 @@
   position: fixed;
   width:100%;
   margin-bottom: 0px !important;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.25);
+  -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.25);
+  box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.25);
 
   //background-color: rgba(231, 231, 231, 0.3) !important;
   a:hover, a:active, a:focus{
@@ -33,6 +36,7 @@
     color: rgba(255, 255, 255, 1);
 }
 #navbar-g.navbar-default {
+  // font-family: "Times New Roman", Times, serif;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: 500;
     font-size: 16px;
@@ -40,6 +44,7 @@
     border-bottom-width: 0px;
 }
 #navbar-g.navbar-default .navbar-nav>li>a {
+  // font-family: "Times New Roman", Times, serif;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: 500;
     color: $navbar-text;
@@ -48,44 +53,54 @@
 
 #navbar-g.navbar-default .navbar-nav>li>a:hover,
 #navbar-g.navbar-default .navbar-nav>li>a:focus {
+  // font-family: "Times New Roman", Times, serif;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: 500;
-    color: $navbar-text;
+    color: $navbar-text-active;
     background-color: $navbar-background-active;
 }
 #navbar-g.navbar-default .navbar-nav>.active>a,
 #navbar-g.navbar-default .navbar-nav>.active>a:hover,
 #navbar-g.navbar-default .navbar-nav>.active>a:focus {
+  // font-family: "Times New Roman", Times, serif;
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-weight: 500;
-    color: $navbar-text;
+    color: $navbar-text-active;
     background-color: $navbar-background-active;
 }
 .dropdown-menu{
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  font-weight: 500;
+  // font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 100;
   background-color: $dropdown-background;
   color: $dropdown-text;
 
   li{
     a{
-      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-      font-weight: 500;
+      // font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      // font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 100;
       color: $dropdown-text;
     }
   }
 }
 .dropdown-menu > .active > a, .dropdown-menu > .active > a:focus {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  font-weight: 500;
+  // font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  // font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
     color: $navbar-text;
     text-decoration: none;
     outline: 0;
     background-color: $navbar-background-active;
 }
 #navbar-g a:hover, .dropdown-menu > li > a:focus {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  font-weight: 500;
+  //font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  // font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 100;
     text-decoration: none;
     color: $dropdown-hover-text;
     background-color: $dropdown-hover-background;
@@ -106,6 +121,55 @@
 }
 .navbar-brand{
     &:hover{
-      background-color: $navbar-background-active !important;
+       background-color: rgba(0,0,0,0) !important;
     }
+}
+
+
+
+// MOBILE NAVBAR
+
+#menu-overlay{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+    position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: $navbar-background;
+}
+
+#menu-icon-o, #menu-icon-c{
+    color: $navbar-text;
+
+}
+
+#menu-items{
+
+  width: 80%; 
+  left:10%;
+  position: relative;
+  top: 50%;
+  height: 320px;
+  text-align: center;
+  transform: translateY(-160px);
+  h1, h2 {
+    font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+    color: $navbar-text;
+    margin: 35px 0px 35px 0px;
+  }
+  ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+  }
+  a{ 
+    text-decoration: none;
+  }
+  h2:hover{
+    transition: 0.5s;
+    color: $navbar-text;
+    @include transform (scale(1.25));
+  }
 }
