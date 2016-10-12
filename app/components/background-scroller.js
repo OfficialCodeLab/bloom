@@ -3,20 +3,21 @@ var Promise = Ember.RSVP.Promise;
 
 export default Ember.Component.extend({
 
-	currentBackground: 0,  //Currently active background
+	currentBackground: 3,  //Currently active background
 	calledOnce: false,	  //Prevent multiple calls
 	refreshIntervalId: 0, //Used for GC
 
-	backgrounds: ["bg1.jpg", "6.jpg", "splash1.jpg"],
+	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg"],
 
 	//Initialize script when component is inserted
 	didInsertElement: function(){
 	  let _that = this;
 	  if(this.get('calledOnce') === false){
+	  		_that.changeBackground();
 	      this.set('calledOnce', true);
 	      let _refreshIntervalId = setInterval(function() {
 	      	_that.changeBackground();
-	      }, 4000);	
+	      }, 8000);	
 	      this.set('refreshIntervalId', _refreshIntervalId);	  	
 	  }
 	},
@@ -53,7 +54,7 @@ export default Ember.Component.extend({
 			Ember.$('#section1').css({
 			    'background-image' : "url('" + url  + "')"
 			});
-			Ember.$('#section1-bg').fadeOut(1000,function() {
+			Ember.$('#section1-bg').fadeOut(2000,function() {
 				Ember.$('#section1-bg').css({
 				      'background-image' : "url('" + backgrounds[_currentBackground] + "')"
 				});

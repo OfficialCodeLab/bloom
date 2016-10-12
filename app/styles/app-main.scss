@@ -104,9 +104,9 @@ p{
     @include text-shadow(1px 1px 1px #000);
 }
 #section1{
-  background-color: black;
+  background-color: white;
 	color: white;
-  background-image: url(images/bg1.jpg);
+  // background-image: url(images/bg1.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
   background-position: 0% 30%;
@@ -119,8 +119,9 @@ p{
 }
 
 #section1-bg {
+  background-color: white;
   position: fixed;
-  background-image: url(images/bg1.jpg);
+  // background-image: url(images/bg1.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
   /*background-position: center center;*/
