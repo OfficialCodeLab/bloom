@@ -18,34 +18,6 @@
     src: url(fonts/Antipasto_extrabold.otf);
 }
 
-
-#menu-button {
-    cursor: pointer;
-    position: absolute;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    color: #fff;
-    //border: 3px solid #000;
-    display: none;
-    text-align: center;
-    height: 30px;
-    width: 30px;
-    @include border-radius (25px);
-    //font-size: 1.625rem;
-    //padding-top: 4px;
-    z-index: 11;
-    //box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
-    font-size:2.0rem;
-    @include text-shadow (1px 1px 1px rgba(0, 0, 0, 0.4));
-}
-
-#menu-button:hover {
-    color: #eee;
-    @include text-shadow (1px 1px 2px rgba(0, 0, 0, 0.7));
-    //border: 3px solid #F3EA5D;
-}
-
 .text-top-right {
     text-decoration: none;  
     cursor: pointer;
@@ -389,7 +361,7 @@ h2.white{
     border: 4px solid #e6e6e6;
     color: #808080;
   }
-  &:active, &:focus, &:active:focus  {
+  &:active, &:focus, &:active:focus, &:active:hover  {
     border: 4px solid #525252;
     background-color: #525252;
     outline: none;
@@ -424,7 +396,7 @@ h2.white{
     background-color: #F4E976;
     color: white;
   }
-  &:active, &:focus, &:active:focus  {
+  &:active, &:focus, &:active:focus, &:active:hover  {
     border: 4px solid #C4B34A;
     background-color: #C4B34A;
     outline: none;

@@ -1228,6 +1228,9 @@ $font_0: FontAwesome;
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+	.cl-spacing{
+		display: none !important;
+	}
 	.pear-text-logo{
 		font-size: 7em;
 	}
