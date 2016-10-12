@@ -1,11 +1,15 @@
 import Ember from 'ember';
+var Promise = Ember.RSVP.Promise;
 
 export default Ember.Component.extend({
-	currentBackground: 0,
-	calledOnce: false,
-	refreshIntervalId: 0,
-	// backgrounds: ['https://newevolutiondesigns.com/images/freebies/colorful-background-17.jpg', 'http://www.planwallpaper.com/static/images/518164-backgrounds.jpg', 'http://www.planwallpaper.com/static/images/maxresdefault_5aMEgAt.jpg'],
+
+	currentBackground: 0,  //Currently active background
+	calledOnce: false,	  //Prevent multiple calls
+	refreshIntervalId: 0, //Used for GC
+
 	backgrounds: ["bg1.jpg", "6.jpg", "splash1.jpg"],
+
+	//Initialize script when component is inserted
 	didInsertElement: function(){
 	  let _that = this;
 	  if(this.get('calledOnce') === false){
@@ -16,10 +20,14 @@ export default Ember.Component.extend({
 	      this.set('refreshIntervalId', _refreshIntervalId);	  	
 	  }
 	},
+
+	//GC clean up to stop script running once route changes
 	willDestroyElement: function(){
 		let _refreshIntervalId = this.get('refreshIntervalId');
 		clearInterval(_refreshIntervalId);
 	},
+
+	//Script to change between backgrounds gracefully
 	changeBackground: function(){
       
 		var backgrounds = this.get('backgrounds');
@@ -27,20 +35,29 @@ export default Ember.Component.extend({
 		Ember.$('#section1-bg').fadeIn(0);
 		_currentBackground++;
 		if(_currentBackground > 2) {
-		_currentBackground = 0;
+			_currentBackground = 0;
 		} 
 
 		this.set('currentBackground', _currentBackground);
+		let url = backgrounds[_currentBackground];
 
-		var img = Ember.$('#section1-bg');
+		//Image preloader
+		new Promise((resolve, reject) => {
+	      let image = new Image();
+	      image.onload = resolve;
+	      image.onerror = reject;
+	      image.src = url;
+	    }).then(()=>{ //Once image has been loaded
+			var img = Ember.$('#section1-bg');
 
-		Ember.$('#section1').css({
-		    'background-image' : "url('" + backgrounds[_currentBackground] + "')"
-		});
-		Ember.$('#section1-bg').fadeOut(1000,function() {
-			Ember.$('#section1-bg').css({
-			      'background-image' : "url('" + backgrounds[_currentBackground] + "')"
+			Ember.$('#section1').css({
+			    'background-image' : "url('" + url  + "')"
 			});
-		});
+			Ember.$('#section1-bg').fadeOut(1000,function() {
+				Ember.$('#section1-bg').css({
+				      'background-image' : "url('" + backgrounds[_currentBackground] + "')"
+				});
+			});	    	
+	    });
     }
 });
