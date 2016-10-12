@@ -71,17 +71,29 @@ body {
 .pear-main-well{
 	text-align: center;
 	margin-top: 30px;
+	min-height: 80px;
+	line-height: 60px;
 }
 .pear-main-pills{
 	display: inline-block;
+	height: 100%;
+	line-height:inherit;
 	li{
 		// width: auto;
 		min-width: 170px;
 		margin: 0px !important;
 		margin-bottom: 5px !important;
+		line-height: inherit;
+		height: inherit;
 
 		a{
+			i {
+				font-size: 25px;
+			}
+			line-height: inherit;
+			height: inherit;
 			border-radius: 0px;
+			font-size: 22px;
 			background-color: white;
 			&:link{
 				background-color: $pill-inactive-main;
@@ -93,11 +105,11 @@ body {
 			}
 			&:hover{
 				background-color: $pill-hover;
-				color: $pill-text;
+				color: $pill-text-hover;
 			}
 			&:active{
 				background-color: $pill-click;
-				color: $pill-text;
+				color: $pill-text-hover;
 			}
 		}
 		&.active{
@@ -114,7 +126,7 @@ body {
 				}
 				&:active{
 					background-color: $pill-click;
-					color: $pill-text;
+					color: $pill-text-hover;
 				}
 			}
 
@@ -228,52 +240,75 @@ body {
 	}
 }
 
+.pear-sub-well{
+	text-align: center;
+	min-height: 40px;
+	margin-left: -15px;
+	margin-right: -15px;
+	background-color: $pill-active;
+
+	// line-height: 20px;
+}
+
 .pear-sidebar{
 	display: inline-block;
-	width: 100%;
+	height: 100%;
+	line-height:inherit;
 	li{
-		width: 100%;
-		// min-width: 170px;
+		// width: auto;
+		min-width: 170px;
 		margin: 0px !important;
 		margin-bottom: 5px !important;
+		line-height: inherit;
+		height: inherit;
 
 		a{
+			i {
+				font-size: 25px;
+			}
+			line-height: inherit;
+			height: inherit;
+			border-radius: 0px;
+			// font-size: 22px;
 			background-color: white;
 			&:link{
-				background-color: $pill-inactive;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive-main;
+				color: $pill-text-hover;
 			}
 			&:visited{
-				background-color: $pill-inactive;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive-main;
+				color: $pill-text-hover;
 			}
 			&:hover{
 				background-color: $pill-hover;
-				color: $pill-text;
+				color: $pill-text-hover;
 			}
 			&:active{
 				background-color: $pill-click;
-				color: $pill-text;
+				color: $pill-text-inactive;
 			}
 		}
 		&.active{
+			color: $pill-text;
 			margin-left: 0px;
 			a{
-				background-color: $primary-color;
-				color: inherit;
+				background-color: $pill-inactive-main;
+				color: $pill-text;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $pill-active;
-					color: $pill-text;
+					background-color: $pill-inactive-main;
+					color: inherit;
 				}
 				&:active{
-					background-color: $pill-click;
+					background-color: $pill-inactive-main;
 					color: $pill-text;
 				}
 			}
 
 		}
+
+
 	}
 }
 .pear-chart{

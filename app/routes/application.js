@@ -94,7 +94,16 @@ export default Ember.Route.extend({
 	    	alert("Sorry this feature is still under contruction!");
 	    },
 	    showLogins: function(){
+	    	if(this.controller.get('menuOpen')) {
+   				Ember.$('#menu-overlay').fadeOut("slow");
+   				Ember.$('#menu-icon-c').fadeOut(0);
+   				Ember.$('#menu-icon-o').fadeIn("fast");
+				this.controller.toggleProperty('menuOpen');
+	    	}
 			Ember.$('#s2-overlay3').fadeIn("fast");	    	
+	    },
+	    hideLogins: function(){
+			Ember.$('#s2-overlay3').fadeOut("fast"); 
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);

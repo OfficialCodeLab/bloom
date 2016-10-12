@@ -1,4 +1,9 @@
-<div class="container index-main" style="text-align:center;">
+<div class="container index-main" style="text-align:center; padding-top:30px;">
+	
+	{{#if session.isAuthenticated}}
+	{{else}}
+		<div class="navbar-padding"></div>
+	{{/if}}
 	<div class="text-center pear-guide-top">
 		<h1 class="pear-text-logo unselectable">&nbsp;</h1>
 	</div>

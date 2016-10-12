@@ -158,15 +158,24 @@ p{
   width: 300px;
   border-radius:3px;
   display: block;
-  position: absolute; 
+  position: fixed; 
   text-align: center;
-  z-index: 20;
+  z-index: 54;
 
   //Styling
   -webkit-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
   -moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);
   box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.5);               
 }
+
+.close-overlay{  
+    color: black;
+    font-size: 18px;
+    position: fixed;
+    padding-left: 7px;
+    cursor: pointer;
+}
+
 .pear-social-button{
   margin-bottom: 10px;
   &:hover{
@@ -261,6 +270,20 @@ hr.style-two {
     // height: 230px;
     width: 100vw;
     top: 65vh;
+    // margin-left: 12.5vw;
+    text-align: center;
+}
+
+.splash-footer {
+  z-index: 20;
+  position: absolute; 
+    @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+    // height: 230px;
+    left:10vw;
+    width: 80vw;
+    bottom:0px;
+    height: 90px;
+    font-size: 12px;
     // margin-left: 12.5vw;
     text-align: center;
 }

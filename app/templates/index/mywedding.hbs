@@ -1,23 +1,26 @@
-<div class="favourites-padder">
+{{!-- <div class="favourites-padder"> --}}
+<div class="pear-sub-well">
+	<ul class="nav nav-pills unselectable pear-sidebar">
+		{{#link-to 'index.mywedding.overview' tagName="li"}}<a href>Overview</a>{{/link-to}}
+		{{#link-to 'index.mywedding.guests' tagName="li"}}<a href>Guest List</a>{{/link-to}}
+		{{#link-to 'index.mywedding.innercircle' tagName="li"}}<a href>Inner Circle</a>{{/link-to}}
+		{{#link-to 'index.mywedding.mystats' tagName="li"}}<a href>My Stats</a>{{/link-to}}
+	</ul>
+</div>
 <div class="wedding-first-time text-center">
 	<h1 class="font-times-header">MY WEDDING</h1>
 	<p class="font-times-subheader">Plan and manage the aspects of your wedding.</p>
 </div>
 <hr class="style-two">
 <div class="row">
-	<div class="col-md-2">
-		<div>
-			<ul class="nav pear-sidebar">
-				{{#link-to 'index.mywedding.overview' tagName="li"}}<a href>Overview</a>{{/link-to}}
-				{{#link-to 'index.mywedding.guests' tagName="li"}}<a href>Guest List</a>{{/link-to}}
-				{{#link-to 'index.mywedding.innercircle' tagName="li"}}<a href>Inner Circle</a>{{/link-to}}
-				{{#link-to 'index.mywedding.mystats' tagName="li"}}<a href>My Stats</a>{{/link-to}}
-			</ul>
+	<div class="col-md-12">
+		{{!-- <div>
+			
 		</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-8"> --}}
 		{{outlet}}
 	</div>
 </div>
-
-</div>
+{{!-- 
+</div> --}}

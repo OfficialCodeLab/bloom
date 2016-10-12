@@ -1,6 +1,5 @@
 {{!-- TODO:
 - ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
-{{partial 'navbar-splash'}} 
 {{#background-scroller}}{{/background-scroller}}
 <main id="panel">
 	
@@ -25,41 +24,11 @@
 		<!-- Columns for the cheeseburger menu and search bar -->
 		<!-- End of columns for top elements -->
 		<div id="splash-content">
-			<div id class="">
-
-			</div>
+			
 			<div id="s1-overlay1">
 
 			</div>
-			<div id="s2-overlay3" style="display:none">
-				<h1 style="text-align:center;" class="font-times-header">LOGIN</h1>
-				<h3 class="font-times-subheader" style="text-align:center;">An account is required</h3>
-
-				<hr>
-
-				<br>
-			<div class="col-xs-12">
-				{{!-- {{action "login" "facebook" }} --}}
-				<btn class="btn btn-block btn-social btn-facebook pear-social-button" {{action "login" "facebook" }}>
-				  <span class="fa fa-facebook"></span>
-				  Sign in with Facebook
-				</btn>
-			</div>
-			<div class="col-xs-12">
-				 {{!-- {{action "login" "twitter" }} --}}
-				<btn class="btn btn-block btn-social btn-twitter pear-social-button" {{action "login" "twitter" }}>
-				  <span class="fa fa-twitter"></span>
-				  Sign in with Twitter
-				</btn>
-			</div>
-			<div class="col-xs-12">
-				{{!-- k" {{action "notimplemented"}} --}}
-				<btn class="btn btn-block btn-social btn-facebook btn-reddit pear-social-button2" {{action "notimplemented" }}>
-				  <span class="fa fa-envelope"></span>
-				  Sign in with Email &amp; Password
-				</btn>
-			</div>
-		</div>
+			
 	<div class="bottom-center">
 		{{!-- 
 		<h2 class="white unselectable">PLAN MY WEDDING</h2>
@@ -82,6 +51,9 @@
             {{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
         {{/if}}
 	</div>
+    <div class="splash-footer">
+    	<span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
+    </div>
 	</div>
 	</div>
 </main>

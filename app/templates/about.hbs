@@ -1,4 +1,8 @@
 <div class="about-page">
+  {{#if session.isAuthenticated}}
+  {{else}}
+    <div class="navbar-padding"></div>
+  {{/if}}
   {{#j-query.slider-component}}
     <div class="about-slider-container">
       <div class="about-slider">
@@ -64,7 +68,7 @@
       </div>
     </div>
   </div>
-  <div class="about-section-white">
+  <div class="about-section-white" id="contact-us">
     <h1 class="font-times-header">Contact Us</h1>
     <hr class="style-two">
     <h3 class="font-times-subheader">Let’s chat. We’d love to hear your thoughts.</h3>

@@ -2,26 +2,30 @@
 	{{!-- Main content of the site goes here  --}}
 	<div class="row pear-index-top">
 		<div class="splash-overlay">
-			<div class="col-sm-2">
+			<div class="col-sm-3">
 					
 			</div>
-			<div class="col-sm-8 text-center index-logo-container">
-				{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
-				<img src="../assets/images/test1.png" class="pear-splash-hub img-responsive">
-			</div>
-			<div class="col-sm-2 text-center hideOnMobile">
-				<div class="index-profile-image-container">
+			<div class="col-sm-6 text-center index-logo-container">
+				{{!-- <div class="index-profile-image-container">
 					{{#link-to 'myaccount'}}<img src={{model.userext.imgurl}} class="img-responsive" style="background-color:white !important;">{{/link-to}}
-				</div>
+				</div> --}}
+				{{#link-to 'myaccount'}}<div class="profile-pic-outer">
+			    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+			    </div>{{/link-to}}
 				<h4 style="margin: 0px; color:white;">{{model.user.name}}&nbsp;{{model.user.surname}}</h4>
+				{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
+			</div>
+			<div class="col-sm-3 text-center hideOnMobile">
+				<img src="../assets/images/pear-splash-color.png" class="pear-splash-hub img-responsive">
+				
 			</div>
 		</div>
 	</div>
 	<div class="pear-main-well">
 	    <ul class="nav nav-pills pear-main-pills unselectable">
-	    	{{#link-to 'index.favourites' tagName="li" class="font-century"}}<a href>FAVOURITES</a>{{/link-to}}
-			{{#link-to 'index.mywedding' tagName="li" class="font-century"}}<a href>MY WEDDING</a>{{/link-to}}
-			{{#if model.user.accountType}}{{#link-to 'index.vendor' tagName="li" class="font-century"}}<a href>VENDOR ADMIN</a>{{/link-to}}{{/if}}
+	    	{{#link-to 'index.favourites' tagName="li" class="font-century"}}<a href><i class="fa fa-heart-o" aria-hidden="true"></i><span class="hideOnPhones">&nbsp;Favourites</span></a>{{/link-to}}
+			{{#link-to 'index.mywedding' tagName="li" class="font-century"}}<a href><i class="fa fa-diamond" aria-hidden="true"></i><span class="hideOnPhones">&nbsp;Wedding</span></a>{{/link-to}}
+			{{#if model.user.accountType}}{{#link-to 'index.vendor' tagName="li" class="font-century"}}<a href><i class="fa fa-truck" aria-hidden="true"></i><span class="hideOnPhones">&nbsp;Vendor</span></a>{{/link-to}}{{/if}}
 	    </ul>
 	</div>
 		

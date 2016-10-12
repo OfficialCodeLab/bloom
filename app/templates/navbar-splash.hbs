@@ -19,13 +19,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        {{#nav-link-to 'index'}}ABOUT PEAR{{/nav-link-to}}
+        {{#nav-link-to 'about'}}ABOUT PEAR{{/nav-link-to}}
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{!-- {{#nav-link-to 'admin'}}Admin{{/nav-link-to}} --}}
         {{#nav-link-to 'index'}}VENDOR LIST{{/nav-link-to}}
-        {{#nav-link-to 'index'}}CONTACT US{{/nav-link-to}}
-        <li class="yellow-highlight"><a href="#" {{action 'logout'}}>LOG IN</a></li>
+        {{#nav-link-to 'about'}}CONTACT US{{/nav-link-to}}
+        <li class="yellow-highlight"><a href="#" {{action "showLogins"}}>LOG IN</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -36,10 +36,10 @@
   {{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
     <ul>
       {{#link-to 'index'}}<h2>TOUR</h2>{{/link-to}}
-      {{#link-to 'index'}}<h2>ABOUT</h2>{{/link-to}}
+      {{#link-to 'about'}}<h2>ABOUT</h2>{{/link-to}}
       {{#link-to 'index'}}<h2>VENDOR LIST</h2>{{/link-to}}
-      {{#link-to 'index'}}<h2>CONTACT US</h2>{{/link-to}}
-      <a {{action 'index'}} href="#"><h2>LOG IN</h2></a>
+      {{#link-to 'about'}}<h2>CONTACT US</h2>{{/link-to}}
+      <a {{action "showLogins"}} href="#"><h2>LOG IN</h2></a>
     </ul>
   </div>
 </div>

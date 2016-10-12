@@ -61,14 +61,15 @@ $dropdown-hover-text: #fff;
   Button Colours
 \*==============================================================================*/
 
-$pill-inactive-main: rgb(21,32,70);
+$pill-inactive-main: rgba(0,0,0,0);
 
-$pill-inactive: #fbb7b9;
-$pill-active: #f5565c;
-$pill-hover: #fb9da2;
+$pill-inactive: rgba(0,0,0,0);
+$pill-active: #FFCD5D;
+$pill-hover: rgba(0,0,0,0);
 $pill-text: #ffffff;
-$pill-text-inactive: #ffffff;
-$pill-click: #f5565c;
+$pill-text-hover: #CF9D22;
+$pill-text-inactive: #707070;
+$pill-click: rgba(0,0,0,0);
 
 //Background for active items and normal buttons
 //1 MAIN COLOR

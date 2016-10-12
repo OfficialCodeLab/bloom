@@ -4,7 +4,11 @@
 		{{outlet}}
 	</div>
 {{else}}
+
+	{{partial 'navbar-splash'}} 
 	{{outlet}}
+	{{partial 'partials/login-modal'}}
+	
 {{/if}}
 
 {{#if currentlyLoading}}
