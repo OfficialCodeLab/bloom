@@ -71,7 +71,7 @@ body {
 .pear-main-well{
 	text-align: center;
 	margin-top: 30px;
-	min-height: 80px;
+	height: 80px;
 	line-height: 60px;
 }
 .pear-main-pills{
@@ -1236,6 +1236,8 @@ $font_0: FontAwesome;
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 	.pear-main-well{
+		min-height: 80px;
+		height: auto;
 		ul {
 			width: 100%;
 		}
