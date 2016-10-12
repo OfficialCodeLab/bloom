@@ -94,6 +94,7 @@ p{
   max-width: 100%;
   max-height:100%;
   position: relative;
+  z-index: 3;
   background-color: rgba(0, 0, 0, 0.5);
 }
 .cheeseburger{
@@ -103,12 +104,12 @@ p{
     @include text-shadow(1px 1px 1px #000);
 }
 #section1{
-	background-image: url(images/bg1.jpg);
-	background-size:     cover;
-	background-repeat:   no-repeat;
-	/*background-position: center center;*/
-	background-position: 0% 30%;
+  background-color: black;
 	color: white;
+  background-image: url(images/bg1.jpg);
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: 0% 30%;
 }
 #section1 a{
 	color: white;
@@ -117,6 +118,16 @@ p{
 	color: brightgreen;
 }
 
+#section1-bg {
+  position: fixed;
+  background-image: url(images/bg1.jpg);
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  /*background-position: center center;*/
+  background-position: 0% 30%;
+  z-index:2;
+
+}
 #section2 {
 	background: rgba(29, 31, 32, 0.9);
 }
@@ -124,15 +135,16 @@ p{
 /*This is the main pear logo*/
 #s1-overlay1{
   //background-color: rgba(0, 0, 0, 0.15);
+  z-index: 3;
   @include border-radius (3px);
 	width: 50vw;
-	height: 20vw;
+	height: 40vh;
   margin-left: 25vw;
 	display: block;
 	position: absolute;             
-	top: 40%;                       
+	top: 40vh;                       
 	@include transform (translate(0, -50%));  
-	background-image: url(images/pear-splash.png);
+	background-image: url(images/pear-splash-color.png);
     background-size:     contain;      
     background-repeat:   no-repeat;
     background-position: center center; 
@@ -147,10 +159,10 @@ p{
 
 }
 #s2-overlay1{
-    height:230px;           
+  height:230px;           
 	top: 35%;         
-    right:25%;
-    left:25%;
+  right:25%;
+  left:25%;
     /*margin-left:-150px;*/
 	display: block;
 	/*text-align:center;*/
@@ -165,7 +177,7 @@ p{
   padding-bottom: 5px;
   max-height: 500px;
   margin-bottom: 50px;       
-  top: 10%;
+  top: 20%;
 
   left: 0;
   right: 0;
@@ -270,14 +282,13 @@ hr.style-two {
 }
 
 .bottom-center {
+  z-index: 20;
 	position: absolute; 
     @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
-    width:300px;
-    height:230px;
-    bottom:0px;
-    right:25%;
-    left:50%;
-    margin-left:-150px;	
+    // height: 230px;
+    width: 100vw;
+    top: 65vh;
+    // margin-left: 12.5vw;
     text-align: center;
 }
 
@@ -353,6 +364,76 @@ h2.white{
     color: white;
   }
 }
+
+.clbutton-white{
+  padding:0px;
+    font-family: antipasto; 
+    font-size: 18px;
+    @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+    @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+  margin-top: 7px;
+  margin-bottom: 7px;
+  display: inline-block;
+  max-width: 500px;
+  min-width: 180px;
+  height: 5vh;
+  min-height: 40px;
+
+  /*Styling*/
+  border: 3px solid white;
+  @include border-radius (5px);
+  color: #808080;
+  background-color: white;
+  &:hover {
+    border: 4px solid #e6e6e6;
+    color: #808080;
+  }
+  &:active, &:focus, &:active:focus  {
+    border: 4px solid #525252;
+    background-color: #525252;
+    outline: none;
+    color: white;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.0);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.0);
+
+  }
+}
+
+.clbutton-grey{
+  padding:0px;
+    font-family: antipasto; 
+    font-size: 18px;
+    @include box-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+    @include text-shadow(1px 1px 1px rgba(0, 0, 0, 0.4));
+  margin-top: 7px;
+  margin-bottom: 7px;
+  display: inline-block;
+  max-width: 500px;
+  min-width: 180px;
+  height: 5vh;
+  min-height: 40px;
+
+  /*Styling*/
+  border: 3px solid #808080;
+  @include border-radius (5px);
+  color: white;
+  background-color: #808080;
+  &:hover {
+    border: 4px solid #F4E976;
+    background-color: #F4E976;
+    color: white;
+  }
+  &:active, &:focus, &:active:focus  {
+    border: 4px solid #C4B34A;
+    background-color: #C4B34A;
+    outline: none;
+    color: white;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.0);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.0);
+
+  }
+}
+
 
 
 /*=======MEDIA QUERIES=======*/

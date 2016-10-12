@@ -174,3 +174,9 @@
     @include transform (scale(1.25));
   }
 }
+
+
+#navbar-g.navbar-default .navbar-nav > li.yellow-highlight > a {
+  font-weight: 600;
+  color: #F4E976;  
+}
