@@ -1365,6 +1365,13 @@ $font_0: FontAwesome;
 	.showOnMobile{
 		display: block;
 	}
+	.pear-sidebar{
+		width: 100%;
+		li{
+			min-width: 0px;
+			width: 50%;
+		}
+	}
 
 	.slick-content{
 		height: 40vh;
@@ -1394,6 +1401,8 @@ $font_0: FontAwesome;
 			width: 100%;
 		}
 	}
+
+
 	.pear-slide-2, .pear-slide-3{
 		h1{
 			font-size: 9em;
@@ -1410,6 +1419,13 @@ $font_0: FontAwesome;
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+	.pear-sidebar{
+		width: 100%;
+		li{
+			min-width: 0px;
+			width: 100%;
+		}
+	}
 	.cl-spacing{
 		display: none !important;
 	}
