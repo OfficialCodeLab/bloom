@@ -80,7 +80,7 @@ body {
 
 .pear-main-well{
 	text-align: center;
-	margin-top: 30px;
+	// margin-top: 30px;
 	height: 80px;
 	line-height: 65px;
 }
@@ -149,8 +149,8 @@ body {
 .pear-sub-well{
 	text-align: center;
 	min-height: 40px;
-	margin-left: -15px;
-	margin-right: -15px;
+	// margin-left: -15px;
+	// margin-right: -15px;
 	background-color: $pill-active;
 
 	// line-height: 20px;
@@ -256,7 +256,7 @@ body {
 
 		a{
 			padding: 25px;
-			border-top: 1px solid white;
+			border-top: 1px solid rgba(255, 255, 255, 0.7);
 			width: inherit;
 			font-weight: 600;
 			// margin-top: 5px;
