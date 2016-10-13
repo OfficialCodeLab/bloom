@@ -1,7 +1,7 @@
 
 // @import 
 
-@import 'https://fonts.googleapis.com/css?family=Open+Sans:400,700i|Roboto';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:400,600i,700i|Roboto';
 
 
 @font-face {
@@ -689,6 +689,23 @@ body{
   width:220px;
   @include border-radius(50%);
   @include box-shadow(0px 0px 8px 1px rgba(0,0,0,0.6));
+}
+
+.profile-pic-outer-grey {
+  transition: transform 600ms ease;
+  &:hover {
+    cursor: pointer; 
+    @include box-shadow(0px 0px 8px 2px rgba(0,0,0,0.7));
+    @include transform (scale(1.05));
+   }
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #DCDCDC;
+  padding: 10px 10px 10px 10px;
+  height:220px;
+  width:220px;
+  @include border-radius(50%);
+  // @include box-shadow(0px 0px 8px 1px rgba(0,0,0,0.6));
 }
 
 .tiny-text {
