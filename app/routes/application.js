@@ -104,6 +104,25 @@ export default Ember.Route.extend({
 	    },
 	    hideLogins: function(){
 			Ember.$('#s2-overlay3').fadeOut("fast"); 
+	    },
+	    showModal: function(name, model) {
+	      this.render(name, {
+	        into: 'application',
+	        outlet: 'modal',
+	        model: model
+	      });
+	    },
+	    removeModal: function() {
+	      this.disconnectOutlet({
+	        outlet: 'modal',
+	        parentView: 'application'
+	      });
+	    },
+	    storeTransition: function (){
+
+	    },
+	    ok: function(){
+	    	 // this.transitionTo(this.controller.get('transition'));
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);

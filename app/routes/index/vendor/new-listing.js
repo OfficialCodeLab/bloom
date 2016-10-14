@@ -21,6 +21,33 @@ export default Ember.Route.extend({
     },
 	filepicker: Ember.inject.service(),
     actions: {
+
+    	ok: function() {
+			let _transition = this.controller.get('tempTransition');
+			let modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+			if(modalData){
+				modalData.deleteRecord();
+			}
+			console.log(_transition);
+	    	let _blob = this.controller.get('imgBlob');
+    		this.controller.set('name', '');
+			this.controller.set('price', '');
+			this.controller.set('desc', '');
+			this.controller.set('imageURL', '');
+			this.controller.set('imgBlob', '');
+			this.controller.set('isCreating', false);
+			this.controller.set('tempTransition', '');
+			this.controller.set('confirmTransition', 1);
+
+
+			if(_blob){		
+		    	this.destroyBlob(_blob);    
+			}
+			// console.log(_transition);
+			this.transitionTo(_transition);
+			this.controller.set('confirmTransition', 0);
+
+    	},
     	openFilePicker: function(){
     		let picker_options = {mimetype: 'image/*'};
     		let _that = this;
@@ -42,27 +69,52 @@ export default Ember.Route.extend({
 	        });
 	    },
 	    willTransition(transition){
-	    	let _blob = this.controller.get('imgBlob');
-	    	if(!this.controller.get('itemCreated')){
-	    		let confirmation = confirm("Your item hasn't been created yet, are you sure you want to leave this form?");
+	    	// let _blob = this.controller.get('imgBlob');
+	    		// console.log("TEST" + this.controller.get('itemCreated'));
+	    	if(this.isItemCreated()){
+	    		// console.log(this.controller.get('itemCreated'));
+	    		if(this.controller.get('confirmTransition') === 0) {
+		            this.controller.set('tempTransition', transition.intent.name);
+		            transition.abort();
+		            let _modalData;
+		            let modalDataId;
+		            if(this.controller.get('modalDataId')){
+						_modalData = this.store.peekRecord('modal-data', this.controller.get('modelDataId'));	
+		            	this.send('showModal', 'modal-confirm', _modalData);	            	
+		            } else {
+				    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "You have unsaved changes."});
+				     	this.controller.set('modalDataId', _modalData.get('id'));
+		            	this.send('showModal', 'modal-confirm', _modalData);
+		            }    
+					// let modalData = this.store.peekRecord('modelDataId', this.controller.get('modalDataId'));  
+		            // this.controller.set('tempTransition', transition);
+	    		} else {
+	    			this.controller.set('confirmTransition', 0);
+	    		}
 
-		        if (confirmation) {
-							this.controller.set('name', '');
-							this.controller.set('price', '');
-							this.controller.set('desc', '');
-							this.controller.set('imageURL', '');
-							this.controller.set('imgBlob', '');
-							this.controller.set('isCreating', false);
+	            // transition.abort();
+	            // this.controller.set('tempTransition', transition);
+	            // this.sendAction('showModal');
+	    		// let confirmation = confirm("Your item hasn't been created yet, are you sure you want to leave this form?");
 
-			    	if(_blob){		
-		            	this.destroyBlob(_blob);    
-			    	}
-		    	} else {
-			          transition.abort();
-		        }	    		
-	    	} else {
-	    		this.controller.set('itemCreated', false);
-	    	}
+		     //    if (confirmation) {
+							// this.controller.set('name', '');
+							// this.controller.set('price', '');
+							// this.controller.set('desc', '');
+							// this.controller.set('imageURL', '');
+							// this.controller.set('imgBlob', '');
+							// this.controller.set('isCreating', false);
+
+			    // 	if(_blob){		
+		     //        	this.destroyBlob(_blob);    
+			    // 	}
+		    	// } else {
+			    //       transition.abort();
+		     //    }	    		
+	    	} 
+	    	// else {
+	    	// 	this.controller.set('itemCreated', true);
+	    	// }
 	    },
 		createItem(){
 			try{
@@ -120,6 +172,14 @@ export default Ember.Route.extend({
 				alert("Please select a category or there was a problem");
 			}
 		}
+	},
+	isItemCreated(){
+		 if(this.controller.get('name') || this.controller.get('price') || this.controller.get('desc') || this.controller.get('imageURL')){
+			return true;
+		}	
+
+		return false;
+
 	},
 	destroyBlob(blob){
 
