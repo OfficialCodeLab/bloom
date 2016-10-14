@@ -3,7 +3,7 @@
 	    <h1 class="font-times-header" style="color: #4C4C4E;">MY ACCOUNT</h1>
 	    <hr>
 
-	    <div class="col-md-3 nav-account-sidebar" style="background-color: #FFCC67;">
+	    <div class="col-lg-2 col-md-3 nav-account-sidebar" style="background-color: #FFCC67;">
 			<div class="pear-sidebar-well">
 				<ul class="nav nav-pills unselectable pear-account-sidebar">
 					{{#link-to 'myaccount' tagName="li"}}<a href>ACCOUNT</a>{{/link-to}}
@@ -16,7 +16,7 @@
 			</div>
 	    </div>
 
-	    <div class="col-md-9">
+	    <div class="col-lg-10 col-md-9">
 		    <div class="col-md-4">
 			    <div class="profile-pic-outer-grey">
 			    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
@@ -31,7 +31,7 @@
 			    {{/if}} --}}
 		    </div>
 		    <div class="col-md-8">
-		    	<h3 style="font-weight: 600; padding-bottom: 30px; color: #7D7D7D;">PERSONAL INFORMATION</h3>
+		    	<h3 class="pi-title">PERSONAL INFORMATION</h3>
 				<div class="form-horizontal form-margin-sm ">
 				        <div class="form-group">
 				            <label class="col-sm-3 control-label">EMAIL</label>
@@ -83,7 +83,7 @@
 
 				        <div class="form-group">
 				            <div class="col-sm-offset-5 col-sm-4">
-				                <button type="submit" style="width:100%" class="btn btn-success" {{action 'saveUser' model.user}}>Save Changes</button>
+				                <button type="submit" style="width:100%" class="btn btn-success" {{action 'saveUser' model.user}}>UPDATE</button>
 				            </div>
 				        </div>
 				    </div>
