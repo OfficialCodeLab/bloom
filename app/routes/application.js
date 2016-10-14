@@ -113,6 +113,9 @@ export default Ember.Route.extend({
 	      });
 	    },
 	    removeModal: function() {
+	    	try{
+	      		this.send('cancel');
+	    	} catch (ex){}
 	      this.disconnectOutlet({
 	        outlet: 'modal',
 	        parentView: 'application'

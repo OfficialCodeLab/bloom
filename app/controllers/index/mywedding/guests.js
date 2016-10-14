@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
 	email: '',
 	cell: '',
 	guests: 0,
+	guestId: '',
 	guestsValue: '0',
 	addingGuest: '',
 	isNotValid: Ember.computed.not('name'),
@@ -34,6 +35,7 @@ export default Ember.Controller.extend({
 
 	}),
 	actions: {
+		
 		showGuestAdd(){
 			this.set('showAdd', true);
 		},
@@ -92,12 +94,19 @@ export default Ember.Controller.extend({
 			model.save();
 		},
 		destroyGuest(id){
-			let confirmation = confirm("Are you sure?");
 
-			if(confirmation){
-				let model = this.store.peekRecord('guest', id);
-				model.destroyRecord();
-			}
+			let _modalData;
+			this.set('guestId', id);
+			if(this.get('modalDataId')){
+				_modalData = this.store.peekRecord('modal-data', this.get('modalDataId'));
+				_modalData.set('mainMessage', 'Do you want to remove this guest from your wedding?');	
+				_modalData.set('action', 'delete');	
+            	this.send('showModal', 'modal-confirm', _modalData);	            	
+            } else {
+		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Do you want to remove this guest from your wedding?', 'action': 'delete'});
+		     	this.set('modalDataId', _modalData.get('id'));
+            	this.send('showModal', 'modal-confirm', _modalData);
+            } 
 		}
 	}
 });

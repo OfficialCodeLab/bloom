@@ -24,11 +24,13 @@ export default Ember.Route.extend({
 
     	ok: function() {
 			let _transition = this.controller.get('tempTransition');
+
+			//GC for modal when transitioning
 			let modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			if(modalData){
 				modalData.deleteRecord();
 			}
-			console.log(_transition);
+
 	    	let _blob = this.controller.get('imgBlob');
     		this.controller.set('name', '');
 			this.controller.set('price', '');
@@ -79,7 +81,7 @@ export default Ember.Route.extend({
 		            let _modalData;
 		            let modalDataId;
 		            if(this.controller.get('modalDataId')){
-						_modalData = this.store.peekRecord('modal-data', this.controller.get('modelDataId'));	
+						_modalData = this.store.peekRecord('modal-data', this.controller.get('modaDataId'));	
 		            	this.send('showModal', 'modal-confirm', _modalData);	            	
 		            } else {
 				    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "You have unsaved changes."});

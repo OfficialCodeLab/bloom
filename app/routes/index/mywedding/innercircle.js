@@ -44,6 +44,20 @@ export default Ember.Route.extend({
 
 			}
 		},
+		ok: function () {
+			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+			switch(_modalData.get('action')) {
+				case 'delete':
+					
+					let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+					let user = this.store.peekRecord('user', _id);
+					// let _user = this.store.peekRecord(this.controller.get('user'));
+					user.get('innercircle').removeObject(this.controller.get('user'));
+					user.save();
+
+					break;
+			}
+		},
 		addInnerCircle(_user){
 			let searchRes = Ember.get(this.controller.get('searchResults'), _user.key+ "");
 			Ember.set(searchRes, 'adding', true);
@@ -83,14 +97,18 @@ export default Ember.Route.extend({
 
 		},
 		removeInnerCircle(_user){
-			let confirmation = confirm("Are you sure?");
-
-			if (confirmation) {
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-				let user = this.store.peekRecord('user', _id);
-				user.get('innercircle').removeObject(_user);
-				user.save();
-			}
+			let _modalData;
+			this.controller.set('user', _user);
+			if(this.controller.get('modalDataId')){
+				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+				_modalData.set('mainMessage', 'This deletion is permeanent.');	
+				_modalData.set('action', 'delete');	
+            	this.send('showModal', 'modal-confirm', _modalData);	            	
+            } else {
+		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'This deletion is permeanent.', 'action': 'delete'});
+		     	this.controller.set('modalDataId', _modalData.get('id'));
+            	this.send('showModal', 'modal-confirm', _modalData);
+            } 
 		},
 		closeMessage(){
 			this.controller.set('responseMessage', "");
@@ -106,8 +124,13 @@ export default Ember.Route.extend({
 			this.controller.set('searchPartial', false);			
 		},
 		willTransition(){
-			let _id = this.get("session").content.currentUser.id + "";
-  			this.store.findRecord('user', _id);			
+			//GC for modal when transitioning
+			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+			if(_modalData){
+				_modalData.deleteRecord();
+			}
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+  			this.store.findRecord('user', _id);	
 		}
 	}
 });
