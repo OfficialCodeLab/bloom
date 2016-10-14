@@ -66,7 +66,10 @@ export default Ember.Route.extend({
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
 				user.get('innercircle').pushObject(stats);
 				user.save().then(()=>{
-					Ember.set(searchRes, 'response', 'User added');
+					this.controller.get('notifications').success('User added successfully!',{
+					  autoClear: true
+					});
+					// Ember.set(searchRes, 'response', 'User added');
 					Ember.set(searchRes, 'adding', '');
 				});
 			},()=>{
@@ -77,7 +80,10 @@ export default Ember.Route.extend({
 				stats.save();
 				user.get('innercircle').pushObject(stats);
 				user.save().then(()=> {
-					Ember.set(searchRes, 'response', 'User added');
+					// Ember.set(searchRes, 'response', 'User added');
+					this.controller.get('notifications').success('User added successfully!',{
+					  autoClear: true
+					});
 					Ember.set(searchRes, 'adding', '');
 				});
 			});

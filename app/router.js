@@ -22,6 +22,7 @@ Router.map(function() {
       this.route('overview', {path: '/'});
       this.route('guests');
       this.route('mystats');
+      this.route('selectgender');
       this.route('innercircle');
     });
     this.route('vendor', function() {

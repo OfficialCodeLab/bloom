@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	showPartial: Ember.computed.or('showAdd', 'showList'),
+	notifications: Ember.inject.service('notification-messages'),
 	showAdd: '',
 	showList: '',
 	name: '',
@@ -73,6 +74,9 @@ export default Ember.Controller.extend({
 			wedding.get('guests').pushObject(guest);
 			wedding.save().then(()=>{
 				guest.save().then(()=>{
+					this.get('notifications').success('Guest added!',{
+					  autoClear: true
+					});
 					this.set('addingGuest', false);
 					this.set('name', '');
 					this.set('email', '');

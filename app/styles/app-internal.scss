@@ -1333,6 +1333,8 @@ $font_0: FontAwesome;
 	font-family: "Open Sans";
 }
 
+
+
 /*==============================================================================*\
   __  __          _ _          ___                  _
  |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___
@@ -1386,6 +1388,10 @@ $font_0: FontAwesome;
 			width: 50%;
 		}
 	}
+	.form-padding-bottom {
+		padding-bottom: 50px;
+	}
+
 
 	.slick-content{
 		height: 40vh;

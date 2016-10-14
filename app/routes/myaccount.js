@@ -40,7 +40,10 @@ export default Ember.Route.extend({
 	  actions : {
 	  	saveUser(usr) { 
 	      usr.save().then(() => {
-        		this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
+        		//this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
+        		this.controller.get('notifications').success('Saved successfully!',{
+				  autoClear: true
+				});
 	      });
 	    },
 	    closeMessage() {

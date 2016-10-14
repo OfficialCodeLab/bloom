@@ -2,10 +2,10 @@
 	<div class="text-center">
 		<h1>My Stats</h1><hr><p style="text-center">Don’t worry about whipping out the tape measure whenever you’re trying stuff on. Your crucial sizes will all be here at the ready.</p>
 	</div>
-	{{#if model.hasGender}}
+	{{#if model.user.hasGender}}
 	<div class="hideOnMobile">
 		<div class="col-sm-6" style="text-align: right;">
-			{{#if model.isFemale}}
+			{{#if model.user.isFemale}}
 			<img src="../assets/images/clothing-measurement-f.png" style="height:480px; width:auto">
 			{{else}}
 			<img src="../assets/images/clothing-measurement-m.png" style="height:480px; width:auto">
@@ -14,64 +14,64 @@
 		<div class="col-sm-6 form-horizontal row" style="padding-top:38px;">
 			<div class="form-group has-feedback">
 				<div class="col-sm-8">
-					{{input type="text" value=height class="form-control sm-txt" placeholder="Height"}}
+					{{input type="text" value=model.userstat.height class="form-control sm-txt" placeholder="Height"}}
 				</div>
 			</div>
-			{{#if model.isFemale}}
+			{{#if model.user.isFemale}}
 			<div class="form-group has-feedback" style="margin-top:71px;">
 				<div class="col-sm-8">
-					{{input type="text" value=chest class="form-control sm-txt" placeholder="Chest"}}
+					{{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:-6px;">
 				<div class="col-sm-8">
-					{{input type="text" value=waist class="form-control sm-txt" placeholder="Waist"}}
+					{{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:-2px;">
 				<div class="col-sm-8">
-					{{input type="text" value=hips class="form-control sm-txt" placeholder="Hips"}}
+					{{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:75px;">
 				<div class="col-sm-8">
-					{{input type="text" value=inseam class="form-control sm-txt" placeholder="Inseam"}}
+					{{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:76px;">
 				<div class="col-sm-8">
-					{{input type="text" value=shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
+					{{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
 				</div>
 			</div>
 			{{else}}
 			<div class="form-group has-feedback" style="margin-top:44px;">
 				<div class="col-sm-8">
-					{{input type="text" value=shoulders class="form-control sm-txt" placeholder="Shoulders"}}
+					{{input type="text" value=model.userstat.shoulders class="form-control sm-txt" placeholder="Shoulders"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:-11px;">
 				<div class="col-sm-8">
-					{{input type="text" value=chest class="form-control sm-txt" placeholder="Chest"}}
+					{{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:-11px;">
 				<div class="col-sm-8">
-					{{input type="text" value=waist class="form-control sm-txt" placeholder="Waist"}}
+					{{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:-11px;">
 				<div class="col-sm-8">
-					{{input type="text" value=hips class="form-control sm-txt" placeholder="Hips"}}
+					{{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:64px;">
 				<div class="col-sm-8">
-					{{input type="text" value=inseam class="form-control sm-txt" placeholder="Inseam"}}
+					{{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}}
 				</div>
 			</div>
 			<div class="form-group has-feedback" style="margin-top:87px;">
 				<div class="col-sm-8">
-					{{input type="text" value=shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
+					{{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
 				</div>
 			</div>
 
@@ -91,34 +91,34 @@
 	<div class="showOnMobile text-center">
 		<div class="form-group has-feedback">
 			<label class="control-label">Height</label>
-			{{input type="text" value=height class="form-control sm-txt" placeholder="Height"}}
+			{{input type="text" value=model.userstat.height class="form-control sm-txt" placeholder="Height"}}
 		</div>
-		{{#if model.isFemale}}
+		{{#if model.user.isFemale}}
 		{{else}}
 		<div class="form-group has-feedback">
 			<label class="control-label">Shoulders</label>
-			{{input type="text" value=shoulders class="form-control sm-txt" placeholder="Shoulders"}}
+			{{input type="text" value=model.userstat.shoulders class="form-control sm-txt" placeholder="Shoulders"}}
 		</div>
 		{{/if}}
 		<div class="form-group has-feedback">
 			<label class="control-label">Chest</label>
-			{{input type="text" value=chest class="form-control sm-txt" placeholder="Chest"}}
+			{{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}}
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label">Waist</label>
-			{{input type="text" value=waist class="form-control sm-txt" placeholder="Waist"}}
+			{{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}}
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label">Hips</label>
-			{{input type="text" value=hips class="form-control sm-txt" placeholder="Hips"}}
+			{{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}}
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label">Inseam</label>
-			{{input type="text" value=inseam class="form-control sm-txt" placeholder="Inseam"}}
+			{{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}}
 		</div>
 		<div class="form-group has-feedback">
 			<label class="control-label">Shoe Size</label>
-			{{input type="text" value=shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
+			{{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
 		</div>
 
         {{#if responseMessage}}
@@ -127,22 +127,10 @@
 	    {{/if}}
 
 		<div class="form-group has-feedback text-center">
-			<button class="btn btn-success-thin" {{action 'updateStats'}}>Update Stats</button>
+			<button class="btn btn-success" {{action 'updateStats'}}>Update Stats</button>
 		</div>
 	</div>
 	{{else}}
-		<div class="text-center">
-			<h3>Please pick your gender</h3>
-			<div class="col-xs-6 border-box">
-                <div class="circle-link" style="float:right; padding-right:20px; cursor:pointer;" {{action 'selectGender' 'female'}}>
-                    <div class="circle"><i class="fa fa-venus"></i></div>
-                </div>
-            </div>
-            <div class="col-xs-6 border-box">
-                <div class="circle-link" style="float:left; padding-left:20px; cursor:pointer;" {{action 'selectGender' 'male'}}>
-                    <div class="circle"><i class="fa fa-mars"></i></div>
-                </div>
-            </div>
-		</div>
+		
 	{{/if}}
 </div>
