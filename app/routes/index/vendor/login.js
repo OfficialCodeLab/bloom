@@ -9,6 +9,10 @@ export default Ember.Route.extend({
           }
           return sesh;
     },
+      model () {
+        let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+        return this.store.peekRecord('user', _id);
+      },
 	actions: {
 		login: function (){
 			let hash = this.hashCode(this.controller.get('email'));					//Hash the email address
@@ -18,10 +22,14 @@ export default Ember.Route.extend({
 				if(_passhash === passhash) {		                    //Compare passwords
 					this.assignToUser(vendor.get('vendorID'));						//Assign vendor account to user
 				} else {
-					alert("Incorrect password:\n" + vendor.get('password') + "\n" + passhash);
+					this.controller.get('notifications').error('Incorrect password!',{
+                        autoClear: true
+                    });
 				}
 			}, () => {
-				alert("Account does not exist!");
+				this.controller.get('notifications').error('Account does not exist!',{
+                    autoClear: true
+                });
 			});
 		}
 	},
@@ -39,8 +47,14 @@ export default Ember.Route.extend({
         return hash;
     },
     assignToUser: function(id){
+        //window.scrollTo(0,0);       
     	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
     	user.set('vendorAccount', id);
-    	user.save().then(()=>this.transitionTo('index.vendor'));
+    	user.save().then(()=> {      
+            this.transitionTo('index.vendor');                          
+            this.controller.get('notifications').success('Logged in successfully!',{
+                autoClear: true
+            });              
+        }); 
     }
 });

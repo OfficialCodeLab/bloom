@@ -21,13 +21,17 @@ export default Ember.Route.extend({
 					this.store.findRecord('vendorLogin', emailhash).then((vendorLogin) => {
 						vendorLogin.set('password', passhash);
 						vendorLogin.save().then(()=> {
-							alert("Password Changed!");
+							this.controller.get('notifications').success('Password changed successfully!',{
+				                autoClear: true
+				            });  
 							this.controller.set('showPasswordPartial', false);
 						});
 					});
 				});
 			} else {
-				alert("Passwords do not match");
+				this.controller.get('notifications').error('Passwords do not match!',{
+	                autoClear: true
+	            });
 			}
 		},
 		changeEmail: function(){
@@ -56,7 +60,9 @@ export default Ember.Route.extend({
                                 vendorID: vendorAccount
                             });
 							_vendorLogin.save().then(()=> {
-								alert("Email Changed!");
+								this.controller.get('notifications').success('Email changed successfully!',{
+					                autoClear: true
+					            });  
 								this.controller.set('showEmailPartial', false);
 							});
 						});
@@ -70,6 +76,9 @@ export default Ember.Route.extend({
 	    	user.set('vendorAccount', '');
 	    	user.save();
 	    	this.transitionTo('index.vendor.login');
+	    	this.controller.get('notifications').info('Logged out successfully!',{
+                autoClear: true
+            });  
 		}
 	},
     hashCode: function(str) {  //String to hash function

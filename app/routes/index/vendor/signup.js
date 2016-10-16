@@ -24,10 +24,14 @@ export default Ember.Route.extend({
                         if (regex) {																		//Check email with regex
                             if (customID) {																	//Check if user is using custom ID
                                 this.store.findRecord('vendor', customID).then(() => {						//Check if ID exists already
-                                    alert("User ID Already exists");
+                                    this.controller.get('notifications').error('User ID Already exists!',{
+                                        autoClear: true
+                                    });
                                 }, () => {
                                     this.store.findRecord('vendorLogin', hash).then(() => {					//Check if email is in use
-                                        alert("Email address already in use");
+                                        this.controller.get('notifications').error('Email address already in use!',{
+                                            autoClear: true
+                                        });
                                     }, () => {
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
                                             id: hash,
@@ -54,13 +58,19 @@ export default Ember.Route.extend({
 	                                        	this.assignToUser(_vendorid);								//Add id to user
 	                                        	vendorLogin.set('vendorID', _vendorid);						//Add id to vendorLogin
 	                                        	vendorLogin.save();
+                                                window.scrollTo(0,0);
+                                                this.controller.get('notifications').success('Account has been created!',{
+                                                    autoClear: true
+                                                });
 	                                        });
                                         });
                                     });
                                 });
                             } else {
                                 this.store.findRecord('vendorLogin', hash).then(() => {						//Check if email is in use
-                                    alert("Email address already in use");
+                                    this.controller.get('notifications').error('Email address already in use!',{
+                                        autoClear: true
+                                    });
                                 }, () => {
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
                                         id: hash,
@@ -85,24 +95,36 @@ export default Ember.Route.extend({
                                         	let _vendorid = vendor.get('id');												
                                         	this.assignToUser(_vendorid);									//Add id to user
                                         	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
-                                        	vendorLogin.save();
+                                        	vendorLogin.save();  
+                                            window.scrollTo(0,0);                                          
+                                            this.controller.get('notifications').success('Account has been created!',{
+                                                autoClear: true
+                                            });
                                         });		
                                     });
                                 });
                             }
 
                         } else {
-                            alert("Not a valid email address");
+                            this.controller.get('notifications').error('Not a valid email address!',{
+                                autoClear: true
+                            });
                         }
                     } else {
-                        alert("Passwords don't match");
+                        this.controller.get('notifications').error('Passwords don\'t match!',{
+                            autoClear: true
+                        });
                     }
                 } else {
-                    alert("Password not long enough");
+                    this.controller.get('notifications').error('Password not long enough!',{
+                        autoClear: true
+                    });
                 }
 
             } else {
-                alert("Please enter a name");
+                this.controller.get('notifications').error('Please enter a name!',{
+                    autoClear: true
+                });
             }
         }
     },

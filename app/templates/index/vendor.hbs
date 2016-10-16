@@ -12,15 +12,8 @@
 		<h1 class="font-times-header">VENDOR ADMIN</h1>
 		<p class="font-times-subheader">Add / Update product listings here</p>
 		<hr class="style-two">
-		<div class="row">
-			<div class="col-md-2">
-				<div>
-					
-				</div>
-			</div>
-			<div class="col-md-8">
+		<div class="container">
 			{{outlet}}
-			</div>
 		</div>
 	</div>
 
@@ -36,3 +29,5 @@
     {{outlet}}
     </div>
 {{/if}}
+
+{{notification-container position="bottom"}}

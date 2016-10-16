@@ -52,7 +52,6 @@ export default Ember.Route.extend({
 					if(_modalData){
 						_modalData.deleteRecord();
 					}
-					let _transition = this.controller.get("tempTransition");
 					this.transitionTo(_transition);
 					this.controller.set('confirmTransition', 0);
 
@@ -91,24 +90,38 @@ export default Ember.Route.extend({
 		},
 		updateItem: function(model){
 			let _cat = this.controller.get('category') + "";
+			let _item = this.store.peekRecord('cat-item', this.controller.get('model.catItem.id'));
 			this.controller.get('model.catItem').set('isUpdating', true);
 			if(_cat.charAt(0) !== '<'){
-				//alert(_cat);
-				let cat = this.store.peekRecord('category', this.controller.get('category'));
-				model.set('category', cat);
+				//Category has changed:
+				let cat = this.store.peekRecord('category', _cat);
+				let oldcatid = _item.get('category').get('id');
+				let oldcat = this.store.peekRecord('category', oldcatid);
+				//Update relationships
+				oldcat.get('catItems').removeObject(_item);
+				cat.get('catItems').pushObject(_item);
+				_item.set('category', cat);
+
+				oldcat.save().then(() => {
+					cat.save().then(() => {
+						_item.save().then(() => {
+							this.controller.get('model.catItem').set('isUpdating', false);
+							this.tryFlushBlob(model); //Attempt GC
+				    		this.controller.get('notifications').success('Product info has been saved!',{
+					            autoClear: true
+					          });
+						});
+					});
+				});
+			} else {
+				model.save().then(() => {
+					this.controller.get('model.catItem').set('isUpdating', false);
+					this.tryFlushBlob(model); //Attempt GC
+		    		this.controller.get('notifications').success('Product info has been saved!',{
+			            autoClear: true
+			          });
+				});
 			}
-			model.save().then(() => {
-				this.controller.get('model.catItem').set('isUpdating', false);
-				this.transitionTo('index.vendor');
-				try{
-				    let _blob = model.get('imageBlob');
-				    let _imgurl = model.get('imageURL');
-				    if (_blob.url !== _imgurl){
-						this.destroyBlob(_blob);
-				  	    //this.destroyBlob(_blob);
-				    }					
-				} catch(ex){}
-			});
 		},
 		willTransition(transition) {
 			let model = this.controller.get('model.catItem');
@@ -161,6 +174,16 @@ export default Ember.Route.extend({
 		        });
 	        });
 	    }
+	},
+	tryFlushBlob(model){
+		try{
+		    let _blob = model.get('imageBlob');
+		    let _imgurl = model.get('imageURL');
+		    if (_blob.url !== _imgurl){
+				this.destroyBlob(_blob);
+		  	    //this.destroyBlob(_blob);
+		    }					
+		} catch(ex){}
 	},
 	destroyBlob(blob){
 

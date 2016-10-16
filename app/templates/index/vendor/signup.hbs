@@ -1,76 +1,78 @@
-<h1>Signup form</h1>
+<div class="container">
+    <h1>Signup form</h1>
 
-<div class="form-horizontal">
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Vendor Name*</label>
-        <div class="col-sm-6">
-          {{input type="text" value=name class="form-control" placeholder="Vendor account name"}}
+    <div class="form-horizontal">
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Vendor Name*</label>
+            <div class="col-sm-6">
+              {{input type="text" value=name class="form-control" placeholder="Vendor account name"}}
+            </div>
+        </div> 
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Email*</label>
+            <div class="col-sm-6">
+              {{input type="email" value=email class="form-control" placeholder="This will be used to log in and for password recovery"}}
+            </div>
         </div>
-    </div> 
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Email*</label>
-        <div class="col-sm-6">
-          {{input type="email" value=email class="form-control" placeholder="This will be used to log in and for password recovery"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Password*</label>
+            <div class="col-sm-6">
+              {{input type="password" value=password class="form-control" placeholder="8 Characters or more"}}
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Password*</label>
-        <div class="col-sm-6">
-          {{input type="password" value=password class="form-control" placeholder="8 Characters or more"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Confirm Password*</label>
+            <div class="col-sm-6">
+              {{input type="password" value=passwordConfirm class="form-control" placeholder="Retype password to confirm"}}
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Confirm Password*</label>
-        <div class="col-sm-6">
-          {{input type="password" value=passwordConfirm class="form-control" placeholder="Retype password to confirm"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Description</label>
+            <div class="col-sm-6">
+              {{input type="text" value=desc class="form-control" placeholder="Describe your business a bit more"}}
+            </div>
+        </div> 
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Custom Vendor ID</label>
+            <div class="col-sm-6">
+              {{input type="text" value=customID class="form-control" placeholder="Eg: pear.life/vendor/<your custom ID>"}}
+            </div>
+        </div>   
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Cellphone Number</label>
+            <div class="col-sm-6">
+              {{input type="text" value=cell class="form-control" placeholder="Your primary contact number"}}
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Description</label>
-        <div class="col-sm-6">
-          {{input type="text" value=desc class="form-control" placeholder="Describe your business a bit more"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Address Line 1</label>
+            <div class="col-sm-6">
+              {{input type="text" value=addressL1 class="form-control" placeholder="Your full address"}}
+            </div>
         </div>
-    </div> 
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Custom Vendor ID</label>
-        <div class="col-sm-6">
-          {{input type="text" value=customID class="form-control" placeholder="Eg: pear.life/vendor/<your custom ID>"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Address Line 2</label>
+            <div class="col-sm-6">
+              {{input type="text" value=addressL2 class="form-control" placeholder="Your full address continued"}}
+            </div>
         </div>
-    </div>   
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Cellphone Number</label>
-        <div class="col-sm-6">
-          {{input type="text" value=cell class="form-control" placeholder="Your primary contact number"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">City</label>
+            <div class="col-sm-6">
+              {{input type="text" value=city class="form-control" placeholder="Your city"}}
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Address Line 1</label>
-        <div class="col-sm-6">
-          {{input type="text" value=addressL1 class="form-control" placeholder="Your full address"}}
+        <div class="form-group has-feedback">
+            <label class="col-sm-3 control-label">Postal Code</label>
+            <div class="col-sm-6">
+              {{input type="text" value=postalcode class="form-control" placeholder="Your postal code"}}
+            </div>
         </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Address Line 2</label>
-        <div class="col-sm-6">
-          {{input type="text" value=addressL2 class="form-control" placeholder="Your full address continued"}}
-        </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">City</label>
-        <div class="col-sm-6">
-          {{input type="text" value=city class="form-control" placeholder="Your city"}}
-        </div>
-    </div>
-    <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Postal Code</label>
-        <div class="col-sm-6">
-          {{input type="text" value=postalcode class="form-control" placeholder="Your postal code"}}
-        </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-4">
-            <button type="submit" style="width:100%" class="btn btn-success-thin" {{action 'signBtn' }}>Confirm</button>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <button type="submit" style="width:100%" class="btn btn-success" {{action 'signBtn' }}>Confirm</button>
+            </div>
         </div>
     </div>
 </div>
