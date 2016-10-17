@@ -1,0 +1,72 @@
+
+<div class="col-md-4">
+    <div class="profile-pic-outer-grey">
+    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+    </div>
+    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3><hr>
+    {{!-- {{#if model.user.accountType}}
+    	<p><i>Registered {{model.user.accountType}}</i></p>
+    {{else}}
+    	<p><i>Registered user</i></p>
+    	<p>Request vendor status</p>
+    	{{x-toggle toggled=model.user.vendorRequest value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
+    {{/if}} --}}
+</div>
+<div class="col-md-8">
+	<h3 class="pi-title">PERSONAL INFORMATION</h3>
+	<div class="form-horizontal form-margin-sm form-padding-bottom">
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">EMAIL</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.email class="form-control form-centered" placeholder="Your Email Address"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">CELL</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.cell class="form-control form-centered" placeholder="Your contact number"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">ADDRESS</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.addressL1 class="form-control form-centered" placeholder="Your Address"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            </div>
+	        </div>
+	        {{!-- <div class="form-group has-feedback">
+	            <label class="col-sm-3 control-label">Address Line 2</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.addressL2 class="form-control" placeholder="Your Address"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            {{!-- </div>
+	        </div>  --}}
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">CITY</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.city class="form-control form-centered" placeholder="Your City"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            </div>
+	        </div>
+	        <div class="form-group">
+	            <label class="col-sm-3 control-label">POSTAL CODE</label>
+	            <div class="col-sm-6">
+	              {{input type="text" value=model.user.postalcode class="form-control form-centered" placeholder="Your Postal Code"}}
+	              {{!-- {{#if item.isValid}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}} --}}
+	            </div>
+	        </div>
+
+	        {{#if model.userext.responseMessage}}
+		      <div class="col-sm-offset-3 col-sm-6 alert alert-success" {{action 'closeMessage'}}>{{model.userext.responseMessage}}
+		      <p class="tiny-text">Tap this message to close it</p></div>
+		    {{/if}}
+
+	        <div class="form-group">
+	            <div class="col-sm-offset-5 col-sm-4">
+	                <button type="submit" style="width:100%" class="btn btn-success" {{action 'saveUser' model.user}}>UPDATE</button>
+	            </div>
+	        </div>
+	    </div>
+</div>

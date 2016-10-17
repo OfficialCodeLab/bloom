@@ -15,7 +15,14 @@ Router.map(function() {
     this.route('new', {path: '/new'});
     this.route('account', {path: '/:user_id'});
   });
-  this.route('myaccount');
+  this.route('myaccount', function() {
+    this.route('account', {path: '/' });
+    this.route('privacy');
+    this.route('security');
+    this.route('notifications');
+    this.route('payments');
+    this.route('support');
+  });
   this.route('index', {path: '/' }, function() {
     this.route('favourites', {path: '/' });
     this.route('mywedding', function() {
