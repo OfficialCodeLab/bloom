@@ -1,0 +1,28 @@
+{{#modal-popup title='Contact us' ok="submit" close='closeContactModal'}}
+  
+      <div class="form-horizontal form-group form-group-lg row">
+        <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+          <div class="has-feedback {{if model.isValid 'has-success'}}">
+            <div class="input-group">
+              <span class="input-group-addon">@</span> {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
+            </div>
+            <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
+          </div>
+          <br>
+          <div class="{{if model.isLong 'has-success'}}">
+            {{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
+          </div>
+          <br>
+          {{#if model.responseMessage}}
+            <div class="alert alert-success" {{action 'closeMessage'}}>{{model.responseMessage}}
+              <p>Click this popup to close it</p>
+            </div>
+          {{/if}}
+          <div style="float:right;">
+            {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired" }}{{/ember-grecaptcha}}
+            <br>
+           {{!--  <button class="btn btn-success btn-lg btn-block" style="float:right; max-width:180px;" disabled= {{model.isDisabled}} {{action 'saveContact' model}}>Submit</button> --}}
+          </div>
+        </div>
+      </div>
+{{/modal-popup}}

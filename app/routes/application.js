@@ -135,11 +135,74 @@ export default Ember.Route.extend({
 	        parentView: 'application'
 	      });
 	    },
+	    openContactModal: function(){
+	    	let contact = this.store.createRecord('contact');
+	    	this.controller.set("messageN", contact);
+	    	this.send('showModal', 'modal-contact', contact);
+	    },
+	    closeContactModal: function(){
+	    	this.send('removeModal');
+	    	let contact = this.controller.get("messageN");
+	    	if(contact !== ''){
+	    		contact.deleteRecord();
+	    	}
+	    	this.controller.set("messageN", "");
+	    },
 	    storeTransition: function (){
 
 	    },
+	    captchaStore: function(val){
+	    	this.controller.set('captchaVerified', val);
+	    },
 	    ok: function(){
 	    	 // this.transitionTo(this.controller.get('transition'));
+	    },
+	    submit: function(){
+	    	let contact = this.controller.get("messageN");
+	    	this.controller.set("messageN", "");
+	    	let user_id;
+	    	let email = contact.get('email');
+	    	let message = contact.get('message');
+	    	if(email === null || email === '' || email === undefined){
+	    		this.controller.get('notifications').error('Invalid email address',{
+				    autoClear: true
+				});
+	    		contact.deleteRecord();
+	    	} else if (message === null || message === '' || message === undefined) {
+	    		this.controller.get('notifications').error('Please enter a message of 5 characters or more.',{
+				    autoClear: true
+				});
+	    		contact.deleteRecord();
+	    	} else {
+				if (this.get("session").get('currentUser') !== undefined){
+					user_id = this.get("session").get('currentUser').providerData[0].uid;
+				} else {
+					user_id = "Anonymous user";
+				}
+				if (this.controller.get('captchaVerified')) {
+					let message = this.store.createRecord('message', {
+					  to: "info@codelab.io",
+					  from: contact.get('email'),
+					  subject: "New Contact request from " + contact.get('email'),
+					  html: contact.get('message'),
+					  senderId: user_id
+					});
+					message.save();
+
+					contact.save().then(() => {
+					  this.controller.get('notifications').info('Message sent successfully!',{
+					    autoClear: true
+					  });
+	    			  contact.deleteRecord();
+					});
+				} else {
+					this.controller.get('notifications').error('CAPTCHA form invalid!',{
+					    autoClear: true
+					});
+	    			contact.deleteRecord();
+				}
+	    		
+	    	}
 	    }
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);

@@ -17,6 +17,7 @@ export default Ember.Route.extend({
             let email = this.controller.get('email');
             let hash = this.hashCode(email);
             let passhash = this.hashCode(this.controller.get('password'));
+            //if(email === null )
 
             if (this.controller.get('name')) {  															//Check name field
                 if (passLength) {																			//Check password length
