@@ -2,6 +2,12 @@
   
       <div class="form-horizontal form-group form-group-lg row">
         <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+          <!-- Vendor Name -->
+          {{#if model.vendor}}
+          <div class="input-group pear-max-width">
+            {{input type="text" value=to class="form-control pear-input" placeholder="Vendor Name" disabled="true" value=model.vendor}}
+          </div><br>
+          {{/if}}
           <div class="has-feedback {{if model.isValid 'has-success'}}">
             <div class="input-group">
               <span class="input-group-addon">@</span> {{input type="email" value=model.email class="form-control" placeholder="Your e-mail address."}}
@@ -9,6 +15,11 @@
             <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
           </div>
           <br>
+          {{#if model.vendor}}
+          <div class="input-group pear-max-width">
+            {{input type="text" class="form-control pear-input" placeholder="Subject" value=model.subject}}
+          </div><br>
+          {{/if}}
           <div class="{{if model.isLong 'has-success'}}">
             {{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}}
           </div>

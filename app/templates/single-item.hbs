@@ -57,10 +57,9 @@
 								<p>Message Seller</p>
 							</td>
 							<td>
-								{{!-- <a href="mailto:pear+{{model.email}}?cc=info@pear.life" target="_top">Email</a> --}}
-								{{#link-to 'messaging' model.vendor.id}}
-									<button class="btn btn-default btn-pear">Message {{model.vendor.name}}</button>
-								{{/link-to}}
+								{{!-- {{#link-to 'messaging' model.vendor.id}} --}}
+									<button class="btn btn-default btn-pear" {{action 'openContactModalInit'}}>Message {{model.vendor.name}}</button>
+								{{!-- {{/link-to}} --}}
 							</td>
 						</tr>
 						<tr>
@@ -78,3 +77,4 @@
 		</div>
 	</div>
 </div>
+		{{notification-container position="bottom"}}

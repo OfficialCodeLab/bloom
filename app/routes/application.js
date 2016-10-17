@@ -135,8 +135,10 @@ export default Ember.Route.extend({
 	        parentView: 'application'
 	      });
 	    },
-	    openContactModal: function(){
+	    openContactModal: function(vname, vemail){
 	    	let contact = this.store.createRecord('contact');
+	    	if (typeof vname !== 'undefined') { contact.set('vendor', vname); }
+	    	if (typeof vemail !== 'undefined') { contact.set('vendorEmail', vemail); }
 	    	this.controller.set("messageN", contact);
 	    	this.send('showModal', 'modal-contact', contact);
 	    },
@@ -163,6 +165,8 @@ export default Ember.Route.extend({
 	    	let user_id;
 	    	let email = contact.get('email');
 	    	let message = contact.get('message');
+	    	let subject;
+	    	let to;
 	    	if(email === null || email === '' || email === undefined){
 	    		this.controller.get('notifications').error('Invalid email address',{
 				    autoClear: true
@@ -178,12 +182,22 @@ export default Ember.Route.extend({
 					user_id = this.get("session").get('currentUser').providerData[0].uid;
 				} else {
 					user_id = "Anonymous user";
-				}
+				}				
+		    	if (contact.get('subject')){
+					subject = contact.get('subject');
+		    	} else {
+		    		subject = "New Contact request from " + contact.get('email');
+		    	}
+		    	if (contact.get('vendorEmail')){
+		    		to = contact.get('vendorEmail');
+		    	} else {
+		    		to = "info@codelab.io";
+		    	}
 				if (this.controller.get('captchaVerified')) {
 					let message = this.store.createRecord('message', {
-					  to: "info@codelab.io",
+					  to: to,
 					  from: contact.get('email'),
-					  subject: "New Contact request from " + contact.get('email'),
+					  subject: subject,
 					  html: contact.get('message'),
 					  senderId: user_id
 					});

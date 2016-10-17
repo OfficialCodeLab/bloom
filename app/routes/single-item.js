@@ -25,6 +25,12 @@ export default Ember.Route.extend({
 		goBack: function(){
 			window.history.go(-1);
 			//console.log("This works.");
-		}
+		},
+
+	    openContactModalInit: function(){
+	    	let venName = this.controller.get('model.vendor.name');
+	    	let venEmail = this.controller.get('model.vendor.email');
+	    	this.send('openContactModal', venName, venEmail);
+	    },
 	}
 });
