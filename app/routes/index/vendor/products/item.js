@@ -27,6 +27,9 @@ export default Ember.Route.extend({
 					model.destroyRecord().then(()=>{
 						this.controller.get('model.catItem').set('isDeleting', false);
 						this.transitionTo('index.vendor');
+						this.controller.get('notifications').info('Item listing has been removed!',{
+			                autoClear: true
+			            }); 
 						try{
 				        	let _blob = model.get('imageBlob');
 				            if(_blob){	            	

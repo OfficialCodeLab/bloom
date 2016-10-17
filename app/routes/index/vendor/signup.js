@@ -129,6 +129,9 @@ export default Ember.Route.extend({
         }
     },
     hashCode: function(str) {  //String to hash function
+        if (str === undefined){
+            str = '';
+        }
         let hash = 0,
             i, chr, len;
         if (str.length === 0) {
@@ -138,7 +141,7 @@ export default Ember.Route.extend({
             chr = str.charCodeAt(i);
             hash = ((hash << 5) - hash) + chr;
             hash |= 0; // Convert to 32bit integer
-        }
+        }            
         return hash;
     },
     assignToUser: function(id){

@@ -158,20 +158,27 @@ export default Ember.Route.extend({
 							            	this.destroyBlob(_blob);
 							            } 
 							    	}
+							    	this.controller.get('notifications').info('Listing created successfully!',{
+						                autoClear: true
+						            });  
 									this.transitionTo('index.vendor');
 								});
 							});	
 						});
 					} else {
 						this.controller.set('isCreating', false);
-						alert("You have reached maximum listings.\nPlease upgrade your plan to post more.");
+						this.controller.get('notifications').error('You have reached maximum listings.\nPlease upgrade your plan to post more.',{
+			                autoClear: true
+			            });  
 					}
 
 					
 				});
 			} catch(ex){
 				this.controller.set('isCreating', false);
-				alert("Please select a category or there was a problem");
+				this.controller.get('notifications').error('Please select a category or there was a problem.',{
+	                autoClear: true
+	            }); 
 			}
 		}
 	},

@@ -12,7 +12,12 @@ export default Ember.Route.extend({
 				case 'delete':
 					
 					let model = this.store.peekRecord('guest', this.controller.get('guestId'));
-					model.destroyRecord();
+					model.destroyRecord().then(()=>{
+						this.controller.get('notifications').info('Guest has been removed!',{
+							autoClear: true
+						});
+
+					});
 
 					break;
 			}

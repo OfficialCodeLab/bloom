@@ -95,7 +95,11 @@ export default Ember.Controller.extend({
 				rsvp = true;
 			}
 			model.set('rsvp', rsvp);
-			model.save();
+			model.save().then(()=>{
+				this.get('notifications').success('Guest attendance updated!',{
+					autoClear: true
+				});
+			});
 		},
 		destroyGuest(id){
 

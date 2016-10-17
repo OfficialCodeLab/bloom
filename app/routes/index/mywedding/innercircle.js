@@ -16,7 +16,6 @@ export default Ember.Route.extend({
 				let searchResults = [];
 				this.controller.set('searching', true);
 				this.store.query('user',  {}).then((users) =>{
-				  // Do something with `peters`
 				  	users.forEach(function(user){
 						let fullname = user.get('name') + " " + user.get('surname'); 	
 						if(~fullname.toLowerCase().indexOf(_name)){
@@ -28,11 +27,12 @@ export default Ember.Route.extend({
 								key: key
 							});
 							key++;
-							//console.log(fullname);
 						}
 					});
 					if(JSON.stringify(searchResults) === "[]"){
-						this.controller.set('responseMessage', "No Users with that name were found");
+						this.controller.get('notifications').warning('No Users with that name were found.',{
+				            autoClear: true
+				        });
 					}
 					this.controller.set('searchResults', searchResults);
 					this.controller.set('searching', false);
@@ -53,7 +53,11 @@ export default Ember.Route.extend({
 					let user = this.store.peekRecord('user', _id);
 					// let _user = this.store.peekRecord(this.controller.get('user'));
 					user.get('innercircle').removeObject(this.controller.get('user'));
-					user.save();
+					user.save().then(()=>{
+						this.controller.get('notifications').info('Inner circle member removed!',{
+							autoClear: true
+						});
+					});
 
 					break;
 			}
@@ -63,15 +67,43 @@ export default Ember.Route.extend({
 			Ember.set(searchRes, 'adding', true);
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let user = this.store.peekRecord('user', _id);
+			let that = this;
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
-				user.get('innercircle').pushObject(stats);
-				user.save().then(()=>{
-					this.controller.get('notifications').success('User added successfully!',{
-					  autoClear: true
+
+					
+					user.get('innercircle').then((circle) => {	
+						let len = circle.get('length');	
+						let i = 0;	
+						var BreakException = {}; //  For lazy hackaround to break .forEach() loop
+						try{
+							circle.forEach(function(c){
+					  			i++;
+					  			if(c.id === stats.id){
+					  				that.controller.get('notifications').warning('User is already in your inner circle!',{
+										autoClear: true
+									});
+									Ember.set(searchRes, 'adding', '');								
+	    							throw BreakException; // Yep I am a monster
+					  			} else if (len === i) {
+									user.get('innercircle').pushObject(stats);
+									user.save().then(()=>{
+										that.controller.get('notifications').success('User added successfully!',{
+										  autoClear: true
+										});
+										that.sendMail(user, _user);
+										Ember.set(searchRes, 'adding', '');
+									});
+					  			}
+					  		});
+						} catch (ex){
+							if (ex !== BreakException) {
+								throw ex;
+							}
+						}
+						
 					});
-					// Ember.set(searchRes, 'response', 'User added');
-					Ember.set(searchRes, 'adding', '');
-				});
+				//}
+				
 			},()=>{
 				let stats = this.store.createRecord('userstat', {
 					id: _user.id,
@@ -80,25 +112,12 @@ export default Ember.Route.extend({
 				stats.save();
 				user.get('innercircle').pushObject(stats);
 				user.save().then(()=> {
-					// Ember.set(searchRes, 'response', 'User added');
 					this.controller.get('notifications').success('User added successfully!',{
 					  autoClear: true
 					});
 					Ember.set(searchRes, 'adding', '');
+					that.sendMail(user, _user);
 				});
-			});
-
-			this.store.findRecord('user', _user.id).then((__user) => {
-				let message = this.store.createRecord('message', {
-		          to: __user.get('email'),
-		          from: user.get("email"),
-		          subject: "You Have Been Added to an Inner Circle",
-		          html: "Hi, I have added you to my inner circle",
-		          senderId: _id,
-		          senderName: user.get("name"),
-		          receiverName: __user.get("name")
-		        });
-		        message.save();
 			});
 
 		},
@@ -127,6 +146,7 @@ export default Ember.Route.extend({
 			this.controller.set('searchPartial', true);
 		},
 		backBtn(){
+  			this.refresh();	
 			this.controller.set('searchPartial', false);			
 		},
 		willTransition(){
@@ -136,7 +156,21 @@ export default Ember.Route.extend({
 				_modalData.deleteRecord();
 			}
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-  			this.store.findRecord('user', _id);	
+  			this.store.findRecord('user', _id);
 		}
+	},
+	sendMail: function (user, _user){
+		this.store.findRecord('user', _user.id).then((__user) => {
+			let message = this.store.createRecord('message', {
+	          to: __user.get('email'),
+	          from: user.get("email"),
+	          subject: "You Have Been Added to an Inner Circle",
+	          html: "Hi, I have added you to my inner circle",
+	          senderId: user.get("id"),
+	          senderName: user.get("name"),
+	          receiverName: __user.get("name")
+	        });
+	        message.save();
+		});
 	}
 });
