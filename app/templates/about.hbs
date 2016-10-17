@@ -1,8 +1,8 @@
 <div class="about-page">
-  {{#if session.isAuthenticated}}
+  {{!-- {{#if session.isAuthenticated}}
   {{else}}
     <div class="navbar-padding"></div>
-  {{/if}}
+  {{/if}} --}}
   {{#j-query.slider-component}}
     <div class="about-slider-container">
       <div class="about-slider">
@@ -95,13 +95,14 @@
           <div style="float:right;">
             {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired" }}{{/ember-grecaptcha}}
             <br>
-            <button class="btn btn-success-thin btn-lg btn-block" style="float:right; max-width:180px;" disabled= {{model.isDisabled}} {{action 'saveContact' model}}>Submit</button>
+            <button class="btn btn-success btn-lg btn-block" style="float:right; max-width:180px;" disabled= {{model.isDisabled}} {{action 'saveContact' model}}>Submit</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+{{notification-container position="bottom"}}
 
 
 

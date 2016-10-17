@@ -6,8 +6,10 @@
 {{else}}
 
 	{{partial 'navbar-splash'}} 
-	{{outlet}}
-	{{partial 'partials/login-modal'}}
+	<div class="pear-app-content">
+		{{outlet}}
+		{{partial 'partials/login-modal'}}
+	</div>
 	
 {{/if}}
 

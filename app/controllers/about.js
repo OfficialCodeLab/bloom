@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	captchaVerified: '',
+	notifications: Ember.inject.service('notification-messages'),
 
 	actions: {
 	    captchaComplete(data) {

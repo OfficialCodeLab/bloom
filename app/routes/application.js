@@ -47,6 +47,7 @@ export default Ember.Route.extend({
 			Ember.$('#s2-overlay3').fadeOut("fast");	
 			let _that = this;
 			let scope = "";
+
 			if(provider === "facebook"){
 				scope = 'public_profile,user_friends';
 			}
@@ -57,15 +58,28 @@ export default Ember.Route.extend({
 				}
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
+	    		
 				
-	          this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
-	          	this.transitionTo('index');
-	          }, ()=> {this.transitionTo('user.new');});
-          });
+				this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
+					this.transitionTo('index');
+					window.scrollTo(0,0);
+					this.controller.get('notifications').info('Logged in successfully.',{
+			          autoClear: true
+			      	});
+				}, ()=> {this.transitionTo('user.new');});
+			}, (error) => {
+				this.controller.get('notifications').error('An error occured, please try again later.',{
+				    autoClear: true
+				});
+          	});
 	    },
 	    logout: function() {
-	      this.get("session").close();
-	      this.transitionTo('login');
+    	  this.transitionTo('logout');
+	      // this.get("session").close();
+	      // this.controller.get('notifications').info('Logged out successfully.',{
+	      //     autoClear: true
+	      // });
+	      //this.transitionTo('login');
 	    },
 	    showId: function(){
 	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));

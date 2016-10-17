@@ -62,6 +62,7 @@ Router.map(function() {
   this.route('guide');
   this.route('master-admin');
   this.route('messaging', { path: '/messaging/:vendor_id' });
+  this.route('logout');
 });
 
 export default Router;

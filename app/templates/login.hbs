@@ -1,7 +1,7 @@
 {{!-- TODO:
 - ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
 {{#background-scroller}}{{/background-scroller}}
-<main id="panel">
+<main id="panel" style="margin-top: -50px !important; OVERFLOW-x: hidden;">
 	
 	<div class="fullscreen" id="section1">
 		<div id="section1-bg" class="fullscreen">
@@ -39,20 +39,17 @@
 			</a>{{/link-to}}
 		</div>
 		--}}
-		{{#if session.isAuthenticated}}          
-            <h2 style="text-align:center; color:#fff">Logging in {{!-- {{session.currentUser.providerData.0.providerData.0.displayName}} --}}</h2>
-          {{!-- <button class="btn btn-default clbutton-main" {{action "logout"}}>Logout</button>  --}}
-        {{else}}
-          {{!-- <button {{action "login" "twitter"}}>Sign in with Twitter</button><br> --}}
-            {{!-- <h2 style="text-align:center; color:#fff">Sign in: </h2> --}}
+		 {{#if session.isAuthenticated}}           
+            <h3 style="text-align:center; color:#fff">Logging in <i class="fa fa-spinner fa-spin"></i></h3>
+         {{else}}
           	{{#link-to 'guide'}}<button class="btn btn-default clbutton-white">G U I D E D&nbsp;&nbsp;&nbsp;&nbsp;T O U R</button>{{/link-to}}
           	<div class="cl-spacing" style="display: inline-block; min-width: 0.7vw;"></div>
             <button class="btn btn-default clbutton-grey"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button>
-            {{!-- <button class="btn btn-default clbutton-main"{{action "login" "facebook" }}>Sign in with Facebook</button> --}}
-        {{/if}}
+        {{/if}} 
 	</div>
     <div class="splash-footer">
     	<span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
+			{{notification-container position="bottom"}}
     </div>
 	</div>
 	</div>
