@@ -23,6 +23,10 @@
 					</div>
 				</div>
 			{{/masonry-grid}} 
+			<div style="text-align: center">
+			    <button class="btn btn-default" {{action "prev"}}>Previous</button>
+			    <button class="btn btn-default" {{action "next"}}>Next</button>
+		    </div>
 		</div>
 		<div id="loading-spinner">
 			<div class="progress">
@@ -54,11 +58,11 @@
 			</div>
 		</div>
 	    {{/each}}
+		<div style="text-align: center">
+		    <button class="btn btn-default" {{action "prev"}}>Previous</button>
+		    <button class="btn btn-default" {{action "next"}}>Next</button>
+	    </div>
 	</div>
-	<div style="text-align: center">
-	    <button class="btn btn-default" {{action "prev"}}>Previous</button>
-	    <button class="btn btn-default" {{action "next"}}>Next</button>
-    </div>
 
 
 
