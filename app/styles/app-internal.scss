@@ -902,6 +902,17 @@ Guest List
 	// border-radius: 5px;
 }
 
+#masonry-items{
+	display: none;
+}
+
+#loading-spinner{
+	padding-bottom: 40px;
+}
+.progress-bar-warning {
+	background-color: $pill-active;
+}
+
 /*==============================================================================*\
    ____      _     ___ _
   / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___
