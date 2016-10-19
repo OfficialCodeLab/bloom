@@ -21,6 +21,10 @@ export default Ember.Component.extend({
         //console.log("loaded the image didn't I! - 1");
     },
     imageError: function(event){
-        //console.log("there was an error wasn't there! - 1");
+        this.set('src', "placeholder-square.png");
+        this.sendAction('loadedImg');
+        this.sendAction('errorImg');
+        console.log("Image unable to load, used placeholder.");
+        //console.log(this.get('src'));
     }
 });
