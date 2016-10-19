@@ -28,11 +28,15 @@ const FavouriteButtonComponent = Ember.Component.extend({
 			if(this.get('favourited')){
 				this.set('favourited', false);
 	    		user.get('favourites').removeObject(item);
+	    		item.get('favouritedBy').removeObject(user);
 			} else{				
 				this.set('favourited', true);
 	    		user.get('favourites').pushObject(item);
+	    		item.get('favouritedBy').pushObject(user);
 			}
-    		user.save();
+    		user.save().then(()=>{
+    			item.save();
+    		});
 	    }
 	}
 });
