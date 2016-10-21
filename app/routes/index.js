@@ -2,9 +2,16 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-init: function(){
 
-},
+  handleResize: function() {
+    try{
+        var $container = this.controller.get('masonryRef');
+        $container.layout();        
+    } catch(ex){}
+  },
+  bindResizeEvent: function() {
+    jQuery(window).on('resize', Ember.run.bind(this, this.handleResize));
+  }.on('init'),
 
 
   beforeModel: function() {
@@ -17,7 +24,6 @@ init: function(){
       }
       return sesh;
   },
-
   model() {
     //Before creating the record, clear the DS Store
 

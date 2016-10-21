@@ -14,6 +14,16 @@ export default Ember.Route.extend({
 	      }
 	      return sesh;
     },
+  handleResize: function() {
+    try{
+        var $container = this.controller.get('masonryRef');
+        $container.layout();        
+    } catch(ex){}
+  },
+  bindResizeEvent: function() {
+    this._super();
+    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
+  }.on('init'),
 
 
   model () {

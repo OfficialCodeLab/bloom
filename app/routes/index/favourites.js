@@ -7,8 +7,6 @@ export default Ember.Route.extend({
   endAt: null,
   loadAmount: 0,
   loadCount: 0,
-  name: '',
-  desc: '',
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){
@@ -28,36 +26,24 @@ export default Ember.Route.extend({
   }.on('init'),
 
 
-  model (params) {
-  	window.scrollTo(0,0);
-  	let _id = params.category_id;
-
-    return this.store.find('category', _id).then((cat) => {
-      let catItems = cat.get('catItems');
-      // console.log(catItems.get('length'));
-      // console.log(catItems);
-      this.set('name', cat.get('name'));
-      this.set('desc', cat.get('desc'));
+  model () {
+  	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	//return this.store.findRecord('user', _id);	
+    return this.store.findRecord('user', _id).then((user) => {
+      let favourites = user.get('favourites');
       if (!(this.get('startAt'))) {
         this.resetIndexes();
       }
       //let sorted = items.sortBy('name');
       this.resetLoadCount();
-      console.log(this.get('startAt') + " => " + this.get('endAt'));
 
-      return catItems;
+      return favourites.slice(this.get('startAt'), this.get('endAt'));
     });
   },
-  setupController: function (controller, model) {
-	this._super(controller, model);
-  	this.controller.set('name', this.get('name'));
-  	this.controller.set('desc', this.get('desc'));
-  },
 
-  actions: {
-  	
+	actions: {
 
-    prev: function() {
+		prev: function() {
       var id = this.get('currentModel').get('firstObject.id');
       //var items = this.store.peekAll('cat-item');
       if(this.get('startAt') - PAGE_SIZE >= 0){
@@ -123,8 +109,7 @@ export default Ember.Route.extend({
 
   },
   resetIndexes: function() { 
-  	let items  = this.store.peekAll('cat-item');    		
-  	console.log(items.get("length"));
+      var items = this.store.peekAll('cat-item');   
       this.set('startAt', 0);
       if(PAGE_SIZE < items.get('length')){        
         this.set('endAt', PAGE_SIZE);
@@ -146,5 +131,4 @@ export default Ember.Route.extend({
       this.set('loadAmount', loadAmount);
       this.set('loadCount', 0);    
   }
-  	  
 });
