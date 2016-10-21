@@ -3,17 +3,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 
-  handleResize: function() {
-    try{
-        var $container = this.controller.get('masonryRef');
-        $container.layout();        
-    } catch(ex){}
-  },
-  bindResizeEvent: function() {
-    jQuery(window).on('resize', Ember.run.bind(this, this.handleResize));
-  }.on('init'),
-
-
   beforeModel: function() {
   	var sesh = this.get("session").fetch().catch(function() {});
   	if(!this.get('session.isAuthenticated')){

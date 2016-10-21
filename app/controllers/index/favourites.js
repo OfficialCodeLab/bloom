@@ -10,10 +10,10 @@ export default Ember.Controller.extend({
 		storeMasonryRef(ref){
 			this.set('masonryRef', ref);
 		},
-	    removedFavourite(){
-	    	//console.log("TESTERINO");
-		  	var $container = this.get('masonryRef');
-		  	$container.masonry('layout');
-	    },
+	    // removedFavourite(){
+	    // 	//console.log("TESTERINO");
+		  	// var $container = this.get('masonryRef');
+		  	// $container.masonry('layout');
+	    // },
 	}
 });

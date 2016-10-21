@@ -27,6 +27,7 @@
 			    <button class="btn btn-default" {{action "next"}}>Next</button>
 		    </div>
 		</div>
+		{{#if model}}
 		<div id="loading-spinner">
 			<div class="progress">
 			  <div class="progress-bar progress-bar-warning" role="progressbar" ariaValuenow={{percentLoaded}}
@@ -35,6 +36,7 @@
 			</div>
 			{{!-- <h2><i class="fa fa-spinner fa-spin"></i></h2> --}}
 		</div>
+		{{/if}}
 	</div>
 	<div class="row text-center showOnPhones">
 	    {{#each model as |cat-item|}}

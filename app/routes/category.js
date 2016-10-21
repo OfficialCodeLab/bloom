@@ -9,6 +9,7 @@ export default Ember.Route.extend({
   loadCount: 0,
   name: '',
   desc: '',
+  catCount: 0,
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){
@@ -29,6 +30,7 @@ export default Ember.Route.extend({
 
 
   model (params) {
+  	this.store.unloadAll('cat-item');
   	window.scrollTo(0,0);
   	let _id = params.category_id;
 
@@ -36,6 +38,7 @@ export default Ember.Route.extend({
       let catItems = cat.get('catItems');
       // console.log(catItems.get('length'));
       // console.log(catItems);
+      this.set('catCount', catItems.get('length'));
       this.set('name', cat.get('name'));
       this.set('desc', cat.get('desc'));
       if (!(this.get('startAt'))) {
@@ -80,15 +83,15 @@ export default Ember.Route.extend({
 
     next: function() {
       var id = this.get('currentModel').get('lastObject.id');
-      var items = this.store.peekAll('cat-item');
-      if(this.get('startAt') + PAGE_SIZE < items.get('length')){
+      var cc = this.get('catCount');
+      if(this.get('startAt') + PAGE_SIZE < cc){
         this.resetLoadCount();  
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
-        if(this.get('endAt') + PAGE_SIZE < items.get('length')){
+        if(this.get('endAt') + PAGE_SIZE < cc){
           this.set('endAt', this.get('endAt') + PAGE_SIZE);
         } else {
-          this.set('endAt', items.get('length'));
+          this.set('endAt', cc);
         }
         this.refresh();
       } 
@@ -123,14 +126,13 @@ export default Ember.Route.extend({
 
   },
   resetIndexes: function() { 
-  	let items  = this.store.peekAll('cat-item');    		
-  	console.log(items.get("length"));
+    var cc = this.get('catCount');    	
       this.set('startAt', 0);
-      if(PAGE_SIZE < items.get('length')){        
+      if(PAGE_SIZE < cc){        
         this.set('endAt', PAGE_SIZE);
       }
       else{
-        this.set('endAt', items.get('length'));
+        this.set('endAt', cc);
       }
   },
   resetLoadCount: function (){
