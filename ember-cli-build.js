@@ -10,7 +10,10 @@ module.exports = function(defaults) {
     },
     fingerprint: {
       exclude: ['apple-touch', 'favicon', 'mstile', 'open-graph', 'firefox_app', 'coast', 'android-chrome', 'yandex-browser', 'twitter']
-    }
+    },
+    sassOptions: {
+      includePaths: ['bower_components/material-design-lite/src']
+    },
     // Add options here
   });
 
@@ -20,6 +23,8 @@ module.exports = function(defaults) {
   app.import('bower_components/slick-carousel/slick/slick.css');
   app.import('bower_components/slick-carousel/slick/slick-theme.css');
   app.import('bower_components/slick-carousel/slick/slick.min.js');
+  app.import('bower_components/material-design-lite/material.min.css');
+  app.import('bower_components/material-design-lite/material.min.js');
   app.import('bower_components/bootstrap-social/bootstrap-social.css');
 
 

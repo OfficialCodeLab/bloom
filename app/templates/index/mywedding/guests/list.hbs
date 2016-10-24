@@ -1,4 +1,4 @@
-<table class="table table-bordered table-striped hideOnMobile">
+{{!-- <table class="table table-bordered table-striped hideOnMobile">
     <thead style="text-align: center;">
       <tr>
           <th>Full Name</th>
@@ -22,9 +22,40 @@
     {{/each}}
 
     </tbody>
-</table>
+</table> --}}
 
-<div class="showOnMobile container">
+<div class="text-center">
+  <div class="hideOnMobile container">
+    {{#mdl-table content=model.guests as |guest|}}
+      {{#mdl-table-col label='Full Name'}}
+        {{guest.name}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='E-mail'}}
+        {{guest.email}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='Contact Number'}}
+        {{guest.cell}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label="+1's"}}
+        {{guest.guests}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='Attending'}}
+        <div style="text-align: center;">
+        <input style="margin-left: auto; margin-right: auto;" type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}>
+        {{!-- {{mdl-checkbox value=guest.rsvp is-checked=guest.rsvp}} --}}
+        </div>
+        {{!-- <input type="checkbox" > --}}
+      {{/mdl-table-col}}
+      {{#mdl-table-col label='Delete'}}
+        <div style="text-align: center;">
+        {{!-- {{mdl-button isRaised=true icon='delete' isMiniFab=true action="destroyGuest" param=guest.id}} --}}
+        <a href='' {{action "destroyGuest" guest.id}}><i class="fa fa-times" style="font-size: 24px;" aria-hidden="true"></i></a></div>
+        {{!-- <button class="btn btn-danger" {{action "destroyGuest" guest.id}}>X</button> --}}
+      {{/mdl-table-col}}
+    {{/mdl-table}}
+  </div>
+
+ <div class="showOnMobile container">
         {{#each model.guests as |guest|}}
         <div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
           <div class="row">
@@ -64,3 +95,4 @@
         </div>
       {{/each}}
     </div>
+</div>

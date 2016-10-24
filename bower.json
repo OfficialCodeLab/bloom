@@ -11,7 +11,9 @@
     "masonry": "^4.1.0",
     "imagesloaded": "^4.1.0",
     "slick-carousel": "^1.6.0",
-    "chartjs": "1.0.2"
+    "chartjs": "1.0.2",
+    "material-design-lite": "~1.0.4",
+    "material-design-lite-src": "https://github.com/google/material-design-lite.git#37286ae139b0ae336a8a7e9ed3b18ace1abff7ed"
   },
   "devDependencies": {
     "bootstrap-social": "^5.0.0"

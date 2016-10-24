@@ -9,6 +9,7 @@ export default Ember.Controller.extend({
 	email: '',
 	cell: '',
 	guests: 0,
+	checked: true,
 	guestId: '',
 	guestsValue: '0',
 	addingGuest: '',

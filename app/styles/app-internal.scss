@@ -452,12 +452,20 @@ body {
 	line-height: 30px;
 }
 
+.mdl-data-table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*================================*\
 Guest List
 \*================================*/
 .add-guest-button-container{
        text-align: center;
 }
+
+
+
 .btn-guest-add{
        display: inline-block;
        &,
