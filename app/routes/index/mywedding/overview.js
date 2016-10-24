@@ -40,6 +40,12 @@ export default Ember.Route.extend({
 
 			}
 			*/
+		},
+		dateChanged: function (date, valid){
+			if(valid){
+				this.controller.set('selectedDate', date);
+			}
 		}
+
 	}
 });
