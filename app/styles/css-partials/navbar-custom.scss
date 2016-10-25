@@ -178,6 +178,7 @@
     cursor: pointer;
     position: absolute;
     position: fixed;
+    padding-top: 3px;
     top: 10px;
     left: 10px;
     color: #fff;
@@ -192,12 +193,12 @@
     z-index: 52;
     //box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
     font-size:2.0rem;
-    @include text-shadow (1px 1px 1px rgba(0, 0, 0, 0.4));
+    //@include text-shadow (1px 1px 1px rgba(0, 0, 0, 0.4));
 }
 
 #menu-button:hover {
     color: #eee;
-    @include text-shadow (1px 1px 2px rgba(0, 0, 0, 0.7));
+    @include text-shadow (1px 1px 2px rgba(0, 0, 0, 0.3));
 }
 
 #navbar-g.navbar-default .navbar-nav > li.yellow-highlight > a {
