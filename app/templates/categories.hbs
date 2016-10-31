@@ -1,11 +1,17 @@
-<div class="container index-main">
+<div class="container-fluid index-main">
 	<div class="header-top">
 		<h1 class="font-times-header text-uppercase">Categories</h1>
 		<hr class="style-two">
 		<h3 class="font-times-subheader">All available categories</h3>
 	</div>
-	<div class="row">
+	<div style="padding-top: 50px;">
 		{{#each model as |category|}}
+		{{#link-to 'category' category.id}}
+		<div class="col-sm-3 height-3" style={{category.style}}>
+
+		</div>{{/link-to}}
+		{{/each}}
+		{{!-- {{#each model as |category|}}
 		{{#link-to 'category' category.id}}
 		<div class="col-lg-4 col-md-6">
 			<div class="category-block-m">
@@ -15,6 +21,6 @@
 				<div class="overlay-title"><h4>{{category.name}}</h4></div>
 			</div>
 		</div>{{/link-to}}
-		{{/each}}
+		{{/each}} --}}
 	</div>
 </div>

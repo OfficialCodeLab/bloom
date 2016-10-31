@@ -547,6 +547,22 @@ h2.white{
   }
 }
 
+
+
+.mdl-progress > .progressbar {
+  background-color: $primary-color !important;
+}
+
+.mdl-progress {
+  width: 100% !important;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.mdl-progress > .bufferbar {
+    background-image: -webkit-linear-gradient(left, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), -webkit-linear-gradient(left, $pill-text-inactive, $pill-text-inactive) !important;
+    background-image: linear-gradient(to right, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), linear-gradient(to right, $pill-text-inactive, $pill-text-inactive) !important;
+}
 // html{ 
 //   background: url(images/invites.jpg) no-repeat center center fixed; 
 //   -webkit-background-size: cover;

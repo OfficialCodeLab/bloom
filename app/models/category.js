@@ -6,5 +6,6 @@ export default Model.extend({
   name: attr('string'),
   imageURL: attr('string'),
   desc: attr('string'),
+  style: attr('string'),
   catItems: hasMany('cat-item', {inverse: 'category', async: true})
 });

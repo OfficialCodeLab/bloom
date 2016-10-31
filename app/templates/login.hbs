@@ -39,13 +39,15 @@
 			</a>{{/link-to}}
 		</div>
 		--}}
-		 {{#if session.isAuthenticated}}           
-            <h3 style="text-align:center; color:#fff">Logging in <i class="fa fa-spinner fa-spin"></i></h3>
-         {{else}}
+		{{#if session.isAuthenticated}}   
+		 	<div>         
+            	<h3 style="text-align:center; color:#fff">Logging in</h3>{{mdl-spinner}}
+            </div>
+        {{else}}
           	{{#link-to 'guide'}}<button class="btn btn-default clbutton-white">G U I D E D&nbsp;&nbsp;&nbsp;&nbsp;T O U R</button>{{/link-to}}
           	<div class="cl-spacing" style="display: inline-block; min-width: 0.7vw;"></div>
             <button class="btn btn-default clbutton-grey"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button>
-        {{/if}} 
+        {{/if}}  
 	</div>
     <div class="splash-footer">
     	<span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
