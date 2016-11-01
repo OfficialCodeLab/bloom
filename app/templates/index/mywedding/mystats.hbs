@@ -10,74 +10,86 @@
 	<div class="hideOnMobile">
 		<div class="col-sm-6" style="text-align: right;">
 			{{#if model.user.isFemale}}
-			<img src="../assets/images/clothing-measurement-f.png" style="height:480px; width:auto">
+			<img src="../assets/images/clothing-measurement-f.png" style="height:800px; width:auto">
 			{{else}}
-			<img src="../assets/images/clothing-measurement-m.png" style="height:480px; width:auto">
+			<img src="../assets/images/clothing-measurement-m.png" style="height:800px; width:auto">
 			{{/if}}
 		</div>
-		<div class="col-sm-6 form-horizontal row" style="padding-top:38px;">
-			<div class="form-group has-feedback">
+		<div class="col-sm-6 form-horizontal row" style="padding-top:42px;">
+			{{!-- <div class="form-group has-feedback"> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.height class="form-control sm-txt" placeholder="Height"}}
+					{{mdl-textfield label='Height' value=model.userstat.height}}
+					{{!-- {{input type="text" value=model.userstat.height class="form-control sm-txt" placeholder="Height"}} --}}
 				</div>
-			</div>
+			{{!-- </div> --}}
 			{{#if model.user.isFemale}}
-			<div class="form-group has-feedback" style="margin-top:71px;">
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}}
+					{{mdl-textfield label='Chest' value=model.userstat.chest}}
+					{{!-- {{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:-6px;">
+			{{!-- </div> --}}
+			{{!-- <div > --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}}
+					{{mdl-textfield label='Waist' value=model.userstat.waist}}
+					{{!-- {{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:-2px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
+					{{mdl-textfield label='First Name' value=firstName}}
 					{{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:75px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:76px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}} --}}
 				</div>
-			</div>
+			{{!-- </div> --}}
 			{{else}}
-			<div class="form-group has-feedback" style="margin-top:44px;">
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.shoulders class="form-control sm-txt" placeholder="Shoulders"}}
+					{{mdl-textfield label='Shoulders' value=model.userstat.shoulders}}
+					{{!-- {{input type="text" value=model.userstat.shoulders class="form-control sm-txt" placeholder="Shoulders"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:-11px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.chest class="form-control sm-txt" placeholder="Chest"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:-11px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.waist class="form-control sm-txt" placeholder="Waist"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:-11px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.hips class="form-control sm-txt" placeholder="Hips"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:64px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.inseam class="form-control sm-txt" placeholder="Inseam"}} --}}
 				</div>
-			</div>
-			<div class="form-group has-feedback" style="margin-top:87px;">
+			{{!-- </div> --}}
+			{{!-- <div> --}}
 				<div class="col-sm-8">
-					{{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}}
+					{{mdl-textfield label='First Name' value=firstName}}
+					{{!-- {{input type="text" value=model.userstat.shoesize class="form-control sm-txt" placeholder="Shoe Size"}} --}}
 				</div>
-			</div>
+			{{!-- </div> --}}
 
 			{{/if}}
 

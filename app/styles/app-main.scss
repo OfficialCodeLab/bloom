@@ -41,14 +41,17 @@
     color: #F3EA5D;
     //border: 3px solid #F3EA5D;
 }
+html, body {
+  font-family: "Open Sans", sans-serif !important;
+}
 
 h1, h2, h3, h4, h5, h6, p, a{
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 	color: rgb(88,89,91);
 }
 
 p{
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 a{

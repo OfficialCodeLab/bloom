@@ -75,7 +75,8 @@ body {
 .pear-main-well{
 	text-align: center;
 	// margin-top: 30px;
-	height: 80px;
+	padding-top: 7px;
+	height: 100px;
 	line-height: 65px;
 }
 .pear-main-pills{
@@ -92,12 +93,22 @@ body {
 
 		a{
 			i {
-				font-size: 25px;
+			    // padding: 5px 10px;	
+			    color: $button-text-color;	
+			    display: inline-block;
+				font-size: 28px;
+			    display: inline-block;		
+			    -moz-border-radius: 100px;
+			    -webkit-border-radius: 100px;
+			    border-radius: 100px;
+				background-color: $pill-text-inactive;
 			}
 			line-height: inherit;
 			height: inherit;
 			border-radius: 0px;
-			font-size: 22px;
+			font-size: 24px;
+  			font-family: "Open Sans", sans-serif !important;
+			font-style: italic;
 			background-color: white;
 			&:link{
 				background-color: $pill-inactive-main;
@@ -105,32 +116,47 @@ body {
 			}
 			&:visited{
 				background-color: $pill-inactive-main;
+				// background-color: $pill-inactive-main;
 				color: $pill-text-inactive;
 			}
 			&:hover{
-				background-color: $pill-hover;
+				i{
+					background-color: $pill-text-hover;
+				}
+				background-color: $pill-inactive-main;
+				// background-color: $pill-hover;
 				color: $pill-text-hover;
 			}
 			&:active{
-				background-color: $pill-click;
+				i{
+					background-color: $pill-text-hover;
+				}
+				background-color: $pill-inactive-main;
+				// background-color: $pill-click;
 				color: $pill-text-hover;
 			}
 		}
 		&.active{
-			color: $button-text-color;
+			i{	
+			    background-color: $primary-color !important;
+			}
+			color: $primary-color;
 			margin-left: 0px;
 			a{
-				background-color: $pill-active;
+				// background-color: $pill-active;
 				color: $pill-text;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $pill-active;
-					color: inherit;
+					background-color: $pill-inactive-main;
+					// background-color: $pill-active;
+					color: $primary-color;
 				}
 				&:active{
-					background-color: $pill-click;
-					color: $pill-text-hover;
+				background-color: $pill-inactive-main;
+					// background-color: $pill-click;
+					// color: $pill-text-hover;
+					color: inherit;
 				}
 			}
 
@@ -139,6 +165,19 @@ body {
 
 	}
 }
+
+.i-padding-1 {
+	padding: 21px 18px 17px 20px
+}
+
+.i-padding-2 {
+	padding: 20px 18px 17px 18px;
+}
+
+.i-padding-3 {
+	padding: 21px 22px 20px 18px;
+}
+
 
 .pear-sub-well{
 	text-align: center;
@@ -1412,6 +1451,16 @@ $font_0: FontAwesome;
 }
 
 
+/*====================================================================*\
+	Material design custom
+\*====================================================================*/
+.mdl-textfield__label{
+	font-size: 14px !important;
+}
+.mdl-textfield__label:after{
+	bottom: 15px !important;
+	// background-color: $primary-color !important;
+}
 
 /*==============================================================================*\
   __  __          _ _          ___                  _
@@ -1459,6 +1508,14 @@ $font_0: FontAwesome;
 	.showOnMobile{
 		display: block;
 	}
+	.pear-main-well{
+		min-height: 80px;
+		height: auto;
+		ul {
+			padding-top: 30px;
+			width: 100%;
+		}
+	}
 	.pear-sidebar{
 		width: 100%;
 		li{
@@ -1485,18 +1542,12 @@ $font_0: FontAwesome;
 	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-	.pear-main-well{
-		min-height: 80px;
-		height: auto;
-		ul {
-			width: 100%;
-		}
-	}
+	
 	.pear-main-pills{
 		width: 100%;
 		li{
 			min-width: 0px;
-			width: 100%;
+    		width: 33%;
 		}
 	}
 

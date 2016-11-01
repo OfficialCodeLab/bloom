@@ -117,3 +117,10 @@ $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !
 $font: Roboto, sans-serif !default;
 $font-form: 14px !default;
 $font-small: 12px !default;
+
+
+//Material Design
+@import "_color-definitions";
+
+$color-primary: $palette-amber-500;
+$color-accent: $palette-pink-A200;
