@@ -7,7 +7,9 @@
 	<div style="padding-top: 50px;">
 		{{#each model as |category|}}
 		{{#link-to 'category' category.id}}
-		<div class="col-sm-3 height-3" style={{category.style}}>
+		<div class="col-sm-3 height-3 category-square col-xs-4" style={{category.style}}>
+			<i class={{category.icon}}></i>
+			<p class="cat-heading">{{category.name}}</p>
 
 		</div>{{/link-to}}
 		{{/each}}

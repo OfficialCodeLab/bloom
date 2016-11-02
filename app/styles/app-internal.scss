@@ -497,6 +497,27 @@ body {
 	margin-right: auto;
 }
 
+/* CATEOGORIES */
+.category-square{
+	// padding-top: 10px;
+	min-height: 120px;
+	padding-top: calc(100vw / 18);
+	text-align: center;
+	i{
+		color: white;
+		font-size: 8vw;
+	}
+}
+
+.cat-heading{
+	padding-top: 8px;
+	line-height: 2vw;
+	vertical-align: center;
+	font-size: 2vw;
+	color: white;
+}
+
+
 /*================================*\
 Guest List
 \*================================*/
@@ -1555,7 +1576,10 @@ $font_0: FontAwesome;
 	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-	
+	.category-square{
+		padding-top: 40px;
+	}
+
 	.pear-main-pills{
 		width: 100%;
 		li{
@@ -1587,6 +1611,15 @@ $font_0: FontAwesome;
 			min-width: 0px;
 			width: 100%;
 		}
+	}
+
+	.category-square i{
+		font-size: 10vw;
+	}
+
+	.cat-heading{
+		font-size: 3vw;
+		line-height: 3vw;
 	}
 	.i-lbl{
 		display: none;
