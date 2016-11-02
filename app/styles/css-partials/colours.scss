@@ -64,20 +64,20 @@ $dropdown-hover-text: #fff;
 $pill-inactive-main: rgba(0,0,0,0);
 
 $pill-inactive: rgba(0,0,0,0);
-$pill-active: #FFCD5D; // light yellow
+$pill-active: #F4B3AF; // light pink
 $pill-hover: rgba(0,0,0,0);
 $pill-text: #ffffff;
-$pill-text-hover: #CF9D22; // dark yellow
+$pill-text-hover: #EF5B53; // dark pink
 $pill-text-inactive: #707070; // grey
 $pill-click: rgba(0,0,0,0);
 
 //Background for active items and normal buttons
 //1 MAIN COLOR
-$primary-color: #FFCC67;
+$primary-color: #F28179;
 
 //Hover for navbar and buttons
 //2 LIGHT COLOR
-$hover-color: #FFD78E;
+$hover-color: #F4B3AF;
 
 //Default Button State
 //3 NEUTRAL
@@ -122,5 +122,5 @@ $font-small: 12px !default;
 //Material Design
 @import "_color-definitions";
 
-$color-primary: $palette-amber-500;
-$color-accent: $palette-pink-A200;
+$color-primary: $palette-pink-A100;
+$color-accent: $palette-amber-500;

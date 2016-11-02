@@ -1,10 +1,7 @@
 
 <h1 class="font-times-header" style="color: #4C4C4E;">MY ACCOUNT</h1><br>
 <hr>
-
-<h3 style="color: #7D7D7D;">PERSONAL INFORMATION</h3>
 <div class="row">
-	<div class="col-md-3">
 	    <div class="profile-pic-outer-grey">
 	    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
 	    </div>
@@ -16,15 +13,16 @@
 	    	<p>Request vendor status</p>
 	    	{{x-toggle toggled=model.user.vendorRequest value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
 	    {{/if}} --}}
-	</div>
-	<div class="col-md-9">
-		<div class="form-horizontal form-padding-bottom negative-margin-sm">
-		<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='Email Address' value=model.user.email}}</tab1><br>
-		<i class="fa fa-phone i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='Contact number' value=model.user.cell}}</tab1><br>
-		<i class="fa fa-map-marker i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='Physical Address' value=model.user.addressL1}}</tab1><br>
-		<i class="fa fa-home i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='City' value=model.user.city}}</tab1><br>
-		<i class="fa fa-map-o i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='Postal Code' value=model.user.postalcode}}</tab1><br>
-		<i class="fa fa-globe i-lbl" aria-hidden="true"></i><tab1>{{mdl-textfield label='Country' value="South Africa" disabled=true}}</tab1><br>
+	 </div>
+
+<div class="row">
+		<div class="form-horizontal form-padding-bottom negative-margin-sm" style="padding-top: 20px;">
+			<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.user.email}}
+			<i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.user.cell}}<br>
+			<i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.user.addressL1}}
+			<i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.user.city}}<br>
+			<i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.user.postalcode}}
+			<i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
 					{{!-- {{mdl-textfield label='Contact number' value=model.user.cell}}<br>
 					{{mdl-textfield label='Physical Address' value=model.user.addressL1}}<br>
 					{{mdl-textfield label='Postal Code' value=model.user.postalcode}}<br>
@@ -36,9 +34,7 @@
 		    {{/if}}
 	                {{!-- <button type="submit" style="width:100%" class="btn btn-success" {{action 'saveUser' model.user}}>UPDATE</button> --}}
 	    </div>
-
-	</div>
 </div>
-<div style="padding: 40px 0px 40px 0px;">
+<div style="padding: 20px 0px 40px 0px;">
 	{{mdl-button isRaised=true text='UPDATE' action="saveUser"}}
 </div>
