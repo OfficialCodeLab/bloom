@@ -11,18 +11,11 @@ Launch demo modal2
 </button> --}}
 <div class="container-fluid">
    <div class="text-center">
-      <h1 class="font-times-header">MY FAVOURITES</h1>
-      {{#if model}}
-      <p class="font-times-subheader">
-         Simply click the heart to remove the idea from your board, or click through to chat to the supplier about the details. 
-      </p>
-      <br>
-      {{else}}
-      <h3>It looks like you don't have any favourites yet!</h3>
-      <h3>Click here to explore</h3>
-      {{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
-      {{/if}}
+      <h1 class="font-times-header" style="color: #4C4C4E;">MY FAVOURITES</h1><br>
+      <hr>
    </div>
+
+   {{#if model}}
    <div class="text-center hideOnPhones">
       <div id="masonry-items">
          {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
@@ -80,6 +73,11 @@ Launch demo modal2
          <button class="btn btn-default" {{action "prev"}}>Previous</button>
          <button class="btn btn-default" {{action "next"}}>Next</button>
       </div>
-   </div>
+   </div>   
+   {{else}}
+   <h3>It looks like you don't have any favourites yet!</h3>
+   <h3>Click here to explore</h3>
+   {{#link-to 'categories'}}<button class="btn btn-lg btn-default clbutton-grey">Categories</button>{{/link-to}}
+   {{/if}}
 </div>
 {{notification-container position="bottom"}}

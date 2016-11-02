@@ -986,6 +986,7 @@ Guest List
 	padding-top: 30px;
 	min-height: 100vh;
 	height: 100%;
+	background-color: #fff;
 }
 .pear-profile-card{
 	//margin: 5px 5px 0px 0px;
@@ -996,6 +997,13 @@ Guest List
 
 }
 
+.negative-margin-sm{
+	margin-left: -4em;
+}
+
+.i-lbl{
+	font-size: 1.6em;
+}
 /*==============================================================================*\
   ______          _            
  |  ____|        | |           
@@ -1390,7 +1398,7 @@ $font_0: FontAwesome;
 	}
 }
 .font-times-header{
-	font-family: "Times New Roman", Times, serif;
+	text-align: center;
 	letter-spacing: 5px;
 	color: black;
 }
@@ -1461,7 +1469,9 @@ $font_0: FontAwesome;
 	bottom: 15px !important;
 	// background-color: $primary-color !important;
 }
-
+.mdl-button{
+	width: 180px !important;
+}
 /*==============================================================================*\
   __  __          _ _          ___                  _
  |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___
@@ -1502,6 +1512,9 @@ $font_0: FontAwesome;
 
 }
 @media (max-width:772px) { /* Our definition of really small */
+	.negative-margin-sm{
+		margin-left: none;
+	}
 	.hideOnMobile{
 		display: none;
 	}
@@ -1574,6 +1587,9 @@ $font_0: FontAwesome;
 			min-width: 0px;
 			width: 100%;
 		}
+	}
+	.i-lbl{
+		display: none;
 	}
 	.cl-spacing{
 		display: none !important;

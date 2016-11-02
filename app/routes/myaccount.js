@@ -38,7 +38,9 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'user', model.user);
 	  },
 	  actions : {
-	  	saveUser(usr) { 
+	  	saveUser() { 
+		  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		  let usr = this.store.peekRecord('user', _id);
 	      usr.save().then(() => {
         		//this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
         		this.controller.get('notifications').success('Saved successfully!',{
