@@ -30,7 +30,7 @@ export default Ember.Route.extend({
 
 
   model (params) {
-  	this.store.unloadAll('cat-item');
+  	//this.store.unloadAll('cat-item');
   	window.scrollTo(0,0);
   	let _id = params.category_id;
 

@@ -507,6 +507,12 @@ body {
 		color: white;
 		font-size: 8vw;
 	}
+
+	&:hover, &:focus, &:active{		
+	    @include transform (scale(1.05));
+  		transition: all 0.3s ease;
+
+	}
 }
 
 .cat-heading{

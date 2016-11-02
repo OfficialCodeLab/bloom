@@ -40,14 +40,14 @@ Launch demo modal2
       </div>
       {{#if model}}
       <div id="loading-spinner">
-         <div class="progress">
-            <div class="progress-bar progress-bar-warning" role="progressbar" ariaValuenow={{percentLoaded}}
-               ariaValuemin="0" ariaValuemax="100" style={{percentLoadedStyle}}>
-            </div>
-         </div>
-         {{!-- 
-         <h2><i class="fa fa-spinner fa-spin"></i></h2>
-         --}}
+         {{!-- <div class="progress">
+           <div class="progress-bar progress-bar-warning" role="progressbar" ariaValuenow={{percentLoaded}}
+           ariaValuemin="0" ariaValuemax="100" style={{percentLoadedStyle}}>
+           </div>
+         </div> --}}
+         <br>
+           {{mdl-progress progress=percentLoaded}}
+         {{!-- <h2><i class="fa fa-spinner fa-spin"></i></h2> --}}
       </div>
       {{/if}}
    </div>
