@@ -503,6 +503,7 @@ body {
 	min-height: 120px;
 	padding-top: calc(100vw / 18);
 	text-align: center;
+	z-index: 2;
 	i{
 		color: white;
 		font-size: 8vw;
@@ -511,7 +512,7 @@ body {
 	&:hover, &:focus, &:active{		
 	    @include transform (scale(1.05));
   		transition: all 0.3s ease;
-
+  		z-index: 3;
 	}
 }
 
