@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
 	guests: 0,
 	guestsValue: '0',
 	responseMessage: '',
+	notifications: Ember.inject.service('notification-messages'),
 	isValid: Ember.computed.and('name', 'email', 'cell'),
 	isNotValid: Ember.computed.not('isValid'),
 	numberObserver: Ember.observer('guestsValue', function() {
@@ -61,6 +62,7 @@ export default Ember.Controller.extend({
 				name: this.get('name'),
 				email: this.get('email'),
 				cell: this.get('cell'),
+				attending: 0,
 				guests: this.get('guests') + ""
 			};
 			this.get('guestsA').pushObject(guest);
@@ -70,10 +72,19 @@ export default Ember.Controller.extend({
 			this.set('cell', '');
 			this.set('guests', 0);
 			this.set('guestsValue', '0');
-			this.set('responseMessage', 'Guest has been added to the guest list!');
+			this.get('notifications').success('Guest has been added to your list!',{
+                autoClear: true
+            }); 
 		},
 		closeMessage(){
 			this.set('responseMessage', '');
+		},
+		ok: function(){
+			let guest = this.get('guestToDestroy');
+			this.get('guestsA').removeObject(guest);
+			this.get('notifications').info('Guest has been removed from your list!',{
+                autoClear: true
+            }); 
 		},
 		// addGuest(){
 		// 	this.set('addingGuest', true);
@@ -110,11 +121,30 @@ export default Ember.Controller.extend({
 		// 	model.save();
 		// },
 		destroyGuest(guest){
-			let confirmation = confirm("Are you sure?");
-
-			if(confirmation){
-				this.get('guestsA').removeObject(guest);
+			let _modalData;
+            let modalDataId;
+            this.set('guestToDestroy', guest);
+            if(this.get('modalDataId')){
+				_modalData = this.store.peekRecord('modal-data', this.get('modaDataId'));	
+            	this.send('showModal', 'modal-confirm', _modalData);	            	
+            } else {
+		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "Are you sure?"});
+		     	this.set('modalDataId', _modalData.get('id'));
+            	this.send('showModal', 'modal-confirm', _modalData);
+            }    
+		},
+		checkBox(guest){
+			let msg = "";
+			if(guest.attending){
+				msg = "Guest is no longer attending.";
+				guest.attending = 0;
+			} else {
+				msg = "Guest is now attending!";
+				guest.attending = 1;
 			}
+			this.get('notifications').info(msg,{
+                autoClear: true
+            }); 
 		}
 	}
 });

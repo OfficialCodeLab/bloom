@@ -7,20 +7,20 @@
 	<div class="text-center pear-guide-top">
 		<h1 class="pear-text-logo unselectable">&nbsp;</h1>
 	</div>
-	<h1 class="font-times-header">PEAR GUIDED TOUR</h1>
-	<hr class="style-two">
-	<h3 class="font-times-header">WELCOME</h3>
+	<h3 class="font-times-header">Guided Tour</h3>
+	<hr>
+	<h3 class="font-times-header">Welcome</h3>
 	<p class="font-times-subheader">Welcome to Pear, the wedding planner.<br>This is where your wedding all comes together.<br>Scroll down for a preview of Pear's capabilities.</p><br>
 	<hr><br>
 
-	<h3 class="font-times-header">CATEGORIES</h3>
+	<h3 class="font-times-header">Categories</h3>
 	<p class="font-times-subheader">Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br>You can also click on the images to find out more about the supplier and get in touch.</p>
     <div class="form-group">
-		{{#link-to 'categories'}}<button class="btn btn-default">Categories</button>{{/link-to}}
+		{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
 	</div><br>
 
-	<div class="card" style="padding-right:10px	">
-		<h3 class="font-times-header">TRY FAVOURTIE SOME ITEMS!</h3><hr><p class="font-times-subheader">Click the hearts to favourite or unfavourite</p>
+	<div class="card-material" style="padding-right:10px	">
+		<h3 class="font-times-header">Try Favouriting Some Items!</h3><hr><p class="font-times-subheader">Click the hearts to favourite or unfavourite</p>
 		<div class="row guide-row">
 			<div class="col-lg-4 col-md-6 guide-card">					
 				<div class="guide-content">
@@ -61,15 +61,15 @@
 		</div>
 	</div>
 	<br>
-	<h3 class="font-times-header">FAVOURITING</h3>
+	<h3 class="font-times-header">Favouriting</h3>
 	<p class="font-times-subheader">If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab, <strong>in your Hub...</strong></p>
     <div class="form-group">
-		{{#link-to 'index'}}<button class="btn btn-default">Favourites</button>{{/link-to}}
+		{{#link-to 'index'}}{{mdl-button isRaised=true text='Favourites'}}{{/link-to}}
 	</div>
 	<br>
 
-	<div class="card" style=" padding-right:10px">
-		<h3 class="font-times-header">YOUR FAVOURITED ITEMS</h3><hr><p class="font-times-subheader">Click the hearts to unfavourite</p>
+	<div class="card-material" style=" padding-right:10px">
+		<h3 class="font-times-header">Your Favourited Items</h3><hr><p class="font-times-subheader">Click the hearts to unfavourite</p>
 		<div class="row guide-row">
 			{{#if dress}}
 			<div class="col-lg-4 col-md-6 guide-card">					
@@ -117,39 +117,29 @@
 
 	</div>
 	<br>
-	<h3 class="font-times-header">ADD GUESTS TO YOUR WEDDING</h3>
+	<h3 class="font-times-header">Add Guests to Your Wedding</h3>
 	<p class="font-times-subheader">If you want to get your guest list started, just head to the my wedding section<strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
     <div class="form-group">
-		{{#link-to 'index.mywedding'}}<button class="btn btn-default">My Wedding</button>{{/link-to}}
+		{{#link-to 'index.mywedding'}}{{mdl-button isRaised=true text='My Wedding'}}{{/link-to}}
 	</div>
 	<br>
 
-	<div class="card" style=" padding:0px 20px 20px 20px">
-		<h3 class="font-times-header">ADD GUESTS</h3><hr><p class="font-times-subheader">Add guests here and they will appear in the table below</p>
-		<div class="form-horizontal row">
+	<div class="card-material card-sm" style=" padding:0px 20px 20px 20px">
+		<h3 class="font-times-header">Add Guests</h3><hr><p class="font-times-subheader">Add guests here and they will appear in the table below</p>
+		<div class="form-horizontal row text-center">
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Name &amp; Surname*</label>
-				<div class="col-sm-6">
-					{{input type="text" value=name class="form-control" placeholder="Name of guest"}}
-				</div>
+				{{mdl-textfield label='Name & Surname*' value=name}}
 			</div>
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Email Address</label>
-				<div class="col-sm-6">
-					{{input type="text" value=email class="form-control disabled" placeholder="Email address of guest"}}
-				</div>
+				{{mdl-textfield label='Email Address' value=email}}
 			</div>
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Contact Number</label>
-				<div class="col-sm-6">
-					{{input type="text" value=cell class="form-control disabled" placeholder="Contact details of guest"}}
-				</div>
+				{{mdl-textfield label='Contact Number' value=cell}}
 			</div>
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Number of additional guests?</label>
-				<div class="col-sm-6">
+				{{mdl-textfield label='Number of additional guests?' value=guestsValue type="number"}}
 
-					<div class="input-group">
+					{{!-- <div class="input-group">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" {{action 'decrementNumber'}}>-</button>
 						</span>
@@ -157,12 +147,11 @@
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button" {{action 'incrementNumber'}}>+</button>
 						</span>
-					</div> 
+					</div>  --}}
 					{{!-- {{#touch-spin}}
 						<input id="guestNumberBox" type="text" value={{guests}} name="demo1" style="height:33px !important;">
 					{{/touch-spin}} --}}
 					{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
-				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -172,20 +161,21 @@
 		      <p class="tiny-text">Tap this message to close it</p></div>
 		    {{/if}}
 			<div class="col-sm-offset-3 col-sm-6">
-				<button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list</button>
+				{{mdl-button isRaised=true text='Add Guest' action='addGuest' disabled=isNotValid}}
+				{{!-- <button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list</button> --}}
 			</div>
 		</div>
 	</div>
 	<br>
-	<h3 class="font-times-header">YOUR GUEST LIST</h3>
+	<h3 class="font-times-header">Your Guest List</h3>
 	<p class="font-times-subheader">Once you have some guests, you can now manage and view them.<br>All the guests will be listed in a table and <strong>you can can RSVP or remove them.</strong></p>
     <div class="form-group">
-		{{#link-to 'index.mywedding.guests'}}<button class="btn btn-default">Guest List</button>{{/link-to}}
+		{{#link-to 'index.mywedding.guests'}}{{mdl-button isRaised=true text='Guest List'}}{{/link-to}}
 	</div>
 	<br>
 
-	<div class="card" style=" padding:0px 20px 20px 20px">
-		<h3 class="font-times-header">YOUR GUESTS</h3><hr><p class="font-times-subheader">Click the X to remove or click the checkbox to confirm RSVP</p>
+	<div class="card-material card-sm" style=" padding:0px 20px 20px 20px">
+		<h3 class="font-times-header">Your Guests</h3><hr><p class="font-times-subheader">Click the X to remove or click the checkbox to confirm RSVP</p>
 		<div class="showOnMobile container">
 		    {{#each guestsA as |guest|}}
 				<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
@@ -228,8 +218,27 @@
 		</div>
 
 
-		<div class="guide-container hideOnMobile">
-			<table class="table table-bordered table-striped" style="background-color:white;">
+		<div class="guide-container hideOnMobile" style="padding-bottom: 5px;">
+
+		{{#mdl-table content=guestsA as |guest|}}
+			{{#mdl-table-col label='Name'}}
+				{{guest.name}}
+			{{/mdl-table-col}}
+			{{#mdl-table-col label='Contact'}}
+				{{guest.email}}<br>{{guest.cell}}
+			{{/mdl-table-col}}
+			{{#mdl-table-col label="+1's"}}
+				{{guest.guests}}
+			{{/mdl-table-col}}
+			{{#mdl-table-col label='RSVP'}}
+				<input type="checkbox" onclick={{action "checkBox" guest}}>
+			{{/mdl-table-col}}
+			{{#mdl-table-col label='Delete'}}
+		        <div style="text-align: center;">
+		        <a href='' {{action "destroyGuest" guest}}><i class="fa fa-times" style="font-size: 24px;" aria-hidden="true"></i></a></div>
+			{{/mdl-table-col}}
+		{{/mdl-table}}
+			{{!-- <table class="table table-bordered table-striped" style="background-color:white;">
 			    <thead style="text-align: center;">
 			      <tr>
 			          <th class="text-center">Name</th>
@@ -251,18 +260,19 @@
 			    {{/each}}
 
 			    </tbody>
-			</table>
+			</table> --}}
 		</div>
 	</div>
 	<br>
-	<h3 class="font-times-header">EL FINITO!</h3>
+	<h3 class="font-times-header">El Finito!</h3>
 	<p class="font-times-subheader">That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
     <div class="form-group">
-		{{#link-to 'login'}}<button class="btn btn-default" style="width:90px">Sign Up <i class="fa fa-heart-o"></i></button>{{/link-to}}
+		{{#link-to 'login'}}{{#mdl-button isRaised=true}} Sign Up <i class="fa fa-heart-o"></i> {{/mdl-button}}{{/link-to}}
 	</div>
 	<div class="form-group">
-		{{#link-to 'index'}}<button class="btn btn-default" style="width:90px">Hub <i class="fa fa-dashboard"></i></button>{{/link-to}}
+		{{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}} Hub <i class="fa fa-dashboard"></i> {{/mdl-button}}{{/link-to}}
 	</div>
 	<br><hr><br>
 
+	{{notification-container position="bottom"}}
 </div>
