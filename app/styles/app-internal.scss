@@ -386,8 +386,14 @@ body {
 	min-height: 45px;
 	font-size: 18px;
 }
-
-
+.modal-header{
+	background-color: $color-main;
+	color: $light-text;
+}
+.modal-content{
+	border-radius: 2px;
+	max-width: 500px;
+}
 
 /*==============================================================================*\
   __  __        __        __       _     _ _
@@ -1488,6 +1494,9 @@ $font_0: FontAwesome;
 }
 .mdl-button{
 	width: 180px !important;
+}
+.modal-footer>.mdl-button{
+	width: auto !important;
 }
 .mdl-button--accent{
 	color: $color-main !important;

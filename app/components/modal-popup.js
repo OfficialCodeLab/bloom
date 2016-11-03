@@ -6,6 +6,10 @@ actions: {
       this.$('.modal').modal('hide');
       this.sendAction('ok');
     },
+    close: function(){
+      this.$('.modal').modal('hide');
+      this.sendAction('close');      
+    },
     submit: function(){
       this.$('.modal').modal('hide');
       this.sendAction('submitMsg');      
