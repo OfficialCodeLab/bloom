@@ -38,89 +38,83 @@
 
 */
 /*==============================================================================*/
+//Material Design
+@import "_color-definitions";
+$color-primary: $palette-pink-100;
+$color-accent: "255, 255, 255";
 
+//Change these:
+$color-main: #F8BBD0;
+$color-secondary: #F48FB1;
+$color-click: #808080;
+$light-text: #ffffff;
+$medium-text: #707070;
 $transparent: rgba(0,0,0,0);
+$pill-inactive: $transparent;
+
+// To change:
+$button-favourited: #F8BBD0;
+$button-unfavourited: $medium-text;
+
+//IGNORE THESE UNLESS YOU KNOW WHAT YOU'RE DOING
 
 /*==============================================================================*\
   Navbar Colours
 \*==============================================================================*/
 
 $navbar-background: rgba(255,255,255, 0.95); // rgb(254,240,223);
-$navbar-background-active: #808080;
-$navbar-text: #808080;
-$navbar-text-active: #fff;
+$navbar-background-active: $color-click;
+$navbar-text: $color-click;
+$navbar-text-active: $light-text;
 // $navbar-text: #000;
 // $navbar-text: rgb(21,32,70);
 
 $dropdown-background: rgba(255,255,255, 0.95); // rgb(254,240,223);
-$dropdown-text: #808080; // rgb(21,32,70);
-$dropdown-hover-background: #808080; // rgb(21,32,70);
-$dropdown-hover-text: #fff;
+$dropdown-text: $color-click; // rgb(21,32,70);
+$dropdown-hover-background: $color-click; // rgb(21,32,70);
+$dropdown-hover-text: $light-text;
 
 /*==============================================================================*\
   Button Colours
 \*==============================================================================*/
 
-$pill-inactive-main: rgba(0,0,0,0);
-
-$pill-inactive: rgba(0,0,0,0);
-$pill-active: #F4B3AF; // light pink
-$pill-hover: rgba(0,0,0,0);
-$pill-text: #ffffff;
-$pill-text-hover: #EF5B53; // dark pink
-$pill-text-inactive: #707070; // grey
+$pill-active: #F48FB1; // light pink
+$pill-text-hover: #F06292; // dark pink
 $pill-click: rgba(0,0,0,0);
+$pill-inactive-main: rgba(0,0,0,0);
+$pill-hover: rgba(0,0,0,0);
 
 //Background for active items and normal buttons
 //1 MAIN COLOR
-$primary-color: #F28179;
+$primary-color: #F48FB1;
 
 //Hover for navbar and buttons
 //2 LIGHT COLOR
-$hover-color: #F4B3AF;
-
-//Default Button State
-//3 NEUTRAL
-$secondary-color: #f5f5f5;
+$hover-color: #F06292;
 
 //Button Text (light) / navbar active
 //4 USUALLY WHITE
 $button-text-color: #ffffff;
 
-//Active button Text
-//5 USUALLY BLACK / not used
-$button-text-color-active: #000000;
-
 //Button Click
 //6 VERY DARK
 $button-click-color: #808080;
 
-//Shouldn't do anything
-$link-text-color: #272727;
 
 //Changes colour of favourited state of circle heart button
-$button-favourited: #d9534f;
-$button-unfavourited: #000000;
 
 
 // Material design datepicker
-$accent-color: $primary-color;
+$accent-color: $color-main;
 $disabled-textfield-grey: #9e9e9e !default;
-$divider-color: $primary-color;
+$divider-color: $color-main;
 $datepicker-background-color: #fff !default;
 $text-on-accent-color: #fff !default;
 $invalid-red: #f44336 !default;
-$month-selector-color: $primary-color;
-$datepicker-main-text-color: $button-click-color;
+$month-selector-color: $color-main;
+$datepicker-main-text-color: $color-click;
 $datepicker-disabled-text-color: #CCCCCC !default;
 $box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !default;
 $font: Roboto, sans-serif !default;
 $font-form: 14px !default;
 $font-small: 12px !default;
-
-
-//Material Design
-@import "_color-definitions";
-
-$color-primary: $palette-pink-A100;
-$color-accent: $palette-amber-500;

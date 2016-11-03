@@ -44,9 +44,15 @@
             	<h3 style="text-align:center; color:#fff">Logging in</h3>{{mdl-spinner}}
             </div>
         {{else}}
-          	{{#link-to 'guide'}}<button class="btn btn-default clbutton-white">G U I D E D&nbsp;&nbsp;&nbsp;&nbsp;T O U R</button>{{/link-to}}
-          	<div class="cl-spacing" style="display: inline-block; min-width: 0.7vw;"></div>
-            <button class="btn btn-default clbutton-grey"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button>
+    		<div class="login-btns-padding">
+				{{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR' isAccent=true}}{{/link-to}}
+			</div>
+          	{{!-- {{#link-to 'guide'}}<button class="btn btn-default clbutton-white">G U I D E D&nbsp;&nbsp;&nbsp;&nbsp;T O U R</button>{{/link-to}} --}}
+          	{{!-- <div class="cl-spacing" style="display: inline-block; min-width: 0.7vw;"></div> --}}
+    		<div class="login-btns-padding">
+				{{mdl-button isRaised=true text='SIGN IN' action="showLogins"}}
+			</div>
+            {{!-- <button class="btn btn-default clbutton-grey"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button> --}}
         {{/if}}  
 	</div>
     <div class="splash-footer">

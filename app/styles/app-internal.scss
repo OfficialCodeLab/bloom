@@ -94,14 +94,14 @@ body {
 		a{
 			i {
 			    // padding: 5px 10px;	
-			    color: $button-text-color;	
+			    color: $light-text;	
 			    display: inline-block;
 				font-size: 28px;
 			    display: inline-block;		
 			    -moz-border-radius: 100px;
 			    -webkit-border-radius: 100px;
 			    border-radius: 100px;
-				background-color: $pill-text-inactive;
+				background-color: $medium-text;
 			}
 			line-height: inherit;
 			height: inherit;
@@ -111,51 +111,51 @@ body {
 			font-style: italic;
 			background-color: white;
 			&:link{
-				background-color: $pill-inactive-main;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive;
+				color: $medium-text;
 			}
 			&:visited{
-				background-color: $pill-inactive-main;
-				// background-color: $pill-inactive-main;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive;
+				// background-color: $pill-inactive;
+				color: $medium-text;
 			}
 			&:hover{
 				i{
-					background-color: $pill-text-hover;
+					background-color: $color-secondary;
 				}
-				background-color: $pill-inactive-main;
-				// background-color: $pill-hover;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				// background-color: $pill-inactive;
+				color: $color-secondary;
 			}
 			&:active{
 				i{
-					background-color: $pill-text-hover;
+					background-color: $color-main;
 				}
-				background-color: $pill-inactive-main;
-				// background-color: $pill-click;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				// background-color: $pill-inactive;
+				color: $color-main;
 			}
 		}
 		&.active{
 			i{	
-			    background-color: $primary-color !important;
+			    background-color: $color-main !important;
 			}
-			color: $primary-color;
+			color: $color-main;
 			margin-left: 0px;
 			a{
 				// background-color: $pill-active;
-				color: $pill-text;
+				color: $color-main;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $pill-inactive-main;
+					background-color: $pill-inactive;
 					// background-color: $pill-active;
-					color: $primary-color;
+					color: $color-main;
 				}
 				&:active{
-				background-color: $pill-inactive-main;
-					// background-color: $pill-click;
-					// color: $pill-text-hover;
+				background-color: $pill-inactive;
+					// background-color: $pill-inactive;
+					// color: $color-main
 					color: inherit;
 				}
 			}
@@ -181,10 +181,12 @@ body {
 
 .pear-sub-well{
 	text-align: center;
-	min-height: 40px;
+	width: 100%;
+	padding: 0px;
+	min-height: 49px;
 	// margin-left: -15px;
 	// margin-right: -15px;
-	background-color: $pill-active;
+	background-color: $color-main;
 
 	// line-height: 20px;
 }
@@ -212,37 +214,37 @@ body {
 			// font-size: 22px;
 			background-color: white;
 			&:link{
-				background-color: $pill-inactive-main;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				color: $color-secondary;
 			}
 			&:visited{
-				background-color: $pill-inactive-main;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				color: $color-secondary;
 			}
 			&:hover{
-				background-color: $pill-hover;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				color: $color-secondary;
 			}
 			&:active{
-				background-color: $pill-click;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive;
+				color: $light-text;
 			}
 		}
 		&.active{
-			color: $pill-text;
+			color: $light-text;
 			margin-left: 0px;
 			a{
-				background-color: $pill-inactive-main;
-				color: $pill-text;
+				background-color: $pill-inactive;
+				color: $light-text;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $pill-inactive-main;
+					background-color: $pill-inactive;
 					color: inherit;
 				}
 				&:active{
-					background-color: $pill-inactive-main;
-					color: $pill-text;
+					background-color: $pill-inactive;
+					color: $light-text;
 				}
 			}
 
@@ -251,19 +253,6 @@ body {
 
 	}
 }
-
-.pear-sub-well{
-	text-align: center;
-	width: 100%;
-	padding: 0px;
-	min-height: 49px;
-	// margin-left: -15px;
-	// margin-right: -15px;
-	background-color: $pill-active;
-
-	// line-height: 20px;
-}
-
 .nav-account-sidebar {
     margin-top: -20px;
     background-color: #FFCC67;
@@ -305,37 +294,37 @@ body {
 			// font-size: 22px;
 			background-color: white;
 			&:link{
-				background-color: $pill-inactive-main;
-				color: $button-text-color;
+				background-color: $pill-inactive;
+				color: $color-main;
 			}
 			&:visited{
-				background-color: $pill-inactive-main;
-				color: $button-text-color;
+				background-color: $pill-inactive;
+				color: $color-main;
 			}
 			&:hover{
-				background-color: $pill-hover;
-				color: $pill-text-hover;
+				background-color: $pill-inactive;
+				color: $color-main;
 			}
 			&:active{
-				background-color: $pill-click;
-				color: $pill-text-inactive;
+				background-color: $pill-inactive;
+				color: $medium-text;
 			}
 		}
 		&.active{
-			color: $pill-text-inactive;
+			color: $medium-text;
 			margin-left: 0px;
 			a{
 				background-color: #fff;
-				color: $pill-text-inactive;
+				color: $medium-text;
 
 				//Reset, leave as-is
 				&:link, &:visited, &:hover{
-					background-color: $button-text-color;
+					background-color: $color-main;
 					color: inherit;
 				}
 				&:active{
-					background-color: $button-text-color;
-					color: $pill-text-hover;
+					background-color: $color-main;
+					color: $color-main;
 				}
 			}
 
@@ -345,7 +334,7 @@ body {
 	}
 }
 .pear-text-logo{
-	color: $button-text-color;
+	color: $color-main;
 	padding: 0px;
 	font-size: 20em;
 	text-align: center;
@@ -551,7 +540,7 @@ Guest List
        &:hover,
        &:focus,
        &.focus {
-               color: $hover-color;
+               color: $color-secondary;
                text-decoration: none;
        }
 
@@ -731,10 +720,10 @@ Guest List
 	border: none;
 	background-color: $button-unfavourited !important;
 	&:hover{
-		background-color: $hover-color !important;
+		background-color: $color-secondary !important;
 	}
 	&:active{
-		background-color: $button-click-color !important;
+		background-color: $color-click !important;
 	}
 	&:focus{
 		outline: none;
@@ -797,7 +786,7 @@ Guest List
 	background-position: center center;
 	background-size: contain;
 	h1{
-		color: $primary-color !important;
+		color: $color-main !important;
 	}
 }
 
@@ -1377,25 +1366,25 @@ $font_0: FontAwesome;
 	// height: 20px !important;
 }
 .btn-success-thin{
-	border-color: $primary-color !important;
-	color: $primary-color !important;
-	// background-color: $primary-color;
+	border-color: $color-main !important;
+	color: $color-main !important;
+	// background-color: $color-main;
 	&:hover, &:focus, &:active:focus, &:active:hover{
 		outline: none;
-		background-color: $primary-color !important;
-		color: $button-text-color !important;
+		background-color: $color-main !important;
+		color: $light-text !important;
 	}
 }
 .btn-success{
-	border-color: $primary-color !important;
-	background-color: $primary-color !important;
-	color: $button-text-color !important;
-	// background-color: $primary-color;
+	border-color: $color-main !important;
+	background-color: $color-main !important;
+	color: $light-text !important;
+	// background-color: $color-main;
 	&:hover, &:focus, &:active:focus, &:active:hover{
 		outline: none;
-		border-color: $hover-color !important;
-		background-color: $hover-color !important;
-		color: $button-text-color !important;
+		border-color: $color-secondary !important;
+		background-color: $color-secondary !important;
+		color: $light-text !important;
 	}
 }
 .pear-footer-padding{
@@ -1403,15 +1392,15 @@ $font_0: FontAwesome;
 }
 .btn-pear{
        font-family: antipasto;
-       background-color: $primary-color;
-       color: $button-text-color;
+       background-color: $color-main;
+       color: $color-main;
        &:hover{
-               background-color: $hover-color;
-               color: $button-text-color;
+               background-color: $color-secondary;
+               color: $color-main;
        }
        &:active{
-               background-color: $button-click-color !important;
-               color: $button-text-color;
+               background-color: $color-click !important;
+               color: $color-main;
        }
 }
 .font-antipasto{
@@ -1495,10 +1484,13 @@ $font_0: FontAwesome;
 }
 .mdl-textfield__label:after{
 	bottom: 15px !important;
-	// background-color: $primary-color !important;
+	// background-color: $color-main !important;
 }
 .mdl-button{
 	width: 180px !important;
+}
+.mdl-button--accent{
+	color: $color-main !important;
 }
 /*==============================================================================*\
   __  __          _ _          ___                  _

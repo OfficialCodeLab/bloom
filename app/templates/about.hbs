@@ -64,7 +64,8 @@
         </div>
         <h3 class="font-times-subheader">Have another look at how it all works with a guided tour.</h3>
         <hr>
-        <button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Tour</button>
+        {{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR'}}{{/link-to}}
+        {{!-- <button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Tour</button> --}}
       </div>
     </div>
   </div>

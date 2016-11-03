@@ -56,11 +56,11 @@ p{
 
 a{
   &:link, &:visited{
-    color: $primary-color;
+    color: $color-main;
     &:hover, &:active{
-      color: $pill-text-hover;
+      color: $color-secondary;
     }
-    //color: $pill-text-hover;
+    //color: $color-secondary;
 
   }
 }
@@ -246,7 +246,10 @@ a{
     position: relative;
     height:80px;
 }
-
+.login-btns-padding{
+  padding: 5px;
+  display: inline-block;
+}
 .fixed {
   backface-visibility: hidden;
   position: fixed;
@@ -553,7 +556,7 @@ h2.white{
 
 
 .mdl-progress > .progressbar {
-  background-color: $primary-color !important;
+  background-color: $color-main !important;
 }
 
 .mdl-progress {
@@ -563,8 +566,8 @@ h2.white{
 }
 
 .mdl-progress > .bufferbar {
-    background-image: -webkit-linear-gradient(left, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), -webkit-linear-gradient(left, $pill-text-inactive, $pill-text-inactive) !important;
-    background-image: linear-gradient(to right, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), linear-gradient(to right, $pill-text-inactive, $pill-text-inactive) !important;
+    background-image: -webkit-linear-gradient(left, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), -webkit-linear-gradient(left, $medium-text, $medium-text) !important;
+    background-image: linear-gradient(to right, rgba(255,255,255, 0.7), rgba(255,255,255, 0.7)), linear-gradient(to right, $medium-text, $medium-text) !important;
 }
 // html{ 
 //   background: url(images/invites.jpg) no-repeat center center fixed; 
@@ -817,7 +820,7 @@ hr.style-two {
     width: 150px;
     @include border-radius (150px);
     border-color: rgba(66, 165, 245, 1);
-    border: $primary-color 10px;
+    border: $color-main 10px;
     position: relative;
     text-align: center;
     color: #58595b;
@@ -832,7 +835,7 @@ hr.style-two {
     -moz-transition: .5s;
     -ms-transition: .5s;
     &:hover{
-      background-color: $primary-color;
+      background-color: $color-main;
       font-size: 88px;
       color: white;
       @include box-shadow(0px 0px 8px 2px rgba(66, 165, 245, 0.7));    

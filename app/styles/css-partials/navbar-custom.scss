@@ -91,7 +91,7 @@
   // font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     font-family: 'Open Sans', sans-serif;
     font-weight: 100;
-    color: $primary-color;
+    color: $color-primary;
     text-decoration: none;
     outline: 0;
     background-color: $navbar-background-active;
@@ -203,7 +203,7 @@
 
 #navbar-g.navbar-default .navbar-nav > li.nav-highlight > a {
   font-weight: 600;
-  color: $primary-color;  
+  color: $color-primary;  
 }
 
 .navbar-padding {
