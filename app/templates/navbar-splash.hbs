@@ -1,6 +1,6 @@
 <a id="menu-button" {{action 'toggleMenu'}} class="{{if menuOpen 'displayBlock'}}">
-      <i id="menu-icon-o" class="fa fa-bars"></i>
-      <i id="menu-icon-c" style="display:none" class="fa fa-close"></i>
+      <i id="menu-icon-o">{{mdl-icon icon='menu'}}</i>
+      <i id="menu-icon-c" style="display:none">{{mdl-icon icon='close'}}</i>
   </a>
 <nav id="navbar-g" class="navbar navbar-default navbar-fixed-top">
   
@@ -32,7 +32,7 @@
 </nav>
 
 <div id="menu-overlay" style="display:none">
-  <div id="menu-items">
+  <div id="menu-items"  class="unselectable">
   {{!-- TODO: IF THE USER IS ON LOG IN PAGE, DO NOT SHOW OPEN --}}
     <ul>
       {{#link-to 'index'}}<h2>TOUR</h2>{{/link-to}}

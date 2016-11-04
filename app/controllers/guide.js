@@ -79,13 +79,6 @@ export default Ember.Controller.extend({
 		closeMessage(){
 			this.set('responseMessage', '');
 		},
-		ok: function(){
-			let guest = this.get('guestToDestroy');
-			this.get('guestsA').removeObject(guest);
-			this.get('notifications').info('Guest has been removed from your list!',{
-                autoClear: true
-            }); 
-		},
 		// addGuest(){
 		// 	this.set('addingGuest', true);
   //     		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
