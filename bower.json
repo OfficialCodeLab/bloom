@@ -13,7 +13,9 @@
     "slick-carousel": "^1.6.0",
     "chartjs": "1.0.2",
     "material-design-lite": "~1.0.4",
-    "material-design-lite-src": "https://github.com/google/material-design-lite.git#37286ae139b0ae336a8a7e9ed3b18ace1abff7ed"
+    "material-design-lite-src": "https://github.com/google/material-design-lite.git#37286ae139b0ae336a8a7e9ed3b18ace1abff7ed",
+    "hammer.js": "^2.0.8",
+    "matchMedia": "0.2.0"
   },
   "devDependencies": {
     "bootstrap-social": "^5.0.0"
