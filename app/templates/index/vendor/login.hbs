@@ -1,16 +1,14 @@
 
-<h1 class="font-times-header" style="color: #4C4C4E;">LOG IN</h1><br>
+<h1 class="font-times-header" style="color: #4C4C4E;">Log In</h1><br>
 <hr>
 
 {{#if model.vendorAccount}}
-<div class="container">
-    <h1>Logging you in <i class="fa fa-spinner fa-spin"></i></h1>
+<div class="container">         
+    <h3 style="text-align:center; color:#fff">Logging in</h3>{{mdl-spinner}}
 </div>
 
 {{else}}
 <div class="container">
-    <h1>Log In:</h1>
-
     <div class="form-horizontal">
         <div class="form-group has-feedback">
             <label class="col-sm-3 control-label">Email</label>

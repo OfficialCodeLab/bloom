@@ -1,14 +1,15 @@
 
-<h1 class="font-times-header" style="color: #4C4C4E;">INNER CIRCLE</h1><br>
+<h1 class="font-times-header" style="color: #4C4C4E;">Inner Cirlce</h1><br>
 <hr>
 
 {{#if searchPartial}}
 	 {{partial "index/mywedding/innercircle/search"}}
 {{else}}
-	<div class="form-horizontal">
+	<div class="form-horizontal" >
 			<div class="form-group">
-		        <div class="col-sm-offset-4 col-sm-4">
-					<button class="btn btn-default" style="width:100%" {{action 'showSearchPartial'}}>Add</button>
+		        <div style="text-align: center;">
+	        		{{#mdl-button isRaised=true isAccent=true action="showSearchPartial"}}Search <i class="fa fa-search-plus"></i>{{/mdl-button}}
+					{{!-- <button class="btn btn-default" style="width:100%" {{action 'showSearchPartial'}}>Add</button> --}}
 		        </div>
 		    </div>
 	    </div>

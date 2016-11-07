@@ -1,6 +1,6 @@
 <div style="text-align: center">
 
-      <h1 class="font-times-header" style="color: #4C4C4E;">GUEST LIST</h1><br>
+      <h1 class="font-times-header" style="color: #4C4C4E;">Guest List</h1><br>
       <hr>
 
 	    {{!-- <div class="form-group">
@@ -12,11 +12,10 @@
 	{{#if showAdd}}
 		{{partial 'index/mywedding/guests/add'}}
 	{{else}}
-		<div class="form-horizontal">
+		<div class="form-horizontal" style="text-align: center;">
 			<div class="form-group">
-		        <div class="col-sm-offset-4 col-sm-4">
-					<button class="btn btn-default" style="width:100%" {{action 'showGuestAdd'}}>Add Guests</button>
-		        </div>
+	        	{{#mdl-button isRaised=true isAccent=true action="showGuestAdd"}}Add Guests <i class="fa fa-user-plus"></i>{{/mdl-button}}
+					{{!-- <button class="btn btn-default" style="width:100%" {{action 'showGuestAdd'}}>Add Guests</button> --}}
 		    </div>
 	    </div>
 		{{partial 'index/mywedding/guests/list'}}

@@ -469,6 +469,7 @@ h2.white{
 .s-middle{
     display: table-cell;
     vertical-align: middle;
+    transform: translateY(-60px);
     h3{
       color: $light-text;
     }
@@ -531,6 +532,7 @@ h2.white{
   }
 }
 /*=========/SPINNER===========*/
+
 
 /*=======MEDIA QUERIES=======*/
 @media (max-width:1281px) { /* hi-res laptops and desktops */ 

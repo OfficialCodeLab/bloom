@@ -576,6 +576,16 @@ Guest List
     background-color: #1E1E1E;
 }
 
+#searchRes{
+	padding-top: 40px;
+
+	.mdl-data-table td {
+	    line-height: 35px;
+	}
+	.mdl-data-table td, .mdl-data-table th {
+	    padding: 10px 18px 10px 18px;
+	}
+}
 /*==============================================================================*\
    ____      _     ___ _
   / ___|__ _| |_  |_ _| |_ ___ _ __ ___  ___

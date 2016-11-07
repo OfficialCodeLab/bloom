@@ -1,13 +1,13 @@
 {{#if session.isAuthenticated}}
 	{{partial 'navbar'}} 
-	<div class="pear-app-content">
+	<div class="pear-app-content" id="pear-app">
 		{{outlet}}
 		{{partial 'partials/footer'}}
 	</div>
 {{else}}
 
 	{{partial 'navbar-splash'}} 
-	<div class="pear-app-content">
+	<div class="pear-app-content" id="pear-app">
 		{{outlet}}
 		{{partial 'partials/login-modal'}}
 	</div>

@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
 	guestsValue: '0',
 	addingGuest: '',
 	isNotValid: Ember.computed.not('name'),
+	isDisabled: Ember.computed.or('isNotValid', 'addingGuest'),
 	numberObserver: Ember.observer('guestsValue', function() {
         let num = this.get('guests');
         let txtvalue = this.get('guestsValue');
