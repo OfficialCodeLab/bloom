@@ -16,11 +16,11 @@ export default Ember.Route.extend({
 	    // return new Ember.RSVP.Promise(function(resolve) {
 	    //   setTimeout(resolve, 3000);
 	    // });
-  },
+	},
 
-  afterModel: function (model, transition) {
-    Ember.$('.loading-overlay').fadeOut("fast");
-  },
+	afterModel: function (model, transition) {
+		Ember.$('.loading-overlay').fadeOut("fast");
+	},
 	actions: {
 		toggleMenu: function () {
 			if(this.controller.get('menuOpen')){

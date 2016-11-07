@@ -22,13 +22,41 @@
     <!-- 
         font-family: 'Lato', sans-serif;
      -->
-    
+
 
     {{content-for "head-footer"}}
   </head>
   <body>
     {{content-for "body"}}
 
+    <div class="ember-load-indicator">
+    <div class="s-outer">
+      <div class="s-middle" id="l-container">
+        <script>
+          let phrases = [
+            "Setting up your big day",
+            "Instructing bridesmaids",
+            "Tailoring dresses",
+            "You look beautiful"
+          ];
+          let i = Math.floor( Math.random() * phrases.length );
+          let phrase = phrases[i];
+          console.log(phrase);
+          var h3 = document.createElement("h3");                       // Create a <h3> element
+          var t = document.createTextNode(phrase);       // Create a text node
+          h3.appendChild(t);    
+          document.getElementById('l-container').appendChild(h3);
+        </script>
+        <div class="spinner">
+          <!-- <h3 id="loading-flavour-text">Test</h3> -->
+          <div class="cube1"></div>
+          <div class="cube2"></div>
+        </div>      
+      </div>
+    </div>
+    
+    </div>
+    
     <script src="assets/vendor.js"></script>
     <script src="assets/pear.js"></script>
 
