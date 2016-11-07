@@ -2,79 +2,25 @@
 <h1 class="font-times-header" style="color: #4C4C4E;">Sign Up</h1><br>
 <hr>
 
-<div class="container">
-    <div class="form-horizontal">
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Vendor Name*</label>
-            <div class="col-sm-6">
-              {{input type="text" value=name class="form-control" placeholder="Vendor account name"}}
-            </div>
-        </div> 
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Email*</label>
-            <div class="col-sm-6">
-              {{input type="email" value=email class="form-control" placeholder="This will be used to log in and for password recovery"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Password*</label>
-            <div class="col-sm-6">
-              {{input type="password" value=password class="form-control" placeholder="8 Characters or more"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Confirm Password*</label>
-            <div class="col-sm-6">
-              {{input type="password" value=passwordConfirm class="form-control" placeholder="Retype password to confirm"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Description</label>
-            <div class="col-sm-6">
-              {{input type="text" value=desc class="form-control" placeholder="Describe your business a bit more"}}
-            </div>
-        </div> 
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Custom Vendor ID</label>
-            <div class="col-sm-6">
-              {{input type="text" value=customID class="form-control" placeholder="Eg: pear.life/vendor/<your custom ID>"}}
-            </div>
-        </div>   
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Cellphone Number</label>
-            <div class="col-sm-6">
-              {{input type="text" value=cell class="form-control" placeholder="Your primary contact number"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Address Line 1</label>
-            <div class="col-sm-6">
-              {{input type="text" value=addressL1 class="form-control" placeholder="Your full address"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Address Line 2</label>
-            <div class="col-sm-6">
-              {{input type="text" value=addressL2 class="form-control" placeholder="Your full address continued"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">City</label>
-            <div class="col-sm-6">
-              {{input type="text" value=city class="form-control" placeholder="Your city"}}
-            </div>
-        </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Postal Code</label>
-            <div class="col-sm-6">
-              {{input type="text" value=postalcode class="form-control" placeholder="Your postal code"}}
-            </div>
-        </div>
+<div class="container text-center">
 
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-4">
-                <button type="submit" style="width:100%" class="btn btn-success" {{action 'signBtn' }}>Confirm</button>
-            </div>
+    <div class="row">
+        <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+            <i class="fa fa-book i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Vendor Account Name*' value=name}}<br>
+            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=email}}<br>
+            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=email}}<br>
+            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Confirm Password*' value=email}}<br>
+            <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Description' value=desc}}<br>
+            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom ID' value=customID}}<br>
+            <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=cell}}<br>
+            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=addressL1}}<br>
+            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br>
+            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
+            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
         </div>
+    </div>
+
+    <div style="padding: 20px 0 40px 0;">
+        {{#mdl-button isRaised=true action="signBtn"}}Sign Up{{/mdl-button}}
     </div>
 </div>

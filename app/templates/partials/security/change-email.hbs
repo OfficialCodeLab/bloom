@@ -2,15 +2,16 @@
 
 <div class="form-horizontal">
     <div class="form-group has-feedback">
-        <label class="col-sm-3 control-label">Email</label>
-        <div class="col-sm-6">
-          {{input type="email" value=email class="form-control" placeholder="Your new email address"}}
+        <div class="col-sm-6 col-sm-offset-3">
+        {{mdl-textfield label='Your new email address' value=email}}
+          {{!-- {{input type="email" value=email class="form-control" placeholder="Your new email address"}} --}}
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-4">
-            <button type="submit" style="width:150px;" disabled={{isNotValidEmail}} class="btn btn-success" {{action 'changeEmail'}}>Confirm</button>
+            {{#mdl-button disabled=isNotValidEmail isRaised=true action="changeEmail"}}Confirm{{/mdl-button}}
+            {{!-- <button type="submit" style="width:150px;" disabled={{isNotValidEmail}} class="btn btn-success" {{action 'changeEmail'}}>Confirm</button> --}}
         </div>
     </div>
 </div>

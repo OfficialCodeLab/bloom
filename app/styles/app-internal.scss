@@ -65,8 +65,9 @@ body {
 
 .h1-name {
 	font-family: "Open Sans";
-	font-style: italic;
-	font-weight: 700;
+	// font-style: italic;
+	// font-weight: 700;
+    font-size: 2.5vw;
 	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
     padding-top: 20px;
     padding-bottom: 10px;
@@ -101,7 +102,7 @@ body {
 			    -moz-border-radius: 100px;
 			    -webkit-border-radius: 100px;
 			    border-radius: 100px;
-				background-color: $medium-text;
+				background-color: $color-click;
 			}
 			line-height: inherit;
 			height: inherit;
@@ -112,12 +113,12 @@ body {
 			background-color: white;
 			&:link{
 				background-color: $pill-inactive;
-				color: $medium-text;
+				color: $color-click;
 			}
 			&:visited{
 				background-color: $pill-inactive;
 				// background-color: $pill-inactive;
-				color: $medium-text;
+				color: $color-click;
 			}
 			&:hover{
 				i{
@@ -1547,6 +1548,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 			font-size: 2em;
 		}
 	}
+
+	.h1-name { 
+		font-size: 3.4vw;
+	}
 }
 @media (max-width:991px) { /* Custom */
 	.nav-account-sidebar{
@@ -1566,6 +1571,9 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	.negative-margin-sm{
 		margin-left: none;
 	}
+	.h1-name { 
+		font-size: 4.2vw;
+	}
 	.hideOnMobile{
 		display: none;
 	}
@@ -1578,6 +1586,14 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		ul {
 			padding-top: 30px;
 			width: 100%;
+		}
+	}
+
+	.pear-main-pills{
+		width: 100%;
+		li{
+			min-width: 0px;
+    		width: 33%;
 		}
 	}
 	.pear-sidebar{
@@ -1609,15 +1625,9 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	.category-square{
 		padding-top: 40px;
 	}
-
-	.pear-main-pills{
-		width: 100%;
-		li{
-			min-width: 0px;
-    		width: 33%;
-		}
+	.h1-name { 
+		font-size: 6.2vw;
 	}
-
 
 	.pear-slide-2, .pear-slide-3{
 		h1{

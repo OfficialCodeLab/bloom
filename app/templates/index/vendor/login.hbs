@@ -3,29 +3,28 @@
 <hr>
 
 {{#if model.vendorAccount}}
-<div class="container">         
-    <h3 style="text-align:center; color:#fff">Logging in</h3>{{mdl-spinner}}
+<div class="container">  
+    <br>       
+    {{mdl-spinner}}
 </div>
 
 {{else}}
 <div class="container">
     <div class="form-horizontal">
         <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Email</label>
-            <div class="col-sm-6">
-              {{input type="email" value=email class="form-control" placeholder="Your Email"}}
+            <div class="col-sm-6 col-sm-offset-3">
+            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email' value=email}}<br>
             </div>
         </div>
         <div class="form-group has-feedback">
-            <label class="col-sm-3 control-label">Password</label>
-            <div class="col-sm-6">
-              {{input type="password" value=password class="form-control" placeholder="Your Password"}}
+            <div class="col-sm-6 col-sm-offset-3">
+                <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password' type="password" value=password}}<br>
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-4">
-                <button type="submit" style="width:100%" class="btn btn-success" {{action 'login'}}>Confirm</button>
+                {{#mdl-button isRaised=true action="login"}}Confirm{{/mdl-button}}
             </div>
         </div>
     </div>

@@ -21,10 +21,16 @@ export default Ember.Route.extend({
     	return this.store.findRecord('vendor', user.get('vendorAccount'));
     },
     actions: {
-    	saveChanges(model) {
-    		this.controller.get('notifications').success('Changes have been saved!',{
-            autoClear: true
-          });
+    	saveChanges() {
+        let model = this.controller.get('model');
+        this.controller.set('isUpdating', true);
+        model.save().then(() => {
+         this.controller.set('isUpdating', false);
+          this.controller.get('notifications').success('Changes have been saved!',{
+              autoClear: true
+            });
+
+        });
     	},
     	closeMessage(){
     		this.controller.set('responseMessage', '');
