@@ -2,21 +2,27 @@
 <h1 class="font-times-header" style="color: #4C4C4E;">NEW PRODUCT</h1><br>
 <hr>
 
-<div style="text-align:center; padding-bottom:100px;">
-<div class="form-horizontal">
+<div style="padding-bottom:100px;">
+<div class="form-horizontal full-width-boxes">
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Name</label>
+			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6 {{if isLongName 'has-success'}}">
-				{{input type="text" disabled=isCreating value=name class="form-control" placeholder="Name of new item"}}
+				{{mdl-textfield label='Name of new item' value=name}}
+				{{!-- {{input type="text" disabled=isCreating value=name class="form-control" placeholder="Name of new item"}} --}}
 			</div>
 		</div>
-		{{#paper-select on-open=onUserLoad item-label-callback=(action "selectCat" "target.value") placeholder="Select a category"}}
-		  {{#each model as |cat|}}
-		    {{#paper-option value=cat.id}}
-		      {{cat.name}}
-		    {{/paper-option}}
-		  {{/each}}
-		{{/paper-select}}
+		<div class="form-group has-feedback" style="text-align: left;">
+			{{!-- <label class="col-sm-3 control-label"></label> --}}
+			<div class="col-sm-6 col-sm-offset-3">
+				{{#paper-select placeholder="Select a category" model=category}}
+				  {{#each model as |cat|}}
+				    {{#paper-option value=cat.id}}
+				      {{cat.name}}
+				    {{/paper-option}}
+				  {{/each}}
+				{{/paper-select}}
+			</div>
+		</div>
 		{{!-- <div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Category</label>
 			<div class="col-sm-6 {{if category 'has-success'}}">
@@ -29,31 +35,34 @@
 			</div>
 		</div> --}}
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Price</label>
+			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6">
-				<div class="has-feedback {{if isValidNumber 'has-success'}}">
+				{{mdl-textfield label='Price of item (ZAR)' value=price}}
+				{{!-- <div class="has-feedback {{if isValidNumber 'has-success'}}">
 				  <div class="input-group">
 				    <span class="input-group-addon">R</span>
 				    {{input type="text" disabled=isCreating value=price class="form-control" placeholder="Eg: 500 or 450.23"}}
 				  </div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Upload Image</label>
+			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6">
-				<button class="btn btn-default" disabled={{isCreating}} style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button>
+				{{#mdl-button action='openFilePicker' disabled=isCreating isRaised=true isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}}
+				{{!-- <button class="btn btn-default" disabled={{isCreating}} style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button> --}}
 			</div>
 		</div>
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Or Image URL</label>
+			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6">
-				<div class="has-feedback {{if imageURL 'has-success'}}">
+				{{mdl-textfield label='Or Image URL' value=imageURL}}
+				{{!-- <div class="has-feedback {{if imageURL 'has-success'}}">
 				  <div class="input-group">
 				    <span class="input-group-addon">http://</span>
 				    {{input type="text" disabled=isCreating value=imageURL class="form-control" placeholder="Eg: imgur/image.jpg"}}
 				  </div>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 		{{!-- <div class="form-group has-feedback">
@@ -68,22 +77,21 @@
 		</div> --}}
 
 		<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Description</label>
+			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6 {{if isLongDesc 'has-success'}}">
-	        		{{textarea class="form-control" disabled=isCreating value=desc placeholder="Your product description. (At least 5 characters.)" rows="7"}}
+				{{mdl-textarea label='Your product description.' value=desc}}
+	        		{{!-- {{textarea class="form-control" disabled=isCreating value=desc placeholder="Your product description. (At least 5 characters.)" rows="7"}} --}}
         	</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-3">
-
-		</div>
-		<div class="col-sm-6">
-			<button class="btn btn-success" disabled={{isNotValid}} {{action 'createItem'}}>
+		<div class="col-sm-6 col-sm-offset-3">
+			{{#mdl-button action='createItem' disabled=isNotValid isRaised=true isAccent=true}}Create new item {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+			{{!-- <button class="btn btn-success" disabled={{isNotValid}} {{action 'createItem'}}>
 				<span>
 					Create new item {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}
 				</span>
-			</button>
+			</button> --}}
 		</div>
 	</div>
 </div>

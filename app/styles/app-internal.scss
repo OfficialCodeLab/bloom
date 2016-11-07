@@ -1496,11 +1496,22 @@ $font_0: FontAwesome;
 .mdl-button{
 	width: 180px !important;
 }
+
 .modal-footer>.mdl-button{
 	width: auto !important;
 }
 .mdl-button--accent{
 	color: $color-main !important;
+}
+md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float) {
+    
+    transform: translate3d(0, 6px, 0) scale(1) !important;
+    color: $color-main !important;
+}
+.full-width-boxes{
+	.mdl-textfield{
+		width:100% !important;
+	}
 }
 /*==============================================================================*\
   __  __          _ _          ___                  _
