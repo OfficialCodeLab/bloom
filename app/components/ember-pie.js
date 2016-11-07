@@ -11,14 +11,14 @@ const EmberPieComponent = Ember.Component.extend({
 			this.set('chartData', Ember.A([
 				{
 			        value: this.get('allGuests') - this.get('attendingGuests'),
-			        color: "#F7464A",
-			        highlight: "#FF5A5E",
+			        color: "#808080",
+			        highlight: "#9E9E9E",
 			        label: "Not Attending"
 			    }, 
 			    {
 			        value: this.get('attendingGuests'),
-			        color: "#46BFBD",
-			        highlight: "#5AD3D1",
+			        color: "#F48FB1",
+			        highlight: "#F8BBD0",
 			        label: "Attending"
 			    }
 	    	]));
