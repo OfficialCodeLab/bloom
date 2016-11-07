@@ -1,7 +1,8 @@
-<div style="text-align:left;">
-	{{#link-to 'index.vendor'}}<button class="btn btn-default">Back</button>{{/link-to}}
+<div style="text-align:center; padding-top: 40px;">
+
+	{{!-- {{#link-to 'index.vendor'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}} --}}
 </div>
-<div class="row text-center">
+<div class="row text-center full-width-boxes">
 	<div class="col-lg-12">
 		<h1>{{model.catItem.name}}</h1>
 		<div class="single-img-container">
@@ -11,20 +12,34 @@
 	<div class="col-lg-12" style="padding-bottom: 100px">
 
 		<div class="form-horizontal">
-			<h1>Update Details</h1>
+			<h3>Update Details</h3>
 			<div class="form-group has-feedback">
-			<label class="col-sm-3 control-label">Name</label>
-			<div class="col-sm-6 {{if model.catItem.isLongName 'has-success'}}">
-				{{input type="text" disabled=model.catItem.updating value=model.catItem.name class="form-control" placeholder="Name of new item"}}
+			{{!-- <label class="col-sm-3 control-label">Name</label> --}}
+			<div class="col-sm-6 col-sm-offset-3">
+				{{mdl-textfield disabled=model.catItem.updating label='Name of item' value=model.catItem.name}}
+				{{!-- {{input type="text" disabled=model.catItem.updating value=model.catItem.name class="form-control" placeholder="Name of new item"}} --}}
 			</div>
 		</div>
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Description</label>
-				<div class="col-sm-6 {{if model.catItem.isLongDesc 'has-success'}}">
-		        		{{textarea class="form-control" disabled=model.catItem.updating value=model.catItem.desc placeholder="Your product description. (At least 5 characters.)" rows="7"}}
+				{{!-- <label class="col-sm-3 control-label">Description</label> --}}
+				<div class="col-sm-6 col-sm-offset-3">
+					{{mdl-textarea disabled=model.catItem.updating label='Your product description' value=model.catItem.desc}}
+		        		{{!-- {{textarea class="form-control" disabled=model.catItem.updating value=model.catItem.desc placeholder="Your product description. (At least 5 characters.)" rows="7"}} --}}
 	        	</div>
 			</div>
-			<div class="form-group has-feedback">
+			<div class="form-group has-feedback" style="text-align: left;">
+			{{!-- <label class="col-sm-3 control-label"></label> --}}
+			<div class="col-sm-6 col-sm-offset-3">
+				{{#paper-select placeholder="Category" model=category}}
+				  {{#each model.category as |cat|}}
+				    {{#paper-option value=cat.id}}
+				      {{cat.name}}
+				    {{/paper-option}}
+				  {{/each}}
+				{{/paper-select}}
+				</div>
+			</div>
+			{{!-- <div class="form-group has-feedback">
 				<label class="col-sm-3 control-label">Category</label>
 				<div class="col-sm-6 {{if category 'has-success'}}">
 					<select disabled={{model.catItem.updating}} onchange={{action "selectCat" value="target.value"}} class="form-control">
@@ -35,36 +50,35 @@
 					  {{/each}}
 					</select>
 				</div>
-			</div>
+			</div> --}}
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Price</label>
-				<div class="col-sm-6">
-					<div class="has-feedback {{if model.catItem.isValidNumber 'has-success'}}">
+				<div class="col-sm-6 col-sm-offset-3">
+					{{mdl-textfield disabled=model.catItem.updating label='Price of item (ZAR)' value=model.catItem.price}}	
+					{{!-- <div class="has-feedback {{if model.catItem.isValidNumber 'has-success'}}">
 					  <div class="input-group">
 					    <span class="input-group-addon">R</span>
 					    {{input type="text" disabled=model.catItem.updating value=model.catItem.price class="form-control" placeholder="Eg: 500 or 450.23"}}
 					  </div>
-					</div>
+					</div> --}}
 				</div>
 			</div>			
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Upload Image</label>
-				<div class="col-sm-6">
-					<button class="btn btn-default" disabled={{model.catItem.updating}} style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button>
+				<div class="col-sm-6 col-sm-offset-3">
+				{{#mdl-button isRaised=true disabled=model.catItem.updating action="openFilePicker" isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}}
 				</div>
 			</div>
 			<div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Image URL</label>
-				<div class="col-sm-6">
-					<div class="has-feedback {{if model.catItem.imageURL 'has-success'}}">
+				<div class="col-sm-6 col-sm-offset-3">
+				{{mdl-textfield disabled=model.catItem.updating label='Image Url' value=model.catItem.imageURL}}
+					{{!-- <div class="has-feedback {{if model.catItem.imageURL 'has-success'}}">
 					  <div class="input-group">
 					    <span class="input-group-addon">http://</span>
 					    {{input type="text" disabled=model.catItem.updating value=model.catItem.imageURL class="form-control" placeholder="Eg: imgur/image.jpg"}}
 					  </div>
-					</div>
+					</div> --}}
 				</div>
 			</div>
-			<div class="col-sm-offset-3 col-sm-6">
+			{{!-- <div class="col-sm-offset-3 col-sm-6">
 				<button class="btn btn-success" style="width:100%;" disabled={{model.catItem.isNotValid}} {{action 'updateItem' model.catItem}}>
 					<span>
 						Update Product Listing {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}
@@ -77,6 +91,12 @@
 						Remove Product Listing {{#if model.catItem.isDeleting}}<i class="fa fa-spinner fa-spin"></i>{{/if}}
 					</span>
 				</button>
+			</div> --}}
+			<div>
+				{{#mdl-button isRaised=true disabled=model.catItem.updating action="updateItem"}}Update Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+			</div>
+			<div style="padding-top: 15px;">
+				{{#mdl-button isRaised=true disabled=model.catItem.updating action="destroyItem" isAccent=true}}Delete Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-trash-o"></i>{{/if}}{{/mdl-button}}
 			</div>
 		</div>
 	</div>

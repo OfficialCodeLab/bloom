@@ -12,6 +12,11 @@ export default Ember.Route.extend({
 	    this._super(controller, model);
 	    Ember.set(controller, 'catItem', model.catItem);
 	    Ember.set(controller, 'category', model.category);
+
+		let catItem = this.controller.get('model.catItem');
+		let cat = catItem.get('category');
+		let cat_id = cat.get('id');
+		this.controller.set('category', cat_id);
 	  },
 	filepicker: Ember.inject.service(),
 	actions: {
@@ -75,7 +80,7 @@ export default Ember.Route.extend({
 					break;
 			}
 		},
-		destroyItem: function(model){
+		destroyItem: function(){
 			// let confirmation = confirm('Are you sure?');
 			this.controller.get('model.catItem').set('isDeleting', true);
 			let _modalData;
@@ -91,7 +96,7 @@ export default Ember.Route.extend({
             } 
 	        
 		},
-		updateItem: function(model){
+		updateItem: function(){
 			let _cat = this.controller.get('category') + "";
 			let _item = this.store.peekRecord('cat-item', this.controller.get('model.catItem.id'));
 			this.controller.get('model.catItem').set('isUpdating', true);
@@ -109,7 +114,7 @@ export default Ember.Route.extend({
 					cat.save().then(() => {
 						_item.save().then(() => {
 							this.controller.get('model.catItem').set('isUpdating', false);
-							this.tryFlushBlob(model); //Attempt GC
+							this.tryFlushBlob(_item); //Attempt GC
 				    		this.controller.get('notifications').success('Product info has been saved!',{
 					            autoClear: true
 					          });
@@ -117,9 +122,9 @@ export default Ember.Route.extend({
 					});
 				});
 			} else {
-				model.save().then(() => {
+				_item.save().then(() => {
 					this.controller.get('model.catItem').set('isUpdating', false);
-					this.tryFlushBlob(model); //Attempt GC
+					this.tryFlushBlob(_item); //Attempt GC
 		    		this.controller.get('notifications').success('Product info has been saved!',{
 			            autoClear: true
 			          });

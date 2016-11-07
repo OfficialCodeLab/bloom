@@ -18,8 +18,7 @@ export default Ember.Controller.extend({
 	isValid: Ember.computed.and('isLongName', 'isLongDesc', 'category', 'isValidNumber', 'imageURL', 'isNotCreating'),
 	isNotValid: Ember.computed.not('isValid'),
     actions: {
-    	selectCat(value){
-			this.set('category', value);
-		}
+    	selectCat(){
+		},
     }
 });
