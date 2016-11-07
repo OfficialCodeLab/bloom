@@ -10,7 +10,14 @@
 				{{input type="text" disabled=isCreating value=name class="form-control" placeholder="Name of new item"}}
 			</div>
 		</div>
-		<div class="form-group has-feedback">
+		{{#paper-select on-open=onUserLoad item-label-callback=(action "selectCat" "target.value") placeholder="Select a category"}}
+		  {{#each model as |cat|}}
+		    {{#paper-option value=cat.id}}
+		      {{cat.name}}
+		    {{/paper-option}}
+		  {{/each}}
+		{{/paper-select}}
+		{{!-- <div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Category</label>
 			<div class="col-sm-6 {{if category 'has-success'}}">
 				<select disabled={{isCreating}} onchange={{action "selectCat" value="target.value"}} class="form-control">
@@ -20,7 +27,7 @@
 				  {{/each}}
 				</select>
 			</div>
-		</div>
+		</div> --}}
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label">Price</label>
 			<div class="col-sm-6">
