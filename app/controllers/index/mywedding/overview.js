@@ -6,6 +6,9 @@ import fromNow from 'ember-moment/computeds/from-now';
 export default Ember.Controller.extend({
 	selectedDate: null,
 	moment: Ember.inject.service(),
+	computedSelected: format('selectedDate'),
 	dateCurrent: format(),
-	computedFromNow: fromNow(momentComputed('selectedDate'), false), 
+	// computedFromNow: fromNow(momentComputed('selectedDate'), false), 
+	computedFromNow: 0,
+	daysString: ''
 });
