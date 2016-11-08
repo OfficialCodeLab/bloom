@@ -1,57 +1,58 @@
+<div class="container-fluid">
+    <h1 class="font-times-header" style="color: #4C4C4E;">Overview</h1><br>
+    <hr>
 
-<h1 class="font-times-header" style="color: #4C4C4E;">Overview</h1><br>
-<hr>
-
-<div style="padding-bottom:60px;">
-    
-    
-        <div class="row">
-        	<div class="col-md-8">
-        		{{!-- <h3>Welcome to your overview</h3> --}}
-                <div class="row">
-                    {{#if selectedDate}}
-                    <div class="col-sm-12">
-                        <h3>Your wedding is {{computedFromNow}}</h3>
+    <div style="padding-bottom:60px;">
+        
+        
+            <div class="row">
+            	<div class="col-md-8">
+            		{{!-- <h3>Welcome to your overview</h3> --}}
+                    <div class="row">
+                        {{#if selectedDate}}
+                        <div class="col-sm-12">
+                            <h3>Your wedding is {{computedFromNow}}</h3>
+                        </div>
+                        {{/if}}
+                        <div class="col-md-4">
+                        {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}
+                        </div>
                     </div>
-                    {{/if}}
-                    <div class="col-md-4">
-                    {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}
-                    </div>
-                </div>
-        		<p><hr><b>What can you do in the hub?</b><hr>Current Features: </p>
-        		<p><i class="fa fa-user-plus" aria-hidden="true"></i> Add guests to your guest list and see the attendance overview on this page.</p>
-        		<p><i class="fa fa-users" aria-hidden="true"></i> Add members to your inner circle and view their stats</p>
-        		<p><i class="fa fa-female" aria-hidden="true"></i> View and edit your own stats and measurements</p><hr>
-                <p>Features Coming soon: </p>
-                <p><i class="fa fa-envelope-o" aria-hidden="true"></i> Chat with suppliers and your inner circle</p>
-                <p><i class="fa fa-tasks" aria-hidden="true"></i> Assign Tasks to your inner circle members</p>
-                <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr>
-        		
-        	</div>
-            <div class="col-md-4">
-                <h3 class="text-center">Guest Attendance:</h3> 
-                {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+            		<p><hr><b>What can you do in the hub?</b><hr>Current Features: </p>
+            		<p><i class="fa fa-user-plus" aria-hidden="true"></i> Add guests to your guest list and see the attendance overview on this page.</p>
+            		<p><i class="fa fa-users" aria-hidden="true"></i> Add members to your inner circle and view their stats</p>
+            		<p><i class="fa fa-female" aria-hidden="true"></i> View and edit your own stats and measurements</p><hr>
+                    <p>Features Coming soon: </p>
+                    <p><i class="fa fa-envelope-o" aria-hidden="true"></i> Chat with suppliers and your inner circle</p>
+                    <p><i class="fa fa-tasks" aria-hidden="true"></i> Assign Tasks to your inner circle members</p>
+                    <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr>
+            		
+            	</div>
+                <div class="col-md-4">
+                    <h3 class="text-center">Guest Attendance:</h3> 
+                    {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
 
-                <div class="row pie-label" style="padding-top: 10px;">
-                	<div class="col-xs-6 pie-label-right">
-                		<div class="pie-label-square attending"></div>
-                	</div>
-                	<div class="col-xs-6 pie-label-left">
-                		Attending
-                	</div>
-                </div>
-                <div class="row pie-label">
-                	<div class="col-xs-6 pie-label-right">
-                		<div class="pie-label-square not-attending"></div>
-                	</div>
-                	<div class="col-xs-6 pie-label-left">
-                		Not Attending
-                	</div>
+                    <div class="row pie-label" style="padding-top: 10px;">
+                    	<div class="col-xs-6 pie-label-right">
+                    		<div class="pie-label-square attending"></div>
+                    	</div>
+                    	<div class="col-xs-6 pie-label-left">
+                    		Attending
+                    	</div>
+                    </div>
+                    <div class="row pie-label">
+                    	<div class="col-xs-6 pie-label-right">
+                    		<div class="pie-label-square not-attending"></div>
+                    	</div>
+                    	<div class="col-xs-6 pie-label-left">
+                    		Not Attending
+                    	</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    <div class="col-md-6">
-    
+        <div class="col-md-6">
+        
+        </div>
     </div>
 </div>

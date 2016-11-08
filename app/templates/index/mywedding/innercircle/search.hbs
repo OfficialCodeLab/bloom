@@ -1,13 +1,10 @@
 <div class="container-fluid" style="padding: 0px 10px 60px 10px; text-align: center;">
-	<div class="row">
-	{{!-- <button class="col-sm-3 btn btn-default" {{action 'backBtn'}}>Back</button> --}}
-	<h3 class="text-center" style="margin-top:0px; padding-top:0px;">Add Inner Circle Members</h3>
-	</div>
-	<br>
 	<div class="form-horizontal row">
 		<div class="form-group has-feedback">
 			<div class="col-sm-6 col-sm-offset-3" style="padding-top:5px">
+				{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}
 				{{mdl-textfield disabled=searching label='Name to search for' value=name}}
+				{{mdl-button icon="search" action="searchUser" disabled=searching}}
 				{{!-- {{input type="text" disabled=searching value=name class="form-control" placeholder="Name to search for"}} --}}
 			</div>
 			{{!-- <div class="col-sm-3" style="padding-top:5px">
@@ -15,10 +12,17 @@
 			</div> --}}
 		</div>
 	</div>
-	<div class="row">
-		{{#mdl-button isRaised=true isAccent=true action="backBtn"}}Cancel{{/mdl-button}}&nbsp;
-		{{#mdl-button isRaised=true action="searchUser" disabled=isDisabled}}Search {{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+	{{#if searching}}
+	<div class="row text-center">
+		<div class="form-group">
+    		{{mdl-spinner}}
+			{{!-- {{#mdl-button isRaised=true isAccent=true action="backBtn"}}Cancel{{/mdl-button}}&nbsp; --}}
+		</div>
+		{{!-- <div class="form-group" style="padding-top: 5px;">
+			{{#mdl-button isRaised=true action="searchUser" disabled=isDisabled}}Search {{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+		</div> --}}
 	</div>
+	{{/if}}
 	{{#if responseMessage}}
 		<div class="row text-center">
 		    <div class="col-sm-offset-2 col-sm-8 alert alert-warning" {{action 'closeMessage'}}>{{responseMessage}}
@@ -33,7 +37,17 @@
 		        {{user.name}}
 		      {{/mdl-table-col}}
 		      {{#mdl-table-col label='Send Request'}}
-		        <button class="btn btn-success" disabled={{user.adding}} {{action "addInnerCircle" user}}>Add{{#if user.adding}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button> 
+		      	<div {{action "addInnerCircle" user}} class="text-center">
+		      		{{#if user.adding}}
+		      			<div style="padding-top: 10px;">
+		      				{{mdl-spinner}}
+		      			</div>
+		      		{{else}}
+						{{mdl-button icon="person_add" disabled=user.adding}}
+		      		{{/if}}
+
+		      	</div>
+		        {{!-- <button class="btn btn-success" disabled={{user.adding}} {{action "addInnerCircle" user}}>Add{{#if user.adding}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>  --}}
 		      {{/mdl-table-col}}
 		    {{/mdl-table}}
 		</div>

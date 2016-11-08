@@ -8,9 +8,12 @@ export default Ember.Route.extend({
 	actions: {
 		searchUser(){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			let _name = this.controller.get('name').toLowerCase();
+			let _name = this.controller.get('name') + "";
+			_name = _name.toLowerCase();
+			let _oldname = this.controller.get('oldname') + "";
+			_oldname = _oldname.toLowerCase();
 			let key = 0;
-			if(_name !== '' && _name !== " "){
+			if(_name !== '' && _name !== " " && _name !== _oldname){
 				this.controller.set('responseMessage', "");
 				//console.log("SEARCHING FOR: " + _name);
 				let searchResults = [];
@@ -34,6 +37,7 @@ export default Ember.Route.extend({
 				            autoClear: true
 				        });
 					}
+					this.controller.set('oldname', _name);
 					this.controller.set('searchResults', searchResults);
 					this.controller.set('searching', false);
 					this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});

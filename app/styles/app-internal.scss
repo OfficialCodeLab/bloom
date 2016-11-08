@@ -1595,10 +1595,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 	.pear-slide-2, .pear-slide-3{
 		h1{
-			font-size: 12em;
+			font-size: 12em !important;
 		}
 		h4{
-			font-size: 2em;
+			font-size: 2em !important;
 		}
 	}
 
@@ -1617,7 +1617,18 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
-
+	h1{
+	  font-size: 3.8em !important;
+	}
+	h2{
+	  font-size: 3em !important;
+	}
+	h3{
+	  font-size: 2.6em !important;
+	}
+	h4{
+	  font-size: 2em !important;
+	}
 
 }
 @media (max-width:772px) { /* Our definition of really small */
@@ -1646,7 +1657,7 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		width: 100%;
 		li{
 			min-width: 0px;
-    		width: 33%;
+    		 width: 33%;
 		}
 	}
 	.pear-sidebar{
@@ -1667,10 +1678,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 	.pear-slide-2, .pear-slide-3{
 		h1{
-			font-size: 12em;
+			font-size: 12em !important;
 		}
 		h4{
-			font-size: 1.5em;
+			font-size: 1.5em !important;
 		}
 	}
 }
@@ -1684,10 +1695,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 	.pear-slide-2, .pear-slide-3{
 		h1{
-			font-size: 9em;
+			font-size: 9em !important;
 		}
 		h4{
-			font-size: 1em;
+			font-size: 1em !important;
 		}
 	}
 	//Hide font awesome buttons on slider here
@@ -1696,8 +1707,33 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 			display: none;
 		}
 	}
+	h1{
+	  font-size: 3.4em !important;
+	}
+	h2{
+	  font-size: 2.6em !important;
+	}
+	h3{
+	  font-size: 2.2em !important;
+	}
+	h4{
+	  font-size: 1.8em !important;
+	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+
+	h1{
+	  font-size: 2.8em !important;
+	}
+	h2{
+	  font-size: 2.2em !important;
+	}
+	h3{
+	  font-size: 1.8em !important;
+	}
+	h4{
+	  font-size: 1.5em !important;
+	}
 	.pear-sidebar{
 		width: 100%;
 		li{
@@ -1742,7 +1778,7 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
 	.pear-slide-2, .pear-slide-3{
 		h1{
-			font-size: 7em;
+			font-size: 7em !important;
 		}
 		h4{
 			display: none;
