@@ -1,1 +1,7 @@
-<button type="button" class="btn btn-danger cat-heart-button {{if favourited 'favourited'}}" {{action 'toggleFavourite'}}><i class="fa fa-heart-o"></i></button>
+{{!-- <button type="button" class="btn btn-danger cat-heart-button {{if favourited 'favourited'}}" {{action 'toggleFavourite'}}><i class="fa fa-heart-o"></i></button> --}}
+
+{{#if favourited}}
+{{mdl-button icon="favorite" action="toggleFavourite"}}
+{{else}}
+{{mdl-button icon="favorite_border" action="toggleFavourite"}}
+{{/if}}

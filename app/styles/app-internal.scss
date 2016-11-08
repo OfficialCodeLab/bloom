@@ -621,7 +621,7 @@ Guest List
 	border-radius: 2px;
 
 	//Card stuff
-	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 
 	.cat-overlay-1{
@@ -658,7 +658,7 @@ Guest List
 		overflow: hidden;
 	}
 	&:hover{
-  		box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  		box-shadow: 0 5px 5px 0 rgba(0,0,0,.14),0 4px 5px -2px rgba(0,0,0,.2),0 3px 8px 0 rgba(0,0,0,.12);
   		.cat-overlay-1{
   			display: inline-block;
   			z-index: 10;
@@ -691,6 +691,38 @@ Guest List
 
     overflow: hidden;
 
+}
+.cat-title{	
+    width: 85%;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 5px 0;
+    margin-bottom: 10px;
+}
+.cat-category{
+	position: absolute;
+	left: 10px;
+	font-weight: 600;
+	font-size: 12px;
+    text-transform: uppercase;
+    padding-top: 6px;
+}
+.cat-price{
+	position: absolute;
+	right: 8px;
+	font-size: 15px;
+	padding-top: 5px;
+}
+.cat-bottom-box{
+	padding: 5px;
+	height: 40px;
+}
+.float-top-right {
+	top: 6px;
+	right: 2%;
+	position: absolute;
+	z-index: 10;
 }
 
 .cat-img-container{
@@ -728,20 +760,26 @@ Guest List
 }
 
 .cat-heart-button{
-	width: 60px;
-	height: 60px;
+	width: 45px;
+	height: 45px;
 	border-radius: 0px;
-	bottom: 0%;
 	// line-height: 20px;
 	text-align: center;
 	padding: 0px;
 	border: none;
-	background-color: $button-unfavourited !important;
+	color: $color-click;
+	font-size: 24px;
+	z-index: 10;
+	position: absolute;
+	top: 0%;
+	right: 2%;
+
+	background-color: $transparent !important;
 	&:hover{
-		background-color: $color-secondary !important;
+		background-color: $transparent !important;
 	}
 	&:active{
-		background-color: $color-click !important;
+		background-color: $transparent !important;
 	}
 	&:focus{
 		outline: none;
@@ -749,7 +787,8 @@ Guest List
 }
 
 .favourited {
-	background-color: $button-favourited !important;
+	background-color: $transparent !important;
+	color: $color-main !important;
 }
 .cat-button-circle{
 	border: 2px solid white;
@@ -1507,12 +1546,20 @@ $font_0: FontAwesome;
 .mdl-button{
 	width: 180px !important;
 }
+#single-item{
+	.mdl-button{
+		width: auto !important;
+	}
+}
 
 .modal-footer>.mdl-button{
 	width: auto !important;
 }
 .mdl-button--accent{
 	color: $color-main !important;
+}
+.mdl-button--icon{
+	width: 32px !important;
 }
 md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float) {
     

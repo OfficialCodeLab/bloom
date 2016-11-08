@@ -1,4 +1,4 @@
-<div class="container index-main">
+<div class="container index-main" id="single-item">
 	<div class="row page-navigation">
 		<div class="col-md-3">
 			<button class="btn btn-default" {{action 'goBack'}} style="width: 100%">Back</button>
@@ -40,16 +40,16 @@
 							<td>
 								<p>Vendor</p>
 							</td>
-							<td>
-								{{#link-to 'vendor-profile' model.vendor.id}}{{model.vendor.name}}{{/link-to}}
+							<td>								
+								{{#link-to 'vendor-profile' model.vendor.id}}{{#mdl-button}}{{model.vendor.name}}{{/mdl-button}}{{/link-to}}
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<p>Category</p>
 							</td>
-							<td>
-								{{#link-to 'category' model.category.id}}{{model.category.name}}{{/link-to}}
+							<td>								
+								{{#link-to 'category' model.category.id}}{{#mdl-button}}{{model.category.name}}{{/mdl-button}}{{/link-to}}
 							</td>
 						</tr>
 						<tr>
@@ -57,8 +57,9 @@
 								<p>Message Seller</p>
 							</td>
 							<td>
+								{{#mdl-button action='openContactModalInit'}}Send Message{{/mdl-button}}
 								{{!-- {{#link-to 'messaging' model.vendor.id}} --}}
-									<button class="btn btn-default btn-pear" {{action 'openContactModalInit'}}>Message {{model.vendor.name}}</button>
+									{{!-- <button class="btn btn-default btn-pear" {{action 'openContactModalInit'}}></button> --}}
 								{{!-- {{/link-to}} --}}
 							</td>
 						</tr>
