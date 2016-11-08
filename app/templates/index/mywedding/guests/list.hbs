@@ -40,16 +40,23 @@
         {{guest.guests}}
       {{/mdl-table-col}}
       {{#mdl-table-col label='Attending'}}
-        <div style="text-align: center;">
-        <input style="margin-left: auto; margin-right: auto;" type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}>
-        {{!-- {{mdl-checkbox value=guest.rsvp is-checked=guest.rsvp}} --}}
+        <div {{action "checkBox" guest.id}} class="text-center tb-btn">
+          {{#if guest.rsvp}}
+            {{mdl-button icon="check_box"}}
+          {{else}}
+            {{mdl-button icon="check_box_outline_blank"}}
+          {{/if}}
         </div>
+        {{!-- <input style="margin-left: auto; margin-right: auto;" type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}> --}}
+        {{!-- {{mdl-checkbox value=guest.rsvp is-checked=guest.rsvp}} --}}
         {{!-- <input type="checkbox" > --}}
       {{/mdl-table-col}}
       {{#mdl-table-col label='Delete'}}
-        <div style="text-align: center;">
+        <div {{action "destroyGuest" guest.id}} class="text-center tb-btn">
+            {{mdl-button icon="delete"}}
+        </div>
         {{!-- {{mdl-button isRaised=true icon='delete' isMiniFab=true action="destroyGuest" param=guest.id}} --}}
-        <a href='' {{action "destroyGuest" guest.id}}><i class="fa fa-times" style="font-size: 24px;" aria-hidden="true"></i></a></div>
+        {{!-- <a href='' {{action "destroyGuest" guest.id}}><i class="fa fa-times" style="font-size: 24px;" aria-hidden="true"></i></a></div> --}}
         {{!-- <button class="btn btn-danger" {{action "destroyGuest" guest.id}}>X</button> --}}
       {{/mdl-table-col}}
     {{/mdl-table}}
@@ -92,7 +99,7 @@
             <div class="col-xs-3">
               <i class="fa fa-ticket" aria-hidden="true"></i>
             </div>
-            <div class="col-xs-9" style="text-align: left;">RSVP:   <input type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}></div>
+            <div class="col-xs-9" style="text-align: left;">RSVP: <input type="checkbox" onclick={{action "checkBox" guest.id}} checked={{guest.rsvp}}></div>
             
           </div>
         </div>
