@@ -609,7 +609,7 @@ Guest List
 	margin-bottom: 8px;
 
 	//Take up the full column...
-	width: 100%;
+	// width: 100%;
 
 	//But not too big!
 	max-width: 360px;
@@ -661,7 +661,7 @@ Guest List
   		box-shadow: 0 5px 5px 0 rgba(0,0,0,.14),0 4px 5px -2px rgba(0,0,0,.2),0 3px 8px 0 rgba(0,0,0,.12);
   		.cat-overlay-1{
   			display: inline-block;
-  			z-index: 10;
+  			z-index: 11;
   			text-align: center;
   			opacity: 1;
   		}
@@ -693,15 +693,20 @@ Guest List
 
 }
 .cat-title{	
-    width: 85%;
+    width: 80%;
+    float: left;
     text-align: left;
     font-size: 16px;
     font-weight: 600;
-    padding: 10px 5px 0;
-    margin-bottom: 10px;
+    padding: 10px 5px 10px 5px;
+}
+.cat-fav{
+	padding: 5px;
+	float: right;
 }
 .cat-category{
-	position: absolute;
+	float: left;
+	// position: absolute;
 	left: 10px;
 	font-weight: 600;
 	font-size: 12px;
@@ -709,7 +714,8 @@ Guest List
     padding-top: 6px;
 }
 .cat-price{
-	position: absolute;
+	float: right;
+	// position: absolute;
 	right: 8px;
 	font-size: 15px;
 	padding-top: 5px;
