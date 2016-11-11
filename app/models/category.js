@@ -8,5 +8,6 @@ export default Model.extend({
   desc: attr('string'),
   style: attr('string'),
   icon: attr('string'),
+  iconName: attr('string'),
   catItems: hasMany('cat-item', {inverse: 'category', async: true})
 });
