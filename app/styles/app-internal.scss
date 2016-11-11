@@ -521,6 +521,11 @@ body {
 	color: white;
 }
 
+.nav-arrows {
+	color: #C3C3C1;
+	font-size: 20px;
+	text-align: center;
+}
 
 /*================================*\
 Guest List
@@ -1480,13 +1485,13 @@ $font_0: FontAwesome;
 .font-times-header{
 	text-align: center;
 	//letter-spacing: 5px;
-	color: black;
+	color: #4D4D4F;
 }
 .font-times-subheader{
 	//font-family: "Times New Roman", Times, serif;
 	//letter-spacing: 2px;
-	color: #999;
-	font-size: 15px;
+	color: #4D4D4F;
+	font-size: 16px;
 	font-style: italic;
 
 }
@@ -1566,6 +1571,15 @@ $font_0: FontAwesome;
 }
 .mdl-button--icon{
 	width: 32px !important;
+}
+.nav-arrows {
+	.mdl-button--icon{
+    	transform: translateY(-1px) !important;
+		.material-icons{
+    		transform: translate(-23px, -12px) !important;
+			font-size: 45px !important;
+		}
+	}
 }
 md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float) {
     

@@ -9,6 +9,8 @@ export default Ember.Route.extend({
   loadCount: 0,
   name: '',
   desc: '',
+  icon: '',
+  iconName: '',
   catCount: 0,
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
@@ -41,6 +43,8 @@ export default Ember.Route.extend({
       this.set('catCount', catItems.get('length'));
       this.set('name', cat.get('name'));
       this.set('desc', cat.get('desc'));
+      this.set('icon', cat.get('icon'));
+      this.set('iconName', cat.get('iconName'));
       if (!(this.get('startAt'))) {
         this.resetIndexes();
       }
@@ -55,6 +59,8 @@ export default Ember.Route.extend({
 	this._super(controller, model);
   	this.controller.set('name', this.get('name'));
   	this.controller.set('desc', this.get('desc'));
+    this.controller.set('icon', this.get('icon'));
+    this.controller.set('iconName', this.get('iconName'));
   },
 
   actions: {

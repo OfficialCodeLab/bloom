@@ -1,9 +1,9 @@
 <div class="container index-main">
 	<div class="header-top">
-		<h1 class="font-times-header text-uppercase">{{name}}</h1>
-		<h3 class="font-times-subheader">{{desc}}</h3>
-		<hr class="style-two">
-	</div>
+		<h1 class="font-times-header"><i class={{icon}}>{{iconName}}</i>{{name}}</h1>
+		<p class="font-times-subheader">{{desc}}</p>
+		<hr>
+	</div><br>
 	<div class="text-center hideOnPhones">
 		<div id="masonry-items">
 	         {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}

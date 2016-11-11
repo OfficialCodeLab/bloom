@@ -1,9 +1,9 @@
 <div class="container index-main">
 	<div class="header-top">
-		<h1 class="font-times-header text-uppercase">Listings</h1>
-		<hr class="style-two">
-		<h3 class="font-times-subheader">Go wild. Be inspired.</h3>
-	</div>	
+		<h1 class="font-times-header"><i class="material-icons">view_list</i>Listings</h1>
+		<p class="font-times-subheader">Go wild. Be inspired.</p>
+		<hr>
+	</div><br>	
 	<div class="text-center hideOnPhones">
 		<div id="masonry-items">
 	         {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
@@ -26,16 +26,15 @@
 	            </div>
 	         </div>
 	         {{/masonry-grid}} 
-	         <div style="text-align: center">
-	            <button class="btn btn-default" {{action "prev"}}>Previous</button>
-	            <button class="btn btn-default" {{action "next"}}>Next</button>
+	         <div class="nav-arrows">
+         		{{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
 	         </div>
 	      </div>
 
 		{{#if model}}
 		<div id="loading-spinner">
 			<br>
-			  {{mdl-progress progress=percentLoaded}}		
+			  {{paper-progress-linear value=percentLoaded}}		
 		</div>
 		{{/if}}
 	</div>
@@ -60,9 +59,8 @@
             </div>
          </div>
       {{/each}}
-      <div style="text-align: center">
-         <button class="btn btn-default" {{action "prev"}}>Previous</button>
-         <button class="btn btn-default" {{action "next"}}>Next</button>
+      <div class="nav-arrows">
+         {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
       </div>
    </div> 
 </div>
