@@ -5,7 +5,6 @@ export default Ember.Controller.extend({
 	isLoaded: false,
 	isNotLoaded: Ember.computed.not('isLoaded'),
 	percentLoaded: 0,
-	// percentLoadedStyle: 'width: 0%',
 	isFirst: true,
 	isLast: false,
 	pageTotal: 0,

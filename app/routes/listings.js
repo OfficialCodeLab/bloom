@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 10;
 
 export default Ember.Route.extend({
   startAt: null,
@@ -30,15 +30,7 @@ export default Ember.Route.extend({
     this.locatePage(controller);
     var items = this.store.peekAll('cat-item');
     controller.set('pageTotal', Math.ceil(items.get('length')/PAGE_SIZE));
-
   },
-  // renderTemplate(controller, model) {
-  //   // note: don't call super here
-  //   this.render('application', {
-  //     controller: controller,
-  //     model: model
-  //   });
-  // },
   model () {
     return this.store.findAll('cat-item', {reload: true}).then((items) => {
       if (!(this.get('startAt'))) {
@@ -117,7 +109,7 @@ export default Ember.Route.extend({
   locatePage: function(controller){
     //console.log()
     var items = this.store.peekAll('cat-item');
-    if(this.get('startAt') + PAGE_SIZE > items.get('length')){
+    if(this.get('startAt') + PAGE_SIZE >= items.get('length')){
       //AT LAST PAGE
       controller.set('isLast', true);
     } else {

@@ -38,9 +38,8 @@ Launch demo modal2
             </div>
          </div>
          {{/masonry-grid}} 
-         <div style="text-align: center">
-            <button class="btn btn-default" {{action "prev"}}>Previous</button>
-            <button class="btn btn-default" {{action "next"}}>Next</button>
+         <div class="nav-arrows">
+            {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
          </div>
       </div>
       {{#if model}}
@@ -71,9 +70,8 @@ Launch demo modal2
             </div>
          </div>
       {{/each}}
-      <div style="text-align: center">
-         <button class="btn btn-default" {{action "prev"}}>Previous</button>
-         <button class="btn btn-default" {{action "next"}}>Next</button>
+      <div class="nav-arrows">
+         {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
       </div>
    </div>    
    {{else}}

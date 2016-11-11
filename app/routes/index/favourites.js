@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 6;
 
 export default Ember.Route.extend({
   startAt: null,
@@ -26,6 +26,12 @@ export default Ember.Route.extend({
     Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
   }.on('init'),
 
+  setupController: function (controller, model) {
+    this._super(controller, model);
+    this.locatePage(controller);
+    var fc = this.get('favsCount');
+    controller.set('pageTotal', Math.ceil(fc/PAGE_SIZE));
+  },
 
   model () {
   	//this.store.unloadAll('cat-item');
@@ -51,6 +57,7 @@ export default Ember.Route.extend({
       //var items = this.store.peekAll('cat-item');
       if(this.get('startAt') - PAGE_SIZE >= 0){
         this.resetLoadCount();  
+        this.decrementPage(); 
         let diff = this.get('endAt') - this.get('startAt');
         if(diff < PAGE_SIZE){
           this.set('endAt', this.get('startAt'));
@@ -58,6 +65,7 @@ export default Ember.Route.extend({
           this.set('endAt', this.get('endAt') - PAGE_SIZE);
         }
         this.set('startAt', this.get('startAt') - PAGE_SIZE);
+        this.locatePage(this.controller);
         this.refresh();
       } else {      
         this.resetIndexes();
@@ -71,7 +79,8 @@ export default Ember.Route.extend({
       var id = this.get('currentModel').get('lastObject.id');
   	  let fc = this.get('favsCount');
       if(this.get('startAt') + PAGE_SIZE < fc){
-        this.resetLoadCount();  
+        this.resetLoadCount();
+        this.incrementPage();   
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
         if(this.get('endAt') + PAGE_SIZE < fc){
@@ -79,6 +88,7 @@ export default Ember.Route.extend({
         } else {
           this.set('endAt', fc);
         }
+        this.locatePage(this.controller);
         this.refresh();
       } 
       //console.log("START AT: " + this.get('startAt') + "\nEND AT: " + this.get('endAt'));
@@ -90,9 +100,7 @@ export default Ember.Route.extend({
       c++;
       let percentLoaded = (c / la) * 100;
       percentLoaded = parseInt(percentLoaded);
-      let percentLoadedStyle = 'width: ' + percentLoaded + '%';
       this.controller.set('percentLoaded', percentLoaded);
-      this.controller.set('percentLoadedStyle', percentLoadedStyle);
       //console.log("loaded image");
       this.set('loadCount', c);
 
@@ -111,15 +119,43 @@ export default Ember.Route.extend({
     }
 
   },
+  locatePage: function(controller){
+    var fc = this.get('favsCount'); 
+    if(this.get('startAt') + PAGE_SIZE >= fc){
+      //AT LAST PAGE
+      controller.set('isLast', true);
+    } else {
+      controller.set('isLast', false);
+    }
+
+    if(this.get('startAt') - PAGE_SIZE < 0) {
+      //AT FIRST PAGE
+      controller.set('isFirst', true);
+    } else {      
+      controller.set('isFirst', false);
+    }
+
+  },
+  incrementPage: function(){
+    let x = this.controller.get('pageNum');
+    x++;
+    this.controller.set('pageNum', x);
+  },   
+  decrementPage: function(){
+    let x = this.controller.get('pageNum');
+    x--;
+    this.controller.set('pageNum', x);
+  }, 
   resetIndexes: function() { 
   	let fc = this.get('favsCount');
-	this.set('startAt', 0);
-	if(PAGE_SIZE < fc){        
-		this.set('endAt', PAGE_SIZE);
-	}
-	else{
-		this.set('endAt', fc);
-	}
+	  this.set('startAt', 0);
+    this.set('pageTotal', Math.ceil(fc/PAGE_SIZE));
+  	if(PAGE_SIZE < fc){        
+  		this.set('endAt', PAGE_SIZE);
+  	}
+  	else{
+  		this.set('endAt', fc);
+  	}
   },
   // unloadRecords: function(){
   // 	let items = this.controller.get('model');
@@ -127,9 +163,7 @@ export default Ember.Route.extend({
   // },
   resetLoadCount: function (){
       try{
-         let percentLoadedStyle = 'width: 0%';
          this.controller.set('percentLoaded', 0);
-         this.controller.set('percentLoadedStyle', percentLoadedStyle);
          this.controller.set('isLoaded', false);
          Ember.$('#masonry-items').fadeOut(0);
          Ember.$('#loading-spinner').fadeIn(0);

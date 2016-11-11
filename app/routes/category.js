@@ -29,8 +29,6 @@ export default Ember.Route.extend({
   	this._super();
     Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
   }.on('init'),
-
-
   model (params) {
   	//this.store.unloadAll('cat-item');
   	window.scrollTo(0,0);
@@ -52,7 +50,7 @@ export default Ember.Route.extend({
       this.resetLoadCount();
       console.log(this.get('startAt') + " => " + this.get('endAt'));
 
-      return catItems;
+      return catItems.slice(this.get('startAt'), this.get('endAt'));
     });
   },
   setupController: function (controller, model) {
@@ -61,6 +59,9 @@ export default Ember.Route.extend({
   	this.controller.set('desc', this.get('desc'));
     this.controller.set('icon', this.get('icon'));
     this.controller.set('iconName', this.get('iconName'));
+    this.locatePage(controller);
+    var cc = this.get('catCount');
+    controller.set('pageTotal', Math.ceil(cc/PAGE_SIZE));
   },
 
   actions: {
@@ -71,6 +72,7 @@ export default Ember.Route.extend({
       //var items = this.store.peekAll('cat-item');
       if(this.get('startAt') - PAGE_SIZE >= 0){
         this.resetLoadCount();  
+        this.decrementPage();
         let diff = this.get('endAt') - this.get('startAt');
         if(diff < PAGE_SIZE){
           this.set('endAt', this.get('startAt'));
@@ -78,6 +80,7 @@ export default Ember.Route.extend({
           this.set('endAt', this.get('endAt') - PAGE_SIZE);
         }
         this.set('startAt', this.get('startAt') - PAGE_SIZE);
+        this.locatePage(this.controller);
         this.refresh();
       } else {      
         this.resetIndexes();
@@ -91,7 +94,8 @@ export default Ember.Route.extend({
       var id = this.get('currentModel').get('lastObject.id');
       var cc = this.get('catCount');
       if(this.get('startAt') + PAGE_SIZE < cc){
-        this.resetLoadCount();  
+        this.resetLoadCount(); 
+        this.incrementPage(); 
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
         if(this.get('endAt') + PAGE_SIZE < cc){
@@ -99,6 +103,7 @@ export default Ember.Route.extend({
         } else {
           this.set('endAt', cc);
         }
+        this.locatePage(this.controller);
         this.refresh();
       } 
       //console.log("START AT: " + this.get('startAt') + "\nEND AT: " + this.get('endAt'));
@@ -110,15 +115,9 @@ export default Ember.Route.extend({
       c++;
       let percentLoaded = (c / la) * 100;
       percentLoaded = parseInt(percentLoaded);
-      let percentLoadedStyle = 'width: ' + percentLoaded + '%';
       this.controller.set('percentLoaded', percentLoaded);
-      this.controller.set('percentLoadedStyle', percentLoadedStyle);
-      //console.log("loaded image");
       this.set('loadCount', c);
-
-     // }
      if(c >= la){
-        //console.log("loading complete");
         Ember.$('#masonry-items').fadeIn("fast");
         Ember.$('#loading-spinner').fadeOut("fast");
       }
@@ -131,10 +130,38 @@ export default Ember.Route.extend({
     }
 
   },
+  locatePage: function(controller){
+    var cc = this.get('catCount'); 
+    if(this.get('startAt') + PAGE_SIZE >= cc){
+      //AT LAST PAGE
+      controller.set('isLast', true);
+    } else {
+      controller.set('isLast', false);
+    }
+
+    if(this.get('startAt') - PAGE_SIZE < 0) {
+      //AT FIRST PAGE
+      controller.set('isFirst', true);
+    } else {      
+      controller.set('isFirst', false);
+    }
+
+  },
+  incrementPage: function(){
+    let x = this.controller.get('pageNum');
+    x++;
+    this.controller.set('pageNum', x);
+  },   
+  decrementPage: function(){
+    let x = this.controller.get('pageNum');
+    x--;
+    this.controller.set('pageNum', x);
+  }, 
   resetIndexes: function() { 
-    var cc = this.get('catCount');    	
+      var cc = this.get('catCount');    	
       this.set('startAt', 0);
-      if(PAGE_SIZE < cc){        
+      this.set('pageTotal', Math.ceil(cc/PAGE_SIZE));
+      if(PAGE_SIZE < cc){ 
         this.set('endAt', PAGE_SIZE);
       }
       else{
@@ -143,9 +170,7 @@ export default Ember.Route.extend({
   },
   resetLoadCount: function (){
       try{
-         let percentLoadedStyle = 'width: 0%';
          this.controller.set('percentLoaded', 0);
-         this.controller.set('percentLoadedStyle', percentLoadedStyle);
          this.controller.set('isLoaded', false);
          Ember.$('#masonry-items').fadeOut(0);
          Ember.$('#loading-spinner').fadeIn(0);
