@@ -499,6 +499,11 @@ body {
 .category-outer-square{
 	padding: 2px !important;
 	min-height: 145px;
+	&:hover, &:focus, &:active{		
+	    @include transform (scale(1.05));
+  		transition: all 0.3s ease;
+  		z-index: 3;
+	}
 }
 .category-square{
 	// padding-top: 10px;
@@ -512,11 +517,6 @@ body {
 		font-size: 8vw;
 	}
 
-	&:hover, &:focus, &:active{		
-	    @include transform (scale(1.05));
-  		transition: all 0.3s ease;
-  		z-index: 3;
-	}
 }
 
 .cat-heading{
@@ -1289,7 +1289,20 @@ Guest List
 		font-size: 3em;
 	}
 }
+.si-left{
+	text-align: left;
+	font-weight: 600;
+	color: #B0B0B0;
+}
+.si-right{
+	text-align: right;
+	color: $color-main;
+}
 
+.si-row{
+	border-bottom: 1px solid rgba(135, 135, 135, 0.7);
+	padding-top: 35px;
+}
 .single-img-container{
 	// background-color: black;
 	// border-radius: 15px;
