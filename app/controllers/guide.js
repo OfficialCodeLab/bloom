@@ -121,7 +121,7 @@ export default Ember.Controller.extend({
 				_modalData = this.store.peekRecord('modal-data', this.get('modaDataId'));	
             	this.send('showModal', 'modal-confirm', _modalData);	            	
             } else {
-		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "Are you sure?"});
+		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "This will remove the guest from your guest list."});
 		     	this.set('modalDataId', _modalData.get('id'));
             	this.send('showModal', 'modal-confirm', _modalData);
             }    
@@ -130,14 +130,14 @@ export default Ember.Controller.extend({
 			let msg = "";
 			if(guest.attending){
 				msg = "Guest is no longer attending.";
-				guest.attending = 0;
+				Ember.set(guest, 'attending', 0);
 			} else {
 				msg = "Guest is now attending!";
-				guest.attending = 1;
+				Ember.set(guest, 'attending', 1);
 			}
 			this.get('notifications').info(msg,{
                 autoClear: true
             }); 
 		}
-	}
+	},
 });

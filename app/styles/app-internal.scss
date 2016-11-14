@@ -611,7 +611,6 @@ Guest List
 	margin: auto;
 	margin-left: 4px;
 	margin-right: 4px;
-
 	//To create space between rows
 	margin-bottom: 8px;
 
@@ -675,6 +674,14 @@ Guest List
   		img{
   			opacity: 0.5;
   		}
+	}
+
+	.img-backdrop{
+		margin-top: 50px;
+		background-repeat: no-repeat;
+		// background-attachment
+		background-position: center center;
+		background-size: contain;
 	}
 
 
@@ -849,16 +856,47 @@ Guest List
 	}
 }
 
+.overlay-vendor{
+	width: 100%;
+	padding: 30px;
+	height: auto;
+	opacity: 0;
+	position: absolute;
+	transition: all 0.3s;
+
+	&:hover{
+  		img{
+  			opacity: 0.8;
+  		}
+	}
+}
+
 .guided-tour-top {
 	background: url('../assets/images/slider-images/slider2.jpg');
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;
+
 	h1{
 		color: white;
 	}
 }
-
+.tour-image-backdrop{
+	text-align: center;
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	h1{
+		color: white;
+	}
+	p{
+		color: white;
+	}
+}
+.tour-block-padding{
+	padding-top: 65px;
+	padding-bottom: 65px;
+}
 .pear-guide-top{
 	background: url(../assets/images/pear-guided-tour-temp.png);
 	background-repeat: no-repeat;

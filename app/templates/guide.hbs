@@ -1,132 +1,228 @@
-<div class="container index-main" style="text-align:center; padding-top:30px;">
+<div class="index-main" style="text-align:center; overflow-x: hidden;">
 	
 	{{!-- {{#if session.isAuthenticated}}
 	{{else}}
 		<div class="navbar-padding"></div>
 	{{/if}} --}}
-	<div class="text-center pear-guide-top">
-		<h1 class="pear-text-logo unselectable">&nbsp;</h1>
-	</div>
-	<h3 class="font-times-header">Guided Tour</h3>
-	<hr>
-	<h3 class="font-times-header">Welcome</h3>
-	<p class="font-times-subheader">Welcome to Pear, the wedding planner.<br>This is where your wedding all comes together.<br>Scroll down for a preview of Pear's capabilities.</p><br>
-	<hr><br>
 
-	<h3 class="font-times-header">Categories</h3>
-	<p class="font-times-subheader">Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br>You can also click on the images to find out more about the supplier and get in touch.</p>
-    <div class="form-group">
-		{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
-	</div><br>
-
-	<div class="card-material" style="padding-right:10px	">
-		<h3 class="font-times-header">Try Favouriting Some Items!</h3><hr><p class="font-times-subheader">Click the hearts to favourite or unfavourite</p>
-		<div class="row guide-row">
-			<div class="col-lg-4 col-md-6 guide-card">					
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Beautiful Dress</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 guide-card">
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Culinary Delights</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 guide-card">
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Unforgettable Venue</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
-				</div>
+  	<div class="guided-tour-top">
+	    <div class="container" style="padding-top: 125px; padding-bottom: 125px;">
+			<div class="text-center pear-guide-top">
+				<h1 class="pear-text-logo unselectable">&nbsp;</h1>
 			</div>
 		</div>
 	</div>
-	<br>
-	<h3 class="font-times-header">Favouriting</h3>
-	<p class="font-times-subheader">If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab, <strong>in your Hub...</strong></p>
-    <div class="form-group">
-		{{#link-to 'index'}}{{mdl-button isRaised=true text='Favourites'}}{{/link-to}}
-	</div>
-	<br>
 
-	<div class="card-material" style=" padding-right:10px">
-		<h3 class="font-times-header">Your Favourited Items</h3><hr><p class="font-times-subheader">Click the hearts to unfavourite</p>
-		<div class="row guide-row">
-			{{#if dress}}
-			<div class="col-lg-4 col-md-6 guide-card">					
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Beautiful Dress</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if dress 'favourited'}}" {{action 'toggleFavourite' "dress"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
-				</div>
+	<div class="container" style="padding-top: 40px; padding-bottom: 20px;">
+	<h1>Welcome to Pear</h1>
+		<p style="font-size: 20px;">The Ultimate Wedding Planner - Where your wedding all comes together.</p>
+		<br>
+		<p style="font-style: italic;">Scroll down for a preview of Pear's capabilities.</p><br>
+	</div>
+
+
+<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider3.jpg');">
+	<div class="container tour-block-padding">
+		<h1>All Listings</h1><br>
+		<p>Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br><br>
+		You can also click on the images to find out more about the supplier and get in touch.</p>
+	    <div class="form-group" style="padding-top: 60px;">
+			{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
+		</div><br>
+	</div>
+</div>
+
+	<div style="padding-top:50px" class="container">
+		<h1>Try Favouriting Some Items!</h1>
+		<p>Click the hearts to favourite or unfavourite</p>
+		<div style="padding-top: 50px; padding-bottom: 60px;" class="row guide-row">
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               <span class="cat-title">Beautiful Dress</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "dress"}}>
+	                  	{{#if dress}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+               		{{!-- <img class="overlay-vendor" src="../assets/images/logo1055.png">   --}}
+	               	<div class="img-backdrop"  style="background-image: url('../assets/images/dresses-vendor.png');">
+		               	<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
+		            </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Dresses</span>
+	                  <span class="cat-price">R6850.00</span>
+	               </div>
+	            </div>
+	         </div>	
+			</div>	
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               {{!-- <div style="display: inline-block">
+		               <div class="cat-overlay-1">	
+		               		<img class="overlay-vendor" src="../assets/images/logo1055.png">                 
+		               </div>
+		            </div> --}}
+	               <span class="cat-title">Delicious Food</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "culinary"}}>
+	                  	{{#if culinary}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+	               <div class="img-backdrop"  style="background-image: url('../assets/images/culinary-vendor.png');">
+	               		<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
+	               </div>
+	               <div class="cat-overlay-2">	                  
+	               </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Culinary</span>
+	                  <span class="cat-price">R2225.00</span>
+	               </div>
+	            </div>
+	         </div>	
 			</div>
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               <span class="cat-title">Stunning Venue</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "venue"}}>
+	                  	{{#if venue}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+	               <div class="img-backdrop"  style="background-image: url('../assets/images/venue-vendor.png');">
+	               		<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
+	               </div>
+	               <div class="cat-overlay-2">	                  
+	               </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Venues</span>
+	                  <span class="cat-price">R10240.00</span>
+	               </div>
+	            </div>
+	         </div>	
+			</div>		
+		</div>
+	</div>
+	<div class="container"><hr><br>
+		<p>If you have some favourites, they will display in the block below.<br>You will be able to see all your favourites in your favourites tab, <strong>in your Hub...</strong></p>
+	    <div class="form-group" style="padding-top: 15px;">
+			{{#link-to 'index'}}{{mdl-button isRaised=true text='Favourites'}}{{/link-to}}
+		</div>
+		<div style="padding-top: 50px; padding-bottom: 60px;" class="row guide-row">
+
+		<h1>Your Favourites</h1>
+		<p>Click the hearts to unfavourite</p>
+		{{#if dress}}
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               <span class="cat-title">Beautiful Dress</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "dress"}}>
+	                  	{{#if dress}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+	               <div class="img-backdrop"  style="background-image: url('../assets/images/dresses-vendor.png');">
+		               	<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
+		            </div>
+	               <div class="cat-overlay-2">	                  
+	               </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Dresses</span>
+	                  <span class="cat-price">R6850.00</span>
+	               </div>
+	            </div>
+	         </div>	
+			</div>	
 			{{/if}}
 			{{#if culinary}}
-			<div class="col-lg-4 col-md-6 guide-card">
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Culinary Delights</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if culinary 'favourited'}}" {{action 'toggleFavourite' "culinary"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
-				</div>
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               <span class="cat-title">Delicious Food</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "culinary"}}>
+	                  	{{#if culinary}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+	               <div class="img-backdrop"  style="background-image: url('../assets/images/culinary-vendor.png');">
+	               		<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
+	               </div>
+	               <div class="cat-overlay-2">	                  
+	               </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Culinary</span>
+	                  <span class="cat-price">R2225.00</span>
+	               </div>
+	            </div>
+	         </div>	
 			</div>
 			{{/if}}
-			{{#if venue}}
-			<div class="col-lg-4 col-md-6 guide-card">
-				<div class="guide-content">
-					<div class="cat-overlay-3">
-						<div class="cat-overlay-1">
-							<h2>Unforgettable Venue</h2>
-						</div>
-						<button type="button" class="btn btn-danger cat-heart-button {{if venue 'favourited'}}" {{action 'toggleFavourite' "venue"}}>
-							<i class="fa fa-heart-o"></i></button>
-					</div>
-					<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
-				</div>
+          	{{#if venue}}
+			<div class="col-lg-4 col-md-6">	
+				<div style="display: inline-block;">
+	            <div class="category-block">
+	               <span class="cat-title">Stunning Venue</span>
+	               <div class="cat-fav">
+	                  <a href="#" {{action 'toggleFavourite' "venue"}}>
+	                  	{{#if venue}}
+							{{mdl-button icon="favorite"}}
+						{{else}}
+							{{mdl-button icon="favorite_border"}}
+						{{/if}}
+					  </a>
+	               </div>
+	               <div class="img-backdrop"  style="background-image: url('../assets/images/venue-vendor.png');">
+	               		<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
+	               </div>
+	               <div class="cat-overlay-2">	                  
+	               </div>
+	               <div class="cat-bottom-box">
+	                  <span class="cat-category">Venues</span>
+	                  <span class="cat-price">R10240.00</span>
+	               </div>
+	            </div>
+	         </div>	
 			</div>
 			{{/if}}
 		</div>
-
 	</div>
-	<br>
-	<h3 class="font-times-header">Add Guests to Your Wedding</h3>
-	<p class="font-times-subheader">If you want to get your guest list started, just head to the my wedding section <strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
-    <div class="form-group">
-		{{#link-to 'index.mywedding'}}{{mdl-button isRaised=true text='My Wedding'}}{{/link-to}}
+<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider2.jpg');">
+	<div class="container tour-block-padding">
+		<h1>Add Guests to Your Wedding</h1><br>
+		<p>If you want to get your guest list started, just head to the my wedding section <strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
+	    <div class="form-group" style="padding-top: 60px;">
+			{{#link-to 'index.mywedding'}}{{mdl-button isRaised=true text='Wedding'}}{{/link-to}}
+		</div><br>
 	</div>
-	<br>
+</div>
 
-	<div class="card-material card-sm" style=" padding:0px 20px 20px 20px">
-		<h3 class="font-times-header">Add Guests</h3><hr><p class="font-times-subheader">Add guests here and they will appear in the table below</p>
-		<div class="form-horizontal row text-center">
+	<div class="container tour-block-padding">
+		<h1>Add Your Guests</h1>
+		<p>Add guests here and they will appear in the table below</p>
+		<div class="form-horizontal row text-center" style="padding-top: 20px;">
 			<div class="form-group has-feedback">
 				{{mdl-textfield label='Name & Surname*' value=name}}
 			</div>
@@ -138,44 +234,25 @@
 			</div>
 			<div class="form-group has-feedback">
 				{{mdl-textfield label='Number of additional guests?' value=guestsValue type="number"}}
-
-					{{!-- <div class="input-group">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" {{action 'decrementNumber'}}>-</button>
-						</span>
-						{{input type="text" class="form-control guests-add" value=guestsValue }}
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button" {{action 'incrementNumber'}}>+</button>
-						</span>
-					</div>  --}}
-					{{!-- {{#touch-spin}}
-						<input id="guestNumberBox" type="text" value={{guests}} name="demo1" style="height:33px !important;">
-					{{/touch-spin}} --}}
-					{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
 			</div>
 		</div>
 		<div class="row">
-			
-	        {{#if responseMessage}}
-		      <div class="col-sm-offset-3 col-sm-6 alert alert-success" {{action 'closeMessage'}}>{{responseMessage}}
-		      <p class="tiny-text">Tap this message to close it</p></div>
-		    {{/if}}
 			<div class="col-sm-offset-3 col-sm-6">
 				{{mdl-button isRaised=true text='Add Guest' action='addGuest' disabled=isNotValid}}
-				{{!-- <button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list</button> --}}
 			</div>
 		</div>
+		<br><hr><br>
+		<h1>Your Guest List</h1>
+		<p>Once you have some guests, you can now manage and view them.<br>All the guests will be listed in a table and you can can <strong>RSVP or remove them.</strong></p>
+	    <div class="form-group">
+			{{#link-to 'index.mywedding.guests'}}{{mdl-button isRaised=true text='Guest List'}}{{/link-to}}
+		</div>
+		<br>
 	</div>
-	<br>
-	<h3 class="font-times-header">Your Guest List</h3>
-	<p class="font-times-subheader">Once you have some guests, you can now manage and view them.<br>All the guests will be listed in a table and <strong>you can can RSVP or remove them.</strong></p>
-    <div class="form-group">
-		{{#link-to 'index.mywedding.guests'}}{{mdl-button isRaised=true text='Guest List'}}{{/link-to}}
-	</div>
-	<br>
 
-	<div class="card-material card-sm" style=" padding:0px 20px 20px 20px">
-		<h3 class="font-times-header">Your Guests</h3><hr><p class="font-times-subheader">Click the X to remove or click the checkbox to confirm RSVP</p>
+	<div class="" style=" padding:10px 20px 60px 20px">
+		<h1>Your Guests</h1>
+		<p>Click the X to remove or click the checkbox to confirm RSVP</p>
 		<div class="showOnMobile container">
 		    {{#each guestsA as |guest|}}
 				<div class="pear-profile-card guide-xs-card" style="padding: 5px 8px 15px 5px;">
@@ -186,6 +263,9 @@
 						<div class="col-xs-3" style="text-align: right; height: 40px;">
 							<a href='' {{action "destroyGuest" guest}}><i class="fa fa-times" aria-hidden="true"></i></a>
 						</div>
+					</div>
+
+					<div class="row">
 
 						<div class="col-xs-3">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -210,7 +290,21 @@
 						<div class="col-xs-3">
 							<i class="fa fa-ticket" aria-hidden="true"></i>
 						</div>
-						<div class="col-xs-9" style="text-align: left;">RSVP: 	<input type="checkbox" onclick={{action "checkBox" guest}}></div>
+						{{!-- <a href="#" {{action "checkBox" guest}}>
+						  {{#if guest.attending}}
+				            {{mdl-button icon="check_box"}}
+				          {{else}}
+				            {{mdl-button icon="check_box_outline_blank"}}
+				          {{/if}}
+				         </a> --}}
+				         <div {{action "checkBox" guest}} class="tb-btn" style="text-align: left;">
+						  {{#if guest.attending}}
+				            {{mdl-button icon="check_box"}}
+				          {{else}}
+				            {{mdl-button icon="check_box_outline_blank"}}
+				          {{/if}}
+				         </div>
+						{{!-- <div class="col-xs-9" style="text-align: left;">RSVP: 	<input type="checkbox" onclick={{action "checkBox" guest}}></div> --}}
 						
 					</div>
 				</div>
@@ -218,7 +312,7 @@
 		</div>
 
 
-		<div class="guide-container hideOnMobile" style="padding-bottom: 5px;">
+		<div class="guide-container hideOnMobile" style="padding:10px 20px 60px 20px">
 
 		{{#mdl-table content=guestsA as |guest|}}
 			{{#mdl-table-col label='Name'}}
@@ -231,11 +325,19 @@
 				{{guest.guests}}
 			{{/mdl-table-col}}
 			{{#mdl-table-col label='RSVP'}}
-				<input type="checkbox" onclick={{action "checkBox" guest}}>
+        		<div {{action "checkBox" guest}} class="text-center tb-btn">
+				  {{#if guest.attending}}
+		            {{mdl-button icon="check_box"}}
+		          {{else}}
+		            {{mdl-button icon="check_box_outline_blank"}}
+		          {{/if}}
+		         </div>
+				{{!-- <input type="checkbox" onclick={{action "checkBox" guest}}> --}}
 			{{/mdl-table-col}}
 			{{#mdl-table-col label='Delete'}}
-		        <div style="text-align: center;">
-		        <a href='' {{action "destroyGuest" guest}}><i class="fa fa-times" style="font-size: 24px;" aria-hidden="true"></i></a></div>
+				<div {{action "destroyGuest" guest}} class="text-center tb-btn">
+		            {{mdl-button icon="delete"}}
+		        </div>
 			{{/mdl-table-col}}
 		{{/mdl-table}}
 			{{!-- <table class="table table-bordered table-striped" style="background-color:white;">
@@ -263,16 +365,24 @@
 			</table> --}}
 		</div>
 	</div>
-	<br>
-	<h3 class="font-times-header">El Finito!</h3>
-	<p class="font-times-subheader">That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
-    <div class="form-group">
-		{{#link-to 'login'}}{{#mdl-button isRaised=true}} Sign Up <i class="fa fa-heart-o"></i> {{/mdl-button}}{{/link-to}}
-	</div>
-	<div class="form-group">
-		{{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}} Hub <i class="fa fa-dashboard"></i> {{/mdl-button}}{{/link-to}}
-	</div>
-	<br><hr><br>
 
+	<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider3.jpg');">
+		<div class="container tour-block-padding">
+			<h1>El Finito!</h1>
+			<p>That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
+			<div style="padding-top: 10px;">
+				<div class="login-btns-padding">
+					{{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}} Hub <i class="fa fa-dashboard"></i> {{/mdl-button}}{{/link-to}}
+				</div>
+	    		<div class="login-btns-padding">
+					{{#mdl-button isRaised=true action="showLogins"}} Sign Up <i class="fa fa-heart-o"></i> {{/mdl-button}}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="padding-top: 30px;">
+      <span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
+    </div>
 	{{notification-container position="bottom"}}
 </div>
