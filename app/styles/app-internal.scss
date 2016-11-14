@@ -54,7 +54,7 @@ body {
 }
 
 .index-main{
-	padding-bottom: 80px;
+	padding-bottom: 120px;
 	// background-color: rgba(255,255,255,0.99);
 	background-color: white;
 	min-height: 100vh;
@@ -751,7 +751,10 @@ Guest List
 }
 
 .cat-img-container{
-	background-color: #000000;
+	background-color: white;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
 	width: 100%;
 	// min-height: 234px;
 	// line-height: 117px;
@@ -1091,6 +1094,7 @@ Guest List
 	}
 }
 .masonry-item{
+	background: white;
 	// width: 180px;
 	// // height: 120px;
 	// float: left;
@@ -1101,6 +1105,7 @@ Guest List
 }
 
 #masonry-items{
+	background: white;
 	display: none;
 }
 

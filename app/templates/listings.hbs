@@ -13,9 +13,11 @@
                <div class="cat-fav">
 	                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
 	               </div>
-	               {{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
-	               {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-	               {{/link-to}}
+	               <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
+	                  {{#link-to 'single-item' cat-item.id tagname='div'}}
+	                  {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+	                  {{/link-to}}
+	               </div>
 	               <div class="cat-overlay-2">
 	                  
 	               </div>
