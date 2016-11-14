@@ -496,11 +496,16 @@ body {
 }
 
 /* CATEOGORIES */
+.category-outer-square{
+	padding: 2px !important;
+	min-height: 145px;
+}
 .category-square{
 	// padding-top: 10px;
-	min-height: 120px;
 	padding-top: calc(100vw / 18);
+	padding-bottom: 10px;
 	text-align: center;
+	height: 100%;
 	z-index: 2;
 	i{
 		color: white;
@@ -1674,6 +1679,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 }
 @media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */
+
+	.category-square{
+		padding-top: calc(100vw / 19);
+	}
 	.pear-text-logo{
 		font-size: 14em;
 	}
@@ -1701,6 +1710,9 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
+	.category-square{
+		padding-top: calc(100vw / 20);
+	}
 	h1{
 	  font-size: 3.6em !important;
 	}
@@ -1770,9 +1782,6 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-	.category-square{
-		padding-top: 40px;
-	}
 	.h1-name { 
 		font-size: 6.2vw;
 	}
@@ -1825,9 +1834,16 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 			width: 100%;
 		}
 	}
+	.category-outer-square{
+		min-height: calc(100vw / 12 * 3 + 20px);
+	}
 
-	.category-square i{
-		font-size: 10vw;
+	.category-square{
+		padding-top: 30px;
+
+		i{
+			font-size: 10vw;
+		}
 	}
 
 	.cat-heading{
@@ -1860,6 +1876,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
+
+	.category-square{
+		padding-top: 15px;
+	}
 	.pear-slide{
 		.slide-h1{
 			font-size: 2.8em !important;

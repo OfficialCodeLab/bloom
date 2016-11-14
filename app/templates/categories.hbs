@@ -7,10 +7,11 @@
 	<div style="padding-top: 50px;">
 		{{#each model as |category|}}
 		{{#link-to 'category' category.id}}
-		<div class="col-sm-3 height-3 category-square col-xs-4" style={{category.style}}>
-			<i class={{category.icon}}>{{category.iconName}}</i>
-			<p class="cat-heading">{{category.name}}</p>
-
+		<div class="col-sm-3 height-3 category-outer-square col-xs-4">
+			<div class="category-square" style={{category.style}}>
+				<i class={{category.icon}}>{{category.iconName}}</i>
+				<p class="cat-heading">{{category.name}}</p>
+			</div>
 		</div>{{/link-to}}
 		{{/each}}
 		{{!-- {{#each model as |category|}}
