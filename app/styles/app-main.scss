@@ -47,19 +47,19 @@ html, body {
 
 h1, h2, h3, h4, h5, h6, p, a{
   font-family: "Open Sans", sans-serif !important;
-	color: rgb(88,89,91);
+	color: $color-heading;
 }
 h1{
   font-size: 4em !important;
 }
 h2{
-  font-size: 3.2em !important;
+  font-size: 3em !important;
 }
 h3{
-  font-size: 2.8em !important;
+  font-size: 2.6em !important;
 }
 h4{
-  font-size: 2.2em !important;
+  font-size: 2em !important;
 }
 
 p{
@@ -872,6 +872,14 @@ body{
   background-color: #fff;
   text-align: center;
   //@include box-shadow(inset 1px 0px 3px 1px rgba(0,0,0,0.5));
+  color: #555 !important;
+  .about-block-h1{
+    font-weight: 600 !important;
+  }
+  p{
+    font-size: 21px !important;
+    line-height: 30px !important;
+  }
 }
 
 .about-section-white {

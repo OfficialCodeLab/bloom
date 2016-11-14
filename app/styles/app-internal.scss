@@ -352,12 +352,13 @@ body {
 	background-size: contain;
 }
 .index-logo-container-2{
-	background-image: url("../assets/images/hires-logo.png");
+	background-image: url("../assets/images/pear-splash-color.png");
 	background-repeat: no-repeat;
 	// background-attachment
 	background-position: center center;
 	background-size: contain;
-	height: 100%;
+	height: 80%;
+	transform: translateY(10%);
 }
 .splash-overlay{
 	padding: 25px;
@@ -848,6 +849,16 @@ Guest List
 	}
 }
 
+.guided-tour-top {
+	background: url('../assets/images/slider-images/slider2.jpg');
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	h1{
+		color: white;
+	}
+}
+
 .pear-guide-top{
 	background: url(../assets/images/pear-guided-tour-temp.png);
 	background-repeat: no-repeat;
@@ -1316,6 +1327,23 @@ Guest List
 .about-intro-header{
 	font-size: 4em;
 }
+.pear-slide{	
+	background-color: rgba(0,0,0,0.8);
+	color: white;
+	.slide-h1{
+		color: white;
+		font-size: 10em;
+		font-weight: 600;
+		margin: 0px;
+	}
+	.slide-sub {
+		color: white;
+		font-size: 2em;
+		line-height: 1.2em;
+		font-style: italic;
+		font-weight: 300;
+	}
+}
 .pear-slide-2, .pear-slide-3{
 	background-color: rgba(0,0,0,0.8);
 	color: white;
@@ -1329,7 +1357,7 @@ Guest List
 	}
 	h4{
 		color: white;
-		font-size: 3em;
+		font-size: 2em;
 		// font-family: 'Open Sans', sans-serif;
 		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
 		font-style: italic;
@@ -1611,12 +1639,12 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	.pear-text-logo{
 		font-size: 14em;
 	}
-	.pear-slide-2, .pear-slide-3{
-		h1{
-			font-size: 12em !important;
+	.pear-slide{
+		.slide-h1{
+			font-size: 7em !important;
 		}
-		h4{
-			font-size: 2em !important;
+		.slide-sub{
+			font-size: 1.8em !important;
 		}
 	}
 
@@ -1636,16 +1664,16 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 }
 @media (max-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */
 	h1{
-	  font-size: 3.8em !important;
+	  font-size: 3.6em !important;
 	}
 	h2{
-	  font-size: 3em !important;
-	}
-	h3{
 	  font-size: 2.6em !important;
 	}
+	h3{
+	  font-size: 2.2em !important;
+	}
 	h4{
-	  font-size: 2em !important;
+	  font-size: 1.8em !important;
 	}
 
 }
@@ -1694,11 +1722,11 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		height: 40vh;
 		width: 100%;
 	}
-	.pear-slide-2, .pear-slide-3{
-		h1{
-			font-size: 12em !important;
+	.pear-slide{
+		.slide-h1{
+			font-size: 6em !important;
 		}
-		h4{
+		.slide-sub{
 			font-size: 1.5em !important;
 		}
 	}
@@ -1711,11 +1739,11 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		font-size: 6.2vw;
 	}
 
-	.pear-slide-2, .pear-slide-3{
-		h1{
-			font-size: 9em !important;
+	.pear-slide{
+		.slide-h1{
+			font-size: 4em !important;
 		}
-		h4{
+		.slide-sub{
 			font-size: 1em !important;
 		}
 	}
@@ -1726,31 +1754,31 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		}
 	}
 	h1{
-	  font-size: 3.4em !important;
+	  font-size: 3.2em !important;
 	}
 	h2{
-	  font-size: 2.6em !important;
-	}
-	h3{
 	  font-size: 2.2em !important;
 	}
+	h3{
+	  font-size: 2em !important;
+	}
 	h4{
-	  font-size: 1.8em !important;
+	  font-size: 1.6em !important;
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 
 	h1{
-	  font-size: 2.8em !important;
+	  font-size: 2.6em !important;
 	}
 	h2{
-	  font-size: 2.2em !important;
+	  font-size: 2em !important;
 	}
 	h3{
-	  font-size: 1.8em !important;
+	  font-size: 1.7em !important;
 	}
 	h4{
-	  font-size: 1.5em !important;
+	  font-size: 1.4em !important;
 	}
 	.pear-sidebar{
 		width: 100%;
@@ -1794,11 +1822,11 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
-	.pear-slide-2, .pear-slide-3{
-		h1{
-			font-size: 7em !important;
+	.pear-slide{
+		.slide-h1{
+			font-size: 2.8em !important;
 		}
-		h4{
+		.slide-sub{
 			display: none;
 		}
 	}

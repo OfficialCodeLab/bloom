@@ -9,39 +9,39 @@ export default Ember.Route.extend({
     return sesh;
   },
   model() {
-    return this.store.createRecord('contact');
+    // return this.store.createRecord('contact');
   },
 
 
   actions: {
 
-    saveContact(newContact) {
-      let user_id;
-      if (this.get("session").get('currentUser') !== undefined){
-        user_id = this.get("session").get('currentUser').providerData[0].uid;
-      } else {
-        user_id = "Anonymous user";
-      }
-      if (this.controller.get('captchaVerified')) {
-        let message = this.store.createRecord('message', {
-          to: "info@codelab.io",
-          from: this.controller.get('model').get('email'),
-          subject: "New Contact request from " + this.controller.get('model').get('email'),
-          html: this.controller.get('model').get('message'),
-          senderId: user_id
-        });
-        message.save();
+    // saveContact(newContact) {
+    //   let user_id;
+    //   if (this.get("session").get('currentUser') !== undefined){
+    //     user_id = this.get("session").get('currentUser').providerData[0].uid;
+    //   } else {
+    //     user_id = "Anonymous user";
+    //   }
+    //   if (this.controller.get('captchaVerified')) {
+    //     let message = this.store.createRecord('message', {
+    //       to: "info@codelab.io",
+    //       from: this.controller.get('model').get('email'),
+    //       subject: "New Contact request from " + this.controller.get('model').get('email'),
+    //       html: this.controller.get('model').get('message'),
+    //       senderId: user_id
+    //     });
+    //     message.save();
 
-        newContact.save().then(() => {
-          this.controller.get('model').set('email', '');
-          this.controller.get('model').set('message', '');
-          //this.controller.get('model').set('responseMessage', 'Message has been sent');
-          this.controller.get('notifications').info('Message sent successfully!',{
-            autoClear: true
-          });
-        });
-      }
-    },
+    //     newContact.save().then(() => {
+    //       this.controller.get('model').set('email', '');
+    //       this.controller.get('model').set('message', '');
+    //       //this.controller.get('model').set('responseMessage', 'Message has been sent');
+    //       this.controller.get('notifications').info('Message sent successfully!',{
+    //         autoClear: true
+    //       });
+    //     });
+    //   }
+    //},
 
     willTransition() {
       // rollbackAttributes() removes the record from the store

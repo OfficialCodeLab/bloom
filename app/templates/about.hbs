@@ -6,7 +6,7 @@
   {{#j-query.slider-component}}
     <div class="about-slider-container">
       <div class="about-slider">
-        <div class="slick-content pear-slide-1" style="background-image: url('../assets/images/slider-images/slider1.jpg');">
+        <div class="slick-content pear-slide" style="background-image: url('../assets/images/slider-images/slider1.jpg');">
           <div class="row" style="height: 100%;">
             <div class="col-xs-2">
               <!-- Nothing here -->
@@ -19,21 +19,27 @@
             </div>
           </div>
         </div>
-        <div class="slick-content pear-slide-2" style="background-image: url('../assets/images/slider-images/slider2.jpg');">
+        <div class="slick-content pear-slide" style="background-image: url('../assets/images/slider-images/slider2.jpg');">
           <div class="about-center-me text-center">
-            <h1 class="text-center"><span>Plan</span></h1>
+            <h5 class="slide-h1">Plan</h5>
             <div class="about-font-stretch">
-              <h4 class="text-center"><span>Wedding planning can be tough.
-							<br />We're here to change that.</span></h4>
+              <h6 class="text-center slide-sub">Wedding planning can be tough.<br />We're here to change that.</h6>
             </div>
           </div>
         </div>
-        <div class="slick-content pear-slide-3" style="background-image: url('../assets/images/slider-images/slider3.jpg');">
+        <div class="slick-content pear-slide" style="background-image: url('../assets/images/slider-images/slider3.jpg');">
           <div class="about-center-me text-center">
-            <h1 class="text-center"><span>Share</span></h1>
+            <h5 class="slide-h1">Share</h5>
             <div class="about-font-stretch">
-              <h4 class="text-center"><span>Share your ideas and favourites with your friends,<br />and invite them to view your Pear Wedding Profile.
-							<br /></span></h4>
+              <h6 class="text-center slide-sub">Share your ideas and favourites with your friends,<br />and invite them to view your Pear Wedding Profile.</h6>
+            </div>
+          </div>
+        </div>
+        <div class="slick-content pear-slide" style="background-image: url('../assets/images/slider-images/slider2.jpg');">
+          <div class="about-center-me text-center">
+            <h5 class="slide-h1">Remember</h5>
+            <div class="about-font-stretch">
+              <h6 class="text-center slide-sub">For when you have alzheimers,<br />now you can look back at memories.</h6>
             </div>
           </div>
         </div>
@@ -43,39 +49,40 @@
   <div class="about-section-grey">
     <div class="container inner-sec">
       <div class="">
-        <h1 class="font-times-header">We want to make things easy for you.</h1>
-        <hr>
+        <h1 class="font-times-header">We want to make things<br>easy for you.</h1>
+        <br><hr>
         <div class="row">
           <div class="col-sm-4 border-box">
             <img src="../assets/images/plan.png" style="height:150px;">
-            <h1 class="font-times-header">PLAN</h1>
-            <h4 class="font-times-subheader">Info and stats about your wedding are usually all over the place. It’s our mission at Pear to change that. Manage your budget, guest list and so much more in the Hub..</h4>
+            <h1 class="about-block-h1">Plan</h1>
+            <p>Info and stats about your wedding are usually all over the place. It’s our mission at Pear to change that. Manage your budget, guest list and so much more in the Hub..</p>
           </div>
 
           <div class="col-sm-4 border-box">
             <img src="../assets/images/connect.png" style="height:150px;">
-            <h1 class="font-times-header">CONNECT</h1>
-            <h4 class="font-times-subheader">Pear’s unique product listing allows you to start gathering  your ideas in your hub, by ‘favoriting’ those that appeal to you most. When you’re ready, get in touch with the chosen ones.</h4></div>
+            <h1 class="about-block-h1">Connect</h1>
+            <p>Pear’s unique product listing allows you to start gathering  your ideas in your hub, by ‘favoriting’ those that appeal to you most. When you’re ready, get in touch with the chosen ones.</p></div>
 
           <div class="col-sm-4 border-box">
             <img src="../assets/images/share.png" style="height:150px;">
-            <h1 class="font-times-header">SHARE</h1>
-            <h4 class="font-times-subheader">Any wedding these days  requires involvement from loved ones living all over the world. Making them feel a part of the whole process is one of Pear’s biggest priorities.</h4></div>
+            <h1 class="about-block-h1">Share</h1>
+            <p>Any wedding these days  requires involvement from loved ones living all over the world. Making them feel a part of the whole process is one of Pear’s biggest priorities.</p></div>
         </div>
-        <h3 class="font-times-subheader">Have another look at how it all works with a guided tour.</h3>
-        <hr>
-        {{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR'}}{{/link-to}}
         {{!-- <button class="btn btn-lg btn-default clbutton-grey" {{action 'guidedSearch'}}>Guided Tour</button> --}}
       </div>
     </div>
   </div>
+  <div class="guided-tour-top">
+    <div class="container" style="padding-top: 125px; padding-bottom: 125px;">
+        <h1>Have another look at how it all works<br>with our Guided Tour.</h1><br>
+        {{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR'}}{{/link-to}}
+    </div>
+  </div>
   <div class="about-section-white" id="contact-us">
-    <h1 class="font-times-header">Contact Us</h1>
-    <hr class="style-two">
-    <h3 class="font-times-subheader">Let’s chat. We’d love to hear your thoughts.</h3>
-    <br>
-    <div>
-      <div class="form-horizontal form-group form-group-lg row">
+    <h1>Let’s chat.<br>We’d love to hear your thoughts.</h1>
+    <div style="padding: 20px 0px 45px 0px;">
+      <a href="#" {{action 'openContactModal'}}>{{mdl-button isRaised=true text='CONTACT US'}}</a>
+      {{!-- <div class="form-horizontal form-group form-group-lg row">
         <div class="col-md-offset-2 col-md-8">
           <div class="has-feedback {{if model.isValid 'has-success'}}">
             <div class="input-group">
@@ -99,7 +106,10 @@
             <button class="btn btn-success btn-lg btn-block" style="float:right; max-width:180px;" disabled= {{model.isDisabled}} {{action 'saveContact' model}}>Submit</button>
           </div>
         </div>
-      </div>
+      </div> --}}
+    </div>
+    <div class="container" style="padding: 30px 0px 80px 0px">
+      <span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
     </div>
   </div>
 </div>
