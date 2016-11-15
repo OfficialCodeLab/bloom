@@ -6,9 +6,12 @@
 	{{/if}} --}}
 
   	<div class="guided-tour-top">
-	    <div class="container" style="padding-top: 125px; padding-bottom: 125px;">
-			<div class="text-center pear-guide-top">
-				<h1 class="pear-text-logo unselectable">&nbsp;</h1>
+		<div class="overlay-dark">
+		    <div class="container text-center" style="padding-top: 100px; padding-bottom: 100px;">
+				{{!-- <div class="text-center pear-guide-top"> --}}
+					<img src="../assets/images/pear-icon-lg.png" height="150px;" width="auto">
+					<h1 style="color: white; font-weight: 600;">Guided Tour</h1>
+				{{!-- </div> --}}
 			</div>
 		</div>
 	</div>
@@ -21,14 +24,16 @@
 	</div>
 
 
-<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider3.jpg');">
-	<div class="container tour-block-padding">
-		<h1>All Listings</h1><br>
-		<p>Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br><br>
-		You can also click on the images to find out more about the supplier and get in touch.</p>
-	    <div class="form-group" style="padding-top: 60px;">
-			{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
-		</div><br>
+<div class="tour-image-backdrop" style="background: url('../assets/images/banners/hands.jpg');">
+	<div class="overlay-dark">
+		<div class="container tour-block-padding">
+			<h1>All Listings</h1><br>
+			<p>Any products and services on offer by our suppliers will be found under categories.<br>Here you can favourite anything you like in order to keep track of them in your wedding Hub.<br><br>
+			You can also click on the images to find out more about the supplier and get in touch.</p>
+		    <div class="form-group" style="padding-top: 60px;">
+				{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
+			</div><br>
+		</div>
 	</div>
 </div>
 
@@ -209,13 +214,15 @@
 			{{/if}}
 		</div>
 	</div>
-<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider2.jpg');">
-	<div class="container tour-block-padding">
-		<h1>Add Guests to Your Wedding</h1><br>
-		<p>If you want to get your guest list started, just head to the my wedding section <strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
-	    <div class="form-group" style="padding-top: 60px;">
-			{{#link-to 'index.mywedding'}}{{mdl-button isRaised=true text='Wedding'}}{{/link-to}}
-		</div><br>
+<div class="tour-image-backdrop" style="background: url('../assets/images/banners/wedding-table.jpg');">
+	<div class="overlay-dark">
+		<div class="container tour-block-padding">
+			<h1>Add Guests to Your Wedding</h1><br>
+			<p>If you want to get your guest list started, just head to the my wedding section <strong>in your Hub.</strong><br>Here is an example of one of the features, or you can head there now!</p>
+		    <div class="form-group" style="padding-top: 60px;">
+				{{#link-to 'index.mywedding'}}{{mdl-button isRaised=true text='Wedding'}}{{/link-to}}
+			</div><br>
+		</div>
 	</div>
 </div>
 
@@ -366,16 +373,18 @@
 		</div>
 	</div>
 
-	<div class="tour-image-backdrop" style="background: url('../assets/images/slider-images/slider3.jpg');">
-		<div class="container tour-block-padding">
-			<h1>El Finito!</h1>
-			<p>That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
-			<div style="padding-top: 10px;">
-				<div class="login-btns-padding">
-					{{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}} Hub <i class="fa fa-dashboard"></i> {{/mdl-button}}{{/link-to}}
-				</div>
-	    		<div class="login-btns-padding">
-					{{#mdl-button isRaised=true action="showLogins"}} Sign Up <i class="fa fa-heart-o"></i> {{/mdl-button}}
+	<div class="tour-image-backdrop" style="background: url('../assets/images/banners/cheers.jpg');">
+		<div class="overlay-dark">
+			<div class="container" style="padding-top: 120px; padding-bottom: 120px;">
+				<h1>El Finito!</h1>
+				<p>That concludes this guided tour of Pear! We hope you liked what you saw.<br>Now you can login / sign up or continue exploring the site!</p><br>
+				<div style="padding-top: 10px;">
+					<div class="login-btns-padding">
+						{{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}} Hub <i class="fa fa-dashboard"></i> {{/mdl-button}}{{/link-to}}
+					</div>
+		    		<div class="login-btns-padding">
+						{{#mdl-button isRaised=true action="showLogins"}} Sign Up <i class="fa fa-heart-o"></i> {{/mdl-button}}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -882,7 +882,7 @@ Guest List
 }
 
 .guided-tour-top {
-	background: url('../assets/images/slider-images/slider2.jpg');
+	background: url('../assets/images/banners/guided-tour.jpg');
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -893,7 +893,7 @@ Guest List
 }
 
 .vendor-tour-top{
-	background: url('../assets/images/slider-images/slider2.jpg');
+	background: url('../assets/images/banners/vendor-van.jpg');
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -921,8 +921,8 @@ Guest List
 	}
 }
 .tour-block-padding{
-	padding-top: 65px;
-	padding-bottom: 65px;
+	padding-top: 80px;
+	padding-bottom: 80px;
 }
 .pear-guide-top{
 	background: url(../assets/images/pear-guided-tour-temp.png);
@@ -1623,6 +1623,11 @@ $font_0: FontAwesome;
 	font-style: italic;
 
 }
+.overlay-dark{
+	width:100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.28);
+}
 .showOnPhones{
 	display: none;
 }
@@ -1870,7 +1875,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-
+	.tour-block-padding{
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 	h1{
 	  font-size: 2.6em !important;
 	}
@@ -1932,7 +1940,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
-
+	.tour-block-padding{
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 	.category-square{
 		padding-top: 15px;
 	}
