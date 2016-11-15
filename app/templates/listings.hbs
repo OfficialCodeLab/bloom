@@ -1,70 +1,73 @@
-<div class="container index-main">
-	<div class="header-top">
-		<h1 class="font-times-header"><i class="material-icons">view_list</i>Listings</h1>
-		<p class="font-times-subheader">Go wild. Be inspired.</p>
-		<hr>
-	</div><br>	
-	<div class="text-center hideOnPhones">
-		<div id="masonry-items">
-	         {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
-	         <div>
+<div class="index-main">
+	<div class="container">
+		<div class="header-top">
+			<h1 class="font-times-header"><i class="material-icons">view_list</i>Listings</h1>
+			<p class="font-times-subheader">Go wild. Be inspired.</p>
+			<hr>
+		</div><br>	
+		<div class="text-center hideOnPhones">
+			<div id="masonry-items">
+		         {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
+		         <div>
+		            <div class="category-block">
+	               <span class="cat-title">{{cat-item.name}}</span>
+	               <div class="cat-fav">
+		                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
+		               </div>
+		               <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
+		                  {{#link-to 'single-item' cat-item.id tagname='div'}}
+		                  {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+		                  {{/link-to}}
+		               </div>
+		               <div class="cat-overlay-2">
+		                  
+		               </div>
+		               <div class="cat-bottom-box">
+		                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
+		                  <span class="cat-price">R{{cat-item.price}}</span>
+		               </div>
+		            </div>
+		         </div>
+		         {{/masonry-grid}} 
+		         <div class="nav-arrows">
+	         		{{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
+		         </div>
+		      </div>
+
+			{{#if model}}
+			<div id="loading-spinner">
+				<br>
+				  {{paper-progress-linear value=percentLoaded}}		
+			</div>
+			{{/if}}
+		</div>
+		<div class="row text-center showOnPhones">
+	      {{#each model as |cat-item|}}
+	         <div style="display: inline-block;">
 	            <div class="category-block">
-               <span class="cat-title">{{cat-item.name}}</span>
-               <div class="cat-fav">
+	               <span class="cat-title">{{cat-item.name}}</span>
+	               <div class="cat-fav">
 	                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
 	               </div>
-	               <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
-	                  {{#link-to 'single-item' cat-item.id tagname='div'}}
-	                  {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-	                  {{/link-to}}
-	               </div>
+	               {{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
+	               		<img src="{{cat-item.imageURL}}" class="img-responsive mobile-image">
+	               {{/link-to}}
 	               <div class="cat-overlay-2">
 	                  
 	               </div>
 	               <div class="cat-bottom-box">
-	                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
+		                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
 	                  <span class="cat-price">R{{cat-item.price}}</span>
 	               </div>
 	            </div>
 	         </div>
-	         {{/masonry-grid}} 
-	         <div class="nav-arrows">
-         		{{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
-	         </div>
+	      {{/each}}
+	      <div class="nav-arrows">
+	         {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
 	      </div>
-
-		{{#if model}}
-		<div id="loading-spinner">
-			<br>
-			  {{paper-progress-linear value=percentLoaded}}		
-		</div>
-		{{/if}}
-	</div>
-	<div class="row text-center showOnPhones">
-      {{#each model as |cat-item|}}
-         <div style="display: inline-block;">
-            <div class="category-block">
-               <span class="cat-title">{{cat-item.name}}</span>
-               <div class="cat-fav">
-                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
-               </div>
-               {{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
-               		<img src="{{cat-item.imageURL}}" class="img-responsive mobile-image">
-               {{/link-to}}
-               <div class="cat-overlay-2">
-                  
-               </div>
-               <div class="cat-bottom-box">
-	                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
-                  <span class="cat-price">R{{cat-item.price}}</span>
-               </div>
-            </div>
-         </div>
-      {{/each}}
-      <div class="nav-arrows">
-         {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
-      </div>
+	   </div> 
    </div> 
 </div>
+{{partial 'partials/footer'}}
 
 

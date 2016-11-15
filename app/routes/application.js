@@ -52,7 +52,7 @@ export default Ember.Route.extend({
 			let scope = "";
 
 			if(provider === "facebook"){
-				scope = 'public_profile,user_friends';
+				scope = 'public_profile,user_friends,user_birthday';
 			}
 	        this.get("session").open("firebase", { 
 	        	provider: provider, 
