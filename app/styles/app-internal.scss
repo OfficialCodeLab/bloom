@@ -891,6 +891,23 @@ Guest List
 		color: white;
 	}
 }
+
+.vendor-tour-top{
+	background: url('../assets/images/slider-images/slider2.jpg');
+	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	max-height: 460px;
+	h1{
+		color: white;
+	}
+	.container{
+		img{
+		  max-height: 360px;
+		  max-width: 100%;			
+		}
+	}
+}
 .tour-image-backdrop{
 	text-align: center;
 	background-size: contain;
@@ -1007,6 +1024,16 @@ Guest List
 	text-align:center;
 	padding-left:10px;
 	width:100%;
+}
+
+.special-vendor-list{
+	background-color: $color-main;
+	h1{
+		color: white;
+	}
+	p{
+		color: white;
+	}
 }
 /*==============================================================================*\
    *                             (

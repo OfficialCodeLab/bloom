@@ -23,7 +23,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{!-- {{#nav-link-to 'admin'}}Admin{{/nav-link-to}} --}}
-        {{#nav-link-to 'index'}}VENDOR LIST{{/nav-link-to}}
+        {{#nav-link-to 'vendor-tour'}}VENDOR TOUR{{/nav-link-to}}
         <li><a href="#" {{action 'openContactModal'}}>CONTACT US</a></li>
         <li class="nav-highlight"><a href="#" {{action "showLogins"}}>LOG IN</a></li>
       </ul>
@@ -37,8 +37,8 @@
     <ul>
       {{#link-to 'index'}}<h2>TOUR</h2>{{/link-to}}
       {{#link-to 'about'}}<h2>ABOUT</h2>{{/link-to}}
-      {{#link-to 'index'}}<h2>VENDOR LIST</h2>{{/link-to}}
-      {{#link-to 'about'}}<h2>CONTACT US</h2>{{/link-to}}
+      {{#link-to 'vendor-tour'}}<h2>VENDOR TOUR</h2>{{/link-to}}
+      <li><a href="#" {{action 'openContactModal'}}><h2>CONTACT US</h2></a></li>
       <a {{action "showLogins"}} href="#"><h2>LOG IN</h2></a>
     </ul>
   </div>

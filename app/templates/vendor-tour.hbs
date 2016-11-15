@@ -1,0 +1,63 @@
+<div class="index-main" style="text-align:center; overflow-x: hidden;">
+
+  	<div class="vendor-tour-top unselectable">
+	    <div class="container" style="padding-top: 50px; padding-bottom: 50px;">
+			<img src='../assets/images/pear-splash-color.png'>
+		</div>
+	</div>
+
+	<div class="container" style="padding-top: 40px; padding-bottom: 20px;">
+		<h1>All your Vendors in one Place!</h1>
+		<p style="font-size: 20px;">All your Vendor contact information in one place while you set up and plan your Wedding.</p>
+		<br>
+		<p style="font-style: italic;">Take a look at some of our Categories and let your imagination go wild!</p><br>
+	</div>
+
+	<div class="container-fluid" style="padding-top: 50px;">
+		{{#each model as |category|}}
+		{{!-- {{#link-to 'category' category.id}} --}}
+		<div class="col-sm-3 height-3 category-outer-square col-xs-4">
+			<div class="category-square" style={{category.style}}>
+				<i class={{category.icon}}>{{category.iconName}}</i>
+				<p class="cat-heading">{{category.name}}</p>
+			</div>
+		</div>{{!-- {{/link-to}} --}}
+		{{/each}}
+		{{!-- {{#each model as |category|}}
+		{{#link-to 'category' category.id}}
+		<div class="col-lg-4 col-md-6">
+			<div class="category-block-m">
+				<div class="text-center cat-img-container-m">
+					<img src="{{category.imageURL}}" class="img-responsive cat-image-m">
+				</div>
+				<div class="overlay-title"><h4>{{category.name}}</h4></div>
+			</div>
+		</div>{{/link-to}}
+		{{/each}} --}}
+	</div>
+
+	<div class="form-group container" style="padding-top: 60px;">
+		<div style="padding-top: 10px; padding-bottom: 60px;">
+			{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
+		</div>
+		<hr>
+		<div style="padding-top: 20px; padding-bottom: 80px;">
+			<h1>Want to become a Vendor?</h1>
+			<p style="font-size: 20px;">We want you to join the Pear Vendor Team - All you need to do is click below<br>
+			and fill in the Vendor Sign Up form. It's that simple :)</p>
+			<div class="form-group" style="padding-top: 60px;">
+				{{#link-to 'categories'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
+			</div>
+		</div>
+	</div>
+
+	<div class="special-vendor-list" style="padding-top: 40px; padding-bottom: 60px;">
+		<div class="container" style="padding-bottom: 100px">
+			<h1>All Pear Vendors</h1>
+		</div>
+	</div>
+
+	<div class="container" style="padding-top: 60px;">
+      <span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;PEAR LIFE LIMITED.</span>
+    </div>
+</div>

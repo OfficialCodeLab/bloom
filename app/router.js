@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('login');
   this.route('about');
+  this.route('vendor-tour');
   this.route('home');
   this.route('categories');
   this.route('category', {path: '/category/:category_id'});
