@@ -2,6 +2,9 @@ import Ember from 'ember';
 
 
 export default Ember.Route.extend({
+	vendorId: null,
+	vendorAcc: null,
+	vendorLog: null,
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
     },
@@ -57,16 +60,38 @@ export default Ember.Route.extend({
 	    			scope: scope,
 				}
 			}).then((data) => {
-	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);
-	    		
-				
-				this.store.findRecord('user', data.currentUser.providerData[0].uid).then(()=>{
-					this.transitionTo('index');
-					window.scrollTo(0,0);
-					this.controller.get('notifications').info('Logged in successfully.',{
-			          autoClear: true
-			      	});
-				}, ()=> {this.transitionTo('user.new');});
+	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);  
+				this.store.findRecord('user', data.currentUser.providerData[0].uid).then((user)=>{
+
+					if(!this.get('vendorId')){
+						this.transitionTo('index');
+						window.scrollTo(0,0);
+						this.controller.get('notifications').info('Logged in successfully.',{
+				          autoClear: true
+			      		});
+			      	} else {
+			      		if(user.get('vendorAccount')){
+	    					this.get('session').close().then(()=> {
+					      		this.controller.get('notifications').error('Account already has vendor account!',{
+						          autoClear: true
+					      		});
+					      	});
+							this.transitionTo('login');
+							this.set('vendorId', null);
+						} else {
+							this.joinAccounts(user);
+						}
+			      	}
+				}, ()=> {					
+					if(this.get('vendorId')){
+						this.createVendor();	
+					} else {
+						this.controller.get('notifications').info('User account created.',{
+				          autoClear: true
+				      	});
+						this.transitionTo('user.new');
+					}
+				});
 			}, (error) => {
 				this.controller.get('notifications').error('An error occured, please try again later.',{
 				    autoClear: true
@@ -80,6 +105,11 @@ export default Ember.Route.extend({
 	      //     autoClear: true
 	      // });
 	      //this.transitionTo('login');
+	    },
+	    storeVendorId: function(id, vendor, vendorLogin){
+	    	this.set('vendorId', id);
+	    	this.set('vendorAcc', vendor);
+	    	this.set('vendorLog', vendorLogin);
 	    },
 	    showId: function(){
 	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));
@@ -259,9 +289,63 @@ export default Ember.Route.extend({
 	 //      this.get("session").close();
 	 //      this.transitionTo('index');
 	 //    }
-	}/*,
+	},
+
+	    createVendor: function(){
+	    	let _id = this.get("session").get('currentUser').providerData[0].uid;
+	    	let vendor = this.get('vendorAcc');
+	    	let vendorLogin = this.get('vendorLog');
+        	let full_name = this.get("session").get('currentUser').providerData[0].displayName;
+        	let x = full_name.indexOf(" ");
+        	let name = full_name.substring(0, x);
+        	let surname = full_name.substring(x+1, full_name.length);
+			var user = this.store.createRecord('user', {
+			  name: name,
+			  surname: surname,
+			  id: _id,
+			  vendorAccount: this.get('vendorId')
+			});				
+
+			let wedding = this.store.createRecord('wedding', 
+				{
+					id: _id,
+					user: user
+				}
+			);
+			user.get('wedding').pushObject(wedding);
+
+			wedding.save().then(() => {
+				vendor.save().then(()=>{
+					vendorLogin.save().then(()=>{
+						user.save().then(()=>{
+							this.transitionTo('index');
+							this.controller.get('notifications').info('Vendor account created.',{
+					          autoClear: true
+					      	});
+					    });
+					});
+				});
+			});
+	    },
+	    joinAccounts: function(user){
+	    	let vendor = this.get('vendorAcc');
+	    	let vendorLogin = this.get('vendorLog');
+	    	let _vendorid = this.get('vendorId');
+	    	vendorLogin.set('vendorID', _vendorid);
+	    	user.set('vendorAccount', _vendorid);
+			vendor.save().then(()=>{
+				vendorLogin.save().then(()=>{
+					user.save().then(()=>{
+						this.transitionTo('index');
+						this.controller.get('notifications').info('Vendor account created.',{
+				          autoClear: true
+				      	});
+				    });
+				});
+			});
+	    },
 	
-	setupController: function(controller, model) {
+	/*setupController: function(controller, model) {
 		this.controller.set('menuOpen', false)
 		console.log("TEST" + this.controller.get('menuOpen'));
 		Ember.$('#menu-overlay').fadeOut("slow");

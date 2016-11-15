@@ -64,9 +64,12 @@ export default Ember.Route.extend({
     actions: {
     	
 		//If the save user button is clicked
-		saveUser(newUser) { 
+		saveUser() { 
     		window.scrollTo(0,0);
-			this.transitionTo('about');
+    		this.controller.get('notifications').success('Saved successfully!',{
+			  autoClear: true
+			});
+			this.transitionTo('index');
 		},
 
 		willTransition() {
