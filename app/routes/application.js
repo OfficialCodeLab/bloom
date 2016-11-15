@@ -114,6 +114,9 @@ export default Ember.Route.extend({
 	    showId: function(){
 	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));
 	    },
+	    navigate: function(route){
+	    	this.transitionTo(route);
+	    },
 	    navigateCat: function(){
 	    	this.transitionTo("categories");
 	    },
