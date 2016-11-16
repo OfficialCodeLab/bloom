@@ -1,10 +1,10 @@
 <div class="container-fluid index-main">
-	<div class="header-top">
+	<div class="header-top container">
 		<h1 class="font-times-header text-uppercase">Categories</h1>
-		<hr class="style-two">
-		<h3 class="font-times-subheader">All available categories</h3>
+		<p>All available categories</p>
+		<hr>
 	</div>
-	<div style="padding-top: 50px;">
+	<div style="padding: 50px 20px 20px 20px;">
 		{{#each model as |category|}}
 		{{#link-to 'category' category.id}}
 		<div class="col-sm-3 height-3 category-outer-square col-xs-4">
