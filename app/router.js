@@ -18,7 +18,7 @@ Router.map(function() {
   });
   this.route('myaccount', function() {
     this.route('account', {path: '/' });
-    this.route('privacy');
+    this.route('vendor');
     this.route('security');
     this.route('notifications');
     this.route('payments');

@@ -3,12 +3,86 @@
     <hr>
 
     <div style="padding-bottom:60px;">
+
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+                    <div class="overview-sm-block" style="background-image: url(../assets/images/overview2.jpg)">
+                        <div class="overlay-green">
+                        </div>
+
+                    </div>
+                    <div class="overview-white-text">
+
+                        {{#if selectedDate}}
+                            <p style="font-size: 72px; padding-top: 30px; font-weight: 600;">{{daysNum}}</p>
+                            <p style="padding-top: 15px;">{{daysString}}</p>
+                            <p style="font-size: 30px; padding-top: 20px; font-weight: 600;">{{dateComputed}}</p>
+                            <p>Wedding Date</p>
+                        {{else}}
+                            <p style="font-size: 24px; padding-top: 100px;">Please select your wedding date :)</p>
+                        {{/if}}
+
+                        <div class="overview-box-bottom {{if selectedDate "padding-25" "padding-75"}}">
+                            {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}                        
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+                    <div class="overview-lg-block" style="background-image: url(../assets/images/overview3.jpg)">
+                        <div class="overlay-pink">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="overview-padding">
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+                    <div class="overview-sm-block" style="background-image: url(../assets/images/overview1.jpg)">
+                        <div class="overlay-pink">
+
+                        </div>
+                    </div>
+                    <div class="overview-white-text">
+                        {{#guest-counter session.currentUser.providerData.0.uid}}{{/guest-counter}}
+                        <p style="padding-top: 20px;">Attending</p>
+                        <p style="font-size: 60px; font-weight: 600;">{{model.guestsAttending}}</p>
+                        <p style="padding-top: 20px;">Invited</p>
+                        <p style="font-size: 60px; font-weight: 600;">{{model.guestsTotal}}</p>
+
+                        <div class="overview-box-bottom" style="text-align: center !important; padding-top: 60px;">
+                            {{#link-to 'index.mywedding.guests'}}{{mdl-button text="Guest List"}}{{/link-to}}                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block">
+
+                </div>
+            </div>
+        </div>
         
         
             <div class="row">
             	<div class="col-md-8">
             		{{!-- <h3>Welcome to your overview</h3> --}}
-                    <div class="row">
+                    {{!-- <div class="row">
                         {{#if selectedDate}}
                         <div class="col-sm-12">
                             <h3>{{dayString}}</h3>
@@ -17,8 +91,8 @@
                         <div class="col-md-4">
                         {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}
                         </div>
-                    </div>
-            		<p><hr><b>What can you do in the hub?</b><hr>Current Features: </p>
+                    </div> --}}
+            		<p><hr><b> </b><hr>Current Features: </p>
             		<p><i class="fa fa-user-plus" aria-hidden="true"></i> Add guests to your guest list and see the attendance overview on this page.</p>
             		<p><i class="fa fa-users" aria-hidden="true"></i> Add members to your inner circle and view their stats</p>
             		<p><i class="fa fa-female" aria-hidden="true"></i> View and edit your own stats and measurements</p><hr>
@@ -30,14 +104,19 @@
             	</div>
                 <div class="col-md-4">
                     <h3 class="text-center">Guest Attendance:</h3> 
+
+                    {{!-- {{#if budgetTotal}} --}}
                     {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+                    {{!-- {{else}} --}}
+                        {{!-- ADD TEXT --}}
+                    {{!-- {{/if}} --}}
 
                     <div class="row pie-label" style="padding-top: 10px;">
                     	<div class="col-xs-6 pie-label-right">
                     		<div class="pie-label-square attending"></div>
                     	</div>
                     	<div class="col-xs-6 pie-label-left">
-                    		Attending
+                    		Used
                     	</div>
                     </div>
                     <div class="row pie-label">
@@ -45,9 +124,10 @@
                     		<div class="pie-label-square not-attending"></div>
                     	</div>
                     	<div class="col-xs-6 pie-label-left">
-                    		Not Attending
+                    		Remaining
                     	</div>
                     </div>
+                    {{mdl-button text="Refresh" action='refreshButton'}}
                 </div>
             </div>
 

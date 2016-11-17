@@ -1,0 +1,16 @@
+
+<h1 class="font-times-header" style="color: #4C4C4E;">Vendor</h1><br>
+<hr>
+
+
+<div style="text-align: center; padding: 20px;">
+	{{#if model.user.accountType}}
+	<p>You are a registered vendor!<br>Go to your vendor page:</p>
+		{{#link-to 'index.vendor.profile'}}{{mdl-button isRaised=true text='PROFILE'}}{{/link-to}}
+	{{else}}
+	<p>Want to become a vendor? Click here</p>
+	<div style="padding: 20px 0px 40px 0px;">
+		{{mdl-button isRaised=true text='SIGN UP' action="signUpVendor"}}
+	</div>
+	{{/if}}
+</div>	

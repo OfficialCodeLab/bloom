@@ -89,6 +89,8 @@ export default Ember.Controller.extend({
 			});		
 		},
 		checkBox(id){
+      		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
 			let model = this.store.peekRecord('guest', id);
 			let rsvp = model.get('rsvp');
 			if(rsvp){
@@ -98,9 +100,25 @@ export default Ember.Controller.extend({
 			}
 			model.set('rsvp', rsvp);
 			model.save().then(()=>{
-				this.get('notifications').success('Guest attendance updated!',{
-					autoClear: true
-				});
+				// let rsvpTotal = wedding.get('guestsAttending');
+				// if(rsvpTotal===null){
+				// 	rsvpTotal = 0;
+				// } else {
+				// 	rsvpTotal = parseInt(rsvpTotal);
+				// }
+
+				// if(rsvp){
+				// 	rsvpTotal--;
+				// } else {
+				// 	rsvpTotal++;
+				// }
+
+				// wedding.set('guestsAttending', rsvpTotal);
+				// wedding.save().then(()=>{
+					this.get('notifications').success('Guest attendance updated!',{
+						autoClear: true
+					});					
+				// });
 			});
 		},
 		destroyGuest(id){

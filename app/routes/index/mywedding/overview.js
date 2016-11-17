@@ -2,7 +2,7 @@ import Ember from 'ember';
 import moment from 'moment';
 
 export default Ember.Route.extend({
-
+	cdata: null,
 	model(){		
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('wedding', _id);	
@@ -16,35 +16,31 @@ export default Ember.Route.extend({
 	dateDiff: function(d1, d2, controller){
 		let d3 = moment(d1).unix()*1000;
 		let d4 = moment(d2).unix()*1000;
-		let dayStr = 'days';
-		let preStr = 'Your wedding is in ';
+		let dayStr = 'Days left';
+		// let preStr = 'Your wedding is in ';
 		let days = Math.floor(( d3 - d4 ) / 86400000) + 1;
 		if(days === 1){
-			preStr = 'Your wedding is ';
-			days = '';
-			dayStr = "tomorrow!";
+			dayStr = 'Day left';
 		} else if (days === 0 ) {
-			preStr = 'Your wedding is ';
-			days = '';
-			dayStr = "today!";
-		} else if (days === -1) {
-			preStr = 'Your wedding was yesterday';
-			days = '';
-			dayStr = '';
-		}else if (days < -1) {
-			preStr = 'Your wedding was ';
+			// preStr = 'Your wedding is ';
+			days = 'Today!';
+			dayStr = "is your wedding day!";
+		} else if (days <= -1) {
+			// preStr = 'Your wedding was ';
 			days = Math.sqrt(days*days);
-			dayStr = 'days ago';
+			dayStr = 'Days ago';
 		}
 		// console.log(moment);
 		//  // let days = Math.floor(( d1 - d2 ) / 86400000);
 		 // let days = d1.diff(d2, 'days');
 		 if(controller){
 		 	controller.set('computedFromNow', days);
-		 	controller.set('dayString', preStr + days + " " + dayStr);
+		 	controller.set('daysString', dayStr);
+		 	controller.set('daysNum', days);
 		 } else {
 		 	this.controller.set('computedFromNow', days);
-		 	this.controller.set('dayString', preStr + days + " " + dayStr);
+		 	this.controller.set('daysString', dayStr);
+		 	this.controller.set('daysNum', days);
 		 }
 	},
 	actions: {
@@ -82,6 +78,41 @@ export default Ember.Route.extend({
 
 			}
 			*/
+		},
+		storePieDataRef(ref){
+			this.set('cdata', ref);
+		},
+		refreshButton(){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	        let wedding = this.store.peekRecord('wedding', _id);
+	        let bTotal = wedding.get('budgetTotal');
+	        let bUsed = wedding.get('budgetUsed');
+	        if(bTotal === null){
+	        	bTotal = 0;
+	        	wedding.set('budgetTotal', 0);
+	        }
+	        if(bUsed === null){
+	        	bUsed = 0;
+	        	wedding.set('budgetUsed', 0);
+	        }
+
+	        this.set('budgetTotal', bTotal);
+	        this.set('budgetUsed', bUsed);
+	    	wedding.save();
+			this.set('cdata', Ember.A([
+			{
+		        value: this.get('budgetTotal') - this.get('budgetUsed'),
+		        color: "#808080",
+		        highlight: "#9E9E9E",
+		        label: "Remaining"
+		    }, 
+		    {
+		        value: this.get('budgetUsed'),
+		        color: "#F48FB1",
+		        highlight: "#F8BBD0",
+		        label: "Used"
+		    }
+    		]));
 		},
 		dateChanged: function (date, valid){
 			if(valid){              

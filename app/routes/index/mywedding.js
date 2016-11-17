@@ -19,6 +19,13 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'userext', model.userext);
 	    Ember.set(controller, 'user', model.user);
 	    Ember.set(controller, 'wedding', model.wedding);
+	    this.store.find('topVendor', 'topvendor').then((vendor)=> {
+	    	let vendors = vendor.get('vendors');
+	    	let numberOne = vendors.objectAt(0).id;
+	    	this.store.find('vendor', numberOne).then((v)=>{
+	    		controller.set('topVendor', v);
+	    	})
+	    });
     },
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});

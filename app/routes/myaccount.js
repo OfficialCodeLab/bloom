@@ -50,6 +50,12 @@ export default Ember.Route.extend({
 	    },
 	    closeMessage() {
 	    	this.controller.get('model.userext').set('responseMessage', '');
+	    },
+	    signUpVendor() {
+
+    		this.get('session').close().then(()=> {
+    			this.transitionTo('vendor-signup');
+    		});
 	    }
 	  }
 });
