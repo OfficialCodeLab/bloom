@@ -10,6 +10,7 @@ const GuestCounterComponent = Ember.Component.extend({
         	let _id = this.get('userid');
         	let store = this.get('storeName');
         	let wedding = store.peekRecord('wedding', _id);
+			wedding.set('guestsTotal', this.get('allGuests'));
         	wedding.set('guestsAttending', this.get('attendingGuests'));
         	wedding.save();
         }
@@ -37,19 +38,19 @@ const GuestCounterComponent = Ember.Component.extend({
 					totalAttending += 1 + parseInt(_guest.get('guests'));
 					_that.set('attendingGuests', totalAttending);
 				}
-				totalUsers = totalUsers + 1 + parseInt(_guest.get('guests'));
+				totalUsers += 1 + parseInt(_guest.get('guests'));
 				_that.set('allGuests', totalUsers);
 				processedGuests++;
 				_that.set('processedGuests', processedGuests);
 			});
 		});
 		this.set('guestsCount', guestsCount);
-		wedding.set('guestsTotal', guestsCount);
 		if(guestsCount===0){
     		wedding.set('hasGuests', false);
+			wedding.set('guestsTotal', 0);
+        	wedding.set('guestsAttending', 0);
     	} else {
     		wedding.set('hasGuests', true);
-
     	}
     	wedding.save();		
 	},

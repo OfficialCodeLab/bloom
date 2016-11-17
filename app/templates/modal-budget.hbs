@@ -1,0 +1,12 @@
+{{#modal-popup title='Enter Budget' ok="submitBudget" close='closeBudgetModal'}}
+	<div class="form-horizontal form-group form-group-lg row">
+        <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+          <div class="input-group">
+            {{mdl-textfield label="Budget Used" value=model.budgetUsed type="number"}}
+          </div>
+          <div class="input-group">
+              {{mdl-textfield label="Budget Total" value=model.budgetTotal type="number"}}
+          </div>
+        </div>
+    </div>
+{{/modal-popup}}

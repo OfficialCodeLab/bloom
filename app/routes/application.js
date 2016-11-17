@@ -182,6 +182,11 @@ export default Ember.Route.extend({
 	    		contact.deleteRecord();
 	    	}
 	    	this.controller.set("messageN", "");
+	    },	    
+		openBudgetModal: function(){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
+	    	this.send('showModal', 'modal-budget', wedding);
 	    },
 	    storeTransition: function (){
 

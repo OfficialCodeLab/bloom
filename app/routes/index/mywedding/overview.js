@@ -82,37 +82,43 @@ export default Ember.Route.extend({
 		storePieDataRef(ref){
 			this.set('cdata', ref);
 		},
-		refreshButton(){
+		openBudget: function(){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-	        let wedding = this.store.peekRecord('wedding', _id);
-	        let bTotal = wedding.get('budgetTotal');
-	        let bUsed = wedding.get('budgetUsed');
-	        if(bTotal === null){
-	        	bTotal = 0;
-	        	wedding.set('budgetTotal', 0);
-	        }
-	        if(bUsed === null){
-	        	bUsed = 0;
-	        	wedding.set('budgetUsed', 0);
-	        }
+			let wedding = this.store.peekRecord('wedding', _id);
+			let oldTotal = wedding.get('budgetTotal');
+			let oldUsed = wedding.get('budgetTotal');
+			this.controller.set('oldTotal', oldTotal);
+			this.controller.set('oldUsed', oldUsed);
+			this.send('openBudgetModal');
+		},
+		closeBudgetModal: function(){			
+	    	this.send('removeModal');
+			// this.send('closeBudgetModal');
+		},
+		submitBudget: function (){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
+			if(parseInt(wedding.get('budgetTotal')) > parseInt(wedding.get('budgetUsed'))){
+				wedding.save().then(()=>{
+					const _this = this;
+					this.controller.set('refresh', false);
+					Ember.run.next(function () {
+				        _this.controller.set('refresh', true);
+				    });
+			    	this.controller.get('notifications').info('Budget has been updated!',{
+		                autoClear: true
+		            });  
+				});
+			} else {
+				let oldBudget = this.controller.get('oldTotal');
+				let oldUsed = this.controller.get('oldUsed');
+				wedding.set('budgetTotal', oldBudget);
+				wedding.set('budgetused', oldUsed);				
+		    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
+	                autoClear: true
+	            });
+			}
 
-	        this.set('budgetTotal', bTotal);
-	        this.set('budgetUsed', bUsed);
-	    	wedding.save();
-			this.set('cdata', Ember.A([
-			{
-		        value: this.get('budgetTotal') - this.get('budgetUsed'),
-		        color: "#808080",
-		        highlight: "#9E9E9E",
-		        label: "Remaining"
-		    }, 
-		    {
-		        value: this.get('budgetUsed'),
-		        color: "#F48FB1",
-		        highlight: "#F8BBD0",
-		        label: "Used"
-		    }
-    		]));
 		},
 		dateChanged: function (date, valid){
 			if(valid){              

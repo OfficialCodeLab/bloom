@@ -10,8 +10,21 @@ export default Ember.Controller.extend({
 	computedSelected: format('selectedDate'),
 	dateComputed: format('selectedDate', 'MMM Do, YY'),
 	dateCurrent: format(),
+	notifications: Ember.inject.service('notification-messages'),
 	// computedFromNow: fromNow(momentComputed('selectedDate'), false), 
 	computedFromNow: 0,
 	daysNum: 0,
-	daysString: ''
+	daysString: '',
+	refresh: true,
+	oldTotal: 0,
+	oldUsed: 0,
+	actions: {
+		refreshButton(){
+			const _this = this;
+			this.set('refresh', false);
+			Ember.run.next(function () {
+		        _this.set('refresh', true);
+		    });
+		}
+	}
 });

@@ -24,7 +24,7 @@ export default Ember.Route.extend({
 	    	let numberOne = vendors.objectAt(0).id;
 	    	this.store.find('vendor', numberOne).then((v)=>{
 	    		controller.set('topVendor', v);
-	    	})
+	    	});
 	    });
     },
 	beforeModel: function() {

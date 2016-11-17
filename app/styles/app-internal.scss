@@ -1047,6 +1047,14 @@ Guest List
 	opacity: 0.6;
 }
 
+.overview-md-block{
+	padding: 20px 20px 10px 25px;
+	h4{		
+		font-weight: 600;
+		margin-top: 0px;
+	}
+}
+
 .overview-lg-block{
 	height: 100%;
 	width: 100%;
@@ -1108,6 +1116,20 @@ Guest List
 	padding-top: 75px;
 }
 
+.r-bold{
+	color: #F48FB1;
+	font-weight: 600;
+}
+
+.overview-action-add{
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	top: 0;
+	right: 0;
+	padding-left: 23px;
+	padding-top: 15px;
+}
 
 //END NEW OVERVIEW
 
@@ -1796,7 +1818,7 @@ $font_0: FontAwesome;
 .mdl-button--icon{
 	width: 32px !important;
 }
-.nav-arrows {
+.nav-arrows, .overview-action-add {
 	.mdl-button--icon{
     	transform: translateY(-1px) !important;
 		.material-icons{
