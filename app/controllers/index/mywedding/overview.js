@@ -18,6 +18,12 @@ export default Ember.Controller.extend({
 	refresh: true,
 	oldTotal: 0,
 	oldUsed: 0,
+	topVendor: null,
+	email: '',
+	cell: '',
+	city: '',
+	birthday: null,
+	birthdayComputed: format('birthday', 'Do MMMM YYYY'),
 	actions: {
 		refreshButton(){
 			const _this = this;

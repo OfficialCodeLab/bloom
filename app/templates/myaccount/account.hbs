@@ -5,14 +5,13 @@
 	    <div class="profile-pic-outer-grey">
 	    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
 	    </div>
-	    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3><hr>
-	    {{!-- {{#if model.user.accountType}}
-	    	<p><i>Registered {{model.user.accountType}}</i></p>
-	    {{else}}
-	    	<p><i>Registered user</i></p>
-	    	<p>Request vendor status</p>
-	    	{{x-toggle toggled=model.user.vendorRequest value=model.user.vendorRequest onToggle=(mut model.user.vendorRequest)}}
-	    {{/if}} --}}
+	    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3>
+	    <div class="row">
+		    <div class="col-sm-4 col-xs-offset-4">
+		    	{{#md-datepicker placeholder="Pick your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}
+		    </div>
+	    </div>
+	    <hr>
 	 </div>
 
 <div class="row">

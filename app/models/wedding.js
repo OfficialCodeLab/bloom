@@ -9,6 +9,7 @@ export default Model.extend({
   weddingDate: attr('date'),
   budgetUsed: attr('string'),
   budgetTotal: attr('string'),
+  hasBudget: attr('boolean'),
   guestsAttending: attr('string'),
   guestsTotal: attr('string'),
   hasGuests: attr('boolean')

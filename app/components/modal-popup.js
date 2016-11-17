@@ -11,7 +11,6 @@ actions: {
       this.sendAction('close');      
     },
     submitBudget: function(){
-      this.$('.modal').modal('hide');
       this.sendAction('submitBudget'); 
     },
     submit: function(){

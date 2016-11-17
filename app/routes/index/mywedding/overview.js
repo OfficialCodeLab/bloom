@@ -3,6 +3,7 @@ import moment from 'moment';
 
 export default Ember.Route.extend({
 	cdata: null,
+	isSubmitted: false,
 	model(){		
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('wedding', _id);	
@@ -11,7 +12,20 @@ export default Ember.Route.extend({
 		this._super(controller, model);
 		let weddingDate = model.get('weddingDate');
 	  	controller.set('selectedDate', weddingDate);
-		this.dateDiff(controller.get('computedSelected'), controller.get('dateCurrent'), controller);
+		this.dateDiff(controller.get('computedSelected'), controller.get('dateCurrent'), controller);		
+	    this.store.find('topVendor', 'topvendor').then((vendor)=> {
+	    	let vendors = vendor.get('vendors');
+	    	let numberOne = vendors.objectAt(0).id;
+	    	this.store.find('vendor', numberOne).then((v)=>{
+	    		controller.set('topVendor', v);
+	    	});
+	    });
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    let user = this.store.peekRecord('user', _id);
+	    controller.set('email', user.get('email'));
+	    controller.set('cell', user.get('cell'));
+	    controller.set('city', user.get('city'));
+	    controller.set('birthday', user.get('birthday'));
 	},
 	dateDiff: function(d1, d2, controller){
 		let d3 = moment(d1).unix()*1000;
@@ -86,18 +100,27 @@ export default Ember.Route.extend({
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 			let oldTotal = wedding.get('budgetTotal');
-			let oldUsed = wedding.get('budgetTotal');
+			let oldUsed = wedding.get('budgetUsed');
 			this.controller.set('oldTotal', oldTotal);
 			this.controller.set('oldUsed', oldUsed);
 			this.send('openBudgetModal');
 		},
-		closeBudgetModal: function(){			
+		closeBudgetModal: function(){
+			if(this.get('isSubmitted') === false){
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let wedding = this.store.peekRecord('wedding', _id);
+				let oldBudget = this.controller.get('oldTotal');
+				let oldUsed = this.controller.get('oldUsed');
+				wedding.set('budgetTotal', oldBudget);
+				wedding.set('budgetUsed', oldUsed);	
+			}
+			this.set('isSubmitted', false);
 	    	this.send('removeModal');
-			// this.send('closeBudgetModal');
 		},
 		submitBudget: function (){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let wedding = this.store.peekRecord('wedding', _id);
+			this.set('isSubmitted', true);
 			if(parseInt(wedding.get('budgetTotal')) > parseInt(wedding.get('budgetUsed'))){
 				wedding.save().then(()=>{
 					const _this = this;
@@ -105,19 +128,19 @@ export default Ember.Route.extend({
 					Ember.run.next(function () {
 				        _this.controller.set('refresh', true);
 				    });
-			    	this.controller.get('notifications').info('Budget has been updated!',{
+			    	this.controller.get('notifications').success('Budget has been updated!',{
 		                autoClear: true
-		            });  
+		            });  	
 				});
 			} else {
 				let oldBudget = this.controller.get('oldTotal');
 				let oldUsed = this.controller.get('oldUsed');
 				wedding.set('budgetTotal', oldBudget);
-				wedding.set('budgetused', oldUsed);				
+				wedding.set('budgetUsed', oldUsed);				
 		    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
 	                autoClear: true
-	            });
-			}
+	            });	
+			}	
 
 		},
 		dateChanged: function (date, valid){

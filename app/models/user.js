@@ -20,5 +20,7 @@ export default Model.extend({
   vendorRequest: attr('boolean'),
   vendorAccount: attr('string'),
   innercircle: hasMany('userstats'),
+  preference: attr('string'),
+  birthday: attr('date'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });

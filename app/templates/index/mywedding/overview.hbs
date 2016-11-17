@@ -33,16 +33,41 @@
             <div class="col-md-5 col-sm-6">
                 <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
 
+                    <div class="overview-md-block">
+                        <h5>Personal Information</h5>
+
+                        <div style="padding-top: 10px;">
+                            <div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
+                            <div class="col-xs-10 overview-info">{{email}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">call</i></div>
+                            <div class="col-xs-10 overview-info">{{cell}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
+                            <div class="col-xs-10 overview-info">{{city}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">cake</i></div>
+                            <div class="col-xs-10 overview-info">{{#if birthday}}{{birthdayComputed}}{{/if}}</div>
+                        </div>
+
+                        <div class="overlay-box-bottom">
+                            {{#link-to 'myaccount'}}{{mdl-button text="Edit Account"}}{{/link-to}}                      
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
-                <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
+                {{#link-to 'vendor-profile' topVendor.id}}<div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2; cursor: pointer;">
                     <div class="overview-lg-block" style="background-image: url(../assets/images/overview3.jpg)">
                         <div class="overlay-pink">
                         </div>
 
                     </div>
-                </div>
+                    <div class="overview-white-text" style="padding-top: 100px;">
+                        <h4>{{topVendor.name}}</h4>
+                        <div style="position: absolute; width: 100%; height: 50px; bottom: 10px; text-align: center">
+                            <p>[ Vendor of the day ]</p>
+                        </div>
+                    </div>
+                </div>{{/link-to}}
             </div>
             <div class="overview-padding">
             </div>
@@ -72,7 +97,7 @@
                         {{mdl-button icon="add_circle" action="openBudget"}}
                     </div>
                     <div class="overview-md-block">
-                        <h4>BUDGET</h4>
+                        <h5>Budget</h5>
                         <div style="padding-top: 5px;">
                             {{#if refresh}}
                                 {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
@@ -94,16 +119,75 @@
             </div>
             <div class="col-md-5 col-sm-6" style="z-index: 2;">
                 <div class="pear-profile-card guide-xs-card overview-block">
+                    <div class="overlay-yellow">
 
+                    </div>
+                    <div class="overlay-coming-soon">
+                        <p>Coming Soon</p>
+                    </div>
+                    <div class="overview-action-add">
+                        {{mdl-button icon="add_circle"}}
+                    </div>
+                    <div class="overview-md-block">
+                        <h5>To-Do List</h5>
+                        <div class="row" style="padding-top: 20px;">
+                            <div class="col-xs-9">
+                                <p> 1. Set a Wedding Date</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{#if selectedDate}}
+                                    {{mdl-button icon="check_box"}}
+                                {{else}}
+                                    {{mdl-button icon="check_box_outline_blank"}}
+                                {{/if}}
+                            </div>
+                            <div class="col-xs-9">
+                                <p> 2. Find a dress maker</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{mdl-button icon="check_box_outline_blank"}}
+                            </div>
+                            <div class="col-xs-9">
+                                <p> 3. Set up Budget</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{#if model.hasBudget}}
+                                    {{mdl-button icon="check_box"}}
+                                {{else}}
+                                    {{mdl-button icon="check_box_outline_blank"}}
+                                {{/if}}
+                            </div>
+                            <div class="col-xs-9">
+                                <p> 4. Wedding Venue</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{mdl-button icon="check_box_outline_blank"}}
+                            </div>
+                            <div class="col-xs-9">
+                                <p> 5. Hair &amp; Makeup</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{mdl-button icon="check_box_outline_blank"}}
+                            </div>
+                            <div class="col-xs-9">
+                                <p> 6. Priest / Pastor</p>
+                            </div>
+                            <div class="col-xs-3 overview-check">
+                                {{mdl-button icon="check_box_outline_blank"}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
+            {{!-- {{mdl-button icon="check_box"}}
+            {{mdl-button icon="check_box_outline_blank"}} --}}
         
-            <div class="row">
+            {{!-- <div class="row">
             	<div class="col-md-8">
-            		{{!-- <h3>Welcome to your overview</h3> --}}
-                    {{!-- <div class="row">
+            		<h3>Welcome to your overview</h3>
+                     <div class="row">
                         {{#if selectedDate}}
                         <div class="col-sm-12">
                             <h3>{{dayString}}</h3>
@@ -113,24 +197,18 @@
                         {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}
                         </div>
                     </div> --}}
-            		<p><hr><b> </b><hr>Current Features: </p>
+            		{{!-- <p><hr><b> </b><hr>Current Features: </p>
             		<p><i class="fa fa-user-plus" aria-hidden="true"></i> Add guests to your guest list and see the attendance overview on this page.</p>
             		<p><i class="fa fa-users" aria-hidden="true"></i> Add members to your inner circle and view their stats</p>
             		<p><i class="fa fa-female" aria-hidden="true"></i> View and edit your own stats and measurements</p><hr>
                     <p>Features Coming soon: </p>
                     <p><i class="fa fa-envelope-o" aria-hidden="true"></i> Chat with suppliers and your inner circle</p>
                     <p><i class="fa fa-tasks" aria-hidden="true"></i> Assign Tasks to your inner circle members</p>
-                    <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr>
+                    <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr> 
             		
             	</div>
                 <div class="col-md-4">
                     <h3 class="text-center">Guest Attendance:</h3> 
-
-                    {{!-- {{#if budgetTotal}} --}}
-                    
-                    {{!-- {{else}} --}}
-                        {{!-- ADD TEXT --}}
-                    {{!-- {{/if}} --}}
 
                     <div class="row pie-label" style="padding-top: 10px;">
                     	<div class="col-xs-6 pie-label-right">
@@ -149,11 +227,11 @@
                     	</div>
                     </div>
                     {{mdl-button text="Refresh" action='refreshButton'}}
-                </div>
+                </div> 
             </div>
 
         <div class="col-md-6">
         
-        </div>
+        </div>--}}
     </div>
 </div>

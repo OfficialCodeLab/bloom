@@ -32,5 +32,19 @@ export default Ember.Route.extend({
 	    this._super(controller, model);
 	    Ember.set(controller, 'userext', model.userext);
 	    Ember.set(controller, 'user', model.user);
+	    let birthday = model.user.get('birthday');
+	  	controller.set('birthday', birthday);
 	  },
+	  actions: {
+		dateChanged: function (date, valid){
+			if(valid){              
+				this.controller.set('birthday', date);
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let user = this.store.peekRecord('user', _id);
+				user.set('birthday', date);
+				// this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	
+				// wedding.save();
+			}
+		}
+	  }
 });
