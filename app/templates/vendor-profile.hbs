@@ -2,7 +2,7 @@
 
 	<div class="container" style="padding-top: 60px;">
 
-		<div class="card-material guide-xs-card text-center">
+		{{!-- <div class="card-material guide-xs-card text-center">
 			<h1>{{model.name}}</h1>
 			<hr class="style-two">
 			<h3>Vendor Details:</h3><br>
@@ -12,7 +12,54 @@
 			<br>
 			<h4>Cellphone:</h4>{{model.cell}}
 		</div><br>
+ --}}
+ 		<div class="row" style="padding-bottom: 30px;">
 
+            <div class=" col-sm-8">
+                <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
+                	<div class="vendor-profile-bg" style="background-image: url(../assets/images/sample-content/vendor-van.jpg);">
+                		<div class="vendor-name-overlay">
+                            <p>{{model.name}}</p>
+                        </div>
+                	</div>
+                    <div class="overview-md-block">
+
+                        <div class="text-center">
+                            {{#if model.desc}}
+	                            <p><b>DESCRIPTION</b>
+	                            <br>{{model.desc}}</p>
+                            {{else}}
+	                            <p><b>NO DESCRIPTION</b></p>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+ 			<div class=" col-sm-4">
+                <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
+
+                    <div class="overview-md-block">
+                        <h5>Vendor Information</h5>
+
+                        <div style="padding-top: 10px;">
+                            <div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
+                            <div class="col-xs-10 overview-info"><a href="mailto:pear+{{model.email}}?cc=info@pear.life" target="_top">{{model.email}}</a></div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">call</i></div>
+                            <div class="col-xs-10 overview-info">{{model.cell}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
+                            <div class="col-xs-10 overview-info">{{model.city}}</div>
+                        </div>
+                        <div class="overlay-box-bottom">
+                            {{mdl-button action='openContactModalInit' text="Message Vendor"}}
+                       </div>
+                    </div>
+
+                </div>
+            </div>
+
+ 		</div>
 
 		<div class="text-center hideOnPhones">
 			<div id="masonry-items">

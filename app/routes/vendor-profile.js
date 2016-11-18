@@ -21,6 +21,11 @@ export default Ember.Route.extend({
   		window.scrollTo(0,0);
   	},
   	actions: {
+	    openContactModalInit: function(){
+	    	let venName = this.controller.get('model.name');
+	    	let venEmail = this.controller.get('model.email');
+	    	this.send('openContactModal', venName, venEmail);
+	    },
 
 	    loadedImg: function() {     
 	      let c = this.get('loadCount');

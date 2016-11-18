@@ -1068,7 +1068,8 @@ Guest List
 }
 
 .overview-info{
-	height: 40px;
+	height: 38px;
+	overflow: hidden;
 	line-height: 28px;
 	i {
 		color: #D3D6DB;
@@ -1561,6 +1562,29 @@ Guest List
 	padding: 15px 25px 25px 25px;
 }
 
+.vendor-profile-block{
+	min-height: 320px;
+	position: relative;
+}
+
+.vendor-profile-bg {
+	position: relative;
+	height: 200px; 
+	background-size: cover;
+	background-position: center center;
+}
+
+.vendor-name-overlay{
+	position: absolute; 
+	bottom: 0px;
+	width: 100%; 
+	text-align: center;
+	p{
+		color: white;
+		font-size: 24px;
+		font-weight: 600;
+	}
+}
 /*==============================================================================*\
      _    _                 _     ____
     / \  | |__   ___  _   _| |_  |  _ \ __ _  __ _  ___
