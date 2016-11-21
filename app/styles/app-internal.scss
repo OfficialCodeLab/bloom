@@ -15,6 +15,11 @@ body {
         overflow: auto;
 }
 
+html{
+	overflow-y: scroll; 
+	-webkit-overflow-scrolling: touch;
+}
+
 /*
 	This class is basically a body replacement,
 	for all pages that have the navbar. If you
@@ -1154,6 +1159,9 @@ Guest List
 
 .overview-box-bottom{
 	text-align: left;
+	.md-datepicker-group .datepicker-container p {
+		color: $color-click !important;
+	}
 	.md-datepicker-group{
     	padding: 0px 5px;
 	}
