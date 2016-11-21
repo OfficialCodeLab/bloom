@@ -26,6 +26,9 @@ export default Ember.Route.extend({
 			window.history.go(-1);
 			//console.log("This works.");
 		},
+		priceClick: function(){
+			this.send('priceClickTest');
+		},
 
 	    openContactModalInit: function(){
 	    	let venName = this.controller.get('model.vendor.name');

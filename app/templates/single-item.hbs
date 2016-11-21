@@ -25,14 +25,14 @@
 
 						<div class="row si-row">
 							<div class="col-xs-6 si-left">
-								{{#mdl-button disabled=true}}Price{{/mdl-button}}
+								{{#mdl-button disabled=true action="priceClickTest"}}Price{{/mdl-button}}
 							</div>
 							<div class="col-xs-6 si-right">
 
 								{{#if model.price}}
-								{{#mdl-button}}R&nbsp;{{model.price}}{{/mdl-button}}
+								{{#mdl-button action="priceClickTest"}}R&nbsp;{{model.price}}{{/mdl-button}}
 								{{else}}
-								{{#mdl-button}}No Price information{{/mdl-button}}
+								{{#mdl-button action="priceClickTest"}}No Price information{{/mdl-button}}
 								{{/if}}
 							</div>
 							<hr>
@@ -48,7 +48,7 @@
 
 
 								<div class="showOnMobile" style="padding-right: 10px;">
-								{{#link-to 'category' model.category.id}}{{mdl-button icon="description"}}{{/link-to}}
+								{{#link-to 'vendor-profile' model.vendor.id}}{{mdl-button icon="description"}}{{/link-to}}
 								</div>
 							</div>
 							<hr>

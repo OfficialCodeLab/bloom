@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-
 export default Ember.Route.extend({
 	vendorId: null,
 	vendorAcc: null,
 	vendorLog: null,
+	metrics: Ember.inject.service(),
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
     },
@@ -159,6 +159,26 @@ export default Ember.Route.extend({
 	        model: model
 	      });
 	    },
+	    priceClickTest: function(){
+	    	let metrics = Ember.get(this, 'metrics');
+			metrics.trackEvent('Mixpanel', {
+			 'event': 'Price Click',
+			 'custom-property1': 'test',
+			 'custom-property2': 'test1',
+			});
+			metrics.trackEvent('GoogleAnalytics', {
+			    // (required) The name you supply for the group of objects you want to track.
+			    category: 'ui-interaction',
+			    // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
+			   action: 'Price Click',
+			   // (optional) string to provide additional dimensions to the event data.
+			   label: 'copied-deeplink',
+			   // (optional) An integer that you can use to provide numerical data about the user event.
+			   value: 1,
+			   // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
+			   //noninteraction: false
+			});
+	    },
 	    removeModal: function() {
 	    	try{
 	      		this.send('cancel');
@@ -242,6 +262,7 @@ export default Ember.Route.extend({
 					message.save();
 
 					contact.save().then(() => {
+					  //this.trackEvent('contact', 'send', contact.get('email'), 1);
 					  this.controller.get('notifications').info('Message sent successfully!',{
 					    autoClear: true
 					  });

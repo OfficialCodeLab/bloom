@@ -23,6 +23,22 @@ module.exports = function(environment) {
       }
     },
     filepickerKey: 'Ab8b55laiRbuJG3a8E2o6z',
+    metricsAdapters: [
+      {
+        name: 'GoogleAnalytics',
+        environments: ['development', 'production'],
+        config: {
+          id: 'UA-87736082-1'
+        }
+      },
+      {
+        name: 'Mixpanel',
+        environments: ['development', 'production'],
+        config: {
+          token: '1f70ad74aad5810ae1053354f1449de8'
+        }
+      }
+    ],
 
 
     APP: {
@@ -52,9 +68,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.googleAnalytics = {
-      webPropertyId: 'UA-87736082-1'
-    }
   }
 
   return ENV;
