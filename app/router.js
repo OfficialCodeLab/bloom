@@ -40,8 +40,8 @@ Router.map(function() {
     this.route('support');
   });
   this.route('index', {path: '/' }, function() {
-    this.route('favourites', {path: '/' });
-    this.route('mywedding', function() {
+    this.route('favourites');
+    this.route('mywedding', {path: '/' }, function() {
       this.route('overview', {path: '/'});
       this.route('guests');
       this.route('mystats');
