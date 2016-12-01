@@ -27,13 +27,15 @@ export default Ember.Route.extend({
 			//console.log("This works.");
 		},
 		priceClick: function(){
-			this.send('priceClickTest');
+			let id = this.controller.get('model.vendor.id')
+			this.send('vendorClick', id);
 		},
 
 	    openContactModalInit: function(){
 	    	let venName = this.controller.get('model.vendor.name');
 	    	let venEmail = this.controller.get('model.vendor.email');
-	    	this.send('openContactModal', venName, venEmail);
+	    	let venId = this.controller.get('model.vendor.id');
+	    	this.send('openContactModal', venName, venEmail, venId);
 	    },
 	}
 });

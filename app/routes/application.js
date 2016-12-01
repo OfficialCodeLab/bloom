@@ -121,10 +121,11 @@ export default Ember.Route.extend({
 	    	this.transitionTo("categories");
 	    },
 	    addFavourite: function(id){
-	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
+	    	let _id = this.get("session").get('currentUser').providerData[0].uid;
+	    	let user = this.store.peekRecord('user', _id);
 	    	let item = this.store.peekRecord('cat-item', id);
+	    	let vendor = item.get('vendor');
 	    	user.get('favourites').pushObject(item);
-	    	user.save();
 	    },
 	    removeFavourite: function(id){
 	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
@@ -188,10 +189,11 @@ export default Ember.Route.extend({
 	        parentView: 'application'
 	      });
 	    },
-	    openContactModal: function(vname, vemail){
+	    openContactModal: function(vname, vemail, vid){
 	    	let contact = this.store.createRecord('contact');
 	    	if (typeof vname !== 'undefined') { contact.set('vendor', vname); }
 	    	if (typeof vemail !== 'undefined') { contact.set('vendorEmail', vemail); }
+	    	if (typeof vid !== 'undefined') { contact.set('vendorId', vid); }
 	    	this.controller.set("messageN", contact);
 	    	this.send('showModal', 'modal-contact', contact);
 	    },
@@ -218,6 +220,7 @@ export default Ember.Route.extend({
 	    	 // this.transitionTo(this.controller.get('transition'));
 	    },
 	    submit: function(){
+	    	let _this = this;
 	    	let contact = this.controller.get("messageN");
 	    	this.controller.set("messageN", "");
 	    	let user_id;
@@ -266,6 +269,10 @@ export default Ember.Route.extend({
 					  this.controller.get('notifications').info('Message sent successfully!',{
 					    autoClear: true
 					  });
+
+					  if(to !== "info@codelab.io"){
+					  	_this.storeContactRequest(contact.get('vendorId'), contact.get('vendorEmail'));
+					  }
 	    			  contact.deleteRecord();
 					});
 				} else {
@@ -318,7 +325,28 @@ export default Ember.Route.extend({
 	 //      this.get("session").close();
 	 //      this.transitionTo('index');
 	 //    }
-	},
+	}, //ACTIONS
+
+	storeContactRequest: function(vendorId, vendorEmail){
+    	let metrics = Ember.get(this, 'metrics');
+		metrics.trackEvent('Mixpanel', {
+		 'event': 'Contact Request',
+		 'custom-property1': vendorId,
+		 'custom-property2': vendorEmail,
+		});
+		metrics.trackEvent('GoogleAnalytics', {
+		    // (required) The name you supply for the group of objects you want to track.
+		   category: vendorId,
+		    // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
+		   action: 'Contact Request',
+		   // (optional) string to provide additional dimensions to the event data.
+		   label: vendorEmail,
+		   // (optional) An integer that you can use to provide numerical data about the user event.
+		   value: 1,
+		   // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
+		   //noninteraction: false
+		});
+    },
 
 	    createVendor: function(){
 	    	let _id = this.get("session").get('currentUser').providerData[0].uid;

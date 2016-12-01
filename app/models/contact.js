@@ -8,6 +8,7 @@ export default Model.extend({
 	responseMessage: attr('string'),
 	vendor: attr('string'),
 	vendorEmail: attr('string'),
+	vendorId: attr('string'),
 	subject: attr('string'),
 	isValid: Ember.computed.match('email', /^.+@.+\..+$/),
 	isLong: Ember.computed.gte('message.length', 5),
