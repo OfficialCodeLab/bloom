@@ -270,9 +270,9 @@ export default Ember.Route.extend({
 					    autoClear: true
 					  });
 
-					  if(to !== "info@codelab.io"){
-					  	_this.storeContactRequest(contact.get('vendorId'), contact.get('vendorEmail'));
-					  }
+					  
+					  _this.storeContactRequest(contact.get('vendorId'), contact.get('vendorEmail'), user_id);
+					  
 	    			  contact.deleteRecord();
 					});
 				} else {
@@ -283,7 +283,47 @@ export default Ember.Route.extend({
 				}
 	    		
 	    	}
-	    }
+	    },
+		storeContactInfoRequest: function(vendorId, userId){
+			let metrics = Ember.get(this, 'metrics');
+			metrics.trackEvent('GoogleAnalytics', {
+			    // (required) The name you supply for the group of objects you want to track.
+			   category: vendorId,
+			    // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
+			   action: 'Contact Info Request',
+			   // (optional) string to provide additional dimensions to the event data.
+			   label: userId,
+			   // (optional) An integer that you can use to provide numerical data about the user event.
+			   value: 1
+			   // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
+			   //noninteraction: false
+			});
+			metrics.trackEvent('Mixpanel', {
+			 'event': 'Contact Info Request',
+			 'custom-property1': vendorId,
+			 'custom-property2': userId
+			});
+		},
+		storeVendorProfileVisited: function(vendorId, userId){
+			let metrics = Ember.get(this, 'metrics');
+			metrics.trackEvent('GoogleAnalytics', {
+			    // (required) The name you supply for the group of objects you want to track.
+			   category: vendorId,
+			    // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
+			   action: 'Visited Vendor Profile',
+			   // (optional) string to provide additional dimensions to the event data.
+			   label: userId,
+			   // (optional) An integer that you can use to provide numerical data about the user event.
+			   value: 1
+			   // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
+			   //noninteraction: false
+			});
+			metrics.trackEvent('Mixpanel', {
+			 'event': 'Visited Vendor Profile',
+			 'custom-property1': vendorId,
+			 'custom-property2': userId
+			});
+		}
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
 		   // let controller = this.controllerFor('loading');
@@ -327,24 +367,25 @@ export default Ember.Route.extend({
 	 //    }
 	}, //ACTIONS
 
-	storeContactRequest: function(vendorId, vendorEmail){
+	storeContactRequest: function(vendorId, vendorEmail, userId){
+		let prop = vendorEmail + " contacted by: " + userId;
     	let metrics = Ember.get(this, 'metrics');
-		metrics.trackEvent('Mixpanel', {
-		 'event': 'Contact Request',
-		 'custom-property1': vendorId,
-		 'custom-property2': vendorEmail,
-		});
 		metrics.trackEvent('GoogleAnalytics', {
 		    // (required) The name you supply for the group of objects you want to track.
 		   category: vendorId,
 		    // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
 		   action: 'Contact Request',
 		   // (optional) string to provide additional dimensions to the event data.
-		   label: vendorEmail,
+		   label: prop,
 		   // (optional) An integer that you can use to provide numerical data about the user event.
-		   value: 1,
+		   value: 1
 		   // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
 		   //noninteraction: false
+		});
+		metrics.trackEvent('Mixpanel', {
+		 'event': 'Contact Request',
+		 'custom-property1': vendorId,
+		 'custom-property2': prop
 		});
     },
 

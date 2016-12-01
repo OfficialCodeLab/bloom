@@ -17,6 +17,13 @@ export default Ember.Route.extend({
 		this.set('loadAmount', catItems.get('length'));
    		this.resetLoadCount();
 	},
+	setupController: function (controller, model) {
+     	this._super(controller, model);
+     	controller.set('contactInfoVisible', false);
+	    let id = this.get("session").get('currentUser').providerData[0].uid;
+	    let vendorId = this.get('vendorId');
+		this.send('storeVendorProfileVisited', vendorId, id);
+	},
   	activate: function(){
   		window.scrollTo(0,0);
   	},
@@ -46,6 +53,12 @@ export default Ember.Route.extend({
 	      } catch(ex){}
 
 
+	    },
+	    showContactInfo: function(){
+	    	let userId = this.get("session").get('currentUser').providerData[0].uid;
+	    	let vendorId = this.controller.get('model.id');
+	    	this.controller.set('contactInfoVisible', true);
+	    	this.send('storeContactInfoRequest', vendorId, userId);
 	    }
   	},
 	resetLoadCount: function (){

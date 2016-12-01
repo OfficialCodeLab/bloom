@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
 	isLoaded: false,
 	isNotLoaded: Ember.computed.not('isLoaded'),
 	percentLoaded: 0,
+	contactInfoVisible: false,
 	actions: {
 		storeMasonryRef(ref){
 			this.set('masonryRef', ref);
@@ -13,6 +14,6 @@ export default Ember.Controller.extend({
 	    	//console.log("TESTERINO");
 		  	var $container = this.get('masonryRef');
 		  	$container.masonry('layout');
-	    },
+	    }
 	}
 });

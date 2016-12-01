@@ -45,13 +45,27 @@
 
                         <div style="padding-top: 10px;">
                             <div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
-                            <div class="col-xs-10 overview-info"><a href="mailto:pear+{{model.email}}?cc=info@pear.life" target="_top">{{model.email}}</a></div>
+                            <div class="col-xs-10 overview-info">                            	
+                            	{{#if contactInfoVisible}}
+                            	<a href="mailto:pear+{{model.email}}?cc=info@pear.life" target="_top">{{model.email}}</a>
+								{{else}}
+                            		****
+                            	{{/if}}
+                            </div>
                             <div class="col-xs-2 overview-info"><i class="material-icons">call</i></div>
-                            <div class="col-xs-10 overview-info">{{model.cell}}</div>
+                            <div class="col-xs-10 overview-info">
+                            	{{#if contactInfoVisible}}
+                            		{{model.cell}}
+                            	{{else}}
+                            		****
+                            	{{/if}}
+
+                            </div>
                             <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
                             <div class="col-xs-10 overview-info">{{model.city}}</div>
                         </div>
                         <div class="overlay-box-bottom">
+                            {{mdl-button action='showContactInfo' text="Show Contact Info"}}
                             {{mdl-button action='openContactModalInit' text="Message Vendor"}}
                        </div>
                     </div>
