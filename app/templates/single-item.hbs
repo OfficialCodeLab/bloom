@@ -30,9 +30,9 @@
 							<div class="col-xs-6 si-right">
 
 								{{#if model.price}}
-								{{#mdl-button}}R&nbsp;{{model.price}}{{/mdl-button}}
+								{{#mdl-button action="priceClick"}}R&nbsp;{{model.price}}{{/mdl-button}}
 								{{else}}
-								{{#mdl-button}}No Price information{{/mdl-button}}
+								{{#mdl-button action="priceClick"}}No Price information{{/mdl-button}}
 								{{/if}}
 							</div>
 							<hr>

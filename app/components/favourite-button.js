@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ResetScrollPositionMixin from 'pear/mixins/reset-scroll';
 
 const FavouriteButtonComponent = Ember.Component.extend({
   	storeName: '',

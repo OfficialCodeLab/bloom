@@ -1,9 +1,13 @@
 <div id="s2-overlay3" style="display:none">
-	<div class="close-overlay" {{action 'hideLogins'}}><i class="fa fa-times" aria-hidden="true"></i></div>
-	<h1 style="text-align:center;" class="font-times-header">LOGIN</h1>
-	<p class="font-times-subheader" style="text-align:center;">An account is required</p>
+	<div class="modal-header">
+        <button type="button" class="close" {{action 'hideLogins'}} aria-hidden="true">×</button>
+        <h4 class="modal-title" style="text-align: left;">Log In</h4>
+      </div>
+	{{!-- <div class="close-overlay" {{action 'hideLogins'}}><i class="fa fa-times" aria-hidden="true"></i></div> --}}
+	{{!-- <h1 style="text-align:center;" class="font-times-header">LOGIN</h1> --}}
+	<p style="text-align:center; padding-top:20px;">An account is required</p>
 
-	<hr>
+	{{!-- <br> --}}
 
 	<br>
 	<div class="col-xs-12">
@@ -20,11 +24,11 @@
 		  Sign in with Twitter
 		</btn>
 	</div>
-	<div class="col-xs-12">
-		{{!-- k" {{action "notimplemented"}} --}}
+	{{!-- <div class="col-xs-12">
+		{{action "notimplemented"}} 
 		<btn disabled="true" class="btn btn-block btn-social btn-facebook btn-reddit pear-social-button2" {{action "notimplemented" }}>
 		  <span class="fa fa-envelope"></span>
 		  Sign in with Email &amp; Password
 		</btn>
-</div>
+	</div> --}}
 </div>

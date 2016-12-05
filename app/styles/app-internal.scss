@@ -12,12 +12,13 @@
 /*==============================================================================*/
 body {
 	background-color: #EDEDED;
-        overflow: auto;
+        // overflow: auto;
+	 overflow-y: scroll; 
+	// -webkit-overflow-scrolling: touch;
 }
 
-html{
-	overflow-y: scroll; 
-	-webkit-overflow-scrolling: touch;
+* {
+    -webkit-overflow-scrolling: touch;
 }
 
 /*
@@ -1884,6 +1885,11 @@ $font_0: FontAwesome;
 	color: #7D7D7D;
 	letter-spacing: 2px;
 	font-family: "Open Sans";
+}
+
+.breadcrumb {
+	text-align: center;
+	background-color: $transparent;
 }
 
 

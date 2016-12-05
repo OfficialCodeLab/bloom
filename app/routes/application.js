@@ -1,4 +1,5 @@
 import Ember from 'ember';
+// import ResetScroll from 'pear/mixins/reset-scroll';
 
 export default Ember.Route.extend({
 	vendorId: null,
@@ -20,6 +21,12 @@ export default Ember.Route.extend({
 	    //   setTimeout(resolve, 3000);
 	    // });
 	},
+
+	currentPathDidChange: function() {
+    // path = this.get('currentPath');
+    // console.log('path changed to: ', path);
+    window.scrollTo(0,0);
+  }.observes('currentPath'),
 
 	afterModel: function (model, transition) {
 		Ember.$('.loading-overlay').fadeOut("fast");

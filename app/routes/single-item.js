@@ -17,18 +17,16 @@ export default Ember.Route.extend({
 	    // controller.set('title', 'Edit library');
 	    // controller.set('buttonLabel', 'Save changes');
   	},
-  	activate: function(){
-  		window.scrollTo(0,0);
-  	},
-
 	actions: {
 		goBack: function(){
 			window.history.go(-1);
 			//console.log("This works.");
 		},
 		priceClick: function(){
-			let id = this.controller.get('model.vendor.id')
-			this.send('vendorClick', id);
+			alert("TEST");
+	    	window.scrollTo(0, 0);
+			// let id = this.controller.get('model.vendor.id')
+			// this.send('vendorClick', id);
 		},
 
 	    openContactModalInit: function(){

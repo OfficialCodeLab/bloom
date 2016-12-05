@@ -80,6 +80,7 @@ Router.map(function() {
   this.route('messaging', { path: '/messaging/:vendor_id' });
   this.route('logout');
   this.route('vendor-signup');
+  this.route('mywedding');
 });
 
 export default Router;

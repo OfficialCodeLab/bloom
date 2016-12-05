@@ -1,0 +1,22 @@
+
+{{#modal-popup title='Log In' ok="submit" close='closeContactModal'}}
+<p class="font-times-subheader" style="text-align:center;">An account is required</p>
+
+	<hr>
+
+	<br>
+	<div class="col-xs-12">
+		{{!-- {{action "login" "facebook" }} --}}
+		<btn class="btn btn-block btn-social btn-facebook pear-social-button" {{action "login" "facebook" }}>
+		  <span class="fa fa-facebook"></span>
+		  Sign in with Facebook
+		</btn>
+	</div>
+	<div class="col-xs-12">
+		 {{!-- {{action "login" "twitter" }} --}}
+		<btn class="btn btn-block btn-social btn-twitter pear-social-button" {{action "login" "twitter" }}>
+		  <span class="fa fa-twitter"></span>
+		  Sign in with Twitter
+		</btn>
+	</div>
+{{/modal-popup}}

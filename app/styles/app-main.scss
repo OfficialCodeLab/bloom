@@ -45,7 +45,7 @@ html, body {
   font-family: "Open Sans", sans-serif !important;
 }
 html{
-  overflow: hidden !important;
+  // overflow: hidden !important;
 }
 
 h1, h2, h3, h4, h5, h6, p, a{
@@ -174,7 +174,7 @@ a{
 #s2-overlay3{
   background-color: rgba(241,241,241,1);
   // height:80%;    
-  overflow-y: scroll;
+  // overflow-y: scroll;
   // min-height: 350px;
   padding-bottom: 5px;
   max-height: 500px;
@@ -1001,7 +1001,7 @@ hr.style-two {
 }
 
 html {
-    overflow: auto;
+    // overflow: auto;
 }
 
 //SCROLLBAR STYLING
