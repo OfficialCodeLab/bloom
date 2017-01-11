@@ -22,11 +22,6 @@ export default Ember.Route.extend({
 	    // });
 	},
 
-	currentPathDidChange: function() {
-    // path = this.get('currentPath');
-    // console.log('path changed to: ', path);
-    window.scrollTo(0,0);
-  }.observes('currentPath'),
 
 	afterModel: function (model, transition) {
 		Ember.$('.loading-overlay').fadeOut("fast");
