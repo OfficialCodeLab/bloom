@@ -55,7 +55,7 @@ Router.map(function() {
       this.route('new-listing');
       this.route('profile');
       this.route('security');
-      this.route('products', function() {
+      this.route('services', function() {
         this.route('item', {path: '/item/:catItem_id'});
       });
     });
