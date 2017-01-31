@@ -9,7 +9,40 @@ export default Ember.Route.extend({
         }
         return sesh;
     },
+    model(){
+        // return Ember.RSVP.hash({
+        //     country: this.store.findRecord('countries', 'South_Africa')
+        // });
+    },
+    setupController(controller, model) {
+        // this._super(controller, model);
+        // Ember.set(controller, 'catItem', model.catItem);
+        // Ember.set(controller, 'country', model.country);
+
+        // let catItem = this.controller.get('model.catItem');
+        // let cat = catItem.get('category');
+        // let cat_id = cat.get('id');
+        // this.controller.set('category', cat_id);
+      },
     actions: {
+        nextSection() {
+            let section = this.controller.get('currentSection');
+            section++;
+            if(section === 2){
+                this.controller.set('section1', false);
+            }
+            this.controller.set('currentSection', section);
+
+        },
+        prevSection() {
+            let section = this.controller.get('currentSection');
+            section--;
+            if(section === 1){
+                this.controller.set('section1', true);
+            }
+            this.controller.set('currentSection', section);
+
+        },
         signBtn() {
             let regex = this.controller.get('isValidEmail');
             let passLength = this.controller.get('passwordLength');
