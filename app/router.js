@@ -40,13 +40,17 @@ Router.map(function() {
     this.route('support');
   });
   this.route('index', {path: '/' }, function() {
-    this.route('favourites');
+    this.route('favourites', function() {
+      this.route('myfavourites', {path: '/' });
+      this.route('selectgender');
+      this.route('innercircle');
+      this.route('mystats');
+    });
     this.route('mywedding', {path: '/' }, function() {
       this.route('overview', {path: '/'});
       this.route('guests');
-      this.route('mystats');
-      this.route('selectgender');
-      this.route('innercircle');
+      // this.route('mystats');
+      // this.route('innercircle');
     });
     this.route('vendor', function() {
       this.route('signup');
