@@ -27,11 +27,11 @@
 	    {{#each model.tasks as |task|}}
 	    	{{#if task.completed}}
 	    		{{#if viewAll}}
-	    			{{task.title}}
+	    			<a href="#" {{action 'openTodoModal' task.id}}>{{task.title}}</a><br>
 	    			{{!-- IF VIEW ALL --}}	    			
 	    		{{/if}}
 	    	{{else}}
-    			{{task.title}}
+	    		<a href="#" {{action 'openTodoModal' task.id}}>{{task.title}}</a><br>
 	    		{{!-- ALWAYS DISPLAY --}}
 	    	{{/if}}
 	    {{/each}}

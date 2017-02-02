@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import format from 'ember-moment/computeds/format';
 
 export default Ember.Controller.extend({
 	notifications: Ember.inject.service('notification-messages'),
@@ -8,6 +9,8 @@ export default Ember.Controller.extend({
     scrollPos1: 0,
     scrollPos2: 0,
     displayName: '',
+    taskCurrent: '',
+	dateCurrent: format(),
 
     
 	currentPathDidChange: function() {

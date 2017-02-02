@@ -14,8 +14,7 @@ export default Ember.Route.extend({
 
 		},
 		saveTodo: function(){
-			alert('caught');
-			this.send('saveTodo');
+			this.send('saveTask');
 		}
 	}
         

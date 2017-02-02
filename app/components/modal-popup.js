@@ -27,7 +27,7 @@ actions: {
     },
     closeTodoModal: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeBudgetModal');       
+      this.sendAction('closeTodoModal');       
     },
     saveTodo: function(){
       this.sendAction('saveTodo');

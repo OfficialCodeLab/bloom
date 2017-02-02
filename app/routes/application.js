@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 // import ResetScroll from 'pear/mixins/reset-scroll';
 
 export default Ember.Route.extend({
@@ -223,22 +224,35 @@ export default Ember.Route.extend({
 	    	this.send('showModal', 'modal-todo', task);
 	    },
 	    closeTodoModal: function(){
+	    	//Clean up dirty attributes
+			if(this.get('isTodoSubmitted') === false){
+	    		let task = this.controller.get('taskCurrent');
+	    		if(task.get('createdOn')){
+	    			task.rollbackAttributes();
+	    		} else {
+	    			task.deleteRecord();
+	    		}
+	    	}
+			this.set('isTodoSubmitted', false);
 	    	this.send('removeModal');
-	    	// let task = this.controller.get('taskCurrent');
-	    	// if(task.get('hasDirtyAttributes')){
-	    	// 	model.rollbackAttributes();
-	    	// }
 	    },
 	    saveTask: function(){
-	    	alert('TASK SAVING');
 	    	let task = this.controller.get('taskCurrent');
+			this.set('isTodoSubmitted', true);
 	    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let wedding = this.store.peekRecord('wedding', _id);
-			//If the task hasn't been created
-	    	if(task.get('createdOn') !== 'undefined'){
-	    		alert('NEW TASK DETECTED');
-	    		//Set up creation date to confirm task has been created
-	    		let createdOn = Date();
+			//If the task is just being updated
+	    	if(task.get('createdOn')){
+	    		//Save task
+	    		task.save().then(()=>{
+	    			//Success notification
+	    			this.controller.get('notifications').info('Task updated successfully!',{
+					    autoClear: true
+					});
+	    		});   		
+	    	} else { //Else the task hasn't been created yet
+	    		//Set up creation date to confirm task has now been created
+	    		let createdOn = moment().unix()*1000;
 	    		task.set('createdOn', createdOn);
 	    		//Set up belongsTo relationship
 	    		let createdBy = wedding;
@@ -253,14 +267,6 @@ export default Ember.Route.extend({
 						    autoClear: true
 						});
 	    			});
-	    		});
-
-	    	} else { //Task is just being updated
-	    		task.save().then(()=>{
-	    			//Success notification
-	    			this.controller.get('notifications').info('Task updated successfully!',{
-					    autoClear: true
-					});
 	    		});
 	    	}
 	    },

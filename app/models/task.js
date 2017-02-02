@@ -6,9 +6,9 @@ import Ember from 'ember';
 export default Model.extend({	
 	title: attr('string'),
 	desc: attr('string'),
-	due: attr('date'),
-	createdOn: attr('date'),
-	createdBy: belongsTo('user'),
+	due: attr('string'),
+	createdOn: attr('string'),
+	createdBy: belongsTo('wedding'),
 	asssignedTo: hasMany('user'),
 	completed: attr('boolean')
 });
