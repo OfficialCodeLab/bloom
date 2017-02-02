@@ -51,6 +51,8 @@ Router.map(function() {
       this.route('guests');
       // this.route('mystats');
       // this.route('innercircle');
+      this.route('todo');
+      this.route('budget');
     });
     this.route('vendor', function() {
       this.route('signup');
