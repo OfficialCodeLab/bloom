@@ -1232,6 +1232,30 @@ Guest List
 	width: 100%;
 	display: inline-block;
 }
+
+
+//TO-DO List
+.todo-action-add {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 0;
+	right: 0;
+	padding-left: 10px;
+	padding-top: 25px;
+	color: $color-main;
+	i{		
+		font-size: 60px;
+		&:hover{
+			cursor: pointer;
+		}
+	}
+}
+
+
+
+
+//End TO-DO List
 /*==============================================================================*\
    *                             (
  (  `            )     (         )\ )    )

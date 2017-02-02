@@ -1,0 +1,12 @@
+{{#modal-popup title='To-Do' ok="saveTodo" close='closeTodoModal'}}
+	<div class="form-horizontal form-group form-group-lg row">
+        <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+          <div class="input-group">
+            {{mdl-textfield label="Task" value=model.title}}
+          </div>
+          <div class="input-group">
+              {{mdl-textfield label="Description" value=model.desc}}
+          </div>
+        </div>
+    </div>
+{{/modal-popup}}

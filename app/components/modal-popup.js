@@ -25,6 +25,13 @@ actions: {
       this.$('.modal').modal('hide');
       this.sendAction('closeBudgetModal');       
     },
+    closeTodoModal: function(){
+      this.$('.modal').modal('hide');
+      this.sendAction('closeBudgetModal');       
+    },
+    saveTodo: function(){
+      this.sendAction('saveTodo');
+    },
     captchaComplete: function(data){
       alert("THIS WORKED");
       this.sendAction('captchaComplete');   

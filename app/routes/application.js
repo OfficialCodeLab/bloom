@@ -212,6 +212,58 @@ export default Ember.Route.extend({
 			let wedding = this.store.peekRecord('wedding', _id);
 	    	this.send('showModal', 'modal-budget', wedding);
 	    },
+	    openTodoModal: function(id){
+	    	let task;
+	    	if (typeof id !== 'undefined') { 
+	    		task = this.store.peekRecord('task', id); 
+	    	} else {
+	    		task = this.store.createRecord('task');
+	    	}
+	    	this.controller.set('taskCurrent', task);
+	    	this.send('showModal', 'modal-todo', task);
+	    },
+	    closeTodoModal: function(){
+	    	this.send('removeModal');
+	    	// let task = this.controller.get('taskCurrent');
+	    	// if(task.get('hasDirtyAttributes')){
+	    	// 	model.rollbackAttributes();
+	    	// }
+	    },
+	    saveTask: function(){
+	    	alert('TASK SAVING');
+	    	let task = this.controller.get('taskCurrent');
+	    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
+			//If the task hasn't been created
+	    	if(task.get('createdOn') !== 'undefined'){
+	    		alert('NEW TASK DETECTED');
+	    		//Set up creation date to confirm task has been created
+	    		let createdOn = Date();
+	    		task.set('createdOn', createdOn);
+	    		//Set up belongsTo relationship
+	    		let createdBy = wedding;
+	    		task.set('createdBy', createdBy);
+	    		//Save task
+	    		task.save().then(()=>{
+	    			//Set up hasMany relationship
+	    			wedding.get('tasks').pushObject(task);
+	    			wedding.save().then(()=>{
+	    				//Success notification
+	    				this.controller.get('notifications').success('Task created successfully!',{
+						    autoClear: true
+						});
+	    			});
+	    		});
+
+	    	} else { //Task is just being updated
+	    		task.save().then(()=>{
+	    			//Success notification
+	    			this.controller.get('notifications').info('Task updated successfully!',{
+					    autoClear: true
+					});
+	    		});
+	    	}
+	    },
 	    storeTransition: function (){
 
 	    },

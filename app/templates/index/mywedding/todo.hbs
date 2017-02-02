@@ -1,10 +1,43 @@
 <div class="container-fluid">
    {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
-    <h1 class="font-times-header" style="color: #4C4C4E;">Overview</h1><br>
-    <hr>
+    <h1 class="font-times-header" style="color: #4C4C4E;">To-Do List</h1><br>
+    {{!-- <hr> --}}
 
     <div style="padding-bottom:60px;">
 
+    <div class="container pear-profile-card" style="padding: 30px 20px 50px 20px; position: relative;">
+
+	    <div style="width: 80%">
+		    {{#if viewAll}}
+			    {{#mdl-button isRaised=true}}View All{{/mdl-button}}&nbsp;
+				{{#mdl-button isRaised=true isAccent=true action="incompleteClick"}}View Incomplete{{/mdl-button}}
+			{{else}}
+			    {{#mdl-button isRaised=true isAccent=true action="allClick"}}View All{{/mdl-button}}&nbsp;
+				{{#mdl-button isRaised=true}}View Incomplete{{/mdl-button}}
+			{{/if}}
+		</div>
+
+		<div class="todo-action-add">
+			{{!-- ACTION TO BRING UP MODAL TO ADD TASK --}}
+	        <a href="#" {{action 'openTodoModal'}}><i class="material-icons">add_circle</i></a>
+	    </div>
+
+	    <hr style="margin-top: 50px;">
+
+	    {{#each model.tasks as |task|}}
+	    	{{#if task.completed}}
+	    		{{#if viewAll}}
+	    			{{task.title}}
+	    			{{!-- IF VIEW ALL --}}	    			
+	    		{{/if}}
+	    	{{else}}
+    			{{task.title}}
+	    		{{!-- ALWAYS DISPLAY --}}
+	    	{{/if}}
+	    {{/each}}
+
     </div>
 
+    
+    </div>
 </div>
