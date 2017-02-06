@@ -8,7 +8,7 @@ actions: {
     },
     close: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('close');      
+      this.sendAction('removeModal');      
     },
     submitBudget: function(){
       this.sendAction('submitBudget'); 

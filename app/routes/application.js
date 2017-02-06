@@ -6,6 +6,7 @@ export default Ember.Route.extend({
 	vendorId: null,
 	vendorAcc: null,
 	vendorLog: null,
+	isTodoSubmitted: null,
 	metrics: Ember.inject.service(),
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
@@ -213,63 +214,88 @@ export default Ember.Route.extend({
 			let wedding = this.store.peekRecord('wedding', _id);
 	    	this.send('showModal', 'modal-budget', wedding);
 	    },
-	    openTodoModal: function(id){
-	    	let task;
-	    	if (typeof id !== 'undefined') { 
-	    		task = this.store.peekRecord('task', id); 
-	    	} else {
-	    		task = this.store.createRecord('task');
-	    	}
-	    	this.controller.set('taskCurrent', task);
+	    openTodoModal: function(task){
 	    	this.send('showModal', 'modal-todo', task);
 	    },
 	    closeTodoModal: function(){
 	    	//Clean up dirty attributes
-			if(this.get('isTodoSubmitted') === false){
-	    		let task = this.controller.get('taskCurrent');
-	    		if(task.get('createdOn')){
-	    			task.rollbackAttributes();
-	    		} else {
-	    			task.deleteRecord();
-	    		}
-	    	}
-			this.set('isTodoSubmitted', false);
+			// if(this.get('isTodoSubmitted') === false){
+	  //   		let task = this.controller.get('taskCurrent');
+	  //   		if(task.get('createdOn')){
+	  //   			task.rollbackAttributes();
+	  //   		} else {
+	  //   			task.deleteRecord();
+	  //   		}
+	  //   	}
+			// this.set('isTodoSubmitted', false);
 	    	this.send('removeModal');
 	    },
-	    saveTask: function(){
-	    	let task = this.controller.get('taskCurrent');
-			this.set('isTodoSubmitted', true);
-	    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			let wedding = this.store.peekRecord('wedding', _id);
-			//If the task is just being updated
-	    	if(task.get('createdOn')){
-	    		//Save task
-	    		task.save().then(()=>{
-	    			//Success notification
-	    			this.controller.get('notifications').info('Task updated successfully!',{
-					    autoClear: true
-					});
-	    		});   		
-	    	} else { //Else the task hasn't been created yet
-	    		//Set up creation date to confirm task has now been created
-	    		let createdOn = moment().unix()*1000;
-	    		task.set('createdOn', createdOn);
-	    		//Set up belongsTo relationship
-	    		let createdBy = wedding;
-	    		task.set('createdBy', createdBy);
-	    		//Save task
-	    		task.save().then(()=>{
-	    			//Set up hasMany relationship
-	    			wedding.get('tasks').pushObject(task);
-	    			wedding.save().then(()=>{
-	    				//Success notification
-	    				this.controller.get('notifications').success('Task created successfully!',{
-						    autoClear: true
-						});
-	    			});
-	    		});
-	    	}
-	    },
+	  //   saveTask: function(){
+	  //   	let task = this.controller.get('taskCurrent');
+			// this.set('isTodoSubmitted', true);
+	  //   	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			// 	this.store.findRecord('wedding', _id).then((wedding) => {
+			// 	//If the task is just being updated
+		 //    	if(task.get('createdOn')){
+		 //    		//Save task
+		 //    		task.save().then(()=>{
+		 //    			// this.controller.set('taskCurrent', null);
+		 //    			//Success notification
+   //      				this.refresh();
+		 //    			this.controller.get('notifications').info('Task updated successfully!',{
+			// 			    autoClear: true
+			// 			});
+		 //    // 			wedding.save().then(()=>{
+			// 			// });
+		 //    		});   		
+		 //    	} else { //Else the task hasn't been created yet
+		 //    		//Set up creation date to confirm task has now been created
+		 //    		let createdOn = moment().unix()*1000;
+		 //    		task.set('createdOn', createdOn);
+		 //    		//Set up belongsTo relationship
+		 //    		let createdBy = wedding;
+		 //    		task.set('createdBy', createdBy);
+		 //    		//Save task
+		 //    		task.save().then(()=>{
+		 //    			//Set up hasMany relationship
+		 //    			wedding.get('tasks').pushObject(task);
+		 //    			wedding.save().then(()=>{
+		 //    				// this.controller.set('taskCurrent', null);
+		 //    				//Success notification
+		 //    				this.controller.get('notifications').success('Task created successfully!',{
+			// 				    autoClear: true
+			// 				});
+		 //    			});
+		 //    		});
+		 //    	}
+			// });
+			
+	  //   },
+	  //   createTask: function(){
+	  //   	alert('finalizing task');
+	  //   	let task = this.controller.get('taskCurrent');
+			// this.set('isTodoSubmitted', true);
+			// let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			// let wedding = this.store.peekRecord('wedding', _id);
+	  //   	//Set up creation date to confirm task has now been created
+   //  		let createdOn = moment().unix()*1000;
+   //  		task.set('createdOn', createdOn);
+   //  		//Set up belongsTo relationship
+   //  		let createdBy = wedding;
+   //  		task.set('createdBy', createdBy);
+   //  		//Save task
+   //  		task.save().then(()=>{
+   //  			//Set up hasMany relationship
+   //  			wedding.get('tasks').pushObject(task);
+   //  			wedding.save().then(()=>{
+   //  				// this.controller.set('taskCurrent', null);
+   //  				//Success notification
+   //  				this.controller.get('notifications').success('Task created successfully!',{
+			// 		    autoClear: true
+			// 		});
+   //  			});
+   //  		});
+   //  	},
 	    storeTransition: function (){
 
 	    },

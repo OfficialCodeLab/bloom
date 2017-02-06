@@ -8,7 +8,7 @@ export default Model.extend({
 	desc: attr('string'),
 	due: attr('string'),
 	createdOn: attr('string'),
-	createdBy: belongsTo('wedding'),
+	createdBy: attr('string'),
 	asssignedTo: hasMany('user'),
 	completed: attr('boolean')
 });

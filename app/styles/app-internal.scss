@@ -1252,7 +1252,39 @@ Guest List
 	}
 }
 
+.todo-item{
 
+	.tb-btn{
+		display: inline-block;
+	}
+	height: 55px;
+	padding: 10px;
+    transition-duration: 0.28s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color;
+
+	&:hover{
+		background-color: #eeeeee;
+
+	}
+}
+
+.todo-text{
+	padding: 5px;
+	display: inline-block;
+}
+
+.todo-left{
+	width: 80%;
+	float: left;
+	font-size: 18px;
+}
+
+.todo-right{
+	// width: 20%;
+	padding: 5px;
+	float: right;
+}
 
 
 //End TO-DO List

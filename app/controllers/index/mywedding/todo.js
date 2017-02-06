@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-	viewAll: true
+	viewAll: true,
+	notifications: Ember.inject.service('notification-messages'),
 });
