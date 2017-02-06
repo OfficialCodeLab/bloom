@@ -152,6 +152,81 @@ export default Ember.Route.extend({
 				this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	
 				wedding.save();
 			}
+		},
+		destroyTask: function(id){
+			let _modalData;
+			this.controller.set('taskId', id);
+			if(this.controller.get('modalDataId')){
+				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+				_modalData.set('mainMessage', 'Do you want to remove this task?');	
+				_modalData.set('action', 'delete');	
+            	this.send('showModal', 'modal-confirm', _modalData);	            	
+            } else {
+		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Do you want to remove this task?', 'action': 'delete'});
+		     	this.controller.set('modalDataId', _modalData.get('id'));
+            	this.send('showModal', 'modal-confirm', _modalData);
+            } 
+		},
+		checkBox: function(id){
+			let task = this.store.peekRecord('task', id);
+			let status;
+			let completed = task.get('completed');
+			if(completed){
+				completed = false;
+				status = "incomplete.";
+			} else {
+				completed = true;
+				status = "complete.";
+			}
+			task.set('completed', completed);
+			task.save().then(()=>{					
+				this.controller.get('notifications').success('Task has been marked as ' + status,{
+					autoClear: true
+				});							
+			});
+		},
+		ok: function() {
+			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
+			switch(_modalData.get('action')) {
+				case 'delete':					
+					
+			    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+					let wedding = this.store.peekRecord('wedding', _id);
+					let taskId = this.controller.get('taskId');
+					let task = this.store.peekRecord('task', taskId);
+					this.controller.set('taskId', null);
+					//Unassign task from wedding
+    				wedding.get('tasks').removeObject(task);
+    				wedding.save().then(()=>{
+    					//Destroy the record
+						task.deleteRecord();
+						task.save().then(()=>{
+							this.controller.get('notifications').info('Task has been deleted.',{
+								autoClear: true
+							});
+	    				});
+					});
+
+					break;
+			}
+		},
+		editTask: function(id){
+    		let task = this.store.peekRecord('task', id); 
+			this.send('openTodoModal', task);
+			this.controller.set('todoEditId', id);
+		},
+		saveTodo: function(){
+			if(this.controller.get('todoEditId')) {
+				let taskId = this.controller.get('todoEditId');
+				this.controller.set('todoEditId', null);
+				let task = this.store.peekRecord('task', taskId);
+				task.save().then(()=>{
+	    			//Success notification
+	    			this.controller.get('notifications').info('Task updated successfully!',{
+					    autoClear: true
+					});
+	    		});  
+			}
 		}
 
 	}

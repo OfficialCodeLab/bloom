@@ -119,64 +119,46 @@
                 </div>
             </div>
             <div class="col-md-5 col-sm-6" style="z-index: 2;">
-                <div class="pear-profile-card guide-xs-card overview-block">
-                    <div class="overlay-gray">
+                <div class="pear-profile-card guide-xs-card overview-block todo-widget">
+                    {{!-- <div class="overlay-gray">
 
-                    </div>
-                    <div class="overlay-coming-soon">
+                    </div> --}}
+                    {{!-- <div class="overlay-coming-soon">
                         <p>Coming Soon</p>
-                    </div>
+                    </div> --}}
                     <div class="overview-action-add">
-                        {{mdl-button icon="add_circle"}}
+                       {{#link-to 'index.mywedding.todo'}}{{mdl-button icon="add_circle"}}{{/link-to}}
                     </div>
                     <div class="overview-md-block">
                         <h5>To-Do List</h5>
-                        <div class="row" style="padding-top: 20px;">
-                            <div class="col-xs-9">
-                                <p> 1. Set a Wedding Date</p>
+
+                        <hr style="margin-top: 20px; margin-bottom: 0px;">
+
+                        {{#each model.tasks as |task|}}
+                            <div class="todo-item">
+                                <div class="todo-left">
+                                    <div {{action "checkBox" task.id}} class="tb-btn">
+                                      {{#if task.completed}}
+                                        {{mdl-button icon="check_box"}}
+                                      {{else}}
+                                        {{mdl-button icon="check_box_outline_blank"}}
+                                      {{/if}}
+                                    </div>
+                                    <div class="todo-text">
+                                        <span><strong>{{task.title}}</strong></span>
+                                    </div>
+                                </div>
+                                <div class="todo-right">
+                                    <div {{action "editTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="create"}}
+                                    </div>
+                                    <div {{action "destroyTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="delete"}}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-xs-3 overview-check">
-                                {{#if selectedDate}}
-                                    {{mdl-button icon="check_box"}}
-                                {{else}}
-                                    {{mdl-button icon="check_box_outline_blank"}}
-                                {{/if}}
-                            </div>
-                            <div class="col-xs-9">
-                                <p> 2. Find a dress maker</p>
-                            </div>
-                            <div class="col-xs-3 overview-check">
-                                {{mdl-button icon="check_box_outline_blank"}}
-                            </div>
-                            <div class="col-xs-9">
-                                <p> 3. Set up Budget</p>
-                            </div>
-                            <div class="col-xs-3 overview-check">
-                                {{#if model.hasBudget}}
-                                    {{mdl-button icon="check_box"}}
-                                {{else}}
-                                    {{mdl-button icon="check_box_outline_blank"}}
-                                {{/if}}
-                            </div>
-                            <div class="col-xs-9">
-                                <p> 4. Wedding Venue</p>
-                            </div>
-                            <div class="col-xs-3 overview-check">
-                                {{mdl-button icon="check_box_outline_blank"}}
-                            </div>
-                            <div class="col-xs-9">
-                                <p> 5. Hair &amp; Makeup</p>
-                            </div>
-                            <div class="col-xs-3 overview-check">
-                                {{mdl-button icon="check_box_outline_blank"}}
-                            </div>
-                            <div class="col-xs-9">
-                                <p> 6. Priest / Pastor</p>
-                            </div>
-                            <div class="col-xs-3 overview-check">
-                                {{mdl-button icon="check_box_outline_blank"}}
-                            </div>
-                        </div>
+                            <hr style="margin-top: 0px; margin-bottom: 0px;">
+                        {{/each}}
                     </div>
                 </div>
             </div>
