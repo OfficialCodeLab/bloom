@@ -1271,23 +1271,38 @@ Guest List
 }
 
 .todo-text{
-	span{
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
 	padding: 5px;
-	max-width: 70%;
+	max-width: 78%;
 	display: inline-block;
 }
 
 .todo-left{
-	width: 75%;
+	width: 70%;
 	float: left;
 	font-size: 18px;
 }
 
+.todo-left-sm{
+	max-width: 40px;
+	width: 15%;
+	float: left;
+	font-size: 18px;
+	padding-top: 5px;
+}
+
+.todo-middle{
+	width: 55%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow-x: hidden;
+	padding: 5px;
+	max-width: 78%;
+	display: inline-block;
+}
+
 .todo-right{
-	width: 25%;
+	max-width: 80px;
+	width: 30%;
 	padding: 5px;
 	float: right;
 }

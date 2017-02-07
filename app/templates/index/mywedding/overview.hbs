@@ -136,7 +136,7 @@
 
                         {{#each model.tasks as |task|}}
                             <div class="todo-item">
-                                <div class="todo-left">
+                                <div class="todo-left-sm">
                                     <div {{action "checkBox" task.id}} class="tb-btn">
                                       {{#if task.completed}}
                                         {{mdl-button icon="check_box"}}
@@ -144,9 +144,9 @@
                                         {{mdl-button icon="check_box_outline_blank"}}
                                       {{/if}}
                                     </div>
-                                    <div class="todo-text">
-                                        <span><strong>{{task.title}}</strong></span>
-                                    </div>
+                                </div>
+                                <div class="todo-middle">
+                                    <strong>{{task.title}}</strong>
                                 </div>
                                 <div class="todo-right">
                                     <div {{action "editTask" task.id}} class="tb-btn">
