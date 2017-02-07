@@ -26,6 +26,23 @@ export default Ember.Route.extend({
 	    controller.set('cell', user.get('cell'));
 	    controller.set('city', user.get('city'));
 	    controller.set('birthday', user.get('birthday'));
+	    this.store.find('customer', _id).then((customer)=>{
+	    	if(customer.get("todoList") === true){
+	    		// alert("TODO LIST LOADED");
+	    	}
+
+	    	if(customer.get("budgetCalc") === true){
+	    		// alert("BUDGET CALCULATOR LOADED");
+	    	}
+
+			if(customer.get("guestListMailer") === true){
+	    		// alert("GUEST LIST MAILER LOADED");
+	    	}
+
+	    }, function(reason) {
+		  // on rejection
+		  // alert("You didn't pay for anything, cheapskate");
+		});
 	},
 	dateDiff: function(d1, d2, controller){
 		let d3 = moment(d1).unix()*1000;

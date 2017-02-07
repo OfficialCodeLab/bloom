@@ -6,6 +6,28 @@ export default Ember.Route.extend({
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('wedding', _id);	
 	},
+	setupController: function (controller, model) {
+		this._super(controller, model);
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
+	    	if(customer.get("todoList") === true){
+	    		controller.set('todoListActivated', true);
+	    		// alert("TODO LIST LOADED");
+	    	}
+
+	    	if(customer.get("budgetCalc") === true){
+	    		// alert("BUDGET CALCULATOR LOADED");
+	    	}
+
+			if(customer.get("guestListMailer") === true){
+	    		// alert("GUEST LIST MAILER LOADED");
+	    	}
+
+	    }, function(reason) {
+		  // on rejection
+		  // alert("You didn't pay for anything, cheapskate");
+		});
+	},
 	actions: {
 		allClick: function(){
 			this.controller.set('viewAll', true);
@@ -79,16 +101,32 @@ export default Ember.Route.extend({
 			this.controller.set('todoEditId', id);
 		},
 		newTask: function(){
-			let task = this.store.createRecord('task');
+			if(this.controller.get('todoListActivated')){
+				let task = this.store.createRecord('task');
+		    	this.send('openTodoModal', task);
+				this.controller.set('newTaskId', task.get('id'));
+			} else {
+				//Double check
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
+			    	if(customer.get("todoList") === true){	
+						let task = this.store.createRecord('task');
+				    	this.send('openTodoModal', task);
+						this.controller.set('newTaskId', task.get('id'));		    	
+			    	} else {
+	    				this.rejectCustomer();	
+			    	}
+			    }, function(reason) {
+	    			this.rejectCustomer();	
+				});			
+			}
 	    	// this.controller.set('taskCurrent', task);
-	    	this.send('openTodoModal', task);
-			this.controller.set('newTaskId', task.get('id'));
 			// alert(this.controller.get('newTaskId'));
 		},
 		saveTodo: function(){
 			if(this.controller.get('todoEditId')) {
 				let taskId = this.controller.get('todoEditId');
-					this.controller.set('todoEditId', null);
+				this.controller.set('todoEditId', null);
 				let task = this.store.peekRecord('task', taskId);
 				task.save().then(()=>{
 	    			//Success notification
@@ -97,31 +135,47 @@ export default Ember.Route.extend({
 					});
 	    		});  
 			} else if (this.controller.get('newTaskId')) {
-				let taskId = this.controller.get('newTaskId');
-				this.controller.set('newTaskId', null);
-				let task = this.store.peekRecord('task', taskId);
-				// this.controller.set('isTodoSubmitted', true);
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-				let wedding = this.store.peekRecord('wedding', _id);
-		    	//Set up creation date to confirm task has now been created
-	    		let createdOn = moment().unix()*1000;
-	    		task.set('createdOn', createdOn);
-	    		//Set up belongsTo relationship
-	    		task.set('createdBy', _id);
-	    		//Save task
-	    		task.save().then(()=>{
-	    			//Set up hasMany relationship
-	    			wedding.get('tasks').pushObject(task);
-	    			wedding.save().then(()=>{
-	    				//Success notification
-	    				this.controller.get('notifications').success('Task created successfully!',{
-						    autoClear: true
-						});
-	    			});
-	    		});
+
+			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
+			    	if(customer.get("todoList") === true){			    		
+						let taskId = this.controller.get('newTaskId');
+						this.controller.set('newTaskId', null);
+						let task = this.store.peekRecord('task', taskId);
+						// this.controller.set('isTodoSubmitted', true);
+						let wedding = this.store.peekRecord('wedding', _id);
+				    	//Set up creation date to confirm task has now been created
+			    		let createdOn = moment().unix()*1000;
+			    		task.set('createdOn', createdOn);
+			    		//Set up belongsTo relationship
+			    		task.set('createdBy', _id);
+			    		//Save task
+			    		task.save().then(()=>{
+			    			//Set up hasMany relationship
+			    			wedding.get('tasks').pushObject(task);
+			    			wedding.save().then(()=>{
+			    				//Success notification
+			    				this.controller.get('notifications').success('Task created successfully!',{
+								    autoClear: true
+								});
+			    			});
+			    		});
+			    	} else {
+	    				this.rejectCustomer();	
+			    	}
+
+			    }, function(reason) {
+	    			this.rejectCustomer();	
+				});
 			}
 
 		}
+	},
+	rejectCustomer:function(){
+		this.controller.get('notifications').error('You need to activate this functionality.',{
+		    autoClear: true
+		});
+		this.transitionTo('myaccount.payments');
 	}
         
 });
