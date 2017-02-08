@@ -6,5 +6,5 @@ import { hasMany } from 'ember-data/relationships';
 export default Model.extend({
 	countryCode: attr('string'),
 	countryFull: attr('string'),
-	provinces: hasMany('province', {inverse: 'country', async: true})
+	province: hasMany('province', {inverse: 'country', async: true})
 });

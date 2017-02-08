@@ -127,6 +127,12 @@ export default Ember.Route.extend({
                     autoClear: true
                 });
             }
+        },
+        signUpVendor() {
+
+            this.get('session').close().then(()=> {
+                this.transitionTo('vendor-signup');
+            });
         }
     },
     hashCode: function(str) {  //String to hash function

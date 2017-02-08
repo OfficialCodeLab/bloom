@@ -862,6 +862,24 @@ Guest List
 	}
 }
 
+.header-bg-block{
+	background-color: $color-main;
+	padding-top: 12px;
+	height: 100px;
+}
+
+.vendor-signup-inner{
+	padding: 20px 40px 0 40px;
+
+	.tb-btn{
+		text-align: left;
+	}
+}
+
+.text-left{
+	text-align: left !important;
+}
+
 .guide-image{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 	transition: all 0.3s cubic-bezier(.25,.8,.25,1);

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+const PAGE_COUNT = 4;
 
 export default Ember.Route.extend({
 	tempId: '',
@@ -10,14 +11,17 @@ export default Ember.Route.extend({
         return sesh;
     },
     model(){
-        // return Ember.RSVP.hash({
-        //     country: this.store.findRecord('countries', 'South_Africa')
-        // });
+        return Ember.RSVP.hash({
+             country: this.store.findAll('country'),
+             // province: this.store.findAll('province', 'south_africa')
+         });
     },
     setupController(controller, model) {
-        // this._super(controller, model);
-        // Ember.set(controller, 'catItem', model.catItem);
-        // Ember.set(controller, 'country', model.country);
+        this._super(controller, model);
+        // Ember.set(controller, 'province', model.province);
+        Ember.set(controller, 'country', model.country);
+
+        // this.controller.set('country', model.country);
 
         // let catItem = this.controller.get('model.catItem');
         // let cat = catItem.get('category');
@@ -28,19 +32,13 @@ export default Ember.Route.extend({
         nextSection() {
             let section = this.controller.get('currentSection');
             section++;
-            if(section === 2){
-                this.controller.set('section1', false);
-            }
-            this.controller.set('currentSection', section);
+            this.setSection(section);
 
         },
         prevSection() {
             let section = this.controller.get('currentSection');
             section--;
-            if(section === 1){
-                this.controller.set('section1', true);
-            }
-            this.controller.set('currentSection', section);
+            this.setSection(section);
 
         },
         signBtn() {
@@ -61,11 +59,13 @@ export default Ember.Route.extend({
                                     this.controller.get('notifications').error('User ID Already exists!',{
                                         autoClear: true
                                     });
+                                    this.setSection(2);
                                 }, () => {
                                     this.store.findRecord('vendorLogin', hash).then(() => {					//Check if email is in use
                                         this.controller.get('notifications').error('Email address already in use!',{
                                             autoClear: true
                                         });
+                                        this.setSection(1);
                                     }, () => {
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
                                             id: hash,
@@ -95,6 +95,7 @@ export default Ember.Route.extend({
                                     this.controller.get('notifications').error('Email address already in use!',{
                                         autoClear: true
                                     });
+                                    this.setSection(1);
                                 }, () => {
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
                                         id: hash,
@@ -123,22 +124,34 @@ export default Ember.Route.extend({
                             this.controller.get('notifications').error('Not a valid email address!',{
                                 autoClear: true
                             });
+                            this.setSection(1);
                         }
                     } else {
                         this.controller.get('notifications').error('Passwords don\'t match!',{
                             autoClear: true
                         });
+                        this.setSection(1);
                     }
                 } else {
                     this.controller.get('notifications').error('Password not long enough!',{
                         autoClear: true
                     });
+                    this.setSection(1);
                 }
 
             } else {
                 this.controller.get('notifications').error('Please enter a name!',{
                     autoClear: true
                 });
+               this.setSection(1);
+            }
+        },
+        checkBox: function(){
+            let checked = this.controller.get('checked');
+            if(checked === true){
+                this.controller.set('checked', false);
+            } else {
+                this.controller.set('checked', true);                
             }
         }
     },
@@ -164,4 +177,36 @@ export default Ember.Route.extend({
     	this.send('storeVendorId', _vendorid, vendor, vendorLogin);
     	this.send('showLogins');
     },
+    setSection: function(x){
+        this.controller.set('currentSection', x);
+        let percentLoaded = (x/PAGE_COUNT)*100;
+        this.controller.set('percentLoaded', percentLoaded);
+
+        switch(x){
+            case 1:
+                this.controller.set('section1', true);
+                this.controller.set('section2', false);
+                this.controller.set('section3', false);
+            break;
+
+            case 2:
+                this.controller.set('section1', false);
+                this.controller.set('section2', true);
+                this.controller.set('section3', false);
+            break;
+
+            case 3:
+                this.controller.set('section1', false);
+                this.controller.set('section2', false);
+                this.controller.set('section3', true);
+            break;
+
+            case 4:
+                this.controller.set('section1', false);
+                this.controller.set('section2', false);
+                this.controller.set('section3', false);
+                this.controller.set('section4', true);
+            break;
+        }
+    }
 });
