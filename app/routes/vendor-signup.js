@@ -11,23 +11,10 @@ export default Ember.Route.extend({
         return sesh;
     },
     model(){
-        return Ember.RSVP.hash({
-             country: this.store.findAll('country'),
-             // province: this.store.findAll('province', 'south_africa')
-         });
+        return this.store.findRecord('country', 'south_africa').then((_country=>{
+            return _country.get('province');
+        }));
     },
-    setupController(controller, model) {
-        this._super(controller, model);
-        // Ember.set(controller, 'province', model.province);
-        Ember.set(controller, 'country', model.country);
-
-        // this.controller.set('country', model.country);
-
-        // let catItem = this.controller.get('model.catItem');
-        // let cat = catItem.get('category');
-        // let cat_id = cat.get('id');
-        // this.controller.set('category', cat_id);
-      },
     actions: {
         nextSection() {
             let section = this.controller.get('currentSection');

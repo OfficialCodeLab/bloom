@@ -49,14 +49,14 @@
 				        	</div>
 				        	<div class="vendor-signup-inner">
 
-					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=addressL1}}<br>
+					            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=addressL1}}<br>
 					            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br>
 					            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
 					            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-					            {{#paper-select placeholder="Select a province" model=country}}
-								  {{#each model.province as |cat|}}
-								    {{#paper-option value=cat.name}}
-								      {{cat.name}}
+					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=province}}
+								  {{#each model as |state|}}
+								    {{#paper-option value=state.name}}
+								      {{state.name}}
 								    {{/paper-option}}
 								  {{/each}}
 								{{/paper-select}}

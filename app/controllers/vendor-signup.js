@@ -19,5 +19,17 @@ export default Ember.Controller.extend({
     passwordConfirm: '',
     postalcode: '',
     cell: '',
-    id: ''
+    id: '',
+    province: ''
+    // provinces: {[
+    //     {
+    //         name: "North West"
+    //     },
+    //     {
+    //         name: "West"
+    //     },
+    //     {
+    //         name: "China"
+    //     },
+    // ]}
 });

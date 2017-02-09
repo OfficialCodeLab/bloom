@@ -874,6 +874,15 @@ Guest List
 	.tb-btn{
 		text-align: left;
 	}
+	md-input-container{
+    	text-align: left;
+    	display: inline-block;
+    	width: 300px;
+    	padding-top: 13px;
+	}
+	md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float){
+		translate3d: (-120px, 6px, 0) scale(1) !important;
+	}
 }
 
 .text-left{
