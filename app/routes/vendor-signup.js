@@ -11,9 +11,33 @@ export default Ember.Route.extend({
         return sesh;
     },
     model(){
-        return this.store.findRecord('country', 'south_africa').then((_country=>{
-            return _country.get('province');
-        }));
+        return Ember.RSVP.hash({
+            province: this.store.findRecord('country', 'south_africa').then((_country=>{
+                return _country.get('province');
+            })),
+            category: this.store.findAll('category')
+        });
+    },
+    setupController(controller, model) {
+        this._super(controller, model);
+        Ember.set(controller, 'province', model.province);
+        Ember.set(controller, 'category', model.category);
+
+        let categories = this.store.peekAll('category');
+        let count = 0;
+        let categoryItems = [];
+
+        categories.forEach(function(cat){
+            categoryItems.pushObject({
+                name: cat.get('name'),
+                id: cat.get('id'),
+                index: count,
+                isChecked: false
+            });
+            count++;
+        });
+
+        Ember.set(controller, 'categoryItems', categoryItems);
     },
     actions: {
         nextSection() {
@@ -67,12 +91,13 @@ export default Ember.Route.extend({
                                             desc: this.controller.get('desc'),
                                             addressL1: this.controller.get('addressL1'),
                                             addressL2: this.controller.get('addressL2'),
-                                            province: this.controller.get('province'),
+                                            province: this.controller.get('selectedProvince'),
                                             city: this.controller.get('city'),
                                             postalcode: this.controller.get('postalcode'),
                                             cell: this.controller.get('cell'),
                                             maxItems: "15"
-                                        });		
+                                        });	
+                                        this.createVendorStats();
     									let _vendorid = vendor.get('id');													
                                     	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
 										this.assignToUser(vendor, vendorLogin);							//Add id to user
@@ -97,12 +122,13 @@ export default Ember.Route.extend({
                                         desc: this.controller.get('desc'),
                                         addressL1: this.controller.get('addressL1'),
                                         addressL2: this.controller.get('addressL2'),
-                                        province: this.controller.get('province'),
+                                        province: this.controller.get('selectedProvince'),
                                         city: this.controller.get('city'),
                                         postalcode: this.controller.get('postalcode'),
                                         cell: this.controller.get('cell'),
                                         maxItems: "15"
-                                    });		
+                                    });	
+                                    this.createVendorStats();
     								let _vendorid = vendor.get('id');
                                 	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin										
                                 	this.assignToUser(vendor, vendorLogin);									//Add id to user
@@ -135,14 +161,6 @@ export default Ember.Route.extend({
                this.setSection(1);
             }
         },
-        checkBox: function(){
-            let checked = this.controller.get('checked');
-            if(checked === true){
-                this.controller.set('checked', false);
-            } else {
-                this.controller.set('checked', true);                
-            }
-        },
         checkBox: function(id){
             let checkedId = 'checked' + id;
             let checked = this.controller.get(checkedId);
@@ -151,6 +169,37 @@ export default Ember.Route.extend({
             } else {
                 this.controller.set(checkedId, true);                
             }
+        },
+        selectCat: function(_cat){
+
+            let cat = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
+            let isChecked = Ember.get(cat, 'isChecked');   
+            let checked = false;        
+            if(isChecked === false){
+                checked = true
+            }
+            Ember.set(cat, 'isChecked', checked);
+            // let cats = this.controller.get('categoryItems');
+            // let _this = this;
+            // let c = 0;
+            // cats.forEach(function(cat){
+            //     if(cat.index === 0){ 
+            //         cats.removeObject(cat);
+            //         let checked = false;                           
+            //         if(cat.isChecked === false){
+            //             checked = true;
+            //         } 
+
+            //         cats.pushObject({
+            //             name: cat.name,
+            //             id: cat.id,
+            //             index: cat.index,
+            //             isChecked: checked
+            //         });
+
+            //         _this.controller.set('categoryItems', cats);
+            //     }
+            // });
         }
     },
     hashCode: function(str) {  //String to hash function
@@ -172,8 +221,18 @@ export default Ember.Route.extend({
     assignToUser: function(vendor, vendorLogin){
     	//Need to log in first:
     	let _vendorid = vendor.get('id');
-    	this.send('storeVendorId', _vendorid, vendor, vendorLogin);
+        let vendorStatsId = this.controller.get('vendorStatsId');
+    	this.send('storeVendorId', _vendorid, vendor, vendorLogin, vendorStatsId);
     	this.send('showLogins');
+    },
+    createVendorStats: function(){
+
+        //vvvvv
+
+        let stats = this.store.createRecord('vendorStats', {
+            //Values
+        });
+        this.controller.set('vendorStatsId', stats.id);
     },
     setSection: function(x){
         this.controller.set('currentSection', x);
@@ -204,6 +263,7 @@ export default Ember.Route.extend({
                 this.controller.set('section2', false);
                 this.controller.set('section3', false);
                 this.controller.set('section4', true);
+                window.scrollTo(0, 0);
             break;
         }
     }

@@ -21,6 +21,7 @@ export default Ember.Controller.extend({
     cell: '',
     id: '',
     province: '',
+    categoryItems: []
     // selectedProvince: '',
     // getProvinceLabel: function() {
     //     let province = this.get('selectedProvince');

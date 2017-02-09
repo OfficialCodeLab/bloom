@@ -110,10 +110,11 @@ export default Ember.Route.extend({
 	      // });
 	      //this.transitionTo('login');
 	    },
-	    storeVendorId: function(id, vendor, vendorLogin){
+	    storeVendorId: function(id, vendor, vendorLogin, vendorStatsId){
 	    	this.set('vendorId', id);
 	    	this.set('vendorAcc', vendor);
 	    	this.set('vendorLog', vendorLogin);
+	    	this.set('vendorStatsId', vendorStatsId);
 	    },
 	    showId: function(){
 	    	alert("Your id is: " + JSON.stringify(this.get("session").content.currentUser));
@@ -496,6 +497,21 @@ export default Ember.Route.extend({
 					user: user
 				}
 			);
+
+			//vvvvv
+
+			let _vendorStats = this.store.peekRecord('vendorStats', this.get('vendorStatsId'));
+			this.store.deleteRecord('vendorStats', this.get('vendorStatsId'));
+
+			let vendorStats = this.store.createRecord('vendorStats',
+				{
+					id: _id
+					//Populate from other vendor stats model
+				}
+			);
+
+			//need to save
+
 			user.get('wedding').pushObject(wedding);
 
 			wedding.save().then(() => {

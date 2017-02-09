@@ -54,8 +54,8 @@
 					            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br>
 					            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
 					            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=province}}
-								  {{#each model as |state|}}
+					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
+								  {{#each province as |state|}}
 								    {{#paper-option value=state.name}}
 								      {{state.name}}
 								    {{/paper-option}}
@@ -72,28 +72,46 @@
 				        	</div>
 				        	<div class="vendor-signup-inner text-left">
 
-					            <strong>Travel Preferences</strong><br><br>
-					            <div {{action "checkBox" "0"}} class="tb-btn">
-	                              {{#if checked0}}
-	                                {{mdl-button icon="check_box"}}
-	                              {{else}}
-	                                {{mdl-button icon="check_box_outline_blank"}}
-	                              {{/if}} Willing to travel?
+					            <strong>Are you willing to travel?</strong><br>
+					            <div>
+									{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
+									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
+									{{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
 	                            </div>
 	                            <hr>	                            
-					            <strong>Where to deport immigrants to?</strong><br><br>
-					            <div {{action "checkBox" "1"}} class="tb-btn">
-	                              {{#if checked1}}
+					            <strong>Which categories does your business associate with?</strong><br><br>
+					            {{#each categoryItems as |cat|}}
+						            <div {{action "selectCat" cat}} class="tb-btn">
+		                              {{#if cat.isChecked}}
+		                                {{mdl-button icon="check_box"}}
+		                              {{else}}
+		                                {{mdl-button icon="check_box_outline_blank"}}
+		                              {{/if}} {{cat.name}}
+		                            </div>
+	                            {{/each}}
+	                            <div>
+									<i class="fa fa-info-circle i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='More Information' value=descCat}}
+	                            </div><hr>
+
+					            <strong>Mailing Preferences</strong><br><br>
+					            <div {{action "checkBox" "MA"}} class="tb-btn">
+	                              {{#if checkedMA}}
 	                                {{mdl-button icon="check_box"}}
 	                              {{else}}
 	                                {{mdl-button icon="check_box_outline_blank"}}
-	                              {{/if}} China
-	                            </div><div {{action "checkBox" "2"}} class="tb-btn">
-	                              {{#if checked2}}
+	                              {{/if}} Would you like a monthly analytics report?
+	                            </div><div {{action "checkBox" "MN"}} class="tb-btn">
+	                              {{#if checkedMN}}
 	                                {{mdl-button icon="check_box"}}
 	                              {{else}}
 	                                {{mdl-button icon="check_box_outline_blank"}}
-	                              {{/if}} Mexico
+	                              {{/if}} Interested in monthly newsletter?
+	                            </div><hr>
+
+					            <strong>Would you be interested in contributing to our social media and website inspiration posts?</strong><br>
+					            <div>
+									{{#paper-radio value="1" selected=analyticsReport}}Yes{{/paper-radio}}
+									{{#paper-radio value="2" selected=analyticsReport}}No{{/paper-radio}}
 	                            </div>
 							    <div style="padding: 20px 0 40px 0;">
 							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
