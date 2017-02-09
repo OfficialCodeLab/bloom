@@ -72,23 +72,23 @@
 				        	</div>
 				        	<div class="vendor-signup-inner text-left">
 
-					            <strong>How many drugs do you do?</strong><br><br>
-					            <div {{action "checkBox"}} class="tb-btn">
-	                              {{#if checked}}
+					            <strong>Travel Preferences</strong><br><br>
+					            <div {{action "checkBox" "0"}} class="tb-btn">
+	                              {{#if checked0}}
 	                                {{mdl-button icon="check_box"}}
 	                              {{else}}
 	                                {{mdl-button icon="check_box_outline_blank"}}
-	                              {{/if}} All of them
+	                              {{/if}} Willing to travel?
 	                            </div>
 	                            <hr>	                            
-					            <strong>Where to deport to?</strong><br><br>
-					            <div {{action "checkBox1"}} class="tb-btn">
+					            <strong>Where to deport immigrants to?</strong><br><br>
+					            <div {{action "checkBox" "1"}} class="tb-btn">
 	                              {{#if checked1}}
 	                                {{mdl-button icon="check_box"}}
 	                              {{else}}
 	                                {{mdl-button icon="check_box_outline_blank"}}
 	                              {{/if}} China
-	                            </div><div {{action "checkBox1"}} class="tb-btn">
+	                            </div><div {{action "checkBox" "2"}} class="tb-btn">
 	                              {{#if checked2}}
 	                                {{mdl-button icon="check_box"}}
 	                              {{else}}

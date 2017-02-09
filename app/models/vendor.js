@@ -14,6 +14,7 @@ export default Model.extend({
   city: attr('string'),
   country: attr('string'),
   postalcode: attr('string'),
+  province: attr('string'),
   website: attr('string'),
   cell: attr('string'),
   personalCell: attr('string'),

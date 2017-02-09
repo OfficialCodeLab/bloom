@@ -4,8 +4,8 @@ export default Ember.Controller.extend({
 	notifications: Ember.inject.service('notification-messages'),
 	isValidEmail: Ember.computed.match('email', /^.+@.+\..+$/),
     passwordLength: Ember.computed.gte('password.length', 8),
-    notChecked: Ember.computed.not('checked'),
-    checked: false,
+    notChecked: Ember.computed.not('checked0'),
+    checked0: false,
     section1: true,
     currentSection: 1,
     percentLoaded: 25,
@@ -20,7 +20,12 @@ export default Ember.Controller.extend({
     postalcode: '',
     cell: '',
     id: '',
-    province: ''
+    province: '',
+    // selectedProvince: '',
+    // getProvinceLabel: function() {
+    //     let province = this.get('selectedProvince');
+    //   return province.get('name');
+    // }.property('selectedProvince')
     // provinces: {[
     //     {
     //         name: "North West"

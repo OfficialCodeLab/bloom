@@ -67,6 +67,7 @@ export default Ember.Route.extend({
                                             desc: this.controller.get('desc'),
                                             addressL1: this.controller.get('addressL1'),
                                             addressL2: this.controller.get('addressL2'),
+                                            province: this.controller.get('province'),
                                             city: this.controller.get('city'),
                                             postalcode: this.controller.get('postalcode'),
                                             cell: this.controller.get('cell'),
@@ -96,6 +97,7 @@ export default Ember.Route.extend({
                                         desc: this.controller.get('desc'),
                                         addressL1: this.controller.get('addressL1'),
                                         addressL2: this.controller.get('addressL2'),
+                                        province: this.controller.get('province'),
                                         city: this.controller.get('city'),
                                         postalcode: this.controller.get('postalcode'),
                                         cell: this.controller.get('cell'),
@@ -139,6 +141,15 @@ export default Ember.Route.extend({
                 this.controller.set('checked', false);
             } else {
                 this.controller.set('checked', true);                
+            }
+        },
+        checkBox: function(id){
+            let checkedId = 'checked' + id;
+            let checked = this.controller.get(checkedId);
+            if(checked === true){
+                this.controller.set(checkedId, false);
+            } else {
+                this.controller.set(checkedId, true);                
             }
         }
     },
