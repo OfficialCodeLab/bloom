@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 				this.controller.set('password', '');
 				this.controller.set('passwordConfirm', '');
 				
-				this.store.findRecord('vendor', vendorAccount).then((vendor) => {
+				this.store.findRecord('vendor', vendorAccount, { reload: true }).then((vendor) => {
 					let email = vendor.get('email');
 					let emailhash = this.hashCode(email);
 
@@ -37,19 +37,19 @@ export default Ember.Route.extend({
 		changeEmail: function(){
 			let email = this.controller.get('email');
 		    let emailhash = this.hashCode(email);
-		    this.store.findRecord('vendorLogin', emailhash).then(() => {						//Check if email is in use
+		    this.store.findRecord('vendorLogin', emailhash, { reload: true }).then(() => {						//Check if email is in use
                     alert("Email address already in use");
                 }, () => {
 			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let vendorAccount = user.get('vendorAccount');
 				this.controller.set('email', '');		
-				this.store.findRecord('vendor', vendorAccount).then((vendor) => {
+				this.store.findRecord('vendor', vendorAccount, { reload: true }).then((vendor) => {
 					let _email = vendor.get('email');
 					let _emailhash = this.hashCode(_email);
 					vendor.set('email', email);
 					vendor.save().then(() => {
-						this.store.findRecord('vendorLogin', _emailhash).then((vendorLogin) => {
+						this.store.findRecord('vendorLogin', _emailhash, { reload: true }).then((vendorLogin) => {
 							let password = vendorLogin.get('password');
 							let vendorID = vendorLogin.get('vendorID');
 							vendorLogin.destroyRecord();

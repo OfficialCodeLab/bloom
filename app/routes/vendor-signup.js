@@ -176,30 +176,26 @@ export default Ember.Route.extend({
             let isChecked = Ember.get(cat, 'isChecked');   
             let checked = false;        
             if(isChecked === false){
-                checked = true
+                checked = true;
             }
             Ember.set(cat, 'isChecked', checked);
-            // let cats = this.controller.get('categoryItems');
-            // let _this = this;
-            // let c = 0;
-            // cats.forEach(function(cat){
-            //     if(cat.index === 0){ 
-            //         cats.removeObject(cat);
-            //         let checked = false;                           
-            //         if(cat.isChecked === false){
-            //             checked = true;
-            //         } 
-
-            //         cats.pushObject({
-            //             name: cat.name,
-            //             id: cat.id,
-            //             index: cat.index,
-            //             isChecked: checked
-            //         });
-
-            //         _this.controller.set('categoryItems', cats);
-            //     }
-            // });
+        },
+        test: function(){
+            let cats = this.controller.get('categoryItems');
+            let catIds = [];
+            let selectedCats = [];
+            let _this = this;
+            cats.forEach(function(cat){            
+                // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
+                let isChecked = Ember.get(cat, 'isChecked');        
+                if(isChecked === true){
+                    let id = Ember.get(cat, 'id');
+                    // alert(id);
+                    let selectedCat = _this.store.peekRecord('category', id);
+                    selectedCats.pushObject(selectedCat);
+                    console.log(selectedCat.get('id'));
+                }
+            });
         }
     },
     hashCode: function(str) {  //String to hash function
@@ -226,11 +222,60 @@ export default Ember.Route.extend({
     	this.send('showLogins');
     },
     createVendorStats: function(){
+        let willingTravel = this.controller.get('willingToTravel');
+        let travelDist = null;
+        switch(willingTravel){
+            case '1': //Yes
+                willingTravel = true;
+                travelDist = this.controller.get('maxDist');
+            break;
 
-        //vvvvv
+            case '2': //No
+                willingTravel = false;
+            break;
+
+            case '3': //Na
+                willingTravel = null;
+            break;
+
+            default: //Na
+                willingTravel = null;
+            break;
+        }
+
+        let willingToContribute = false;
+
+        if(this.controller.get('willingToContribute') === '1'){
+            willingToContribute = false;
+        }
+
+        //Get all categories
+        let cats = this.controller.get('categoryItems');
+        let catIds = [];
+        let selectedCats = [];
+        let _this = this;
+        cats.forEach(function(cat){            
+            // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
+            let isChecked = Ember.get(cat, 'isChecked');        
+            if(isChecked === true){
+                let id = Ember.get(cat, 'id');
+                let selectedCat = _this.store.peekRecord('category', id);
+                selectedCats.pushObject(selectedCat);
+            }
+        });
 
         let stats = this.store.createRecord('vendorStats', {
             //Values
+            willingToTravel: willingTravel,
+            maxTravelDist: travelDist,
+            categories: selectedCats,
+            servicesDesc: this.controller.get('descCat'),
+            repName: this.controller.get('rep'),
+            vatNum: this.controller.get('vatNum'),
+            website: this.controller.get('website'),
+            monthlyAnalytics: this.controller.get('checkedMA'),
+            montlyNewsletter: this.controller.get('checkedMN'),
+            willContribute: willingToContribute
         });
         this.controller.set('vendorStatsId', stats.id);
     },
@@ -263,7 +308,7 @@ export default Ember.Route.extend({
                 this.controller.set('section2', false);
                 this.controller.set('section3', false);
                 this.controller.set('section4', true);
-                window.scrollTo(0, 0);
+                window.scrollTo(0, 200);
             break;
         }
     }

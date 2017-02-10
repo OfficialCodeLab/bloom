@@ -505,8 +505,19 @@ export default Ember.Route.extend({
 
 			let vendorStats = this.store.createRecord('vendorStats',
 				{
-					id: _id
+					id: this.get('vendorId'),
+					createdBy: _id,
 					//Populate from other vendor stats model
+		            willingToTravel: _vendorStats.get('willingToTravel'),
+		            maxTravelDist: _vendorStats.get('maxTravelDist'),
+		            categories: _vendorStats.get('categories'),
+		            servicesDesc: _vendorStats.get('servicesDesc'),
+		            repName: _vendorStats.get('repName'),
+		            vatNum: _vendorStats.get('vatNum'),
+		            website: _vendorStats.get('website'),
+		            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
+		            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
+		            willContribute: _vendorStats.get('willContribute')
 				}
 			);
 
@@ -518,10 +529,12 @@ export default Ember.Route.extend({
 				vendor.save().then(()=>{
 					vendorLogin.save().then(()=>{
 						user.save().then(()=>{
-							this.transitionTo('index');
-							this.controller.get('notifications').info('Vendor account created.',{
-					          autoClear: true
-					      	});
+							vendorStats.save().then(()=>{
+								this.transitionTo('index');
+								this.controller.get('notifications').info('Vendor account created.',{
+						          autoClear: true
+						      	});
+							});
 					    });
 					});
 				});

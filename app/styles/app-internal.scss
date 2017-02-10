@@ -2217,6 +2217,13 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+
+	.vendor-signup-inner{
+		padding: 20px 0;
+		.mdl-button{
+			margin: 5px;
+		}
+	}
 	.tour-block-padding{
 		padding-top: 20px;
 		padding-bottom: 20px;

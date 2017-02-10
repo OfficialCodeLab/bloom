@@ -4,10 +4,10 @@
 		<p style="font-style: italic; text-align: center;">Welcome to Pear's Vendor System, please follow the steps to create your account below.</p>
 		<hr>
 
-		<div class="container text-center">
+		<div class="text-center">
 
 		    <div class="row">
-		        <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+		        <div style="padding-top: 20px; padding-bottom: 40px;">
 			        <div class="pear-profile-card card-sm">
 			    	{{#if section1}}
 			        	<div class="header-bg-block">
@@ -78,6 +78,17 @@
 									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
 									{{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
 	                            </div>
+	                            {{#if willTravel}}
+	                            <div><strong>Maximum Distance:</strong><br><br>
+	                            	<div layout style="cursor: pointer;">
+								      <div flex="10" layout layout-align="center center">
+								        <span>Km:</span>
+								      </div>
+								      {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
+								    </div>
+									{{!-- <i class="fa fa-plane i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Maximum Distance' value=maxDist}} --}}
+	                            </div>
+	                            {{/if}}
 	                            <hr>	                            
 					            <strong>Which categories does your business associate with?</strong><br><br>
 					            {{#each categoryItems as |cat|}}
@@ -110,8 +121,8 @@
 
 					            <strong>Would you be interested in contributing to our social media and website inspiration posts?</strong><br>
 					            <div>
-									{{#paper-radio value="1" selected=analyticsReport}}Yes{{/paper-radio}}
-									{{#paper-radio value="2" selected=analyticsReport}}No{{/paper-radio}}
+									{{#paper-radio value="1" selected=willingToContribute}}Yes{{/paper-radio}}
+									{{#paper-radio value="2" selected=willingToContribute}}No{{/paper-radio}}
 	                            </div>
 							    <div style="padding: 20px 0 40px 0;">
 							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
