@@ -196,6 +196,11 @@ export default Ember.Route.extend({
                     console.log(selectedCat.get('id'));
                 }
             });
+        },
+        fieldDisabled: function(){
+            this.controller.get('notifications').error('Sign up is temporarily disabled, please try again soon!',{
+                autoClear: true
+            });            
         }
     },
     hashCode: function(str) {  //String to hash function
