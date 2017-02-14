@@ -1,1 +1,57 @@
-{{outlet}}
+<div class="container-fluid">
+   {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
+    <h1 class="font-times-header" style="color: #4C4C4E;">Budget Calculator</h1><br>
+    {{!-- <hr> --}}
+
+    <div style="padding-bottom:60px;">
+
+	    <div class="container pear-profile-card" style="padding: 30px 20px 50px 20px; position: relative;">
+		    	<div class="col-sm-8">
+				    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Venue</h4>
+				    <hr class="budget-hr">
+
+		    		<div class="budget-left">
+		                    
+	                </div>
+	                <div class="budget-mid">
+	                	<strong>ESTIMATE</strong>
+	                </div>
+	                <div class="budget-mid">
+	                	<strong>BOOKED</strong>
+	                </div>
+				<div class="budget-item">
+		                <div class="budget-left">
+		                    Registrar/Religious Minister
+		                </div>
+		                <div class="budget-mid">
+		                	R5000
+		                </div>
+		                <div class="budget-mid">
+		                	R3000
+		                </div>
+		                <div class="budget-right">
+		                    <div {{action "editTask"}} class="tb-btn">
+		                        {{mdl-button icon="create"}}
+		                    </div>
+		                    <div {{action "destroyTask"}} class="tb-btn">
+		                        {{mdl-button icon="delete"}}
+		                    </div>
+		                </div>
+		            </div>
+					<hr style="margin-top: 0px; margin-bottom: 0px;">
+				</div>
+				<div class="col-sm-4">
+					<div class="row" style="padding: 24px 10px 40px 10px;">
+						<div class="col-sm-6">Used: <strong class="budget-pink">R3210</strong></div>
+						<div class="col-sm-6">Total: <strong>R200000</strong></div>	
+					</div>								
+                    {{#if refresh}}
+                        {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+                    {{/if}}
+				</div>
+
+	    </div>
+
+    
+    </div>
+</div>

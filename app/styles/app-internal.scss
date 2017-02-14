@@ -1342,6 +1342,96 @@ Guest List
 
 
 //End TO-DO List
+
+//TO-DO List
+.budget-action-add {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 0;
+	right: 0;
+	padding-left: 10px;
+	padding-top: 25px;
+	color: $color-main;
+	i{		
+		font-size: 60px;
+		&:hover{
+			cursor: pointer;
+		}
+	}
+}
+
+.budget-item{
+
+	.tb-btn{
+		display: inline-block;
+		// max-width: 10%;
+	}
+	height: 55px;
+	padding: 10px;
+    transition-duration: 0.28s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-property: background-color;
+
+	&:hover{
+		background-color: #eeeeee;
+
+	}
+}
+
+.budget-text{
+	padding: 5px;
+	max-width: 78%;
+	display: inline-block;
+}
+
+.budget-left{
+	width: 40%;
+	float: left;
+	font-size: 18px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow-x: hidden;
+	padding: 5px;
+	max-width: 78%;
+	display: inline-block;
+}
+
+.budget-mid{
+	width: 20%;
+	padding: 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow-x: hidden;
+	display: inline-block;
+	text-align: center;
+}
+
+// .todo-left-sm{
+// 	max-width: 40px;
+// 	width: 15%;
+// 	float: left;
+// 	font-size: 18px;
+// 	padding-top: 5px;
+// }
+
+.budget-right{
+	max-width: 80px;
+	width: 20%;
+	padding: 5px;
+	float: right;
+}
+
+.budget-hr{
+	height: 7px;
+	border-top: 7px solid $color-main;
+}
+
+.budget-pink{
+	color: $color-main;
+}
+
+//End TO-DO List
 /*==============================================================================*\
    *                             (
  (  `            )     (         )\ )    )
