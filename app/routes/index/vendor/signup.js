@@ -129,7 +129,6 @@ export default Ember.Route.extend({
             }
         },
         signUpVendor() {
-
             this.get('session').close().then(()=> {
                 this.transitionTo('vendor-signup');
             });

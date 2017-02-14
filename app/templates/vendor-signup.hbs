@@ -126,7 +126,7 @@
 	                            </div>
 							    <div style="padding: 20px 0 40px 0;">
 							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
-							        {{#mdl-button isRaised=true action="fieldDisabled"}}Sign Up{{/mdl-button}}
+							        {{#mdl-button isRaised=true disabled=isCreating action="signBtn"}}Sign Up {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
 							    </div>
 							</div>
 

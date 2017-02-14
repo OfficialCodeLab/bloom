@@ -23,6 +23,7 @@ export default Ember.Controller.extend({
     postalcode: '',
     cell: '',
     id: '',
+    isCreating: false,
     province: '',
     categoryItems: []
     // selectedProvince: '',

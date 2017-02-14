@@ -6,6 +6,7 @@ export default Ember.Route.extend({
 	vendorId: null,
 	vendorAcc: null,
 	vendorLog: null,
+	vendorStatsId: null,
 	isTodoSubmitted: null,
 	metrics: Ember.inject.service(),
 	beforeModel: function() {
@@ -110,10 +111,12 @@ export default Ember.Route.extend({
 	      // });
 	      //this.transitionTo('login');
 	    },
-	    storeVendorId: function(id, vendor, vendorLogin, vendorStatsId){
+	    storeVendorId: function(id, vendor, vendorLogin){
 	    	this.set('vendorId', id);
 	    	this.set('vendorAcc', vendor);
 	    	this.set('vendorLog', vendorLogin);
+	    },
+	    storeVendorStatsId: function(vendorStatsId){
 	    	this.set('vendorStatsId', vendorStatsId);
 	    },
 	    showId: function(){
@@ -410,7 +413,7 @@ export default Ember.Route.extend({
 			 'custom-property1': vendorId,
 			 'custom-property2': userId
 			});
-		}
+		},
 	    // loading: function(transition, originRoute) {
 		   // //this.controller.set('currentlyLoading', true);
 		   // let controller = this.controllerFor('loading');
@@ -498,10 +501,7 @@ export default Ember.Route.extend({
 				}
 			);
 
-			//vvvvv
-
 			let _vendorStats = this.store.peekRecord('vendorStats', this.get('vendorStatsId'));
-			this.store.deleteRecord('vendorStats', this.get('vendorStatsId'));
 
 			let vendorStats = this.store.createRecord('vendorStats',
 				{
@@ -520,6 +520,7 @@ export default Ember.Route.extend({
 		            willContribute: _vendorStats.get('willContribute')
 				}
 			);
+			this.store.deleteRecord('vendorStats', this.get('vendorStatsId'));
 
 			//need to save
 
@@ -541,18 +542,41 @@ export default Ember.Route.extend({
 			});
 	    },
 	    joinAccounts: function(user){
+	    	let _id = user.id;
 	    	let vendor = this.get('vendorAcc');
 	    	let vendorLogin = this.get('vendorLog');
 	    	let _vendorid = this.get('vendorId');
 	    	vendorLogin.set('vendorID', _vendorid);
 	    	user.set('vendorAccount', _vendorid);
+
+			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
+
+			let vendorStats = this.store.createRecord('vendorStat',
+				{
+					id: this.get('vendorId'),
+					createdBy: _id,
+					//Populate from other vendor stats model
+		            willingToTravel: _vendorStats.get('willingToTravel'),
+		            maxTravelDist: _vendorStats.get('maxTravelDist'),
+		            categories: _vendorStats.get('categories'),
+		            servicesDesc: _vendorStats.get('servicesDesc'),
+		            repName: _vendorStats.get('repName'),
+		            vatNum: _vendorStats.get('vatNum'),
+		            website: _vendorStats.get('website'),
+		            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
+		            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
+		            willContribute: _vendorStats.get('willContribute')
+				}
+			);
 			vendor.save().then(()=>{
 				vendorLogin.save().then(()=>{
 					user.save().then(()=>{
-						this.transitionTo('index');
-						this.controller.get('notifications').info('Vendor account created.',{
-				          autoClear: true
-				      	});
+						vendorStats.save().then(()=>{
+							this.transitionTo('index');
+							this.controller.get('notifications').info('Vendor account created.',{
+					          autoClear: true
+					      	});
+						});
 				    });
 				});
 			});

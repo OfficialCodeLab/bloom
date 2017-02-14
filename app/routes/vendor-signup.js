@@ -5,8 +5,12 @@ export default Ember.Route.extend({
 	tempId: '',
 	beforeModel: function() {
         var sesh = this.get("session").fetch().catch(function() {});
-        if(this.get('session.isAuthenticated')){
-            this.transitionTo('not-found');
+        if(this.get('session.isAuthenticated')){            
+             this.get('session').close().then(()=> {
+                this.controller.get('notifications').info('Logged out successfully.',{
+                  autoClear: true
+                });
+             });
         }
         return sesh;
     },
@@ -26,6 +30,7 @@ export default Ember.Route.extend({
         let categories = this.store.peekAll('category');
         let count = 0;
         let categoryItems = [];
+        controller.set('isCreating', false);
 
         categories.forEach(function(cat){
             categoryItems.pushObject({
@@ -53,6 +58,7 @@ export default Ember.Route.extend({
 
         },
         signBtn() {
+            this.controller.set('isCreating', true);
             let regex = this.controller.get('isValidEmail');
             let passLength = this.controller.get('passwordLength');
             let customID = this.controller.get('customID');
@@ -97,7 +103,6 @@ export default Ember.Route.extend({
                                             cell: this.controller.get('cell'),
                                             maxItems: "15"
                                         });	
-                                        this.createVendorStats();
     									let _vendorid = vendor.get('id');													
                                     	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
 										this.assignToUser(vendor, vendorLogin);							//Add id to user
@@ -128,7 +133,6 @@ export default Ember.Route.extend({
                                         cell: this.controller.get('cell'),
                                         maxItems: "15"
                                     });	
-                                    this.createVendorStats();
     								let _vendorid = vendor.get('id');
                                 	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin										
                                 	this.assignToUser(vendor, vendorLogin);									//Add id to user
@@ -139,18 +143,21 @@ export default Ember.Route.extend({
                             this.controller.get('notifications').error('Not a valid email address!',{
                                 autoClear: true
                             });
+                            this.controller.set('isCreating', false);
                             this.setSection(1);
                         }
                     } else {
                         this.controller.get('notifications').error('Passwords don\'t match!',{
                             autoClear: true
                         });
+                        this.controller.set('isCreating', false);
                         this.setSection(1);
                     }
                 } else {
                     this.controller.get('notifications').error('Password not long enough!',{
                         autoClear: true
                     });
+                    this.controller.set('isCreating', false);
                     this.setSection(1);
                 }
 
@@ -158,6 +165,7 @@ export default Ember.Route.extend({
                 this.controller.get('notifications').error('Please enter a name!',{
                     autoClear: true
                 });
+                this.controller.set('isCreating', false);
                this.setSection(1);
             }
         },
@@ -221,9 +229,9 @@ export default Ember.Route.extend({
     },
     assignToUser: function(vendor, vendorLogin){
     	//Need to log in first:
+        this.createVendorStats();
     	let _vendorid = vendor.get('id');
-        let vendorStatsId = this.controller.get('vendorStatsId');
-    	this.send('storeVendorId', _vendorid, vendor, vendorLogin, vendorStatsId);
+    	this.send('storeVendorId', _vendorid, vendor, vendorLogin);
     	this.send('showLogins');
     },
     createVendorStats: function(){
@@ -251,7 +259,7 @@ export default Ember.Route.extend({
         let willingToContribute = false;
 
         if(this.controller.get('willingToContribute') === '1'){
-            willingToContribute = false;
+            willingToContribute = true;
         }
 
         //Get all categories
@@ -269,7 +277,7 @@ export default Ember.Route.extend({
             }
         });
 
-        let stats = this.store.createRecord('vendorStats', {
+        let stats = this.store.createRecord('vendorStat', {
             //Values
             willingToTravel: willingTravel,
             maxTravelDist: travelDist,
@@ -283,6 +291,7 @@ export default Ember.Route.extend({
             willContribute: willingToContribute
         });
         this.controller.set('vendorStatsId', stats.id);
+        this.send('storeVendorStatsId', stats.id);
     },
     setSection: function(x){
         this.controller.set('currentSection', x);
