@@ -10,7 +10,8 @@ export default Ember.Route.extend({
 		this._super(controller, model);
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 	    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-	    	if(customer.get("todoList") === true){
+	    	// if(customer.get("todoList") === true){
+    		if(true){ //Temporarily give all clients access
 	    		controller.set('todoListActivated', true);
 	    		// alert("TODO LIST LOADED");
 	    	}
@@ -109,7 +110,8 @@ export default Ember.Route.extend({
 				//Double check
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	if(customer.get("todoList") === true){	
+			    	// if(customer.get("todoList") === true){	
+			    	if(true){ //Temporarily give all clients access
 						let task = this.store.createRecord('task');
 				    	this.send('openTodoModal', task);
 						this.controller.set('newTaskId', task.get('id'));		    	
@@ -138,7 +140,8 @@ export default Ember.Route.extend({
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 
 			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	if(customer.get("todoList") === true){			    		
+			    	// if(customer.get("todoList") === true){			
+			    	if(true){  //Temporarily give all clients access   		
 						let taskId = this.controller.get('newTaskId');
 						this.controller.set('newTaskId', null);
 						let task = this.store.peekRecord('task', taskId);
