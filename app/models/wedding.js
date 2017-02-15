@@ -13,5 +13,6 @@ export default Model.extend({
   hasBudget: attr('boolean'),
   guestsAttending: attr('string'),
   guestsTotal: attr('string'),
-  hasGuests: attr('boolean')
+  hasGuests: attr('boolean'),
+  budgetCalc: hasMany('budget', {inverse: 'wedding', async: true})
 });

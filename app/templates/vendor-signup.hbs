@@ -33,8 +33,8 @@
 				        	</div>
 				        	<div class="vendor-signup-inner">
 					            <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
-					            <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Company Description' value=desc}}<br>
-					            <i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br>
+					            <div style="padding-top: 9px;"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc}}<br></div>
+					            <div style="margin-top: -28px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
 					            <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
 					            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom URL' value=customID}}<br>
 
@@ -50,8 +50,9 @@
 				        	</div>
 				        	<div class="vendor-signup-inner">
 
-					            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=addressL1}}<br>
-					            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br>
+	                            <div style="padding-top: 9px">
+					            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='Physical Address' value=addressL1}}<br></div>
+					            <div style="margin-top: -28px;"><i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br></div>
 					            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
 					            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
 					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
@@ -100,8 +101,8 @@
 		                              {{/if}} {{cat.name}}
 		                            </div>
 	                            {{/each}}
-	                            <div>
-									<i class="fa fa-info-circle i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='More Information' value=descCat}}
+	                            <div style="padding-top: 9px">
+									<i class="fa fa-info-circle i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='More Information' value=descCat}}
 	                            </div><hr>
 
 					            <strong>Mailing Preferences</strong><br><br>
