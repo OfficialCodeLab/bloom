@@ -7,6 +7,8 @@ import locale from 'ember-moment/computeds/locale';
 export default Ember.Controller.extend({
 	moment: Ember.inject.service(),
 	dateCurrent: format(),
+	
+	firebase: Ember.inject.service( 'firebase' ),
 	refresh: true,
 	actions: {
 		refreshButton(){

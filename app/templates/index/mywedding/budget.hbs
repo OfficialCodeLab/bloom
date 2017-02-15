@@ -19,7 +19,31 @@
 	                <div class="budget-mid">
 	                	<strong>BOOKED</strong>
 	                </div>
-				<div class="budget-item">
+				{{#each budget.categoryApparel as |item|}}
+						<div class="budget-item">
+			                <div class="budget-left">
+			                    {{item.id}}
+			                </div>
+			                <div class="budget-mid">
+			                	{{item.estimate}}
+			                </div>
+			                <div class="budget-mid">
+			                	{{item.booked}}
+			                </div>
+			                <div class="budget-right">
+			                    <div {{action "editTask"}} class="tb-btn">
+			                        {{mdl-button icon="create"}}
+			                    </div>
+			                    <div {{action "destroyTask"}} class="tb-btn">
+			                     s   {{mdl-button icon="delete"}}
+			                    </div>
+			                </div>
+							<hr style="margin-top: 0px; margin-bottom: 0px;">
+						</div>
+				{{/each}}
+				</div>
+				{{!-- <div class="budget-item">
+
 		                <div class="budget-left">
 		                    Registrar/Religious Minister
 		                </div>
@@ -39,7 +63,7 @@
 		                </div>
 		            </div>
 					<hr style="margin-top: 0px; margin-bottom: 0px;">
-				</div>
+				</div> --}}
 				<div class="col-sm-4">
 					<div class="row" style="padding: 24px 10px 40px 10px;">
 						<div class="col-sm-6">Used: <strong class="budget-pink">R3210</strong></div>
