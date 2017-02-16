@@ -7,6 +7,7 @@ import locale from 'ember-moment/computeds/locale';
 export default Ember.Controller.extend({
 	moment: Ember.inject.service(),
 	dateCurrent: format(),
+	notifications: Ember.inject.service('notification-messages'),
 	
 	firebase: Ember.inject.service( 'firebase' ),
 	refresh: true,

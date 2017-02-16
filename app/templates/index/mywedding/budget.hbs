@@ -20,7 +20,7 @@
 	                	<strong>BOOKED</strong>
 	                </div>
 					{{#each budgetApparel as |item|}}
-						<div class="budget-item">
+						<div class="budget-item" {{action "selectBudget" item.id 'categoryApparel'}}>
 			                <div class="budget-left">
 			                    {{item.name}}
 			                </div>
@@ -40,7 +40,7 @@
 					</div>
 
 				    {{#each budgetPeople as |item|}}
-						<div class="budget-item">
+						<div class="budget-item" {{action "selectBudget" item.id 'categoryPeople'}} >
 			                <div class="budget-left">
 			                    {{item.name}}
 			                </div>
@@ -61,7 +61,7 @@
 					</div>
 
 				    {{#each budgetEvent as |item|}}
-						<div class="budget-item">
+						<div class="budget-item" {{action "selectBudget" item.id 'categoryEvent'}}>
 			                <div class="budget-left">
 			                    {{item.name}}
 			                </div>
@@ -81,7 +81,7 @@
 					</div>
 
 				    {{#each budgetPlaces as |item|}}
-						<div class="budget-item">
+						<div class="budget-item" {{action "selectBudget" item.id 'categoryPlaces'}}>
 			                <div class="budget-left">
 			                    {{item.name}}
 			                </div>
@@ -102,7 +102,7 @@
 					</div>
 
 				    {{#each budgetAdditional as |item|}}
-						<div class="budget-item">
+						<div class="budget-item" {{action "selectBudget" item.id 'categoryAdditional'}}>
 			                <div class="budget-left">
 			                    {{item.name}}
 			                </div>

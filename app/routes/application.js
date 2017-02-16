@@ -213,11 +213,6 @@ export default Ember.Route.extend({
 	    	}
 	    	this.controller.set("messageN", "");
 	    },	    
-		openBudgetModal: function(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			let wedding = this.store.peekRecord('wedding', _id);
-	    	this.send('showModal', 'modal-budget', wedding);
-	    },
 	    openTodoModal: function(task){
 	    	this.send('showModal', 'modal-todo', task);
 	    },

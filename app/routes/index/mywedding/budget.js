@@ -6,7 +6,7 @@ const BUDGET_APPAREL = {
 	weddingDress: "Wedding Dress",
 	groomSuit: "Groom Suit",
 	hairAndMakeup: "Hair and Makeup",
-	bridesmaidDresses: "BridesMaid Dresses",
+	bridesmaidDresses: "Bridesmaid Dresses",
 	groomsmenSuits: "Groomsmen Suits",
 	weddingRings: "Wedding Rings",
 	shoesAndAccessories: "Shoes And Accessories"
@@ -141,124 +141,71 @@ export default Ember.Route.extend({
 		});
 	},
 	actions: {
-		destroyTask: function(id){
-			let _modalData;
-			this.controller.set('taskId', id);
-			if(this.controller.get('modalDataId')){
-				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-				_modalData.set('mainMessage', 'Do you want to remove this task?');	
-				_modalData.set('action', 'delete');	
-            	this.send('showModal', 'modal-confirm', _modalData);	            	
-            } else {
-		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Do you want to remove this task?', 'action': 'delete'});
-		     	this.controller.set('modalDataId', _modalData.get('id'));
-            	this.send('showModal', 'modal-confirm', _modalData);
-            } 
-
+		//TODO:
+			// - check for access rights
+			// - graph updating
+			// - quickly entering a budget total?
+			
+		openBudgetModal: function(id, obj, category){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let budget = this.store.createRecord('budget-modal', {				
+				_id: id,
+				name: Ember.get(obj, 'name'),
+				balance: Ember.get(obj, 'balance'),
+				booked: Ember.get(obj, 'booked'),
+				estimate: Ember.get(obj, 'estimate'),
+				deposit: Ember.get(obj, 'deposit'),
+				category: category
+			});
+			this.controller.set('selectedBudgetId', budget.id);
+	    	this.send('showModal', 'modal-budget', budget);
+	    },
+		closeBudgetModal: function(){
+	    	let budgetId = this.controller.get('selectedBudgetId');
+			let budget = this.store.peekRecord('budget-modal', budgetId);
+	    	budget.deleteRecord();
+			this.set('isSubmitted', false);
+	    	this.send('removeModal');
 		},
-		ok: function() {
-			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-			switch(_modalData.get('action')) {
-				case 'delete':					
-					
-			    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-					let wedding = this.store.peekRecord('wedding', _id);
-					let taskId = this.controller.get('taskId');
-					let task = this.store.peekRecord('task', taskId);
-					this.controller.set('taskId', null);
-					//Unassign task from wedding
-    				wedding.get('tasks').removeObject(task);
-    				wedding.save().then(()=>{
-    					//Destroy the record
-						task.deleteRecord();
-						task.save().then(()=>{
-							this.controller.get('notifications').info('Task has been deleted.',{
-								autoClear: true
-							});
-	    				});
-					});
+	    submitBudget: function(){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    	let budgetId = this.controller.get('selectedBudgetId');
+			let budget = this.store.peekRecord('budget-modal', budgetId);
+			let deposit = parseInt(budget.get('deposit'));
+			let estimate = parseInt(budget.get('estimate'));
+			let booked = parseInt(budget.get('booked'));
 
-					break;
+			// deposit + booked < estimate
+
+			if(estimate > deposit + booked) {
+		    	let balance = estimate - deposit - booked;
+		    	let _budget = this.store.peekRecord('budget', _id);
+		    	let selectedCategory = _budget.get(budget.get('category'));
+		    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
+		    	console.log(selectedObject);
+		    	Ember.set(selectedObject, 'deposit', deposit);
+		    	Ember.set(selectedObject, 'estimate', estimate);
+		    	Ember.set(selectedObject, 'booked', booked);
+		    	Ember.set(selectedObject, 'balance', balance);
+		    	_budget.save().then(()=>{
+			    	this.controller.get('notifications').success('Budget has been updated!',{
+		                autoClear: true
+		            });  
+		    	});				
+			} else {		
+		    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
+	                autoClear: true
+	            });					
 			}
-
-		},
-		editTask: function(id){
-    		let task = this.store.peekRecord('task', id); 
-			this.send('openTodoModal', task);
-			this.controller.set('todoEditId', id);
-		},
-		newTask: function(){
-			if(this.controller.get('todoListActivated')){
-				let task = this.store.createRecord('task');
-		    	this.send('openTodoModal', task);
-				this.controller.set('newTaskId', task.get('id'));
-			} else {
-				//Double check
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	// if(customer.get("todoList") === true){	
-			    	if(true){ //Temporarily give all clients access
-						let task = this.store.createRecord('task');
-				    	this.send('openTodoModal', task);
-						this.controller.set('newTaskId', task.get('id'));		    	
-			    	} else {
-	    				this.rejectCustomer();	
-			    	}
-			    }, function(reason) {
-	    			this.rejectCustomer();	
-				});			
-			}
-	    	// this.controller.set('taskCurrent', task);
-			// alert(this.controller.get('newTaskId'));
-		},
-		saveTodo: function(){
-			if(this.controller.get('todoEditId')) {
-				let taskId = this.controller.get('todoEditId');
-				this.controller.set('todoEditId', null);
-				let task = this.store.peekRecord('task', taskId);
-				task.save().then(()=>{
-	    			//Success notification
-	    			this.controller.get('notifications').info('Task updated successfully!',{
-					    autoClear: true
-					});
-	    		});  
-			} else if (this.controller.get('newTaskId')) {
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-
-			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	// if(customer.get("todoList") === true){			
-			    	if(true){  //Temporarily give all clients access   		
-						let taskId = this.controller.get('newTaskId');
-						this.controller.set('newTaskId', null);
-						let task = this.store.peekRecord('task', taskId);
-						// this.controller.set('isTodoSubmitted', true);
-						let wedding = this.store.peekRecord('wedding', _id);
-				    	//Set up creation date to confirm task has now been created
-			    		let createdOn = moment().unix()*1000;
-			    		task.set('createdOn', createdOn);
-			    		//Set up belongsTo relationship
-			    		task.set('createdBy', _id);
-			    		//Save task
-			    		task.save().then(()=>{
-			    			//Set up hasMany relationship
-			    			wedding.get('tasks').pushObject(task);
-			    			wedding.save().then(()=>{
-			    				//Success notification
-			    				this.controller.get('notifications').success('Task created successfully!',{
-								    autoClear: true
-								});
-			    			});
-			    		});
-			    	} else {
-	    				this.rejectCustomer();	
-			    	}
-
-			    }, function(reason) {
-	    			this.rejectCustomer();	
-				});
-			}
-
-		}
+	    },
+	    selectBudget: function(id, cat){
+	    	// alert('Selected: ' + id + "\nCategory: " + cat);
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    	let budget = this.store.peekRecord('budget', _id);
+	    	let selectedCategory = Ember.get(budget, cat);
+	    	let selectedObject = Ember.get(selectedCategory, id);
+	    	this.send('openBudgetModal', id, selectedObject, cat);
+	    }
 	},
 	rejectCustomer:function(){
 		this.controller.get('notifications').error('You need to activate this functionality.',{
@@ -268,8 +215,9 @@ export default Ember.Route.extend({
 	},
 	convertAllCategories: function (){
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-
 		let budget = this.store.peekRecord('budget', _id);
+
+		//Convery each category
 		let budgetApparel = this.convertJSONtoArray(budget.get('categoryApparel'));
 		this.controller.set('budgetApparel', budgetApparel);
 

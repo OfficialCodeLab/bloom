@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 	    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 	    	// if(customer.get("todoList") === true){
     		if(true){ //Temporarily give all clients access
-	    		controller.set('todoListActivated', true);
+	    		controller.set('budgetCalcActivated', true);
 	    		// alert("TODO LIST LOADED");
 	    	}
 
@@ -102,7 +102,7 @@ export default Ember.Route.extend({
 			this.controller.set('todoEditId', id);
 		},
 		newTask: function(){
-			if(this.controller.get('todoListActivated')){
+			if(this.controller.get('budgetCalcActivated')){
 				let task = this.store.createRecord('task');
 		    	this.send('openTodoModal', task);
 				this.controller.set('newTaskId', task.get('id'));
