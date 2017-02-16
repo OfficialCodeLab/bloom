@@ -7,7 +7,7 @@
 
 	    <div class="container pear-profile-card" style="padding: 30px 20px 50px 20px; position: relative;">
 		    	<div class="col-sm-8">
-				    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Venue</h4>
+				    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Apparel</h4>
 				    <hr class="budget-hr">
 
 		    		<div class="budget-left">
@@ -19,28 +19,142 @@
 	                <div class="budget-mid">
 	                	<strong>BOOKED</strong>
 	                </div>
-				{{#each budget.categoryApparel as |item|}}
+					{{#each budgetApparel as |item|}}
 						<div class="budget-item">
 			                <div class="budget-left">
-			                    {{item.id}}
+			                    {{item.name}}
 			                </div>
 			                <div class="budget-mid">
-			                	{{item.estimate}}
+			                	R{{item.estimate}}
 			                </div>
 			                <div class="budget-mid">
-			                	{{item.booked}}
+			                	R{{item.booked}}
 			                </div>
 			                <div class="budget-right">
 			                    <div {{action "editTask"}} class="tb-btn">
 			                        {{mdl-button icon="create"}}
 			                    </div>
 			                    <div {{action "destroyTask"}} class="tb-btn">
-			                     s   {{mdl-button icon="delete"}}
+			                        {{mdl-button icon="delete"}}
 			                    </div>
 			                </div>
-							<hr style="margin-top: 0px; margin-bottom: 0px;">
+							<hr style="margin-top: 8px; margin-bottom: 0px;">
 						</div>
-				{{/each}}
+					{{/each}}
+
+					<div style="padding-top: 50px;">
+					    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">People</h4>
+					    <hr class="budget-hr">
+					</div>
+
+				    {{#each budgetPeople as |item|}}
+						<div class="budget-item">
+			                <div class="budget-left">
+			                    {{item.name}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.estimate}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.booked}}
+			                </div>
+			                <div class="budget-right">
+			                    <div {{action "editTask"}} class="tb-btn">
+			                        {{mdl-button icon="create"}}
+			                    </div>
+			                    <div {{action "destroyTask"}} class="tb-btn">
+			                        {{mdl-button icon="delete"}}
+			                    </div>
+			                </div>
+							<hr style="margin-top: 8px; margin-bottom: 0px;">
+						</div>
+					{{/each}}
+
+
+					<div style="padding-top: 50px;">
+					    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Event</h4>
+					    <hr class="budget-hr">
+					</div>
+
+				    {{#each budgetEvent as |item|}}
+						<div class="budget-item">
+			                <div class="budget-left">
+			                    {{item.name}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.estimate}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.booked}}
+			                </div>
+			                <div class="budget-right">
+			                    <div {{action "editTask"}} class="tb-btn">
+			                        {{mdl-button icon="create"}}
+			                    </div>
+			                    <div {{action "destroyTask"}} class="tb-btn">
+			                        {{mdl-button icon="delete"}}
+			                    </div>
+			                </div>
+							<hr style="margin-top: 8px; margin-bottom: 0px;">
+						</div>
+					{{/each}}
+
+					<div style="padding-top: 50px;">
+					    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Places</h4>
+					    <hr class="budget-hr">
+					</div>
+
+				    {{#each budgetPlaces as |item|}}
+						<div class="budget-item">
+			                <div class="budget-left">
+			                    {{item.name}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.estimate}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.booked}}
+			                </div>
+			                <div class="budget-right">
+			                    <div {{action "editTask"}} class="tb-btn">
+			                        {{mdl-button icon="create"}}
+			                    </div>
+			                    <div {{action "destroyTask"}} class="tb-btn">
+			                        {{mdl-button icon="delete"}}
+			                    </div>
+			                </div>
+							<hr style="margin-top: 8px; margin-bottom: 0px;">
+						</div>
+					{{/each}}
+
+
+					<div style="padding-top: 50px;">
+					    <h4 class="font-times-header" style="color: #4C4C4E; text-align: left;">Additional</h4>
+					    <hr class="budget-hr">
+					</div>
+
+				    {{#each budgetAdditional as |item|}}
+						<div class="budget-item">
+			                <div class="budget-left">
+			                    {{item.name}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.estimate}}
+			                </div>
+			                <div class="budget-mid">
+			                	R{{item.booked}}
+			                </div>
+			                <div class="budget-right">
+			                    <div {{action "editTask"}} class="tb-btn">
+			                        {{mdl-button icon="create"}}
+			                    </div>
+			                    <div {{action "destroyTask"}} class="tb-btn">
+			                        {{mdl-button icon="delete"}}
+			                    </div>
+			                </div>
+							<hr style="margin-top: 8px; margin-bottom: 0px;">
+						</div>
+					{{/each}}
 				</div>
 				{{!-- <div class="budget-item">
 

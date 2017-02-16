@@ -70,11 +70,11 @@ export default Ember.Route.extend({
 				this.set("createdBudget", 1);
 				let newBudget = this.store.createRecord('budget', {
 					id: _id,
-					total: '0',
-					used: '0',
-					moneyFromFam: '0',
-					savedSoFar: '0',
-					leftToSave: '0',
+					total: 0,
+					used: 0,
+					moneyFromFam: 0,
+					savedSoFar: 0,
+					leftToSave: 0,
 					categoryApparel: {},
 					categoryEvent: {},
 					categoryPeople: {},
@@ -113,6 +113,12 @@ export default Ember.Route.extend({
 					newChildRef.set(obj);
 				}	    		
 	    	}
+	    	this.store.findRecord('budget', _id, { reload: true }).then(()=>{
+	    		this.convertAllCategories();
+	    	});
+		}
+		else {
+			this.convertAllCategories();
 		}
 
 		//Check store for customer
@@ -259,6 +265,39 @@ export default Ember.Route.extend({
 		    autoClear: true
 		});
 		this.transitionTo('myaccount.payments');
+	},
+	convertAllCategories: function (){
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+
+		let budget = this.store.peekRecord('budget', _id);
+		let budgetApparel = this.convertJSONtoArray(budget.get('categoryApparel'));
+		this.controller.set('budgetApparel', budgetApparel);
+
+		let budgetPeople = this.convertJSONtoArray(budget.get('categoryPeople'));
+		this.controller.set('budgetPeople', budgetPeople);
+
+
+		let budgetEvent = this.convertJSONtoArray(budget.get('categoryEvent'));
+		this.controller.set('budgetEvent', budgetEvent);
+
+
+		let budgetPlaces = this.convertJSONtoArray(budget.get('categoryPlaces'));
+		this.controller.set('budgetPlaces', budgetPlaces);
+
+
+		let budgetAdditional = this.convertJSONtoArray(budget.get('categoryAdditional'));
+		this.controller.set('budgetAdditional', budgetAdditional);
+	},
+	convertJSONtoArray: function(obj) {
+		let objArr = [];
+		for (var key in obj){
+			if (obj.hasOwnProperty(key)) {
+				obj[key]['id'] = key;
+                objArr.pushObject(obj[key]);
+            }
+		}
+
+		return objArr;
 	}
         
 });

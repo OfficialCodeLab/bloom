@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
 	
 	firebase: Ember.inject.service( 'firebase' ),
 	refresh: true,
+	budgetApparel: [],
 	actions: {
 		refreshButton(){
 			const _this = this;
