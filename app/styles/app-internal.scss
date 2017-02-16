@@ -1390,6 +1390,7 @@ Guest List
     transition-property: background-color;
 
 	&:hover{
+		cursor: pointer;
 		background-color: #eeeeee;
 
 	}
@@ -1402,7 +1403,7 @@ Guest List
 }
 
 .budget-left{
-	width: 40%;
+	width: 50%;
 	float: left;
 	font-size: 18px;
 	text-overflow: ellipsis;
@@ -1414,7 +1415,7 @@ Guest List
 }
 
 .budget-mid{
-	width: 20%;
+	width: 24%;
 	padding: 5px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
