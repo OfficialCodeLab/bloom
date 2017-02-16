@@ -23,7 +23,7 @@ const BUDGET_PEOPLE = {
 
 //Event
 const BUDGET_EVENT = {
-	foodAndDrinks: "Food and Drinks",
+	catering: "Catering",
 	decor: "Décor",
 	cake: "Cake",
 	weddingFavours: "Wedding Favours",
@@ -145,7 +145,7 @@ export default Ember.Route.extend({
 			// - check for access rights
 			// - graph updating
 			// - quickly entering a budget total?
-			
+
 		openBudgetModal: function(id, obj, category){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let budget = this.store.createRecord('budget-modal', {				

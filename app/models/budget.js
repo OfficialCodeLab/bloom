@@ -4,15 +4,37 @@ import attr from 'ember-data/attr';
 
 export default Model.extend({
 	// wedding: belongsTo('wedding', { inverse: 'budget', async: true }),
+
+	//Editable fields
 	total: attr('string'),
-	used: attr('string'),
 	moneyFromFam: attr('string'),
 	savedSoFar: attr('string'),
+
+	//Calculated fields
+
+	used: attr('string'),
+	unallocated: attr('string'),
+	categoryTotals: attr(),
 	leftToSave: attr('string'),
 
-	//Categories	
+	//Example structure (category totals):
+	// {
+	// 	 apparel: 123,
+	//   people: 2134,
+	// 	 event: 4152,
+	// 	 palces: 2344,
+	// 	 additional: 4124
+	// }
 
-	//Example structure:
+	//Categories	
+	
+	categoryApparel: attr(),
+	categoryPeople: attr(),
+	categoryEvent: attr(),
+	categoryPlaces: attr(),
+	categoryAdditional: attr()
+
+	//Example structure (category):
 	// {
 	// 	 name: "Minister Services",
 	//   category: "Venue",
@@ -22,44 +44,4 @@ export default Model.extend({
 	// 	 balance: "4218"
 	// }
 
-	categoryApparel: attr(),
-	categoryPeople: attr(),
-	categoryEvent: attr(),
-	categoryPlaces: attr(),
-	categoryAdditional: attr()
-
-	// //Apparel:
-	// weddingDress: attr(),
-	// groomSuit: attr(),
-	// hairAndMakeup: attr(),
-	// bridesmaidDresses: attr(),
-	// groomsmenSuits: attr(),
-	// weddingRings: attr(),
-	// shoesAndAccessories: attr(),
-
-	// //People:
-	// photographer: attr(),
-	// videographer: attr(),
-	// officiant: attr(),
-	// bandOrDJ: attr(),
-	// florist: attr(),
-
-	// //Event:
-	// foodAndDrinks: attr(),
-	// decor: attr(),
-	// cake: attr(),
-	// weddingFavours: attr(),
-	// bridalPartyGifts: attr(),
-	// addedExtras: attr(),
-
-	// //Places
-	// venue: attr(),
-	// weddingNightHotel: attr(),
-	// accomodationForBridalParty: attr(),
-
-	// //Additional
-	// weddingStationery: attr(),
-	// photobooth: attr(),
-	// honeymoon: attr(),
-	// insurance: attr()
 });
