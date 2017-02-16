@@ -1,11 +1,8 @@
 import Ember from 'ember';
 import moment from 'moment';
 
-// import ENV from '../../../config/environment';
-// const ref = new window.Firebase(ENV.firebaseURL);
-
+//Apparel
 const BUDGET_APPAREL = {
-	//Apparel:
 	weddingDress: "Wedding Dress",
 	groomSuit: "Groom Suit",
 	hairAndMakeup: "Hair and Makeup",
@@ -15,8 +12,8 @@ const BUDGET_APPAREL = {
 	shoesAndAccessories: "Shoes And Accessories"
 };
 
+//People:
 const BUDGET_PEOPLE = {
-	//People:
 	photographer: "Photographer",
 	videographer: "Videographer",
 	officiant: "Officiant",
@@ -24,8 +21,8 @@ const BUDGET_PEOPLE = {
 	florist: "Florist"
 };
 
+//Event
 const BUDGET_EVENT = {
-	//Event:
 	foodAndDrinks: "Food and Drinks",
 	decor: "Décor",
 	cake: "Cake",
@@ -34,19 +31,28 @@ const BUDGET_EVENT = {
 	addedExtras: "Added Extras"
 };
 
+//Places
 const BUDGET_PLACES = {
-	//Places
 	venue: "Venue",
 	weddingNightHotel: "Wedding Night Hotel",
 	accomodationForBridalParty: "Accomodation for Bridal Party"
 };
 
+//Additional
 const BUDGET_ADDITIONAL = {
-	//Additional
 	weddingStationery: "Wedding Stationery",
 	photobooth: "Photobooth",
 	honeymoon: "Honeymoon",
 	insurance: "Insurance"
+};
+
+//All categories
+const BUDGET_CATEGORIES = {
+	'categoryApparel': BUDGET_APPAREL,
+	'categoryPeople': BUDGET_PEOPLE,
+	'categoryEvent': BUDGET_EVENT,
+	'categoryPlaces': BUDGET_PLACES,
+	'categoryAdditional': BUDGET_ADDITIONAL
 };
 
 export default Ember.Route.extend({
@@ -56,104 +62,31 @@ export default Ember.Route.extend({
 		
     	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 
-    	//Check the local store first for record of the budget
-
 		return Ember.RSVP.hash({
 	    	budget: this.store.findRecord('budget', _id, { reload: true }).then((_budget)=>{
 	    		return _budget;
 	    	}, () => {
 				//Need to create Record
 				this.set("createdBudget", 1);
-				return this.store.createRecord('budget', {
+				let newBudget = this.store.createRecord('budget', {
 					id: _id,
-					total: 0,
-					used: 0,
-					moneyFromFam: 0,
-					savedSoFar: 0,
-					leftToSave: 0
+					total: '0',
+					used: '0',
+					moneyFromFam: '0',
+					savedSoFar: '0',
+					leftToSave: '0',
+					categoryApparel: {},
+					categoryEvent: {},
+					categoryPeople: {},
+					categoryPlaces: {},
+					categoryAdditional: {}
 				});
 
-				//Run through hashtables and set up objects for each attribute of Budget model
-				//let _apparel = [];
-				// for (var key in BUDGET_APPAREL) {
-				// 	let obj = Ember.Object.create({ 
-				// 		name: BUDGET_APPAREL[key],
-				// 		booked: 0,
-				// 		estimate: 0,
-				// 		deposit: 0,
-				// 		balance: 0,
-				// 		category: "Apparel"
-				// 	});
-				// 	alert("STILL GOIN BOIS");
-				// 	var ref = new Firebase("https://pear-server.firebaseio.com/budget/categoryApparel/"+key);
-				// 	var newChildRef = ref.push();
-				// 	newChildRef.set(obj);
-					
-				// 	// newBudget.set(key, obj);
-				// }
-
-
-
-		  //       return EmberFire.ObjectArray.create({ ref: ref.child('menus')});
-				// alert("WE MADE IT BOIS");
-				// newBudget.set('categoryApparel', _apparel);
-
-				// let _event = [];
-				// for (key in BUDGET_EVENT) {
-				// 	let obj = { 
-				// 		name: BUDGET_EVENT[key],
-				// 		booked: 0,
-				// 		estimate: 0,
-				// 		deposit: 0,
-				// 		balance: 0,
-				// 		category: "Event"
-				// 	};
-				// 	_event.pushObject(obj);
-				// }
-				// newBudget.set('categoryEvent', _event);
-
-				// let _people = [];
-				// for (key in BUDGET_PEOPLE) {
-				// 	let obj = { 
-				// 		name: BUDGET_PEOPLE[key],
-				// 		booked: 0,
-				// 		estimate: 0,
-				// 		deposit: 0,
-				// 		balance: 0,
-				// 		category: "People"
-				// 	};
-				// 	_people.pushObject(obj);
-				// }
-				// newBudget.set('categoryPeople', _people);
-
-				// let _places = [];
-				// for (key in BUDGET_PLACES) {
-				// 	let obj = { 
-				// 		name: BUDGET_PLACES[key],
-				// 		booked: 0,
-				// 		estimate: 0,
-				// 		deposit: 0,
-				// 		balance: 0,
-				// 		category: "Places"
-				// 	};
-				// 	_places.pushObject(obj);
-				// }
-				// newBudget.set('categoryPlaces', _places);
-
-				// let _additional = [];
-				// for (key in BUDGET_ADDITIONAL) {
-				// 	let obj = { 
-				// 		id: key,
-				// 		name: BUDGET_ADDITIONAL[key],
-				// 		booked: 0,
-				// 		estimate: 0,
-				// 		deposit: 0,
-				// 		balance: 0,
-				// 		category: "Additional"
-				// 	};
-				// 	_additional.pushObject(obj);
-				// }
-				// newBudget.set('categoryAdditional', _additional);
+				newBudget.save().then(()=>{
+					return newBudget;
+				}).catch((e) => {
+				    console.log(e.errors);
+				});
 	     	}).catch((err)=>{})
 	    });
 	},
@@ -161,33 +94,28 @@ export default Ember.Route.extend({
 		this._super(controller, model);
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		controller.set('budget', model.budget);
-		model.budget.save();
-		if(false) {
-		let ref = this.get('firebase');
-		let _ref = ref.child('budgets').child(_id);
-		// let ref = firebase.database().ref('budget');
-    	let newBudget = this.store.peekRecord('budget', _id);
-    	// newBudget.save().then(()=>{
-	        for (var key in BUDGET_APPAREL) {
-				let obj = Ember.Object.create({ 
-					name: BUDGET_APPAREL[key],
-					booked: 0,
-					estimate: 0,
-					deposit: 0,
-					balance: 0,
-					category: "Apparel"
-				});
-				var newChildRef = _ref.push();
-				newChildRef.set(obj);
-
-				
-				// newBudget.set(key, obj);
-			}
+		if(this.get("createdBudget") === 1) {
+			let ref = this.get('firebase');
+			let _ref = ref.child('budgets').child(_id);
+	    	let newBudget = this.store.peekRecord('budget', _id);
+	    	for (var key in BUDGET_CATEGORIES) {
+	    		var childRef = key;
+	    		var __ref = _ref.child(childRef);
+		        for (var k in BUDGET_CATEGORIES[key]) {
+					let obj = Ember.Object.create({ 
+						name: BUDGET_CATEGORIES[key][k],
+						booked: 0,
+						estimate: 0,
+						deposit: 0,
+						balance: 0
+					});
+					var newChildRef = __ref.push();
+					newChildRef.set(obj);
+				}	    		
+	    	}
 		}
-    	// });
 
-
-	// controller.set('budgetItems', budgetItems);
+		//Check store for customer
 	    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 	    	if(customer.get("todoList") === true){
 	    		// alert("TODO LIST LOADED");
