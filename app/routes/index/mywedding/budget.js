@@ -68,6 +68,13 @@ export default Ember.Route.extend({
 	    	}, () => {
 				//Need to create Record
 				this.set("createdBudget", 1);
+				let totalsObj = {					
+					'apparel': 0,
+					'people': 0,
+					'event': 0,
+					'places': 0,
+					'additional': 0
+				};
 				let newBudget = this.store.createRecord('budget', {
 					id: _id,
 					total: 0,
@@ -75,11 +82,13 @@ export default Ember.Route.extend({
 					moneyFromFam: 0,
 					savedSoFar: 0,
 					leftToSave: 0,
+					unallocated: 0,
 					categoryApparel: {},
 					categoryEvent: {},
 					categoryPeople: {},
 					categoryPlaces: {},
-					categoryAdditional: {}
+					categoryAdditional: {},
+					categoryTotals: totalsObj
 				});
 
 				newBudget.save().then(()=>{
