@@ -192,8 +192,8 @@ export default Ember.Route.extend({
 
 			if(estimate >= 0 && booked >= 0 && deposit >= 0){
 
-				if(estimate > deposit + booked) {
-			    	let balance = estimate - deposit - booked;
+				if(estimate >= booked) {
+			    	let balance = estimate - booked;
 			    	let _budget = this.store.peekRecord('budget', _id);
 			    	let selectedCategory = _budget.get(category);
 			    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
