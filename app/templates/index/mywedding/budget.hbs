@@ -140,12 +140,18 @@
 				</div> --}}
 				<div class="col-sm-4">
 					<div class="row" style="padding: 24px 10px 40px 10px;">
-						<div class="col-sm-6">Used: <strong class="budget-pink">R3210</strong></div>
-						<div class="col-sm-6">Total: <strong>R200000</strong></div>	
+						<div class="col-sm-6">Used: <strong class="budget-pink">R{{budget.used}}</strong></div>
+						<div class="col-sm-6">Total: <strong>R{{budget.total}}</strong></div>	
 					</div>								
                     {{#if refresh}}
                         {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
                     {{/if}}
+                    <div> 
+						{{mdl-textfield label='New Budget Total' value=total type="number"}}
+                    </div>
+                    <div style="text-align: center;"> 
+						{{#mdl-button isRaised=true action="saveNewTotal"}}UPDATE{{/mdl-button}}
+                    </div>
 				</div>
 
 	    </div>

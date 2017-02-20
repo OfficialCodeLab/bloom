@@ -95,7 +95,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
                     <div class="overview-action-add">
-                        {{mdl-button icon="add_circle" action="openBudget" disabled=true}}
+                        {{#link-to 'index.mywedding.budget'}}{{mdl-button icon="add_circle"}}{{/link-to}}  
                     </div>
                     <div class="overview-md-block">
                         <h5>Budget</h5>
@@ -105,14 +105,14 @@
                             {{/if}}
                         </div>
                         <div style="padding-top: 10px;">
-                            <div style="width:50%; float: left; padding-left: 25px;">
+                            {{!-- <div style="width:50%; float: left; padding-left: 25px;">
                                 <p>Used:
                                 <br><span class="r-bold">Total:</span></p>
                             </div>
                             <div style="width:50%; float: right;">
                                 <p>R {{model.budgetUsed}}
                                 <br><span class="r-bold">R {{model.budgetTotal}}</span></p>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>

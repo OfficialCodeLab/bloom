@@ -69,11 +69,11 @@ export default Ember.Route.extend({
 				//Need to create Record
 				this.set("createdBudget", 1);
 				let totalsObj = {					
-					'apparel': 0,
-					'people': 0,
-					'event': 0,
-					'places': 0,
-					'additional': 0
+					'categoryApparel': 0,
+					'categoryPeople': 0,
+					'categoryEvent': 0,
+					'categoryPlaces': 0,
+					'categoryAdditional': 0
 				};
 				let newBudget = this.store.createRecord('budget', {
 					id: _id,
@@ -103,6 +103,7 @@ export default Ember.Route.extend({
 		this._super(controller, model);
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		controller.set('budget', model.budget);
+		let _this = this;
 		if(this.get("createdBudget") === 1) {
 			let ref = this.get('firebase');
 			let _ref = ref.child('budgets').child(_id);
@@ -122,9 +123,11 @@ export default Ember.Route.extend({
 					newChildRef.set(obj);
 				}	    		
 	    	}
-	    	this.store.findRecord('budget', _id, { reload: true }).then(()=>{
-	    		this.convertAllCategories();
-	    	});
+	    	this.set('createdBudget', 0);
+	    	this.refresh();
+	    	// this.store.findRecord('budget', _id, { reload: true }).then(()=>{
+	    	// 	_this.convertAllCategories();
+	    	// });
 		}
 		else {
 			this.convertAllCategories();
@@ -183,26 +186,32 @@ export default Ember.Route.extend({
 			let deposit = parseInt(budget.get('deposit'));
 			let estimate = parseInt(budget.get('estimate'));
 			let booked = parseInt(budget.get('booked'));
+			let category = budget.get('category');
 
 			// deposit + booked < estimate
 
-			if(estimate > deposit + booked) {
-		    	let balance = estimate - deposit - booked;
-		    	let _budget = this.store.peekRecord('budget', _id);
-		    	let selectedCategory = _budget.get(budget.get('category'));
-		    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
-		    	console.log(selectedObject);
-		    	Ember.set(selectedObject, 'deposit', deposit);
-		    	Ember.set(selectedObject, 'estimate', estimate);
-		    	Ember.set(selectedObject, 'booked', booked);
-		    	Ember.set(selectedObject, 'balance', balance);
-		    	_budget.save().then(()=>{
-			    	this.controller.get('notifications').success('Budget has been updated!',{
+			if(estimate >= 0 && booked >= 0 && deposit >= 0){
+
+				if(estimate > deposit + booked) {
+			    	let balance = estimate - deposit - booked;
+			    	let _budget = this.store.peekRecord('budget', _id);
+			    	let selectedCategory = _budget.get(category);
+			    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
+			    	console.log(selectedObject);
+			    	this.recalculateBudget(_budget, budget);
+			    	Ember.set(selectedObject, 'deposit', deposit);
+			    	Ember.set(selectedObject, 'estimate', estimate);
+			    	Ember.set(selectedObject, 'booked', booked);
+			    	Ember.set(selectedObject, 'balance', balance);
+			    	//save this later			
+				} else {		
+			    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
 		                autoClear: true
-		            });  
-		    	});				
-			} else {		
-		    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
+		            });					
+				}
+
+			} else {
+		    	this.controller.get('notifications').error('Negative numbers are invalid!',{
 	                autoClear: true
 	            });					
 			}
@@ -214,7 +223,105 @@ export default Ember.Route.extend({
 	    	let selectedCategory = Ember.get(budget, cat);
 	    	let selectedObject = Ember.get(selectedCategory, id);
 	    	this.send('openBudgetModal', id, selectedObject, cat);
+	    },
+	    saveNewTotal: function(){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    	let budget = this.store.peekRecord('budget', _id);
+	    	let newTotal = parseInt(this.controller.get('total'));
+	    	let unallocated = parseInt(budget.get('unallocated'));
+	    	let total = parseInt(budget.get('total'));
+	    	if(newTotal >= 0){
+	    		//Ensure new total isn't squelching unallocated below 0
+	    		let deltaTotal = newTotal - total;
+	    		let newUnallocated = unallocated + deltaTotal;
+	    		if (newUnallocated >= 0) { 
+	    			//update
+	    			budget.set('unallocated', newUnallocated);
+	    			budget.set('total', newTotal);
+	    			budget.save().then(()=>{
+	    				this.controller.set('total', undefined);
+						this.refreshBudgetWidget();
+				    	this.controller.get('notifications').success('Budget total has been updated!',{
+			                autoClear: true
+			            });  	    				
+	    			});
+	    		} else {
+	    			let excess = 0 - newUnallocated;
+			    	this.controller.get('notifications').error('New total is is too low!' + '\nPlease increase by at least ' + excess,{
+		                autoClear: true
+		            });		    			
+	    		}
+
+	    	} else {
+		    	this.controller.get('notifications').error('Negative numbers are invalid!',{
+	                autoClear: true
+	            });			    		
+	    	}
+
 	    }
+	},
+	recalculateBudget: function(oldBudget, newBudget) {
+		//NEW
+		let estimate = parseInt(newBudget.get('estimate'));
+		let booked = parseInt(newBudget.get('booked'));
+		let category = newBudget.get('category');
+		let id = newBudget.get('_id');
+
+		//OLD
+    	let selectedCategory = oldBudget.get(category);
+    	let oldObject = Ember.get(selectedCategory, id);
+		let oldEstimate = Ember.get(oldObject, 'estimate');
+		let oldBooked = parseInt(Ember.get(oldObject, 'booked'));
+
+		let deltaBooked = oldBooked - booked;
+		let deltaEstimated = oldEstimate - estimate;
+			
+		//Update
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+    	let _budget = this.store.peekRecord('budget', _id);
+    	let selectedTotals = _budget.get('categoryTotals');
+    	let _oldBooked = Ember.get(selectedTotals, category);
+    	let _oldEstimate = parseInt(_budget.get('total'));
+    	let unallocated = parseInt(_budget.get('unallocated'));
+    	// if true, then total needs to be increased
+    	let newUnallocated = unallocated + deltaEstimated;
+    	if(newUnallocated < 0) {
+    		let newEstimate = _oldEstimate - newUnallocated;
+    		_budget.set('total', newEstimate);
+    		_budget.set('unallocated', 0);   		
+    	} else {
+    		_budget.set('unallocated', newUnallocated);
+    	}
+
+    	let newBooked = _oldBooked - deltaBooked;
+    	Ember.set(selectedTotals, category, newBooked);	
+    	//calculate total used budget again
+    	this.recalculateTotalUsed(_budget);
+	},
+	recalculateTotalUsed: function(budget){
+    	let selectedTotals = budget.get('categoryTotals');
+    	// let total = budget.get('total');
+    	let used = 0;
+
+    	for (var key in BUDGET_CATEGORIES) {
+    		used+= Ember.get(selectedTotals, key);
+    	}
+    	budget.set('used', used);
+    	// budget.set('unallocated', total - used);
+
+		budget.save().then(()=>{
+			this.refreshBudgetWidget();
+	    	this.controller.get('notifications').success('Budget has been updated!',{
+                autoClear: true
+            });  
+    	});	
+	},
+	refreshBudgetWidget: function(){
+		const _this = this;
+		this.controller.set('refresh', false);
+		Ember.run.next(function () {
+	        _this.controller.set('refresh', true);
+	    });
 	},
 	rejectCustomer:function(){
 		this.controller.get('notifications').error('You need to activate this functionality.',{
