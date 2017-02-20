@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 	calledOnce: false,	  //Prevent multiple calls
 	refreshIntervalId: 0, //Used for GC
 
-	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg"],
+	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg"],
 
 	//Initialize script when component is inserted
 	didInsertElement: function(){
@@ -35,7 +35,7 @@ export default Ember.Component.extend({
         var _currentBackground = this.get('currentBackground');
 		Ember.$('#section1-bg').fadeIn(0);
 		_currentBackground++;
-		if(_currentBackground > 2) {
+		if(_currentBackground > 3) {
 			_currentBackground = 0;
 		} 
 
