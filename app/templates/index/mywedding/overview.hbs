@@ -100,8 +100,14 @@
                     <div class="overview-md-block">
                         <h5>Budget</h5>
                         <div style="padding-top: 5px;">
-                            {{#if refresh}}
-                                {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+                            {{#if model.hasBudget}}
+                                {{#if refresh}}
+                                    {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+                                {{else}}
+                                    {{mdl-spinner}}
+                                {{/if}}
+                            {{else}}
+                                <p style="text-align: center; margin-top: 50px;"> Please set up your budget </p>
                             {{/if}}
                         </div>
                         <div style="padding-top: 10px;">

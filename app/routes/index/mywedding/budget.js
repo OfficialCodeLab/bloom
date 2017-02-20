@@ -123,8 +123,13 @@ export default Ember.Route.extend({
 					newChildRef.set(obj);
 				}	    		
 	    	}
-	    	this.set('createdBudget', 0);
-	    	this.refresh();
+	    	this.store.findRecord('wedding', _id). then((wedding)=> {
+	    		wedding.set('hasBudget', true);
+	    		wedding.save().then(()=>{
+			    	_this.set('createdBudget', 0);
+			    	_this.refresh();
+	    		});
+	    	});
 	    	// this.store.findRecord('budget', _id, { reload: true }).then(()=>{
 	    	// 	_this.convertAllCategories();
 	    	// });
