@@ -29,5 +29,10 @@ export default Ember.Controller.extend({
     	selectCat(value){
 			this.set('category', value);
 		}
+    },
+
+	addedFile: function(file) {
+        console.log('added: ', file, this);
+        //UPLOAD TO FIREBASE STORAGE
     }
 });

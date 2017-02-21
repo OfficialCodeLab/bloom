@@ -49,7 +49,22 @@
 		<div class="form-group has-feedback">
 			<label class="col-sm-3 control-label"></label>
 			<div class="col-sm-6">
-				{{#mdl-button action='openFilePicker' disabled=isCreating isRaised=true isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}}
+			{{#drop-zone
+      addRemoveLinks=true
+      onAddedFile=addedFile
+      onRemovedFile=removedFile
+      acceptedFiles='.jpg,.png'
+      as |register|
+    }}
+      {{#default-message register=register}}
+        <span class="fa fa-files-o"></span><br>
+        Drop Files Here to Upload
+      {{/default-message}}
+      {{#invalid-file-type register=register}}
+        Invalid File Type! We only accept mp4, pdf, and xml files
+      {{/invalid-file-type}}
+    {{/drop-zone}}
+				{{!-- {{#mdl-button action='openFilePicker' disabled=isCreating isRaised=true isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}} --}}
 				{{!-- <button class="btn btn-default" disabled={{isCreating}} style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button> --}}
 			</div>
 		</div>
