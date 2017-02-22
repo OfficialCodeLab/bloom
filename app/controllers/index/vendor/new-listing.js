@@ -10,6 +10,8 @@ export default Ember.Controller.extend({
 	isCreating: '',
 	responseMessage: '',
 	imgBlob: '',
+    section1: true,
+    currentSection: 1,
 	noName: Ember.computed.none('name'),
 	noCat: Ember.computed.none('category'),
 	noPrice: Ember.computed.none('price'),
@@ -33,6 +35,51 @@ export default Ember.Controller.extend({
 
 	addedFile: function(file) {
         console.log('added: ', file, this);
+        // alert(file.type);s
+        alert(file.name);
         //UPLOAD TO FIREBASE STORAGE
-    }
+    },
+
+    storeMainImage: function(file, done){
+        console.log(file);
+		let _file = file;
+
+		let reader = new FileReader();
+
+		reader.onloadend = Ember.run.bind(this, function(){
+			var dataURL = reader.result;
+			var output = document.getElementById('output');
+			output.src = dataURL;
+		});
+		 //debugger;
+		reader.readAsDataURL(file);
+		 //debugger;
+		 
+
+    //     return new Promise(function(resolve, reject){
+		  //   var _xhr = file.get('xhr');
+		  //   _xhr.onreadystatechange = handler;
+		  //   _xhr.send();
+
+		  //   function handler() {
+		  //     if (this.readyState === this.DONE) {
+		  //       if (this.status === 200) {
+		  //         resolve(console.log(file.status));
+		  //       } else {
+		  //         reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
+		  //       }
+		  //     }
+		  //   };
+		  // });
+// file.done((response)=>{
+// 	console.log("TEST");
+// });
+        // while(file.status !== "success"){
+
+        // }
+         // file.xhr.onload = () => {
+         // 	console.log(file.status);
+         // };
+        // console.log(file.contents);
+    },
 });

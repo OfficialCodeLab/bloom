@@ -73,11 +73,3 @@ export default Ember.Route.extend({
   }
   
 });
-
-
-export default DS.Model.extend({
-  name: DS.attr('string'),
-  minister: DS.attr(), //eg { name: "dsad", booked: "213", estimate: "424" }
-  dress: DS.attr() // eg as above
-  //etc
-});
