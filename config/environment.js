@@ -31,13 +31,13 @@ module.exports = function(environment) {
           id: 'UA-87736082-1'
         }
       },
-      {
-        name: 'Mixpanel',
-        environments: ['development', 'production'],
-        config: {
-          token: '1f70ad74aad5810ae1053354f1449de8'
-        }
-      }
+      // {
+      //   name: 'Mixpanel',
+      //   environments: ['development', 'production'],
+      //   config: {
+      //     token: '1f70ad74aad5810ae1053354f1449de8'
+      //   }
+      // }
     ],
 
 

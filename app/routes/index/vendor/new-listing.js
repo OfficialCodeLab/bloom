@@ -25,7 +25,7 @@ export default Ember.Route.extend({
 	firebaseApp: Ember.inject.service(),
 	storageRef: '',
 	file: '',
-	itemId: 'gfeg45sb4',
+	itemId: 'imageDump',
 	uploadsComplete: false,
 	listingCreated: false,
     actions: {
@@ -188,7 +188,7 @@ export default Ember.Route.extend({
  
 										this.set('listingCreated', true);
 
-										if(this.get('uploadsComplete') === true) {
+										if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
 											this.completeListing();
 										}
 									});
@@ -279,7 +279,7 @@ export default Ember.Route.extend({
 				//COMPLETE
 				var downloadURL = uploadTask.snapshot.downloadURL;
 				// alert(downloadURL);
-				console.log(downloadURL);
+				// console.log(downloadURL);
 				tasksComplete++;
 				console.log(tasksComplete + " / " + tasksToDo + " tasks complete");
 				//Add main image
@@ -288,9 +288,9 @@ export default Ember.Route.extend({
 				catItem.save().then(()=>{
 					if(tasksComplete === tasksToDo){					
 						_this.set('uploadsComplete', true);
-						console.log("Complete");
+						// console.log("Complete");
 
-						if(_this.get('listingCreated') === true) {
+						if(_this.get('listingCreated') === true && _this.controller.get('isCreating') === true) {
 							_this.completeListing();
 						}
 					}
@@ -301,7 +301,9 @@ export default Ember.Route.extend({
 			for (var j = 0; j < uploadTasks.length; j++) {
 				//TODO: handle all other uploads
 				//Possibly change observable property and complete when done
-				uploadTasks[j].on('state_changed', function(snapshot){
+				let upload = uploadTasks[j];
+				let imageNum = "image" + j;
+				upload.on('state_changed', function(snapshot){
 				//PROGRESS
 					var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 					// console.log('Upload is ' + progress + '% done');
@@ -310,19 +312,23 @@ export default Ember.Route.extend({
 					//ERROR
 				}, function() {
 					//COMPLETE
-					var downloadURL = uploadTask.snapshot.downloadURL;
+					var downloadURL = upload.snapshot.downloadURL;
 					// alert(downloadURL);
-					console.log(downloadURL);
+					// console.log(downloadURL);
 					tasksComplete++;
 					console.log(tasksComplete + " / " + tasksToDo + " tasks complete");
-					if(tasksComplete === tasksToDo){					
-						_this.set('uploadsComplete', true);
-						console.log("Complete");
+					let catItem = _this.store.peekRecord('cat-item', itemId);
+					catItem.set(imageNum, downloadURL);
+					catItem.save().then(()=>{
+						if(tasksComplete === tasksToDo){					
+							_this.set('uploadsComplete', true);
+							// console.log("Complete");
 
-						if(_this.get('listingCreated') === true) {
-							_this.completeListing();
+							if(_this.get('listingCreated') === true && _this.controller.get('isCreating') === true) {
+								_this.completeListing();
+							}
 						}
-					}
+					});
 				});
 			}
 	    },
@@ -411,10 +417,10 @@ export default Ember.Route.extend({
 		return decodedImage;
 	},
 	completeListing: function(){
+        this.controller.set('isCreating', false);
     	this.controller.get('notifications').info('Listing created successfully!',{
             autoClear: true
         }); 
-        this.controller.set('isCreating', false);
         this.transitionTo('index.vendor');
 	}
 });

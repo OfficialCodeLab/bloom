@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
     },
 
     storeExtraImage: function(file, done){
-    	console.log(file);
+    	// console.log(file);
     	let _file = file;
 
     	let reader = new FileReader();
