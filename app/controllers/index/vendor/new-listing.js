@@ -40,6 +40,36 @@ export default Ember.Controller.extend({
         //UPLOAD TO FIREBASE STORAGE
     },
 
+    storeExtraImage: function(file, done){
+    	console.log(file);
+    	let _file = file;
+
+    	let reader = new FileReader();
+
+    	reader.onloadend = Ember.run.bind(this, function(){
+			var dataURL = reader.result;
+			var img1 = document.getElementById('img1');
+			if(img1.src){
+				var img2 = document.getElementById('img2');
+				if(img2.src){
+					var img3 = document.getElementById('img3');
+					if(img3.src){
+						// Simple handling for now.
+						// Need to figure out image removal
+					} else {
+						img3.src = dataURL;
+					}
+				} else {
+					img2.src = dataURL;
+				}
+			} else {
+				img1.src = dataURL;
+			}
+    	});
+		reader.readAsDataURL(file);
+
+    },
+
     storeMainImage: function(file, done){
         console.log(file);
 		let _file = file;
@@ -48,8 +78,8 @@ export default Ember.Controller.extend({
 
 		reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
-			var output = document.getElementById('output');
-			output.src = dataURL;
+			var mainImg = document.getElementById('mainImg');
+			mainImg.src = dataURL;
 		});
 		 //debugger;
 		reader.readAsDataURL(file);

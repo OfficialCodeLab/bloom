@@ -84,7 +84,7 @@
 			        		<h4>Images</h4>
 			        	</div>
 			        	<div class="vendor-service-inner">
-			        	<img id='output' height='200' width='200' hidden={{shouldHideImage}}>
+			        	<img id='mainImg' height='200' width='200' hidden='true'>
 			        		<p> Listing main image* </p>
 							{{#drop-zone
 						      addRemoveLinks=true
@@ -107,10 +107,16 @@
 								{{!-- <button class="btn btn-default" disabled={{isCreating}} style="width:100%" {{action 'openFilePicker'}}>Upload Files <i class="fa fa-upload"></i></button> --}}
 
 							<br><hr>
+
+				        	<img id='img1' height='200' width='200' hidden='true'>
+
+				        	<img id='img2' height='200' width='200' hidden='true'>
+
+				        	<img id='img3' height='200' width='200' hidden='true'>
 			        		<p> Additional images </p>
 							{{#drop-zone
 						      addRemoveLinks=true
-						      onAddedFile=addedFile
+						      onAddedFile=storeExtraImage
 						      onRemovedFile=removedFile
 						      acceptedFiles='.jpg,.png'
 						      maxFiles='3'
@@ -128,7 +134,7 @@
 						    <div style="padding: 20px 0 40px 0;">
 
 							    {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
-						        {{#mdl-button isRaised=true action="uploadAllFiles"}}Create Service{{/mdl-button}}
+						        {{#mdl-button isRaised=true action="createItem" disabled=isCreating}}Create Service {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
 									{{!-- {{#mdl-button action='createItem' disabled=isNotValid isRaised=true isAccent=true}}Create new item {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}} --}}
 							</div>
 			        	</div>

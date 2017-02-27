@@ -25,6 +25,9 @@ export default Ember.Route.extend({
 	firebaseApp: Ember.inject.service(),
 	storageRef: '',
 	file: '',
+	itemId: 'gfeg45sb4',
+	uploadsComplete: false,
+	listingCreated: false,
     actions: {
 		goBack: function(){
 			window.history.go(-1);
@@ -91,54 +94,6 @@ export default Ember.Route.extend({
 		        });
 	        });
 	    },
-	    uploadAllFiles: function(){
-	    	// let blob = this.controller.get('mainImageBlob');
-			var output = document.getElementById('output');
-			let blob = output.src;
-	    	let _blob = blob.split(",", 2);
-
-	    	let _metadata = _blob[0].split(';', 2);
-	    	let fileType = _metadata[1].split(':', 2);
-
-
-	    	var metadata = {
-				contentType: fileType[1]
-			};
-
-			var __blob = this.b64toBlob(_blob[1]);
-			var storageRef = this.get('firebaseApp').storage().ref();
-			// let ref = this.get('firebase').storage().ref();
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			let user = this.store.peekRecord('user', _id);
-			let vendorId = user.get('vendorAccount');
-
-			// let _ref = ref.child('budgets').child(_id);.storage().ref();
-			//PATH : userId / catItems / filename
-			//Should locally store all variables
-			var path = 'vendorImages/' + vendorId + '/services/test.jpg';
-			var uploadTask = storageRef.child(path).put(__blob, metadata);
-
-			uploadTask.on('state_changed', function(snapshot){
-				//PROGRESS
-				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				console.log('Upload is ' + progress + '% done');
-				console.log(snapshot.state);
-			}, function(error) {
-				//ERROR
-			}, function() {
-				//COMPLETE
-				var downloadURL = uploadTask.snapshot.downloadURL;
-				alert(downloadURL);
-				console.log(downloadURL);
-				// newPlan.set(‘imageUrl’, downloadURL);
-				// newPlan.save().then(() => ctrl.transitionToRoute(‘plans’));
-				// ctrl.set(‘file’, ‘’);
-				// ctrl.set(‘selectedCategory’, ‘’);
-				// ctrl.set(document.getElementById(‘output’).src, ‘’);
-				// ctrl.set(‘days’, ‘’);
-				// ctrl.set(‘isDisabled’, true);
-			});
-	    },
 	    willTransition(transition){
 	    	// let _blob = this.controller.get('imgBlob');
 	    		// console.log("TEST" + this.controller.get('itemCreated'));
@@ -195,45 +150,55 @@ export default Ember.Route.extend({
 				let user = this.store.peekRecord('user', _id);
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
+
+				var mainImg = document.getElementById('mainImg');
+
 				this.store.findRecord('vendor', user.get('vendorAccount')).then((vndr) => {
 					let itemsC = vndr.get("catItems.length");
 					itemsC = parseInt(itemsC) + 1;
 					let maxCount = parseInt(vndr.get("maxItems"));
 
 					if(!maxCount || maxCount > itemsC){
-						let newItem = this.store.createRecord('cat-item', {		
-						  name: this.controller.get('name'),			
-						  desc: this.controller.get('desc'),			
-						  price: this.controller.get('price'),
-						  category: cat,
-						  vendor: vndr,
-						  imageBlob: _blob,
-						  imageURL: _imgurl
-						});
-						newItem.save().then(()=>{
-							cat.get('catItems').pushObject(newItem);
-							cat.save().then(()=>{		
-								vndr.get('catItems').pushObject(newItem);
-								vndr.save().then(()=>{
-									this.controller.set('name', '');
-									this.controller.set('price', '');
-									this.controller.set('desc', '');
-									this.controller.set('imageURL', '');
-									this.controller.set('isCreating', false);
-									this.controller.set('imgBlob', '');
-									this.controller.set('itemCreated', true);
-									if(_blob.url !== _imgurl){
-							            if(_blob){
-							            	this.destroyBlob(_blob);
-							            } 
-							    	}
-							    	this.controller.get('notifications').info('Listing created successfully!',{
-						                autoClear: true
-						            });  
-									this.transitionTo('index.vendor');
-								});
-							});	
-						});
+						if(mainImg.src){
+							let newItem = this.store.createRecord('cat-item', {		
+							  name: this.controller.get('name'),			
+							  desc: this.controller.get('desc'),			
+							  price: this.controller.get('price'),
+							  category: cat,
+							  vendor: vndr
+							});
+							this.set('itemId', newItem.get('id'));
+							this.uploadAllFiles();
+							newItem.save().then(()=>{
+								cat.get('catItems').pushObject(newItem);
+								cat.save().then(()=>{		
+									vndr.get('catItems').pushObject(newItem);
+									vndr.save().then(()=>{
+										this.controller.set('name', '');
+										this.controller.set('price', '');
+										this.controller.set('desc', '');
+										this.controller.set('imageURL', '');
+										// this.controller.set('imgBlob', '');
+										this.controller.set('itemCreated', true);
+										// if(_blob.url !== _imgurl){
+								  //           if(_blob){
+								  //           	this.destroyBlob(_blob);
+								  //           } 
+								  //   	}
+ 
+										this.set('listingCreated', true);
+
+										if(this.get('uploadsComplete') === true) {
+											this.completeListing();
+										}
+									});
+								});	
+							});							
+						} else {
+							this.controller.get('notifications').error('Please select a main image for your listing.',{
+				                autoClear: true
+				            });  							
+						}
 					} else {
 						this.controller.set('isCreating', false);
 						this.controller.get('notifications').error('You have reached maximum listings.\nPlease upgrade your plan to post more.',{
@@ -259,6 +224,108 @@ export default Ember.Route.extend({
 		return false;
 
 	},
+
+	    uploadAllFiles: function(){
+	    	// let blob = this.controller.get('mainImageBlob');
+			var mainImg = document.getElementById('mainImg');
+			var img1 = document.getElementById('img1');
+			var img2 = document.getElementById('img2');
+			var img3 = document.getElementById('img3');
+			var imagesArr = [img1, img2, img3];
+			let mainI = this.decodeImage(mainImg);
+			let tasksComplete = 0;
+			let tasksToDo = 0;
+			let _this = this;
+
+			//Still all under assumption it is loaded
+
+	    	var metadata = {
+				contentType: mainI.contentType
+			};
+
+			var storageRef = this.get('firebaseApp').storage().ref();
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let user = this.store.peekRecord('user', _id);
+			let itemId = this.get('itemId');
+			let vendorId = user.get('vendorAccount');
+			//PATH : userId / catItems / filename
+			//Should locally store all variables
+			var path = 'vendorImages/' + vendorId + '/services/' + itemId + '/';
+			var uploadTask = storageRef.child(path + "mainImg").put(mainI.blob, metadata);
+			tasksToDo++;
+
+			let uploadTasks = [];
+
+			for (var i = 0; i < 3; i++){
+				if(imagesArr[i].src){
+					let im = this.decodeImage(imagesArr[i]);
+					let met = {
+						contentType: im.contentType
+					};
+					let newUpload = storageRef.child(path + "image" + i).put(im.blob, met);
+					uploadTasks.push(newUpload);
+					tasksToDo++;
+				}
+			}
+
+			uploadTask.on('state_changed', function(snapshot){
+				//PROGRESS
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				// console.log('Upload is ' + progress + '% done');
+				// console.log(snapshot.state);
+			}, function(error) {
+				//ERROR
+			}, function() {
+				//COMPLETE
+				var downloadURL = uploadTask.snapshot.downloadURL;
+				// alert(downloadURL);
+				console.log(downloadURL);
+				tasksComplete++;
+				console.log(tasksComplete + " / " + tasksToDo + " tasks complete");
+				//Add main image
+				let catItem = _this.store.peekRecord('cat-item', itemId);
+				catItem.set('imageURL', downloadURL);
+				catItem.save().then(()=>{
+					if(tasksComplete === tasksToDo){					
+						_this.set('uploadsComplete', true);
+						console.log("Complete");
+
+						if(_this.get('listingCreated') === true) {
+							_this.completeListing();
+						}
+					}
+				});
+			});
+
+
+			for (var j = 0; j < uploadTasks.length; j++) {
+				//TODO: handle all other uploads
+				//Possibly change observable property and complete when done
+				uploadTasks[j].on('state_changed', function(snapshot){
+				//PROGRESS
+					var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					// console.log('Upload is ' + progress + '% done');
+					// console.log(snapshot.state);
+				}, function(error) {
+					//ERROR
+				}, function() {
+					//COMPLETE
+					var downloadURL = uploadTask.snapshot.downloadURL;
+					// alert(downloadURL);
+					console.log(downloadURL);
+					tasksComplete++;
+					console.log(tasksComplete + " / " + tasksToDo + " tasks complete");
+					if(tasksComplete === tasksToDo){					
+						_this.set('uploadsComplete', true);
+						console.log("Complete");
+
+						if(_this.get('listingCreated') === true) {
+							_this.completeListing();
+						}
+					}
+				});
+			}
+	    },
 	destroyBlob(blob){
 
 	  	this.get('filepicker.promise').then((filepicker) => {
@@ -324,5 +391,30 @@ export default Ember.Route.extend({
 
 		var blob = new Blob(byteArrays, {type: contentType});
 		return blob;
+	},
+	//Returns JSON struct with decoded blob, extension and content type
+	decodeImage: function(image){
+		let blob = image.src;
+		let _blob = blob.split(",", 2);
+		let _metadata = _blob[0].split(';', 2);
+		let fileType = _metadata[0].split(':', 2);
+		let contentType = fileType[1];
+		let __blob = this.b64toBlob(_blob[1]);
+		let ext = fileType[1].split('/', 2);
+
+		let decodedImage = {
+			contentType: contentType,
+			extension: ext[1],
+			blob: __blob
+		};
+
+		return decodedImage;
+	},
+	completeListing: function(){
+    	this.controller.get('notifications').info('Listing created successfully!',{
+            autoClear: true
+        }); 
+        this.controller.set('isCreating', false);
+        this.transitionTo('index.vendor');
 	}
 });
