@@ -18,9 +18,55 @@ export default Ember.Route.extend({
 
           return sesh;
     },
-    model() {
+    model(params) {
     	return this.store.findAll('category');
     },
+	setupController: function (controller, model) {
+     	this._super(controller, model);
+  	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+        let user = this.store.peekRecord('user', _id);
+  	    let vendorId = user.get('vendorAccount');
+     	this.store.findRecord('vendor-stat', vendorId).then((vs)=>{
+
+     		//If vendor is willing to travel, autopopulate
+     		let willingToTravel = vs.get('willingToTravel');
+     		if(willingToTravel == 'true'){
+     			let maxTravelDist = vs.get('maxTravelDist');
+     			controller.set('maxDist', maxTravelDist);
+     			controller.set('willingToTravel', '1');     			
+     		} else if(willingToTravel == 'false') { 
+     			controller.set('willingToTravel', '2');
+     		} else {
+     			controller.set('willingToTravel', '3');
+     		}
+
+     		//If vendor has selected one category, auto select it for them
+     		let categories = vs.get('categories');
+     		let cats = [];
+
+     		categories.forEach(function(cat){
+     			cats.push(cat.get('id'));
+     		});
+     		if(cats.length === 1){
+     			controller.set('category', cats[0]);
+     		} 
+
+     		//If auto listing, fill in description
+     		if(controller.get('isAutoListing') === 'true') {
+     			controller.set('desc', vs.get('servicesDesc'));
+
+    			this.store.findRecord('vendor', vendorId).then((vendor)=>{
+     				controller.set('name', vendor.get('name'));
+
+     				//Refresh fields
+     				controller.set('refreshFields', false);
+     				Ember.run.next(function () {
+     					controller.set('refreshFields', true);
+				    });
+    			});
+     		} 
+     	});
+	},
 	filepicker: Ember.inject.service(),
 	firebaseApp: Ember.inject.service(),
 	storageRef: '',
@@ -160,41 +206,50 @@ export default Ember.Route.extend({
 
 					if(!maxCount || maxCount > itemsC){
 						if(mainImg.src){
-							let newItem = this.store.createRecord('cat-item', {		
-							  name: this.controller.get('name'),			
-							  desc: this.controller.get('desc'),			
-							  price: this.controller.get('price'),
-							  category: cat,
-							  vendor: vndr
-							});
-							this.set('itemId', newItem.get('id'));
-							this.uploadAllFiles();
-							newItem.save().then(()=>{
-								cat.get('catItems').pushObject(newItem);
-								cat.save().then(()=>{		
-									vndr.get('catItems').pushObject(newItem);
-									vndr.save().then(()=>{
-										this.controller.set('name', '');
-										this.controller.set('price', '');
-										this.controller.set('desc', '');
-										this.controller.set('imageURL', '');
-										// this.controller.set('imgBlob', '');
-										this.controller.set('itemCreated', true);
-										// if(_blob.url !== _imgurl){
-								  //           if(_blob){
-								  //           	this.destroyBlob(_blob);
-								  //           } 
-								  //   	}
- 
-										this.set('listingCreated', true);
+							if(this.controller.get('name')) {
+								let newItem = this.store.createRecord('cat-item', {		
+								  name: this.controller.get('name'),			
+								  desc: this.controller.get('desc'),			
+								  price: this.controller.get('price'),
+								  category: cat,
+								  vendor: vndr
+								});
+								this.set('itemId', newItem.get('id'));
+								this.uploadAllFiles();
+								newItem.save().then(()=>{
+									cat.get('catItems').pushObject(newItem);
+									cat.save().then(()=>{		
+										vndr.get('catItems').pushObject(newItem);
+										vndr.save().then(()=>{
+											this.controller.set('name', '');
+											this.controller.set('price', '');
+											this.controller.set('desc', '');
+											this.controller.set('imageURL', '');
+											// this.controller.set('imgBlob', '');
+											this.controller.set('itemCreated', true);
+											// if(_blob.url !== _imgurl){
+									  //           if(_blob){
+									  //           	this.destroyBlob(_blob);
+									  //           } 
+									  //   	}
+	 
+											this.set('listingCreated', true);
 
-										if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
-											this.completeListing();
-										}
-									});
+											if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
+												this.completeListing();
+											}
+										});
+									});	
 								});	
-							});							
+
+							} else {
+								this.controller.set('isCreating', false);
+								this.controller.get('notifications').error('Please enter a name for your listing',{
+					                autoClear: true
+					            });  							
+							}						
 						} else {
+							this.controller.set('isCreating', false);
 							this.controller.get('notifications').error('Please select a main image for your listing.',{
 				                autoClear: true
 				            });  							

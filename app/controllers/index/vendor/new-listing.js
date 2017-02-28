@@ -12,6 +12,7 @@ export default Ember.Controller.extend({
 	imgBlob: '',
     section1: true,
     currentSection: 1,
+    refreshFields: true,
 	noName: Ember.computed.none('name'),
 	noCat: Ember.computed.none('category'),
 	noPrice: Ember.computed.none('price'),
@@ -27,6 +28,20 @@ export default Ember.Controller.extend({
 	isNotCreating: Ember.computed.not('isCreating'),
 	isValid: Ember.computed.and('isLongName', 'isLongDesc', 'category', 'isValidNumber', 'imageURL', 'isNotCreating'),
 	isNotValid: Ember.computed.not('isValid'),
+	willingToTravel: 0,
+    willTravel: Ember.computed.equal('willingToTravel', '1'),
+    pricingOption: '3',
+    maxDist: 0,
+    isFixedPrice: Ember.computed.equal('pricingOption', '1'),
+    isRangePrice: Ember.computed.equal('pricingOption', '2'),
+    queryParams: ['isAutoListing'],
+  	isAutoListing: null,
+	// willTravel: Ember.computed('willingToTravel', function() {
+	// 	if(${this.get('firstName')} === 1){
+	// 		return true
+	// 	} 
+	//     return false;
+ //    }),
     actions: {
     	selectCat(value){
 			this.set('category', value);

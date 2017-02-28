@@ -11,7 +11,9 @@
 		        		<h4>Details</h4>
 		        	</div>
 		        	<div class="vendor-service-inner">
+		        		{{#if refreshFields}}							
 						{{mdl-textfield label='Name of new item' value=name}}
+						{{/if}}
 
 						{{#paper-select placeholder="Select a category" model=category}}
 						  {{#each model as |cat|}}
@@ -21,8 +23,9 @@
 						  {{/each}}
 						{{/paper-select}}
 						
-
+						{{#if refreshFields}}	
 						{{mdl-textarea label='Your product description.' value=desc}}
+						{{/if}}
 
 						<hr>
 
@@ -34,7 +37,7 @@
 								{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
 								{{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
 	                        </div>
-                        {{!-- {{#if willTravel}} --}}
+                        {{#if willTravel}}
                         <div><strong>Maximum Distance:</strong><br><br>
                         	<div layout style="cursor: pointer;">
 						      <div flex="10" layout layout-align="center center">
@@ -44,8 +47,8 @@
 						    </div>
 							{{!-- <i class="fa fa-plane i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Maximum Distance' value=maxDist}} --}}
                         </div>
+                        {{/if}}
 	                    </div>
-                        {{!-- {{/if}} --}}
 			        		
 
 					    <div style="padding: 20px 0 40px 0;">
@@ -70,8 +73,14 @@
                         </div>
                         </div>
 
-
-							{{mdl-textfield label='Price of item (ZAR)' value=price}}				        		
+                        	{{#if isFixedPrice}}
+							{{mdl-textfield label='Price of item (ZAR)' value=price}}
+							{{else}}
+								{{#if isRangePrice}}
+									{{mdl-textfield label='Min price (ZAR)' value=minPrice}}
+									{{mdl-textfield label='Max price (ZAR)' value=maxPrice}}
+								{{/if}}	
+							{{/if}}				        		
 
 						    <div style="padding: 20px 0 40px 0;">
 
