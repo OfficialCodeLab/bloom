@@ -16,7 +16,7 @@
 						{{/if}}
 
 						{{#paper-select placeholder="Select a category" model=category}}
-						  {{#each model as |cat|}}
+						  {{#each model.category as |cat|}}
 						    {{#paper-option value=cat.id}}
 						      {{cat.name}}
 						    {{/paper-option}}
@@ -26,6 +26,15 @@
 						{{#if refreshFields}}	
 						{{mdl-textarea label='Your product description.' value=desc}}
 						{{/if}}
+
+						{{#paper-select placeholder="Your Location" model=selectedProvince}}
+						  {{#each model.province as |state|}}
+						    {{#paper-option value=state.name}}
+						      {{state.name}}
+						    {{/paper-option}}
+						  {{/each}}
+						{{/paper-select}}
+
 
 						<hr>
 
@@ -74,11 +83,11 @@
                         </div>
 
                         	{{#if isFixedPrice}}
-							{{mdl-textfield label='Price of item (ZAR)' value=price}}
+							{{mdl-textfield label='Price of item (ZAR)' value=price type="number"}}
 							{{else}}
 								{{#if isRangePrice}}
-									{{mdl-textfield label='Min price (ZAR)' value=minPrice}}
-									{{mdl-textfield label='Max price (ZAR)' value=maxPrice}}
+									{{mdl-textfield label='Min price (ZAR)' value=minPrice type="number"}}
+									{{mdl-textfield label='Max price (ZAR)' value=maxPrice type="number"}}
 								{{/if}}	
 							{{/if}}				        		
 

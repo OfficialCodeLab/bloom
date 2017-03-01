@@ -2,7 +2,7 @@
 <br>
 <hr>
 <div style="text-align:center" id="vendorListings">
-   {{!-- {{#if model}} --}}
+   {{#if model.catItems}}
    <div class="text-center hideOnPhones">
       <div id="masonry-items">
          {{#masonry-grid items=model.catItems isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
@@ -16,7 +16,7 @@
                </div>
                <div class="cat-bottom-box">
                   <span class="cat-category">{{cat-item.category.name}}</span>
-                  <span class="cat-price">R{{cat-item.price}}</span>
+                  {{!-- <span class="cat-price">R{{cat-item.price}}</span> --}}
                </div>
             </div>
          </div>
@@ -41,17 +41,17 @@
             </div>
             <div class="cat-bottom-box">
                <span class="cat-category">{{cat-item.category.name}}</span>
-               <span class="cat-price">R{{cat-item.price}}</span>
+               {{!-- <span class="cat-price">R{{cat-item.price}}</span> --}}
             </div>
          </div>
       </div>
       {{/each}}
    </div>
-   {{!-- {{else}}
+   {{else}}
    <div class="text-center">
-      <p>It looks like you don't have any products yet!</p>
+      <p>It looks like you don't have any services yet!</p>
       <p>Click here to create a listing</p>
-      {{#link-to 'index.vendor.new-listing'}}{{mdl-button isRaised=true text='ADD PRODUCT'}}{{/link-to}}
+      {{mdl-button isRaised=true text='ADD SERVICE' action="openAutoListing"}}
    </div>
-   {{/if}} --}}
+   {{/if}}
 </div>

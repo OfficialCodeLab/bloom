@@ -46,28 +46,31 @@ export default Ember.Route.extend({
 	    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
 	}.on('init'),
     actions: {
-    loadedImg: function() {     
-	      let c = this.get('loadCount');
-	      let la = this.get('loadAmount');
-	      c++;
-	      let percentLoaded = (c / la) * 100;
-	      percentLoaded = parseInt(percentLoaded);
-	      this.controller.set('percentLoaded', percentLoaded);
-	      //console.log("loaded image");
-	      this.set('loadCount', c);
+	    loadedImg: function() {     
+		      let c = this.get('loadCount');
+		      let la = this.get('loadAmount');
+		      c++;
+		      let percentLoaded = (c / la) * 100;
+		      percentLoaded = parseInt(percentLoaded);
+		      this.controller.set('percentLoaded', percentLoaded);
+		      //console.log("loaded image");
+		      this.set('loadCount', c);
 
-	     // }
-	     if(c >= la){
-	        //console.log("loading complete");
-	        Ember.$('#masonry-items').fadeIn("fast");
-	        Ember.$('#loading-spinner').fadeOut("fast");
-	      }
-	      try{
-	          var $container = this.controller.get('masonryRef');
-	          $container.layout();        
-	      } catch(ex){}
+		     // }
+		     if(c >= la){
+		        //console.log("loading complete");
+		        Ember.$('#masonry-items').fadeIn("fast");
+		        Ember.$('#loading-spinner').fadeOut("fast");
+		      }
+		      try{
+		          var $container = this.controller.get('masonryRef');
+		          $container.layout();        
+		      } catch(ex){}
 
 
+	    },
+	    openAutoListing: function(){
+	    	this.transitionTo('index.vendor.new-listing', { queryParams: { isAutoListing: true }});
 	    }
 
 	},

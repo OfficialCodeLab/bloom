@@ -19,10 +19,19 @@ export default Ember.Route.extend({
           return sesh;
     },
     model(params) {
-    	return this.store.findAll('category');
+
+        return Ember.RSVP.hash({
+            province: this.store.findRecord('country', 'south_africa').then((_country=>{
+                return _country.get('province');
+            })),
+            category: this.store.findAll('category')
+        });
+    	// return this.store.findAll('category');
     },
 	setupController: function (controller, model) {
      	this._super(controller, model);
+        Ember.set(controller, 'province', model.province);
+        Ember.set(controller, 'category', model.category);
   	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
         let user = this.store.peekRecord('user', _id);
   	    let vendorId = user.get('vendorAccount');
@@ -51,20 +60,25 @@ export default Ember.Route.extend({
      			controller.set('category', cats[0]);
      		} 
 
-     		//If auto listing, fill in description
-     		if(controller.get('isAutoListing') === 'true') {
-     			controller.set('desc', vs.get('servicesDesc'));
+			this.store.findRecord('vendor', vendorId).then((vendor)=>{
+	     		//If auto listing, fill in description
+	     		if(controller.get('isAutoListing') === 'true') {
+	     			controller.set('desc', vs.get('servicesDesc'));
 
-    			this.store.findRecord('vendor', vendorId).then((vendor)=>{
-     				controller.set('name', vendor.get('name'));
+	     				controller.set('name', vendor.get('name'));
 
-     				//Refresh fields
-     				controller.set('refreshFields', false);
-     				Ember.run.next(function () {
-     					controller.set('refreshFields', true);
-				    });
-    			});
-     		} 
+	     				//Refresh fields
+	     				controller.set('refreshFields', false);
+	     				Ember.run.next(function () {
+	     					controller.set('refreshFields', true);
+					    });
+	     		} 
+
+     			//If province is set up, fill in
+	     		if(vendor.get('province')) {
+	     			controller.set('selectedProvince', vendor.get('province'));
+	     		}
+	     	});
      	});
 	},
 	filepicker: Ember.inject.service(),
@@ -107,6 +121,9 @@ export default Ember.Route.extend({
 			this.controller.set('desc', '');
 			this.controller.set('imageURL', '');
 			this.controller.set('imgBlob', '');
+			this.controller.set('minPrice', '');
+			this.controller.set('maxPrice', '');
+			this.controller.set('pricingOption', '3');
 			this.controller.set('isCreating', false);
 			this.controller.set('tempTransition', '');
 			this.controller.set('confirmTransition', 1);
@@ -207,10 +224,22 @@ export default Ember.Route.extend({
 					if(!maxCount || maxCount > itemsC){
 						if(mainImg.src){
 							if(this.controller.get('name')) {
+								let travelObj = this.retrieveTravelInfo();
+								let priceObj = this.retrievePriceInfo();
+								let provinceName = this.controller.get('selectedProvince');
+								let provinceCode = this.retrieveProvinceCode(provinceName);
 								let newItem = this.store.createRecord('cat-item', {		
 								  name: this.controller.get('name'),			
 								  desc: this.controller.get('desc'),			
-								  price: this.controller.get('price'),
+								  price: priceObj.price,		
+								  minPrice: priceObj.minPrice,		
+								  maxPrice: priceObj.maxPrice,
+								  country: 'South Africa',
+								  countryCode: 'za',
+								  province: provinceName,
+								  provinceCode: provinceCode,
+								  willingToTravel: travelObj.willingTravel,
+								  maxTravelDist: travelObj.travelDist,
 								  category: cat,
 								  vendor: vndr
 								});
@@ -223,6 +252,9 @@ export default Ember.Route.extend({
 										vndr.save().then(()=>{
 											this.controller.set('name', '');
 											this.controller.set('price', '');
+											this.controller.set('minPrice', '');
+											this.controller.set('maxPrice', '');
+											this.controller.set('pricingOption', '3');
 											this.controller.set('desc', '');
 											this.controller.set('imageURL', '');
 											// this.controller.set('imgBlob', '');
@@ -477,5 +509,63 @@ export default Ember.Route.extend({
             autoClear: true
         }); 
         this.transitionTo('index.vendor');
+	},
+	retrieveProvinceCode: function(provinceName){
+		let provinces = this.store.peekAll('province');
+		provinces.forEach(function(province){
+			if (province.get('name') === provinceName) {
+				return province.get('code');
+			}
+		});
+		return null;
+	},
+	retrieveTravelInfo: function(){
+		let willingTravel;
+		let travelDist;
+		switch(this.controller.get('willingToTravel')){
+            case '1': //Yes
+                willingTravel = true;
+                travelDist = this.controller.get('maxDist');
+            break;
+
+            case '2': //No
+                willingTravel = false;
+            break;
+
+            default: //Na
+                willingTravel = null;
+            break;
+        }
+
+        return {
+        	willingTravel: willingTravel, 
+        	travelDist: travelDist
+        };
+	},
+	retrievePriceInfo: function(){
+		let price;
+		let minPrice;
+		let maxPrice;
+
+		switch(this.controller.get('pricingOption')){
+			case '1': //Fixed
+                price = this.controller.get('price');
+            break;
+
+            case '2': //Range
+                minPrice = this.controller.get('minPrice');
+                maxPrice = this.controller.get('maxPrice');
+            break;
+
+            default: //Na
+                
+            break;
+        }
+
+        return {
+        	price: price,
+        	minPrice: minPrice,
+        	maxPrice: maxPrice
+        };
 	}
 });
