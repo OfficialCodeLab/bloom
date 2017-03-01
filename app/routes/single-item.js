@@ -34,5 +34,78 @@ export default Ember.Route.extend({
 	    	let venId = this.controller.get('model.vendor.id');
 	    	this.send('openContactModal', venName, venEmail, venId);
 	    },
+	    imgPrev: function(){
+	    	let isRunning = true;
+	    	let breakThis = 0;
+
+	    	while(isRunning){
+		    	let currentSlide = this.controller.get('currentSlide');
+		    	if (currentSlide === 0){
+		    		currentSlide = 3;
+		    	} else {
+		    		currentSlide--;
+		    	}
+
+		    	let imageSuffix = '';
+		    	if(currentSlide === 0) {
+		    		imageSuffix = "URL";
+		    	} else {
+		    		let calcIndex = currentSlide - 1;
+		    		imageSuffix = calcIndex + '';
+		    	}
+
+		    	let toGetString = "model.image" + imageSuffix;
+		    	if(this.controller.get(toGetString)){
+		    		this.setImageSlide(currentSlide);
+		    		isRunning = false;
+		    	} else {
+		    		breakThis++;
+		    		if(breakThis >= 4){
+		    			isRunning = false;
+		    		}
+		    	}
+		    }
+	    },
+	    imgNext: function(){
+	    	let isRunning = true;
+	    	let breakThis = 0;
+
+	    	while(isRunning){
+		    	let currentSlide = this.controller.get('currentSlide');
+				if (currentSlide === 3){
+		    		currentSlide = 0;
+		    	} else {
+		    		currentSlide++;
+		    	}			    	
+
+		    	let imageSuffix = '';
+		    	if(currentSlide === 0) {
+		    		imageSuffix = "URL";
+		    	} else {
+		    		let calcIndex = currentSlide - 1;
+		    		imageSuffix = calcIndex + '';
+		    	}
+
+		    	let toGetString = "model.image" + imageSuffix;
+		    	if(this.controller.get(toGetString)){
+		    		this.setImageSlide(currentSlide);
+		    		isRunning = false;
+		    	} else {
+		    		breakThis++;
+		    		if(breakThis >= 4){
+		    			isRunning = false;
+		    		}
+		    	}	    		
+	    	}
+	    }
+	},
+	setImageSlide: function(slide){
+		this.controller.set('currentSlide', slide);
+		let imgStr = "img" + slide;
+		this.controller.set("img0", false);
+		this.controller.set("img1", false);
+		this.controller.set("img2", false);
+		this.controller.set("img3", false);
+		this.controller.set(imgStr, true);
 	}
 });

@@ -1780,6 +1780,8 @@ Guest List
 	padding-top: 35px;
 }
 .single-img-container{
+	position:relative;
+	min-height: 150px;
 	// background-color: black;
 	// border-radius: 15px;
 	// border-top-left-radius: 15px;
@@ -1798,6 +1800,7 @@ Guest List
 	img{
 		display: inline-block;
 		cursor: default;
+		z-index: 6;
 		// border-radius: 15px;
 
 
@@ -1829,7 +1832,15 @@ Guest List
 	margin-bottom: 24px !important;
 	text-overflow: ellipsis;
 }
-
+.background-spinner {
+	z-index: 4;
+	position: absolute;
+	padding: 20px;
+	top: 80px;
+	width: 100%;
+	text-align: center;
+	// width: 100%;
+}
 
 /*==============================================================================*\
   	Vendor (fuck you im too lazy to make a fancy ascii title)

@@ -9,11 +9,48 @@
 			<div class="col-lg-12 single-item-imageheader unselectable">
 				<div class="single-img-container card-material guide-xs-card">
 					<h4 class="single-item-title">{{model.name}}</h4>
-					<img src={{model.imageURL}}>  {{!-- style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" --}}
+
+					<div style="z-index: 5">
+					{{#if img0}}
+			        <img src={{model.imageURL}}>
+			        {{else}}
+			        	{{#if img1}}
+			        		<img src={{model.image0}}>
+			        	{{else}}
+				        	{{#if img2}}
+				        		<img src={{model.image1}}>
+				        	{{else}}
+					        	{{#if img3}}
+					        		<img src={{model.image2}}>
+			        			{{/if}}
+			        		{{/if}}
+			        	{{/if}}
+			        {{/if}}
+			        </div>
+
+			        <div class="background-spinner">
+						{{mdl-spinner}}
+			        </div>
+					  {{!-- style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" --}}
+
+					    {{!-- {{#ui.item}}
+					      <img src={{model.imageURL}}>
+					    {{/ui.item}}
+					    {{#if model.image0}}
+					    {{#ui.item}}
+					      <img src={{model.image0}}>
+					    {{/ui.item}}
+					    {{/if}} --}}
 				</div>
 			</div>
+
+
 			<div class="col-lg-12" style="padding-bottom: 50px;">
-				<div>
+				<div style="padding-top: 20px;">
+				<div style="text-align: center">
+				{{#mdl-button isRaised=true isAccent=true action="imgPrev"}}Prev{{/mdl-button}}
+				{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
+				</div>
 					<div class="col-md-6 col-md-offset-3">
 						<h4 style="text-align: left; font-weight: 600;">Description</h4>
 						{{#if model.desc}}
