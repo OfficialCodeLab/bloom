@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-
 	model(params){
 		return Ember.RSVP.hash({
 	    	catItem: this.store.findRecord('catItem', params.catItem_id),
-			category: this.store.findAll('category')
+			category: this.store.findAll('category'),
+			province: this.store.findRecord('country', 'south_africa').then((_country=>{
+                return _country.get('province');
+            })),
 	    });
 	},
 	setupController(controller, model) {
@@ -13,10 +15,57 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'catItem', model.catItem);
 	    Ember.set(controller, 'category', model.category);
 
-		let catItem = this.controller.get('model.catItem');
+	    //Select Category
+		let catItem = controller.get('model.catItem');
 		let cat = catItem.get('category');
 		let cat_id = cat.get('id');
-		this.controller.set('category', cat_id);
+		controller.set('category', cat_id);
+
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+        let user = this.store.peekRecord('user', _id);
+  	    let vendorId = user.get('vendorAccount');
+
+ 		//If vendor is willing to travel, autopopulate
+ 		let willingToTravel = catItem.get('willingToTravel');
+ 		if(willingToTravel == 'true'){
+ 			controller.set('maxDist', catItem.get('maxTravelDist'));
+ 			controller.set('willingToTravel', '1');     			
+ 		} else if(willingToTravel == 'false') { 
+ 			controller.set('willingToTravel', '2');
+ 		} else {
+ 			controller.set('willingToTravel', '3');
+ 		}
+
+ 		//Set up and select price
+ 		let price = catItem.get('price');
+ 		let minPrice = catItem.get('minPrice');
+ 		let maxPrice = catItem.get('maxPrice');
+ 		if(price){ 
+ 			// controller.set('maxDist', maxTravelDist);
+ 			controller.set('pricingOption', '1');
+ 			controller.set('price', price);     			
+ 		} else if(minPrice || maxPrice) { 
+ 			controller.set('pricingOption', '2');
+ 			controller.set('minPrice', minPrice);   
+ 			controller.set('maxPrice', maxPrice);   
+ 		} else {
+ 			controller.set('pricingOption', '3');
+ 		}
+     	
+     	//If province is set up, fill in
+     	let province_name = catItem.get('province');
+     	controller.set('selectedProvince', province_name);     	
+		// let prov_code = catItem.get('provinceCode');
+		// this.store.findRecord('country', 'south_africa').then((_country=>{
+	 //        let provinces = _country.get('province');
+	 //        provinces.forEach(function(province){
+	 //        	if(province.get('code') === prov_code){
+	 //        		controller.set('selectedProvince', province.get('name'));
+	 //        	}
+	 //        })
+	 //    }));
+
+
 	  },
 	filepicker: Ember.inject.service(),
 	actions: {
@@ -100,6 +149,21 @@ export default Ember.Route.extend({
 			let _cat = this.controller.get('category') + "";
 			let _item = this.store.peekRecord('cat-item', this.controller.get('model.catItem.id'));
 			this.controller.get('model.catItem').set('isUpdating', true);
+
+			let travelObj = this.retrieveTravelInfo();
+			let priceObj = this.retrievePriceInfo();
+			let provinceName = this.controller.get('selectedProvince');
+			let provinceCode = this.retrieveProvinceCode(provinceName);
+			_item.set('price', priceObj.price);
+			_item.set('minPrice', priceObj.minPrice);
+			_item.set('maxPrice', priceObj.maxPrice);
+			_item.set('country', 'South Africa');
+			_item.set('countryCode', 'za');
+			_item.set('province', provinceName);
+			_item.set('provinceCode', provinceCode);
+			_item.set('willingToTravel', travelObj.willingTravel);
+			_item.set('maxTravelDist', travelObj.travelDist);
+
 			if(_cat.charAt(0) !== '<'){
 				//Category has changed:
 				let cat = this.store.peekRecord('category', _cat);
@@ -114,7 +178,7 @@ export default Ember.Route.extend({
 					cat.save().then(() => {
 						_item.save().then(() => {
 							this.controller.get('model.catItem').set('isUpdating', false);
-							this.tryFlushBlob(_item); //Attempt GC
+							// this.tryFlushBlob(_item); //Attempt GC
 				    		this.controller.get('notifications').success('Product info has been saved!',{
 					            autoClear: true
 					          });
@@ -181,7 +245,80 @@ export default Ember.Route.extend({
 	            	catItem.set('imageURL', Blob.url);
 		        });
 	        });
+	    },
+	imgPrev: function(){
+	    	let isRunning = true;
+	    	let breakThis = 0;
+
+	    	while(isRunning){
+		    	let currentSlide = this.controller.get('currentSlide');
+		    	if (currentSlide === 0){
+		    		currentSlide = 3;
+		    	} else {
+		    		currentSlide--;
+		    	}
+
+		    	let imageSuffix = '';
+		    	if(currentSlide === 0) {
+		    		imageSuffix = "URL";
+		    	} else {
+		    		let calcIndex = currentSlide - 1;
+		    		imageSuffix = calcIndex + '';
+		    	}
+
+		    	let toGetString = "model.catItem.image" + imageSuffix;
+		    	if(this.controller.get(toGetString)){
+		    		this.setImageSlide(currentSlide);
+		    		isRunning = false;
+		    	} else {
+		    		breakThis++;
+		    		if(breakThis >= 4){
+		    			isRunning = false;
+		    		}
+		    	}
+		    }
+	    },
+	    imgNext: function(){
+	    	let isRunning = true;
+	    	let breakThis = 0;
+
+	    	while(isRunning){
+		    	let currentSlide = this.controller.get('currentSlide');
+				if (currentSlide === 3){
+		    		currentSlide = 0;
+		    	} else {
+		    		currentSlide++;
+		    	}			    	
+
+		    	let imageSuffix = '';
+		    	if(currentSlide === 0) {
+		    		imageSuffix = "URL";
+		    	} else {
+		    		let calcIndex = currentSlide - 1;
+		    		imageSuffix = calcIndex + '';
+		    	}
+
+		    	let toGetString = "model.catItem.image" + imageSuffix;
+		    	if(this.controller.get(toGetString)){
+		    		this.setImageSlide(currentSlide);
+		    		isRunning = false;
+		    	} else {
+		    		breakThis++;
+		    		if(breakThis >= 4){
+		    			isRunning = false;
+		    		}
+		    	}	    		
+	    	}
 	    }
+	},
+	setImageSlide: function(slide){
+		this.controller.set('currentSlide', slide);
+		let imgStr = "img" + slide;
+		this.controller.set("img0", false);
+		this.controller.set("img1", false);
+		this.controller.set("img2", false);
+		this.controller.set("img3", false);
+		this.controller.set(imgStr, true);
 	},
 	tryFlushBlob(model){
 		try{
@@ -203,6 +340,64 @@ export default Ember.Route.extend({
 		      }
 		    );
         }); 
+	},
+	retrieveProvinceCode: function(provinceName){
+		let provinces = this.store.peekAll('province');
+		provinces.forEach(function(province){
+			if (province.get('name') === provinceName) {
+				return province.get('code');
+			}
+		});
+		return null;
+	},
+	retrieveTravelInfo: function(){
+		let willingTravel;
+		let travelDist;
+		switch(this.controller.get('willingToTravel')){
+            case '1': //Yes
+                willingTravel = true;
+                travelDist = this.controller.get('maxDist');
+            break;
+
+            case '2': //No
+                willingTravel = false;
+            break;
+
+            default: //Na
+                willingTravel = null;
+            break;
+        }
+
+        return {
+        	willingTravel: willingTravel, 
+        	travelDist: travelDist
+        };
+	},
+	retrievePriceInfo: function(){
+		let price;
+		let minPrice;
+		let maxPrice;
+
+		switch(this.controller.get('pricingOption')){
+			case '1': //Fixed
+                price = this.controller.get('price');
+            break;
+
+            case '2': //Range
+                minPrice = this.controller.get('minPrice');
+                maxPrice = this.controller.get('maxPrice');
+            break;
+
+            default: //Na
+                
+            break;
+        }
+
+        return {
+        	price: price,
+        	minPrice: minPrice,
+        	maxPrice: maxPrice
+        };
 	},
 	uiSetup: function(){
 	   // do magic here...

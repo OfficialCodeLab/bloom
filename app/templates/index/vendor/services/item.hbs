@@ -1,103 +1,120 @@
 <div style="text-align:center; padding-top: 40px;">
-
-	{{!-- {{#link-to 'index.vendor'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}} --}}
+   {{!-- {{#link-to 'index.vendor'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}} --}}
 </div>
 <div class="row text-center full-width-boxes">
-	<div class="col-lg-12">
-		<h1>{{model.catItem.name}}</h1>
-		<div class="single-img-container">
-			<img src={{model.catItem.imageURL}} class="img-responsive">
-		</div>
-	</div>
-	<div class="col-lg-12" style="padding-bottom: 100px">
+   <div class="col-lg-12">
+      <h1>{{model.catItem.name}}</h1>
+      <div class="single-img-container">
+         {{!-- <img src={{model.catItem.imageURL}} class="img-responsive"> --}}
+         <div style="z-index: 5">
+			{{#if img0}}
+	        <img src={{model.catItem.imageURL}} class="img-responsive">
+	        {{else}}
+	        	{{#if img1}}
+	        		<img src={{model.catItem.image0}} class="img-responsive">
+	        	{{else}}
+		        	{{#if img2}}
+		        		<img src={{model.catItem.image1}} class="img-responsive">
+		        	{{else}}
+			        	{{#if img3}}
+			        		<img src={{model.catItem.image2}} class="img-responsive">
+	        			{{/if}}
+	        		{{/if}}
+	        	{{/if}}
+	        {{/if}}
+	        </div>
 
-		<div class="form-horizontal">
-			<h3>Update Details</h3>
-			<div class="form-group has-feedback">
-			{{!-- <label class="col-sm-3 control-label">Name</label> --}}
-			<div class="col-sm-6 col-sm-offset-3">
-				{{mdl-textfield disabled=model.catItem.updating label='Name of item' value=model.catItem.name}}
-				{{!-- {{input type="text" disabled=model.catItem.updating value=model.catItem.name class="form-control" placeholder="Name of new item"}} --}}
-			</div>
+	        <div class="background-spinner">
+				{{mdl-spinner}}
+	        </div>
+      </div>
+   </div>
+   <div class="col-lg-12" style="padding-bottom: 100px">
+		<div style="padding-top: 20px; text-align: center">
+			{{#mdl-button isRaised=true isAccent=true action="imgPrev"}}Prev{{/mdl-button}}
+			{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
 		</div>
-			<div class="form-group has-feedback">
-				{{!-- <label class="col-sm-3 control-label">Description</label> --}}
-				<div class="col-sm-6 col-sm-offset-3">
-					{{mdl-textarea disabled=model.catItem.updating label='Your product description' value=model.catItem.desc}}
-		        		{{!-- {{textarea class="form-control" disabled=model.catItem.updating value=model.catItem.desc placeholder="Your product description. (At least 5 characters.)" rows="7"}} --}}
-	        	</div>
-			</div>
-			<div class="form-group has-feedback" style="text-align: left;">
-			{{!-- <label class="col-sm-3 control-label"></label> --}}
-			<div class="col-sm-6 col-sm-offset-3">
-				{{#paper-select placeholder="Category" model=category}}
-				  {{#each model.category as |cat|}}
-				    {{#paper-option value=cat.id}}
-				      {{cat.name}}
-				    {{/paper-option}}
-				  {{/each}}
-				{{/paper-select}}
-				</div>
-			</div>
-			{{!-- <div class="form-group has-feedback">
-				<label class="col-sm-3 control-label">Category</label>
-				<div class="col-sm-6 {{if category 'has-success'}}">
-					<select disabled={{model.catItem.updating}} onchange={{action "selectCat" value="target.value"}} class="form-control">
-						<option value={{model.catItem.category.id}} selected="selected">{{model.catItem.category.name}}</option>
-						<option style="text-align:center;" disabled>────────────────────</option>
-					  {{#each model.category as |cat|}}
-					    <option value={{cat.id}}>{{cat.name}}</option>
-					  {{/each}}
-					</select>
-				</div>
-			</div> --}}
-			<div class="form-group has-feedback">
-				<div class="col-sm-6 col-sm-offset-3">
-					{{mdl-textfield disabled=model.catItem.updating label='Price of item (ZAR)' value=model.catItem.price}}	
-					{{!-- <div class="has-feedback {{if model.catItem.isValidNumber 'has-success'}}">
-					  <div class="input-group">
-					    <span class="input-group-addon">R</span>
-					    {{input type="text" disabled=model.catItem.updating value=model.catItem.price class="form-control" placeholder="Eg: 500 or 450.23"}}
-					  </div>
-					</div> --}}
-				</div>
-			</div>			
-			<div class="form-group has-feedback">
-				<div class="col-sm-6 col-sm-offset-3">
-				{{#mdl-button isRaised=true disabled=model.catItem.updating action="openFilePicker" isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}}
-				</div>
-			</div>
-			<div class="form-group has-feedback">
-				<div class="col-sm-6 col-sm-offset-3">
-				{{mdl-textfield disabled=model.catItem.updating label='Image Url' value=model.catItem.imageURL}}
-					{{!-- <div class="has-feedback {{if model.catItem.imageURL 'has-success'}}">
-					  <div class="input-group">
-					    <span class="input-group-addon">http://</span>
-					    {{input type="text" disabled=model.catItem.updating value=model.catItem.imageURL class="form-control" placeholder="Eg: imgur/image.jpg"}}
-					  </div>
-					</div> --}}
-				</div>
-			</div>
-			{{!-- <div class="col-sm-offset-3 col-sm-6">
-				<button class="btn btn-success" style="width:100%;" disabled={{model.catItem.isNotValid}} {{action 'updateItem' model.catItem}}>
-					<span>
-						Update Product Listing {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}
-					</span>
-				</button>
-			</div><br><br>
-			<div class="col-sm-offset-3 col-sm-6">
-				<button class="btn btn-danger" style="width:100%;" disabled={{model.catItem.updating}} {{action 'destroyItem' model.catItem}}>
-					<span>
-						Remove Product Listing {{#if model.catItem.isDeleting}}<i class="fa fa-spinner fa-spin"></i>{{/if}}
-					</span>
-				</button>
-			</div> --}}
-			<div>
-				{{#mdl-button isRaised=true disabled=model.catItem.updating action="updateItem"}}Update Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
-			</div>
-			<div style="padding-top: 15px;">
-				{{#mdl-button isRaised=true disabled=model.catItem.updating action="destroyItem" isAccent=true}}Delete Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-trash-o"></i>{{/if}}{{/mdl-button}}
-			</div>
-		</div>
-	</div>
+      <div class="form-horizontal">
+         <h3>Update Details</h3>
+         <div class="form-group has-feedback">
+            <div class="col-sm-6 col-sm-offset-3">
+               {{mdl-textfield disabled=model.catItem.updating label='Name of item' value=model.catItem.name}}
+            </div>
+         </div>
+         <div class="form-group has-feedback">
+            <div class="col-sm-6 col-sm-offset-3">
+               {{mdl-textarea disabled=model.catItem.updating label='Your product description' value=model.catItem.desc}}
+            </div>
+         </div>
+         <div class="form-group has-feedback" style="text-align: left;">
+            <div class="col-sm-6 col-sm-offset-3">
+               {{#paper-select placeholder="Select a category" model=category}}
+               {{#each model.category as |cat|}}
+               {{#paper-option value=cat.id}}
+               {{cat.name}}
+               {{/paper-option}}
+               {{/each}}
+               {{/paper-select}}
+            </div>
+         </div>
+         <div class="form-group has-feedback" style="text-align: left;">
+            <div class="col-sm-6 col-sm-offset-3">
+               {{#paper-select placeholder="Your Location" model=selectedProvince}}
+               {{#each model.province as |state|}}
+               {{#paper-option value=state.name}}
+               {{state.name}}
+               {{/paper-option}}
+               {{/each}}
+               {{/paper-select}}
+            </div>
+         </div>
+         <div class="form-group has-feedback" style="text-align: left;">
+            <div class="col-sm-6 col-sm-offset-3">
+               <strong>Willing to travel?</strong><br>
+               <div>
+                  {{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
+                  {{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
+                  {{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
+               </div>
+               {{#if willTravel}}
+               <div>
+                  <strong>Maximum Distance:</strong><br><br>
+                  <div layout style="cursor: pointer;">
+                     <div flex="10" layout layout-align="center center">
+                        <span>Km:</span>
+                     </div>
+                     {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
+                  </div>
+               </div>
+               {{/if}}
+            </div>
+         </div>
+         <div class="form-group has-feedback">
+            <div class="col-sm-6 col-sm-offset-3">
+               <div style="text-align: left">
+                  <strong>Pricing Option</strong><br>
+                  <div>
+                     {{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
+                     {{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
+                     {{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
+                  </div>
+               </div>
+               {{#if isFixedPrice}}
+               {{mdl-textfield label='Price of item (ZAR)' value=price type="number"}}
+               {{else}}
+               {{#if isRangePrice}}
+               {{mdl-textfield label='Min price (ZAR)' value=minPrice type="number"}}
+               {{mdl-textfield label='Max price (ZAR)' value=maxPrice type="number"}}
+               {{/if}}	
+               {{/if}}	
+            </div>
+         </div>
+         <div>
+            {{#mdl-button isRaised=true disabled=model.catItem.updating action="updateItem"}}Update Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+         </div>
+         <div style="padding-top: 15px;">
+            {{#mdl-button isRaised=true disabled=model.catItem.updating action="destroyItem" isAccent=true}}Delete Item {{#if model.catItem.isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{else}}<i class="fa fa-trash-o"></i>{{/if}}{{/mdl-button}}
+         </div>
+      </div>
+   </div>
 </div>

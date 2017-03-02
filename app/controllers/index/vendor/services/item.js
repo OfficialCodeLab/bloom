@@ -17,6 +17,19 @@ export default Ember.Controller.extend({
 	isNotCreating: Ember.computed.not('isCreating'),
 	isValid: Ember.computed.and('isLongName', 'isLongDesc', 'category', 'isValidNumber', 'imageURL', 'isNotCreating'),
 	isNotValid: Ember.computed.not('isValid'),
+	willingToTravel: 0,
+    willTravel: Ember.computed.equal('willingToTravel', '1'),
+    pricingOption: '3',
+    maxDist: 0,
+    province: '',
+    isFixedPrice: Ember.computed.equal('pricingOption', '1'),
+    isRangePrice: Ember.computed.equal('pricingOption', '2'),
+
+	img0: true,
+    img1: false,
+    img2: false,
+    img3: false,
+    currentSlide: 0,
     actions: {
     	selectCat(){
 		},
