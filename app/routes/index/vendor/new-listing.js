@@ -123,6 +123,7 @@ export default Ember.Route.extend({
 			this.controller.set('imgBlob', '');
 			this.controller.set('minPrice', '');
 			this.controller.set('maxPrice', '');
+			this.setSection(1);
 			this.controller.set('pricingOption', '3');
 			this.controller.set('isCreating', false);
 			this.controller.set('tempTransition', '');
@@ -257,6 +258,7 @@ export default Ember.Route.extend({
 											this.controller.set('pricingOption', '3');
 											this.controller.set('desc', '');
 											this.controller.set('imageURL', '');
+											this.setSection(1);
 											// this.controller.set('imgBlob', '');
 											this.controller.set('itemCreated', true);
 											// if(_blob.url !== _imgurl){
