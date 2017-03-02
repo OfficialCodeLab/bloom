@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+	firebaseApp: Ember.inject.service(),
+	storageRef: '',
 	model(params){
 		return Ember.RSVP.hash({
 	    	catItem: this.store.findRecord('catItem', params.catItem_id),
@@ -27,10 +29,10 @@ export default Ember.Route.extend({
 
  		//If vendor is willing to travel, autopopulate
  		let willingToTravel = catItem.get('willingToTravel');
- 		if(willingToTravel == 'true'){
+ 		if(willingToTravel === 'true'){
  			controller.set('maxDist', catItem.get('maxTravelDist'));
  			controller.set('willingToTravel', '1');     			
- 		} else if(willingToTravel == 'false') { 
+ 		} else if(willingToTravel === 'false') { 
  			controller.set('willingToTravel', '2');
  		} else {
  			controller.set('willingToTravel', '3');
@@ -81,15 +83,11 @@ export default Ember.Route.extend({
 					model.destroyRecord().then(()=>{
 						this.controller.get('model.catItem').set('isDeleting', false);
 						this.transitionTo('index.vendor');
+						this.deleteImages();
 						this.controller.get('notifications').info('Item listing has been removed!',{
 			                autoClear: true
 			            }); 
-						try{
-				        	let _blob = model.get('imageBlob');
-				            if(_blob){	            	
-						  		this.destroyBlob(_blob);
-				            } 						
-						} catch(ex){}
+						
 					});
 
 					break;
@@ -97,18 +95,6 @@ export default Ember.Route.extend({
 
 				case 'transition':
 		    		this.controller.set('confirmTransition', 1);
-					try{
-						let _blob = model.get('imageBlob');
-						let _imgurl = model.get('imageURL');
-						if (_blob.url !== _imgurl){
-							this.destroyBlob(_blob);
-						}
-					}
-					catch(ex){}
-					//GC for modal when transitioning
-					if(_modalData){
-						_modalData.deleteRecord();
-					}
 					this.transitionTo(_transition);
 					this.controller.set('confirmTransition', 0);
 
@@ -398,6 +384,46 @@ export default Ember.Route.extend({
         	minPrice: minPrice,
         	maxPrice: maxPrice
         };
+	},
+	deleteImages: function(){
+		var storageRef = this.get('firebaseApp').storage().ref();
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let user = this.store.peekRecord('user', _id);
+		let catItem = this.controller.get('model.catItem');
+		let itemId = catItem.get('id');
+		let vendorId = user.get('vendorAccount');
+	    var _ref = 'vendorImages/' + vendorId + '/services/' + itemId;
+	    var mainRef = storageRef.child(_ref + '/mainImg');
+
+	    // Delete the file
+	    mainRef.delete().then(function() { // File deleted successfully
+	    }).catch(function(error) { // Uh-oh, an error occurred!
+		     console.log(error);
+	    });
+
+	    if(catItem.get('image0')){
+	    	var ref0 = storageRef.child(_ref+'/image0');
+		    ref0.delete().then(function() { // File deleted successfully
+		    }).catch(function(error) { // Uh-oh, an error occurred!
+		      console.log(error);
+		    });
+	    }
+
+	    if(catItem.get('image1')){
+	    	var ref1 = storageRef.child(_ref+'/image1');
+		    ref1.delete().then(function() { // File deleted successfully
+		    }).catch(function(error) { // Uh-oh, an error occurred!
+		      console.log(error);
+		    });
+	    }
+
+	    if(catItem.get('image2')){
+	    	var ref2 = storageRef.child(_ref+'/image2');
+		    ref2.delete().then(function() { // File deleted successfully
+		    }).catch(function(error) { // Uh-oh, an error occurred!
+		      console.log(error);
+		    });
+	    }
 	},
 	uiSetup: function(){
 	   // do magic here...

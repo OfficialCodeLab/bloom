@@ -39,11 +39,11 @@ export default Ember.Route.extend({
 
      		//If vendor is willing to travel, autopopulate
      		let willingToTravel = vs.get('willingToTravel');
-     		if(willingToTravel == 'true'){
+     		if(willingToTravel === 'true'){
      			let maxTravelDist = vs.get('maxTravelDist');
      			controller.set('maxDist', maxTravelDist);
      			controller.set('willingToTravel', '1');     			
-     		} else if(willingToTravel == 'false') { 
+     		} else if(willingToTravel === 'false') { 
      			controller.set('willingToTravel', '2');
      		} else {
      			controller.set('willingToTravel', '3');
@@ -384,7 +384,7 @@ export default Ember.Route.extend({
 				});
 			});
 
-
+			/* jshint ignore:start */
 			for (var j = 0; j < uploadTasks.length; j++) {
 				//TODO: handle all other uploads
 				//Possibly change observable property and complete when done
@@ -418,6 +418,7 @@ export default Ember.Route.extend({
 					});
 				});
 			}
+			/* jshint ignore:end */
 	    },
 	destroyBlob(blob){
 
