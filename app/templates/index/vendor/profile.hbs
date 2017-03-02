@@ -5,16 +5,121 @@
 <div style="text-align:center">
     <h3>{{model.name}}</h3>
     <div class="row">
-        <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
-            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' disabled="true" value=model.email}}
-            <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Description' value=model.desc}}<br>
-            <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.cell}}
-            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.addressL1}}<br>
-            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.city}}
-            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.postalcode}}<br>
+
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-xs-4">
+                {{mdl-button icon="account_box" action="select0" isRaised=isSelected0 isColored=isSelected0}}       
+                <a href="#" {{action 'select0'}}>
+                    <p  class="{{if isSelected0 'pink-text'}}">Account</p>
+                </a>
+            </div>
+
+            <div class="col-xs-4">
+                {{mdl-button icon="pin_drop" action="select1" isRaised=isSelected1 isColored=isSelected1}}                
+                <a href="#" {{action 'select1'}}>
+                    <p class="{{if isSelected1 'pink-text'}}">Location</p>
+                </a>
+            </div>
+
+            <div action="select2" class="col-xs-4">
+                {{mdl-button icon="settings_applications" action="select2" isRaised=isSelected2 isColored=isSelected2}}       
+                <a href="#" {{action 'select2'}}>
+                    <p class="{{if isSelected2 'pink-text'}}">Preferences</p>
+                </a>
+            </div>
         </div>
     </div>
-    <div class="row"> 
-        {{#mdl-button isRaised=true disabled=isUpdating action="saveChanges"}}Update {{#if isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+
+    <div class="row">
+        <div class="pear-profile-card card-sm unselectable">
+            <div class="vendor-signup-inner">
+                {{#if isSelected0}}
+                    <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+                        <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' disabled="true" value=model.email}}<br>
+                        <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Description' value=model.desc}}<br>
+                        <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.cell}}<br>
+                        <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
+                        <i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br>
+                        <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
+                    </div>
+                {{else}}
+                    {{#if isSelected1}}
+                        <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+                            <i class="fa fa-address-card  i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.addressL1}}<br>
+                            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.city}}<br>
+                            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.postalcode}}<br>                    
+                            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+                            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
+                              {{#each province as |state|}}
+                                {{#paper-option value=state.name}}
+                                  {{state.name}}
+                                {{/paper-option}}
+                              {{/each}}
+                            {{/paper-select}}
+
+                        </div>
+                    {{else}}
+                        <div style="text-align: left; padding: 20px;">
+                           <div>
+                                <strong>Willing to travel?</strong><br>
+                           </div>
+                           <div>
+                              {{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
+                              {{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
+                              {{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
+                           </div>
+                           {{#if willTravel}}
+                           <div>
+                              <strong>Maximum Distance:</strong><br><br>
+                              <div layout style="cursor: pointer;">
+                                 <div flex="10" layout layout-align="center center">
+                                    <span>Km:</span>
+                                 </div>
+                                 {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
+                              </div>
+                           </div>
+                           {{/if}}
+                           <div>
+                              <strong>Pricing Option</strong><br>
+                              <div>
+                                 {{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
+                                 {{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
+                                 {{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
+                              </div>
+                           </div>
+                           {{#if isFixedPrice}}
+                                {{mdl-textfield label='Price of item (ZAR)' value=price type="number"}}
+                           {{else}}
+                               {{#if isRangePrice}}
+                                   {{mdl-textfield label='Min price (ZAR)' value=minPrice type="number"}}
+                                   {{mdl-textfield label='Max price (ZAR)' value=maxPrice type="number"}}
+                               {{/if}}  
+                           {{/if}}
+
+                           <hr>
+
+                           <strong>Mailing Preferences</strong><br><br>
+                            <div {{action "checkBox" "MA"}} class="tb-btn">
+                              {{#if checkedMA}}
+                                {{mdl-button icon="check_box"}}
+                              {{else}}
+                                {{mdl-button icon="check_box_outline_blank"}}
+                              {{/if}} Would you like a monthly analytics report?
+                            </div><div {{action "checkBox" "MN"}} class="tb-btn">
+                              {{#if checkedMN}}
+                                {{mdl-button icon="check_box"}}
+                              {{else}}
+                                {{mdl-button icon="check_box_outline_blank"}}
+                              {{/if}} Interested in monthly newsletter?
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+
+                <div class="row" style="margin-top: 30px; margin-bottom: 30px;"> 
+                    {{#mdl-button isRaised=true disabled=isUpdating action="saveChanges"}}Update {{#if isUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>

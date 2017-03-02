@@ -32,6 +32,21 @@ export default Ember.Route.extend({
 
         });
     	},
+      select0: function(){
+        this.controller.set('isSelected0', true);
+        this.controller.set('isSelected1', false);
+        this.controller.set('isSelected2', false);
+      },
+      select1: function(){
+        this.controller.set('isSelected0', false);
+        this.controller.set('isSelected1', true);
+        this.controller.set('isSelected2', false);
+      },
+      select2: function(){
+        this.controller.set('isSelected0', false);
+        this.controller.set('isSelected1', false);
+        this.controller.set('isSelected2', true);
+      },
     	closeMessage(){
     		this.controller.set('responseMessage', '');
     	}
