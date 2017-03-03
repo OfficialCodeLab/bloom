@@ -26,5 +26,5 @@ export default Ember.Route.extend({
 	        this.transitionTo('login');
 	      }
 	      return sesh;
-    },
+    }
 });

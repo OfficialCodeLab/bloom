@@ -8,6 +8,7 @@ export default Ember.Route.extend({
 	vendorLog: null,
 	vendorStatsId: null,
 	isTodoSubmitted: null,
+	isOverlay: false,
 	metrics: Ember.inject.service(),
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
@@ -45,6 +46,7 @@ export default Ember.Route.extend({
 				//console.log("TEST" + this.controller);
 			}
 		},
+		
 		didTransition() {
 			Ember.$('#menu-overlay').fadeOut("slow");
 			Ember.$('#menu-icon-c').fadeOut(0);

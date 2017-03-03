@@ -61,6 +61,7 @@ body {
 
 .index-main{
 	padding-bottom: 20px;
+	position: relative;
 	// background-color: rgba(255,255,255,0.99);
 	background-color: white;
 	min-height: 100vh;
@@ -1273,6 +1274,19 @@ Guest List
 	}
 }
 
+#overview-card-1{
+	z-index: 3;
+}
+
+#overview-card-3 {
+	cursor: pointer;
+}
+
+#overview-card-6, #overview-card-5, #overview-card-4, #overview-card-3, #overview-card-2 {
+	z-index: 2;
+
+}
+
 .padding-25{		
 	padding-top: 25px;
 }
@@ -2168,6 +2182,36 @@ $font_0: FontAwesome;
 
 .pink-text{
 	color: $color-main;
+}
+
+#dark-overlay{
+	// position: absolute;
+	width: 100%;
+	height: 100%;
+    position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 200;
+	background: rgba(0,0,0,0.65);
+	display: none;
+
+}
+
+.highlight-item{
+	z-index: 900 !important;
+}
+
+#highlight-item{
+	z-index: 800 !important;
+}
+
+.shepherd-enabled {
+	z-index: 900 !important;
+
+}
+
+.shepherd-element.shepherd-theme-arrows .shepherd-content footer .shepherd-buttons li .shepherd-button {
+	background: $color-main;
 }
 
 

@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-md-3 col-sm-6">
-                <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 3;">
+                <div class="pear-profile-card guide-xs-card overview-block" id="overview-card-1">
                     <div class="overview-sm-block" style="background-image: url(../assets/images/overview2.jpg)">
                         <div class="overlay-green">
                         </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-md-5 col-sm-6">
-                <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
+                <div class="pear-profile-card guide-xs-card overview-block" id="overview-card-2">
 
                     <div class="overview-md-block">
                         <h5>Personal Information</h5>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
-                {{#link-to 'vendor-profile' topVendor.id}}<div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2; cursor: pointer;">
+                {{#link-to 'vendor-profile' topVendor.id}}<div class="pear-profile-card guide-xs-card overview-block" id="overview-card-3">
                     <div class="overview-lg-block" style="background-image: url(../assets/images/overview3.jpg)">
                         <div class="overlay-pink">
                         </div>
@@ -73,7 +73,7 @@
             <div class="overview-padding">
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
+                <div class="pear-profile-card guide-xs-card overview-block" id="overview-card-4">
                     <div class="overview-sm-block" style="background-image: url(../assets/images/overview1.jpg)">
                         <div class="overlay-pink">
 
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
-                <div class="pear-profile-card guide-xs-card overview-block" style="z-index: 2;">
+                <div class="pear-profile-card guide-xs-card overview-block" id="overview-card-5">
                     <div class="overview-action-add">
                         {{#link-to 'index.mywedding.budget'}}{{mdl-button icon="add_circle"}}{{/link-to}}  
                     </div>
@@ -124,8 +124,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 col-sm-6" style="z-index: 2;">
-                <div class="pear-profile-card guide-xs-card overview-block todo-widget">
+            <div class="col-md-5 col-sm-6">
+                <div class="pear-profile-card guide-xs-card overview-block todo-widget" id="overview-card-6">
                     {{!-- <div class="overlay-gray">
 
                     </div> --}}
@@ -224,3 +224,4 @@
         </div>--}}
     </div>
 </div>
+{{#tour-wedding}} {{/tour-wedding}} 
