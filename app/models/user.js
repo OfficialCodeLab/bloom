@@ -22,5 +22,6 @@ export default Model.extend({
   innercircle: hasMany('userstats'),
   preference: attr('string'),
   birthday: attr('date'),
+  mustTourWedding: attr('boolean'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });
