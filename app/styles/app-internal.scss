@@ -899,6 +899,14 @@ Guest List
 
 }
 
+.vendor-profile-inner-override {
+	padding-top: 7px;
+
+	md-input-container > md-select {
+	 margin-top: -30px !important;
+	}
+}
+
 .vendor-service-inner{
 	padding: 20px 40px 0 40px;
 	max-width: 450px;

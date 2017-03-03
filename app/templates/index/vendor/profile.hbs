@@ -3,7 +3,7 @@
 <hr>
 
 <div style="text-align:center">
-    <h3>{{model.name}}</h3>
+    <h3>{{model.vendor.name}}</h3>
     <div class="row">
 
         <div class="col-sm-6 col-sm-offset-3">
@@ -35,27 +35,29 @@
             <div class="vendor-signup-inner">
                 {{#if isSelected0}}
                     <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
-                        <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' disabled="true" value=model.email}}<br>
-                        <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Description' value=model.desc}}<br>
-                        <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.cell}}<br>
-                        <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
-                        <i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br>
-                        <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
+                        <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' disabled="true" value=model.vendor.email}}<br>
+                        <i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Description' value=model.vendor.desc}}<br>
+                        <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.vendor.cell}}<br>
+                        <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=model.vendorStat.repName}}<br>
+                        <i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=model.vendorStat.vatNum}}<br>
+                        <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=model.vendorStat.website}}<br>
                     </div>
                 {{else}}
                     {{#if isSelected1}}
                         <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
-                            <i class="fa fa-address-card  i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.addressL1}}<br>
-                            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.city}}<br>
-                            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.postalcode}}<br>                    
+                            <i class="fa fa-address-card  i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.vendor.addressL1}}<br>
+                            <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.vendor.city}}<br>
+                            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.vendor.postalcode}}<br>                    
                             <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+                            <div class="vendor-profile-inner-override">
                             <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
-                              {{#each province as |state|}}
+                              {{#each model.province as |state|}}
                                 {{#paper-option value=state.name}}
                                   {{state.name}}
                                 {{/paper-option}}
                               {{/each}}
                             {{/paper-select}}
+                            </div>
 
                         </div>
                     {{else}}
@@ -79,34 +81,18 @@
                               </div>
                            </div>
                            {{/if}}
-                           <div>
-                              <strong>Pricing Option</strong><br>
-                              <div>
-                                 {{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
-                                 {{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
-                                 {{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
-                              </div>
-                           </div>
-                           {{#if isFixedPrice}}
-                                {{mdl-textfield label='Price of item (ZAR)' value=price type="number"}}
-                           {{else}}
-                               {{#if isRangePrice}}
-                                   {{mdl-textfield label='Min price (ZAR)' value=minPrice type="number"}}
-                                   {{mdl-textfield label='Max price (ZAR)' value=maxPrice type="number"}}
-                               {{/if}}  
-                           {{/if}}
 
                            <hr>
 
                            <strong>Mailing Preferences</strong><br><br>
-                            <div {{action "checkBox" "MA"}} class="tb-btn">
-                              {{#if checkedMA}}
+                            <div {{action "checkBoxMA"}} class="tb-btn">
+                              {{#if model.vendorStat.monthlyAnalytics}}
                                 {{mdl-button icon="check_box"}}
                               {{else}}
                                 {{mdl-button icon="check_box_outline_blank"}}
                               {{/if}} Would you like a monthly analytics report?
-                            </div><div {{action "checkBox" "MN"}} class="tb-btn">
-                              {{#if checkedMN}}
+                            </div><div {{action "checkBoxMN"}} class="tb-btn">
+                              {{#if model.vendorStat.montlyNewsletter}}
                                 {{mdl-button icon="check_box"}}
                               {{else}}
                                 {{mdl-button icon="check_box_outline_blank"}}
