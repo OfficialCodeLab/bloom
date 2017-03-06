@@ -40,7 +40,10 @@ export default Ember.Route.extend({
 					this.controller.set('oldname', _name);
 					this.controller.set('searchResults', searchResults);
 					this.controller.set('searching', false);
-					this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});
+					let _this = this;
+					Ember.run.next(function () {
+						_this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});
+				    });
   					this.store.unloadAll('user');
 		  			this.store.findRecord('user', _id);
 				});

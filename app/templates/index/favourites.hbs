@@ -1,8 +1,8 @@
 <div class="pear-sub-well">
    <ul class="nav nav-pills unselectable pear-sidebar">
-      {{#link-to 'index.favourites.myfavourites' tagName="li"}}<a href>MY FAVOURITES</a>{{/link-to}}
-      {{#link-to 'index.favourites.innercircle' tagName="li"}}<a href>INNER CIRCLE</a>{{/link-to}}
-      {{#link-to 'index.favourites.mystats' tagName="li"}}<a href>MY STATS</a>{{/link-to}}
+      {{#link-to 'index.favourites.myfavourites' tagName="li"}}<a id="nav-my-favs" href>MY FAVOURITES</a>{{/link-to}}
+      {{#link-to 'index.favourites.innercircle' tagName="li"}}<a id="nav-innercircle" href>INNER CIRCLE</a>{{/link-to}}
+      {{#link-to 'index.favourites.mystats' tagName="li"}}<a id="nav-my-stats" href>MY STATS</a>{{/link-to}}
    </ul>
 </div>
 <div class="container">
@@ -11,3 +11,4 @@
    </div>
 </div>
 {{notification-container position="bottom"}}
+{{#tour-favourites session.currentUser.providerData.0.uid}} {{/tour-favourites}} 

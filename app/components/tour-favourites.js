@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const TourWeddingComponent = Ember.Component.extend({
+const TourFavouritesComponent = Ember.Component.extend({
   	tour: Ember.inject.service(),
   	storeName: '',
   	scroller: Ember.inject.service(),
@@ -18,9 +18,9 @@ const TourWeddingComponent = Ember.Component.extend({
 		};
 
 		store.findRecord('user', _id).then((user)=>{
-			var mustTourWedding = user.get('mustTourWedding');
+			var mustTourFavourites = user.get('mustTourFavourites');
 
-			if(mustTourWedding){
+			if(mustTourFavourites){
 				this.get('tour').set('defaults', {
 				  classes: 'shepherd-element shepherd-open shepherd-theme-arrows',
 				  scrollTo: true,
@@ -30,20 +30,19 @@ const TourWeddingComponent = Ember.Component.extend({
 				  scrollToHandler: scrollHandler
 				});
 		    	this.get('tour').set('steps', [
-				  {
-				    id: 'intro',
-				    scrollTo: false,
+		    	  {
+				    id: 'welcome-favs',
 				    options: {
 				      builtInButtons: [
 				        {
 				          classes: 'shepherd-button-primary',
-				          text: 'Start',
+				          text: 'start',
 				          type: 'next'
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Welcome to Bloom',
-				      text: ['Dream. Create. Inspire.<br>Bloom invites you to build and celebrate your magical day with flawless wedding planning that spares no detail.<br>We’ll show you all the ropes to help you tie the knot.'],
+				      title: 'Welcome to your favourites',
+				      text: ['This section is all about you!<br>Keep track of all your favourite listings, your inner circle<br>and your stats!'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -52,11 +51,11 @@ const TourWeddingComponent = Ember.Component.extend({
 				    }
 				  },
 				  {
-				    id: 'select-date',
+				    id: 'your-favs',
 				    options: {
 				      attachTo: {
-						  element: '#overview-card-1',
-						  on: 'right'
+						  element: '#nav-my-favs',
+						  on: 'bottom'
 						},
 				      // beforeShowPromise: function() {
 				      //   return new Ember.RSVP.Promise(function(resolve) {
@@ -80,8 +79,8 @@ const TourWeddingComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Set up your wedding date',
-				      text: ['Select your wedding date so that you can start planning for your big day!'],
+				      title: 'Keep track of your favourites',
+				      text: ['With Listings to visually inspire and fill all your heart’s desires.<br>Once you have hit the favourite button,<br>they will all be saved here!'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -90,11 +89,11 @@ const TourWeddingComponent = Ember.Component.extend({
 				    }
 				  },
 				  {
-				    id: 'setup-budget',
+				    id: 'invite-friends',
 				    options: {
 				      attachTo: {
-						  element: '#overview-card-5',
-						  on: 'top'
+						  element: '#nav-innercircle',
+						  on: 'bottom'
 						},
 				      builtInButtons: [
 				        {
@@ -109,8 +108,8 @@ const TourWeddingComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Set up a budget',
-				      text: ['Keep track of those finances with our advanced budget calculator.'],
+				      title: 'Invite your friends!',
+				      text: ['Add your friends to your inner circle and share<br>your wedding planning journey with them.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -119,11 +118,11 @@ const TourWeddingComponent = Ember.Component.extend({
 				    }
 				  },
 				  {
-				    id: 'setup-todo',
+				    id: 'my-stats',
 				    options: {
 				      attachTo: {
-						  element: '#overview-card-6',
-						  on: 'left'
+						  element: '#nav-my-stats',
+						  on: 'bottom'
 						},
 				      builtInButtons: [
 				        {
@@ -138,72 +137,41 @@ const TourWeddingComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Plan out your tasks',
-				      text: ['Add tasks to your to-do list to keep track of everything that needs doing.<br>Soon you will be able to assign them to your friends!'],
+				      scrollTo: false,
+				      title: 'Set up your stats',
+				      text: ['Keep your measurements up to date so you can easily share these<br>with your inner circle when they need them!'],
 				      when: {
 				        cancel: () => {
+				        	alert("DONE BITCHES");
 				        	this.completeTour();
 				        }
 				      }
 				    }
 				  },
 				  {
-				    id: 'invite-guests',
+				    id: 'tour-done',
 				    options: {
-				      attachTo: {
-						  element: '#overview-card-4',
-						  on: 'right'
-						},
-				      builtInButtons: [
-				        {
-				          classes: 'shepherd-button-primary',
-				          text: 'Back',
-				          type: 'back'
-				        },
-				        {
-				          classes: 'shepherd-button-primary',
-				          text: 'Next',
-				          type: 'next'
-				        }
-				      ],
-				  	  disableScroll: true,
-				      title: 'Get started on your guest list',
-				      text: ['Invite all of your loved ones to your big day.<br>When you are done you can email all your invites out automatically!'],
-				      when: {
-				        cancel: () => {
-				        	this.completeTour();
-				        }
-				      }
-				    }
-				  },
-				  {
-				    id: 'outro',
-				    options: {
-				      attachTo: {
-						  element: '#overview-card-2',
-						  on: 'top'
-					  },
+				      showCancelLink: true,
 				      builtInButtons: [
 				        {
 				          classes: 'shepherd-button-secondary',
 				          text: 'Done',
 				          type: 'cancel'
-				        }
+				        },
 				      ],
 				  	  disableScroll: true,
-				      // scrollTo: false,
-				      title: 'Finish your profile',
-				      text: ['That’s all for this tour!<br>Head to your account page to set up<br>any other details you may have missed!'],
+				      title: 'Go wild. Be inspired!',
+				      text: ['Now it is time to browse!<br>Click on categories in the navigation bar and explore! Enjoy :)'],
 				      when: {
-				        hide: () => {
+				      	hide: () => {
 				        	this.completeTour();
-				        },
+				      	},
 				        cancel: () => {
 				        	this.completeTour();
 				        }
 				      }
 				    }
-				  },
+				  }
 				  ]);
 				this.toggleOverlay();
 				this.get('tour').start();
@@ -228,16 +196,16 @@ const TourWeddingComponent = Ember.Component.extend({
 		let store = this.get('storeName');
 		let _id = this.get('userid');
 		store.findRecord('user', _id).then((user)=>{
-			user.set('mustTourWedding', false);
+			user.set('mustTourFavourites', false);
 			user.save();
 		});
 	}
 });
 
 
-TourWeddingComponent.reopenClass({
+TourFavouritesComponent.reopenClass({
   positionalParams: ['userid']
 });
 
 
-export default TourWeddingComponent;
+export default TourFavouritesComponent;

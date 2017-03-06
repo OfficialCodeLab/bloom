@@ -5,22 +5,14 @@
 				{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}
 				{{mdl-textfield disabled=searching label='Name to search for' value=name}}
 				{{mdl-button icon="search" action="searchUser" disabled=searching}}
-				{{!-- {{input type="text" disabled=searching value=name class="form-control" placeholder="Name to search for"}} --}}
 			</div>
-			{{!-- <div class="col-sm-3" style="padding-top:5px">
-				<button class="btn btn-default" style="width:100%" disabled={{isNotValid}} {{action 'searchUser'}}>Go{{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>
-			</div> --}}
 		</div>
 	</div>
 	{{#if searching}}
 	<div class="row text-center">
 		<div class="form-group">
     		{{mdl-spinner}}
-			{{!-- {{#mdl-button isRaised=true isAccent=true action="backBtn"}}Cancel{{/mdl-button}}&nbsp; --}}
 		</div>
-		{{!-- <div class="form-group" style="padding-top: 5px;">
-			{{#mdl-button isRaised=true action="searchUser" disabled=isDisabled}}Search {{#if searching}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
-		</div> --}}
 	</div>
 	{{/if}}
 	{{#if responseMessage}}
@@ -45,34 +37,9 @@
 		      		{{else}}
 						{{mdl-button icon="person_add" disabled=user.adding}}
 		      		{{/if}}
-
 		      	</div>
-		        {{!-- <button class="btn btn-success" disabled={{user.adding}} {{action "addInnerCircle" user}}>Add{{#if user.adding}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button>  --}}
 		      {{/mdl-table-col}}
 		    {{/mdl-table}}
 		</div>
 	{{/if}}
-		{{!-- <table class="table table-bordered table-striped">
-		    <thead style="text-align: center;">
-		      <tr>
-		          <th>Full Name</th>
-		          <th>Send Request</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    {{#each searchResults as |user|}}
-		        <tr>
-		            <td>{{user.name}}</td>           
-		            <td>
-		            	<button class="btn btn-success" disabled={{user.adding}} {{action "addInnerCircle" user}}>Add{{#if user.adding}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button> 
-							{{#if user.response}}
-					    		<div class="alert alert-success text-center" style="display:inline-block; margin-bottom:0px; padding: 8px; " {{action 'closeMessageAdded' user}}>{{user.response}}</div>
-						{{/if}}
-					</td>
-		        </tr>
-		    {{/each}}
-
-		    </tbody>
-		</table> --}}
-
 </div>

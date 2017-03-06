@@ -23,5 +23,7 @@ export default Model.extend({
   preference: attr('string'),
   birthday: attr('date'),
   mustTourWedding: attr('boolean'),
+  mustTourVendor: attr('boolean'),
+  mustTourFavourites: attr('boolean'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });

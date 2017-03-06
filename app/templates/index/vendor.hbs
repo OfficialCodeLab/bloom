@@ -2,9 +2,9 @@
 {{#if model.user.vendorAccount}}
 	<div class="pear-sub-well">
 		<ul class="nav nav-pills unselectable pear-sidebar">
-		{{#link-to 'index.vendor.listings' tagName="li"}}<a href>SERVICES</a>{{/link-to}}
-		{{#link-to 'index.vendor.new-listing' tagName="li"}}<a href>ADD SERVICE</a>{{/link-to}}
-		{{#link-to 'index.vendor.profile' tagName="li"}}<a href>PROFILE</a>{{/link-to}}
+		{{#link-to 'index.vendor.listings' tagName="li"}}<a id="nav-all-services" href>SERVICES</a>{{/link-to}}
+		{{#link-to 'index.vendor.new-listing' tagName="li"}}<a id="nav-add-services" href>ADD SERVICE</a>{{/link-to}}
+		{{#link-to 'index.vendor.profile' tagName="li"}}<a id="nav-vendor-profile" href>PROFILE</a>{{/link-to}}
 		{{#link-to 'index.vendor.security' tagName="li"}}<a href>SECURITY</a>{{/link-to}}
 		</ul>
 	</div>
