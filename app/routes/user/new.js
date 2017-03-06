@@ -16,7 +16,10 @@ export default Ember.Route.extend({
 			var user = this.store.createRecord('user', {
 			  name: name,
 			  surname: surname,
-			  id: _id
+			  id: _id,
+			  mustTourWedding: true,
+			  mustTourFavourites: true,
+			  mustTourVendor: true
 			});
 
 			let wedding = this.store.createRecord('wedding', 

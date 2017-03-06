@@ -56,6 +56,20 @@ export default Ember.Route.extend({
     		this.get('session').close().then(()=> {
     			this.transitionTo('vendor-signup');
     		});
-	    }
+	    },
+
+		retakeTours: function(){
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let user = this.store.peekRecord('user', _id);
+			user.set('mustTourVendor', true);
+			user.set('mustTourWedding', true);
+			user.set('mustTourFavourites', true);
+			user.save().then(()=>{
+				this.controller.get('notifications').success('Saved successfully!',{
+					  autoClear: true
+				});
+				
+			});
+		}
 	  }
 });
