@@ -8,12 +8,15 @@
 		</div>
 	</div>
 
-	<div class="container" style="padding-top: 40px; padding-bottom: 20px;">
+	<div class="container">
+		<div style="padding-top: 80px; padding-bottom: 80px;">
 		<h1>Become Part of an Ecosystem</h1>
 		<p style="font-size: 20px;">Along with the country's finest wedding suppliers.</p>
-		<br><hr><br>
-		<h1>How it Works</h1>
-		<div class="row vendor-tour-works">
+		</div><hr>
+		<div style="padding-top: 80px">
+			<h1>How it Works</h1>
+		</div>
+		<div class="row vendor-tour-works" style="padding-bottom: 60px; padding-top: 20px;">
           <div class="col-sm-3 border-box">
             <i class="material-icons">dashboard</i>
             <p>Create your profile in no time with our easy to use app.</p>
@@ -33,10 +36,51 @@
             <p>Couples are then able to directly connect with you. From here you will then follow through and manage your booking.</p></div>
         </div>
 		{{!-- stuff --}}
-		<p style="font-style: italic;">Take a look at some of our Categories and let your imagination go wild!</p><br>
+		<hr>
 	</div>
 
-	<div class="container-fluid" style="padding-top: 50px;">
+
+	
+
+	<div class="form-group container" style="padding-top: 80px;">
+		{{!-- <div style="padding-top: 10px; padding-bottom: 60px;">
+			{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
+		</div> --}}
+		<div>
+			<h1>We’d love you to join the Bloom Ecosystem.</h1>
+			{{!-- <p style="font-size: 20px;">We’d love for you to join the Bloom Vendor Team!</p> --}}
+			<p style="font-style: italic;">Simply click below and fill in the Vendor Sign Up form.</p>
+			<p style="font-style: italic;">It’s that easy!</p>
+			<div class="form-group" style="padding-top: 50px; padding-bottom: 80px;">
+				{{#link-to 'vendor-signup'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
+			</div><hr>
+			<div style="padding-top: 80px">
+				<h1>What makes Bloom different?</h1>
+			</div>
+
+			<p>Instead of paying a monthly rate with no guarantee, our payment structure is geared towards only being charged for the traffic you receive. This is monitored through favInstead of paying a monthly subscription with no guarantee, our payment structure is geared towards only being charged for the traffic and bookings you receive. This is monitored through favouriting, contact requests and direct messaging. With a capped monthly spend you can manage your budget.ouriting, contact number requests and direct messaging.</p>
+			<div class="form-group" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
+				{{mdl-button isRaised=true text='View Rates'}}
+			</div>			
+			<p style="text-align: left;">
+			We aim to offer a fully transparent service that shows you the traffic you receive with itemized billing.
+			<br><br>Along with your bill, you will receive a monthly analytics report.
+			<br><br>This valuable information provides insights into your profile, such as how to increase traffic to your listing along with so much more.
+			<br><br>Inquiries are sent directly to your inbox.
+			<br><br>Without enquiries, contact requests or favouriting, no costs will be added to you.
+			<br><br>You will never pay more than your capped monthly spend and still receive the traffic as usual.
+			<br><br>Our targeted marketing strategy helps you gain exposure to couples that are in the market for wedding vendors. As a digital business we put a huge focus on online marketing in order to drive maximum user traffic to our platform and ultimately your products and services.
+			<br><br>No subscription fees and you can leave the platform at any time. It is our priority to drive value to you the vendor and the user.</p>
+			<div class="form-group" style="padding-top: 50px; padding-bottom: 80px;">
+				{{#link-to 'vendor-signup'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
+			</div><hr>
+		</div>
+	</div>
+
+	<div style="padding-top: 80px;">
+	<h1>A Taste of our Categories</h1>
+	<p style="font-style: italic;">Once you have signed up your listing will be found under the relevant category.</p><br>
+	<div class="container-fluid" style="padding-top: 80px; padding-bottom: 120px;">
 		{{#each model as |category|}}
 		{{!-- {{#link-to 'category' category.id}} --}}
 		<div class="col-sm-3 height-3 category-outer-square col-xs-4">
@@ -46,34 +90,7 @@
 			</div>
 		</div>{{!-- {{/link-to}} --}}
 		{{/each}}
-		{{!-- {{#each model as |category|}}
-		{{#link-to 'category' category.id}}
-		<div class="col-lg-4 col-md-6">
-			<div class="category-block-m">
-				<div class="text-center cat-img-container-m">
-					<img src="{{category.imageURL}}" class="img-responsive cat-image-m">
-				</div>
-				<div class="overlay-title"><h4>{{category.name}}</h4></div>
-			</div>
-		</div>{{/link-to}}
-		{{/each}} --}}
 	</div>
-
-	<div class="form-group container" style="padding-top: 60px;">
-		<div style="padding-top: 10px; padding-bottom: 60px;">
-			{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
-		</div>
-		<hr>
-		<div style="padding-top: 20px; padding-bottom: 80px;">
-			<h1>Want to become a Vendor?</h1>
-			<p style="font-size: 20px;">We’d love for you to join the Bloom Vendor Team!</p>
-			<p style="font-style: italic;">Simply click below and fill in the Vendor Sign Up form.</p>
-			<p style="font-style: italic;">It’s that easy!</p>
-			<div class="form-group" style="padding-top: 50px; padding-bottom: 50px;">
-				{{#link-to 'vendor-signup'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
-			</div><hr>
-			{{!-- <p><h1>Why Pair with Pear?</h1>Instead of paying a monthly rate with no guarantee, our payment structure is geared towards only being charged for the traffic you receive. This is monitored through favouriting, contact number requests and direct messaging.<br><br>Along with your bill, you would receive a monthly analytics report.<br><br>This valuable information provides insights into your profile, such as how to increase traffic to your listing along with so much more.<br><br>Inquiries are then sent directly to your inbox.<br><br>Without enquiries, contact number requests or favouriting, no costs will be added to you.<br><br>Our targeted marketing strategy helps you gain exposure to couples that are in the market for wedding vendors.</p> --}}
-		</div>
 	</div>
 
 	<div class="special-vendor-list" style="padding-top: 40px; padding-bottom: 60px;">
