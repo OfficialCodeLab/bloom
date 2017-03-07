@@ -2,27 +2,28 @@
 <h1 class="font-times-header" style="color: #4C4C4E;">My Account</h1><br>
 <hr>
 <div class="row">
-	    <div class="profile-pic-outer-grey">
-	    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
-	    </div>
-	    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3>
-	    <div class="row">
-		    <div class="col-sm-4 col-xs-offset-4">
-		    	{{#md-datepicker placeholder="Pick your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}
-		    </div>
-	    </div>
-	    <hr>
-	 </div>
+    <div class="profile-pic-outer-grey">
+    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+    </div>
+    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3>
+    
+    <div class="form-horizontal">
+	    <div class="col-sm-4 col-sm-offset-4">
+	    	{{#md-datepicker placeholder="Pick your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}
+    	</div>
+    </div>
+</div>
+<hr>
 
 <div class="row">
-		<div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
-			<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.user.email}}
-			<i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.user.cell}}<br>
-			<i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.user.addressL1}}
-			<i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.user.city}}<br>
-			<i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.user.postalcode}}
-			<i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-	    </div>
+	<div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+		<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.user.email}}
+		<i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.user.cell}}<br>
+		<i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.user.addressL1}}
+		<i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.user.city}}<br>
+		<i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.user.postalcode}}
+		<i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+    </div>
 </div>
 <div style="padding: 20px 0px 40px 0px;">
 	{{mdl-button isRaised=true text='UPDATE' action="saveUser"}}

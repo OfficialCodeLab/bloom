@@ -1,12 +1,18 @@
 <div class="container-fluid" style="padding: 0px 10px 60px 10px; text-align: center;">
-	<div class="form-horizontal row">
-		<div class="form-group has-feedback">
+	<div class="row">
 			<div class="col-sm-6 col-sm-offset-3" style="padding-top:5px">
-				{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}
-				{{mdl-textfield disabled=searching label='Name to search for' value=name}}
-				{{mdl-button icon="search" action="searchUser" disabled=searching}}
+				<div class="row">
+					<div class="col-xs-2" style="padding-top: 20px;">
+						{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}
+					</div>
+					<div class="col-xs-8">
+						{{mdl-textfield disabled=searching label='Name to search for' value=name}}
+					</div>
+					<div class="col-xs-2" style="padding-top: 20px;">
+						{{mdl-button icon="search" action="searchUser" disabled=searching}}
+					</div>
+				</div>
 			</div>
-		</div>
 	</div>
 	{{#if searching}}
 	<div class="row text-center">

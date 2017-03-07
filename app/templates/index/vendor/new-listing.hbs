@@ -11,9 +11,11 @@
 		        		<h4>Details</h4>
 		        	</div>
 		        	<div class="vendor-service-inner">
+
 		        		{{#if refreshFields}}							
 						{{mdl-textfield label='Name of new item' value=name}}
 						{{/if}}
+
 
 						{{#paper-select placeholder="Select a category" model=category}}
 						  {{#each model.category as |cat|}}
@@ -23,9 +25,11 @@
 						  {{/each}}
 						{{/paper-select}}
 						
+
 						{{#if refreshFields}}	
 						{{mdl-textarea label='Your product description.' value=desc}}
 						{{/if}}
+
 
 						{{#paper-select placeholder="Your Location" model=selectedProvince}}
 						  {{#each model.province as |state|}}
@@ -36,26 +40,29 @@
 						{{/paper-select}}
 
 
-						<hr>
 
 
-			        	<div style="text-align: left">
-							<strong>Willing to travel?</strong><br>
-				            <div>
-								{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
-								{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
-								{{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
+
+         				<div style="padding: 10px;">
+							<hr>
+					        	<div style="text-align: left">
+									<strong>Willing to travel?</strong><br>
+					            <div>
+									{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
+									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
+									{{#paper-radio value="3" selected=willingToTravel}}N/A{{/paper-radio}}
+		                        </div>
+	                        {{#if willTravel}}
+	                        <div><strong>Maximum Distance:</strong><br><br>
+	                        	<div layout style="cursor: pointer;">
+							      <div flex="10" layout layout-align="center center">
+							        <span>Km:</span>
+							      </div>
+							      {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
+							    </div>
 	                        </div>
-                        {{#if willTravel}}
-                        <div><strong>Maximum Distance:</strong><br><br>
-                        	<div layout style="cursor: pointer;">
-						      <div flex="10" layout layout-align="center center">
-						        <span>Km:</span>
-						      </div>
-						      {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
-						    </div>
-                        </div>
-                        {{/if}}
+	                        {{/if}}
+		                    </div>
 	                    </div>
 			        		
 
@@ -72,14 +79,16 @@
 		        		</div>
 			        	<div class="vendor-service-inner">
 
-			        	<div style="text-align: left">
-							<strong>Pricing Option</strong><br>
-				            <div>
-								{{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
-								{{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
-								{{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
-                        </div>
-                        </div>
+	         				<div style="padding: 10px;">
+					        	<div style="text-align: left">
+									<strong>Pricing Option</strong><br>
+						            <div>
+										{{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
+										{{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
+										{{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
+		                    		</div>
+		                        </div>
+	                        </div>
 
                         	{{#if isFixedPrice}}
 							{{mdl-textfield label='Price of item (ZAR)' value=price type="number"}}
@@ -100,7 +109,7 @@
 				    	<div class="header-bg-block">
 			        		<h4>Images</h4>
 			        	</div>
-			        	<div class="vendor-service-inner">
+			        	<div class="vendor-service-inner" style="padding: 10px;">
 			        	<img id='mainImg' height='200' width='200' hidden='true'>
 			        		<p> Listing main image* </p>
 							{{#drop-zone

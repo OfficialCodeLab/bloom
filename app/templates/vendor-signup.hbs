@@ -5,75 +5,73 @@
 		<hr>
 
 		<div class="text-center">
+	        <div style="padding-top: 20px; padding-bottom: 40px;">
+		        <div class="pear-profile-card card-sm unselectable">
+		    	{{#if section1}}
+		        	<div class="header-bg-block">
+		        		<h4>Account Set-Up</h4>
+		        	</div>
+		        	<div class="vendor-signup-inner">
+			            <i class="fa fa-book i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Vendor Account Name*' value=name}}<br>
+			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=password type="password"}}<br>
+			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Confirm Password*' value=passwordConfirm type="password"}}<br>
+			            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=email}}<br>
+			            <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=cell}}<br>
 
-		    <div class="row">
-		        <div style="padding-top: 20px; padding-bottom: 40px;">
-			        <div class="pear-profile-card card-sm unselectable">
-			    	{{#if section1}}
+					    <div style="padding: 20px 0 40px 0;">
+						    {{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}}
+					        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
+					    </div>
+			        </div>
+			    {{else}}
+
+			    	{{#if section2}}
 			        	<div class="header-bg-block">
-			        		<h4>Account Set-Up</h4>
+			        		<h4>Vendor Details</h4>
 			        	</div>
 			        	<div class="vendor-signup-inner">
-				            <i class="fa fa-book i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Vendor Account Name*' value=name}}<br>
-				            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=password type="password"}}<br>
-				            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Confirm Password*' value=passwordConfirm type="password"}}<br>
-				            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=email}}<br>
-				            <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=cell}}<br>
+				            <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
+				            <div style="padding-top: 9px;"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc}}<br></div>
+				            <div style="margin-top: -28px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
+				            <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
+				            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom URL' value=customID}}<br>
 
 						    <div style="padding: 20px 0 40px 0;">
-							    {{#link-to 'index'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}}
+						        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
 						        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
 						    </div>
-				        </div>
-				    {{else}}
+				    	</div>
+			    	{{else}}
+			    		{{#if section3}}
+			        	<div class="header-bg-block">
+				        	<h4>Location Information</h4>
+			        	</div>
+			        	<div class="vendor-signup-inner">
 
-				    	{{#if section2}}
-				        	<div class="header-bg-block">
-				        		<h4>Vendor Details</h4>
-				        	</div>
-				        	<div class="vendor-signup-inner">
-					            <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
-					            <div style="padding-top: 9px;"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc}}<br></div>
-					            <div style="margin-top: -28px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
-					            <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
-					            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom URL' value=customID}}<br>
-
-							    <div style="padding: 20px 0 40px 0;">
-							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
-							        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
-							    </div>
-					    	</div>
-				    	{{else}}
-				    		{{#if section3}}
-				        	<div class="header-bg-block">
-					        	<h4>Location Information</h4>
-				        	</div>
-				        	<div class="vendor-signup-inner">
-
-	                            <div style="padding-top: 9px">
-					            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='Physical Address' value=addressL1}}<br></div>
-					            <div style="margin-top: -28px;"><i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br></div>
-					            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
-					            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-					            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
-								  {{#each province as |state|}}
-								    {{#paper-option value=state.name}}
-								      {{state.name}}
-								    {{/paper-option}}
-								  {{/each}}
-								{{/paper-select}}
-							    <div style="padding: 20px 0 40px 0;">
-							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
-							        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
-							    </div>
-							</div>
-							{{else}}
-				        	<div class="header-bg-block">
-					        	<h4>Survey</h4>
-				        	</div>
-				        	<div class="vendor-signup-inner text-left">
-
-					            <strong>Are you willing to travel?</strong><br>
+                            <div style="padding-top: 9px">
+				            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='Physical Address' value=addressL1}}<br></div>
+				            <div style="margin-top: -28px;"><i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br></div>
+				            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
+				            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+				            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
+							  {{#each province as |state|}}
+							    {{#paper-option value=state.name}}
+							      {{state.name}}
+							    {{/paper-option}}
+							  {{/each}}
+							{{/paper-select}}
+						    <div style="padding: 20px 0 40px 0;">
+						        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
+						        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
+						    </div>
+						</div>
+						{{else}}
+			        	<div class="header-bg-block">
+				        	<h4>Survey</h4>
+			        	</div>
+			        	<div class="vendor-signup-inner">
+			        		<div class="text-left" style="padding-left: 10px; padding-right: 10px">
+				            	<strong>Are you willing to travel?</strong><br>
 					            <div>
 									{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
 									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
@@ -125,23 +123,23 @@
 									{{#paper-radio value="1" selected=willingToContribute}}Yes{{/paper-radio}}
 									{{#paper-radio value="2" selected=willingToContribute}}No{{/paper-radio}}
 	                            </div>
-							    <div style="padding: 20px 0 40px 0;">
-							        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
-							        {{#mdl-button isRaised=true disabled=isCreating action="signBtn"}}Sign Up {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
-							    </div>
-							</div>
+                            </div>
+						    <div style="padding: 20px 0 40px 0;">
+						        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
+						        {{#mdl-button isRaised=true disabled=isCreating action="signBtn"}}Sign Up {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+						    </div>
+						</div>
 
 
-							{{/if}}
-				    	{{/if}}
-				    {{/if}}
-				    {{paper-progress-linear value=percentLoaded}}				
-			        </div>
+						{{/if}}
+			    	{{/if}}
+			    {{/if}}
+			    {{paper-progress-linear value=percentLoaded}}				
 		        </div>
-		    </div>	
+	        </div>	
 		</div>
 	</div>
-		{{partial 'partials/footer'}}
+	{{partial 'partials/footer'}}
   	{{notification-container position="bottom"}}
 </div>
 

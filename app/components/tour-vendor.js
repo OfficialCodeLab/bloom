@@ -117,7 +117,7 @@ const TourVendorComponent = Ember.Component.extend({
 						},
 				      builtInButtons: [
 				        {
-				          classes: 'shepherd-button-primary',
+				          classes: 'shepherd-button-secondary',
 				          text: 'Done',
 				          type: 'next'
 				        }

@@ -79,7 +79,7 @@ export default Ember.Route.extend({
 	     			controller.set('selectedProvince', vendor.get('province'));
 	     		}
 	     	});
-     	});
+     	}, ()=> {});
 	},
 	filepicker: Ember.inject.service(),
 	firebaseApp: Ember.inject.service(),

@@ -1,57 +1,34 @@
 {{!-- When the "Add Guest" button is clicked, this will show. --}}
 <div class="row">
-{{!-- <button class="col-sm-3 btn btn-default" {{action 'backBtn'}}>Back</button> --}}
-<h2 class="text-center" style="margin-top:0px; padding-top:0px;">Add Guests</h2>
+	<h2 class="text-center" style="margin-top:0px; padding-top:0px;">Add Guests</h2>
 </div>
 <br>
 
 <div class="form-horizontal row">
 	<div class="form-group has-feedback">
-		{{!-- <label class="col-sm-3 control-label">Name &amp; Surname</label> --}}
 		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Name of guest' value=name}}
-			{{!-- {{input type="text" disabled=addingGuest value=name class="form-control" placeholder="Name of guest"}} --}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
-		{{!-- <label class="col-sm-3 control-label">Email Address</label> --}}
 		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Email address' value=email}}
-			{{!-- {{input type="text" disabled=addingGuest value=email class="form-control disabled" placeholder="Email address of guest"}} --}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
-		{{!-- <label class="col-sm-3 control-label">Contact Number</label> --}}
 		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Contact number' value=cell}}
-			{{!-- {{input type="text" disabled=addingGuest value=cell class="form-control disabled" placeholder="Contact details of guest"}} --}}
 		</div>
 	</div>
 	<div class="form-group has-feedback">
-		{{!-- <label class="col-sm-3 control-label">Number of additional guests?</label> --}}
 		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Number of additional guests' value=guests type="number"}}
-
-			{{!-- <div class="input-group">
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" disabled={{addingGuest}} {{action 'decrementNumber'}}>-</button>
-				</span>
-				{{input type="text" disabled=addingGuest class="form-control guests-add" value=guestsValue }}
-				<span class="input-group-btn">
-					<button class="btn btn-default" type="button" disabled={{addingGuest}} {{action 'incrementNumber'}}>+</button>
-				</span>
-			</div>  --}}
-			{{!-- {{#touch-spin}}
-				<input id="guestNumberBox" type="text" value={{guests}} name="demo1" style="height:33px !important;">
-			{{/touch-spin}} --}}
-			{{!-- {{input type="number" value=desc class="form-control disabled" placeholder="Select a number"}} --}}
 		</div>
 	</div>
 </div>
 <div class="row">
-	<div class="col-sm-6 col-sm-offset-3">
-		{{!-- <button class="btn btn-default" disabled={{isNotValid}} {{action 'addGuest'}}>Add Guest to guest list {{#if addingGuest}}<i class="fa fa-spinner fa-spin"></i>{{/if}}</button> --}}
-		{{#mdl-button isRaised=true isAccent=true action="backBtn"}}Cancel{{/mdl-button}}&nbsp;
+	<div class="col-sm-6 col-sm-offset-3 cascading-buttons">
+		{{#mdl-button isRaised=true isAccent=true action="backBtn"}}Cancel{{/mdl-button}}
 		{{#mdl-button isRaised=true action="addGuest" disabled=isDisabled}}Add Guest {{#if addingGuest}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
 	</div>
 </div>

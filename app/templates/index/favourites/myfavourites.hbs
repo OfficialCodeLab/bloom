@@ -1,8 +1,9 @@
-<div class="text-center">
+<div class="text-center container">
 	<h1 class="font-times-header" style="color: #4C4C4E;">My Favourites</h1><br>
 	<hr>
 </div>
 
+   
    {{#if model}}
    <div class="text-center hideOnPhones">
       <div id="masonry-items">
@@ -39,7 +40,7 @@
       </div>
       {{/if}}
    </div>
-   <div class="row text-center showOnPhones">
+   <div class="text-center showOnPhones">
       {{#each model as |cat-item|}}
          <div style="display: inline-block;">
             <div class="category-block">

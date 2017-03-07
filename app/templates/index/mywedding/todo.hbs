@@ -1,33 +1,56 @@
 <div class="container-fluid">
-   {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
     <h1 class="font-times-header" style="color: #4C4C4E;">To-Do List</h1><br>
-    {{!-- <hr> --}}
 
     <div style="padding-bottom:60px;">
 
-    <div class="container pear-profile-card" style="padding: 30px 20px 50px 20px; position: relative;">
+        <div class="container pear-profile-card" style="padding: 30px 20px 50px 20px; position: relative;">
+    	    <div style="width: 80%" class="cascading-buttons">
+    		    {{#if viewAll}}
+    			    {{#mdl-button isRaised=true}}View All{{/mdl-button}}&nbsp;
+    				{{#mdl-button isRaised=true isAccent=true action="incompleteClick"}}View Incomplete{{/mdl-button}}
+    			{{else}}
+    			    {{#mdl-button isRaised=true isAccent=true action="allClick"}}View All{{/mdl-button}}&nbsp;
+    				{{#mdl-button isRaised=true}}View Incomplete{{/mdl-button}}
+    			{{/if}}
+    		</div>
 
-	    <div style="width: 80%">
-		    {{#if viewAll}}
-			    {{#mdl-button isRaised=true}}View All{{/mdl-button}}&nbsp;
-				{{#mdl-button isRaised=true isAccent=true action="incompleteClick"}}View Incomplete{{/mdl-button}}
-			{{else}}
-			    {{#mdl-button isRaised=true isAccent=true action="allClick"}}View All{{/mdl-button}}&nbsp;
-				{{#mdl-button isRaised=true}}View Incomplete{{/mdl-button}}
-			{{/if}}
-		</div>
+    		<div class="todo-action-add">
+    			{{!-- ACTION TO BRING UP MODAL TO ADD TASK --}}
+    	        <a href="#" {{action 'newTask'}}><i class="material-icons">add_circle</i></a>
+    	    </div>
 
-		<div class="todo-action-add">
-			{{!-- ACTION TO BRING UP MODAL TO ADD TASK --}}
-	        <a href="#" {{action 'newTask'}}><i class="material-icons">add_circle</i></a>
-	    </div>
+    	    <hr style="margin-top: 50px; margin-bottom: 0px;">
 
-	    <hr style="margin-top: 50px; margin-bottom: 0px;">
-
-	    {{#each model.tasks as |task|}}
-	    	{{#if task.completed}}
-	    		{{#if viewAll}}
-	    			<div class="todo-item">
+    	    {{#each model.tasks as |task|}}
+    	    	{{#if task.completed}}
+    	    		{{#if viewAll}}
+    	    			<div class="todo-item">
+                            <div class="todo-left-sm">
+                                <div {{action "checkBox" task.id}} class="tb-btn">
+                                  {{#if task.completed}}
+                                    {{mdl-button icon="check_box"}}
+                                  {{else}}
+                                    {{mdl-button icon="check_box_outline_blank"}}
+                                  {{/if}}
+                                </div>
+                            </div>
+                            <div class="todo-middle">
+                                <strong>{{task.title}}</strong>
+                            </div>
+                            <div class="todo-right">
+                                <div {{action "editTask" task.id}} class="tb-btn">
+                                    {{mdl-button icon="create"}}
+                                </div>
+                                <div {{action "destroyTask" task.id}} class="tb-btn">
+                                    {{mdl-button icon="delete"}}
+                                </div>
+                            </div>
+                        </div>
+    	    			<hr style="margin-top: 0px; margin-bottom: 0px;">
+    	    			{{!-- IF VIEW ALL --}}	    			
+    	    		{{/if}}
+    	    	{{else}}
+    	    		<div class="todo-item">
                         <div class="todo-left-sm">
                             <div {{action "checkBox" task.id}} class="tb-btn">
                               {{#if task.completed}}
@@ -49,38 +72,12 @@
                             </div>
                         </div>
                     </div>
-	    			<hr style="margin-top: 0px; margin-bottom: 0px;">
-	    			{{!-- IF VIEW ALL --}}	    			
-	    		{{/if}}
-	    	{{else}}
-	    		<div class="todo-item">
-                    <div class="todo-left-sm">
-                        <div {{action "checkBox" task.id}} class="tb-btn">
-                          {{#if task.completed}}
-                            {{mdl-button icon="check_box"}}
-                          {{else}}
-                            {{mdl-button icon="check_box_outline_blank"}}
-                          {{/if}}
-                        </div>
-                    </div>
-                    <div class="todo-middle">
-                        <strong>{{task.title}}</strong>
-                    </div>
-                    <div class="todo-right">
-                        <div {{action "editTask" task.id}} class="tb-btn">
-                            {{mdl-button icon="create"}}
-                        </div>
-                        <div {{action "destroyTask" task.id}} class="tb-btn">
-                            {{mdl-button icon="delete"}}
-                        </div>
-                    </div>
-                </div>
-    			<hr style="margin-top: 0px; margin-bottom: 0px;">
-	    		{{!-- ALWAYS DISPLAY --}}
-	    	{{/if}}
-	    {{/each}}
+        			<hr style="margin-top: 0px; margin-bottom: 0px;">
+    	    		{{!-- ALWAYS DISPLAY --}}
+    	    	{{/if}}
+    	    {{/each}}
 
-    </div>
+        </div>
 
     
     </div>
