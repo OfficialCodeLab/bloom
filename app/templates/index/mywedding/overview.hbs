@@ -99,7 +99,7 @@
                     </div>
                     <div class="overview-md-block">
                         <h5>Budget</h5>
-                        <div style="padding-top: 5px;">
+                        <div style="padding-top: 15px; text-align: center;">
                             {{#if model.hasBudget}}
                                 {{#if refresh}}
                                     {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
@@ -107,7 +107,7 @@
                                     {{mdl-spinner}}
                                 {{/if}}
                             {{else}}
-                                <p style="text-align: center; margin-top: 50px;"> Please set up your budget </p>
+                                <img src="../assets/images/no-budget.png" style="height: auto; width:70%;">
                             {{/if}}
                         </div>
                         <div style="padding-top: 10px;">
@@ -140,31 +140,37 @@
 
                         <hr style="margin-top: 20px; margin-bottom: 0px;">
 
-                        {{#each model.tasks as |task|}}
-                            <div class="todo-item">
-                                <div class="todo-left-sm">
-                                    <div {{action "checkBox" task.id}} class="tb-btn">
-                                      {{#if task.completed}}
-                                        {{mdl-button icon="check_box"}}
-                                      {{else}}
-                                        {{mdl-button icon="check_box_outline_blank"}}
-                                      {{/if}}
+                        {{#if model.tasks}}
+                            {{#each model.tasks as |task|}}
+                                <div class="todo-item">
+                                    <div class="todo-left-sm">
+                                        <div {{action "checkBox" task.id}} class="tb-btn">
+                                          {{#if task.completed}}
+                                            {{mdl-button icon="check_box"}}
+                                          {{else}}
+                                            {{mdl-button icon="check_box_outline_blank"}}
+                                          {{/if}}
+                                        </div>
+                                    </div>
+                                    <div class="todo-middle">
+                                        <strong>{{task.title}}</strong>
+                                    </div>
+                                    <div class="todo-right">
+                                        <div {{action "editTask" task.id}} class="tb-btn">
+                                            {{mdl-button icon="create"}}
+                                        </div>
+                                        <div {{action "destroyTask" task.id}} class="tb-btn">
+                                            {{mdl-button icon="delete"}}
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="todo-middle">
-                                    <strong>{{task.title}}</strong>
-                                </div>
-                                <div class="todo-right">
-                                    <div {{action "editTask" task.id}} class="tb-btn">
-                                        {{mdl-button icon="create"}}
-                                    </div>
-                                    <div {{action "destroyTask" task.id}} class="tb-btn">
-                                        {{mdl-button icon="delete"}}
-                                    </div>
-                                </div>
+                                <hr style="margin-top: 0px; margin-bottom: 0px;">
+                            {{/each}}
+                        {{else}}
+                            <div style="padding-top: 5px; text-align: center;">
+                                <img src="../assets/images/no-todo.jpg" style="height: auto; width:100%;">
                             </div>
-                            <hr style="margin-top: 0px; margin-bottom: 0px;">
-                        {{/each}}
+                        {{/if}}
                     </div>
                 </div>
             </div>

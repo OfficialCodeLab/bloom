@@ -69,9 +69,9 @@ export default Ember.Route.extend({
 	    imgNext: function(){
 	    	let isRunning = true;
 	    	let breakThis = 0;
+	    	let currentSlide = this.controller.get('currentSlide');
 
 	    	while(isRunning){
-		    	let currentSlide = this.controller.get('currentSlide');
 				if (currentSlide === 3){
 		    		currentSlide = 0;
 		    	} else {
