@@ -1395,7 +1395,7 @@ Guest List
 
 .todo-right{
 	max-width: 80px;
-	width: 30%;
+	// width: 30%;
 	padding: 5px;
 	float: right;
 }
@@ -2420,6 +2420,11 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 
+
+	.todo-middle{
+		width: 50%
+	}
+
 	.vendor-signup-inner{
 		padding: 20px 0;
 		.mdl-button{
@@ -2502,6 +2507,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */
+	.todo-middle{
+		width: 45%
+	}
+
 	.tour-block-padding{
 		padding-top: 10px;
 		padding-bottom: 10px;

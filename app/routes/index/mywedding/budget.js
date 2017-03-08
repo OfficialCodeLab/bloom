@@ -202,7 +202,7 @@ export default Ember.Route.extend({
 			    	let _budget = this.store.peekRecord('budget', _id);
 			    	let selectedCategory = _budget.get(category);
 			    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
-			    	console.log(selectedObject);
+			    	// console.log(selectedObject);
 			    	this.recalculateBudget(_budget, budget);
 			    	Ember.set(selectedObject, 'deposit', deposit);
 			    	Ember.set(selectedObject, 'estimate', estimate);
@@ -248,7 +248,8 @@ export default Ember.Route.extend({
 						this.refreshBudgetWidget();
 				    	this.controller.get('notifications').success('Budget total has been updated!',{
 			                autoClear: true
-			            });  	    				
+			            });  			            
+						this.updateWedding();      				
 	    			});
 	    		} else {
 	    			let excess = 0 - newUnallocated;
@@ -319,7 +320,18 @@ export default Ember.Route.extend({
 	    	this.controller.get('notifications').success('Budget has been updated!',{
                 autoClear: true
             });  
+			this.updateWedding();          
     	});	
+	},
+	updateWedding: function(){
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+        let wedding = this.store.peekRecord('wedding', _id);
+    	if(wedding.get('hasBudget')){
+
+    	} else {			            		
+        	wedding.set('hasBudget', true);
+        	wedding.save();
+    	}  
 	},
 	refreshBudgetWidget: function(){
 		const _this = this;

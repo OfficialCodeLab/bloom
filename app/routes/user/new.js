@@ -17,6 +17,7 @@ export default Ember.Route.extend({
 			  name: name,
 			  surname: surname,
 			  id: _id,
+			  email: this.get("session").get('currentUser').providerData[0].email,
 			  mustTourWedding: true,
 			  mustTourFavourites: true,
 			  mustTourVendor: true
@@ -69,15 +70,20 @@ export default Ember.Route.extend({
 		//If the save user button is clicked
 		saveUser() { 
     		window.scrollTo(0,0);
-    		this.controller.get('notifications').success('Saved successfully!',{
-			  autoClear: true
-			});
 			this.transitionTo('index');
 		},
 
-		willTransition() {
+		willTransition(transition) {
 			//Saves the model regardless of how the user navigates
-			this.controller.get('model').save();
+			let user = this.controller.get('model');
+			if(user.get('email') !== undefined && user.get('email') !== ""){
+				user.save();
+	    		this.controller.get('notifications').success('Account Finalized!',{
+				  autoClear: true
+				});
+			} else {
+	            transition.abort();
+			}
 		},
 		didInsertElement(){
 			Ember.$('#usernew').fadeOut(0);    //Run relevant jquery methods in component

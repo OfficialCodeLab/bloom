@@ -32,5 +32,12 @@ export default Ember.Controller.extend({
 		        _this.set('refresh', true);
 		    });
 		}
-	}
+	},
+	demoTasks: [ 
+	  { title: 'Create a Bloom Account', completed: true },
+	  { title: 'Set up a Budget', completed: false },
+	  { title: 'Create a To-do List', completed: false },
+	  { title: 'Set your Wedding Date', completed: false },
+	  { title: 'Invite Guests', completed: false }
+  	]
 });

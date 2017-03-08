@@ -55,10 +55,10 @@ export default Ember.Route.extend({
 				name: user.get('name') + " " + user.get('surname')
 			});
 			stats.save();
-			this.transitionTo('index.mywedding.mystats');
+			this.transitionTo('index.favourites.mystats');
 		},
 		error: function(error) {
-			this.transitionTo('index.mywedding.selectgender');
+			this.transitionTo('index.favourites.selectgender');
 	    },
 		closeMessage(){
 			this.controller.set('responseMessage', '');

@@ -59,7 +59,7 @@ export default Ember.Route.extend({
 			let scope = "";
 
 			if(provider === "facebook"){
-				scope = 'public_profile,user_friends,user_birthday';
+				scope = 'public_profile,user_friends,user_birthday,email';
 			}
 	        this.get("session").open("firebase", { 
 	        	provider: provider, 
@@ -488,7 +488,13 @@ export default Ember.Route.extend({
 			  name: name,
 			  surname: surname,
 			  id: _id,
-			  vendorAccount: this.get('vendorId')
+			  email: vendor.get('email'),
+			  cell: vendor.get('cell'),
+			  vendorAccount: this.get('vendorId'),
+			  mustTourWedding: true,
+			  mustTourFavourites: true,
+			  mustTourVendor: true,
+			  accountType: "vendor"
 			});				
 
 			let wedding = this.store.createRecord('wedding', 
@@ -498,9 +504,9 @@ export default Ember.Route.extend({
 				}
 			);
 
-			let _vendorStats = this.store.peekRecord('vendorStats', this.get('vendorStatsId'));
+			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
 
-			let vendorStats = this.store.createRecord('vendorStats',
+			let vendorStats = this.store.createRecord('vendorStat',
 				{
 					id: this.get('vendorId'),
 					createdBy: _id,
@@ -517,7 +523,6 @@ export default Ember.Route.extend({
 		            willContribute: _vendorStats.get('willContribute')
 				}
 			);
-			this.store.deleteRecord('vendorStats', this.get('vendorStatsId'));
 
 			//need to save
 
@@ -545,6 +550,7 @@ export default Ember.Route.extend({
 	    	let _vendorid = this.get('vendorId');
 	    	vendorLogin.set('vendorID', _vendorid);
 	    	user.set('vendorAccount', _vendorid);
+	    	user.set('accountType', "vendor");
 
 			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
 

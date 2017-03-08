@@ -76,12 +76,14 @@ export default Ember.Route.extend({
                                     this.controller.get('notifications').error('User ID Already exists!',{
                                         autoClear: true
                                     });
+                                    this.controller.set('isCreating', false);
                                     this.setSection(2);
                                 }, () => {
                                     this.store.findRecord('vendorLogin', hash).then(() => {					//Check if email is in use
                                         this.controller.get('notifications').error('Email address already in use!',{
                                             autoClear: true
                                         });
+                                        this.controller.set('isCreating', false);
                                         this.setSection(1);
                                     }, () => {
                                         let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
@@ -113,6 +115,7 @@ export default Ember.Route.extend({
                                     this.controller.get('notifications').error('Email address already in use!',{
                                         autoClear: true
                                     });
+                                    this.controller.set('isCreating', false);
                                     this.setSection(1);
                                 }, () => {
                                     let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record

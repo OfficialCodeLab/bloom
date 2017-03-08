@@ -13,6 +13,14 @@ export default Ember.Route.extend( {
       }
       return sesh;
   },
+  
+  setupController(controller, model) {
+      this._super(controller, model);
+      Ember.set(controller, 'userext', model.userext);
+      Ember.set(controller, 'user', model.user);
+      model.user.set('imgurl', model.userext.get('imgurl'));
+      model.user.save();
+  },
   model() {
     //Before creating the record, clear the DS Store
 

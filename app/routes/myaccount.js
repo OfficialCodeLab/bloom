@@ -36,6 +36,8 @@ export default Ember.Route.extend({
 	    this._super(controller, model);
 	    Ember.set(controller, 'userext', model.userext);
 	    Ember.set(controller, 'user', model.user);
+	    model.user.set('imgurl', model.userext.get('imgurl'));
+	    model.user.save();
 	  },
 	  actions : {
 	  	saveUser() { 

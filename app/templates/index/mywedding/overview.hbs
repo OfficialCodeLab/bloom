@@ -167,9 +167,34 @@
                                 <hr style="margin-top: 0px; margin-bottom: 0px;">
                             {{/each}}
                         {{else}}
-                            <div style="padding-top: 5px; text-align: center;">
+                            {{!-- <div style="padding-top: 5px; text-align: center;">
                                 <img src="../assets/images/no-todo.jpg" style="height: auto; width:100%;">
-                            </div>
+                            </div> --}}
+                            {{#each demoTasks as |task|}}
+                                <div class="todo-item">
+                                    <div class="todo-left-sm">
+                                        <div class="tb-btn">
+                                          {{#if task.completed}}
+                                            {{mdl-button icon="check_box" disabled=true}}
+                                          {{else}}
+                                            {{mdl-button icon="check_box_outline_blank" disabled=true}}
+                                          {{/if}}
+                                        </div>
+                                    </div>
+                                    <div class="todo-middle">
+                                        <strong>{{task.title}}</strong>
+                                    </div>
+                                    <div class="todo-right">
+                                        <div class="tb-btn">
+                                            {{mdl-button icon="create" disabled=true}}
+                                        </div>
+                                        <div class="tb-btn">
+                                            {{mdl-button icon="delete" disabled=true}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr style="margin-top: 0px; margin-bottom: 0px;">
+                            {{/each}}
                         {{/if}}
                     </div>
                 </div>
