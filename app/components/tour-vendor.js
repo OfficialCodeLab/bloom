@@ -42,7 +42,7 @@ const TourVendorComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Welcome to your vendor portal',
-				      text: ['Here you keep track of all your listings<br>and information for users to find you!'],
+				      text: ['A quick introduction to your Bloom account and how it all works.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -70,8 +70,8 @@ const TourVendorComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'View your services',
-				      text: ['Keep track of all of the services that you advertise<br>on Bloom and edit them to suit your needs.'],
+				      title: 'View service listings',
+				      text: ['Keep track and edit your listings here at any time.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -100,7 +100,7 @@ const TourVendorComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Create Service Listings',
-				      text: ['Add services so that users can find your<br>business at any time and get into contact with you.'],
+				      text: ['Add your services here to create your service listing.<br>You can have more than one listing, provided it falls under a separate category.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -123,8 +123,8 @@ const TourVendorComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Enhance your profile',
-				      text: ['Ensure that your profile is up to date<br>and supercharged with all the information<br>that you want users to see!'],
+				      title: 'Manage your profile',
+				      text: ['Ensure your profile is up to date with all the information users need<br>to get in touch with you.'],
 				      when: {
 				      	hide: () => {
 				        	this.completeTour();				      		

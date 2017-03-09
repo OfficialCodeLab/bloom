@@ -5,12 +5,20 @@
 
 <div style="text-align: center; padding: 20px;">
 	{{#if model.user.accountType}}
-	<p>You are a registered vendor!<br>Go to your vendor page:</p>
-		{{#link-to 'index.vendor.profile'}}{{mdl-button isRaised=true text='PROFILE'}}{{/link-to}}
+		{{#if model.user.vendorAccount}}
+			<p>You are a registered vendor!<br>Go to your vendor page:</p>
+			{{#link-to 'index.vendor.profile'}}{{mdl-button isRaised=true text='PROFILE'}}{{/link-to}}
+		{{else}}
+			<p>You are a registered vendor!<br>Log in or sign up below</p>
+			<div class="cascading-buttons">
+				{{#link-to 'index.vendor.profile'}}{{mdl-button isRaised=true text='LOG IN' isAccent=true}}{{/link-to}}
+				{{mdl-button isRaised=true text='SIGN UP' action="signUpVendor"}}
+			</div>
+		{{/if}}
 	{{else}}
 	<p>Want to become a vendor? Click here</p>
 	<div style="padding: 20px 0px 40px 0px;">
-		{{mdl-button isRaised=true text='SIGN UP' action="signUpVendor"}}
+		{{mdl-button isRaised=true text='SIGN ME UP' action="changeAccountType"}}
 	</div>
 	{{/if}}
 </div>	

@@ -59,6 +59,16 @@ export default Ember.Route.extend({
     			this.transitionTo('vendor-signup');
     		});
 	    },
+	    changeAccountType() {
+		  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		  let usr = this.store.peekRecord('user', _id);
+		  usr.set('accountType', "vendor");
+		  usr.save().then(()=>{
+		  	this.controller.get('notifications').success('Registered Successfully!',{
+			  autoClear: true
+			});
+		  });
+	    },
 
 		retakeTours: function(){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";

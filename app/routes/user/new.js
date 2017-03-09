@@ -20,7 +20,8 @@ export default Ember.Route.extend({
 			  email: this.get("session").get('currentUser').providerData[0].email,
 			  mustTourWedding: true,
 			  mustTourFavourites: true,
-			  mustTourVendor: true
+			  mustTourVendor: true,
+			  isNewToBloom: true
 			});
 
 			let wedding = this.store.createRecord('wedding', 

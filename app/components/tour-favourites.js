@@ -42,7 +42,7 @@ const TourFavouritesComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Welcome to your favourites',
-				      text: ['This section is all about you!<br>Keep track of all your favourite listings, your inner circle<br>and your stats!'],
+				      text: ['This section is all about you!<br>Keep track of your Favourite listings, Inner Circle and stats.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -79,8 +79,8 @@ const TourFavouritesComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Keep track of your favourites',
-				      text: ['With Listings to visually inspire and fill all your heart’s desires.<br>Once you have hit the favourite button,<br>they will all be saved here!'],
+				      title: 'Favouriting on Bloom',
+				      text: ['Simply hit the favourite button for preferred listings.<br>Your favoured listing will be saved here.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -108,8 +108,8 @@ const TourFavouritesComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Invite your friends!',
-				      text: ['Add your friends to your inner circle and share<br>your wedding planning journey with them.'],
+				      title: 'Invite loved ones',
+				      text: ['Take the weight off your shoulders by assigning tasks<br>or sharing your plans and inspirations<br>with the Inner circle feature.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -138,8 +138,8 @@ const TourFavouritesComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      scrollTo: false,
-				      title: 'Set up your stats',
-				      text: ['Keep your measurements up to date so you can easily share these<br>with your inner circle when they need them!'],
+				      title: 'Voila!',
+				      text: ['Start browsing categories and be inspired.<br>Get in touch with direct messaging<br>and take that one step closer to happily ever after.'],
 				      when: {
 				        cancel: () => {
 				        	alert("DONE BITCHES");

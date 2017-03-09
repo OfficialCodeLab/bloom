@@ -102,7 +102,7 @@ export default Ember.Route.extend({
 			this.controller.set('todoEditId', id);
 		},
 		newTask: function(){
-			if(this.controller.get('budgetCalcActivated')){
+			if(true){
 				let task = this.store.createRecord('task');
 		    	this.send('openTodoModal', task);
 				this.controller.set('newTaskId', task.get('id'));
@@ -139,7 +139,7 @@ export default Ember.Route.extend({
 			} else if (this.controller.get('newTaskId')) {
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 
-			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
+			    // this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 			    	// if(customer.get("todoList") === true){			
 			    	if(true){  //Temporarily give all clients access   		
 						let taskId = this.controller.get('newTaskId');
@@ -167,9 +167,9 @@ export default Ember.Route.extend({
 	    				this.rejectCustomer();	
 			    	}
 
-			    }, function(reason) {
-	    			this.rejectCustomer();	
-				});
+			    // }, function(reason) {
+	    			// this.rejectCustomer();	
+				// });
 			}
 
 		}

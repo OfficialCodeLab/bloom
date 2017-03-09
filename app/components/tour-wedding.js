@@ -43,7 +43,7 @@ const TourWeddingComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Welcome to Bloom',
-				      text: ['Dream. Create. Inspire.<br>Bloom invites you to build and celebrate your magical day with flawless wedding planning that spares no detail.<br>We’ll show you all the ropes to help you tie the knot.'],
+				      text: ['Dream. Create. Inspire.<br>Let us show you the ropes to help you tie the knot.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -80,8 +80,8 @@ const TourWeddingComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Set up your wedding date',
-				      text: ['Select your wedding date so that you can start planning for your big day!'],
+				      title: 'Add your wedding date',
+				      text: ['Let’s begin the countdown to the big day.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -138,8 +138,8 @@ const TourWeddingComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Plan out your tasks',
-				      text: ['Add tasks to your to-do list to keep track of everything that needs doing.<br>Soon you will be able to assign them to your friends!'],
+				      title: 'Plan tasks',
+				      text: ['Use the to-do list to guide you through the process.<br>Make it your own by editing the list to suit your needs.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -168,7 +168,7 @@ const TourWeddingComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Get started on your guest list',
-				      text: ['Invite all of your loved ones to your big day.<br>When you are done you can email all your invites out automatically!'],
+				      text: ['Add email addresses of invitees and send to guests<br>with our electronic invite.<br>Bloom will automatically track guest’s responses.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -192,8 +192,8 @@ const TourWeddingComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      // scrollTo: false,
-				      title: 'Finish your profile',
-				      text: ['That’s all for this tour!<br>Head to your account page to set up<br>any other details you may have missed!'],
+				      title: 'My Wedding Hub',
+				      text: ['Go to MY ACCOUNT to view profile details.<br>Check out Favourites to take the next tour.'],
 				      when: {
 				        hide: () => {
 				        	this.completeTour();
