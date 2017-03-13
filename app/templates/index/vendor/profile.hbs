@@ -3,8 +3,31 @@
 <hr>
 
 <div style="text-align:center">
-    <h3>{{model.vendor.name}}</h3>
     <div class="row">
+        <div class="col-sm-offset-2 col-sm-8">
+            <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2; margin-top: 60px;">
+                <div class="vendor-profile-bg" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-van.jpg' }});"> {{!-- RATIO NEEDS TO BE 15 x 4 --}}
+                    <div class="vendor-name-overlay">
+                        <p>{{model.vendor.name}}</p>
+                    </div>
+                </div>
+                <div class="overview-md-block">
+
+                    <div class="text-center">
+                        {{#if model.vendor.desc}}
+                            <p><b>DESCRIPTION</b>
+                            <br>{{model.vendor.desc}}</p>
+                        {{else}}
+                            <p><b>NO DESCRIPTION</b></p>
+                        {{/if}}
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 60px;">
 
         <div class="col-sm-6 col-sm-offset-3">
             <div class="col-xs-4">
