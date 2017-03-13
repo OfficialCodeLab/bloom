@@ -19,5 +19,7 @@ export default Model.extend({
   cell: attr('string'),
   personalCell: attr('string'),
   maxItems: attr('string'),
+  backgroundImage: attr('string'),
+  brandImage: attr('string'),
   catItems: hasMany('cat-item', {inverse: 'vendor', async: true}),
 });

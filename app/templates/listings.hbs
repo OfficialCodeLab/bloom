@@ -16,7 +16,9 @@
 		               </div>
 		               <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
 		                  {{#link-to 'single-item' cat-item.id tagname='div'}}
-		                  {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+                  		  <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
+		                  	{{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+		                  </div>
 		                  {{/link-to}}
 		               </div>
 		               <div class="cat-overlay-2">

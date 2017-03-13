@@ -64,6 +64,7 @@ Router.map(function() {
       this.route('services', function() {
         this.route('item', {path: '/item/:catItem_id'});
       });
+      this.route('branding');
     });
   });
   this.route('single-item', { path: '/item/:catItem_id' });

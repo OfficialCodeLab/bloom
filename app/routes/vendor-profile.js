@@ -6,10 +6,14 @@ export default Ember.Route.extend({
 	vendorId: null,
 
 	model(params){
-		
 		this.set('vendorId', params.vendor_id);
 
-		return this.store.findRecord('vendor', params.vendor_id);
+		return Ember.RSVP.hash({
+            vendor: this.store.findRecord('vendor', params.vendor_id),
+            vendorStat: this.store.findRecord('vendor-stat', params.vendor_id)
+        });
+		
+
 	},
 	afterModel(){
 		let vendor = this.store.peekRecord('vendor', this.get('vendorId'));
@@ -19,6 +23,8 @@ export default Ember.Route.extend({
 	},
 	setupController: function (controller, model) {
      	this._super(controller, model);
+     	controller.set('vendor', model.vendor);
+     	controller.set('vendorStat', model.vendorStat);
      	controller.set('contactInfoVisible', false);
 	    let id = this.get("session").get('currentUser').providerData[0].uid;
 	    let vendorId = this.get('vendorId');

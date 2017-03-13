@@ -17,17 +17,17 @@
 
             <div class=" col-sm-8">
                 <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
-                	<div class="vendor-profile-bg" style="background-image: url(../assets/images/sample-content/vendor-van.jpg);">
+                	<div class="vendor-profile-bg" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-van.jpg' }});"> {{!-- RATIO NEEDS TO BE 15 x 4 --}}
                 		<div class="vendor-name-overlay">
-                            <p>{{model.name}}</p>
+                            <p>{{model.vendor.name}}</p>
                         </div>
                 	</div>
                     <div class="overview-md-block">
 
                         <div class="text-center">
-                            {{#if model.desc}}
+                            {{#if model.vendor.desc}}
 	                            <p><b>DESCRIPTION</b>
-	                            <br>{{model.desc}}</p>
+	                            <br>{{model.vendor.desc}}</p>
                             {{else}}
 	                            <p><b>NO DESCRIPTION</b></p>
                             {{/if}}
@@ -47,7 +47,7 @@
                             <div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
                             <div class="col-xs-10 overview-info">                            	
                             	{{#if contactInfoVisible}}
-                            	<a href="mailto:pear+{{model.email}}?cc=info@pear.life" target="_top">{{model.email}}</a>
+                            	<a href="mailto:pear+{{model.vendor.email}}?cc=info@pear.life" target="_top">{{model.vendor.email}}</a>
 								{{else}}
                             		****
                             	{{/if}}
@@ -55,14 +55,16 @@
                             <div class="col-xs-2 overview-info"><i class="material-icons">call</i></div>
                             <div class="col-xs-10 overview-info">
                             	{{#if contactInfoVisible}}
-                            		{{model.cell}}
+                            		{{model.vendor.cell}}
                             	{{else}}
                             		****
                             	{{/if}}
 
                             </div>
                             <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
-                            <div class="col-xs-10 overview-info">{{model.city}}</div>
+                            <div class="col-xs-10 overview-info">{{model.vendor.city}}, {{model.vendor.province}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">laptop</i></div>
+                            <div class="col-xs-10 overview-info"><a href={{model.vendorStat.website}} >{{model.vendorStat.website}}</a></div>
                         </div>
                         <div class="overlay-box-bottom">
                             {{mdl-button action='showContactInfo' text="Show Contact Info"}}
@@ -77,7 +79,7 @@
 
 		<div class="text-center hideOnPhones">
 			<div id="masonry-items">
-				{{#masonry-grid items=model.catItems isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
+				{{#masonry-grid items=model.vendor.catItems isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
 		         <div>
 		            <div class="category-block">
 	               <span class="cat-title">{{cat-item.name}}</span>
@@ -101,7 +103,7 @@
 		         {{/masonry-grid}} 
 	         </div>
 
-	         {{#if model.catItems}}
+	         {{#if model.vendor.catItems}}
 				<div id="loading-spinner">
 					<br>
 					  {{paper-progress-linear value=percentLoaded}}		
@@ -110,7 +112,7 @@
 		</div>
 
 		<div class="row text-center showOnPhones">
-			{{#each model.catItems as |cat-item|}}
+			{{#each model.vendor.catItems as |cat-item|}}
 		         <div style="display: inline-block;">
 		            <div class="category-block">
 		               <span class="cat-title">{{cat-item.name}}</span>

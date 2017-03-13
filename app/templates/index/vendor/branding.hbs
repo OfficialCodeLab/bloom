@@ -1,0 +1,63 @@
+
+<h1 class="font-times-header" style="color: #4C4C4E;">Branding</h1><br>
+{{!-- <p class="italic">Set up and display your brand</p> --}}
+<hr>
+
+<div style="text-align:center">
+    <div style="padding: 10px;" class="pear-profile-card card-sm unselectable">
+    <h3>Your Primary Branding</h3>
+    <p>Upload your logo to Bloom and help users identify you easier</p>
+    <p>For best results, use a png image with a transparent background that will work well against a white background</p>
+    <p>Please ensure your aspect ratio is 1x1 (square)</p>
+    <img id='brandImage' hidden='true'>
+	{{#drop-zone
+      addRemoveLinks=true
+      onAddedFile=storeBrandImage
+      keepLocal=true
+      acceptedFiles='.jpg,.png'
+      maxFiles='1'
+      as |register|
+    }}
+      {{#default-message register=register}}
+        <span class="fa fa-files-o"></span><br>
+        Drop Files Here to Upload
+      {{/default-message}}
+      {{#invalid-file-type register=register}}
+        Invalid File Type! We only accept jpg and png files
+      {{/invalid-file-type}}
+    {{/drop-zone}}
+
+    <br>
+    {{#mdl-button isRaised=true action="uploadBrandImg" disabled=uploadingBrandImage}}Upload {{#if uploadingBrandImage}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+    <br>
+    </div>
+
+    <div style="padding: 10px; margin-top: 80px;" class="pear-profile-card card-sm unselectable">
+    <h3>Your Splash Image</h3>
+    <p>Upload a custom splash image to Bloom and make your profile bloom!</p>
+    <p>For best results, use a vibrant image that works with a dark overlay. This image will be on your vendor profile</p>
+    <p>Please ensure your aspect ratio is 15x4 (eg 750 x 200 px)</p>
+    <img id='backgroundImage' hidden='true'>
+	{{#drop-zone
+      addRemoveLinks=true
+      onAddedFile=storeBackgroundImage
+      keepLocal=true
+      acceptedFiles='.jpg,.png'
+      maxFiles='1'
+      as |register|
+    }}
+      {{#default-message register=register}}
+        <span class="fa fa-files-o"></span><br>
+        Drop Files Here to Upload
+      {{/default-message}}
+      {{#invalid-file-type register=register}}
+        Invalid File Type! We only accept jpg and png files
+      {{/invalid-file-type}}
+    {{/drop-zone}}
+    <br>
+    {{#mdl-button isRaised=true action="uploadBackImg" disabled=uploadingBackgroundImage}}Upload {{#if uploadingBackgroundImage}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+    <br>
+    </div>
+
+</div>
+{{notification-container position="bottom"}}

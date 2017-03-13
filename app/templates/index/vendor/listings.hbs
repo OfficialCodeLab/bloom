@@ -10,7 +10,10 @@
             <div class="category-block">
                <span class="cat-title">{{cat-item.name}}</span>
                {{#link-to 'index.vendor.services.item' cat-item.id tagname='div' class="text-center cat-img-container"}}
-               {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+
+               <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
+                  {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+               </div>
                {{/link-to}}
                <div class="cat-overlay-2">
                </div>
