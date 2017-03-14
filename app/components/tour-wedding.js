@@ -168,7 +168,7 @@ const TourWeddingComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Get started on your guest list',
-				      text: ['Add email addresses of invitees and send to guests<br>with our electronic invite.<br>Bloom will automatically track guest’s responses.'],
+				      text: ['Add email addresses of invitees and send<br>to guests with our electronic invite.<br>Bloom will automatically track guest’s responses.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();

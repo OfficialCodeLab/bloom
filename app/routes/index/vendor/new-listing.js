@@ -223,7 +223,7 @@ export default Ember.Route.extend({
 					let maxCount = parseInt(vndr.get("maxItems"));
 
 					if(!maxCount || maxCount > itemsC){
-						if(!(!mainImg.complete || typeof mainImg.naturalWidth == "undefined" || mainImg.naturalWidth == 0)){
+						if(!(!mainImg.complete || typeof mainImg.naturalWidth === "undefined" || mainImg.naturalWidth === 0)){
 							if(this.controller.get('name')) {
 								let travelObj = this.retrieveTravelInfo();
 								let priceObj = this.retrievePriceInfo();
@@ -346,7 +346,7 @@ export default Ember.Route.extend({
 			let uploadTasks = [];
 
 			for (var i = 0; i < 3; i++){
-				if(!(!imagesArr[i].complete || typeof imagesArr[i].naturalWidth == "undefined" || imagesArr[i].naturalWidth == 0)){
+				if(!(!imagesArr[i].complete || typeof imagesArr[i].naturalWidth === "undefined" || imagesArr[i].naturalWidth === 0)){
 					let im = this.decodeImage(imagesArr[i]);
 					let met = {
 						contentType: im.contentType

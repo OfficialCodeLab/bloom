@@ -806,6 +806,24 @@ Guest List
 	background-size: contain;
 }
 
+.img-backdrop-s{
+
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center center;
+	background-size: 120px 120px;
+	background-image: url(../assets/images/edit-icon.png);
+	z-index: 6;
+}
+
+.img-far-background {
+	background-color: white;
+	background-size: contain;
+	z-index: 5;
+
+}
+
+
 .cat-heart-button{
 	width: 45px;
 	height: 45px;
@@ -1812,18 +1830,8 @@ Guest List
 	position:relative;
 	min-height: 150px;
 	min-width: 150px;
-	// background-color: black;
-	// border-radius: 15px;
-	// border-top-left-radius: 15px;
-	// border-top-right-radius: 15px;
-	// width: 100%;
-	// height: 100%;
-	// line-height: 117px;
-	// display: inline-block;
 	text-align: center;
 	display: inline-block;
-	// max-height: 500px;
-	// overflow-y: hidden;
 	background-color: #fff;
 	margin: 0px;
 	padding: 0px;
@@ -1831,21 +1839,13 @@ Guest List
 		display: inline-block;
 		cursor: default;
 		z-index: 6;
-		// border-radius: 15px;
-
-
 		position: relative;
-		// top: 50%;
-		// transform: translateY(-50%);
-
 		max-height: 100vh;
 		max-width: 100%;
 		height: auto;
 		width: auto;
-
 		margin: 0px;
 		padding: 0px;
-
 		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
@@ -1853,6 +1853,45 @@ Guest List
 		-webkit-user-select: none;
 		-ms-user-select: none;
 	}
+	
+}
+
+.single-img-container-v{
+	position:relative;
+	// min-height: 150px;
+	// min-width: 150px;
+	text-align: center;
+	display: inline-block;
+	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
+	&:hover{
+		cursor: pointer;
+  		box-shadow: 0 5px 5px 0 rgba(0,0,0,.14),0 4px 5px -2px rgba(0,0,0,.2),0 3px 8px 0 rgba(0,0,0,.12);
+		transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  		img{
+  			opacity: 0.5;
+			transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  		}
+	}
+	img{
+		display: inline-block;
+		z-index: 6;
+		position: relative;
+		max-height: 100vh;
+		max-width: 100%;
+		height: auto;
+		width: auto;
+		margin: 0px;
+		padding: 0px;
+		user-drag: none;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	
 }
 
 .single-item-title{

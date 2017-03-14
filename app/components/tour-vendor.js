@@ -100,7 +100,7 @@ const TourVendorComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Create Service Listings',
-				      text: ['Add your services here to create your service listing.<br>You can have more than one listing, provided it falls under a separate category.'],
+				      text: ['Add your services here to create your service listing.<br>You can have more than one listing, provided it<br>falls under a separate category.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -129,7 +129,7 @@ const TourVendorComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Manage your profile',
-				      text: ['Ensure your profile is up to date with all the information users need<br>to get in touch with you.'],
+				      text: ['Ensure your profile is up to date with all the information<br> users need to get in touch with you.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();

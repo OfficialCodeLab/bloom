@@ -4,36 +4,92 @@
 <div class="row text-center full-width-boxes">
    <div class="col-lg-12">
       <h1>{{model.catItem.name}}</h1>
-      <div class="single-img-container">
-         {{!-- <img src={{model.catItem.imageURL}} class="img-responsive"> --}}
-         <div style="z-index: 5">
-			{{#if img0}}
-	        <img src={{model.catItem.imageURL}} class="img-responsive">
-	        {{else}}
-	        	{{#if img1}}
-	        		<img src={{model.catItem.image0}} class="img-responsive">
-	        	{{else}}
-		        	{{#if img2}}
-		        		<img src={{model.catItem.image1}} class="img-responsive">
-		        	{{else}}
-			        	{{#if img3}}
-			        		<img src={{model.catItem.image2}} class="img-responsive">
-	        			{{/if}}
-	        		{{/if}}
-	        	{{/if}}
-	        {{/if}}
-	        </div>
 
-	        <div class="background-spinner">
+     	{{#if showImageUploader}}
+        	<img id='selectedImage' height='200' width='200' hidden='true'>
+	      	<div class="container" style="padding: 10px; margin-bottom: 40px;">
+		 		<p> Select your image </p>
+				{{#drop-zone
+			      addRemoveLinks=true
+			      onAddedFile=storeImage
+			      keepLocal=true
+			      onRemovedFile=removeImage
+			      acceptedFiles='.jpg,.png'
+			      maxFiles='1'
+			      as |register|
+			    }}
+			      {{#default-message register=register}}
+			        <span class="fa fa-files-o"></span><br>
+			        Drop Files Here to Upload
+			      {{/default-message}}
+			      {{#invalid-file-type register=register}}
+			        Invalid File Type! We only accept jpg and png images
+			      {{/invalid-file-type}}
+			    {{/drop-zone}}
+	     	</div>
+     	{{else}} 
+      <div class="single-img-container-v">
+         {{!-- <img src={{model.catItem.imageURL}} class="img-responsive"> --}}
+         {{!-- <div style="z-index: 5">        		 --}}
+    		{{!-- <div class="img-far-background"> --}}
+        		<a href="#" {{action 'showUploader'}}>
+	      		    <div class="img-backdrop-s">
+					{{#if img0}}
+			        <img src={{model.catItem.imageURL}} class="img-responsive">
+			        {{else}}
+			        	{{#if img1}}
+			        		{{#if model.catItem.image0}}
+				        		<img src={{model.catItem.image0}} class="img-responsive">
+			        		{{else}}			        			
+			        			<img src='assets/images/sample-content/add-image.png' class="img-responsive">
+			        		{{/if}}	
+			        	{{else}}
+				        	{{#if img2}}
+				        		{{#if model.catItem.image1}}
+					        		<img src={{model.catItem.image1}} class="img-responsive">
+				        		{{else}}			        			
+				        			<img src='assets/images/sample-content/add-image.png' class="img-responsive">
+				        		{{/if}}	
+				        	{{else}}
+					        	{{#if img3}}
+					        		{{#if model.catItem.image2}}
+					        			<img src={{model.catItem.image2}} class="img-responsive">
+					        		{{else}}			        			
+					        			<img src='assets/images/sample-content/add-image.png' class="img-responsive">
+					        		{{/if}}			        		
+			        			{{/if}}
+			        		{{/if}}
+			        	{{/if}}
+			        {{/if}}
+			        </div>
+		        </a>
+	        {{!-- </div> --}}
+	        {{!-- </div> --}}
+
+	        {{!-- <div class="background-spinner">
 				{{mdl-spinner}}
-	        </div>
+	        </div> --}}
+
       </div>
+	   {{/if}}
    </div>
    <div class="col-lg-12" style="padding-bottom: 100px">
-		<div style="padding-top: 20px; text-align: center" class="cascading-buttons">
-			{{#mdl-button isRaised=true isAccent=true action="imgPrev"}}Prev{{/mdl-button}}
-			{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
-		</div>
+
+     	{{#if showImageUploader}}
+			{{#mdl-button isRaised=true isAccent=true action="cancelUpload"}}Cancel{{/mdl-button}}
+			{{#mdl-button isRaised=true action="uploadImage" disabled=isUploading}}Upload {{#if isUploading}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+		{{else}}
+			{{#if img0}}
+			{{else}}
+	        	<a href="#" {{action 'setMainImage'}}>Set as main image</a>
+			{{/if}}
+			<div style="padding-top: 20px; text-align: center" class="cascading-buttons">
+				{{#mdl-button isRaised=true isAccent=true action="imgPrev"}}Prev{{/mdl-button}}
+				{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
+			</div>
+			<br>
+			Image {{currentSlideCalc}} out of 4
+		{{/if}}
       <div class="form-horizontal">
          <h3>Update Details</h3>
          <div class="form-group has-feedback">

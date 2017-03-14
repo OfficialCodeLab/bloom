@@ -109,7 +109,7 @@ const TourFavouritesComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Invite loved ones',
-				      text: ['Take the weight off your shoulders by assigning tasks<br>or sharing your plans and inspirations<br>with the Inner circle feature.'],
+				      text: ['Take the weight off your shoulders by<br>assigning tasks or sharing your plans and<br>inspirations with the Inner circle feature.'],
 				      when: {
 				        cancel: () => {
 				        	this.completeTour();
@@ -160,7 +160,7 @@ const TourFavouritesComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      title: 'Voila!',
-				      text: ['Start browsing categories and be inspired.<br>Get in touch with direct messaging and take that one step closer to happily ever after.'],
+				      text: ['Start browsing categories and be inspired.<br>Get in touch with direct messaging and take that<br>one step closer to happily ever after.'],
 				      when: {
 				      	hide: () => {
 				        	this.completeTour();

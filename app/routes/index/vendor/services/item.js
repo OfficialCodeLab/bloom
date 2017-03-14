@@ -181,6 +181,118 @@ export default Ember.Route.extend({
 				});
 			}
 		},
+		setMainImage: function(){
+			let currentSlide = this.controller.get('currentSlide');
+			let imageSuffix = '';
+	    	if(currentSlide === 0) {
+	    		imageSuffix = "URL";
+	    	} else {
+	    		let calcIndex = currentSlide - 1;
+	    		imageSuffix = calcIndex + '';
+	    	}
+			let toGetString = "image" + imageSuffix;
+		    if(this.controller.get("model.catItem."+toGetString)){
+				let model = this.controller.get('model.catItem');
+		    	let oldImage = model.get(toGetString);
+		    	let oldMain = model.get('imageURL');
+				model.set('imageURL', oldImage);
+				model.set(toGetString, oldMain);
+	          	this.setImageSlide(0);
+				model.save().then(()=>{
+					this.controller.get('notifications').success('Main Image has been updated',{
+		            	autoClear: true
+		          	});
+				});
+		    } else {
+		    	this.controller.get('notifications').error('Image could not be used',{
+	            	autoClear: true
+	          	});
+		    }
+
+		},
+		showUploader: function() {
+			this.controller.set("showImageUploader", true);
+		},
+		cancelUpload: function () {
+			this.controller.set("showImageUploader", false);
+			var selectedImage = document.getElementById('selectedImage');
+    		selectedImage.src = null;
+		},
+		uploadImage: function() {
+			var selectedImage = document.getElementById('selectedImage');
+			if(!(!selectedImage.complete || typeof selectedImage.naturalWidth === "undefined" || selectedImage.naturalWidth === 0)) {
+
+				this.controller.set("isUploading", true);
+				let currentSlide = this.controller.get('currentSlide');
+				let imageSuffix = '';
+				let imageName = "";
+		    	if(currentSlide === 0) {
+		    		imageSuffix = "URL";
+		    		imageName = "mainImg";
+		    	} else {
+		    		let calcIndex = currentSlide - 1;
+		    		imageSuffix = calcIndex + '';
+		    		imageName = "image" + calcIndex;
+		    	}
+				let toGetString = "image" + imageSuffix;
+
+				let mainI = this.decodeImage(selectedImage);
+				let tasksComplete = 0;
+				let tasksToDo = 0;
+				let _this = this;
+
+				//Still all under assumption it is loaded
+
+		    	var metadata = {
+					contentType: mainI.contentType
+				};
+
+				var storageRef = this.get('firebaseApp').storage().ref();
+				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let user = this.store.peekRecord('user', _id);
+				let catItem = this.controller.get('model.catItem');
+				let itemId = catItem.get('id');
+				let vendorId = user.get('vendorAccount');
+
+				//Should locally store all variables
+				var path = 'vendorImages/' + vendorId + '/services/' + itemId + '/';
+				var uploadTask = storageRef.child(path + imageName).put(mainI.blob, metadata);
+
+				uploadTask.on('state_changed', function(snapshot){
+					//PROGRESS
+					var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+					// console.log('Upload is ' + progress + '% done');
+					// console.log(snapshot.state);
+				}, function(error) {
+					_this.controller.set("isUploading", false);
+					_this.controller.get('notifications').error('Something went wrong, please try again.',{
+			            autoClear: true
+			        }); 
+					//ERROR
+				}, function() {
+					//COMPLETE
+					var downloadURL = uploadTask.snapshot.downloadURL;
+					//Add image
+					let catItem = _this.store.peekRecord('cat-item', itemId);
+					catItem.set(toGetString, downloadURL);
+					catItem.save().then(()=>{
+						_this.controller.get('notifications').success('Image uploaded successfully!',{
+				            autoClear: true
+				        }); 
+
+						_this.controller.set("isUploading", false);						
+						_this.controller.set("showImageUploader", false);
+			    		selectedImage.src = null;
+					});
+				});
+
+			} else {
+				this.controller.get('notifications').error('Please select an image',{
+		            autoClear: true
+		        }); 
+			}
+
+		},
 		willTransition(transition) {
 			let model = this.controller.get('model.catItem');
 
@@ -252,16 +364,16 @@ export default Ember.Route.extend({
 		    		imageSuffix = calcIndex + '';
 		    	}
 
-		    	let toGetString = "model.catItem.image" + imageSuffix;
-		    	if(this.controller.get(toGetString)){
+		    	// let toGetString = "model.catItem.image" + imageSuffix;
+		    	// if(this.controller.get(toGetString)){
 		    		this.setImageSlide(currentSlide);
 		    		isRunning = false;
-		    	} else {
-		    		breakThis++;
-		    		if(breakThis >= 4){
-		    			isRunning = false;
-		    		}
-		    	}
+		    	// } else {
+		    	// 	breakThis++;
+		    	// 	if(breakThis >= 4){
+		    	// 		isRunning = false;
+		    	// 	}
+		    	// }
 		    }
 	    },
 	    imgNext: function(){
@@ -284,16 +396,16 @@ export default Ember.Route.extend({
 		    		imageSuffix = calcIndex + '';
 		    	}
 
-		    	let toGetString = "model.catItem.image" + imageSuffix;
-		    	if(this.controller.get(toGetString)){
+		    	// let toGetString = "model.catItem.image" + imageSuffix;
+		    	// if(this.controller.get(toGetString)){
 		    		this.setImageSlide(currentSlide);
 		    		isRunning = false;
-		    	} else {
-		    		breakThis++;
-		    		if(breakThis >= 4){
-		    			isRunning = false;
-		    		}
-		    	}	    		
+		    	// } else {
+		    	// 	breakThis++;
+		    	// 	if(breakThis >= 4){
+		    	// 		isRunning = false;
+		    	// 	}
+		    	// }	    		
 	    	}
 	    }
 	},
@@ -425,7 +537,48 @@ export default Ember.Route.extend({
 		    });
 	    }
 	},
+	b64toBlob: function(b64Data, contentType, sliceSize) {
+		contentType = contentType || '';
+		sliceSize = sliceSize || 512;
+
+		var byteCharacters = atob(b64Data);
+		var byteArrays = [];
+
+		for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+		var byteNumbers = new Array(slice.length);
+		for (var i = 0; i < slice.length; i++) {
+		  byteNumbers[i] = slice.charCodeAt(i);
+		}
+
+		var byteArray = new Uint8Array(byteNumbers);
+
+		byteArrays.push(byteArray);
+		}
+
+		var blob = new Blob(byteArrays, {type: contentType});
+		return blob;
+	},
+	//Returns JSON struct with decoded blob, extension and content type
+	decodeImage: function(image){
+		let blob = image.src;
+		let _blob = blob.split(",", 2);
+		let _metadata = _blob[0].split(';', 2);
+		let fileType = _metadata[0].split(':', 2);
+		let contentType = fileType[1];
+		let __blob = this.b64toBlob(_blob[1]);
+		let ext = fileType[1].split('/', 2);
+
+		let decodedImage = {
+			contentType: contentType,
+			extension: ext[1],
+			blob: __blob
+		};
+
+		return decodedImage;
+	},
 	uiSetup: function(){
 	   // do magic here...
-	}.on('didInsertElement').observes('model') 
+	}.on('didInsertElement').observes('model')
 });
