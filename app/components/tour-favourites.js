@@ -138,11 +138,10 @@ const TourFavouritesComponent = Ember.Component.extend({
 				      ],
 				  	  disableScroll: true,
 				      scrollTo: false,
-				      title: 'Voila!',
-				      text: ['Start browsing categories and be inspired.<br>Get in touch with direct messaging<br>and take that one step closer to happily ever after.'],
+				      title: 'Set up your stats',
+				      text: ['Keep measurements up to date and on hand for when you need them.'],
 				      when: {
 				        cancel: () => {
-				        	alert("DONE BITCHES");
 				        	this.completeTour();
 				        }
 				      }
@@ -160,8 +159,8 @@ const TourFavouritesComponent = Ember.Component.extend({
 				        },
 				      ],
 				  	  disableScroll: true,
-				      title: 'Go wild. Be inspired!',
-				      text: ['Now it is time to browse!<br>Click on categories in the navigation bar and explore! Enjoy :)'],
+				      title: 'Voila!',
+				      text: ['Start browsing categories and be inspired.<br>Get in touch with direct messaging and take that one step closer to happily ever after.'],
 				      when: {
 				      	hide: () => {
 				        	this.completeTour();

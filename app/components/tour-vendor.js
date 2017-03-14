@@ -109,10 +109,39 @@ const TourVendorComponent = Ember.Component.extend({
 				    }
 				  },
 				  {
-				    id: 'outro',
+				    id: 'manage-profile',
 				    options: {				    	
 				      attachTo: {
 						  element: '#nav-vendor-profile',
+						  on: 'bottom'
+						},
+				      builtInButtons: [
+				        {
+				          classes: 'shepherd-button-primary',
+				          text: 'Back',
+				          type: 'back'
+				        },
+				        {
+				          classes: 'shepherd-button-primary',
+				          text: 'Next',
+				          type: 'next'
+				        }
+				      ],
+				  	  disableScroll: true,
+				      title: 'Manage your profile',
+				      text: ['Ensure your profile is up to date with all the information users need<br>to get in touch with you.'],
+				      when: {
+				        cancel: () => {
+				        	this.completeTour();
+				        }
+				      }
+				    }
+				  },
+				  {
+				    id: 'outro',
+				    options: {				    	
+				      attachTo: {
+						  element: '#nav-vendor-branding',
 						  on: 'bottom'
 						},
 				      builtInButtons: [
@@ -123,8 +152,8 @@ const TourVendorComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Manage your profile',
-				      text: ['Ensure your profile is up to date with all the information users need<br>to get in touch with you.'],
+				      title: 'Upload your branding',
+				      text: ['Help users identify you better.<br>So that they know to come to you first.'],
 				      when: {
 				      	hide: () => {
 				        	this.completeTour();				      		
@@ -134,7 +163,7 @@ const TourVendorComponent = Ember.Component.extend({
 				        }
 				      }
 				    }
-				  },
+				  }
 				  ]);
 				this.toggleOverlay();
 				this.get('tour').start();
