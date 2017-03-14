@@ -14,7 +14,7 @@ export default Ember.Controller.extend({
 		let errorFunc = function() {
             _this.dropzone.removeFile(file);
         	alert("Aspect ratio is incorrect.\nPlease ensure it is 15x4 (eg 750 x 200 px)");
-		}	
+		};	
 
 		reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
 		let errorFunc = function() {
             _this.dropzone.removeFile(file);
         	alert("Aspect ratio is incorrect.\nPlease ensure it is 1x1 (square)");
-		}		
+		};		
 
 		reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;

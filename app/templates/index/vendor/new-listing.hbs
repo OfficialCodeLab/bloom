@@ -116,7 +116,7 @@
 						      addRemoveLinks=true
 						      onAddedFile=storeMainImage
 						      keepLocal=true
-						      onRemovedFile=removedMainImage
+						      onRemovedFile=removeMainImage
 						      acceptedFiles='.jpg,.png'
 						      maxFiles='1'
 						      as |register|
@@ -126,7 +126,7 @@
 						        Drop Files Here to Upload
 						      {{/default-message}}
 						      {{#invalid-file-type register=register}}
-						        Invalid File Type! We only accept mp4, pdf, and xml files
+						        Invalid File Type! We only accept jpg and png images
 						      {{/invalid-file-type}}
 						    {{/drop-zone}}
 								{{!-- {{#mdl-button action='openFilePicker' disabled=isCreating isRaised=true isAccent=true}}Upload Files <i class="fa fa-upload"></i>{{/mdl-button}} --}}
@@ -143,7 +143,8 @@
 							{{#drop-zone
 						      addRemoveLinks=true
 						      onAddedFile=storeExtraImage
-						      onRemovedFile=removedFile
+						      onRemovedFile=removeExtraImage
+						      keepLocal=true
 						      acceptedFiles='.jpg,.png'
 						      maxFiles='3'
 						      as |register|
@@ -153,7 +154,7 @@
 						        Drop Files Here to Upload
 						      {{/default-message}}
 						      {{#invalid-file-type register=register}}
-						        Invalid File Type! We only accept mp4, pdf, and xml files
+						        Invalid File Type! We only accept jpg and png images
 						      {{/invalid-file-type}}
 						    {{/drop-zone}}		        		
 

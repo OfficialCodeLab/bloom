@@ -56,38 +56,59 @@ export default Ember.Controller.extend({
         //UPLOAD TO FIREBASE STORAGE
     },
 
+    removeExtraImage: function(file, done){
+    	let reader = new FileReader();
+
+    	reader.onloadend = Ember.run.bind(this, function(){
+    		var dataURL = reader.result;
+    		var img1 = document.getElementById('img1');
+    		var img2 = document.getElementById('img2');
+    		var img3 = document.getElementById('img3');
+    		if(img1.src === dataURL) {
+    			img1.src = null;
+    		} else if (img2.src === dataURL) {
+    			img2.src = null;
+    		} else if (img3.src === dataURL) {
+    			img3.src = null;  		
+			}
+    	});
+
+    	reader.readAsDataURL(file);
+
+    },
+
     storeExtraImage: function(file, done){
     	// console.log(file);
+    	let _this = this;
     	let _file = file;
 
     	let reader = new FileReader();
 
     	reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
-			var img1 = document.getElementById('img1');
-			if(img1.src){
-				var img2 = document.getElementById('img2');
-				if(img2.src){
-					var img3 = document.getElementById('img3');
-					if(img3.src){
-						// Simple handling for now.
-						// Need to figure out image removal
-					} else {
-						img3.src = dataURL;
-					}
-				} else {
-					img2.src = dataURL;
-				}
-			} else {
+    		var img1 = document.getElementById('img1');
+    		var img2 = document.getElementById('img2');
+    		var img3 = document.getElementById('img3');
+			if(!img1.complete || typeof img1.naturalWidth == "undefined" || img1.naturalWidth == 0){
 				img1.src = dataURL;
+			} else if (!img2.complete || typeof img2.naturalWidth == "undefined" || img2.naturalWidth == 0) {
+				img2.src = dataURL;
+			} else if (!img3.complete || typeof img3.naturalWidth == "undefined" || img3.naturalWidth == 0) {
+				img3.src = dataURL;
 			}
+			
     	});
 		reader.readAsDataURL(file);
 
     },
 
+    removeMainImage: function(file, done){
+    	var mainImg = document.getElementById('mainImg');
+    	mainImg.src = null;
+    },
+
     storeMainImage: function(file, done){
-        console.log(file);
+        let _this = this;
 		let _file = file;
 
 		let reader = new FileReader();
