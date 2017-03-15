@@ -83,7 +83,6 @@ Router.map(function() {
   this.route('not-found', { path: '/*path' });
   this.route('vendor-profile', { path: '/vendor/:vendor_id' });
   this.route('guide');
-  this.route('master-admin');
   this.route('messaging', { path: '/messaging/:vendor_id' });
   this.route('logout');
   this.route('vendor-signup');

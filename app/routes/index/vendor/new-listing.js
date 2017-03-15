@@ -78,6 +78,15 @@ export default Ember.Route.extend({
 	     		if(vendor.get('province')) {
 	     			controller.set('selectedProvince', vendor.get('province'));
 	     		}
+
+	     		if(vendor.get('city')) {
+	     			controller.set('city', vendor.get('city'));
+	     			//Refresh fields
+     				controller.set('refreshFields', false);
+     				Ember.run.next(function () {
+     					controller.set('refreshFields', true);
+				    });
+	     		}
 	     	});
      	}, ()=> {});
 	},
@@ -119,6 +128,7 @@ export default Ember.Route.extend({
     		this.controller.set('name', '');
 			this.controller.set('price', '');
 			this.controller.set('desc', '');
+			this.controller.set('city', '');
 			this.controller.set('imageURL', '');
 			this.controller.set('imgBlob', '');
 			this.controller.set('minPrice', '');
@@ -214,6 +224,15 @@ export default Ember.Route.extend({
 				let user = this.store.peekRecord('user', _id);
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
+				let provinceName = this.controller.get('selectedProvince');
+				let provinceCode = "";
+				let provinces = this.store.peekAll('province');
+				provinces.forEach(function(province){
+					if (province.get('name') === provinceName) {
+						let shortCode = province.get('code').split('_');
+						provinceCode = shortCode[1].toUpperCase();
+					}
+				});
 
 				var mainImg = document.getElementById('mainImg');
 
@@ -227,14 +246,13 @@ export default Ember.Route.extend({
 							if(this.controller.get('name')) {
 								let travelObj = this.retrieveTravelInfo();
 								let priceObj = this.retrievePriceInfo();
-								let provinceName = this.controller.get('selectedProvince');
-								let provinceCode = this.retrieveProvinceCode(provinceName);
 								let newItem = this.store.createRecord('cat-item', {		
 								  name: this.controller.get('name'),			
 								  desc: this.controller.get('desc'),			
 								  price: priceObj.price,		
 								  minPrice: priceObj.minPrice,		
 								  maxPrice: priceObj.maxPrice,
+								  city: this.controller.get('city'),
 								  country: 'South Africa',
 								  countryCode: 'za',
 								  province: provinceName,
@@ -513,15 +531,6 @@ export default Ember.Route.extend({
         }); 
         this.transitionTo('index.vendor');
 	},
-	retrieveProvinceCode: function(provinceName){
-		let provinces = this.store.peekAll('province');
-		provinces.forEach(function(province){
-			if (province.get('name') === provinceName) {
-				return province.get('code');
-			}
-		});
-		return null;
-	},
 	retrieveTravelInfo: function(){
 		let willingTravel;
 		let travelDist;
@@ -536,7 +545,7 @@ export default Ember.Route.extend({
             break;
 
             default: //Na
-                willingTravel = null;
+                willingTravel = true;
             break;
         }
 

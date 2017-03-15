@@ -135,11 +135,18 @@ export default Ember.Route.extend({
 			let _cat = this.controller.get('category') + "";
 			let _item = this.store.peekRecord('cat-item', this.controller.get('model.catItem.id'));
 			this.controller.get('model.catItem').set('isUpdating', true);
+			let provinceName = this.controller.get('selectedProvince');
+			let provinceCode = "";
+			let provinces = this.store.peekAll('province');
+			provinces.forEach(function(province){
+				if (province.get('name') === provinceName) {
+					let shortCode = province.get('code').split('_');
+					provinceCode = shortCode[1].toUpperCase();
+				}
+			});
 
 			let travelObj = this.retrieveTravelInfo();
 			let priceObj = this.retrievePriceInfo();
-			let provinceName = this.controller.get('selectedProvince');
-			let provinceCode = this.retrieveProvinceCode(provinceName);
 			_item.set('price', priceObj.price);
 			_item.set('minPrice', priceObj.minPrice);
 			_item.set('maxPrice', priceObj.maxPrice);
@@ -462,7 +469,7 @@ export default Ember.Route.extend({
             break;
 
             default: //Na
-                willingTravel = null;
+                willingTravel = true;
             break;
         }
 

@@ -132,6 +132,56 @@
 							</div>
 							<hr>
 						</div>
+						{{#if model.willingToTravel}}						
+							{{#if model.maxTravelDist}} {{!-- YES --}}
+		                		{{!-- DISPLAY PROVINCE HERE --}}
+                        		<div class="row si-row">
+									<div class="col-xs-6 si-left">
+										{{#mdl-button disabled=true}}Location{{/mdl-button}}
+									</div>
+									<div class="col-xs-6 si-right">
+										<div style="padding-right: 10px;">
+					                        {{#if model.city}}
+						                        {{model.city}}, {{model.provinceCode}}
+						                     {{else}}
+						                        {{model.province}}
+						                     {{/if}}
+										</div>
+									</div>
+									<hr>
+								</div>
+		                    {{/if}}
+	                   		{{!--  DISPLAY PLANE SECTION HERE --}}  
+	                   		<div class="row si-row">
+								<div class="col-xs-6 si-left">
+									{{#mdl-button disabled=true}}Location Info{{/mdl-button}}
+								</div>
+								<div class="col-xs-6 si-right">
+									<div style="padding-right: 10px;">
+										<div class="cat-i-div">
+					                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+					                        {{tooltip-on-element side="left" text="Vendor is willing to travel"}}
+					                    </div> 
+					                    {{!-- If N/A do not show --}}
+					                    {{#if model.maxTravelDist}}{{model.maxTravelDist}} km{{/if}}
+									</div>
+								</div>
+								<hr>
+							</div>                      	
+		                {{else}} {{!-- NO --}}
+		                	{{!-- DISPLAY PROVINCE HERE --}}
+		                	<div class="row si-row">
+								<div class="col-xs-6 si-left">
+									{{#mdl-button disabled=true}}Location{{/mdl-button}}
+								</div>
+								<div class="col-xs-6 si-right">
+									<div style="padding-right: 10px;">
+										{{model.province}}
+									</div>
+								</div>
+								<hr>
+							</div>		                	
+		                {{/if}}
 						{{!-- <table>
 							<tbody>
 								<tr>

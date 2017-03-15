@@ -754,11 +754,27 @@ Guest List
 	padding: 5px;
 	height: 40px;
 }
+
+.cat-bot-box-r{
+	text-align: right;
+	padding: 5px;
+}
+
+.cat-travel-i {	
+    font-size: 20px;
+    vertical-align: -3px;
+}
 .float-top-right {
 	top: 6px;
 	right: 2%;
 	position: absolute;
 	z-index: 10;
+}
+.cat-i-div {
+	display: inline;
+	&:hover {
+		cursor: pointer;
+	}
 }
 
 .cat-img-container{

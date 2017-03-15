@@ -64,7 +64,7 @@
                             <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
                             <div class="col-xs-10 overview-info">{{model.vendor.city}}, {{model.vendor.province}}</div>
                             <div class="col-xs-2 overview-info"><i class="material-icons">laptop</i></div>
-                            <div class="col-xs-10 overview-info"><a href={{model.vendorStat.website}} >{{model.vendorStat.website}}</a></div>
+                            <div class="col-xs-10 overview-info"><a href={{model.vendorStat.website}} target="_blank">{{model.vendorStat.website}}</a></div>
                         </div>
                         <div class="overlay-box-bottom">
                             {{mdl-button action='showContactInfo' text="Show Contact Info"}}
@@ -95,8 +95,31 @@
 		                  
 		               </div>
 		               <div class="cat-bottom-box">
+		                  <div class="cat-bot-box-l col-xs-6">
 		                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
-		                  {{!-- <span class="cat-price">R{{cat-item.price}}</span> --}}
+		                  </div>
+
+		                  <div class="cat-bot-box-r col-xs-6">
+		                  {{#if cat-item.willingToTravel}} 
+		                     <div class="cat-i-div">
+		                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+		                        {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
+		                     </div>
+		                     {{#if cat-item.maxTravelDist}}
+		                        {{#if cat-item.city}}
+                        {{cat-item.city}}, {{cat-item.provinceCode}}
+                     {{else}}
+                        {{cat-item.province}}
+                     {{/if}}
+		                     {{/if}} 
+		                  {{else}} {{!-- NO --}}
+		                     {{#if cat-item.city}}
+                        {{cat-item.city}}, {{cat-item.provinceCode}}
+                     {{else}}
+                        {{cat-item.province}}
+                     {{/if}}
+		                  {{/if}}
+		                  </div>
 		               </div>
 		            </div>
 		         </div>
@@ -126,8 +149,31 @@
 		                  
 		               </div>
 		               <div class="cat-bottom-box">
+			               <div class="cat-bot-box-l col-xs-6">
 			                  {{#link-to 'category' cat-item.category.id class="cat-category" tagName="span"}}{{cat-item.category.name}}{{/link-to}}
-		                  {{!-- <span class="cat-price">R{{cat-item.price}}</span> --}}
+			                  </div>
+
+			                  <div class="cat-bot-box-r col-xs-6">
+			                  {{#if cat-item.willingToTravel}} 
+			                     <div class="cat-i-div">
+			                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+			                        {{tooltip-on-element side="left" text="Vendor is willing to travel"}}
+			                     </div>
+			                     {{#if cat-item.maxTravelDist}}
+			                        {{#if cat-item.city}}
+                        {{cat-item.city}}, {{cat-item.provinceCode}}
+                     {{else}}
+                        {{cat-item.province}}
+                     {{/if}}
+			                     {{/if}} 
+			                  {{else}} {{!-- NO --}}
+			                     {{#if cat-item.city}}
+                        {{cat-item.city}}, {{cat-item.provinceCode}}
+                     {{else}}
+                        {{cat-item.province}}
+                     {{/if}}
+			                  {{/if}}
+		                  </div>
 		               </div>
 		            </div>
 		         </div>

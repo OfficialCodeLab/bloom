@@ -126,6 +126,11 @@
          </div>
          <div class="form-group has-feedback" style="text-align: left;">
             <div class="col-sm-6 col-sm-offset-3">
+               {{mdl-textfield label='City' value=model.catItem.city}}
+            </div>
+         </div>
+         <div class="form-group has-feedback" style="text-align: left;">
+            <div class="col-sm-6 col-sm-offset-3">
                <strong>Willing to travel?</strong><br>
                <div>
                   {{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
