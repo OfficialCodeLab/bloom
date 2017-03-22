@@ -3,7 +3,7 @@ var Promise = Ember.RSVP.Promise;
 
 export default Ember.Component.extend({
 
-	currentBackground: 3,  //Currently active background
+	currentBackground: 0,  //Currently active background
 	calledOnce: false,	  //Prevent multiple calls
 	refreshIntervalId: 0, //Used for GC
 
@@ -35,7 +35,7 @@ export default Ember.Component.extend({
         var _currentBackground = this.get('currentBackground');
 		Ember.$('#section1-bg').fadeIn(0);
 		_currentBackground++;
-		if(_currentBackground > 3) {
+		if(_currentBackground > backgrounds.length) {
 			_currentBackground = 0;
 		} 
 
