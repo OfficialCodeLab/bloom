@@ -1028,7 +1028,7 @@ Guest List
 	text-align: center;
 	background-position: center center;
 	background-repeat: no-repeat;
-	max-height: 460px;
+	min-height: 460px;
 	h1{
 		color: white;
 	}
@@ -1051,6 +1051,19 @@ Guest List
 		color: white;
 	}
 }
+
+.tour-parallax{ 
+    background-attachment: fixed;
+    background-position: 50% 100%;
+    min-height: 500px;
+    background-size: cover;
+}
+
+.guided-tour-top-img {
+	max-height: 200px;
+	max-width: 90%;		
+}
+
 .vendor-tour-works{
 
 	i{
@@ -2505,10 +2518,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 			margin: 5px;
 		}
 	}
-	.tour-block-padding{
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
+	// .tour-block-padding{
+	// 	padding-top: 20px;
+	// 	padding-bottom: 20px;
+	// }
 	h1{
 	  font-size: 2.6em !important;
 	}
@@ -2574,10 +2587,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 		width: 45%
 	}
 
-	.tour-block-padding{
-		padding-top: 10px;
-		padding-bottom: 10px;
-	}
+	// .tour-block-padding{
+	// 	padding-top: 10px;
+	// 	padding-bottom: 10px;
+	// }
 	.category-square{
 		padding-top: 15px;
 	}
