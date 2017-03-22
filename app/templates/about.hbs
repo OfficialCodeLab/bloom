@@ -78,9 +78,18 @@
       </div>
     </div>
   </div>
-  <div class="guided-tour-top">
+  {{!-- <div class="guided-tour-top">
     <div class="overlay-dark">
       <div class="container" style="padding-top: 125px; padding-bottom: 125px;">
+          <h1>Be our guest and take the guided tour</h1><br>
+          {{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR'}}{{/link-to}}
+      </div>
+    </div>
+  </div> --}}
+
+  <div class="tour-image-backdrop vendor-tour-alt" style="background: url('../assets/images/banners/guided-tour-alt.jpg'); height: 569px;">
+    <div class="overlay-dark">
+      <div class="container"  style="padding: 195px 20px 195px 20px;">
           <h1>Be our guest and take the guided tour</h1><br>
           {{#link-to 'guide'}}{{mdl-button isRaised=true text='GUIDED TOUR'}}{{/link-to}}
       </div>

@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 	calledOnce: false,	  //Prevent multiple calls
 	refreshIntervalId: 0, //Used for GC
 
-	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg"],
+	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg", "splash-bg5.jpg"],
 
 	//Initialize script when component is inserted
 	didInsertElement: function(){

@@ -1026,9 +1026,9 @@ Guest List
 .vendor-tour-top{
 	background: url('../assets/images/banners/vendor-van.jpg');
 	text-align: center;
-	background-position: center center;
 	background-repeat: no-repeat;
-	min-height: 460px;
+	background-position: 100% 100%; 
+	min-height: 520px;
 	h1{
 		color: white;
 	}
@@ -1039,6 +1039,11 @@ Guest List
 		}
 	}
 }
+
+.vendor-tour-alt {
+	background-position: 100% 100% !important;
+}
+
 .tour-image-backdrop{
 	text-align: center;
 	background-size: contain;
@@ -1718,6 +1723,40 @@ Guest List
 	bottom: 0px;
 }
 
+.social-media-icons{
+	padding: 10px;
+
+	a{
+		padding: 5px;
+	}
+	a:link, a:visited {
+		color: black;
+		transition: 0.3s;
+	}
+
+	a:hover, a:active, a:focus {
+		color: $color-main;
+		transition: 0.5s;
+	}
+}
+
+.social-media-icons-white{
+	padding: 5px;
+	
+	a{
+		padding: 5px;
+	}
+	a:link, a:visited {
+		color: white;
+		transition: 0.3s;
+	}
+
+	a:hover, a:active, a:focus {
+		color: $color-main;
+		transition: 0.5s;
+	}
+}
+
 
 /*==============================================================================*\
    ____      _     ___ _
@@ -2051,7 +2090,7 @@ Guest List
     // transform:scale(1,1.2); /* W3C */
 }
 .slick-content{
-	height: 60vh;
+	height: 80vh;
 	width: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -2356,6 +2395,10 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 }
 @media (max-width:1025px) { /* big landscape tablets, laptops, and desktops */
+	.vendor-tour-alt {
+		background-position: 20% 100% !important;
+	}
+
 
 	.category-square{
 		padding-top: calc(100vw / 19);

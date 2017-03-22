@@ -110,14 +110,14 @@ a{
   // background-image: url(images/bg1.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
-  background-position: 0% 30%;
+  background-position: 100% 100%;
 }
-#section1 a{
-	color: white;
-}
-#section1 a:hover{
-	color: brightgreen;
-}
+// #section1 a{
+// 	color: white;
+// }
+// #section1 a:hover{
+// 	color: brightgreen;
+// }
 
 #section1-bg {
   background-color: white;
@@ -126,7 +126,7 @@ a{
   background-size:     cover;
   background-repeat:   no-repeat;
   /*background-position: center center;*/
-  background-position: 0% 30%;
+  background-position: 100% 100%;
   z-index:2;
 
 }
@@ -325,7 +325,7 @@ hr.style-two {
     left:10vw;
     width: 80vw;
     bottom:0px;
-    height: 90px;
+    height: 110px;
     font-size: 12px;
     // margin-left: 12.5vw;
     text-align: center;
