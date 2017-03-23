@@ -66,7 +66,7 @@
 						</div> --}}
 						<div class="row si-row">
 							<div class="col-xs-6 si-left">
-								{{#mdl-button disabled=true}}Vendor{{/mdl-button}}
+								{{#mdl-button disabled=true}}Contact Info{{/mdl-button}}
 							</div>
 							<div class="col-xs-6 si-right">
 								<div class="hideOnMobile">
@@ -158,12 +158,19 @@
 								</div>
 								<div class="col-xs-6 si-right">
 									<div style="padding-right: 10px;">
+										{{#if model.maxTravelDist}}
 										<div class="cat-i-div">
 					                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
 					                        {{tooltip-on-element side="left" text="Vendor is willing to travel"}}
 					                    </div> 
 					                    {{!-- If N/A do not show --}}
-					                    {{#if model.maxTravelDist}}{{model.maxTravelDist}} km{{/if}}
+					                    {{model.maxTravelDist}} km
+					                    {{else}}
+										<div class="cat-i-div">
+					                        <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+					                        {{tooltip-on-element side="left" text="Online Business"}}
+					                    </div> 
+					                    {{/if}}
 									</div>
 								</div>
 								<hr>

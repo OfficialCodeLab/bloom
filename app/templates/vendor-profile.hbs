@@ -17,7 +17,7 @@
 
             <div class=" col-sm-8">
                 <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
-                	<div class="vendor-profile-bg" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-van.jpg' }});"> {{!-- RATIO NEEDS TO BE 15 x 4 --}}
+                	<div class="vendor-profile-bg" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-default.jpg' }});">
                 		<div class="vendor-name-overlay">
                             <p>{{model.vendor.name}}</p>
                         </div>
@@ -41,7 +41,14 @@
                 <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
 
                     <div class="overview-md-block">
-                        <h5>Vendor Information</h5>
+
+                    	{{#if model.vendor.brandImage}}
+                    		<div style="text-align: center">
+	                    		<img src={{model.vendor.brandImage}} class="midi-vendor-icon">
+	                    	</div>
+                    	{{else}}
+                        	<h5>Vendor Information</h5>
+                    	{{/if}}
 
                         <div style="padding-top: 10px;">
                             <div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
@@ -61,14 +68,16 @@
                             	{{/if}}
 
                             </div>
-                            <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
-                            <div class="col-xs-10 overview-info">{{model.vendor.city}}, {{model.vendor.province}}</div>
                             <div class="col-xs-2 overview-info"><i class="material-icons">laptop</i></div>
                             <div class="col-xs-10 overview-info"><a href={{model.vendorStat.website}} target="_blank">{{model.vendorStat.website}}</a></div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">home</i></div>
+                            <div class="col-xs-10 overview-info">{{model.vendor.city}}</div>
+                            <div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
+                            <div class="col-xs-10 overview-info">{{model.vendor.province}}</div>
                         </div>
                         <div class="overlay-box-bottom">
-                            {{mdl-button action='showContactInfo' text="Show Contact Info"}}
-                            {{mdl-button action='openContactModalInit' text="Message Vendor"}}
+                            <div style="padding: 5px;">{{mdl-button action='showContactInfo' isRaised=true isAccent=true text="Show Contact Info"}}</div>
+                            <div style="padding: 5px;">{{mdl-button action='openContactModalInit' isRaised=true text="Message Vendor"}}</div>
                        </div>
                     </div>
 
@@ -101,16 +110,22 @@
 
 		                  <div class="cat-bot-box-r col-xs-6">
 		                  {{#if cat-item.willingToTravel}} 
-		                     <div class="cat-i-div">
-		                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
-		                        {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
-		                     </div>
-		                     {{#if cat-item.maxTravelDist}}
+		                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
+		                        <div class="cat-i-div">
+		                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+		                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
+		                        </div>
 		                        {{#if cat-item.city}}
-                        {{cat-item.city}}, {{cat-item.provinceCode}}
-                     {{else}}
-                        {{cat-item.province}}
-                     {{/if}}
+		                           {{cat-item.city}}, {{cat-item.provinceCode}}
+		                        {{else}}
+		                           {{cat-item.province}}
+		                        {{/if}}
+
+		                     {{else}} {{!-- ONLINE --}}
+		                        <div class="cat-i-div">
+		                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+		                           {{tooltip-on-element side="bottom" text="Online Business"}}
+		                        </div>
 		                     {{/if}} 
 		                  {{else}} {{!-- NO --}}
 		                     {{#if cat-item.city}}
@@ -155,16 +170,22 @@
 
 			                  <div class="cat-bot-box-r col-xs-6">
 			                  {{#if cat-item.willingToTravel}} 
-			                     <div class="cat-i-div">
-			                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
-			                        {{tooltip-on-element side="left" text="Vendor is willing to travel"}}
-			                     </div>
-			                     {{#if cat-item.maxTravelDist}}
+			                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
+			                        <div class="cat-i-div">
+			                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+			                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
+			                        </div>
 			                        {{#if cat-item.city}}
-                        {{cat-item.city}}, {{cat-item.provinceCode}}
-                     {{else}}
-                        {{cat-item.province}}
-                     {{/if}}
+			                           {{cat-item.city}}, {{cat-item.provinceCode}}
+			                        {{else}}
+			                           {{cat-item.province}}
+			                        {{/if}}
+
+			                     {{else}} {{!-- ONLINE --}}
+			                        <div class="cat-i-div">
+			                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+			                           {{tooltip-on-element side="bottom" text="Online Business"}}
+			                        </div>
 			                     {{/if}} 
 			                  {{else}} {{!-- NO --}}
 			                     {{#if cat-item.city}}

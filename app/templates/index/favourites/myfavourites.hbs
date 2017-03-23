@@ -32,16 +32,22 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                   {{#if cat-item.willingToTravel}} 
-                     <div class="cat-i-div">
-                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
-                        {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
-                     </div>
-                     {{#if cat-item.maxTravelDist}}
+                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
+                        <div class="cat-i-div">
+                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
+                        </div>
                         {{#if cat-item.city}}
                            {{cat-item.city}}, {{cat-item.provinceCode}}
                         {{else}}
                            {{cat-item.province}}
                         {{/if}}
+
+                     {{else}} {{!-- ONLINE --}}
+                        <div class="cat-i-div">
+                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+                           {{tooltip-on-element side="bottom" text="Online Business"}}
+                        </div>
                      {{/if}} 
                   {{else}} {{!-- NO --}}
                      {{#if cat-item.city}}
@@ -89,17 +95,23 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                   {{#if cat-item.willingToTravel}} 
-                     <div class="cat-i-div">
-                        <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
-                        {{tooltip-on-element side="left" text="Vendor is willing to travel"}}
-                     </div>
-                     {{#if cat-item.maxTravelDist}}
+                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
+                        <div class="cat-i-div">
+                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}}
+                        </div>
                         {{#if cat-item.city}}
-                        {{cat-item.city}}, {{cat-item.provinceCode}}
-                     {{else}}
-                        {{cat-item.province}}
-                     {{/if}}
-                     {{/if}} 
+                           {{cat-item.city}}, {{cat-item.provinceCode}}
+                        {{else}}
+                           {{cat-item.province}}
+                        {{/if}}
+
+                     {{else}} {{!-- ONLINE --}}
+                        <div class="cat-i-div">
+                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+                           {{tooltip-on-element side="bottom" text="Online Business"}}
+                        </div>
+                     {{/if}}  
                   {{else}} {{!-- NO --}}
                      {{#if cat-item.city}}
                         {{cat-item.city}}, {{cat-item.provinceCode}}

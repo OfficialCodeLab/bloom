@@ -1027,21 +1027,31 @@ Guest List
 	background: url('../assets/images/banners/vendor-van.jpg');
 	text-align: center;
 	background-repeat: no-repeat;
-	background-position: 100% 100%; 
-	min-height: 520px;
+	background-position: 50% 0%; 
+	min-height: 500px;
 	h1{
 		color: white;
 	}
 	.container{
 		img{
-		  max-height: 360px;
+		  max-height: 340px;
 		  max-width: 100%;			
 		}
 	}
 }
 
+.tour-text-shadow {
+	h1 {
+	    text-shadow: 0 0 5px #444;		
+	}	
+
+	p {
+	    text-shadow: 0 0 5px #444;		
+	}
+}
+
 .vendor-tour-alt {
-	background-position: 100% 100% !important;
+	background-position: 0% 100% !important;
 }
 
 .tour-image-backdrop{
@@ -1990,13 +2000,13 @@ Guest List
 }
 
 .vendor-profile-block{
-	min-height: 320px;
+	min-height: 460px;
 	position: relative;
 }
 
 .vendor-profile-bg {
 	position: relative;
-	height: 200px; 
+	height: 340px; 
 	background-size: cover;
 	background-position: center center;
 }
@@ -2008,9 +2018,20 @@ Guest List
 	text-align: center;
 	p{
 		color: white;
+	    text-shadow: 0 0 5px #444;
 		font-size: 24px;
 		font-weight: 600;
 	}
+}
+
+.mini-vendor-icon {
+	height: 56px;
+	width: 56px;
+}
+
+.midi-vendor-icon {
+	height: 100px;
+	width: 100px;
 }
 /*==============================================================================*\
      _    _                 _     ____
@@ -2239,7 +2260,7 @@ $font_0: FontAwesome;
 .overlay-dark{
 	width:100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.35);
+	background-color: rgba(0,0,0,0.3);
 }
 .showOnPhones{
 	display: none;
