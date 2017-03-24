@@ -360,7 +360,7 @@ body {
 	background-size: contain;
 }
 .index-logo-container-2{
-	background-image: url("../assets/images/bloom-bg3.png");
+	background-image: url("../assets/images/bloom-bg5.png");
 	background-repeat: no-repeat;
 	// background-attachment
 	background-position: center center;
@@ -370,7 +370,7 @@ body {
 }
 .splash-overlay{
 	padding: 25px;
-    background: rgba(0,0,0,0.4);
+    background: rgba(200,100,100,0.1);
     overflow: hidden;
     height: 100%;
     z-index: 2;
@@ -2130,6 +2130,17 @@ Guest List
 	&:before {
 		// color: red !important;
 	}
+}
+
+.credits-sm{
+	font-size: 10px;
+	padding: 10px;
+}
+
+.credits-bg {
+	background-color: white;
+	text-align: right;
+	width: 100%;
 }
 /*==============================================================================*\
 	Leave these
