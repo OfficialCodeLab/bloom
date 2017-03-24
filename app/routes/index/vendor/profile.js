@@ -113,6 +113,9 @@ export default Ember.Route.extend({
             case '1': //Yes
                 willingTravel = true;
                 travelDist = this.controller.get('maxDist');
+                if (travelDist === 0){
+                  travelDist = 1;
+                }
             break;
 
             case '2': //No

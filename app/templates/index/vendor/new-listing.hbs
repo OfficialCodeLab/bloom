@@ -1,5 +1,9 @@
 
-<h1 class="font-times-header" style="color: #4C4C4E;">New Service</h1><br>
+<h1 class="font-times-header" style="color: #4C4C4E;">New Service</h1>
+{{#unless isAutoListing}}
+<p style="font-style: italic; text-align: center;">If you offer more than one service in a different category, or for a service that is location specific, add your extra listings here.</p>
+{{/unless}}
+<br>
 <hr>
 
 <div style="padding-bottom:100px;">
@@ -13,7 +17,7 @@
 		        	<div class="vendor-service-inner">
 
 		        		{{#if refreshFields}}							
-						{{mdl-textfield label='Name of new item' value=name}}
+						{{mdl-textfield label='Name of Service' value=name}}
 						{{/if}}
 
 
@@ -27,7 +31,7 @@
 						
 
 						{{#if refreshFields}}	
-						{{mdl-textarea label='Your product description.' value=desc}}
+						{{mdl-textarea label='Description of Service Listing' value=desc}}
 						{{/if}}
 
 
