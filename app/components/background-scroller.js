@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 	credit: '',
 
 	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg", "splash-bg5.jpg", "splash-bg6.jpg"],
-	credits: ["", "© Tyme Photography - White Lilly Bridal", "", "", "© Lightburst Photography", ""],
+	credits: ["", "© Tyme Photography - White Lilly Bridal", "", "© Grace Studios Photography", "© Lightburst Photography", ""],
 
 	//Initialize script when component is inserted
 	didInsertElement: function(){

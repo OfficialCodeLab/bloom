@@ -1057,7 +1057,7 @@ Guest List
 
 .tour-image-backdrop{
 	text-align: center;
-	background-size: contain;
+	background-size: cover;
 	background-position: center center;
 	background-repeat: no-repeat;
 	h1{
@@ -2174,10 +2174,10 @@ Guest List
 }
 
 .credits-bg-mid {
-	padding-top: 60px;
+	padding-bottom: 60px; 
 	background-color: white;
 	text-align: center;
-	width: 100%;
+	// width: 100%;
 }
 /*==============================================================================*\
 	Leave these
@@ -2523,23 +2523,31 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 @media (max-width:772px) { /* Our definition of really small */
 	.tour-vendor-listings {
 		background-image: url('../assets/images/banners/visual.jpg'); 
-		background-position: center center;
+		background-position: center center !important;
+		background-size: cover !important;
+		background-attachment: scroll !important;
 	}
 
 	.tour-all-tools {
 		background-image: url('../assets/images/banners/all-tools.jpg'); 
-		background-position: center center;
+		background-position: center center !important;
+		background-size: cover !important;
+		background-attachment: scroll !important;
 	}
 
 	.tour-voila {
 		background-image: url('../assets/images/banners/cake.jpg'); 
-		background-position: center center;
+		background-position: center center !important;
+		background-size: cover !important;
+		background-attachment: scroll !important;
 	}
 
 
 	.vendor-tour-top{
 		background: url('../assets/images/banners/vendor-alt.jpg');
-		background-position: center center;
+		background-position: center center !important;
+		background-size: cover !important;
+		background-attachment: scroll !important;
 	}
 	.negative-margin-sm{
 		margin-left: none;
@@ -2627,7 +2635,6 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-
 
 	.todo-middle{
 		width: 50%
