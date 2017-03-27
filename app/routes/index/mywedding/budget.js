@@ -35,7 +35,7 @@ const BUDGET_EVENT = {
 const BUDGET_PLACES = {
 	venue: "Venue",
 	weddingNightHotel: "Wedding Night Hotel",
-	accomodationForBridalParty: "Accomodation for Bridal Party"
+	accomodationForBridalParty: "Accommodation for Bridal Party"
 };
 
 //Additional

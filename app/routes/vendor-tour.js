@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 	model (){
 	  	return this.store.findAll('category', {reload: true}).then(function(items){
 	  		let sorted = items.sortBy('id');
-	      return sorted.slice(0, 8);
+	      return sorted;
 	    });
 	  }
 });

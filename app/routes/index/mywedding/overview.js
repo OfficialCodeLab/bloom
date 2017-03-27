@@ -47,11 +47,11 @@ export default Ember.Route.extend({
 	dateDiff: function(d1, d2, controller){
 		let d3 = moment(d1).unix()*1000;
 		let d4 = moment(d2).unix()*1000;
-		let dayStr = 'Days left';
+		let dayStr = 'Days to go';
 		// let preStr = 'Your wedding is in ';
 		let days = Math.floor(( d3 - d4 ) / 86400000) + 1;
 		if(days === 1){
-			dayStr = 'Day left';
+			dayStr = 'Day to go';
 		} else if (days === 0 ) {
 			// preStr = 'Your wedding is ';
 			days = 'Today!';
