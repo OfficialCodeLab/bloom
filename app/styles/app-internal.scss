@@ -1027,8 +1027,9 @@ Guest List
 	background: url('../assets/images/banners/vendor-van.jpg');
 	text-align: center;
 	background-repeat: no-repeat;
+	background-size: cover;
 	background-position: 50% 0%; 
-	min-height: 500px;
+	// min-height: 500px;
 	h1{
 		color: white;
 	}
@@ -1199,6 +1200,21 @@ Guest List
 	text-align:center;
 	padding-left:10px;
 	width:100%;
+}
+
+.tour-vendor-listings {
+	background-image: url('../assets/images/banners/hands.jpg'); 
+	background-position: 50% 100%;
+}
+
+.tour-all-tools {
+	background-image: url('../assets/images/banners/wedding-table.jpg'); 
+	background-position: 50% 100%;
+}
+
+.tour-voila {
+	background-image: url('../assets/images/banners/cheers.jpg'); 
+	background-position: 50% 100%;
 }
 
 
@@ -2156,6 +2172,13 @@ Guest List
 	text-align: right;
 	width: 100%;
 }
+
+.credits-bg-mid {
+	padding-top: 60px;
+	background-color: white;
+	text-align: center;
+	width: 100%;
+}
 /*==============================================================================*\
 	Leave these
 \*==============================================================================*/
@@ -2498,6 +2521,26 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 }
 @media (max-width:772px) { /* Our definition of really small */
+	.tour-vendor-listings {
+		background-image: url('../assets/images/banners/visual.jpg'); 
+		background-position: center center;
+	}
+
+	.tour-all-tools {
+		background-image: url('../assets/images/banners/all-tools.jpg'); 
+		background-position: center center;
+	}
+
+	.tour-voila {
+		background-image: url('../assets/images/banners/cake.jpg'); 
+		background-position: center center;
+	}
+
+
+	.vendor-tour-top{
+		background: url('../assets/images/banners/vendor-alt.jpg');
+		background-position: center center;
+	}
 	.negative-margin-sm{
 		margin-left: none;
 	}
