@@ -110,7 +110,7 @@ a{
   // background-image: url(images/bg1.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
-  background-position: 100% 100%;
+  background-position: center center;
 }
 // #section1 a{
 // 	color: white;
@@ -125,8 +125,8 @@ a{
   // background-image: url(images/bg1.jpg);
   background-size:     cover;
   background-repeat:   no-repeat;
-  /*background-position: center center;*/
-  background-position: 100% 100%;
+  background-position: center center;
+  // background-position: 100% 100%;
   z-index:2;
 
 }

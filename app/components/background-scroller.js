@@ -6,8 +6,10 @@ export default Ember.Component.extend({
 	currentBackground: -1,  //Currently active background
 	calledOnce: false,	  //Prevent multiple calls
 	refreshIntervalId: 0, //Used for GC
+	credit: '',
 
-	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg", "splash-bg5.jpg"],
+	backgrounds: ["splash-bg1.jpg", "splash-bg2.jpg", "splash-bg3.jpg", "splash-bg4.jpg", "splash-bg5.jpg", "splash-bg6.jpg"],
+	credits: ["", "© Tyme Photography - White Lilly Bridal", "", "", "© Lightburst Photography", ""],
 
 	//Initialize script when component is inserted
 	didInsertElement: function(){
@@ -33,6 +35,8 @@ export default Ember.Component.extend({
       
 		var backgrounds = this.get('backgrounds');
         var _currentBackground = this.get('currentBackground');
+        var credits = this.get('credits');
+        var _this = this;
 		Ember.$('#section1-bg').fadeIn(0);
 		_currentBackground++;
 		if(_currentBackground >= backgrounds.length) {
@@ -58,6 +62,7 @@ export default Ember.Component.extend({
 				Ember.$('#section1-bg').css({
 				      'background-image' : "url('" + backgrounds[_currentBackground] + "')"
 				});
+				_this.set('credit', credits[_currentBackground]);
 			});	    	
 	    });
     }

@@ -16,6 +16,10 @@ export default Ember.Route.extend({
   // },
   // backgrounds: ['../../public/assets/images/bg1.jpg', '../../public/assets/images/6.jpg', '../../public/assets/images/splash1.jpg'],
    actions: {
+      // bgCredit: function(credit){
+      //   console.log("THIS WORKS");
+      //   alert(credit);
+      // }
   //   login: function(provider) {
   //       this.get("session").open("firebase", { provider: provider}).then((data) => {
   //         this.transitionTo('index');

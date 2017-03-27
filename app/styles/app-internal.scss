@@ -1767,6 +1767,20 @@ Guest List
 	}
 }
 
+.copyright-text {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	padding: 10px;
+	z-index: 4;
+}
+
+#login-copyright-text {
+	color: white;
+	font-size: 10px;
+    // text-shadow: 0 0 5px #444;
+}
+
 
 /*==============================================================================*\
    ____      _     ___ _
