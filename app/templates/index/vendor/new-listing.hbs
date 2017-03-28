@@ -148,14 +148,18 @@
 				        	<img id='img2' height='200' width='200' hidden='true'>
 
 				        	<img id='img3' height='200' width='200' hidden='true'>
-			        		<p> Additional images </p>
+
+				        	<img id='img4' height='200' width='200' hidden='true'>
+
+				        	<img id='img5' height='200' width='200' hidden='true'>
+			        		<p> Additional images (5 max)</p>
 							{{#drop-zone
 						      addRemoveLinks=true
 						      onAddedFile=storeExtraImage
 						      onRemovedFile=removeExtraImage
 						      keepLocal=true
 						      acceptedFiles='.jpg,.png'
-						      maxFiles='3'
+						      maxFiles='5'
 						      as |register|
 						    }}
 						      {{#default-message register=register}}

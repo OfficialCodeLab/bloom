@@ -56,8 +56,24 @@
 					        			<img src={{model.catItem.image2}} class="img-responsive">
 					        		{{else}}			        			
 					        			<img src='assets/images/sample-content/add-image.png' class="img-responsive">
-					        		{{/if}}			        		
-			        			{{/if}}
+					        		{{/if}}	
+                        {{else}}
+                           {{#if img4}}
+                              {{#if model.catItem.image3}}
+                                 <img src={{model.catItem.image3}} class="img-responsive">
+                              {{else}}                      
+                                 <img src='assets/images/sample-content/add-image.png' class="img-responsive">
+                              {{/if}}  
+                           {{else}}
+                              {{#if img5}}
+                                 {{#if model.catItem.image4}}
+                                    <img src={{model.catItem.image4}} class="img-responsive">
+                                 {{else}}                      
+                                    <img src='assets/images/sample-content/add-image.png' class="img-responsive">
+                                 {{/if}}  
+                              {{/if}}
+                           {{/if}}
+                        {{/if}}
 			        		{{/if}}
 			        	{{/if}}
 			        {{/if}}
@@ -88,7 +104,7 @@
 				{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
 			</div>
 			<br>
-			Image {{currentSlideCalc}} out of 4
+			Image {{currentSlideCalc}} out of 6
 		{{/if}}
       <div class="form-horizontal">
          <h3>Update Details</h3>

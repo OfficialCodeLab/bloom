@@ -338,7 +338,9 @@ export default Ember.Route.extend({
 			var img1 = document.getElementById('img1');
 			var img2 = document.getElementById('img2');
 			var img3 = document.getElementById('img3');
-			var imagesArr = [img1, img2, img3];
+			var img4 = document.getElementById('img4');
+			var img5 = document.getElementById('img5');
+			var imagesArr = [img1, img2, img3, img4, img5];
 			let mainI = this.decodeImage(mainImg);
 			let tasksComplete = 0;
 			let tasksToDo = 0;
@@ -363,7 +365,7 @@ export default Ember.Route.extend({
 
 			let uploadTasks = [];
 
-			for (var i = 0; i < 3; i++){
+			for (var i = 0; i < 5; i++){
 				if(!(!imagesArr[i].complete || typeof imagesArr[i].naturalWidth === "undefined" || imagesArr[i].naturalWidth === 0)){
 					let im = this.decodeImage(imagesArr[i]);
 					let met = {

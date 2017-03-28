@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const MAX_IMAGES = 5;
+
 export default Ember.Route.extend({
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
@@ -41,7 +43,7 @@ export default Ember.Route.extend({
 	    	while(isRunning){
 		    	let currentSlide = this.controller.get('currentSlide');
 		    	if (currentSlide === 0){
-		    		currentSlide = 3;
+		    		currentSlide = MAX_IMAGES;
 		    	} else {
 		    		currentSlide--;
 		    	}
@@ -60,7 +62,7 @@ export default Ember.Route.extend({
 		    		isRunning = false;
 		    	} else {
 		    		breakThis++;
-		    		if(breakThis >= 4){
+		    		if(breakThis >= MAX_IMAGES+1){
 		    			isRunning = false;
 		    		}
 		    	}
@@ -72,7 +74,7 @@ export default Ember.Route.extend({
 	    	let currentSlide = this.controller.get('currentSlide');
 
 	    	while(isRunning){
-				if (currentSlide === 3){
+				if (currentSlide === MAX_IMAGES){
 		    		currentSlide = 0;
 		    	} else {
 		    		currentSlide++;
@@ -92,7 +94,7 @@ export default Ember.Route.extend({
 		    		isRunning = false;
 		    	} else {
 		    		breakThis++;
-		    		if(breakThis >= 4){
+		    		if(breakThis >= MAX_IMAGES+1){
 		    			isRunning = false;
 		    		}
 		    	}	    		
@@ -106,6 +108,8 @@ export default Ember.Route.extend({
 		this.controller.set("img1", false);
 		this.controller.set("img2", false);
 		this.controller.set("img3", false);
+		this.controller.set("img4", false);
+		this.controller.set("img5", false);
 		this.controller.set(imgStr, true);
 	}
 });

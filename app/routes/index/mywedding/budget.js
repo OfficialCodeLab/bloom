@@ -196,24 +196,28 @@ export default Ember.Route.extend({
 			// deposit + booked < estimate
 
 			if(estimate >= 0 && booked >= 0 && deposit >= 0){
+		    	let _budget = this.store.peekRecord('budget', _id);
+		    	let selectedCategory = _budget.get(category);
+		    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
+		    	let balance = 0;
 
 				if(estimate >= booked) {
-			    	let balance = estimate - booked;
-			    	let _budget = this.store.peekRecord('budget', _id);
-			    	let selectedCategory = _budget.get(category);
-			    	let selectedObject = Ember.get(selectedCategory, budget.get('_id'));
-			    	// console.log(selectedObject);
-			    	this.recalculateBudget(_budget, budget);
-			    	Ember.set(selectedObject, 'deposit', deposit);
-			    	Ember.set(selectedObject, 'estimate', estimate);
-			    	Ember.set(selectedObject, 'booked', booked);
-			    	Ember.set(selectedObject, 'balance', balance);
+			    	balance = estimate - booked;
 			    	//save this later			
-				} else {		
-			    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
-		                autoClear: true
-		            });					
+				} else {
+					estimate = booked;
+					budget.set('estimate', estimate);
+
+		      		this.controller.get('notifications').warning('Estimated budget has been increased to match used budget',{
+		                 autoClear: true
+		            });			
 				}
+			    
+			    this.recalculateBudget(_budget, budget);
+		    	Ember.set(selectedObject, 'deposit', deposit);
+		    	Ember.set(selectedObject, 'estimate', estimate);
+		    	Ember.set(selectedObject, 'booked', booked);
+		    	Ember.set(selectedObject, 'balance', balance);
 
 			} else {
 		    	this.controller.get('notifications').error('Negative numbers are invalid!',{
@@ -317,6 +321,7 @@ export default Ember.Route.extend({
 
 		budget.save().then(()=>{
 			this.refreshBudgetWidget();
+			this.convertAllCategories();
 	    	this.controller.get('notifications').success('Budget has been updated!',{
                 autoClear: true
             });  
@@ -350,7 +355,7 @@ export default Ember.Route.extend({
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let budget = this.store.peekRecord('budget', _id);
 
-		//Convery each category
+		//Convert each category
 		let budgetApparel = this.convertJSONtoArray(budget.get('categoryApparel'));
 		this.controller.set('budgetApparel', budgetApparel);
 

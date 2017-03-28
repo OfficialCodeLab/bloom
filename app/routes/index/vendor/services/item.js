@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const MAX_IMAGES = 5;
+
 export default Ember.Route.extend({
 	firebaseApp: Ember.inject.service(),
 	storageRef: '',
@@ -358,7 +360,7 @@ export default Ember.Route.extend({
 	    	while(isRunning){
 		    	let currentSlide = this.controller.get('currentSlide');
 		    	if (currentSlide === 0){
-		    		currentSlide = 3;
+		    		currentSlide = MAX_IMAGES;
 		    	} else {
 		    		currentSlide--;
 		    	}
@@ -389,7 +391,7 @@ export default Ember.Route.extend({
 
 	    	while(isRunning){
 		    	let currentSlide = this.controller.get('currentSlide');
-				if (currentSlide === 3){
+				if (currentSlide === MAX_IMAGES){
 		    		currentSlide = 0;
 		    	} else {
 		    		currentSlide++;
@@ -423,6 +425,8 @@ export default Ember.Route.extend({
 		this.controller.set("img1", false);
 		this.controller.set("img2", false);
 		this.controller.set("img3", false);
+		this.controller.set("img4", false);
+		this.controller.set("img5", false);
 		this.controller.set(imgStr, true);
 	},
 	tryFlushBlob(model){
@@ -542,6 +546,22 @@ export default Ember.Route.extend({
 	    if(catItem.get('image2')){
 	    	var ref2 = storageRef.child(_ref+'/image2');
 		    ref2.delete().then(function() { // File deleted successfully
+		    }).catch(function(error) { // Uh-oh, an error occurred!
+		      console.log(error);
+		    });
+	    }
+
+	    if(catItem.get('image3')){
+	    	var ref3 = storageRef.child(_ref+'/image2');
+		    ref3.delete().then(function() { // File deleted successfully
+		    }).catch(function(error) { // Uh-oh, an error occurred!
+		      console.log(error);
+		    });
+	    }
+
+	    if(catItem.get('image4')){
+	    	var ref4 = storageRef.child(_ref+'/image2');
+		    ref4.delete().then(function() { // File deleted successfully
 		    }).catch(function(error) { // Uh-oh, an error occurred!
 		      console.log(error);
 		    });

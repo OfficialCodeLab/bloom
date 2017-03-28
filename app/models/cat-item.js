@@ -17,6 +17,8 @@ export default Model.extend({
   image0: attr('string'),
   image1: attr('string'),
   image2: attr('string'),
+  image3: attr('string'),
+  image4: attr('string'),
   city: attr('string'),
   province: attr('string'),
   provinceCode: attr('string'),

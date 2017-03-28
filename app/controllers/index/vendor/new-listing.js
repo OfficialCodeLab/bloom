@@ -64,12 +64,18 @@ export default Ember.Controller.extend({
     		var img1 = document.getElementById('img1');
     		var img2 = document.getElementById('img2');
     		var img3 = document.getElementById('img3');
+    		var img4 = document.getElementById('img4');
+    		var img5 = document.getElementById('img5');
     		if(img1.src === dataURL) {
     			img1.src = null;
     		} else if (img2.src === dataURL) {
     			img2.src = null;
     		} else if (img3.src === dataURL) {
     			img3.src = null;  		
+			} else if (img4.src === dataURL) {
+    			img4.src = null;  		
+			} else if (img5.src === dataURL) {
+    			img5.src = null;  		
 			}
     	});
 
@@ -95,6 +101,10 @@ export default Ember.Controller.extend({
 				img2.src = dataURL;
 			} else if (!img3.complete || typeof img3.naturalWidth === "undefined" || img3.naturalWidth === 0) {
 				img3.src = dataURL;
+			} else if (!img4.complete || typeof img4.naturalWidth === "undefined" || img4.naturalWidth === 0) {
+				img4.src = dataURL;
+			} else if (!img5.complete || typeof img5.naturalWidth === "undefined" || img5.naturalWidth === 0) {
+				img5.src = dataURL;
 			}
 			
     	});
