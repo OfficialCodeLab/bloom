@@ -95,6 +95,8 @@ export default Ember.Controller.extend({
     		var img1 = document.getElementById('img1');
     		var img2 = document.getElementById('img2');
     		var img3 = document.getElementById('img3');
+    		var img4 = document.getElementById('img4');
+    		var img5 = document.getElementById('img5');
 			if(!img1.complete || typeof img1.naturalWidth === "undefined" || img1.naturalWidth=== 0){
 				img1.src = dataURL;
 			} else if (!img2.complete || typeof img2.naturalWidth === "undefined" || img2.naturalWidth === 0) {

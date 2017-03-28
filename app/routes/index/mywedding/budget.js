@@ -321,7 +321,7 @@ export default Ember.Route.extend({
 
 		budget.save().then(()=>{
 			this.refreshBudgetWidget();
-			this.convertAllCategories();
+			this.convertAllCategories(); // Convert only category in future
 	    	this.controller.get('notifications').success('Budget has been updated!',{
                 autoClear: true
             });  

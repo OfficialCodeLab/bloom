@@ -39,9 +39,9 @@ export default Ember.Route.extend({
 	    imgPrev: function(){
 	    	let isRunning = true;
 	    	let breakThis = 0;
+	    	let currentSlide = this.controller.get('currentSlide');
 
 	    	while(isRunning){
-		    	let currentSlide = this.controller.get('currentSlide');
 		    	if (currentSlide === 0){
 		    		currentSlide = MAX_IMAGES;
 		    	} else {
