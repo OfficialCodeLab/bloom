@@ -8,8 +8,8 @@
 		<div class="" style="min-height: 600px">
 			<div class="container tour-block-padding">
 
-				<img src='../assets/images/bloom-pink.png' class="guided-tour-top-img">
-				<h3 style="color: white;">Guided Tour</h3>
+				<img src='../assets/images/bloom-tour.png' class="guided-tour-top-img">
+				{{!-- <h3 style="color: white;">Guided Tour</h3> --}}
 			</div>
 		</div>
 	</div>
@@ -64,8 +64,14 @@
 		            </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Dresses</span>
-	                  <span class="cat-price">R6850.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+	                           {{tooltip-on-element side="bottom" text="Online Business"}}
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>	
@@ -94,8 +100,14 @@
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Culinary</span>
-	                  <span class="cat-price">R2225.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+	                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}} Western Cape
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>
@@ -119,8 +131,13 @@
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Venues</span>
-	                  <span class="cat-price">R10240.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           Johannesburg, GP
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>		
@@ -156,8 +173,14 @@
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Dresses</span>
-	                  <span class="cat-price">R6850.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+	                           {{tooltip-on-element side="bottom" text="Online Business"}}
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>	
@@ -183,8 +206,14 @@
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Culinary</span>
-	                  <span class="cat-price">R2225.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+	                           {{tooltip-on-element side="bottom" text="Vendor is willing to travel"}} Western Cape
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>
@@ -210,8 +239,13 @@
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Venues</span>
-	                  <span class="cat-price">R10240.00</span>
-	               </div>
+
+		                <div class="cat-bot-box-r" style="float: right;">
+	                  		<div class="cat-i-div">
+	                           Johannesburg, GP
+	                        </div>
+	               		</div>
+               		</div>
 	            </div>
 	         </div>	
 			</div>
@@ -229,24 +263,24 @@
 		</div>
 	</div>
 </div>
-<div class="credits-bg hideOnMobile">
+{{!-- <div class="credits-bg hideOnMobile">
     <span class="credits-sm">&copy; Susan du Toit Photography</span>
-</div>
+</div> --}}
 
 	<div class="container tour-block-padding">
 		<h1>Add Your Guests</h1>
 		<p>Add guests here and they will appear in the table below</p>
-		<div class="form-horizontal row text-center" style="padding-top: 20px;">
-			<div class="form-group has-feedback">
+		<div class="text-center" style="padding-top: 20px;">
+			<div>
 				{{mdl-textfield label='Name & Surname*' value=name}}
 			</div>
-			<div class="form-group has-feedback">
+			<div>
 				{{mdl-textfield label='Email Address' value=email}}
 			</div>
-			<div class="form-group has-feedback">
+			<div>
 				{{mdl-textfield label='Contact Number' value=cell}}
 			</div>
-			<div class="form-group has-feedback">
+			<div>
 				{{mdl-textfield label='Number of additional guests?' value=guestsValue type="number"}}
 			</div>
 		</div>
