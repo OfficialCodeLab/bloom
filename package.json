@@ -1,7 +1,7 @@
 {
-  "name": "pear",
-  "version": "0.0.0",
-  "description": "Small description for pear goes here",
+  "name": "bloom",
+  "version": "1.0.0",
+  "description": "Plan your wedding",
   "private": true,
   "directories": {
     "doc": "doc",
