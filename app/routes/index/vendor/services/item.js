@@ -23,7 +23,12 @@ export default Ember.Route.extend({
 		let catItem = controller.get('model.catItem');
 		let cat = catItem.get('category');
 		let cat_id = cat.get('id');
-		controller.set('category', cat_id);
+		if(catItem.get('category')) {
+ 			//Load category
+			let category = this.store.findRecord('category', catItem.get('category').get('id')).then((p)=>{
+				controller.set('category', p);
+			});
+ 		}
 
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
         let user = this.store.peekRecord('user', _id);
@@ -57,8 +62,13 @@ export default Ember.Route.extend({
  		}
      	
      	//If province is set up, fill in
-     	let province_name = catItem.get('province');
-     	controller.set('selectedProvince', province_name);     	
+     	if(catItem.get('province')) {
+ 			//Load province
+			let province = this.store.findRecord('province', catItem.get('province').get('id')).then((p)=>{
+				controller.set('province', p);
+			});
+ 			// controller.set('province', vendor.get('province'));
+ 		}   	
 		// let prov_code = catItem.get('provinceCode');
 		// this.store.findRecord('country', 'south_africa').then((_country=>{
 	 //        let provinces = _country.get('province');
@@ -134,18 +144,11 @@ export default Ember.Route.extend({
 	        
 		},
 		updateItem: function(){
-			let _cat = this.controller.get('category') + "";
+			let _cat = this.controller.get('category');
+			let _prov = this.controller.get('province');
+			let _this = this;
 			let _item = this.store.peekRecord('cat-item', this.controller.get('model.catItem.id'));
 			this.controller.get('model.catItem').set('isUpdating', true);
-			let provinceName = this.controller.get('selectedProvince');
-			let provinceCode = "";
-			let provinces = this.store.peekAll('province');
-			provinces.forEach(function(province){
-				if (province.get('name') === provinceName) {
-					let shortCode = province.get('code').split('_');
-					provinceCode = shortCode[1].toUpperCase();
-				}
-			});
 
 			let travelObj = this.retrieveTravelInfo();
 			let priceObj = this.retrievePriceInfo();
@@ -154,41 +157,73 @@ export default Ember.Route.extend({
 			_item.set('maxPrice', priceObj.maxPrice);
 			_item.set('country', 'South Africa');
 			_item.set('countryCode', 'za');
-			_item.set('province', provinceName);
-			_item.set('provinceCode', provinceCode);
 			_item.set('willingToTravel', travelObj.willingTravel);
 			_item.set('maxTravelDist', travelObj.travelDist);
 
-			if(_cat.charAt(0) !== '<'){
-				//Category has changed:
-				let cat = this.store.peekRecord('category', _cat);
-				let oldcatid = _item.get('category').get('id');
-				let oldcat = this.store.peekRecord('category', oldcatid);
-				//Update relationships
-				oldcat.get('catItems').removeObject(_item);
-				cat.get('catItems').pushObject(_item);
-				_item.set('category', cat);
+			function checkProvince(){
+			 	return new Promise(function(resolve, reject) {
+					let oldprovid = _item.get('province').get('id');
+					if(_prov.get('id') !== oldprovid) {
+						//Province has changed:
+						let prov = _this.store.peekRecord('province', _prov.get('id'));
+						let oldprov = _this.store.peekRecord('province', oldprovid);
+						//Update relationships
+						oldprov.get('catItems').removeObject(_item);
+						prov.get('catItems').pushObject(_item);
+						_item.set('province', prov);
+						let provinceCode = "";				
+						let shortCode = prov.get('code').split('_');
+						provinceCode = shortCode[1].toUpperCase();
+						_item.set('provinceCode', provinceCode);
 
-				oldcat.save().then(() => {
-					cat.save().then(() => {
-						_item.save().then(() => {
-							this.controller.get('model.catItem').set('isUpdating', false);
-							// this.tryFlushBlob(_item); //Attempt GC
-				    		this.controller.get('notifications').success('Product info has been saved!',{
-					            autoClear: true
-					          });
-						});
-					});
-				});
-			} else {
-				_item.save().then(() => {
-					this.controller.get('model.catItem').set('isUpdating', false);
-					this.tryFlushBlob(_item); //Attempt GC
-		    		this.controller.get('notifications').success('Product info has been saved!',{
-			            autoClear: true
-			          });
+						oldprov.save().then(() => {
+							prov.save().then(() => {
+								resolve();
+							});
+						});				
+					} else {
+						resolve();
+					}
 				});
 			}
+
+			function checkCategory(){
+			 	return new Promise(function(resolve, reject) {
+			 		let oldcatid = _item.get('category').get('id');
+					if(_cat.get('id') !== oldcatid) {
+						//Category has changed:
+						let cat = _this.store.peekRecord('category', _cat.get('id'));
+						let oldcat = _this.store.peekRecord('category', oldcatid);
+						//Update relationships
+						oldcat.get('catItems').removeObject(_item);
+						cat.get('catItems').pushObject(_item);
+						_item.set('category', cat);
+						oldcat.save().then(() => {
+							cat.save().then(() => {
+								resolve();
+							});
+						});				
+					} else {
+						resolve();
+					}
+
+			 	});				
+			}
+
+
+			Promise.all([
+				checkProvince(),
+				checkCategory()
+			]).then(() => {
+				_item.save().then(() => {
+					_this.controller.get('model.catItem').set('isUpdating', false);
+		    		_this.controller.get('notifications').success('Product info has been saved!',{
+			            autoClear: true
+			          });
+				});				
+			})
+
+			
 		},
 		setMainImage: function(){
 			let currentSlide = this.controller.get('currentSlide');

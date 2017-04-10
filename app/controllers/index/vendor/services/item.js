@@ -20,7 +20,7 @@ export default Ember.Controller.extend({
 	willingToTravel: 0,
     willTravel: Ember.computed.equal('willingToTravel', '1'),
     pricingOption: '3',
-    maxDist: 0,
+    maxDist: 1,
     province: '',
     isFixedPrice: Ember.computed.equal('pricingOption', '1'),
     isRangePrice: Ember.computed.equal('pricingOption', '2'),
@@ -29,6 +29,8 @@ export default Ember.Controller.extend({
     img1: false,
     img2: false,
     img3: false,
+    img4: false,
+    img5: false,
     currentSlide: 0,
     currentSlideCalc: Ember.computed('currentSlide', function() {
 	    return `${this.get('currentSlide') + 1}`;

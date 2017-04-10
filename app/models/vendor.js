@@ -1,7 +1,7 @@
 
 import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
-import { hasMany } from 'ember-data/relationships';
+import { hasMany, belongsTo } from 'ember-data/relationships';
 
 export default Model.extend({
   name: attr('string'),
@@ -14,7 +14,7 @@ export default Model.extend({
   city: attr('string'),
   country: attr('string'),
   postalcode: attr('string'),
-  province: attr('string'),
+  province: belongsTo('province'),
   website: attr('string'),
   cell: attr('string'),
   personalCell: attr('string'),

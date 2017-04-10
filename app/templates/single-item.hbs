@@ -152,7 +152,7 @@
 					                        {{#if model.city}}
 						                        {{model.city}}, {{model.provinceCode}}
 						                     {{else}}
-						                        {{model.province}}
+						                        {{model.province.name}}
 						                     {{/if}}
 										</div>
 									</div>
@@ -191,7 +191,7 @@
 								</div>
 								<div class="col-xs-6 si-right">
 									<div style="padding-right: 10px;">
-										{{model.province}}
+										{{model.province.name}}
 									</div>
 								</div>
 								<hr>

@@ -32,7 +32,14 @@ export default Ember.Route.extend({
       Ember.set(controller, 'province', model.province);
       Ember.set(controller, 'vendor', model.vendor);
       Ember.set(controller, 'vendorStat', model.vendorStat);
-      controller.set('selectedProvince', model.vendor.get('province'));
+
+      if(model.vendor.get('province')) {
+        //Load province
+        let province = this.store.findRecord('province', model.vendor.get('province').get('id')).then((p)=>{
+          controller.set('province', p);
+        });
+        // controller.set('province', vendor.get('province'));
+      }
       let vs = model.vendorStat;
       //If vendor is willing to travel, autopopulate
       let willingToTravel = vs.get('willingToTravel');
@@ -53,11 +60,12 @@ export default Ember.Route.extend({
     	saveChanges() {
         let vendor = this.controller.get('model.vendor');
         let vendorStat = this.controller.get('model.vendorStat');
-        vendor.set('province', this.controller.get('selectedProvince'));
+        vendor.set('province', this.controller.get('province'));
         let travelObj = this.retrieveTravelInfo();
         vendorStat.set('willingToTravel', travelObj.willingTravel);
         vendorStat.set('maxTravelDist', travelObj.travelDist);
         this.controller.set('isUpdating', true);
+
         vendor.save().then(() => {          
           vendorStat.save().then(() => {
            this.controller.set('isUpdating', false);
@@ -66,7 +74,9 @@ export default Ember.Route.extend({
               });
 
           });
-        });
+        });   
+
+
     	},
       select0: function(){
         this.controller.set('isSelected0', true);

@@ -54,7 +54,7 @@ export default Ember.Route.extend({
      		let cats = [];
 
      		categories.forEach(function(cat){
-     			cats.push(cat.get('id'));
+     			cats.push(cat);
      		});
      		if(cats.length === 1){
      			controller.set('category', cats[0]);
@@ -76,7 +76,11 @@ export default Ember.Route.extend({
 
      			//If province is set up, fill in
 	     		if(vendor.get('province')) {
-	     			controller.set('selectedProvince', vendor.get('province'));
+	     			//Load province
+     				let province = this.store.findRecord('province', vendor.get('province').get('id')).then((p)=>{
+     					controller.set('province', p);
+     				});
+	     			// controller.set('province', vendor.get('province'));
 	     		}
 
 	     		if(vendor.get('city')) {
@@ -219,20 +223,15 @@ export default Ember.Route.extend({
 		createItem(){
 			try{
 				this.controller.set('isCreating', true);
-				let cat = this.store.peekRecord('category', this.controller.get('category'));
+				let cat = this.controller.get('category');
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
-				let provinceName = this.controller.get('selectedProvince');
-				let provinceCode = "";
-				let provinces = this.store.peekAll('province');
-				provinces.forEach(function(province){
-					if (province.get('name') === provinceName) {
-						let shortCode = province.get('code').split('_');
-						provinceCode = shortCode[1].toUpperCase();
-					}
-				});
+				let province = this.controller.get('province');
+				let provinceCode = "";				
+				let shortCode = province.get('code').split('_');
+				provinceCode = shortCode[1].toUpperCase();
 
 				var mainImg = document.getElementById('mainImg');
 
@@ -255,7 +254,7 @@ export default Ember.Route.extend({
 								  city: this.controller.get('city'),
 								  country: 'South Africa',
 								  countryCode: 'za',
-								  province: provinceName,
+								  province: province,
 								  provinceCode: provinceCode,
 								  willingToTravel: travelObj.willingTravel,
 								  maxTravelDist: travelObj.travelDist,
@@ -266,31 +265,19 @@ export default Ember.Route.extend({
 								this.uploadAllFiles();
 								newItem.save().then(()=>{
 									cat.get('catItems').pushObject(newItem);
-									cat.save().then(()=>{		
-										vndr.get('catItems').pushObject(newItem);
-										vndr.save().then(()=>{
-											this.controller.set('name', '');
-											this.controller.set('price', '');
-											this.controller.set('minPrice', '');
-											this.controller.set('maxPrice', '');
-											this.controller.set('pricingOption', '3');
-											this.controller.set('desc', '');
-											this.controller.set('imageURL', '');
-											this.setSection(1);
-											// this.controller.set('imgBlob', '');
-											this.controller.set('itemCreated', true);
-											// if(_blob.url !== _imgurl){
-									  //           if(_blob){
-									  //           	this.destroyBlob(_blob);
-									  //           } 
-									  //   	}
-	 
-											this.set('listingCreated', true);
+									cat.save().then(()=>{
+										province.get('catItems').pushObject(newItem);
+										province.save().then(()=>{
+											vndr.get('catItems').pushObject(newItem);
+											vndr.save().then(()=>{		 
+												this.controller.set('itemCreated', true);
+												this.set('listingCreated', true);
 
-											if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
-												this.completeListing();
-											}
-										});
+												if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
+													this.completeListing();
+												}
+											});											
+										});	
 									});	
 								});	
 
@@ -527,6 +514,14 @@ export default Ember.Route.extend({
 		return decodedImage;
 	},
 	completeListing: function(){
+		this.controller.set('name', '');
+		this.controller.set('price', '');
+		this.controller.set('minPrice', '');
+		this.controller.set('maxPrice', '');
+		this.controller.set('pricingOption', '3');
+		this.controller.set('desc', '');
+		this.controller.set('imageURL', '');
+		this.setSection(1);
         this.controller.set('isCreating', false);
     	this.controller.get('notifications').info('Listing created successfully!',{
             autoClear: true

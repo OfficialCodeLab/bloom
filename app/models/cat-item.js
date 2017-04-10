@@ -20,7 +20,7 @@ export default Model.extend({
   image3: attr('string'),
   image4: attr('string'),
   city: attr('string'),
-  province: attr('string'),
+  province: belongsTo('province', {inverse: 'catItems', async: true}),
   provinceCode: attr('string'),
   country: attr('string'),
   countryCode: attr('string'),

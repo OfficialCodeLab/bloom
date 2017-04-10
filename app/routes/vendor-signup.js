@@ -259,11 +259,7 @@ export default Ember.Route.extend({
             break;
         }
 
-        let willingToContribute = false;
-
-        if(this.controller.get('willingToContribute') === '1'){
-            willingToContribute = true;
-        }
+        let willingToContribute = this.controller.get('willingToContribute');
 
         //Get all categories
         let cats = this.controller.get('categoryItems');

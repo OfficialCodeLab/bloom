@@ -1,7 +1,7 @@
 <div class="index-main" style="padding-top:60px">
 	<div class="container">
 		<h1 class="font-times-header">Sign Up</h1><br>
-		<p style="font-style: italic; text-align: center;">Welcome to Pear's Vendor System, please follow the steps to create your account below.</p>
+		<p style="font-style: italic; text-align: center;">Welcome to Bloom's Vendor System, please follow the steps to create your account below.</p>
 		<hr>
 
 		<div class="text-center">
@@ -31,8 +31,8 @@
 			        	</div>
 			        	<div class="vendor-signup-inner">
 				            <i class="fa fa-child i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Representative Name' value=rep}}<br>
-				            <div style="padding-top: 9px;"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc}}<br></div>
-				            <div style="margin-top: -28px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
+				            <div class="p-i"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc onChange=(action (mut desc))}}<br></div>
+				            <div style="margin-top: -40px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
 				            <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
 				            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom URL' value=customID}}<br>
 
@@ -48,18 +48,23 @@
 			        	</div>
 			        	<div class="vendor-signup-inner">
 
-                            <div style="padding-top: 9px">
-				            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='Physical Address' value=addressL1}}<br></div>
-				            <div style="margin-top: -28px;"><i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br></div>
+                            <div style="padding-top: 9px" class="p-i">
+				            <i class="fa fa-address-card i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='Physical Address' value=addressL1 onChange=(action (mut addressL1))}}<br></div>
+				            <div style="margin-top: -40px;"><i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=city}}<br></div>
 				            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
 				            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-				            <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{#paper-select placeholder="Province" model=selectedProvince}}
+				            <div class="p-s"><i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;
+				            {{!-- {{#paper-select placeholder="Province" model=selectedProvince}}
 							  {{#each province as |state|}}
 							    {{#paper-option value=state.name}}
 							      {{state.name}}
 							    {{/paper-option}}
 							  {{/each}}
+							{{/paper-select}} --}}
+							{{#paper-select options=province label="Province" required=true selected=selectedProvince onChange=(action (mut selectedProvince)) as |state|}}
+							  {{state.name}}
 							{{/paper-select}}
+							</div>
 						    <div style="padding: 20px 0 40px 0;">
 						        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
 						        {{#mdl-button isRaised=true action="nextSection"}}Next{{/mdl-button}}
@@ -71,11 +76,15 @@
 			        	</div>
 			        	<div class="vendor-signup-inner">
 			        		<div class="text-left" style="padding-left: 10px; padding-right: 10px">
-				            	<strong>Are you willing to travel?</strong><br>
+				            	<strong>Are you willing to travel?</strong><br><br>
 					            <div>
-									{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
-									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
-									{{#paper-radio value="3" selected=willingToTravel}}Online Business{{/paper-radio}}
+						            {{#paper-radio-group
+									  groupValue=(readonly willingToTravel)
+									  onChange=(action (mut willingToTravel)) as |group|}}
+									  {{#group.radio value="1"}} Yes {{/group.radio}}
+									  {{#group.radio value="2"}} No {{/group.radio}}
+									  {{#group.radio value="3"}} Online Business {{/group.radio}}
+									{{/paper-radio-group}}
 	                            </div>
 	                            {{#if willTravel}}
 	                            <div><strong>Maximum Distance:</strong><br><br>
@@ -83,7 +92,7 @@
 								      <div flex="10" layout layout-align="center center">
 								        <span>Km:</span>
 								      </div>
-								      {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
+								      {{paper-slider flex=true discrete=true value=maxDist onChange=(action (mut maxDist)) step='1' min='1' max='1000'}}
 								    </div>
 									{{!-- <i class="fa fa-plane i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Maximum Distance' value=maxDist}} --}}
 	                            </div>
@@ -99,8 +108,8 @@
 		                              {{/if}} {{cat.name}}
 		                            </div>
 	                            {{/each}}
-	                            <div style="padding-top: 9px">
-									<i class="fa fa-info-circle i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='More Information' value=descCat}}
+	                            <div style="padding-top: 9px" class="p-i">
+									<i class="fa fa-info-circle i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label='More Information' value=descCat onChange=(action (mut descCat))}}
 	                            </div><hr>
 
 					            <strong>Mailing Preferences</strong><br><br>
@@ -118,10 +127,17 @@
 	                              {{/if}} Interested in monthly newsletter?
 	                            </div><hr>
 
-					            <strong>Would you be interested in contributing to our social media and website inspiration posts?</strong><br>
+					            <strong>Would you be interested in contributing to our social media and website inspiration posts?</strong><br><br>
 					            <div>
-									{{#paper-radio value="1" selected=willingToContribute}}Yes{{/paper-radio}}
-									{{#paper-radio value="2" selected=willingToContribute}}No{{/paper-radio}}
+					            	{{!-- {{#paper-radio-group
+									  groupValue=(readonly willingToContribute)
+									  onChange=(action (mut willingToContribute)) as |group|}}
+									  {{#group.radio value="1"}} Yes {{/group.radio}}
+									  {{#group.radio value="2"}} No {{/group.radio}}
+									{{/paper-radio-group}} --}}
+									 {{#paper-switch value=willingToContribute onChange=(action (mut willingToContribute))}}
+									    {{willingCont}}
+									 {{/paper-switch}}
 	                            </div>
                             </div>
 						    <div style="padding: 20px 0 40px 0;">

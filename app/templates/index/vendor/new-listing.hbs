@@ -21,27 +21,35 @@
 						{{/if}}
 
 
-						{{#paper-select placeholder="Select a category" model=category}}
+						{{!-- {{#paper-select placeholder="Select a category" model=category}}
 						  {{#each model.category as |cat|}}
 						    {{#paper-option value=cat.id}}
 						      {{cat.name}}
 						    {{/paper-option}}
 						  {{/each}}
-						{{/paper-select}}
+						{{/paper-select}} --}}
+
+						<div class="p-s">{{#paper-select options=model.category label="Select a category" required=true selected=category onChange=(action (mut category)) as |category|}}
+						  {{category.name}}
+						{{/paper-select}}</div>
 						
 
 						{{#if refreshFields}}	
-						{{mdl-textarea label='Description of Service Listing' value=desc}}
+							{{mdl-textarea label='Description of Service Listing' value=desc}}
 						{{/if}}
 
+						<div class="p-s">{{#paper-select options=model.province label="Province" required=true selected=province onChange=(action (mut province)) as |province|}}
+						  {{province.name}}
+						{{/paper-select}}</div>
 
-						{{#paper-select placeholder="Your Location" model=selectedProvince}}
+
+						{{!-- {{#paper-select placeholder="Your Location" model=selectedProvince}}
 						  {{#each model.province as |state|}}
 						    {{#paper-option value=state.name}}
 						      {{state.name}}
 						    {{/paper-option}}
 						  {{/each}}
-						{{/paper-select}}
+						{{/paper-select}} --}}
 
 
 						{{#if refreshFields}}	
@@ -55,22 +63,27 @@
          				<div style="padding: 10px;">
 							<hr>
 					        	<div style="text-align: left">
-									<strong>Willing to travel?</strong><br>
+									<strong>Willing to travel?</strong><br><br>
 					            <div>
-									{{#paper-radio value="1" selected=willingToTravel}}Yes{{/paper-radio}}
-									{{#paper-radio value="2" selected=willingToTravel}}No{{/paper-radio}}
-									{{#paper-radio value="3" selected=willingToTravel}}Online Business{{/paper-radio}}
-		                        </div>
-	                        {{#if willTravel}}
-	                        <div><strong>Maximum Distance:</strong><br><br>
-	                        	<div layout style="cursor: pointer;">
-							      <div flex="10" layout layout-align="center center">
-							        <span>Km:</span>
-							      </div>
-							      {{paper-slider flex=true discrete=true value=maxDist step='1' min='1' max='1000'}}
-							    </div>
-	                        </div>
-	                        {{/if}}
+						            {{#paper-radio-group
+									  groupValue=(readonly willingToTravel)
+									  onChange=(action (mut willingToTravel)) as |group|}}
+									  {{#group.radio value="1"}} Yes {{/group.radio}}
+									  {{#group.radio value="2"}} No {{/group.radio}}
+									  {{#group.radio value="3"}} Online Business {{/group.radio}}
+									{{/paper-radio-group}}
+	                            </div>
+	                            {{#if willTravel}}
+	                            <div><strong>Maximum Distance:</strong><br><br>
+	                            	<div layout style="cursor: pointer;">
+								      <div flex="10" layout layout-align="center center">
+								        <span>Km:</span>
+								      </div>
+								      {{paper-slider flex=true discrete=true value=maxDist onChange=(action (mut maxDist)) step='1' min='1' max='1000'}}
+								    </div>
+									{{!-- <i class="fa fa-plane i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Maximum Distance' value=maxDist}} --}}
+	                            </div>
+	                            {{/if}}
 		                    </div>
 	                    </div>
 			        		
@@ -92,9 +105,14 @@
 					        	<div style="text-align: left">
 									<strong>Pricing Option</strong><br>
 						            <div>
-										{{#paper-radio value="1" selected=pricingOption}}Fixed Price{{/paper-radio}}
-										{{#paper-radio value="2" selected=pricingOption}}Range{{/paper-radio}}
-										{{#paper-radio value="3" selected=pricingOption}}No Price Information{{/paper-radio}}
+
+							            {{#paper-radio-group
+										  groupValue=(readonly pricingOption)
+										  onChange=(action (mut pricingOption)) as |group|}}
+										  {{#group.radio value="1"}} Fixed Price {{/group.radio}}
+										  {{#group.radio value="2"}} Range {{/group.radio}}
+										  {{#group.radio value="3"}} No Price Information {{/group.radio}}
+										{{/paper-radio-group}}
 		                    		</div>
 		                        </div>
 	                        </div>

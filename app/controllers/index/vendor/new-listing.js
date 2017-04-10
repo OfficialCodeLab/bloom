@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
 	willingToTravel: 0,
     willTravel: Ember.computed.equal('willingToTravel', '1'),
     pricingOption: '3',
-    maxDist: 0,
+    maxDist: 1,
     province: '',
     isFixedPrice: Ember.computed.equal('pricingOption', '1'),
     isRangePrice: Ember.computed.equal('pricingOption', '2'),
