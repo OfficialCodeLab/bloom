@@ -550,6 +550,31 @@ Guest List
        text-align: center;
 }
 
+.guest-invites-block{
+	height: 100%;
+	width: 100%;
+	z-index: 4;
+	color: white;
+	background-size: cover;
+	background-position: center center;
+	opacity: 0.6;
+	h4 {
+		color: white;
+	    text-shadow: 0 0 5px #444;	
+	}
+	i {
+		color: $color-main;
+		font-size: 80px;
+	}
+}
+
+.invites-bg {
+	min-height: 450px; 
+	background-size: cover;
+	background-position: center center;
+	cursor: pointer;
+}
+
 
 
 .btn-guest-add{

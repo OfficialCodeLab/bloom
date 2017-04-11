@@ -56,7 +56,31 @@ export default Ember.Route.extend({
 				    autoClear: true
 				});
     		});
-		}
+		},
+	    select0: function(){
+	        this.controller.set('isSelected0', true);
+	        this.controller.set('isSelected1', false);
+	        this.controller.set('isSelected2', false);
+	        this.controller.set('isSelected3', false);
+	    },
+	    select1: function(){
+	        this.controller.set('isSelected0', false);
+	        this.controller.set('isSelected1', true);
+	        this.controller.set('isSelected2', false);
+	        this.controller.set('isSelected3', false);
+	    },
+	    select2: function(){
+	        this.controller.set('isSelected0', false);
+	        this.controller.set('isSelected1', false);
+	        this.controller.set('isSelected2', true);
+	        this.controller.set('isSelected3', false);
+	    },
+	    select3: function(){
+	        this.controller.set('isSelected0', false);
+	        this.controller.set('isSelected1', false);
+	        this.controller.set('isSelected2', false);
+	        this.controller.set('isSelected3', true);
+	    },
 	}
         
 });

@@ -1,35 +1,20 @@
 {{!-- When the "Add Guest" button is clicked, this will show. --}}
-<div class="row">
-	<h2 class="text-center" style="margin-top:0px; padding-top:0px;">Add Guests</h2>
-</div>
-<br>
-
-<div class="form-horizontal row">
-	<div class="form-group has-feedback">
-		<div class="col-sm-6 col-sm-offset-3">
+{{!-- <div class="row"> --}}
+	{{!-- <h2 class="text-center" style="margin-top:0px; padding-top:0px;">Add Guests</h2> --}}
+{{!-- </div> --}}
+{{!-- <br> --}}
+<div class="pear-profile-card card-sm unselectable">
+    <div class="vendor-signup-inner">
+    	<h3 class="text-center">Add Guests</h3>
 			{{mdl-textfield disabled=addingGuest label='Name of guest' value=name}}
-		</div>
-	</div>
-	<div class="form-group has-feedback">
-		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Email address' value=email}}
-		</div>
-	</div>
-	<div class="form-group has-feedback">
-		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Contact number' value=cell}}
-		</div>
-	</div>
-	<div class="form-group has-feedback">
-		<div class="col-sm-6 col-sm-offset-3">
 			{{mdl-textfield disabled=addingGuest label='Number of additional guests' value=guests type="number"}}
+		<div style="padding-bottom: 40px;">
+			<div class="cascading-buttons">
+				{{#mdl-button isRaised=true action="addGuest" disabled=isDisabled}}Add Guest {{#if addingGuest}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+			</div>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-6 col-sm-offset-3 cascading-buttons">
-		{{#mdl-button isRaised=true isAccent=true action="backBtn"}}Back{{/mdl-button}}
-		{{#mdl-button isRaised=true action="addGuest" disabled=isDisabled}}Add Guest {{#if addingGuest}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
 	</div>
 </div>
 {{!-- End of guest add section --}}
