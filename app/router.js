@@ -49,6 +49,7 @@ Router.map(function() {
     this.route('mywedding', {path: '/' }, function() {
       this.route('overview', {path: '/'});
       this.route('guests');
+      this.route('template');
       // this.route('mystats');
       // this.route('innercircle');
       this.route('todo');

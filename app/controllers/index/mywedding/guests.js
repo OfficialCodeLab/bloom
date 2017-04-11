@@ -17,7 +17,9 @@ export default Ember.Controller.extend({
 	guestId: '',
 	guestsValue: '0',
 	addingGuest: '',
-	isNotValid: Ember.computed.not('name'),
+	isValidEmail: Ember.computed.match('email', /^.+@.+\..+$/),
+	isValid: Ember.computed.and('name', 'isValidEmail'),
+	isNotValid: Ember.computed.not('isValid'),
 	isDisabled: Ember.computed.or('isNotValid', 'addingGuest'),
 	// numberObserver: Ember.observer('guestsValue', function() {
  //        let num = this.get('guests');

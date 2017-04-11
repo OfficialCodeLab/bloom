@@ -29,7 +29,7 @@ export default Ember.Route.extend({
 			}
 		},
 		closeGuestModal: function () {
-			// alert("STOP RIGHT THERE CRIMINAL SCUM"); 
+			// Clean up dirty attributes
 			if(this.get('isGuestSaved') === false){
 				let id = this.controller.get('guestEditId');
 	    		let guest = this.store.peekRecord('guest', id); 
@@ -50,12 +50,19 @@ export default Ember.Route.extend({
 			let guestId = this.controller.get('guestEditId');
 			this.controller.set('guestEditId', null);
 			let guest = this.store.peekRecord('guest', guestId);
-			guest.save().then(()=>{
-    			//Success notification
-    			this.controller.get('notifications').info('Guest updated successfully!',{
+			if(guest.get('isNotValid')) { //Check validity of info
+	    		guest.rollbackAttributes();
+    			this.controller.get('notifications').error('Guest needs a name and valid email!',{
 				    autoClear: true
 				});
-    		});
+			} else {
+				guest.save().then(()=>{
+	    			//Success notification
+	    			this.controller.get('notifications').info('Guest updated successfully!',{
+					    autoClear: true
+					});
+	    		});				
+			}
 		},
 	    select0: function(){
 	        this.controller.set('isSelected0', true);

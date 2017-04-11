@@ -1,0 +1,26 @@
+
+<h1 class="font-times-header" style="color: #4C4C4E;">Default Template</h1>
+<p style="font-style: italic; text-align: center;">Edit your invites before sending them out.</p>
+
+<div class="pear-profile-card unselectable" style="max-width: 700px; margin: 0 auto;">
+    <div>
+		{{partial 'partials/templates/default'}}
+	</div>
+</div>
+
+<div class="container text-center">
+<h3>Edit Settings</h3>
+
+{{mdl-textfield disabled=sendingInvites label='Top Name' value=name1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Bottom Name' value=name2}}<br>
+{{mdl-textarea disabled=sendingInvites label='Subheading' value=subheading}}<br>
+{{mdl-textfield disabled=sendingInvites label='Wedding Date' value=date}}<br>
+{{mdl-textfield disabled=sendingInvites label='Address' value=addressL1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Address Cont.' value=addressL2}}<br>
+{{mdl-textfield disabled=sendingInvites label='Information Line 1' value=info1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Information Line 2' value=info2}}<br>
+{{mdl-textfield disabled=sendingInvites label='Information Line 3' value=info3}}<br>
+{{mdl-textfield disabled=sendingInvites label='Contact defails' value=contact}}<br>
+{{#mdl-button isRaised=true action="sendInvites"}}Send Invites {{#if sendingInvites}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+
+</div>
