@@ -1,0 +1,10 @@
+{{#modal-popup title='Edit Guest' ok="saveGuest" close='closeGuestModal'}}  
+      <div class="form-horizontal form-group form-group-lg row">
+        <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+            {{mdl-textfield label='Name of guest' value=model.name}}
+            {{mdl-textfield label='Email address' value=model.email}}
+            {{mdl-textfield label='Contact number' value=model.cell}}
+            {{mdl-textfield label='Number of additional guests' value=model.guests type="number"}}
+        </div>
+      </div>
+{{/modal-popup}}

@@ -28,16 +28,16 @@
   <div class="hideOnMobile container">
     {{#mdl-table content=model.guests as |guest|}}
       {{#mdl-table-col label='Full Name'}}
-        {{guest.name}}
+        <div {{action "editGuest" guest.id}}>{{guest.name}}</div>
       {{/mdl-table-col}}
       {{#mdl-table-col label='E-mail'}}
-        {{guest.email}}
+        <div {{action "editGuest" guest.id}}>{{guest.email}}</div>
       {{/mdl-table-col}}
       {{#mdl-table-col label='Contact Number'}}
-        {{guest.cell}}
+        <div {{action "editGuest" guest.id}}>{{guest.cell}}</div>
       {{/mdl-table-col}}
       {{#mdl-table-col label="+1's"}}
-        {{guest.guests}}
+        <div {{action "editGuest" guest.id}}>{{guest.guests}}</div>
       {{/mdl-table-col}}
       {{#mdl-table-col label='Attending'}}
         <div {{action "checkBox" guest.id}} class="text-center tb-btn">

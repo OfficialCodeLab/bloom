@@ -231,72 +231,17 @@ export default Ember.Route.extend({
 			// this.set('isTodoSubmitted', false);
 	    	this.send('removeModal');
 	    },
-	  //   saveTask: function(){
-	  //   	let task = this.controller.get('taskCurrent');
-			// this.set('isTodoSubmitted', true);
-	  //   	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			// 	this.store.findRecord('wedding', _id).then((wedding) => {
-			// 	//If the task is just being updated
-		 //    	if(task.get('createdOn')){
-		 //    		//Save task
-		 //    		task.save().then(()=>{
-		 //    			// this.controller.set('taskCurrent', null);
-		 //    			//Success notification
-   //      				this.refresh();
-		 //    			this.controller.get('notifications').info('Task updated successfully!',{
-			// 			    autoClear: true
-			// 			});
-		 //    // 			wedding.save().then(()=>{
-			// 			// });
-		 //    		});   		
-		 //    	} else { //Else the task hasn't been created yet
-		 //    		//Set up creation date to confirm task has now been created
-		 //    		let createdOn = moment().unix()*1000;
-		 //    		task.set('createdOn', createdOn);
-		 //    		//Set up belongsTo relationship
-		 //    		let createdBy = wedding;
-		 //    		task.set('createdBy', createdBy);
-		 //    		//Save task
-		 //    		task.save().then(()=>{
-		 //    			//Set up hasMany relationship
-		 //    			wedding.get('tasks').pushObject(task);
-		 //    			wedding.save().then(()=>{
-		 //    				// this.controller.set('taskCurrent', null);
-		 //    				//Success notification
-		 //    				this.controller.get('notifications').success('Task created successfully!',{
-			// 				    autoClear: true
-			// 				});
-		 //    			});
-		 //    		});
-		 //    	}
-			// });
-			
-	  //   },
-	  //   createTask: function(){
-	  //   	alert('finalizing task');
-	  //   	let task = this.controller.get('taskCurrent');
-			// this.set('isTodoSubmitted', true);
-			// let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-			// let wedding = this.store.peekRecord('wedding', _id);
-	  //   	//Set up creation date to confirm task has now been created
-   //  		let createdOn = moment().unix()*1000;
-   //  		task.set('createdOn', createdOn);
-   //  		//Set up belongsTo relationship
-   //  		let createdBy = wedding;
-   //  		task.set('createdBy', createdBy);
-   //  		//Save task
-   //  		task.save().then(()=>{
-   //  			//Set up hasMany relationship
-   //  			wedding.get('tasks').pushObject(task);
-   //  			wedding.save().then(()=>{
-   //  				// this.controller.set('taskCurrent', null);
-   //  				//Success notification
-   //  				this.controller.get('notifications').success('Task created successfully!',{
-			// 		    autoClear: true
-			// 		});
-   //  			});
-   //  		});
-   //  	},
+	    openGuestModal: function(guest){
+	    	this.set('isGuestSubmitted', false);
+	    	this.send('showModal', 'modal-guest-edit', guest);	    	
+	    },
+	    closedGuestModal: function(){
+	    	// if(this.get('isGuestSubmitted') === false){
+	    		// let guest = this.get('sotredGuest');
+	   			// guest.rollbackAttributes();
+	    		this.send('removeModal');
+	    	// }
+	    },			
 	    storeTransition: function (){
 
 	    },

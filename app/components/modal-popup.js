@@ -32,6 +32,13 @@ actions: {
     saveTodo: function(){
       this.sendAction('saveTodo');
     },
+    closeGuestModal: function(){
+      this.$('.modal').modal('hide');
+      this.sendAction('closeGuestModal');       
+    },
+    saveGuest: function(){
+      this.sendAction('saveTodo');
+    },
     captchaComplete: function(data){
       alert("THIS WORKED");
       this.sendAction('captchaComplete');   

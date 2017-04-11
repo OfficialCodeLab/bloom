@@ -221,7 +221,7 @@ export default Ember.Route.extend({
 			            autoClear: true
 			          });
 				});				
-			})
+			});
 
 			
 		},

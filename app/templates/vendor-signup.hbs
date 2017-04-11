@@ -54,13 +54,6 @@
 				            <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=postalcode}}<br>
 				            <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
 				            <div class="p-s"><i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;
-				            {{!-- {{#paper-select placeholder="Province" model=selectedProvince}}
-							  {{#each province as |state|}}
-							    {{#paper-option value=state.name}}
-							      {{state.name}}
-							    {{/paper-option}}
-							  {{/each}}
-							{{/paper-select}} --}}
 							{{#paper-select options=province label="Province" required=true selected=selectedProvince onChange=(action (mut selectedProvince)) as |state|}}
 							  {{state.name}}
 							{{/paper-select}}
