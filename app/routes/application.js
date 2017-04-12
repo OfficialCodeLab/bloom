@@ -284,7 +284,7 @@ export default Ember.Route.extend({
 		    	if (contact.get('vendorEmail')){
 		    		to = contact.get('vendorEmail');
 		    	} else {
-		    		to = "info@codelab.io";
+		    		// to = "support@bloomweddings.co.za";
 		    	}
 				if (this.controller.get('captchaVerified')) {
 					let message = this.store.createRecord('message', {
