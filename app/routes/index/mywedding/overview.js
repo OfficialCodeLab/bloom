@@ -22,6 +22,7 @@ export default Ember.Route.extend({
 	    });
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 	    let user = this.store.peekRecord('user', _id);
+	    controller.set('spouse', user.get('spouse'));
 	    controller.set('email', user.get('email'));
 	    controller.set('cell', user.get('cell'));
 	    controller.set('city', user.get('city'));

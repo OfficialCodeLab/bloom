@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	notifications: Ember.inject.service('notification-messages'),	
-	name1: "John Doe",
-	name2: "Jane Smith",
+	name1: "John",
+	name2: "Jane",
 	subheading: "Would like to invite you, along with their families, to celebrate our love with us on our wedding day.",
 	date: "Friday 23 October 2017 - 8pm",
 	addressL1: "The Forest Walk",

@@ -6,6 +6,7 @@ import Ember from 'ember';
 export default Model.extend({
   name: attr('string'),
   surname: attr('string'),
+  spouse: attr('string'),
   email: attr('string'),
   addressL1: attr('string'),
   addressL2: attr('string'),
