@@ -18,7 +18,11 @@
                   {{#link-to 'single-item' cat-item.id tagname='div'}}
 
                   <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
-                     {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+                     {{#if cat-item.imageURL}}
+                        {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+                     {{else}}
+                        {{#image-component loadedImg="loadedImg" src="placeholder-square.png" class="img-responsive cat-image"}}{{/image-component}}
+                     {{/if}}
                   </div>
                   {{/link-to}}
                </div>

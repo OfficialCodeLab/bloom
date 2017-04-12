@@ -6,15 +6,15 @@ export default Ember.Component.extend({
     src: null,
     didInsertElement: function(){
         var _this = this;
-        if (this.get('src')) {
+        // if (this.get('src')) {
             this.$().on('load', function(evt){
                 return _this.imageLoaded(evt);
             }).on('error', function(evt){
                 return _this.imageError(evt);
             });  
-        } else {    
-            return this.imageError();      
-        }
+        // } else {    
+        //     return this.imageError();      
+        // }
         //this.sendAction('loadedImg');
     },
     willDestroyElement: function(){
