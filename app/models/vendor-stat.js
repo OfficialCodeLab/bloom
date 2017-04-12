@@ -9,6 +9,7 @@ export default Model.extend({
   categories: hasMany('category'),
   servicesDesc: attr('string'),
   createdBy: attr('string'),
+  created: attr('date'),
   repName: attr('string'),
   vatNum: attr('string'),
   website: attr('string'),

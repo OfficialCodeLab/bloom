@@ -1,11 +1,13 @@
 <div class="header-top"><h1>Users</h1></div>
 
+
 <table class="table table-bordered table-striped">
     <thead>
       <tr>
           <th>Full Name</th>
           <th>E-mail</th>
           <th>Facebook</th>
+          <th>Delete</th>
           {{!-- <th>Add Wedding</th> --}}
       </tr>
     </thead>
@@ -15,6 +17,7 @@
             <td>{{user.name}} {{user.surname}}</td>
             <td>{{user.email}}</td>
             <td><a href="http://facebook.com/{{user.id}}">View Profile</a></td>
+            <td><div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div></td>
             {{!-- <td><button class="btn btn-pear" {{action 'addWedding' user.id}}>Add</button></td> --}}
         </tr>
     {{/each}}

@@ -28,5 +28,6 @@ export default Model.extend({
   mustTourWedding: attr('boolean'),
   mustTourVendor: attr('boolean'),
   mustTourFavourites: attr('boolean'),
+  created: attr('date'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });
