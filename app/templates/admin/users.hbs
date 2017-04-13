@@ -1,14 +1,13 @@
 <div class="header-top"><h1>Users</h1></div>
 
 
-<table class="table table-bordered table-striped">
+{{!-- <table class="table table-bordered table-striped">
     <thead>
       <tr>
           <th>Full Name</th>
           <th>E-mail</th>
           <th>Facebook</th>
           <th>Delete</th>
-          {{!-- <th>Add Wedding</th> --}}
       </tr>
     </thead>
     <tbody>
@@ -18,9 +17,36 @@
             <td>{{user.email}}</td>
             <td><a href="http://facebook.com/{{user.id}}">View Profile</a></td>
             <td><div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div></td>
-            {{!-- <td><button class="btn btn-pear" {{action 'addWedding' user.id}}>Add</button></td> --}}
         </tr>
     {{/each}}
 
     </tbody>
-</table>
+</table> --}}
+<div class="container">
+
+{{#mdl-table content=model as |user|}}
+  {{#mdl-table-col label='Full Name'}}
+    {{user.name}} {{user.surname}}
+  {{/mdl-table-col}}
+  {{#mdl-table-col label='E-mail'}}
+    {{user.email}}
+  {{/mdl-table-col}}
+{{!--   {{#mdl-table-col label='Contact Number'}}
+
+  {{/mdl-table-col}} --}}
+  {{#mdl-table-col label="Accounts"}}
+      <a href="http://facebook.com/{{user.id}}">
+          <i style="font-size: 24px;" class="fa fa-facebook-square"></i>
+      </a>&nbsp;&nbsp;
+      <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
+          <i style="font-size: 24px;" class="fa fa-database"></i>
+      </a>
+  {{/mdl-table-col}}
+ {{!--  {{#mdl-table-col label='Attending'}}
+
+  {{/mdl-table-col}} --}}
+  {{#mdl-table-col label='Delete'}}
+    <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+  {{/mdl-table-col}}
+{{/mdl-table}}
+</div>

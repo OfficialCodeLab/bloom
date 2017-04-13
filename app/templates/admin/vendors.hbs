@@ -1,6 +1,8 @@
+<div class="container">
+
 <div class="header-top"><h1>Vendors</h1></div>
 
-<table class="table table-bordered table-striped">
+{{!-- <table class="table table-bordered table-striped">
     <thead>
       <tr>
           <th>Name</th>
@@ -18,4 +20,32 @@
     {{/each}}
 
     </tbody>
-</table>
+</table> --}}
+
+
+{{#mdl-table content=model as |vendor|}}
+  {{#mdl-table-col label='Name'}}
+    {{#link-to 'vendor-profile' model.vendor.id}}{{vendor.name}}{{/link-to}}
+  {{/mdl-table-col}}
+  {{#mdl-table-col label='E-mail'}}
+    {{vendor.email}}
+  {{/mdl-table-col}}
+{{!--   {{#mdl-table-col label='Contact Number'}}
+
+  {{/mdl-table-col}} --}}
+  {{!-- {{#mdl-table-col label="Accounts"}}
+      <a href="http://facebook.com/{{user.id}}">
+          <i style="font-size: 24px;" class="fa fa-facebook-square"></i>
+      </a>&nbsp;&nbsp;
+      <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
+          <i style="font-size: 24px;" class="fa fa-database"></i>
+      </a>
+  {{/mdl-table-col}} --}}
+ {{!--  {{#mdl-table-col label='Attending'}}
+
+  {{/mdl-table-col}} --}}
+  {{#mdl-table-col label='Province'}}
+    {{vendor.province.name}}
+  {{/mdl-table-col}}
+{{/mdl-table}}
+</div>

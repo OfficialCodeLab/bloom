@@ -11,5 +11,14 @@ export default Ember.Route.extend({
 	model(){
 
     	return this.store.findAll('vendor');
-	}
+    	// return Ember.RSVP.hash({
+     //        vendor: this.store.findAll('vendor'),
+     //        vendorStat: this.store.findAll('vendor-stat')
+     //    });
+	},
+	// setupController: function (controller, model) {
+      // this._super(controller, model);
+      // Ember.set(controller, 'vendor', model.vendor);
+      // Ember.set(controller, 'vendorStat', model.vendorStat);
+    // }
 });
