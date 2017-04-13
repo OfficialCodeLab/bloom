@@ -16,20 +16,25 @@ export default Ember.Route.extend({
 		}
 		    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let user = this.store.peekRecord('user', _id);
-		if(!user.get('vendorAccount')){
-			this.transitionTo('index.vendor.login');
-		}
+		user.get('vendorAccount').then((ven)=>{
+      if(ven === null || ven === undefined) {
+        this.transitionTo('index.vendor.login');     
+      }
+    }, ()=>{ 
+      this.transitionTo('index.vendor.login');     
+    });
+		
 		return sesh;
     },
     model() {
 	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let user = this.store.peekRecord('user', _id);
-    	return this.store.findRecord('vendor', user.get('vendorAccount'));
+    	return user.get('vendorAccount');
     },
     afterModel(){
     	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
     	let user = this.store.peekRecord('user', _id);
-    	let vendor = this.store.peekRecord('vendor', user.get('vendorAccount'));
+    	let vendor = user.get('vendorAccount');
 		let items = vendor.get('catItems');
 		this.set('itemsCount', items.get('length'));
 		this.resetLoadCount();

@@ -28,7 +28,7 @@ export default Ember.Route.extend({
 		var storageRef = this.get('firebaseApp').storage().ref();
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		let user = this.store.peekRecord('user', _id);
-		let vendorId = user.get('vendorAccount');
+		let vendorId = user.get('vendorAccount').get('id');
 		//PATH : userId / branding
 		//Should locally store all variables
 		var path = 'vendorImages/' + vendorId + '/branding/';
@@ -41,6 +41,9 @@ export default Ember.Route.extend({
 			// console.log(snapshot.state);
 		}, function(error) {
 			//ERROR
+        _this.controller.get('notifications').error('There was a problem uploading your images, please try again.',{
+            autoClear: true
+        }); 
 		}, function() {
 			//COMPLETE
 			var downloadURL = uploadTask.snapshot.downloadURL;

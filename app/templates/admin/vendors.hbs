@@ -47,5 +47,8 @@
   {{#mdl-table-col label='Province'}}
     {{vendor.province.name}}
   {{/mdl-table-col}}
+  {{#mdl-table-col label='Delete'}}
+    <div {{action "destroyVendor" vendor.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+  {{/mdl-table-col}}
 {{/mdl-table}}
 </div>

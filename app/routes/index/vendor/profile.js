@@ -10,20 +10,24 @@ export default Ember.Route.extend({
 
       	  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
           let user = this.store.peekRecord('user', _id);
-          if(!user.get('vendorAccount')){
-          	this.transitionTo('index.vendor.login');
-          }
+          user.get('vendorAccount').then((ven)=>{
+            if(ven === null || ven === undefined) {
+              this.transitionTo('index.vendor.login');     
+            }
+          }, ()=>{ 
+            this.transitionTo('index.vendor.login');     
+          });
           return sesh;
     },
     model(){    	
 	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		  let user = this.store.peekRecord('user', _id);
 	      return Ember.RSVP.hash({
-            vendor: this.store.findRecord('vendor', user.get('vendorAccount')),
+            vendor: user.get('vendorAccount'),
             province: this.store.findRecord('country', 'south_africa').then((_country=>{
                 return _country.get('province');
             })),
-            vendorStat: this.store.findRecord('vendor-stat', user.get('vendorAccount'))
+            vendorStat: this.store.findRecord('vendor-stat', user.get('vendorAccount').get('id'))
         });
       // return this.store.findAll('category');
     },

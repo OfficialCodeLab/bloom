@@ -49,12 +49,14 @@ export default Ember.Route.extend({
     assignToUser: function(id){
         //window.scrollTo(0,0);       
     	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
-    	user.set('vendorAccount', id);
-    	user.save().then(()=> {      
-            this.transitionTo('index.vendor');                          
-            this.controller.get('notifications').success('Logged in successfully!',{
-                autoClear: true
-            });              
-        }); 
+        this.store.findRecord('vendor', id).then((vendor) => {
+            user.set('vendorAccount', vendor);
+            user.save().then(()=> {      
+                this.transitionTo('index.vendor');                          
+                this.controller.get('notifications').success('Logged in successfully!',{
+                    autoClear: true
+                });              
+            }); 
+        });
     }
 });

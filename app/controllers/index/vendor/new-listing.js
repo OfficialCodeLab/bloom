@@ -89,6 +89,10 @@ export default Ember.Controller.extend({
     	let _file = file;
 
     	let reader = new FileReader();
+      let errorFunc = function() {
+          _this.dropzone.removeFile(file);
+        alert("Image size too large, please ensure the file size is less than 400kb");
+      };   
 
     	reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
@@ -97,17 +101,35 @@ export default Ember.Controller.extend({
     		var img3 = document.getElementById('img3');
     		var img4 = document.getElementById('img4');
     		var img5 = document.getElementById('img5');
+        var img;
 			if(!img1.complete || typeof img1.naturalWidth === "undefined" || img1.naturalWidth=== 0){
 				img1.src = dataURL;
+        img = img1;
 			} else if (!img2.complete || typeof img2.naturalWidth === "undefined" || img2.naturalWidth === 0) {
 				img2.src = dataURL;
+        img = img2;
 			} else if (!img3.complete || typeof img3.naturalWidth === "undefined" || img3.naturalWidth === 0) {
 				img3.src = dataURL;
+        img = img3;
 			} else if (!img4.complete || typeof img4.naturalWidth === "undefined" || img4.naturalWidth === 0) {
 				img4.src = dataURL;
+        img = img4;
 			} else if (!img5.complete || typeof img5.naturalWidth === "undefined" || img5.naturalWidth === 0) {
 				img5.src = dataURL;
+        img = img5;
 			}
+
+      img.onload = function() {
+              var w = this.width,
+                  h = this.height,
+                  t = file.type,                           // ext only: // file.type.split('/')[1],
+                  n = file.name,
+                  s = ~~(file.size/1024) +'KB';
+                if(~~(file.size/1024) >= 400) {
+                  errorFunc();
+                this.src = null;
+              }         
+          };
 			
     	});
 		reader.readAsDataURL(file);
@@ -121,17 +143,32 @@ export default Ember.Controller.extend({
 
     storeMainImage: function(file, done){
         let _this = this;
-		let _file = file;
+    		let _file = file;
 
-		let reader = new FileReader();
+    		let reader = new FileReader();
+        let errorFunc = function() {
+            _this.dropzone.removeFile(file);
+          alert("Image size too large, please ensure the file size is less than 400kb");
+        };    
 
-		reader.onloadend = Ember.run.bind(this, function(){
-			var dataURL = reader.result;
-			var mainImg = document.getElementById('mainImg');
-			mainImg.src = dataURL;
-		});
-		 //debugger;
-		reader.readAsDataURL(file);
+    		reader.onloadend = Ember.run.bind(this, function(){
+    			var dataURL = reader.result;
+    			var mainImg = document.getElementById('mainImg');
+    			mainImg.src = dataURL;
+          mainImg.onload = function() {
+              var w = this.width,
+                  h = this.height,
+                  t = file.type,                           // ext only: // file.type.split('/')[1],
+                  n = file.name,
+                  s = ~~(file.size/1024) +'KB';
+                if(~~(file.size/1024) >= 400) {
+                  errorFunc();
+                this.src = null;
+              }         
+          };
+    		});
+    		 //debugger;
+    		reader.readAsDataURL(file);
 		 //debugger;
 		 
 

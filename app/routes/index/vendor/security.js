@@ -10,7 +10,7 @@ export default Ember.Route.extend({
 			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			    let passhash = this.hashCode(pass);
 				let user = this.store.peekRecord('user', _id);
-				let vendorAccount = user.get('vendorAccount');
+				let vendorAccount = user.get('vendorAccount').get('id');
 				this.controller.set('password', '');
 				this.controller.set('passwordConfirm', '');
 				
@@ -42,7 +42,7 @@ export default Ember.Route.extend({
                 }, () => {
 			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let user = this.store.peekRecord('user', _id);
-				let vendorAccount = user.get('vendorAccount');
+				let vendorAccount = user.get('vendorAccount').get('id');
 				this.controller.set('email', '');		
 				this.store.findRecord('vendor', vendorAccount, { reload: true }).then((vendor) => {
 					let _email = vendor.get('email');
@@ -73,7 +73,7 @@ export default Ember.Route.extend({
 
 		logout: function(){			
 	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
-	    	user.set('vendorAccount', '');
+	    	user.set('vendorAccount', null);
 	    	user.save();
 	    	this.transitionTo('index.vendor.login');
 	    	this.controller.get('notifications').info('Logged out successfully!',{

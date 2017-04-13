@@ -49,11 +49,27 @@ export default Ember.Controller.extend({
 		let _file = file;
 
 		let reader = new FileReader();
+    let errorFunc = function() {
+        _this.dropzone.removeFile(file);
+      alert("Image size too large, please ensure the file size is less than 400kb");
+    }; 
 
 		reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
 			var selectedImage = document.getElementById('selectedImage');
 			selectedImage.src = dataURL;
+      
+      selectedImage.onload = function() {
+          var w = this.width,
+              h = this.height,
+              t = file.type,                           // ext only: // file.type.split('/')[1],
+              n = file.name,
+              s = ~~(file.size/1024) +'KB';
+            if(~~(file.size/1024) >= 400) {
+              errorFunc();
+            this.src = null;
+          }         
+      };
 		});
 		 //debugger;
 		reader.readAsDataURL(file);

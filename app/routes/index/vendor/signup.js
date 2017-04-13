@@ -152,7 +152,9 @@ export default Ember.Route.extend({
     },
     assignToUser: function(id){
     	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
-    	user.set('vendorAccount', id);
-    	user.save();
+        this.store.findRecord('vendor', id).then((vendor)=>{
+            user.set('vendorAccount', vendor);
+            user.save();
+        });
     }
 });

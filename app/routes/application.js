@@ -69,33 +69,35 @@ export default Ember.Route.extend({
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);  
 				this.store.findRecord('user', data.currentUser.providerData[0].uid).then((user)=>{
-
 					if(!this.get('vendorId')){
 						this.transitionTo('index');
 						window.scrollTo(0,0);
 						this.controller.get('notifications').info('Logged in successfully.',{
 				          autoClear: true
 			      		});
-			      	} else {
-			      		if(user.get('vendorAccount')){
-	    					this.get('session').close().then(()=> {
-					      		this.controller.get('notifications').error('Account already has vendor account!',{
-						          autoClear: true
-					      		});
-					      	});
-							this.transitionTo('login');
-							this.set('vendorId', null);
-						} else {
-							this.joinAccounts(user);
-						}
-			      	}
-				}, ()=> {					
+	      	} else {
+	      			user.get('vendorAccount').then((ven)=>{
+		      			if(ven === null || ven === undefined) {
+									this.joinAccounts(user);		      				
+		      			} else {
+		    					this.get('session').close().then(()=> {
+						      		this.controller.get('notifications').error('Account already has vendor account!',{
+							          autoClear: true
+						      		});
+						      	});
+									this.transitionTo('login');
+									this.set('vendorId', null);		      				
+		      			}
+	      			}, ()=>{
+	      			});
+	      	}
+				}, ()=> {			
 					if(this.get('vendorId')){
 						this.createVendor();	
 					} else {
 						this.controller.get('notifications').info('User account created.',{
-				          autoClear: true
-				      	});
+				      autoClear: true
+		      	});
 						this.transitionTo('user.new');
 					}
 				});
@@ -435,7 +437,7 @@ export default Ember.Route.extend({
 			  id: _id,
 			  email: vendor.get('email'),
 			  cell: vendor.get('cell'),
-			  vendorAccount: this.get('vendorId'),
+			  vendorAccount: vendor,
 			  mustTourWedding: true,
 			  mustTourFavourites: true,
 			  mustTourVendor: true,
@@ -494,7 +496,7 @@ export default Ember.Route.extend({
 	    	let vendorLogin = this.get('vendorLog');
 	    	let _vendorid = this.get('vendorId');
 	    	vendorLogin.set('vendorID', _vendorid);
-	    	user.set('vendorAccount', _vendorid);
+	    	user.set('vendorAccount', vendor);
 	    	user.set('accountType', "vendor");
 
 			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));

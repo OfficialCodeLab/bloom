@@ -12,9 +12,14 @@ export default Ember.Route.extend({
 
       	  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
           let user = this.store.peekRecord('user', _id);
-          if(!user.get('vendorAccount')){
-          	this.transitionTo('index.vendor.login');
-          }
+          user.get('vendorAccount').then((ven)=>{
+            if(ven === null || ven === undefined) {
+              this.transitionTo('index.vendor.login');     
+            }
+          }, ()=>{ 
+            this.transitionTo('index.vendor.login');     
+          });
+          
 
           return sesh;
     },
@@ -34,7 +39,7 @@ export default Ember.Route.extend({
         Ember.set(controller, 'category', model.category);
   	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
         let user = this.store.peekRecord('user', _id);
-  	    let vendorId = user.get('vendorAccount');
+  	    let vendorId = user.get('vendorAccount').get('id');
      	this.store.findRecord('vendor-stat', vendorId).then((vs)=>{
 
      		//If vendor is willing to travel, autopopulate
@@ -58,7 +63,9 @@ export default Ember.Route.extend({
      		});
      		if(cats.length === 1){
      			controller.set('category', cats[0]);
-     		} 
+     		} else {
+          controller.set('category', null);
+        }
 
 			this.store.findRecord('vendor', vendorId).then((vendor)=>{
 	     		//If auto listing, fill in description
@@ -235,69 +242,87 @@ export default Ember.Route.extend({
 
 				var mainImg = document.getElementById('mainImg');
 
-				this.store.findRecord('vendor', user.get('vendorAccount')).then((vndr) => {
+				user.get('vendorAccount').then((vndr) => {
 					let itemsC = vndr.get("catItems.length");
 					itemsC = parseInt(itemsC) + 1;
 					let maxCount = parseInt(vndr.get("maxItems"));
 
 					if(!maxCount || maxCount > itemsC){
 						if(!(!mainImg.complete || typeof mainImg.naturalWidth === "undefined" || mainImg.naturalWidth === 0)){
-							if(this.controller.get('name')) {
-								let travelObj = this.retrieveTravelInfo();
-								let priceObj = this.retrievePriceInfo();
-								let newItem = this.store.createRecord('cat-item', {		
-								  name: this.controller.get('name'),			
-								  desc: this.controller.get('desc'),			
-								  price: priceObj.price,		
-								  minPrice: priceObj.minPrice,		
-								  maxPrice: priceObj.maxPrice,
-								  city: this.controller.get('city'),
-								  country: 'South Africa',
-								  countryCode: 'za',
-								  province: province,
-								  provinceCode: provinceCode,
-								  willingToTravel: travelObj.willingTravel,
-								  maxTravelDist: travelObj.travelDist,
-								  category: cat,
-								  vendor: vndr
-								});
-								this.set('itemId', newItem.get('id'));
-								this.uploadAllFiles();
-								newItem.save().then(()=>{
-									cat.get('catItems').pushObject(newItem);
-									cat.save().then(()=>{
-										province.get('catItems').pushObject(newItem);
-										province.save().then(()=>{
-											vndr.get('catItems').pushObject(newItem);
-											vndr.save().then(()=>{		 
-												this.controller.set('itemCreated', true);
-												this.set('listingCreated', true);
+							if(this.controller.get('name') && this.controller.get('province')) {
+                if(this.controller.get('category')){
+                  if(this.controller.get('province')) {
+                    let travelObj = this.retrieveTravelInfo();
+                    let priceObj = this.retrievePriceInfo();
+                    let newItem = this.store.createRecord('cat-item', {   
+                      name: this.controller.get('name'),      
+                      desc: this.controller.get('desc'),      
+                      price: priceObj.price,    
+                      minPrice: priceObj.minPrice,    
+                      maxPrice: priceObj.maxPrice,
+                      city: this.controller.get('city'),
+                      country: 'South Africa',
+                      countryCode: 'za',
+                      province: province,
+                      provinceCode: provinceCode,
+                      willingToTravel: travelObj.willingTravel,
+                      maxTravelDist: travelObj.travelDist,
+                      category: cat,
+                      vendor: vndr
+                    });
+                    this.set('itemId', newItem.get('id'));
+                    this.uploadAllFiles();
+                    newItem.save().then(()=>{
+                      cat.get('catItems').pushObject(newItem);
+                      cat.save().then(()=>{
+                        province.get('catItems').pushObject(newItem);
+                        province.save().then(()=>{
+                          vndr.get('catItems').pushObject(newItem);
+                          vndr.save().then(()=>{     
+                            this.controller.set('itemCreated', true);
+                            this.set('listingCreated', true);
 
-												if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
-													this.completeListing();
-												}
-											});											
-										});	
-									});	
-								});	
+                            if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
+                              this.completeListing();
+                            }
+                          });                     
+                        }); 
+                      }); 
+                    });
+
+                  } else {
+                    this.setSection(1);
+                    this.controller.set('isCreating', false);
+                    this.controller.get('notifications').error('Please select a province for your listing',{
+                        autoClear: true
+                    });
+                  }
+                } else {
+                  this.setSection(1);
+                  this.controller.set('isCreating', false);
+                  this.controller.get('notifications').error('Please select a category for your listing',{
+                      autoClear: true
+                  }); 
+                }	
 
 							} else {
+                this.setSection(1);
 								this.controller.set('isCreating', false);
 								this.controller.get('notifications').error('Please enter a name for your listing',{
-					                autoClear: true
-					            });  							
+		                autoClear: true
+		            });  							
 							}						
 						} else {
 							this.controller.set('isCreating', false);
 							this.controller.get('notifications').error('Please select a main image for your listing.',{
-				                autoClear: true
-				            });  							
+	                autoClear: true
+	            });  							
 						}
 					} else {
 						this.controller.set('isCreating', false);
 						this.controller.get('notifications').error('You have reached maximum listings.\nPlease upgrade your plan to post more.',{
-			                autoClear: true
-			            });  
+                autoClear: true
+            });  
 					}
 
 					
@@ -305,8 +330,8 @@ export default Ember.Route.extend({
 			} catch(ex){
 				this.controller.set('isCreating', false);
 				this.controller.get('notifications').error('Please select a category or there was a problem.',{
-	                autoClear: true
-	            }); 
+            autoClear: true
+        }); 
 			}
 		}
 	},
@@ -343,7 +368,7 @@ export default Ember.Route.extend({
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 			let user = this.store.peekRecord('user', _id);
 			let itemId = this.get('itemId');
-			let vendorId = user.get('vendorAccount');
+			let vendorId = user.get('vendorAccount').get('id');
 			//PATH : userId / catItems / filename
 			//Should locally store all variables
 			var path = 'vendorImages/' + vendorId + '/services/' + itemId + '/';
@@ -370,6 +395,10 @@ export default Ember.Route.extend({
 				// console.log('Upload is ' + progress + '% done');
 				// console.log(snapshot.state);
 			}, function(error) {
+        _this.controller.set('isCreating', false);
+        _this.controller.get('notifications').error('There was a problem uploading your images, please try again.',{
+            autoClear: true
+        }); 
 				//ERROR
 			}, function() {
 				//COMPLETE
@@ -406,6 +435,10 @@ export default Ember.Route.extend({
 					// console.log(snapshot.state);
 				}, function(error) {
 					//ERROR
+          _this.controller.set('isCreating', false);
+          _this.controller.get('notifications').error('There was a problem uploading your images, please try again.',{
+              autoClear: true
+          }); 
 				}, function() {
 					//COMPLETE
 					var downloadURL = upload.snapshot.downloadURL;

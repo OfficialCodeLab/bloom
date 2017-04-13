@@ -14,6 +14,25 @@ export default Ember.Route.extend({
 	    });
 	},
 	actions: {
+
+		linkAccounts(id) {
+			let user = this.store.peekRecord('user', id);
+			let vendorIdCurrent = user.get("vendorAccount").get('id');
+			console.log(vendorIdCurrent);
+
+			this.store.findRecord("vendor", vendorIdCurrent).then((vendor)=>{
+				vendor.get("loggedInUsers").pushObject(user);
+				vendor.save().then(()=>{
+					user.set("vendorAccount", vendor);
+					user.save().then(()=>{
+		    		this.controller.get('notifications').success('User has been updated successfully.',{
+		            autoClear: true
+		        });	
+					});
+				});
+			});
+			
+		},
 		addWedding(id){
 			let user = this.store.peekRecord('user', id);
 			let wedding = this.store.createRecord('wedding', 

@@ -32,7 +32,7 @@ export default Ember.Route.extend({
 
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
         let user = this.store.peekRecord('user', _id);
-  	    let vendorId = user.get('vendorAccount');
+  	    let vendorId = user.get('vendorAccount').get('id');
 
  		//If vendor is willing to travel, autopopulate
  		let willingToTravel = catItem.get('willingToTravel');
@@ -296,7 +296,7 @@ export default Ember.Route.extend({
 				let user = this.store.peekRecord('user', _id);
 				let catItem = this.controller.get('model.catItem');
 				let itemId = catItem.get('id');
-				let vendorId = user.get('vendorAccount');
+				let vendorId = user.get('vendorAccount').get('id');
 
 				//Should locally store all variables
 				var path = 'vendorImages/' + vendorId + '/services/' + itemId + '/';
@@ -552,7 +552,7 @@ export default Ember.Route.extend({
 		let user = this.store.peekRecord('user', _id);
 		let catItem = this.controller.get('model.catItem');
 		let itemId = catItem.get('id');
-		let vendorId = user.get('vendorAccount');
+		let vendorId = user.get('vendorAccount').get('id');
 	    var _ref = 'vendorImages/' + vendorId + '/services/' + itemId;
 	    var mainRef = storageRef.child(_ref + '/mainImg');
 
