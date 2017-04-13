@@ -2390,6 +2390,14 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 	text-align: center;
 	// width: 100%;
 }
+
+.anchor-white{
+	text-decoration: none !important;
+	color: white !important;
+	&:hover{
+		color: white !important;
+	}
+}
 /*==============================================================================*\
 	Leave these
 \*==============================================================================*/
