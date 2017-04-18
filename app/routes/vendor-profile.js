@@ -29,6 +29,7 @@ export default Ember.Route.extend({
 	    let id = this.get("session").get('currentUser').providerData[0].uid;
 	    let vendorId = this.get('vendorId');
 		this.send('storeVendorProfileVisited', vendorId, id);
+      controller.set('website', model.vendorStat.get('website'));
 	},
   	activate: function(){
   		window.scrollTo(0,0);

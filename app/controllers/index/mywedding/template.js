@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 	addressL1: "The Forest Walk",
 	addressL2: "48 Allan Rd, Johannesburg, 1685",
 	info1: "Dress is semi-formal",
-	info2: "Cash bar abailable.",
+	info2: "Cash bar available.",
 	info3: "Please RSVP before 3 January 2017",
 	contact: "086 123 1790"
 });
