@@ -28,6 +28,72 @@ export default Ember.Route.extend({
 		  // on rejection
 		  // alert("You didn't pay for anything, cheapskate");
 		});
+
+	    if(model.get('weddingDateChanged')) {
+	    	// Update all tasks here
+	    }
+
+
+	    /* TODO:
+	    		- Get current Month
+	    		- Set up all months based on this
+	    */
+	    let currentD = parseInt(moment().format('YYYYMM'));
+	    let currentMonth = parseInt(moment().format('MM'));
+	    let currentY = parseInt(moment().format('YYYY'));
+	    let weddingD = parseInt(moment(model.get('weddingDate')).format('YYYYMM'));
+	    let weddingMonth = parseInt(moment(model.get('weddingDate')).format('MM'));
+	    let weddingY = parseInt(moment(model.get('weddingDate')).format('YYYY'));
+
+	    for(var i = 13; i >= 1; i--) {
+	    	let setYear = weddingY;
+	    	let dateDiff = 0;
+	    	if (i  > weddingMonth) { //Previous year
+	    		dateDiff = 12 + weddingMonth - i;
+	    		setYear--;
+	    	} else if(i  === weddingMonth) { //After date
+	    		dateDiff = 12;
+	    	} else {
+	    		dateDiff = Math.abs(weddingMonth - i);
+	    	}
+	    	let monthStr = "";
+	    	if(i >= 10){
+	    		monthStr = i;
+	    	} else {
+	    		monthStr = "0" + i;
+	    	}
+	    	let monthName = moment(monthStr, "MM").format("MMMM");
+	    	let controllerProp = "month" + dateDiff;
+	    	let isSelected = false;
+	    	let isPast = false;
+	    	if(i  < currentMonth || setYear < currentY) {
+	    		isPast = true;
+	    	} else if (i  === currentMonth && setYear === currentY) {
+	    		isSelected = true;
+	    	}
+	    	let obj = Ember.Object.create({ 
+						title: monthName,
+						selected: isSelected,
+						past: isPast,
+						items: {},
+						year: setYear,
+						index: dateDiff
+				});
+				controller.set(controllerProp, obj);
+	    }
+
+	    //Assign all tasks to month objects
+	    // model.get('tasks').then((tasks)=>{
+	    // 	tasks.forEach(function(task) {
+	    // 		let controllerProp = "month" + task.get('month');
+	    // 		let selectedObj = controller.get(controllerProp);
+	    // 		let taskMonths = Ember.get(selectedObj, 'tasks');
+	    // 		taskMonths.pushObject(task);
+					// Ember.set(controllerProp, 'tasks', taskMonths);
+	    // 	});
+
+
+	    // });
 	},
 	actions: {
 		allClick: function(){

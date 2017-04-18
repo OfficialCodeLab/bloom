@@ -6,9 +6,10 @@ import Ember from 'ember';
 export default Model.extend({	
 	title: attr('string'),
 	desc: attr('string'),
-	due: attr('string'),
+	due: attr('date'),
 	createdOn: attr('string'),
 	createdBy: attr('string'),
 	asssignedTo: hasMany('user'),
-	completed: attr('boolean')
+	completed: attr('boolean'),
+  month: attr('number', {defaultValue: 1})
 });
