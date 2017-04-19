@@ -6,7 +6,7 @@ import Ember from 'ember';
 export default Model.extend({	
 	title: attr('string'),
 	desc: attr('string'),
-	due: attr('date'),
+	due: attr('string'),
 	createdOn: attr('string'),
 	createdBy: attr('string'),
 	asssignedTo: hasMany('user'),

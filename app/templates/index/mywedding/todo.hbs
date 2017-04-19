@@ -22,10 +22,41 @@
 
     	    <hr style="margin-top: 50px; margin-bottom: 0px;">
 
-    	    {{#each model.tasks as |task|}}
-    	    	{{#if task.completed}}
-    	    		{{#if viewAll}}
-    	    			<div class="todo-item">
+            {{#if refresh}}
+
+            {{#each monthsArr as |month|}}
+                <div class=" {{if month.past 'past-date'}}">
+                <h2 class="{{if month.selected 'selected-date'}}">{{month.title}} {{month.year}}</h2>
+                {{#each month.items as |task|}}
+                    {{#if task.completed}}
+                        {{#if viewAll}}
+                            <div class="todo-item">
+                                <div class="todo-left-sm">
+                                    <div {{action "checkBox" task.id}} class="tb-btn">
+                                      {{#if task.completed}}
+                                        {{mdl-button icon="check_box"}}
+                                      {{else}}
+                                        {{mdl-button icon="check_box_outline_blank"}}
+                                      {{/if}}
+                                    </div>
+                                </div>
+                                <div class="todo-middle">
+                                    <strong>{{task.title}}</strong>
+                                </div>
+                                <div class="todo-right">
+                                    <div {{action "editTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="create"}}
+                                    </div>
+                                    <div {{action "destroyTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="delete"}}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 0px; margin-bottom: 0px;">
+                            {{!-- IF VIEW ALL --}}                  
+                        {{/if}}
+                    {{else}}
+                        <div class="todo-item">
                             <div class="todo-left-sm">
                                 <div {{action "checkBox" task.id}} class="tb-btn">
                                   {{#if task.completed}}
@@ -47,36 +78,73 @@
                                 </div>
                             </div>
                         </div>
-    	    			<hr style="margin-top: 0px; margin-bottom: 0px;">
-    	    			{{!-- IF VIEW ALL --}}	    			
-    	    		{{/if}}
-    	    	{{else}}
-    	    		<div class="todo-item">
-                        <div class="todo-left-sm">
-                            <div {{action "checkBox" task.id}} class="tb-btn">
-                              {{#if task.completed}}
-                                {{mdl-button icon="check_box"}}
-                              {{else}}
-                                {{mdl-button icon="check_box_outline_blank"}}
-                              {{/if}}
+                        <hr style="margin-top: 0px; margin-bottom: 0px;">
+                        {{!-- ALWAYS DISPLAY --}}
+                    {{/if}}
+
+                {{/each}}
+                </div>
+            {{/each}}
+
+                <h2 class="{{if monthAfter.selected 'selected-date'}}">{{monthAfter.title}}</h2>
+                {{#each monthAfter.items as |task|}}
+                    {{#if task.completed}}
+                        {{#if viewAll}}
+                            <div class="todo-item">
+                                <div class="todo-left-sm">
+                                    <div {{action "checkBox" task.id}} class="tb-btn">
+                                      {{#if task.completed}}
+                                        {{mdl-button icon="check_box"}}
+                                      {{else}}
+                                        {{mdl-button icon="check_box_outline_blank"}}
+                                      {{/if}}
+                                    </div>
+                                </div>
+                                <div class="todo-middle">
+                                    <strong>{{task.title}}</strong>
+                                </div>
+                                <div class="todo-right">
+                                    <div {{action "editTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="create"}}
+                                    </div>
+                                    <div {{action "destroyTask" task.id}} class="tb-btn">
+                                        {{mdl-button icon="delete"}}
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 0px; margin-bottom: 0px;">
+                            {{!-- IF VIEW ALL --}}                  
+                        {{/if}}
+                    {{else}}
+                        <div class="todo-item">
+                            <div class="todo-left-sm">
+                                <div {{action "checkBox" task.id}} class="tb-btn">
+                                  {{#if task.completed}}
+                                    {{mdl-button icon="check_box"}}
+                                  {{else}}
+                                    {{mdl-button icon="check_box_outline_blank"}}
+                                  {{/if}}
+                                </div>
+                            </div>
+                            <div class="todo-middle">
+                                <strong>{{task.title}}</strong>
+                            </div>
+                            <div class="todo-right">
+                                <div {{action "editTask" task.id}} class="tb-btn">
+                                    {{mdl-button icon="create"}}
+                                </div>
+                                <div {{action "destroyTask" task.id}} class="tb-btn">
+                                    {{mdl-button icon="delete"}}
+                                </div>
                             </div>
                         </div>
-                        <div class="todo-middle">
-                            <strong>{{task.title}}</strong>
-                        </div>
-                        <div class="todo-right">
-                            <div {{action "editTask" task.id}} class="tb-btn">
-                                {{mdl-button icon="create"}}
-                            </div>
-                            <div {{action "destroyTask" task.id}} class="tb-btn">
-                                {{mdl-button icon="delete"}}
-                            </div>
-                        </div>
-                    </div>
-        			<hr style="margin-top: 0px; margin-bottom: 0px;">
-    	    		{{!-- ALWAYS DISPLAY --}}
-    	    	{{/if}}
-    	    {{/each}}
+                        <hr style="margin-top: 0px; margin-bottom: 0px;">
+                        {{!-- ALWAYS DISPLAY --}}
+                    {{/if}}
+
+                {{/each}}
+
+            {{/if}}
 
         </div>
 
