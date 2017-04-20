@@ -42,6 +42,13 @@ actions: {
     captchaComplete: function(data){
       alert("THIS WORKED");
       this.sendAction('captchaComplete');   
+    },
+    closeDate: function(){
+      this.$('.modal').modal('hide');
+      this.sendAction('closeDate');       
+    },
+    okDate: function(){
+      this.sendAction('okDate');
     }
   },
   show: function() {

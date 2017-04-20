@@ -232,7 +232,7 @@ export default Ember.Route.extend({
 	  //   	}
 			// this.set('isTodoSubmitted', false);
 	    	this.send('removeModal');
-	    },
+	    },  
 	    openGuestModal: function(guest){
 	    	this.set('isGuestSubmitted', false);
 	    	this.send('showModal', 'modal-guest-edit', guest);	    	

@@ -4,5 +4,6 @@ export default Ember.Controller.extend({
 	viewAll: true,
 	notifications: Ember.inject.service('notification-messages'),
   monthArr: [],
-  refresh: true
+  refresh: true,
+  isGenerating: false
 });

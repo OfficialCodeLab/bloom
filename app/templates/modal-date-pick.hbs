@@ -1,0 +1,12 @@
+{{#modal-popup title='Select Wedding Date' ok="okDate" close='closeDate'}}
+  <div class="form-horizontal form-group form-group-lg row">
+        <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
+          <div class="input-group">
+              {{#md-datepicker placeholder="Pick your wedding date" selectedDate=model.mainMessage dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}  
+          </div>
+          {{!-- <div class="input-group">
+              {{mdl-textfield label="Description" value=model.desc}}
+          </div> --}}
+        </div>
+    </div>
+{{/modal-popup}}

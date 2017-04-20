@@ -195,6 +195,8 @@ const monthAfter = [
 "Apply for new passport"];
 
 export default Ember.Route.extend({
+	monthKeys: {},
+	monthKeysReverse: {},
 	model(){		
 		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 		return this.store.findRecord('wedding', _id);	
@@ -223,207 +225,14 @@ export default Ember.Route.extend({
 		  // alert("You didn't pay for anything, cheapskate");
 		});
 
-	   var promisesArr = [];
+    if(model.get('weddingDate')) {
+    	this.processTodoList(controller, model);
+    } else {
+    	this.openDatePicker(controller);	    	
+    	// Open wedding date picker
+    }
 
-	    /* 
-	    		- Get current month & wedding month
-	    		- Set up all months based on this
-	    */
-
-	    let currentD = parseInt(moment().format('YYYYMM'));
-	    let currentMonth = parseInt(moment().format('MM'));
-	    let currentY = parseInt(moment().format('YYYY'));
-	    let weddingD = parseInt(moment(model.get('weddingDate')).format('YYYYMM'));
-	    let weddingMonth = parseInt(moment(model.get('weddingDate')).format('MM'));
-	    let weddingY = parseInt(moment(model.get('weddingDate')).format('YYYY'));
-
-	    //TODO: if no wedding date - prompt user & cancel navigates back
 	    
-	    if(model.get('weddingDateChanged')) {
-	    	//If wedding date has changed: run through all tasks
-	    	// - calculate date diff
-	    	// - Update month and due (if made by Bloom)
-	    } else {
-	    	if(model.get('tasksGenerated')) {
-	    		arrangeTasks();
-	    	} else {
-	    		console.log("Generating Tasks");
-	    		//Generate Tasks
-	    		for (var i = 0; i < monthsArr.length; i++){ 
-	    			let x = i + 1;
-	    			let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, x);
-			    	let dueDate = moment("01"+dateObj.monthStr + "" + dateObj.setYear, "DDMMYYYY");
-	    			for(var j = 0; j < monthsArr[i].length; j++) {
-	    				let taskVal = monthsArr[i][j];
-	    				console.log(taskVal);
-	    				let task = this.store.createRecord('task', {
-	    					title: taskVal,
-	    					due: dueDate,
-	    					createdOn: moment().unix()*1000,
-	    					createdBy: "Bloom",
-	    					completed: false,
-	    					month: parseInt(dateObj.monthStr)
-	    				});
-	    				model.get('tasks').pushObject(task);
-
-	    				let promise = new Promise(function(resolve, reject) {
-		    					task.save().then(()=>{
-		    						resolve();
-		    					});
-		    				});
-	    				
-	    				promisesArr.pushObject(promise);
-	    			}
-	    		}
-
-	    		let dateObj = {
-	    			dateDiff: -1,
-	    			setYear: weddingY
-	    		};
-	    		let dueDateAfter = moment(model.get('weddingDate')).add(2, 'months');
-
-	    		for (var k = 0; k < monthAfter.length; k++) {
-	    			let taskVal = monthAfter[k];
-	    			let task = this.store.createRecord("task", {
-	    					title: taskVal,
-	    					due: dueDateAfter,
-	    					createdOn: moment().unix()*1000,
-	    					createdBy: _id,
-	    					completed: false,
-	    					month: -1    				
-	    			});
-    				model.get('tasks').pushObject(task);
-
-    				let promise = new Promise(function(resolve, reject) {
-	    					task.save().then(()=>{
-	    						resolve();
-	    					});
-	    				});
-	    			
-	    			promisesArr.pushObject(promise);
-	    		}
-
-	    		Promise.all(promisesArr).then(() => {
-	    			model.set('tasksGenerated', true);
-	    			model.save().then(()=>{
-	    				arrangeTasks();
-	    			});
-					});
-
-
-	    		//Update model
-	    	}
-	    	// Update all tasks here
-	    }
-
- 			function arrangeTasks () {
-
-		    for(var i = 12; i >= 1; i--) {
-					
-					let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, i);
-		    	let monthName = moment(dateObj.monthStr, "MM").format("MMMM");
-		    	let controllerProp = "month" + dateObj.dateDiff;
-		    	let isSelected = false;
-		    	let isPast = false;
-		    	if(i  < currentMonth || dateObj.setYear < currentY) {
-		    		isPast = true;
-		    	} else if (i  === currentMonth && dateObj.setYear === currentY) {
-		    		isSelected = true;
-		    		controller.set('selectedMonth', controllerProp);
-		    	}
-		    	let obj = Ember.Object.create({ 
-							title: monthName,
-							selected: isSelected,
-							past: isPast,
-							items: [],
-							year: dateObj.setYear,
-							index: dateObj.dateDiff
-					});
-					let monthArr = controller.get("monthArr");
-					monthArr.pushObject(obj);
-					controller.set("monthArr", monthArr);
-					controller.set(controllerProp, obj);
-		    }
-
-		    let isSelected = false;
-		    if(parseInt(moment()) > parseInt(moment(model.get('weddingDate')))) {
-		    	isSelected = true;
-		    }
-
-		    let monthAfter = Ember.Object.create({ 
-							title: "After",
-							selected: isSelected,
-							past: false,
-							items: [],
-							year: weddingY,
-							index: -1
-					});
-					controller.set('monthAfter', monthAfter);
-
-		    //Assign all tasks to month objects
-		    model.get('tasks').then((tasks)=>{
-		    	let count = 0;
-		    	let total = tasks.length;
-		    	let promise = new Promise (function(resolve, reject) {
-			    	tasks.forEach(function(task) {
-			    		let month = controller.get('selectedMonth');
-			    		let year = currentY;
-			    		let monthStr = month;
-			    		// let monthDiff = 0;
-			    		if(task.get('month')) {
-			    			month = parseInt(task.get('month'));
-			    			if (month < 0) {
-			    				// monthDiff = -1;
-			    				monthStr = "monthAfter";
-			    			} else {
-			    			  // monthDiff = 12 - month;
-			    			  let mon = parseInt(moment(task.get('due')).format("MM"))-1;
-			    				monthStr = "month" + mon;		    				
-			    			}
-
-			    			year = parseInt(moment(task.get('due')).format("YYYY"));
-			    		}
-
-			    		let controllerProp = monthStr;
-			    		console.log(controllerProp);
-			    		let selectedObj = controller.get(controllerProp);
-			    		let taskMonths = Ember.get(selectedObj, 'items');
-			    		taskMonths.pushObject(task);
-			    		count++;
-			    		if(total === count) {
-			    			resolve();
-			    		}
-
-			    	});
-
-		    	});
-
-		    	promise.then(()=>{
-		    		let obj = controller.get('monthArr');
-		    		let newObj = _this.convertJSONtoArray(obj);
-		    		function compare(a,b) {
-						  if (a.index < b.index)
-						    return -1;
-						  if (a.index > b.index)
-						    return 1;
-						  return 0;
-						}
-
-						newObj.sort(compare);
-						newObj.reverse();
-		    		controller.set('monthsArr', newObj);
-						controller.set('refresh', false);
-						Ember.run.next(function () {
-				        controller.set('refresh', true);
-				    });
-
-		    	});
-
-
-		    });
-
- 				
- 			}
 	},
 	actions: {
 		allClick: function(){
@@ -467,11 +276,12 @@ export default Ember.Route.extend({
 
 		},
 		ok: function() {
+			let _this = this;
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			switch(_modalData.get('action')) {
 				case 'delete':					
 					
-			    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
 					let task = this.store.peekRecord('task', taskId);
@@ -480,20 +290,67 @@ export default Ember.Route.extend({
     				wedding.get('tasks').removeObject(task);
     				wedding.save().then(()=>{
     					//Destroy the record
-						task.deleteRecord();
-						task.save().then(()=>{
-							this.controller.get('notifications').info('Task has been deleted.',{
-								autoClear: true
-							});
-	    				});
+    					let taskMonth = task.get('month') - 1;
+    					if (taskMonth < 0) {
+    						taskMonth = "After";
+    					}
+							let controllerProp = "month" + taskMonth;
+			    		let selectedObj = _this.controller.get(controllerProp);
+	    				let taskMonths = Ember.get(selectedObj, 'items');
+			    		taskMonths.removeObject(task);
+							task.deleteRecord();
+							task.save().then(()=>{
+								_this.controller.get('notifications').info('Task has been deleted.',{
+									autoClear: true
+								});
+    				});
 					});
 
 					break;
 			}
 
 		},
+		okDate: function(){
+			let _modalData = this.store.peekRecord('modal-data', this.controller.get('weddingDateId'));
+
+  		if(_modalData.get('mainMessage')) {
+	    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let wedding = this.store.peekRecord('wedding', _id);
+
+
+				wedding.set('weddingDate', _modalData.get('mainMessage'));
+				wedding.save().then(()=>{
+						this.controller.get('notifications').success('Wedding date has been updated.',{
+							autoClear: true
+						});
+		    		this.processTodoList(this.controller, wedding);
+				});
+			}
+
+		},
+		openDatePickerAction: function() {
+    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
+			this.openDatePicker(this.controller, wedding);
+		},
+    closeDate: function(){
+	    	//Clean up dirty attributes
+	    	let dateId = this.controller.get("weddingDateId");
+	    	let date = this.store.peekRecord('modal-data', dateId);
+	    	if(date !== ''){
+	    		if(date.get('mainMessage')) {
+	    		} else {	    			
+						this.controller.get('notifications').error('Pleae select a wedding date. Tasks will not be shown without this.',{
+							autoClear: true
+						});
+	    		}
+     			date.deleteRecord();
+     		}
+     		
+	    	this.send('removeModal');
+    },
 		editTask: function(id){
-    		let task = this.store.peekRecord('task', id); 
+    	let task = this.store.peekRecord('task', id); 
 			this.send('openTodoModal', task);
 			this.controller.set('todoEditId', id);
 		},
@@ -522,32 +379,69 @@ export default Ember.Route.extend({
 			// alert(this.controller.get('newTaskId'));
 		},
 		saveTodo: function(){
+			let _this = this;
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let wedding = this.store.peekRecord('wedding', _id);
+
 			if(this.controller.get('todoEditId')) {
 				let taskId = this.controller.get('todoEditId');
 				this.controller.set('todoEditId', null);
 				let task = this.store.peekRecord('task', taskId);
+				let oldTaskMonth = task.get('month');
+    		let dateObj = _this.calculateDueDate(task, wedding);
+    		task.set('due', dateObj.dueDate);
+    		task.set('month', dateObj.dueMonth);
 				task.save().then(()=>{
-	    			//Success notification
-	    			this.controller.get('notifications').info('Task updated successfully!',{
-					    autoClear: true
+    			//Success notification
+    			this.controller.get('notifications').info('Task updated successfully!',{
+				    autoClear: true
 					});
-	    		});  
-			} else if (this.controller.get('newTaskId')) {
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    		if(oldTaskMonth !== dateObj.dueMonth) {
+	    			console.log("month changed: " + oldTaskMonth + " > " + dateObj.dueMonth);
+	    			//Remove from old object
+	    			let newMonth = dateObj.dueMonth;
+  					oldTaskMonth--;
+  					newMonth--;
+	    			if(newMonth < 0) {
+	    				newMonth = "After";
+	    			} 
 
+	    			if(oldTaskMonth < 0) {
+	    				oldTaskMonth = "After";
+	    			} 
+
+
+	    			let controllerProp1 = "month" + oldTaskMonth;
+		    		let selectedObj1 = _this.controller.get(controllerProp1);
+	  				let taskMonths1 = Ember.get(selectedObj1, 'items');
+		    		taskMonths1.removeObject(task);
+
+	    			//Add to new object
+	    			let controllerProp2 = "month" + newMonth;
+		    		let selectedObj2 = _this.controller.get(controllerProp2);
+	  				let taskMonths2 = Ember.get(selectedObj2, 'items');
+		    		taskMonths2.pushObject(task);
+	    		}
+    		});  
+			} else if (this.controller.get('newTaskId')) {
 			    // this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 			    	// if(customer.get("todoList") === true){			
 			    	if(true){  //Temporarily give all clients access   		
-						let taskId = this.controller.get('newTaskId');
-						this.controller.set('newTaskId', null);
-						let task = this.store.peekRecord('task', taskId);
-						// this.controller.set('isTodoSubmitted', true);
-						let wedding = this.store.peekRecord('wedding', _id);
+							let taskId = this.controller.get('newTaskId');
+							this.controller.set('newTaskId', null);
+							let task = this.store.peekRecord('task', taskId);
+							// this.controller.set('isTodoSubmitted', true);
+							let wedding = this.store.peekRecord('wedding', _id);
 				    	//Set up creation date to confirm task has now been created
 			    		let createdOn = moment().unix()*1000;
 			    		task.set('createdOn', createdOn);
 			    		//Set up belongsTo relationship
 			    		task.set('createdBy', _id);
+
+			    		let dateObj = _this.calculateDueDate(task, wedding);
+
+			    		task.set('due', dateObj.dueDate);
+			    		task.set('month', dateObj.dueMonth);
 			    		//Save task
 			    		task.save().then(()=>{
 			    			//Set up hasMany relationship
@@ -555,8 +449,13 @@ export default Ember.Route.extend({
 			    			wedding.save().then(()=>{
 			    				//Success notification
 			    				this.controller.get('notifications').success('Task created successfully!',{
-								    autoClear: true
-								});
+									    autoClear: true
+									});
+
+									let controllerProp = "month" + dateObj.dueMonthStr;
+					    		let selectedObj = _this.controller.get(controllerProp);
+			    				let taskMonths = Ember.get(selectedObj, 'items');
+					    		taskMonths.pushObject(task);
 			    			});
 			    		});
 			    	} else {
@@ -599,7 +498,7 @@ export default Ember.Route.extend({
     		dateDiff: dateDiff, 
     		monthStr: monthStr,
     		setYear: setYear
-    	}
+    	};
 
     	return dateObj;
 	},
@@ -613,6 +512,304 @@ export default Ember.Route.extend({
 		}
 
 		return objArr;
-	}
+	},
+	openDatePicker: function(controller){
+		this._super(controller);
+		let _modalData = this.store.createRecord('modal-data', {'mainMessage': '', 'action': 'add'});
+   	this.controller.set('weddingDateId', _modalData.get('id'));
+  	this.send('showModal', 'modal-date-pick', _modalData);
+    
+	},
+	calculateDueDate: function(task, wedding) {
+		let _this = this;
+    let weddingMonth = parseInt(moment(wedding.get('weddingDate')).format('MM'));
+    let weddingY = parseInt(moment(wedding.get('weddingDate')).format('YYYY'));
+
+		let dateObj;
+		let dueDate;
+		let dueMonth;		
+		let dueMonthStr;
+		let monthX = parseInt(moment(task.get('due')).format("MM"));
+		dateObj = _this.calculateDateDiff(weddingMonth, weddingY, monthX);
+
+		if(task.get('due')) {
+			let isAfter = moment(task.get('due')).isAfter(moment(wedding.get('weddingDate')));
+			if(isAfter) {
+				dueMonth = -1;
+	    	dueDate = moment(task.get('due'));
+				dueMonthStr = "After";
+			} else {			    		
+	    	dueDate = moment(task.get('due'));
+	    	let monthS = moment(task.get('due')).format("MMMM");
+	    	for(var i = 0; i < 12; i++){
+	    		let currentIndex = this.controller.get("month" + i);
+	    		let strTest = currentIndex.get('title');
+	    		if(strTest == monthS) { // jshint ignore:line
+	    			dueMonth = currentIndex.get('index') + 1;
+	    			dueMonthStr = parseInt(dueMonth) - 1;
+	    			i = 12;
+	    		}
+	    	}
+			}
+    	// m = getMString(dueMonth);
+		} else {
+			let currentMonth = this.controller.get('selectedMonth');
+			let selectedM = this.controller.get(currentMonth);
+			dueMonth = selectedM.get('index') + 1;
+			dueDate = moment();
+			dueMonthStr = parseInt(dueMonth) - 1;	
+		}
+
+		let obj = {
+			dueDate: dueDate,
+			dueMonth: dueMonth,
+			dueMonthStr: dueMonthStr
+		};
+
+		return obj;
+	},
+	getMonthName: function(monthStr) {
+		let monthKeys = this.get('monthKeys');
+		let xVal = parseInt(monthStr);
+		xVal--;
+		let monthString = monthKeys.get(xVal + "");
+		return monthString;
+	},
+	processTodoList: function (controller, model) {
+		this._super(controller, model);
+		let _this = this;
+		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		_this.controller.set('isGenerating', true);
+   	var promisesArr = [];
+
+    /* 
+    		- Get current month & wedding month
+    		- Set up all months based on this
+    */
+
+    let currentD = parseInt(moment().format('YYYYMM'));
+    let currentMonth = parseInt(moment().format('MM'));
+    let weddingD = parseInt(moment(model.get('weddingDate')).format('YYYYMM'));
+    let weddingMonth = parseInt(moment(model.get('weddingDate')).format('MM'));
+    let weddingY = parseInt(moment(model.get('weddingDate')).format('YYYY'));
+    let currentY = parseInt(moment().format('YYYY'));
+		    
+		    if(model.get('weddingDateChanged')) {
+		    	//If wedding date has changed: run through all tasks
+		    	// - calculate date diff
+		    	// - Update month and due (if made by Bloom)
+		    } else {
+		    	if(model.get('tasksGenerated')) {
+		    		createMonths().then(()=>{arrangeTasks();});
+		    	} else {
+		    		console.log("Generating Tasks");
+		    		createMonths().then(()=>{
+
+			    		//Generate Tasks
+			    		for (var i = 0; i < monthsArr.length; i++){ 
+			    			let x = i + 1;
+			    			let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, x);
+								let monthName = _this.getMonthName(dateObj.monthStr);
+					    	let dueDate = moment("01"+monthName + "" + dateObj.setYear, "DDMMMMYYYY");
+			    			for(var j = 0; j < monthsArr[i].length; j++) {
+			    				let taskVal = monthsArr[i][j];
+			    				// console.log(taskVal);
+			    				let task = this.store.createRecord('task', {
+			    					title: taskVal,
+			    					due: dueDate,
+			    					createdOn: moment().unix()*1000,
+			    					createdBy: "Bloom",
+			    					completed: false,
+			    					month: parseInt(dateObj.monthStr)
+			    				});
+			    				model.get('tasks').pushObject(task);
+
+			 						/* jshint ignore:start */
+			    				let promise = new Promise(function(resolve, reject) {
+				    					task.save().then(()=>{
+				    						resolve();
+				    					});
+				    				});
+			    				
+			    				promisesArr.pushObject(promise);
+			 						/* jshint ignore:end */
+			    			}
+			    		}
+
+			    		let dateObj = {
+			    			dateDiff: -1,
+			    			setYear: weddingY
+			    		};
+			    		let dueDateAfter = moment(model.get('weddingDate')).add(2, 'months');
+
+			    		for (var k = 0; k < monthAfter.length; k++) {
+			    			let taskVal = monthAfter[k];
+			    			let task = this.store.createRecord("task", {
+			    					title: taskVal,
+			    					due: dueDateAfter,
+			    					createdOn: moment().unix()*1000,
+			    					createdBy: _id,
+			    					completed: false,
+			    					month: -1    				
+			    			});
+		    				model.get('tasks').pushObject(task);
+
+			 					/* jshint ignore:start */
+		    				let promise = new Promise(function(resolve, reject) {
+			    					task.save().then(()=>{
+			    						resolve();
+			    					});
+			    				});
+			    			
+			    			promisesArr.pushObject(promise);
+		    				/* jshint ignore:end */
+			    		}
+
+			    		Promise.all(promisesArr).then(() => {
+			    			model.set('tasksGenerated', true);
+			    			model.save().then(()=>{
+			    				arrangeTasks();
+			    			});
+							});							
+		    		});
+		    	}
+		    }
+
+		    function createMonths() {
+		    	return new Promise(function(resolve, reject){
+					let monthKeys = Ember.Object.create({
+
+					});
+					_this.set('monthKeys', monthKeys);
+
+					let monthKeysReverse = Ember.Object.create({
+
+					});
+					_this.set('monthKeysReverse', monthKeysReverse);
+			    for(var i = 12; i >= 1; i--) {
+						
+						let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, i);
+						let mStr = i;
+						if(i < 10) {
+							mStr = "0" + i;
+						}
+			    	let monthName = moment(mStr, "MM").format("MMMM");
+			    	let controllerProp = "month" + dateObj.dateDiff;
+			    	let isSelected = false;
+			    	let isPast = false;
+			    	if(i  < currentMonth || dateObj.setYear < currentY) {
+			    		isPast = true;
+			    	} else if (i  === currentMonth && dateObj.setYear === currentY) {
+			    		isSelected = true;
+			    		_this.controller.set('selectedMonth', controllerProp);
+			    	}
+			    	let obj = Ember.Object.create({ 
+								title: monthName,
+								selected: isSelected,
+								past: isPast,
+								items: [],
+								year: dateObj.setYear,
+								index: dateObj.dateDiff
+						});
+
+						monthKeys.set(dateObj.dateDiff + "", monthName);
+						monthKeysReverse.set(monthName + "", dateObj.dateDiff);
+						let monthArr = _this.controller.get("monthArr");
+						monthArr.pushObject(obj);
+						_this.controller.set("monthArr", monthArr);
+						_this.controller.set(controllerProp, obj);
+			    }
+
+			    let isSelected = false;
+			    if(parseInt(moment()) > parseInt(moment(model.get('weddingDate')))) {
+			    	isSelected = true;
+			    }
+
+			    let monthAfter = Ember.Object.create({ 
+								title: "After",
+								selected: isSelected,
+								past: false,
+								items: [],
+								year: weddingY,
+								index: -1
+						});
+						_this.controller.set('monthAfter', monthAfter);
+						resolve();
+
+		    	});
+				}
+
+	 			function arrangeTasks () {
+
+
+			    //Assign all tasks to month objects
+			    model.get('tasks').then((tasks)=>{
+			    	let count = 0;
+			    	let total = tasks.length;
+			    	let promise = new Promise (function(resolve, reject) {
+				    	tasks.forEach(function(task) {
+				    		let month = _this.controller.get('selectedMonth');
+				    		let year = currentY;
+				    		let monthStr = month;
+				    		// let monthDiff = 0;
+				    		if(task.get('month')) {
+				    			month = parseInt(task.get('month'));
+				    			if (month < 0) {
+				    				// monthDiff = -1;
+				    				monthStr = "monthAfter";
+				    			} else {
+				    			  // monthDiff = 12 - month;
+				    			  let monObj = _this.calculateDateDiff(weddingMonth, weddingY, month); //parseInt(moment(task.get('due')).format("MM"))-1;
+				    			  let monthNum = parseInt(monObj.monthStr)-1;
+				    				monthStr = "month" + monthNum;		    				
+				    			}
+
+				    			year = parseInt(moment(task.get('due')).format("YYYY"));
+				    		}
+
+				    		let controllerProp = monthStr;
+				    		console.log(controllerProp);
+				    		let selectedObj = _this.controller.get(controllerProp);
+				    		let taskMonths = Ember.get(selectedObj, 'items');
+				    		taskMonths.pushObject(task);
+				    		count++;
+				    		if(total === count) {
+				    			resolve();
+				    		}
+
+				    	});
+
+			    	});
+
+			    	promise.then(()=>{
+			    		let obj = _this.controller.get('monthArr');
+			    		let newObj = _this.convertJSONtoArray(obj);
+			    		function compare(a,b) {
+							  if (a.index < b.index){
+							    return -1;
+							  }
+							  if (a.index > b.index){
+							    return 1;
+							  }
+							  return 0;
+							}
+
+							newObj.sort(compare);
+							newObj.reverse();
+							_this.controller.set('isGenerating', false);
+			    		_this.controller.set('monthsArr', newObj);
+							_this.controller.set('refresh', false);
+							Ember.run.next(function () {
+					        _this.controller.set('refresh', true);
+					    });
+
+			    	});
+
+
+			    });
+			  }
+
+ 				
+ 			}
         
 });

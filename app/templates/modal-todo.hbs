@@ -4,6 +4,9 @@
           <div class="input-group">
             {{mdl-textfield label="Task" value=model.title}}
           </div>
+          <div class="input-group">
+              {{#md-datepicker placeholder="Due Date" selectedDate=model.due dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}  
+          </div>
           {{!-- <div class="input-group">
               {{mdl-textfield label="Description" value=model.desc}}
           </div> --}}
