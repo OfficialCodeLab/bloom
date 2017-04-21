@@ -836,9 +836,9 @@ Guest List
   			text-align: center;
   			opacity: 1;
   		}
-  		img{
-  			opacity: 0.5;
-  		}
+  		// .cat-image {
+  		// 	opacity: 0.5;
+  		// }
 	}
 
 	.img-backdrop{
@@ -850,14 +850,13 @@ Guest List
 	}
 
 
-	img{
+	.cat-image{
 		user-drag: none;
 		user-select: none;
 		-moz-user-select: none;
 		-webkit-user-drag: none;
 		-webkit-user-select: none;
 		-ms-user-select: none;
-		transition: .8s opacity;
 	}
 
 	/* None of these should be selectable */
@@ -991,6 +990,17 @@ Guest List
 	// background-attachment
 	background-position: center center;
 	background-size: contain;
+	img {
+	  opacity: 1;  
+	  backface-visibility: hidden;
+	}
+	
+	&:hover {
+		img {
+			transition: opacity .8s;	
+			opacity: 0.5;
+		}
+	}
 }
 
 .img-backdrop-s{
