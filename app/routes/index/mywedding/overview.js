@@ -166,8 +166,14 @@ export default Ember.Route.extend({
 				this.controller.set('selectedDate', date);
 				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 				let wedding = this.store.peekRecord('wedding', _id);
-				wedding.set('weddingDate', date);
+				let oldWeddingDate = wedding.get('weddingDate');
 				this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	
+				if(wedding.get('tasksGenerated')) {
+					wedding.set('weddingDateChanged', oldWeddingDate);
+				} else {
+
+				}
+				wedding.set('weddingDate', date);
 				wedding.save();
 			}
 		},
@@ -208,7 +214,7 @@ export default Ember.Route.extend({
 			switch(_modalData.get('action')) {
 				case 'delete':					
 					
-			    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
 					let task = this.store.peekRecord('task', taskId);
