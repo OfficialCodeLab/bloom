@@ -10,6 +10,7 @@ export default Ember.Controller.extend({
 	notifications: Ember.inject.service('notification-messages'),
 	
 	firebase: Ember.inject.service( 'firebase' ),
+	firstBudgetTotal: 0,
 	refresh: true,
 	budgetApparel: [],
 	actions: {

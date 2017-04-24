@@ -1,6 +1,7 @@
 <div class="container-fluid">
    {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
     <h1 class="font-times-header" style="color: #4C4C4E;">Budget Calculator</h1>
+    {{#if showBudgetPartial}}
     <p style="font-style: italic; text-align: center;">Add your total budget amount. Your estimated spend will be automatically calculated for you. Simply click on any entry to edit this and record your actual spend on booked items.</p>
     {{!-- <hr> --}}
 
@@ -18,7 +19,7 @@
 	                	<strong>ESTIMATE</strong>
 	                </div>
 	                <div class="budget-mid">
-	                	<strong>BOOKED</strong>
+	                	<strong class="budget-pink">BOOKED</strong>
 	                </div>
 					{{#each budgetApparel as |item|}}
 						<div class="budget-item" {{action "selectBudget" item.id 'categoryApparel'}}>
@@ -141,8 +142,8 @@
 				</div> --}}
 				<div class="col-sm-4">
 					<div class="row" style="padding: 24px 10px 40px 10px;">
-						<div class="col-sm-6">Used: <strong class="budget-pink">R{{budget.used}}</strong></div>
 						<div class="col-sm-6">Total: <strong>R{{budget.total}}</strong></div>	
+						<div class="col-sm-6">Used: <strong class="budget-pink">R{{budget.used}}</strong></div>
 					</div>								
                     {{#if refresh}}
                         {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
@@ -161,4 +162,13 @@
 
     
     </div>
+
+    {{else}}
+    	<div class="text-center">
+
+    <p style="font-style: italic;">Please enter your total budget to get started. Bloom will help you estimate where to spend your budget.</p>
+						{{mdl-textfield label='Total Budget' value=firstBudgetTotal type="number"}}<br>
+						{{#mdl-button isRaised=true action="submitFirstBudget" disabled=isGeneratingBudget}}CONTINUE {{#if isGeneratingBudget}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+    	</div>
+    {{/if}}
 </div>

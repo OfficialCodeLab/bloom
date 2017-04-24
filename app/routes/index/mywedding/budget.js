@@ -3,47 +3,47 @@ import moment from 'moment';
 
 //Apparel
 const BUDGET_APPAREL = {
-	weddingDress: "Wedding Dress",
-	groomSuit: "Groom Suit",
-	hairAndMakeup: "Hair and Makeup",
-	bridesmaidDresses: "Bridesmaid Dresses",
-	groomsmenSuits: "Groomsmen Suits",
-	weddingRings: "Wedding Rings",
-	shoesAndAccessories: "Shoes And Accessories"
+	weddingDress: { name: "Wedding Dress", estimate: 7.00},
+	groomSuit: { name: "Groom Suit", estimate: 3.10},
+	hairAndMakeup: { name: "Hair and Makeup", estimate: 2.70},
+	bridesmaidDresses: { name: "Bridesmaid Dresses", estimate: 3.00},
+	groomsmenSuits: { name: "Groomsmen Suits", estimate: 2.50},
+	weddingRings: { name: "Wedding Rings", estimate: 2.00},
+	shoesAndAccessories: { name: "Shoes And Accessories", estimate: 2.40}
 };
 
 //People:
 const BUDGET_PEOPLE = {
-	photographer: "Photographer",
-	videographer: "Videographer",
-	officiant: "Officiant",
-	bandOrDJ: "Band / DJ",
-	florist: "Florist"
+	photographer: { name: "Photographer", estimate: 10.00},
+	videographer: { name: "Videographer", estimate: 0.00},
+	officiant: { name: "Officiant", estimate: 1.00},
+	bandOrDJ: { name: "Band / DJ", estimate: 6.00},
+	florist: { name: "Florist", estimate: 5.00}
 };
 
 //Event
 const BUDGET_EVENT = {
-	catering: "Catering",
-	decor: "Décor",
-	cake: "Cake",
-	weddingFavours: "Wedding Favours",
-	bridalPartyGifts: "Bridal Party Gifts",
-	addedExtras: "Added Extras"
+	catering: { name: "Catering", estimate: 35.00},
+	decor: { name: "Décor", estimate: 3.00},
+	cake: { name: "Cake", estimate: 1.50},
+	weddingFavours: { name: "Wedding Favours", estimate: 0.80},
+	bridalPartyGifts: { name: "Bridal Party Gifts", estimate: 0.50},
+	addedExtras: { name: "Added Extras", estimate: 2.00}
 };
 
 //Places
 const BUDGET_PLACES = {
-	venue: "Venue",
-	weddingNightHotel: "Wedding Night Hotel",
-	accommodationForBridalParty: "Accommodation for Bridal Party"
+	venue: { name: "Venue", estimate: 10.00},
+	weddingNightHotel: { name: "Wedding Night Hotel", estimate: 1.50},
+	accommodationForBridalParty: { name: "Accommodation for Bridal Party", estimate: 0.00}
 };
 
 //Additional
 const BUDGET_ADDITIONAL = {
-	weddingStationery: "Wedding Stationery",
-	photobooth: "Photobooth",
-	honeymoon: "Honeymoon",
-	insurance: "Insurance"
+	weddingStationery: { name: "Wedding Stationery", estimate: 1.00},
+	photobooth: { name: "Photobooth", estimate: 0.00},
+	honeymoon: { name: "Honeymoon", estimate: 0.00},
+	insurance: { name: "Insurance", estimate: 0.00}
 };
 
 //All categories
@@ -105,37 +105,16 @@ export default Ember.Route.extend({
 		controller.set('budget', model.budget);
 		let _this = this;
 		if(this.get("createdBudget") === 1) {
-			let ref = this.get('firebase');
-			let _ref = ref.child('budgets').child(_id);
-	    	let newBudget = this.store.peekRecord('budget', _id);
-	    	for (var key in BUDGET_CATEGORIES) {
-	    		var childRef = key;
-	    		var __ref = _ref.child(childRef);
-		        for (var k in BUDGET_CATEGORIES[key]) {
-					let obj = Ember.Object.create({ 
-						name: BUDGET_CATEGORIES[key][k],
-						booked: 0,
-						estimate: 0,
-						deposit: 0,
-						balance: 0
-					});
-					var newChildRef = __ref.push();
-					newChildRef.set(obj);
-				}	    		
-	    	}
-	    	this.store.findRecord('wedding', _id). then((wedding)=> {
-	    		wedding.set('hasBudget', true);
-	    		wedding.save().then(()=>{
-			    	_this.set('createdBudget', 0);
-			    	_this.refresh();
-	    		});
-	    	});
 	    	// this.store.findRecord('budget', _id, { reload: true }).then(()=>{
 	    	// 	_this.convertAllCategories();
 	    	// });
 		}
 		else {
-			this.convertAllCategories();
+			let total = model.budget.get('total');
+			if(total > 0) {							
+				controller.set('showBudgetPartial', true);
+				this.convertAllCategories();
+			}
 		}
 
 		//Check store for customer
@@ -162,6 +141,57 @@ export default Ember.Route.extend({
 			// - check for access rights
 			// - graph updating
 			// - quickly entering a budget total?
+		submitFirstBudget: function() {
+			let _this = this;
+			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    let budget = this.store.peekRecord('budget', _id);
+	    let total = this.controller.get('firstBudgetTotal');
+	    this.controller.set('isGeneratingBudget', true);
+
+				if (total <= 0) {
+	    		this.controller.set('isGeneratingBudget', false);
+					this.controller.get('notifications').error('Please enter a budget greater than 0.',{
+              autoClear: true
+          });	
+				} else {
+		    	budget.set('total', total);
+		    	budget.save().then(()=>{
+						let ref = this.get('firebase');
+						let _ref = ref.child('budgets').child(_id);
+			    	let newBudget = this.store.peekRecord('budget', _id);
+			    	for (var key in BUDGET_CATEGORIES) {
+			    		var childRef = key;
+			    		var __ref = _ref.child(childRef);
+			        for (var k in BUDGET_CATEGORIES[key]) {
+								let obj = Ember.Object.create({ 
+									name: BUDGET_CATEGORIES[key][k].name,
+									booked: 0,
+									estimate: parseInt((BUDGET_CATEGORIES[key][k].estimate * total)/ 100),
+									deposit: 0,
+									balance: 0
+								});
+								var newChildRef = __ref.push();
+								newChildRef.set(obj);
+							}	    		
+			    	}
+		    	});
+
+		    	this.store.findRecord('wedding', _id). then((wedding)=> {
+		    		wedding.set('hasBudget', true);
+		    		wedding.save().then(()=>{
+				    	_this.set('createdBudget', 0);
+							this.convertAllCategories();
+							this.controller.get('notifications').success('Budget has been allocated successfully!',{
+		              autoClear: true
+		          });	
+    					this.controller.set('isGeneratingBudget', false);
+							this.controller.set('showBudgetPartial', true);
+				    	_this.refresh();
+		    		});
+		    	});
+				}
+
+		},
 
 		openBudgetModal: function(id, obj, category){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
@@ -186,7 +216,7 @@ export default Ember.Route.extend({
 		},
 	    submitBudget: function(){
 			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-	    	let budgetId = this.controller.get('selectedBudgetId');
+	    let budgetId = this.controller.get('selectedBudgetId');
 			let budget = this.store.peekRecord('budget-modal', budgetId);
 			let deposit = parseInt(budget.get('deposit'));
 			let estimate = parseInt(budget.get('estimate'));
