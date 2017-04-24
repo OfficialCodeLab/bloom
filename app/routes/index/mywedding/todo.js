@@ -782,7 +782,7 @@ export default Ember.Route.extend({
 			    	let controllerProp = "month" + dateObj.dateDiff;
 			    	let isSelected = false;
 			    	let isPast = false;
-			    	if(i  < currentMonth && dateObj.setYear <= currentY) {
+			    	if((i  < currentMonth && dateObj.setYear === currentY) || dateObj.setYear < currentY) {
 			    		isPast = true;
 			    	} else if (i  === currentMonth && dateObj.setYear === currentY) {
 			    		isSelected = true;
