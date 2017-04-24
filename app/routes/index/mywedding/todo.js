@@ -604,8 +604,9 @@ export default Ember.Route.extend({
 		    	let monthDiff = moment(oldDate);
 		    	var duration = moment.duration(moment(newDate).diff(moment(oldDate)));
 					var months = Math.trunc(duration.asMonths());
+					var years = Math.trunc(duration.asYears());
 					createMonths(true).then(()=> {
-						shuffleMonths(months).then(()=>{
+						shuffleMonths(months, years).then(()=>{
 							model.set('weddingDateChanged', null);
 							model.save();			
 		    			arrangeTasks();
@@ -625,7 +626,7 @@ export default Ember.Route.extend({
 		    	}
 		    }
 
-		    function shuffleMonths(months) {
+		    function shuffleMonths(months, years) {
 		    	return new Promise (function(resolve, reject) {
 		    		model.get('tasks').then((tasks)=>{
 		    			let len = tasks.length;
@@ -637,8 +638,15 @@ export default Ember.Route.extend({
 		    						newDue = moment(due).add(months, "months");
 		    					} else if (months < 0) { //Subtract
 		    						let monthsAbs = Math.abs(months);
-		    						newDue = moment(due).subtract(monthsAbs, "months");		    						
+		    						newDue = moment(due).subtract(monthsAbs, "months");		  						
 		    					}
+
+		    					if (years > 0) { //Add
+		    						newDue = moment(newDue).add(years, "years");		    						
+		    					} else if (years < 0) {  // Subtract
+		    						let yearsAbs = Math.abs(years);
+		    						newDue = moment(newDue).subtract(yearsAbs, "years");   
+		    					} 
 
 		    					task.set('due', newDue);
 
