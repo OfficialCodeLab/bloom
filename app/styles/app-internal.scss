@@ -2265,12 +2265,19 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 }
 .background-spinner {
 	z-index: 4;
-	position: absolute;
-	padding: 20px;
-	top: 80px;
+	// position: absolute;
+	// padding: 20px;
+	// top: 80px;
 	width: 100%;
 	text-align: center;
 	// width: 100%;
+}
+
+.lazy-image-placeholder {
+	position: static !important;
+	padding-top: 20px;
+	width: 100%;
+	text-align: center;
 }
 
 /*==============================================================================*\

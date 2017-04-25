@@ -11,34 +11,30 @@
 					<h4 class="single-item-title">{{model.name}}</h4>
 
 					<div style="z-index: 5">
-					{{#if img0}}
-			        <img src={{model.imageURL}}>
-			        {{else}}
-			        	{{#if img1}}
-			        		<img src={{model.image0}}>
+						{{#if img0}}
+			        {{#lazy-image url=model.imageURL}}{{mdl-spinner}}{{/lazy-image}}
+		        {{else}}
+		        	{{#if img1}}
+		        		{{#lazy-image url=model.image0}}{{mdl-spinner}}{{/lazy-image}}
+		        	{{else}}
+			        	{{#if img2}}
+			        		{{#lazy-image url=model.image1}}{{mdl-spinner}}{{/lazy-image}}
 			        	{{else}}
-				        	{{#if img2}}
-				        		<img src={{model.image1}}>
+				        	{{#if img3}}
+				        		{{#lazy-image url=model.image2}}{{mdl-spinner}}{{/lazy-image}}
 				        	{{else}}
-					        	{{#if img3}}
-					        		<img src={{model.image2}}>
-					        	{{else}}
-					        		{{#if img4}}
-					        			<img src={{model.image3}}>
-					        		{{else}}
-					        			{{#if img5}}
-					        				<img src={{model.image4}}>
-					        			{{/if}}
-					        		{{/if}}
-			        			{{/if}}
-			        		{{/if}}
-			        	{{/if}}
-			        {{/if}}
-			        </div>
-
-			        <div class="background-spinner">
-						{{mdl-spinner}}
-			        </div>
+				        		{{#if img4}}
+				        			{{#lazy-image url=model.image3}}{{mdl-spinner}}{{/lazy-image}}
+				        		{{else}}
+				        			{{#if img5}}
+				        				{{#lazy-image url=model.image4}}{{mdl-spinner}}{{/lazy-image}}
+				        			{{/if}}
+				        		{{/if}}
+		        			{{/if}}
+		        		{{/if}}
+		        	{{/if}}
+		        {{/if}}
+	        </div>
 				</div>
 			</div>
 

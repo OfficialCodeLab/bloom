@@ -89,13 +89,9 @@ export default Ember.Controller.extend({
     	let _file = file;
 
     	let reader = new FileReader();
-      let errorFunc = function() {
-          _this.dropzone.removeFile(file);
-        alert("Image size too large, please ensure the file size is less than 400kb");
-      };   
-
     	reader.onloadend = Ember.run.bind(this, function(){
 			var dataURL = reader.result;
+          var canvas = document.createElement('canvas');
     		var img1 = document.getElementById('img1');
     		var img2 = document.getElementById('img2');
     		var img3 = document.getElementById('img3');
@@ -119,16 +115,35 @@ export default Ember.Controller.extend({
         img = img5;
 			}
 
-      img.onload = function() {
-              var w = this.width,
-                  h = this.height,
-                  t = file.type,                           // ext only: // file.type.split('/')[1],
-                  n = file.name,
-                  s = ~~(file.size/1024) +'KB';
-                if(~~(file.size/1024) >= 400) {
-                  errorFunc();
-                this.src = null;
-              }         
+        img.onload = function() {
+            var MAX_WIDTH = 1000;
+            var MAX_HEIGHT = 1200;
+            var width = this.width;
+            var height = this.height;
+
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+                sizeExceeds(this);
+              }
+            } else {
+              if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+                sizeExceeds(this);
+              }
+            }
+
+            function sizeExceeds(that) {
+              canvas.width = width;
+              canvas.height = height;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(that, 0, 0, width, height);
+
+              var dataurl = canvas.toDataURL("image/jpg");  
+              that.src = dataurl;                    
+            }  
           };
 			
     	});
@@ -146,25 +161,42 @@ export default Ember.Controller.extend({
     		let _file = file;
 
     		let reader = new FileReader();
-        let errorFunc = function() {
-            _this.dropzone.removeFile(file);
-          alert("Image size too large, please ensure the file size is less than 400kb");
-        };    
 
     		reader.onloadend = Ember.run.bind(this, function(){
     			var dataURL = reader.result;
     			var mainImg = document.getElementById('mainImg');
+          var canvas = document.createElement('canvas');
     			mainImg.src = dataURL;
           mainImg.onload = function() {
-              var w = this.width,
-                  h = this.height,
-                  t = file.type,                           // ext only: // file.type.split('/')[1],
-                  n = file.name,
-                  s = ~~(file.size/1024) +'KB';
-                if(~~(file.size/1024) >= 400) {
-                  errorFunc();
-                this.src = null;
-              }         
+            var MAX_WIDTH = 1000;
+            var MAX_HEIGHT = 1200;
+            var width = this.width;
+            var height = this.height;
+
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+                sizeExceeds(this);
+              }
+            } else {
+              if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+                sizeExceeds(this);
+              }
+            }
+
+            function sizeExceeds(that) {
+              canvas.width = width;
+              canvas.height = height;
+              var ctx = canvas.getContext("2d");
+              ctx.drawImage(that, 0, 0, width, height);
+
+              var dataurl = canvas.toDataURL("image/jpg");  
+              that.src = dataurl;                    
+            }  
+          
           };
     		});
     		 //debugger;
@@ -197,5 +229,5 @@ export default Ember.Controller.extend({
          // 	console.log(file.status);
          // };
         // console.log(file.contents);
-    },
+    }
 });
