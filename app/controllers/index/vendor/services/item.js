@@ -59,6 +59,25 @@ export default Ember.Controller.extend({
       var canvas = document.createElement('canvas');
 			var selectedImage = document.getElementById('selectedImage');
 			selectedImage.src = dataURL;
+      var int32View = new Int32Array(dataURL);
+      var mimeType;
+      switch(int32View[0]) {
+          case 1196314761: 
+              mimeType = "image/png";
+              break;
+          case 944130375:
+              mimeType = "image/gif";
+              break;
+          case 544099650:
+              mimeType = "image/bmp";
+              break;
+          case -520103681:
+              mimeType = "image/jpg";
+              break;
+          default:
+              mimeType = "unknown";
+              break;
+      }
       
       selectedImage.onload = function() {
             var MAX_WIDTH = 1000;
@@ -70,25 +89,34 @@ export default Ember.Controller.extend({
               if (width > MAX_WIDTH) {
                 height *= MAX_WIDTH / width;
                 width = MAX_WIDTH;
-                sizeExceeds(this);
+                sizeExceeds(this, width, height);
               }
             } else {
               if (height > MAX_HEIGHT) {
                 width *= MAX_HEIGHT / height;
                 height = MAX_HEIGHT;
-                sizeExceeds(this);
+                sizeExceeds(this, width, height);
               }
             }
 
-            function sizeExceeds(that) {
-              canvas.width = width;
-              canvas.height = height;
-              var ctx = canvas.getContext("2d");
-              ctx.drawImage(that, 0, 0, width, height);
+            function sizeExceeds(that, width, height) {
+                var imageCompressor = new ImageCompressor();
+                
+                var compressorSettings = {
+                    toWidth : width,
+                    toHeight : height,
+                    mimeType : mimeType,
+                    mode : 'strict',
+                    quality : 0.6,
+                    speed : 'low'
+                };
 
-              var dataurl = canvas.toDataURL("image/jpg");  
-              that.src = dataurl;                    
-            }        
+                imageCompressor.run(that.src, compressorSettings, proceedCompressedImage);
+
+                function proceedCompressedImage (compressedSrc) {
+                  that.src = compressedSrc;
+                }      
+            }       
       };
 		});
 		 //debugger;
