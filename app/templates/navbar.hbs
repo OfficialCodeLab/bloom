@@ -26,6 +26,7 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" {{action "navigateCat"}}><i class="fa fa-plus-square"></i>&nbsp;CATEGORIES {{!-- <b class="caret"></b> --}}</a>
           <ul class="dropdown-menu" role="menu">
+            {{#nav-link-to 'category' 'cakes'}}Cakes{{/nav-link-to}}
             {{#nav-link-to 'category' 'celebrants'}}Celebrants{{/nav-link-to}}
             {{#nav-link-to 'category' 'culinary'}}Culinary{{/nav-link-to}}
             {{#nav-link-to 'category' 'décor'}}Décor{{/nav-link-to}}
@@ -42,6 +43,7 @@
             {{#nav-link-to 'category' 'photography'}}Photography{{/nav-link-to}}
             {{#nav-link-to 'category' 'registries'}}Registries{{/nav-link-to}}
             {{#nav-link-to 'category' 'stationery'}}Stationery{{/nav-link-to}}
+            {{#nav-link-to 'category' 'transport'}}Transport{{/nav-link-to}}
             {{#nav-link-to 'category' 'venues'}}Venues{{/nav-link-to}}
             {{#nav-link-to 'category' 'wedding-planners'}}Wedding Planners{{/nav-link-to}}
             <li role="separator" class="divider"></li>
@@ -66,6 +68,7 @@
       {{#link-to 'index'}}<h2>HUB</h2>{{/link-to}}
       {{!-- {{#link-to 'about'}}<h2>ABOUT</h2>{{/link-to}} --}}
       {{#link-to 'categories'}}<h2>CATEGORIES</h2>{{/link-to}}
+      {{#link-to 'listings'}}<h2>ALL LISTINGS</h2>{{/link-to}}
       {{#link-to 'myaccount'}}<h2>ACCOUNT</h2>{{/link-to}}
       <a {{action 'logout'}} href="#"><h2>LOG OUT</h2></a>
     </ul>
