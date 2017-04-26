@@ -13,7 +13,7 @@
 			<h4>Cellphone:</h4>{{model.cell}}
 		</div><br>
  --}}
- 		<div class="row" style="padding-bottom: 30px;">
+ 		<div class="container-fluid" style="padding-bottom: 30px;">
 
             <div class=" col-sm-8">
                 <div class="pear-profile-card guide-xs-card vendor-profile-block" style="z-index: 2;">
@@ -86,7 +86,7 @@
 
  		</div>
 
-		<div class="text-center hideOnPhones">
+		<div class="container-fluid text-center hideOnPhones">
 			<div id="masonry-items">
 				{{#masonry-grid items=model.vendor.catItems isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
 		         <div>
@@ -155,7 +155,7 @@
 			{{/if}}	
 		</div>
 
-		<div class="row text-center showOnPhones">
+		<div class="container-fluid text-center showOnPhones">
 			{{#each model.vendor.catItems as |cat-item|}}
 		         <div style="display: inline-block;">
 		            <div class="category-block">
