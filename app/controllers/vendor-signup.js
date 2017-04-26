@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
     passwordLength: Ember.computed.gte('password.length', 8),
     notChecked: Ember.computed.not('checked0'),
     willingToTravel: 0,
+    isValidCID: Ember.computed.match('customID', /^[a-zA-Z0-9\-]{3,20}$/),
     willTravel: Ember.computed.equal('willingToTravel', '1'),
     willingToContribute: false,
     willingCont: Ember.computed('willingToContribute', function(){
@@ -15,6 +16,7 @@ export default Ember.Controller.extend({
             return "No thanks, not interested.";
         }
     }),
+    customID: '',
     checked0: false,
     section1: true,
     currentSection: 1,

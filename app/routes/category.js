@@ -80,6 +80,7 @@ export default Ember.Route.extend({
           this.set('endAt', this.get('endAt') - PAGE_SIZE);
         }
         this.set('startAt', this.get('startAt') - PAGE_SIZE);
+        this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
       } else {      
@@ -103,6 +104,7 @@ export default Ember.Route.extend({
         } else {
           this.set('endAt', cc);
         }
+        this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
       } 
@@ -145,7 +147,6 @@ export default Ember.Route.extend({
     } else {      
       controller.set('isFirst', false);
     }
-
   },
   incrementPage: function(){
     let x = this.controller.get('pageNum');
@@ -178,6 +179,12 @@ export default Ember.Route.extend({
       let loadAmount = this.get('endAt') - this.get('startAt');
       this.set('loadAmount', loadAmount);
       this.set('loadCount', 0);    
+  },
+  scrollToTop: function(controller) {    
+    try{
+    Ember.run.next(function () {
+      controller.get('scroller').scrollVertical("#scrollTopPos", {duration:800});
+    }); } catch(ex){}
   }
   	  
 });

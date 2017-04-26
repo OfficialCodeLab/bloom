@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
 	isLast: false,
 	pageTotal: 0,
 	pageNum: 1,
+	scroller: Ember.inject.service(),
 	pgNum: Ember.computed('pageNum', function() {
 		if(this.get('pageNum') < 10){
 			return "0" + this.get('pageNum');

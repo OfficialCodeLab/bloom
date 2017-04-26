@@ -34,7 +34,14 @@
 				            <div class="p-i"><i class="fa fa-newspaper-o i-lbl" aria-hidden="true"></i>{{paper-input textarea=true label="Company Desc" value=desc onChange=(action (mut desc))}}<br></div>
 				            <div style="margin-top: -40px;"><i class="fa fa-briefcase i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='VAT Number (if applicable)' value=vatNum}}<br></div>
 				            <i class="fa fa-laptop i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Website' value=website}}<br>
-				            <i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom URL' value=customID}}<br>
+				            <div><i class="fa fa-terminal i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Custom Bloom Address' value=customID}}
+				            <br></div>
+				            <div style="font-size: 11px; text-align: right; ">
+				            	<div style="cursor: pointer; display: inline;"><span style="padding-right: 20px;"><i class="fa fa-question-circle" aria-hidden="true"></i>&nbsp;&nbsp;What's this?</span>		            	
+					            {{#popover-on-element as |popover|}}
+											  Eg: bloomweddings.co.za/<strong style="color: #F8BBD0">myweddingbusiness</strong>
+											{{/popover-on-element}}</div>
+				            </div>
 
 						    <div style="padding: 20px 0 40px 0;">
 						        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
