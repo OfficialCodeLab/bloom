@@ -2720,6 +2720,71 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 .tb-btn{
 	margin-top: -5px;
 }
+
+/*==============================================================================*\
+   Accordion Styles
+\*==============================================================================*/
+
+.cp-Panel {
+    border: none;
+    box-shadow: none;
+    hr {    	
+	    border: 0 !important;
+	    height: 1px !important;
+	    color: #fff !important;
+	    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) !important;
+    }
+}
+
+.cp-Panel.cp-is-open {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,0.18), 0 4px 15px 0 rgba(0,0,0,0.15);
+    margin: 16px 0;
+	// transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cp-Panel.cp-is-closed {
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    margin: 0 24px;
+    transition: margin 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cp-Panel {	
+	.cp-Panel-toggle{
+	    display: block;
+	    margin: 0px;
+	    cursor: pointer;
+	    min-height: 3rem;
+	    line-height: 3rem;
+	    padding: 0 1rem;
+	    background-color: #fff;
+	    border-bottom: 1px solid #ddd;
+	    p {
+	    	text-align: left;
+	    	margin-bottom: 0px;
+	    	line-height: 50px;
+	    }
+	    i {
+		    width: 2rem;
+		    font-size: 1.6rem;
+		    line-height: 3rem;
+		    display: block;
+		    float: left;
+		    text-align: center;
+		    margin-right: 1rem;
+		    transform: translateY(20%);
+		    color: black;
+		}
+
+	}
+	a {
+		text-decoration: none;
+	}
+}
+
+.cp-Panel-body-inner {
+    padding: 2rem;
+}
+
 /*==============================================================================*\
   __  __          _ _          ___                  _
  |  \/  | ___  __| (_) __ _   / _ \ _   _  ___ _ __(_) ___  ___

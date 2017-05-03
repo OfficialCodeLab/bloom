@@ -52,9 +52,99 @@
 		<div>
 			<h1>We’d love you to join the Bloom Ecosystem.</h1>
 			{{!-- <p style="font-size: 20px;">We’d love for you to join the Bloom Vendor Team!</p> --}}
-			<p style="font-style: italic;">Simply click below and fill in the Vendor Sign Up form.</p>
-			<p style="font-style: italic;">It’s that easy!</p>
+			{{!-- <p style="font-style: italic;">Simply click below and fill in the Vendor Sign Up form.</p>
+			<p style="font-style: italic;">It’s that easy!</p> --}}
+			<p style="font-style: italic;">Follow the instructions below to get started!</p>
+			{{#cp-panels accordion=true as |panels|}}
+			  {{#panels.panel as |panel|}}
+			    {{#panel.toggle}}
+			      <p><i class="material-icons">account_circle</i>&nbsp;&nbsp;Sign Up</p>
+			    {{/panel.toggle}}
+			    {{#panel.body}}
+			      <div>
+			        <h5>Signing up for Bloom is as easy as it gets!</h5>
+			        <p>Simply follow the link below to sign up:<br>
+					{{#link-to 'vendor-signup'}}Vendor Signup Form{{/link-to}}<br>
+					When you have filled in your details and clicked sign up, you will be prompted to log in via social media.</p>
+					<br><hr><br><p><span style="font-style: italic;">But i just created my account, why must I sign in with social media?</span><br>
+					Do not worry, this is for your own security and convenience<br>
+					You will have a vendor account and a user account set up for you<br>
+					Nobody else will know which two accounts are linked. At any given time, your privacy is safe!<br>
+					If you want to remove/delete your vendor account, your Bloom user account will still be alive<br>
+					If you have a colleague that you would like to help manage listings, it's as simple as getting them to log into your vendor account<br>
+					This will ensure that you don't have to share your personal account with them<br>
+					Having a dual account adds an extra level of security for you to keep your information safe and secure</p>
+			      </div>
+			    {{/panel.body}}
+			  {{/panels.panel}}
+
+			  {{#panels.panel as |panel|}}
+			    {{#panel.toggle}}
+			      <p><i class="material-icons">picture_in_picture</i>&nbsp;&nbsp;Add Your Branding</p>
+			    {{/panel.toggle}}
+			    {{#panel.body}}
+			      <div>
+			        <h5>Your listings are branded for you</h5>
+			        <p>Help users identify your brand quickly and grow your name faster!<br>
+			        Simply upload your branding to Bloom and we will help display it beautifully<br>
+			        This will be found in your vendor hub under the branding tab<br>
+			        Once your account has been created, this will be found at:<br>
+			        {{#link-to 'index.vendor'}}bloomweddings.co.za/vendor{{/link-to}}</p>
+			        <br><hr><br>
+			        <p><span style="font-style: italic;">Your Primary Logo</span><br>
+    				Upload your logo to Bloom and help users identify you easier, this will overlay on your listings when users hover over them<br><br>
+			        <span style="font-style: italic;">Your Splash Image</span><br>
+    				When a user visits your vendor profile, this splash image will be the first thing they notice<br>
+    				A vibrant image that won't let them forget you is what we recommend</p>
+			      </div>
+			    {{/panel.body}}
+
+			  {{/panels.panel}}
+
+			  {{#panels.panel as |panel|}}
+			    {{#panel.toggle}}
+			      <p><i class="material-icons">call</i>&nbsp;&nbsp;Check Contact Details</p>
+			    {{/panel.toggle}}
+			    {{#panel.body}}
+			      <div>			      
+			        <h5>Make sure users find you</h5>
+			        <p>Head over to your vendor hub and then to the profile tab<br>
+			        Here you will be able to double check and update all your profile information and contact details<br>
+			        Once your account has been created, this will be found at:<br>
+			        {{#link-to 'index.vendor.profile'}}bloomweddings.co.za/vendor/profile{{/link-to}}</p>
+			        <br><hr><br>
+			        <p><span style="font-style: italic;">Your information transforms your listing</span><br>
+			        That's right! Users will see a dynamically generated listing based on some of the information you enter<br>
+			        So ensure that everything is correct to improve your listings once they are up</p>
+			      </div>
+			    {{/panel.body}}
+
+			  {{/panels.panel}}
+
+
+			  {{#panels.panel as |panel|}}
+			    {{#panel.toggle}}
+			      <p><i class="material-icons">dashboard</i>&nbsp;&nbsp;Publish a Listing</p>
+			    {{/panel.toggle}}
+			    {{#panel.body}}
+			      <div>
+			        <h5>Get your name out there!</h5>
+			        <p>Now is your time to shine, head to your vendor hub and hit the ADD SERVICE button to get started quickly<br>
+			        Bloom will try its best to fill in most of the data for you based on what you entered previously<br>
+			        You just need to proofread and upload some images to set your listing apart</p>
+			        <br><hr><br>
+			        <p><span style="font-style: italic;">Some Extra Hints:</span><br>
+			        You can have more than one listing, but duplicate listings are not allowed<br>
+			        Please feel free to post up to 8 listings showing the different facets of your business<br>
+			        This limit can be extended by contacting us once you reach your limit</p>
+			      </div>
+			    {{/panel.body}}
+
+			  {{/panels.panel}}
+			{{/cp-panels}}
+
 			<div class="form-group" style="padding-top: 50px; padding-bottom: 80px;">
+				<p>I know what to do, sign me up already!</p>
 				{{#link-to 'vendor-signup'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
 			</div><hr>
 			<div style="padding-top: 80px">
