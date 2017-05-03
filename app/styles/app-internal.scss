@@ -2728,12 +2728,6 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 .cp-Panel {
     border: none;
     box-shadow: none;
-    hr {    	
-	    border: 0 !important;
-	    height: 1px !important;
-	    color: #fff !important;
-	    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) !important;
-    }
 }
 
 .cp-Panel.cp-is-open {
@@ -2783,6 +2777,12 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 
 .cp-Panel-body-inner {
     padding: 2rem;
+    hr {    	
+	    border: 0 !important;
+	    height: 1px !important;
+	    color: #fff !important;
+	    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) !important;
+    }
 }
 
 /*==============================================================================*\
