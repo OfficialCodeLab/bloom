@@ -5,11 +5,14 @@ import moment from 'moment';
 export default Ember.Route.extend({
 	vendorId: null,
 	vendorAcc: null,
+	emailStored: null,
+	passwordStored: null,
 	vendorLog: null,
 	vendorStatsId: null,
 	isTodoSubmitted: null,
 	isOverlay: false,
 	metrics: Ember.inject.service(),
+	firebaseApp : Ember.inject.service(),
 	beforeModel: function() {
         return this.get("session").fetch().catch(function() {});
     },
@@ -55,14 +58,22 @@ export default Ember.Route.extend({
 		},
 		login: function(provider) {
 			Ember.$('#s2-overlay3').fadeOut("fast");	
+			Ember.$('#s2-overlay4').fadeOut("fast");
+			let email = "";
+			let password = "";	
 			let _that = this;
 			let scope = "";
 
 			if(provider === "facebook"){
 				scope = 'public_profile,user_friends,user_birthday,email';
+			} else if (provider === "password") {
+		    	email = this.get('emailStored');
+		    	password = this.get('passwordStored');
 			}
 	        this.get("session").open("firebase", { 
 	        	provider: provider, 
+				email: email,
+				password: password,
 	        	settings: {
 	    			scope: scope,
 				}
@@ -102,10 +113,63 @@ export default Ember.Route.extend({
 					}
 				});
 			}, (error) => {
+				console.log(error);
+				if(error.code === 'auth/user-not-found') {
+					this.createAccount('password');
+				}
 				this.controller.get('notifications').error('An error occured, please try again later.',{
 				    autoClear: true
 				});
           	});
+	    },
+		createAccount: function(provider) {
+			Ember.$('#s2-overlay4').fadeOut("fast");	
+			let _this = this;
+	    	let email = this.get('emailStored');
+	    	let password = this.get('passwordStored');
+	    	let firebase = this.get('firebaseApp');
+
+			if(provider === "password"){
+				firebase.auth().createUserWithEmailAndPassword(email, password).then((data)=>{
+					console.log(data);
+					_this.store.findRecord('user', data.uid).then((user)=>{
+		      			user.get('vendorAccount').then((ven)=>{
+			      			if(ven === null || ven === undefined) {
+								_this.joinAccounts(user);		      				
+			      			} else {
+		    					_this.get('session').close().then(()=> {
+						      		_this.controller.get('notifications').error('Account already has vendor account!',{
+							          autoClear: true
+						      		});
+						      	});
+								_this.transitionTo('login');
+								_this.set('vendorId', null);		      				
+			      			}
+      					}, ()=>{
+		      			});				      	
+					}, ()=> {			
+						if(_this.get('vendorId')){
+							_this.createVendor();	
+						} else {
+							_this.controller.get('notifications').info('User account created.',{
+							   autoClear: true
+					      	});
+							_this.transitionTo('user.new');
+						}
+					});
+				  //...
+				}).catch((error) =>{
+				  // Handle Errors here.
+				  var errorCode = error.code;
+				  var errorMessage = error.message;
+				  console.log(error);
+				  if(errorCode === 'auth/email-already-in-use') {
+				  	//Log in instead
+				  	this.logInWithEmail();
+			  	  }
+				  // ...
+				});
+			}
 	    },
 	    logout: function() {
     	  this.transitionTo('logout');
@@ -119,6 +183,10 @@ export default Ember.Route.extend({
 	    	this.set('vendorId', id);
 	    	this.set('vendorAcc', vendor);
 	    	this.set('vendorLog', vendorLogin);
+	    },
+	    storeEmailPass: function(email, pass){
+	    	this.set('emailStored', email);
+	    	this.set('passwordStored', pass);
 	    },
 	    storeVendorStatsId: function(vendorStatsId){
 	    	this.set('vendorStatsId', vendorStatsId);
@@ -164,6 +232,18 @@ export default Ember.Route.extend({
 	    },
 	    hideLogins: function(){
 			Ember.$('#s2-overlay3').fadeOut("fast"); 
+	    },
+	    showVendorLogins: function(){
+	    	if(this.controller.get('menuOpen')) {
+   				Ember.$('#menu-overlay').fadeOut("slow");
+   				Ember.$('#menu-icon-c').fadeOut(0);
+   				Ember.$('#menu-icon-o').fadeIn("fast");
+				this.controller.toggleProperty('menuOpen');
+	    	}
+			Ember.$('#s2-overlay4').fadeIn("fast");	    	
+	    },
+	    hideVendorLogins: function(){
+			Ember.$('#s2-overlay4').fadeOut("fast"); 
 	    },
 	    showModal: function(name, model) {
 	      this.render(name, {
@@ -422,6 +502,61 @@ export default Ember.Route.extend({
 		 'custom-property2': prop
 		});
     },
+    logInWithEmail: function() {
+		let _this = this;
+    	let email = this.get('emailStored');
+    	let password = this.get('passwordStored');
+	    let firebase = this.get('firebaseApp');
+
+
+	  	firebase.auth().signInWithEmailAndPassword(email, password).then(function(data){
+
+			this.store.findRecord('user', data.currentUser.providerData[0].uid).then((user)=>{
+				if(!_this.get('vendorId')){
+					_this.transitionTo('index');
+					window.scrollTo(0,0);
+					_this.controller.get('notifications').info('Logged in successfully.',{
+			          autoClear: true
+		      		});
+
+		      	} else {
+	      			user.get('vendorAccount').then((ven)=>{
+		      			if(ven === null || ven === undefined) {
+									_this.joinAccounts(user);		      				
+		      			} else {
+		    					_this.get('session').close().then(()=> {
+						      		_this.controller.get('notifications').error('Account already has vendor account!',{
+							          autoClear: true
+						      		});
+						      	});
+									_this.transitionTo('login');
+									_this.set('vendorId', null);		      				
+		      			}
+	      			}, ()=>{
+	      			});
+		      	}
+			}, ()=> {			
+				if(_this.get('vendorId')){
+					_this.createVendor();	
+				} else {
+					_this.controller.get('notifications').info('User account created.',{
+					   autoClear: true
+			      	});
+					_this.transitionTo('user.new');
+				}
+		});
+
+	  	}).catch(function(error) {
+		  // Handle Errors here.
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+			_this.controller.get('notifications').error('An error occured, please try again later.',{
+			    autoClear: true
+			});
+		  // ...
+		});
+		//End log in
+	},
 
 	    createVendor: function(){
 	    	let _id = this.get("session").get('currentUser').providerData[0].uid;

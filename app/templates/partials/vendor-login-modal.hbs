@@ -1,0 +1,27 @@
+<div id="s2-overlay4" style="display:none">
+	<div class="modal-header">
+        <button type="button" class="close" {{action 'hideVendorLogins'}} aria-hidden="true">×</button>
+        <h4 class="modal-title" style="text-align: left;">Log In</h4>
+      </div>
+	{{!-- <div class="close-overlay" {{action 'hideLogins'}}><i class="fa fa-times" aria-hidden="true"></i></div> --}}
+	{{!-- <h1 style="text-align:center;" class="font-times-header">LOGIN</h1> --}}
+	<p style="text-align:center; padding-top:20px;">Complete your account<br>
+	We recommend Facebook<br>as it is easier for you</p>
+
+	{{!-- <br> --}}
+
+	<br>
+	<div class="col-xs-12">
+		{{!-- {{action "login" "facebook" }} --}}
+		<btn class="btn btn-block btn-social btn-facebook pear-social-button" {{action "login" "facebook" }}>
+		  <span class="fa fa-facebook"></span>
+		  Sign in with Facebook
+		</btn>
+	</div>
+	<div class="col-xs-12">
+		<btn class="btn btn-block btn-social btn-facebook btn-reddit pear-social-button2" {{action "createAccount" "password" }}>
+		  <span class="fa fa-envelope"></span>
+		  Use your Email &amp; Password
+		</btn>
+	</div>
+</div>

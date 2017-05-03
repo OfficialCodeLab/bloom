@@ -109,6 +109,7 @@ export default Ember.Route.extend({
                                             });	
         									let _vendorid = vendor.get('id');													
                                         	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
+                                            this.send('storeEmailPass', email, this.controller.get('password'));
     										this.assignToUser(vendor, vendorLogin);							//Add id to user
                                         });
                                     });
@@ -147,7 +148,8 @@ export default Ember.Route.extend({
                                         maxItems: "15"
                                     });	
     								let _vendorid = vendor.get('id');
-                                	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin										
+                                	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin	
+                                    this.send('storeEmailPass', email, this.controller.get('password'));									
                                 	this.assignToUser(vendor, vendorLogin);									//Add id to user
                                 });
                             }
@@ -245,7 +247,8 @@ export default Ember.Route.extend({
         this.createVendorStats();
     	let _vendorid = vendor.get('id');
     	this.send('storeVendorId', _vendorid, vendor, vendorLogin);
-    	this.send('showLogins');
+    	// this.send('showVendorLogins');
+        this.send('showLogins');
     },
     createVendorStats: function(){
         let willingTravel = this.controller.get('willingToTravel');
