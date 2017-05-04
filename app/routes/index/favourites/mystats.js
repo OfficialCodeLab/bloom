@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model(){
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		// return this.store.findRecord('user', _id);	
 		return Ember.RSVP.hash({
 	      user: this.store.peekRecord('user', _id),
@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 	    Ember.set(controller, 'user', model.user);
 	},
 	afterModel(){
-		// let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		// let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		// this.store.findRecord('userstat', _id).then((stats)=>{
 		// 	this.controller.set('height', stats.get('height'));
 		// 	this.controller.set('shoulders', stats.get('shoulders'));
@@ -29,7 +29,7 @@ export default Ember.Route.extend({
 	actions:{
 		
 		updateStats(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let userstats = this.store.peekRecord('userstat', _id);
 			userstats.save().then(()=>{
 				this.controller.get('notifications').success('Changes have been saved!',{
@@ -41,7 +41,7 @@ export default Ember.Route.extend({
 
 		},
 		selectGender(gender){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let user = this.store.peekRecord('user', _id);
 			if(gender === 'male'){
 				user.set('isFemale', false);

@@ -4,8 +4,8 @@ export default Ember.Route.extend({
   model () {
     //Before creating the record, clear the DS Store
     this.store.unloadAll('userext');
-      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
-      let imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
+      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0]._uid + "/picture?type=large";
     return Ember.RSVP.hash({
         userext: this.store.createRecord('userext', {
         imgurl: imgStr

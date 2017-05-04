@@ -146,7 +146,7 @@
 						<div class="col-sm-6">Used: <strong class="budget-pink">R{{budget.used}}</strong></div>
 					</div>								
                     {{#if refresh}}
-                        {{#ember-pie session.currentUser.providerData.0.uid}} {{/ember-pie}}
+                        {{#ember-pie session.currentUser.providerData.0._uid}} {{/ember-pie}}
                     {{else}}
 	                    {{mdl-spinner}}
 	                {{/if}}

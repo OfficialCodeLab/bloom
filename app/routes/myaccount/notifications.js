@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     model () {
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('userext');
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let providerID = this.get("session").get('currentUser').providerData[0].providerId + "";
 		let imgStr;
 		if(providerID === "facebook.com"){

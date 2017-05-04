@@ -198,13 +198,13 @@ export default Ember.Route.extend({
 	monthKeys: {},
 	monthKeysReverse: {},
 	model(){		
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		return this.store.findRecord('wedding', _id);	
 	},
 	setupController: function (controller, model) {
 		this._super(controller, model);
 		let _this = this;
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 	    	// if(customer.get("todoList") === true){
     		if(true){ //Temporarily give all clients access
@@ -281,7 +281,7 @@ export default Ember.Route.extend({
 			switch(_modalData.get('action')) {
 				case 'delete':					
 					
-			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
 					let task = this.store.peekRecord('task', taskId);
@@ -314,7 +314,7 @@ export default Ember.Route.extend({
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('weddingDateId'));
 
   		if(_modalData.get('mainMessage')) {
-	    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+	    	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 
 
@@ -329,7 +329,7 @@ export default Ember.Route.extend({
 
 		},
 		openDatePickerAction: function() {
-    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+    	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 			this.openDatePicker(this.controller, wedding);
 		},
@@ -361,7 +361,7 @@ export default Ember.Route.extend({
 				this.controller.set('newTaskId', task.get('id'));
 			} else {
 				//Double check
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
 			    	// if(customer.get("todoList") === true){	
 			    	if(true){ //Temporarily give all clients access
@@ -380,7 +380,7 @@ export default Ember.Route.extend({
 		},
 		saveTodo: function(){
 			let _this = this;
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 
 			if(this.controller.get('todoEditId')) {
@@ -578,7 +578,7 @@ export default Ember.Route.extend({
 	processTodoList: function (controller, model) {
 		this._super(controller, model);
 		let _this = this;
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		_this.controller.set('isGenerating', true);
    	var promisesArr = [];
    	var savesArr = [];

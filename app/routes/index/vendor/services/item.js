@@ -30,7 +30,7 @@ export default Ember.Route.extend({
 			});
  		}
 
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
         let user = this.store.peekRecord('user', _id);
   	    let vendorId = user.get('vendorAccount').get('id');
 
@@ -292,7 +292,7 @@ export default Ember.Route.extend({
 				};
 
 				var storageRef = this.get('firebaseApp').storage().ref();
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let catItem = this.controller.get('model.catItem');
 				let itemId = catItem.get('id');
@@ -548,7 +548,7 @@ export default Ember.Route.extend({
 	},
 	deleteImages: function(){
 		var storageRef = this.get('firebaseApp').storage().ref();
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let user = this.store.peekRecord('user', _id);
 		let catItem = this.controller.get('model.catItem');
 		let itemId = catItem.get('id');

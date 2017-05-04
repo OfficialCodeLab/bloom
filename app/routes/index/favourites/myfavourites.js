@@ -35,7 +35,7 @@ export default Ember.Route.extend({
 
   model () {
   	//this.store.unloadAll('cat-item');
-  	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+  	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	//return this.store.findRecord('user', _id);	
     return this.store.findRecord('user', _id).then((user) => {
       let favourites = user.get('favourites');

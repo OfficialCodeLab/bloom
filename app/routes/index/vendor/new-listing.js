@@ -10,7 +10,7 @@ export default Ember.Route.extend({
             this.transitionTo('login');
           }
 
-      	  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+      	  let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
           let user = this.store.peekRecord('user', _id);
           user.get('vendorAccount').then((ven)=>{
             if(ven === null || ven === undefined) {
@@ -37,7 +37,7 @@ export default Ember.Route.extend({
      	this._super(controller, model);
         Ember.set(controller, 'province', model.province);
         Ember.set(controller, 'category', model.category);
-  	    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+  	    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
         let user = this.store.peekRecord('user', _id);
   	    let vendorId = user.get('vendorAccount').get('id');
      	this.store.findRecord('vendor-stat', vendorId).then((vs)=>{
@@ -231,7 +231,7 @@ export default Ember.Route.extend({
 			try{
 				this.controller.set('isCreating', true);
 				let cat = this.controller.get('category');
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
@@ -365,7 +365,7 @@ export default Ember.Route.extend({
 			};
 
 			var storageRef = this.get('firebaseApp').storage().ref();
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let user = this.store.peekRecord('user', _id);
 			let itemId = this.get('itemId');
 			let vendorId = user.get('vendorAccount').get('id');

@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 	},
 
     model(params) {
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 
         return this.store.findRecord('user', _id);
     },

@@ -247,8 +247,8 @@ export default Ember.Route.extend({
         this.createVendorStats();
     	let _vendorid = vendor.get('id');
     	this.send('storeVendorId', _vendorid, vendor, vendorLogin);
-    	// this.send('showVendorLogins');
-        this.send('showLogins');
+    	this.send('showVendorLogins');
+        // this.send('showLogins');
     },
     createVendorStats: function(){
         let willingTravel = this.controller.get('willingToTravel');

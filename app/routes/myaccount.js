@@ -15,15 +15,18 @@ export default Ember.Route.extend({
 	model () {
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('userext');
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let providerID = this.get("session").get('currentUser').providerData[0].providerId + "";
 		let imgStr;
 		if(providerID === "facebook.com"){
 			imgStr = "http://graph.facebook.com/" + _id + "/picture?type=large";
 		} else {
-			let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
-			imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
-			//console.log("Image String: " + imgStrSM);
+			if(this.get("session").get('currentUser').providerData[0].photoURL) {
+	          let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
+	          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);          
+	        } else {
+	          imgStr = '../favicon.png';
+	        }
 		}
 		return Ember.RSVP.hash({
 	      userext: this.store.createRecord('userext', {
@@ -41,7 +44,7 @@ export default Ember.Route.extend({
 	  },
 	  actions : {
 	  	saveUser() { 
-		  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		  let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		  let usr = this.store.peekRecord('user', _id);
 	      usr.save().then(() => {
         		//this.controller.get('model.userext').set('responseMessage', 'Info has been saved');
@@ -60,7 +63,7 @@ export default Ember.Route.extend({
     		});
 	    },
 	    changeAccountType() {
-		  let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		  let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		  let usr = this.store.peekRecord('user', _id);
 		  usr.set('accountType', "vendor");
 		  usr.save().then(()=>{
@@ -71,7 +74,7 @@ export default Ember.Route.extend({
 	    },
 
 		retakeTours: function(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let user = this.store.peekRecord('user', _id);
 			user.set('mustTourVendor', true);
 			user.set('mustTourWedding', true);

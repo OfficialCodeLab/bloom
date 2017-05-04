@@ -60,7 +60,7 @@ export default Ember.Route.extend({
 	firebase: Ember.inject.service(),
 	model(){		
 		
-    	let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+    	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 
 		return Ember.RSVP.hash({
 	    	budget: this.store.findRecord('budget', _id, { reload: true }).then((_budget)=>{
@@ -101,7 +101,7 @@ export default Ember.Route.extend({
 	},
 	setupController: function (controller, model) {
 		this._super(controller, model);
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		controller.set('budget', model.budget);
 		let _this = this;
 		if(this.get("createdBudget") === 1) {
@@ -143,7 +143,7 @@ export default Ember.Route.extend({
 			// - quickly entering a budget total?
 		submitFirstBudget: function() {
 			let _this = this;
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    let budget = this.store.peekRecord('budget', _id);
 	    let total = this.controller.get('firstBudgetTotal');
 	    this.controller.set('isGeneratingBudget', true);
@@ -194,7 +194,7 @@ export default Ember.Route.extend({
 		},
 
 		openBudgetModal: function(id, obj, category){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let budget = this.store.createRecord('budget-modal', {				
 				_id: id,
 				name: Ember.get(obj, 'name'),
@@ -215,7 +215,7 @@ export default Ember.Route.extend({
 	    	this.send('removeModal');
 		},
 	    submitBudget: function(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    let budgetId = this.controller.get('selectedBudgetId');
 			let budget = this.store.peekRecord('budget-modal', budgetId);
 			let deposit = parseInt(budget.get('deposit'));
@@ -257,14 +257,14 @@ export default Ember.Route.extend({
 	    },
 	    selectBudget: function(id, cat){
 	    	// alert('Selected: ' + id + "\nCategory: " + cat);
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    	let budget = this.store.peekRecord('budget', _id);
 	    	let selectedCategory = Ember.get(budget, cat);
 	    	let selectedObject = Ember.get(selectedCategory, id);
 	    	this.send('openBudgetModal', id, selectedObject, cat);
 	    },
 	    saveNewTotal: function(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    	let budget = this.store.peekRecord('budget', _id);
 	    	let newTotal = parseInt(this.controller.get('total'));
 	    	let unallocated = parseInt(budget.get('unallocated'));
@@ -317,7 +317,7 @@ export default Ember.Route.extend({
 		let deltaEstimated = oldEstimate - estimate;
 			
 		//Update
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
     	let _budget = this.store.peekRecord('budget', _id);
     	let selectedTotals = _budget.get('categoryTotals');
     	let _oldBooked = Ember.get(selectedTotals, category);
@@ -359,7 +359,7 @@ export default Ember.Route.extend({
     	});	
 	},
 	updateWedding: function(){
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
         let wedding = this.store.peekRecord('wedding', _id);
     	if(wedding.get('hasBudget')){
 
@@ -382,7 +382,7 @@ export default Ember.Route.extend({
 		this.transitionTo('myaccount.payments');
 	},
 	convertAllCategories: function (){
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let budget = this.store.peekRecord('budget', _id);
 
 		//Convert each category

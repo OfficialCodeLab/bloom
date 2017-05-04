@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 			let _pass = this.controller.get('passwordConfirm');
 			if(pass === _pass) {
 				//alert(this.hashCode(pass));
-			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			    let passhash = this.hashCode(pass);
 				let user = this.store.peekRecord('user', _id);
 				let vendorAccount = user.get('vendorAccount').get('id');
@@ -40,7 +40,7 @@ export default Ember.Route.extend({
 		    this.store.findRecord('vendorLogin', emailhash, { reload: true }).then(() => {						//Check if email is in use
                     alert("Email address already in use");
                 }, () => {
-			    let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let user = this.store.peekRecord('user', _id);
 				let vendorAccount = user.get('vendorAccount').get('id');
 				this.controller.set('email', '');		
@@ -72,7 +72,7 @@ export default Ember.Route.extend({
 		},
 
 		logout: function(){			
-	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
+	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
 	    	user.set('vendorAccount', null);
 	    	user.save();
 	    	this.transitionTo('index.vendor.login');

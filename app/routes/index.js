@@ -8,7 +8,7 @@ export default Ember.Route.extend( {
   	if(!this.get('session.isAuthenticated')){
         this.transitionTo('login');
       } else{
-        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0].uid).then(()=>{},()=>this.transitionTo('user.new'));
+        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0]._uid).then(()=>{},()=>this.transitionTo('user.new'));
 
       }
       return sesh;
@@ -25,14 +25,18 @@ export default Ember.Route.extend( {
     //Before creating the record, clear the DS Store
 
     //this.store.unloadAll('userext');
-      let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
       let providerId = this.get("session").get('currentUser').providerData[0].providerId;
       let imgStr;
       if(providerId === "facebook.com"){
-        imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0].uid + "/picture?type=large";
+        imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0]._uid + "/picture?type=large";
       } else {
-        let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
-        imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
+        if(this.get("session").get('currentUser').providerData[0].photoURL) {
+          let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
+          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);          
+        } else {
+          imgStr = '../favicon.png';
+        }
       }
     return Ember.RSVP.hash({
         userext: this.store.createRecord('userext', {

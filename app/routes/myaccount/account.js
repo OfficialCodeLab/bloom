@@ -11,7 +11,7 @@ export default Ember.Route.extend({
     model () {
 		//Before creating the record, clear the DS Store
 		this.store.unloadAll('userext');
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let providerID = this.get("session").get('currentUser').providerData[0].providerId + "";
 		let imgStr;
 		if(providerID === "facebook.com"){
@@ -39,7 +39,7 @@ export default Ember.Route.extend({
 		dateChanged: function (date, valid){
 			if(valid){              
 				this.controller.set('birthday', date);
-				let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let user = this.store.peekRecord('user', _id);
 				user.set('birthday', date);
 				// this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	

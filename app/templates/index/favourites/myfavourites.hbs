@@ -12,7 +12,7 @@
             <div class="category-block">
                <span class="cat-title">{{cat-item.name}}</span>
                <div class="cat-fav">
-                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
+                  {{#favourite-button cat-item.id session.currentUser.providerData.0._uid}}{{/favourite-button}}
                </div>
                <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
                   {{#link-to 'single-item' cat-item.id tagname='div'}}
@@ -84,7 +84,7 @@
             <div class="category-block">
                <span class="cat-title">{{cat-item.name}}</span>
                <div class="cat-fav">
-                  {{#favourite-button cat-item.id session.currentUser.providerData.0.uid}}{{/favourite-button}}
+                  {{#favourite-button cat-item.id session.currentUser.providerData.0._uid}}{{/favourite-button}}
                </div>
                {{#link-to 'single-item' cat-item.id tagname='div' class="text-center cat-img-container"}}
                   <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">

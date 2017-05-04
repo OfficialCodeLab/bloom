@@ -26,7 +26,7 @@ export default Ember.Route.extend({
      	controller.set('vendor', model.vendor);
      	controller.set('vendorStat', model.vendorStat);
      	controller.set('contactInfoVisible', false);
-	    let id = this.get("session").get('currentUser').providerData[0].uid;
+	    let id = this.get("session").get('currentUser').providerData[0]._uid;
 	    let vendorId = this.get('vendorId');
 		this.send('storeVendorProfileVisited', vendorId, id);
       controller.set('website', model.vendorStat.get('website'));
@@ -62,7 +62,7 @@ export default Ember.Route.extend({
 
 	    },
 	    showContactInfo: function(){
-	    	let userId = this.get("session").get('currentUser').providerData[0].uid;
+	    	let userId = this.get("session").get('currentUser').providerData[0]._uid;
 	    	let vendorId = this.controller.get('model.id');
 	    	this.controller.set('contactInfoVisible', true);
 	    	this.send('storeContactInfoRequest', vendorId, userId);

@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model(){
-		let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		return this.store.findRecord('user', _id);				
 	},
 	actions: {
 		searchUser(){
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let _name = this.controller.get('name') + "";
 			_name = _name.toLowerCase();
 			let _oldname = this.controller.get('oldname') + "";
@@ -56,7 +56,7 @@ export default Ember.Route.extend({
 			switch(_modalData.get('action')) {
 				case 'delete':
 					
-					let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+					let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 					let user = this.store.peekRecord('user', _id);
 					// let _user = this.store.peekRecord(this.controller.get('user'));
 					user.get('innercircle').removeObject(this.controller.get('user'));
@@ -72,7 +72,7 @@ export default Ember.Route.extend({
 		addInnerCircle(_user){
 			let searchRes = Ember.get(this.controller.get('searchResults'), _user.key+ "");
 			Ember.set(searchRes, 'adding', true);
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			let user = this.store.peekRecord('user', _id);
 			let that = this;
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
@@ -162,7 +162,7 @@ export default Ember.Route.extend({
 			if(_modalData){
 				_modalData.deleteRecord();
 			}
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
   			this.store.findRecord('user', _id);
 		}
 	},

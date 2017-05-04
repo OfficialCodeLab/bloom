@@ -14,13 +14,25 @@ export default Ember.Route.extend({
 	metrics: Ember.inject.service(),
 	firebaseApp : Ember.inject.service(),
 	beforeModel: function() {
-        return this.get("session").fetch().catch(function() {});
+        var sesh = this.get("session").fetch().catch(function() {});
+        let _this = this;
+
+        //Filthy hackaround for password authentication ;)
+
+        sesh.then((s)=> {
+	  		if(!_this.get('session.isAuthenticated')){
+	  		} else {
+		        _this.generateUid();
+	        }
+        });
+
+        return sesh;
     },
 	model: function() {
 		//check server for the record of self
 		try
 		{
-			let _id = this.get("session").get('currentUser').providerData[0].uid + "";
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			return this.store.findRecord('user', _id);			
 		} catch(ex) {}
 		
@@ -78,8 +90,8 @@ export default Ember.Route.extend({
 	    			scope: scope,
 				}
 			}).then((data) => {
-	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0].uid);  
-				this.store.findRecord('user', data.currentUser.providerData[0].uid).then((user)=>{
+	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0]._uid);  
+				this.store.findRecord('user', data.currentUser.providerData[0]._uid).then((user)=>{
 					if(!this.get('vendorId')){
 						this.transitionTo('index');
 						window.scrollTo(0,0);
@@ -131,32 +143,48 @@ export default Ember.Route.extend({
 
 			if(provider === "password"){
 				firebase.auth().createUserWithEmailAndPassword(email, password).then((data)=>{
-					console.log(data);
-					_this.store.findRecord('user', data.uid).then((user)=>{
-		      			user.get('vendorAccount').then((ven)=>{
-			      			if(ven === null || ven === undefined) {
-								_this.joinAccounts(user);		      				
-			      			} else {
-		    					_this.get('session').close().then(()=> {
-						      		_this.controller.get('notifications').error('Account already has vendor account!',{
-							          autoClear: true
-						      		});
+					console.log(data.uid);
+			        _this.get("session").open("firebase", { 
+			        	provider: provider, 
+						email: email,
+						password: password
+					}).then((d) => {
+						_this.store.findRecord('user', d.uid).then((user)=>{
+			      			user.get('vendorAccount').then((ven)=>{
+				      			if(ven === null || ven === undefined) {
+									_this.joinAccounts(user);		      				
+				      			} else {
+			    					_this.get('session').close().then(()=> {
+							      		_this.controller.get('notifications').error('Account already has vendor account!',{
+								          autoClear: true
+							      		});
+							      	});
+									_this.transitionTo('login');
+									_this.set('vendorId', null);		      				
+				      			}
+	      					}, ()=>{
+			      			});				      	
+						}, ()=> {			
+							if(_this.get('vendorId')){
+								_this.createVendor(d.uid);	
+							} else {
+								_this.controller.get('notifications').info('User account created.',{
+								   autoClear: true
 						      	});
-								_this.transitionTo('login');
-								_this.set('vendorId', null);		      				
-			      			}
-      					}, ()=>{
-		      			});				      	
-					}, ()=> {			
-						if(_this.get('vendorId')){
-							_this.createVendor();	
-						} else {
-							_this.controller.get('notifications').info('User account created.',{
-							   autoClear: true
-					      	});
-							_this.transitionTo('user.new');
-						}
+								_this.transitionTo('user.new');
+							}
+						});
+
+				  	}).catch(function(error) {
+					  // Handle Errors here.
+					  var errorCode = error.code;
+					  var errorMessage = error.message;
+						_this.controller.get('notifications').error('An error occured, please try again later.',{
+						    autoClear: true
+						});
+					  // ...
 					});
+					//_this.get('session').set('currentUser', data);
 				  //...
 				}).catch((error) =>{
 				  // Handle Errors here.
@@ -201,14 +229,14 @@ export default Ember.Route.extend({
 	    	this.transitionTo("categories");
 	    },
 	    addFavourite: function(id){
-	    	let _id = this.get("session").get('currentUser').providerData[0].uid;
+	    	let _id = this.get("session").get('currentUser').providerData[0]._uid;
 	    	let user = this.store.peekRecord('user', _id);
 	    	let item = this.store.peekRecord('cat-item', id);
 	    	let vendor = item.get('vendor');
 	    	user.get('favourites').pushObject(item);
 	    },
 	    removeFavourite: function(id){
-	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0].uid);
+	    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
 	    	let item = this.store.peekRecord('cat-item', id);
 	    	user.get('favourites').removeObject(item);
 	    	user.save();
@@ -354,7 +382,7 @@ export default Ember.Route.extend({
 	    		contact.deleteRecord();
 	    	} else {
 				if (this.get("session").get('currentUser') !== undefined){
-					user_id = this.get("session").get('currentUser').providerData[0].uid;
+					user_id = this.get("session").get('currentUser').providerData[0]._uid;
 				} else {
 					user_id = "Anonymous user";
 				}				
@@ -511,7 +539,7 @@ export default Ember.Route.extend({
 
 	  	firebase.auth().signInWithEmailAndPassword(email, password).then(function(data){
 
-			this.store.findRecord('user', data.currentUser.providerData[0].uid).then((user)=>{
+			this.store.findRecord('user', data.providerData[0]._uid).then((user)=>{
 				if(!_this.get('vendorId')){
 					_this.transitionTo('index');
 					window.scrollTo(0,0);
@@ -557,12 +585,27 @@ export default Ember.Route.extend({
 		});
 		//End log in
 	},
+	generateUid: function() {
 
-	    createVendor: function(){
-	    	let _id = this.get("session").get('currentUser').providerData[0].uid;
+        let provData = this.get("session.currentUser").providerData[0];
+        if(this.get("session.provider") === "password") {
+        	Ember.set(provData, '_uid', this.get("session.currentUser").uid);      
+		} else {					
+        	Ember.set(provData, '_uid', this.get("session.currentUser").providerData[0].uid);   
+		}
+	},
+
+	    createVendor: function(uniqueID){	    
+	        this.generateUid();
+	    	let _id = uniqueID || this.get("session").get('currentUser').providerData[0]._uid;
+			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
 	    	let vendor = this.get('vendorAcc');
 	    	let vendorLogin = this.get('vendorLog');
-        	let full_name = this.get("session").get('currentUser').providerData[0].displayName;
+	    	let nameVen;
+	    	if(uniqueID){
+	    		nameVen = _vendorStats.get('repName');
+	    	}
+        	let full_name = nameVen || this.get("session").get('currentUser').providerData[0].displayName;
         	let x = full_name.indexOf(" ");
         	let name = full_name.substring(0, x);
         	let surname = full_name.substring(x+1, full_name.length);
@@ -586,7 +629,6 @@ export default Ember.Route.extend({
 				}
 			);
 
-			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
 
 			let vendorStats = this.store.createRecord('vendorStat',
 				{
