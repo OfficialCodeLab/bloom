@@ -20,6 +20,7 @@ export default Ember.Route.extend({
         //Filthy hackaround for password authentication ;)
 
         sesh.then((s)=> {
+        	console.log(_this.get('session'));
 	  		if(!_this.get('session.isAuthenticated')){
 	  		} else {
 		        _this.generateUid();
@@ -73,7 +74,7 @@ export default Ember.Route.extend({
 			Ember.$('#s2-overlay4').fadeOut("fast");
 			let email = "";
 			let password = "";	
-			let _that = this;
+			let _this = this;
 			let scope = "";
 
 			if(provider === "facebook"){
@@ -104,6 +105,7 @@ export default Ember.Route.extend({
 									this.joinAccounts(user);		      				
 		      			} else {
 		    					this.get('session').close().then(()=> {
+									_this.resetVendorSignup();
 						      		this.controller.get('notifications').error('Account already has vendor account!',{
 							          autoClear: true
 						      		});
@@ -126,10 +128,9 @@ export default Ember.Route.extend({
 				});
 			}, (error) => {
 				console.log(error);
-				if(error.code === 'auth/user-not-found') {
-					this.createAccount('password');
-				}
-				this.controller.get('notifications').error('An error occured, please try again later.',{
+			  	var errorMessage = error.message;
+				_this.resetVendorSignup();
+				this.controller.get('notifications').error(errorMessage,{
 				    autoClear: true
 				});
           	});
@@ -143,47 +144,8 @@ export default Ember.Route.extend({
 
 			if(provider === "password"){
 				firebase.auth().createUserWithEmailAndPassword(email, password).then((data)=>{
-					console.log(data.uid);
-			        _this.get("session").open("firebase", { 
-			        	provider: provider, 
-						email: email,
-						password: password
-					}).then((d) => {
-						_this.store.findRecord('user', d.uid).then((user)=>{
-			      			user.get('vendorAccount').then((ven)=>{
-				      			if(ven === null || ven === undefined) {
-									_this.joinAccounts(user);		      				
-				      			} else {
-			    					_this.get('session').close().then(()=> {
-							      		_this.controller.get('notifications').error('Account already has vendor account!',{
-								          autoClear: true
-							      		});
-							      	});
-									_this.transitionTo('login');
-									_this.set('vendorId', null);		      				
-				      			}
-	      					}, ()=>{
-			      			});				      	
-						}, ()=> {			
-							if(_this.get('vendorId')){
-								_this.createVendor(d.uid);	
-							} else {
-								_this.controller.get('notifications').info('User account created.',{
-								   autoClear: true
-						      	});
-								_this.transitionTo('user.new');
-							}
-						});
-
-				  	}).catch(function(error) {
-					  // Handle Errors here.
-					  var errorCode = error.code;
-					  var errorMessage = error.message;
-						_this.controller.get('notifications').error('An error occured, please try again later.',{
-						    autoClear: true
-						});
-					  // ...
-					});
+					var user = firebase.auth().currentUser;
+					this.logInWithEmail(email, password);
 					//_this.get('session').set('currentUser', data);
 				  //...
 				}).catch((error) =>{
@@ -193,11 +155,21 @@ export default Ember.Route.extend({
 				  console.log(error);
 				  if(errorCode === 'auth/email-already-in-use') {
 				  	//Log in instead
-				  	this.logInWithEmail();
+				  	_this.logInWithEmail(email, password);
+			  	  } else {
+				  	_this.resetVendorSignup();
+					_this.controller.get('notifications').error(errorMessage,{
+					    autoClear: true
+					});
 			  	  }
 				  // ...
 				});
 			}
+	    },
+	    loadSignupPage: function() {
+			Ember.$('#s2-overlay3').fadeOut("fast");	
+			Ember.$('#s2-overlay4').fadeOut("fast");	
+	    	this.transitionTo('user-signup');
 	    },
 	    logout: function() {
     	  this.transitionTo('logout');
@@ -271,6 +243,7 @@ export default Ember.Route.extend({
 			Ember.$('#s2-overlay4').fadeIn("fast");	    	
 	    },
 	    hideVendorLogins: function(){
+	    	this.resetVendorSignup();
 			Ember.$('#s2-overlay4').fadeOut("fast"); 
 	    },
 	    showModal: function(name, model) {
@@ -530,60 +503,61 @@ export default Ember.Route.extend({
 		 'custom-property2': prop
 		});
     },
-    logInWithEmail: function() {
-		let _this = this;
-    	let email = this.get('emailStored');
-    	let password = this.get('passwordStored');
-	    let firebase = this.get('firebaseApp');
-
-
-	  	firebase.auth().signInWithEmailAndPassword(email, password).then(function(data){
-
-			this.store.findRecord('user', data.providerData[0]._uid).then((user)=>{
-				if(!_this.get('vendorId')){
-					_this.transitionTo('index');
-					window.scrollTo(0,0);
-					_this.controller.get('notifications').info('Logged in successfully.',{
-			          autoClear: true
-		      		});
-
-		      	} else {
-	      			user.get('vendorAccount').then((ven)=>{
-		      			if(ven === null || ven === undefined) {
-									_this.joinAccounts(user);		      				
-		      			} else {
-		    					_this.get('session').close().then(()=> {
-						      		_this.controller.get('notifications').error('Account already has vendor account!',{
-							          autoClear: true
-						      		});
-						      	});
-									_this.transitionTo('login');
-									_this.set('vendorId', null);		      				
-		      			}
-	      			}, ()=>{
-	      			});
-		      	}
+    logInWithEmail: function(email, password) {
+    	let _this = this;
+        _this.get("session").open("firebase", { 
+        	provider: "password", 
+			email: email,
+			password: password
+		}).then((d) => {
+			_this.store.findRecord('user', d.uid).then((user)=>{
+      			user.get('vendorAccount').then((ven)=>{
+	      			if(ven === null || ven === undefined) {
+	    				_this.generateUid();
+						_this.joinAccounts(user);		      				
+	      			} else {
+    					_this.get('session').close().then(()=> {
+		  					_this.resetVendorSignup();
+				      		_this.controller.get('notifications').error('Account already has vendor account!',{
+					          autoClear: true
+				      		});
+				      	});
+						_this.set('vendorId', null);		      				
+	      			}
+					}, ()=>{
+	  					_this.resetVendorSignup();
+			      		_this.controller.get('notifications').error('An unknown error occurred. Please contact support.',{
+				          autoClear: true
+			      		});
+      				});				      	
 			}, ()=> {			
 				if(_this.get('vendorId')){
-					_this.createVendor();	
+					_this.createVendor(d.uid);	
 				} else {
+	    			_this.generateUid();
 					_this.controller.get('notifications').info('User account created.',{
 					   autoClear: true
 			      	});
 					_this.transitionTo('user.new');
 				}
-		});
+			});
 
 	  	}).catch(function(error) {
 		  // Handle Errors here.
 		  var errorCode = error.code;
 		  var errorMessage = error.message;
-			_this.controller.get('notifications').error('An error occured, please try again later.',{
+		  _this.resetVendorSignup();
+			_this.controller.get('notifications').error(errorMessage,{
 			    autoClear: true
 			});
 		  // ...
 		});
-		//End log in
+	},
+	resetVendorSignup: function () {	
+    	this.store.unloadAll();
+		try {
+	    	this.controllerFor('vendor-signup').set('isCreating', false);
+		} catch(ex) {}
 	},
 	generateUid: function() {
 
@@ -594,112 +568,96 @@ export default Ember.Route.extend({
         	Ember.set(provData, '_uid', this.get("session.currentUser").providerData[0].uid);   
 		}
 	},
+	updateUser: function(name) {
+		let _this = this;
+	    let firebase = this.get('firebaseApp');
+		var user = firebase.auth().currentUser;
 
-	    createVendor: function(uniqueID){	    
-	        this.generateUid();
-	    	let _id = uniqueID || this.get("session").get('currentUser').providerData[0]._uid;
-			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
-	    	let vendor = this.get('vendorAcc');
-	    	let vendorLogin = this.get('vendorLog');
-	    	let nameVen;
-	    	if(uniqueID){
-	    		nameVen = _vendorStats.get('repName');
-	    	}
-        	let full_name = nameVen || this.get("session").get('currentUser').providerData[0].displayName;
-        	let x = full_name.indexOf(" ");
-        	let name = full_name.substring(0, x);
-        	let surname = full_name.substring(x+1, full_name.length);
-			var user = this.store.createRecord('user', {
-			  name: name,
-			  surname: surname,
-			  id: _id,
-			  email: vendor.get('email'),
-			  cell: vendor.get('cell'),
-			  vendorAccount: vendor,
-			  mustTourWedding: true,
-			  mustTourFavourites: true,
-			  mustTourVendor: true,
-			  accountType: "vendor"
-			});				
+		user.updateProfile({
+		  displayName: name
+		}).then(function() {
+			//Updated
+		}, function(error) {
+		  // An error happened.
+		});
+	},
+	sendVerificationEmail: function() {
+	    let firebase = this.get('firebaseApp');
+		var user = firebase.auth().currentUser;
 
-			let wedding = this.store.createRecord('wedding', 
-				{
-					id: _id,
-					user: user
-				}
-			);
+		user.sendEmailVerification().then(function() {
+		  // Email sent.
+		}, function(error) {
+		  // An error happened.
+		});
+	  // Update successful.
+	},
+
+    createVendor: function(uniqueID){	    
+        this.generateUid();
+    	let _id = uniqueID || this.get("session").get('currentUser').providerData[0]._uid;
+		let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
+    	let vendor = this.get('vendorAcc');
+    	let vendorLogin = this.get('vendorLog');
+    	let nameVen;
+    	if(uniqueID){
+    		nameVen = _vendorStats.get('repName');
+    	}
+    	let full_name = nameVen || this.get("session").get('currentUser').providerData[0].displayName;
+    	let x = full_name.indexOf(" ");
+    	let name = full_name.substring(0, x);
+    	let surname = full_name.substring(x+1, full_name.length);
+    	this.updateUser(full_name);
+		var user = this.store.createRecord('user', {
+		  name: name,
+		  surname: surname,
+		  id: _id,
+		  email: vendor.get('email'),
+		  cell: vendor.get('cell'),
+		  vendorAccount: vendor,
+		  mustTourWedding: true,
+		  mustTourFavourites: true,
+		  mustTourVendor: true,
+		  accountType: "vendor"
+		});				
+
+		let wedding = this.store.createRecord('wedding', 
+			{
+				id: _id,
+				user: user
+			}
+		);
 
 
-			let vendorStats = this.store.createRecord('vendorStat',
-				{
-					id: this.get('vendorId'),
-					createdBy: _id,
-					//Populate from other vendor stats model
-		            willingToTravel: _vendorStats.get('willingToTravel'),
-		            maxTravelDist: _vendorStats.get('maxTravelDist'),
-		            categories: _vendorStats.get('categories'),
-		            servicesDesc: _vendorStats.get('servicesDesc'),
-		            repName: _vendorStats.get('repName'),
-		            vatNum: _vendorStats.get('vatNum'),
-		            website: _vendorStats.get('website'),
-		            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
-		            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
-		            willContribute: _vendorStats.get('willContribute')
-				}
-			);
+		let vendorStats = this.store.createRecord('vendorStat',
+			{
+				id: this.get('vendorId'),
+				createdBy: _id,
+				//Populate from other vendor stats model
+	            willingToTravel: _vendorStats.get('willingToTravel'),
+	            maxTravelDist: _vendorStats.get('maxTravelDist'),
+	            categories: _vendorStats.get('categories'),
+	            servicesDesc: _vendorStats.get('servicesDesc'),
+	            repName: _vendorStats.get('repName'),
+	            vatNum: _vendorStats.get('vatNum'),
+	            website: _vendorStats.get('website'),
+	            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
+	            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
+	            willContribute: _vendorStats.get('willContribute')
+			}
+		);
 
-			//need to save
+		//need to save
 
-			user.get('wedding').pushObject(wedding);
+		user.get('wedding').pushObject(wedding);
 
-			wedding.save().then(() => {
-				vendor.save().then(()=>{
-					vendorLogin.save().then(()=>{
-						user.save().then(()=>{
-							vendorStats.save().then(()=>{
-								this.transitionTo('index');
-								this.controller.get('notifications').info('Vendor account created.',{
-						          autoClear: true
-						      	});
-							});
-					    });
-					});
-				});
-			});
-	    },
-	    joinAccounts: function(user){
-	    	let _id = user.id;
-	    	let vendor = this.get('vendorAcc');
-	    	let vendorLogin = this.get('vendorLog');
-	    	let _vendorid = this.get('vendorId');
-	    	vendorLogin.set('vendorID', _vendorid);
-	    	user.set('vendorAccount', vendor);
-	    	user.set('accountType', "vendor");
-
-			let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
-
-			let vendorStats = this.store.createRecord('vendorStat',
-				{
-					id: this.get('vendorId'),
-					createdBy: _id,
-					//Populate from other vendor stats model
-		            willingToTravel: _vendorStats.get('willingToTravel'),
-		            maxTravelDist: _vendorStats.get('maxTravelDist'),
-		            categories: _vendorStats.get('categories'),
-		            servicesDesc: _vendorStats.get('servicesDesc'),
-		            repName: _vendorStats.get('repName'),
-		            vatNum: _vendorStats.get('vatNum'),
-		            website: _vendorStats.get('website'),
-		            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
-		            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
-		            willContribute: _vendorStats.get('willContribute')
-				}
-			);
+		wedding.save().then(() => {
 			vendor.save().then(()=>{
 				vendorLogin.save().then(()=>{
 					user.save().then(()=>{
 						vendorStats.save().then(()=>{
 							this.transitionTo('index');
+							this.sendVerificationEmail();
 							this.controller.get('notifications').info('Vendor account created.',{
 					          autoClear: true
 					      	});
@@ -707,7 +665,49 @@ export default Ember.Route.extend({
 				    });
 				});
 			});
-	    },
+		});
+    },
+    joinAccounts: function(user){
+    	let _id = user.id;
+    	let vendor = this.get('vendorAcc');
+    	let vendorLogin = this.get('vendorLog');
+    	let _vendorid = this.get('vendorId');
+    	vendorLogin.set('vendorID', _vendorid);
+    	user.set('vendorAccount', vendor);
+    	user.set('accountType', "vendor");
+
+		let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
+
+		let vendorStats = this.store.createRecord('vendorStat',
+			{
+				id: this.get('vendorId'),
+				createdBy: _id,
+				//Populate from other vendor stats model
+	            willingToTravel: _vendorStats.get('willingToTravel'),
+	            maxTravelDist: _vendorStats.get('maxTravelDist'),
+	            categories: _vendorStats.get('categories'),
+	            servicesDesc: _vendorStats.get('servicesDesc'),
+	            repName: _vendorStats.get('repName'),
+	            vatNum: _vendorStats.get('vatNum'),
+	            website: _vendorStats.get('website'),
+	            monthlyAnalytics: _vendorStats.get('monthlyAnalytics'),
+	            montlyNewsletter: _vendorStats.get('montlyNewsletter'),
+	            willContribute: _vendorStats.get('willContribute')
+			}
+		);
+		vendor.save().then(()=>{
+			vendorLogin.save().then(()=>{
+				user.save().then(()=>{
+					vendorStats.save().then(()=>{
+						this.transitionTo('index');
+						this.controller.get('notifications').info('Vendor account created.',{
+				          autoClear: true
+				      	});
+					});
+			    });
+			});
+		});
+    },
 	
 	/*setupController: function(controller, model) {
 		this.controller.set('menuOpen', false)

@@ -66,122 +66,129 @@ export default Ember.Route.extend({
             let hash = this.hashCode(email);
             let passhash = this.hashCode(this.controller.get('password'));
             //if(email === null )
-
-            if (this.controller.get('name')) {  															//Check name field
-                if (passLength) {																			//Check password length
-                    if (this.controller.get('password') === this.controller.get('passwordConfirm')) {		//Check passwords match
-                        if (regex) {																		//Check email with regex
-                            if (customID) {																	//Check if user is using custom ID
-                                let customIDRegex = this.controller.get('isValidCID');
-                                if(customIDRegex) {
-                                    this.store.findRecord('vendor', customID).then(() => {						//Check if ID exists already
-                                        this.controller.get('notifications').error('User ID Already exists!',{
-                                            autoClear: true
-                                        });
-                                        this.controller.set('isCreating', false);
-                                        this.setSection(2);
-                                    }, () => {
-                                        this.store.findRecord('vendorLogin', hash).then(() => {					//Check if email is in use
-                                            this.controller.get('notifications').error('Email address already in use!',{
+            if (this.controller.get('rep')) {
+                if (this.controller.get('name')) {  															//Check name field
+                    if (passLength) {																			//Check password length
+                        if (this.controller.get('password') === this.controller.get('passwordConfirm')) {		//Check passwords match
+                            if (regex) {																		//Check email with regex
+                                if (customID) {																	//Check if user is using custom ID
+                                    let customIDRegex = this.controller.get('isValidCID');
+                                    if(customIDRegex) {
+                                        this.store.findRecord('vendor', customID, { reload: true }).then(() => {						//Check if ID exists already
+                                            this.controller.get('notifications').error('User ID Already exists!',{
                                                 autoClear: true
                                             });
                                             this.controller.set('isCreating', false);
-                                            this.setSection(1);
+                                            this.setSection(2);
                                         }, () => {
-                                            let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
-                                                id: hash,
-                                                email: email,
-                                                password: passhash,
-                                                passTemp: this.controller.get('password')
+                                            this.store.findRecord('vendorLogin', hash, { reload: true }).then(() => {					//Check if email is in use
+                                                this.controller.get('notifications').error('Email address already in use!',{
+                                                    autoClear: true
+                                                });
+                                                this.controller.set('isCreating', false);
+                                                this.setSection(1);
+                                            }, () => {
+                                                let vendorLogin = this.store.createRecord('vendorLogin', {			//Create vendorLogin record
+                                                    id: hash,
+                                                    email: email,
+                                                    password: passhash,
+                                                    passTemp: this.controller.get('password')
+                                                });
+                                                let vendor = this.store.createRecord('vendor', {				//Create vendor record
+                                                    id: this.controller.get('customID'),
+                                                    name: this.controller.get('name'),
+                                                    email: this.controller.get('email'),
+                                                    desc: this.controller.get('desc'),
+                                                    addressL1: this.controller.get('addressL1'),
+                                                    addressL2: this.controller.get('addressL2'),
+                                                    province: this.controller.get('selectedProvince'),
+                                                    city: this.controller.get('city'),
+                                                    postalcode: this.controller.get('postalcode'),
+                                                    cell: this.controller.get('cell'),
+                                                    maxItems: "15"
+                                                });	
+            									let _vendorid = vendor.get('id');													
+                                            	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
+                                                this.send('storeEmailPass', email, this.controller.get('password'));
+        										this.assignToUser(vendor, vendorLogin);							//Add id to user
                                             });
-                                            let vendor = this.store.createRecord('vendor', {				//Create vendor record
-                                                id: this.controller.get('customID'),
-                                                name: this.controller.get('name'),
-                                                email: this.controller.get('email'),
-                                                desc: this.controller.get('desc'),
-                                                addressL1: this.controller.get('addressL1'),
-                                                addressL2: this.controller.get('addressL2'),
-                                                province: this.controller.get('selectedProvince'),
-                                                city: this.controller.get('city'),
-                                                postalcode: this.controller.get('postalcode'),
-                                                cell: this.controller.get('cell'),
-                                                maxItems: "15"
-                                            });	
-        									let _vendorid = vendor.get('id');													
-                                        	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
-                                            this.send('storeEmailPass', email, this.controller.get('password'));
-    										this.assignToUser(vendor, vendorLogin);							//Add id to user
                                         });
+                                    } else {                                                                    //Is nto valid CID
+                                        this.controller.get('notifications').error('Custom Bloom Address cannot contain spaces or special characters and must be 3-20 characters long',{
+                                            autoClear: true,
+                                            clearDuration: 4000
+                                        });
+                                        this.controller.set('isCreating', false);
+                                        this.setSection(2);
+                                    }
+                                } else {
+                                    this.store.findRecord('vendorLogin', hash, { reload: true }).then(() => {						//Check if email is in use
+                                        this.controller.get('notifications').error('Email address already in use!',{
+                                            autoClear: true
+                                        });
+                                        this.controller.set('isCreating', false);
+                                        this.setSection(1);
+                                    }, () => {
+                                        let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
+                                            id: hash,
+                                            email: email,
+                                            password: passhash,
+                                            passTemp: this.controller.get('password')
+                                        });
+                                        let vendor = this.store.createRecord('vendor', {						//Create vendor record
+                                            name: this.controller.get('name'),
+                                            email: this.controller.get('email'),
+                                            desc: this.controller.get('desc'),
+                                            addressL1: this.controller.get('addressL1'),
+                                            addressL2: this.controller.get('addressL2'),
+                                            province: this.controller.get('selectedProvince'),
+                                            city: this.controller.get('city'),
+                                            postalcode: this.controller.get('postalcode'),
+                                            cell: this.controller.get('cell'),
+                                            maxItems: "15"
+                                        });	
+        								let _vendorid = vendor.get('id');
+                                    	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin	
+                                        this.send('storeEmailPass', email, this.controller.get('password'));									
+                                    	this.assignToUser(vendor, vendorLogin);									//Add id to user
                                     });
-                                } else {                                                                    //Is nto valid CID
-                                    this.controller.get('notifications').error('Custom Bloom Address cannot contain spaces or special characters and must be 3-20 characters long',{
-                                        autoClear: true,
-                                        clearDuration: 4000
-                                    });
-                                    this.controller.set('isCreating', false);
-                                    this.setSection(2);
                                 }
-                            } else {
-                                this.store.findRecord('vendorLogin', hash).then(() => {						//Check if email is in use
-                                    this.controller.get('notifications').error('Email address already in use!',{
-                                        autoClear: true
-                                    });
-                                    this.controller.set('isCreating', false);
-                                    this.setSection(1);
-                                }, () => {
-                                    let vendorLogin = this.store.createRecord('vendorLogin', {				//Create vendorLogin record
-                                        id: hash,
-                                        email: email,
-                                        password: passhash,
-                                        passTemp: this.controller.get('password')
-                                    });
-                                    let vendor = this.store.createRecord('vendor', {						//Create vendor record
-                                        name: this.controller.get('name'),
-                                        email: this.controller.get('email'),
-                                        desc: this.controller.get('desc'),
-                                        addressL1: this.controller.get('addressL1'),
-                                        addressL2: this.controller.get('addressL2'),
-                                        province: this.controller.get('selectedProvince'),
-                                        city: this.controller.get('city'),
-                                        postalcode: this.controller.get('postalcode'),
-                                        cell: this.controller.get('cell'),
-                                        maxItems: "15"
-                                    });	
-    								let _vendorid = vendor.get('id');
-                                	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin	
-                                    this.send('storeEmailPass', email, this.controller.get('password'));									
-                                	this.assignToUser(vendor, vendorLogin);									//Add id to user
-                                });
-                            }
 
+                            } else {
+                                this.controller.get('notifications').error('Not a valid email address!',{
+                                    autoClear: true
+                                });
+                                this.controller.set('isCreating', false);
+                                this.setSection(1);
+                            }
                         } else {
-                            this.controller.get('notifications').error('Not a valid email address!',{
+                            this.controller.get('notifications').error('Passwords don\'t match!',{
                                 autoClear: true
                             });
                             this.controller.set('isCreating', false);
                             this.setSection(1);
                         }
                     } else {
-                        this.controller.get('notifications').error('Passwords don\'t match!',{
+                        this.controller.get('notifications').error('Password not long enough!',{
                             autoClear: true
                         });
                         this.controller.set('isCreating', false);
                         this.setSection(1);
                     }
+
                 } else {
-                    this.controller.get('notifications').error('Password not long enough!',{
+                    this.controller.get('notifications').error('Please enter an account name!',{
                         autoClear: true
                     });
                     this.controller.set('isCreating', false);
-                    this.setSection(1);
+                   this.setSection(1);
                 }
-
             } else {
-                this.controller.get('notifications').error('Please enter a name!',{
-                    autoClear: true
-                });
-                this.controller.set('isCreating', false);
-               this.setSection(1);
+                    this.controller.get('notifications').error('Please enter your name!',{
+                        autoClear: true
+                    });
+                    this.controller.set('isCreating', false);
+                    this.setSection(2);
             }
         },
         checkBox: function(id){

@@ -86,6 +86,7 @@ Router.map(function() {
   this.route('guide');
   this.route('messaging', { path: '/messaging/:vendor_id' });
   this.route('logout');
+  this.route('user-signup');
   this.route('vendor-signup');
   this.route('mywedding');
 });

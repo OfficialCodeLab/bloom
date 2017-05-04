@@ -1,0 +1,46 @@
+<div class="index-main" style="padding-top:60px">
+	<div class="container">
+		<h1 class="font-times-header">Log in / Sign Up</h1><br>
+		<p style="font-style: italic; text-align: center;">Please log in or sign up below</p>
+		<hr>
+
+		<div class="text-center">
+	        <div style="padding-top: 20px; padding-bottom: 40px;">
+		        <div class="pear-profile-card card-sm unselectable">
+		    	{{#if section1}}
+		        	<div class="header-bg-block">
+		        		<h4>Log In</h4>
+		        	</div>
+		        	<div class="vendor-signup-inner">
+			            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=logInEmail type="email"}}<br>
+			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=logInPassword type="password"}}<br>
+					    <div style="padding: 20px 0 40px 0;">
+						    {{#mdl-button isRaised=true isAccent=true action="nextSection"}}Sign Up Form{{/mdl-button}}
+					        {{#mdl-button isRaised=true action="logBtn" disabled=isLoggingIn}}Log In {{#if isLoggingIn}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+					    </div>
+			        </div>
+			    {{else}}
+		        	<div class="header-bg-block">
+		        		<h4>Create Account</h4>
+		        	</div>
+		        	<div class="vendor-signup-inner">
+			            <i class="fa fa-book i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Name*' value=name}}<br>
+			            <i class="fa fa-book i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Surname*' value=surname}}<br>
+			            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=email type="email"}}<br>
+			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=password type="password"}}<br>
+			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Confirm Password*' value=passwordConfirm type="password"}}<br>
+
+					    <div style="padding: 20px 0 40px 0;">
+					        {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
+					        {{#mdl-button isRaised=true disabled=isCreating action="signBtn"}}Submit {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+					    </div>
+			    	</div>
+			    {{/if}}
+			    {{!-- {{paper-progress-linear value=percentLoaded}}				 --}}
+		        </div>
+	        </div>	
+		</div>
+	</div>
+	{{partial 'partials/footer'}}
+  	{{notification-container position="bottom"}}
+</div>
