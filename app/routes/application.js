@@ -92,6 +92,7 @@ export default Ember.Route.extend({
 				}
 			}).then((data) => {
 	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0]._uid);  
+       			_this.generateUid();
 				this.store.findRecord('user', data.currentUser.providerData[0]._uid).then((user)=>{
 					if(!this.get('vendorId')){
 						this.transitionTo('index');
@@ -123,6 +124,7 @@ export default Ember.Route.extend({
 						this.controller.get('notifications').info('User account created.',{
 				      autoClear: true
 		      	});
+		        		_this.generateUid();
 						this.transitionTo('user.new');
 					}
 				});
