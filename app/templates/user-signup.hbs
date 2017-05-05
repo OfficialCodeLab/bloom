@@ -14,6 +14,13 @@
 		        	<div class="vendor-signup-inner">
 			            <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address*' value=logInEmail type="email"}}<br>
 			            <i class="fa fa-asterisk i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Password*' value=logInPassword type="password"}}<br>
+			            <div style="font-size: 11px; text-align: right; ">
+			            	<div style="cursor: pointer; display: inline;"><a href {{action "resetPassword"}}><span style="padding-right: 20px;">Forgotten password?</span></a>         	
+					            {{#popover-on-element as |popover|}}
+								  Enter your email address above to send reset link
+								{{/popover-on-element}}
+							</div>
+						</div>
 					    <div style="padding: 20px 0 40px 0;">
 						    {{#mdl-button isRaised=true isAccent=true action="nextSection"}}Sign Up Form{{/mdl-button}}
 					        {{#mdl-button isRaised=true action="logBtn" disabled=isLoggingIn}}Log In {{#if isLoggingIn}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}

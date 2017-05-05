@@ -1,36 +1,81 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	beforeModel: function() {
-	  	var sesh = this.get("session").fetch().catch(function() {});
-	  	if(!this.get('session.isAuthenticated')){
-	        this.transitionTo('login');
-	      }
-	      return sesh;
-    },
-    model () {
-		//Before creating the record, clear the DS Store
-		this.store.unloadAll('userext');
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-		let providerID = this.get("session").get('currentUser').providerData[0].providerId + "";
-		let imgStr;
-		if(providerID === "facebook.com"){
-			imgStr = "http://graph.facebook.com/" + _id + "/picture?type=large";
-		} else {
-			let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
-			imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
-			//console.log("Image String: " + imgStrSM);
-		}
-		return Ember.RSVP.hash({
-	      userext: this.store.createRecord('userext', {
-			  imgurl: imgStr
-			}),
-	      user: this.store.peekRecord('user', _id)
-	    });
-	},
+	firebaseApp : Ember.inject.service(),
 	setupController(controller, model) {
 	    this._super(controller, model);
-	    Ember.set(controller, 'userext', model.userext);
-	    Ember.set(controller, 'user', model.user);
+	    if(this.get("session").get('currentUser').providerData[0].providerId === "password") {
+	    	controller.set('isPasswordAccount', true);
+	    }
 	  },
+	  actions: {
+	  	resetPassword() {	  	
+	    	let firebase = this.get('firebaseApp');
+	  		var auth = firebase.auth();
+	  		let _this = this;
+			let email = this.get("session").get('currentUser').providerData[0].uid + "";
+			this.controller.set('passwordUpdating', true);
+
+			auth.sendPasswordResetEmail(email).then(function() {
+			  // Email sent.
+			  	_this.controller.get('notifications').success('A password reset has been sent to your email address',{
+				    autoClear: true,
+				    clearDuration: 4200
+				});	
+				_this.controller.set('passwordUpdating', false);
+				_this.transitionTo('logout');
+			  	_this.controller.get('notifications').info("Please change your password and sign in again.",{
+				    autoClear: true,
+				    clearDuration: 4200
+				});	
+
+			}, function(error) {
+			  // An error happened.
+			  	_this.controller.get('notifications').error(error.message,{
+				    autoClear: true
+				});	
+				_this.controller.set('passwordUpdating', false);
+			});
+	  	},
+	  	showChangeEmail() {
+	  		this.controller.set('section0', false);
+	  	},
+	  	hideChangeEmail () {
+	  		this.controller.set('section0', true);
+	  	},
+	  	changeEmail() {
+			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+	    	let firebase = this.get('firebaseApp');
+	    	let _this = this;
+	  		var user = firebase.auth().currentUser;
+			_this.controller.set('emailUpdating', true);
+	  		//maybe check for valid email?
+
+			user.updateEmail(this.controller.get('newEmail')).then(function() {
+			  // Update successful.
+			  _this.store.findRecord('user', _id).then((user)=>{
+			  	user.set('email', _this.controller.get('newEmail'));
+			  	user.save().then(()=>{
+				  	_this.controller.get('notifications').success("Email address has been updated!",{
+					    autoClear: true,
+					    clearDuration: 4200
+					});	
+					_this.controller.set('emailUpdating', false);	
+					_this.transitionTo('logout'); 
+				  	_this.controller.get('notifications').info("Please log in with your new email address",{
+					    autoClear: true,
+					    clearDuration: 4200
+					});			
+			  	});
+			  });
+			}, function(error) {
+			  // An error happened.
+			  	_this.controller.get('notifications').error(error.message,{
+				    autoClear: true
+				});	
+				_this.controller.set('emailUpdating', false);
+			});
+
+	  	}
+	  }
 });

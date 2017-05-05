@@ -91,50 +91,19 @@ export default Ember.Route.extend({
 	    			scope: scope,
 				}
 			}).then((data) => {
-	    		//alert("Your id is: " + this.get("session").get('currentUser').providerData[0]._uid);  
-       			_this.generateUid();
-				this.store.findRecord('user', data.currentUser.providerData[0]._uid).then((user)=>{
-					if(!this.get('vendorId')){
-						this.transitionTo('index');
-						window.scrollTo(0,0);
-						this.controller.get('notifications').info('Logged in successfully.',{
-				          autoClear: true
-			      		});
-	      	} else {
-	      			user.get('vendorAccount').then((ven)=>{
-		      			if(ven === null || ven === undefined) {
-									this.joinAccounts(user);		      				
-		      			} else {
-		    					this.get('session').close().then(()=> {
-									_this.resetVendorSignup();
-						      		this.controller.get('notifications').error('Account already has vendor account!',{
-							          autoClear: true
-						      		});
-						      	});
-									this.transitionTo('login');
-									this.set('vendorId', null);		      				
-		      			}
-	      			}, ()=>{
-	      			});
-	      	}
-				}, ()=> {			
-					if(this.get('vendorId')){
-						this.createVendor();	
-					} else {
-						this.controller.get('notifications').info('User account created.',{
-				      autoClear: true
-		      	});
-		        		_this.generateUid();
-						this.transitionTo('user.new');
-					}
-				});
+				_this.completeLogin();
 			}, (error) => {
 				console.log(error);
+				var errorCode = error.code;
 			  	var errorMessage = error.message;
-				_this.resetVendorSignup();
-				this.controller.get('notifications').error(errorMessage,{
-				    autoClear: true
-				});
+			  	if(errorCode === 'auth/operation-not-supported-in-this-environment') {
+	  				_this.loginRedirect(provider, scope);
+			  	} else {
+					_this.resetVendorSignup();
+					_this.controller.get('notifications').error(errorMessage,{
+					    autoClear: true
+					});			  		
+			  	}
           	});
 	    },
 		createAccount: function(provider) {
@@ -594,6 +563,58 @@ export default Ember.Route.extend({
 		});
 	  // Update successful.
 	},
+	completeLogin(){
+		let _this = this;
+		this.generateUid();
+		this.store.findRecord('user', this.get('session').currentUser.providerData[0].uid).then((user)=>{
+			if(!this.get('vendorId')){
+				this.transitionTo('index');
+				window.scrollTo(0,0);
+				this.controller.get('notifications').info('Logged in successfully.',{
+		          autoClear: true
+	      		});
+  			} else {
+  				user.get('vendorAccount').then((ven)=>{
+	      			if(ven === null || ven === undefined) {
+								this.joinAccounts(user);		      				
+	      			} else {
+    					this.get('session').close().then(()=> {
+							_this.resetVendorSignup();
+				      		this.controller.get('notifications').error('Account already has vendor account!',{
+					          autoClear: true
+				      		});
+				      	});
+						this.transitionTo('login');
+						this.set('vendorId', null);		      				
+      				}
+  				}, ()=>{});
+  			}
+		}, ()=> {			
+			if(this.get('vendorId')){
+				this.createVendor();	
+			} else {
+				this.controller.get('notifications').info('User account created.',{
+		      autoClear: true
+      	});
+        		_this.generateUid();
+				this.transitionTo('user.new');
+			}
+		});
+	},
+	loginRedirect: function(provider, scope) {
+		let _this = this;
+		this.get('session').open('firebase', { provider: provider, redirect: true, settings: { scope: scope } }).then(function(result) {
+			_this.completeLogin();
+		}, function(error) {
+			console.log(error);
+			var errorCode = error.code;
+		  	var errorMessage = error.message;
+			_this.resetVendorSignup();
+			_this.controller.get('notifications').error(errorMessage,{
+			    autoClear: true
+			});	
+		});
+    },
 
     createVendor: function(uniqueID){	    
         this.generateUid();

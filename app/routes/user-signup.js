@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	tempId: '',
+    firebaseApp : Ember.inject.service(),
 	beforeModel: function() {
         var sesh = this.get("session").fetch().catch(function() {});
         if(this.get('session.isAuthenticated')){            
@@ -62,6 +63,35 @@ export default Ember.Route.extend({
             this.controller.get('notifications').warning('Sorry this is temporarily disabled for non-vendors!',{
                 autoClear: true
             });
+        },
+        resetPassword() {       
+            let firebase = this.get('firebaseApp');
+            var auth = firebase.auth();
+            let _this = this;
+            let email = this.controller.get('logInEmail');
+            
+            // this.controller.set('passwordUpdating', true);
+            if(email) {
+                auth.sendPasswordResetEmail(email).then(function() {
+                  // Email sent.
+                    _this.controller.get('notifications').success('A password reset has been sent to your email address',{
+                        autoClear: true,
+                        clearDuration: 4000
+                    }); 
+
+                }, function(error) {
+                  // An error happened.
+                    _this.controller.get('notifications').error(error.message,{
+                        autoClear: true
+                    }); 
+                    // _this.controller.set('passwordUpdating', false);
+                });                
+            } else {
+                _this.controller.get('notifications').success('Please enter your email adress in the box above',{
+                    autoClear: true,
+                    clearDuration: 4000
+                });                 
+            }
         },
         signBtnOld() {
             this.controller.set('isCreating', true);

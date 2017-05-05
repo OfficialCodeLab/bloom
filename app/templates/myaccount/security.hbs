@@ -3,5 +3,17 @@
 <hr>
 
 <div style="text-align: center; padding: 20px;">
-	<p>Coming soon!</p>
+	{{#if isPasswordAccount}}
+		{{#if section0}}
+			{{#mdl-button isRaised=true action="resetPassword" disabled=passwordUpdating}}Reset Password {{#if passwordUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+			<br><br>
+			{{mdl-button isRaised=true text='Change Email' action="showChangeEmail"}}
+		{{else}}
+			<div class="cascading-buttons">
+				<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='New Email Address' value=newEmail}}<br><br>
+				{{mdl-button isRaised=true isAccent=true text='back' action="hideChangeEmail"}}
+				{{#mdl-button isRaised=true action="changeEmail" disabled=emailUpdating}}Update {{#if emailUpdating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+			</div>
+		{{/if}}
+	{{/if}}
 </div>
