@@ -10,7 +10,7 @@ export default Model.extend({
 	vendorEmail: attr('string'),
 	vendorId: attr('string'),
 	subject: attr('string'),
-	sendInfo: attr('bool'),
+	sendInfo: attr('boolean'),
 	isValid: Ember.computed.match('email', /^.+@.+\..+$/),
 	isLong: Ember.computed.gte('message.length', 5),
 	isEnabled: Ember.computed.and('isValid', 'isLong'),

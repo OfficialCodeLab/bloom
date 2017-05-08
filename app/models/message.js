@@ -17,5 +17,5 @@ export default Model.extend({
   receiverId: attr('string'),
 
   //Information
-  sendInfo: attr('bool')  
+  sendInfo: attr('boolean')  
 });
