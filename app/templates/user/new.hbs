@@ -1,13 +1,55 @@
 <div id="usernew" class="index-main" style="padding-top:80px">
   <div class="container">
     <div style="text-align:center;">
-        <h1>Finish Creating Your Account</h1>
+        <h1>Welcome to Bloom!</h1>
         <hr>
-        <p>We would like some additional information to finish creating your account</p><br>
-        <p style="font-style: italic;">This is optional but recommended, you can scroll to the bottom of the page and click confirm for now</p>
+        <p>We would like some additional information to improve your account</p><br>
+        <p style="font-style: italic;">This is optional but recommended, you can always fill this in later</p>
     </div>
 
-    <div class="row text-center container-fluid"  style="padding-top: 40px;">
+    <div class="text-center">
+          <div style="padding-top: 20px; padding-bottom: 40px;">
+            <div class="pear-profile-card card-sm unselectable">
+          {{#if section0}}
+              <div class="header-bg-block">
+                <h4>Your Details</h4>
+              </div>
+              <div class="vendor-signup-inner">
+                <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.email}}<br>
+                <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.cell}}<br>
+                <i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.addressL1}}<br>
+                <i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.city}}<br>
+                <i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.postalcode}}<br>
+                <i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+            {{!-- </div> --}}
+              <div style="padding: 20px 0 40px 0;">
+                  {{#link-to 'logout'}}{{#mdl-button isRaised=true isAccent=true}}Cancel{{/mdl-button}}{{/link-to}}
+                  {{#mdl-button isRaised=true action="nextSection" disabled=isLoggingIn}}Next{{/mdl-button}}
+              </div>
+              </div>
+          {{else}}
+              <div class="header-bg-block">
+                <h4>Survey</h4>
+              </div>
+              <div class="vendor-signup-inner">
+                <i class="fa fa-heart i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Name of Your Spouse' value=model.spouse}}<br>
+                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Estimated Amount of Guests' value=estimatedGuests}}<br>
+                <br>{{!-- <strong>Important Dates</strong> --}}<hr><br>
+                {{#md-datepicker placeholder="Wedding Date" selectedDate=weddingDate dateChanged="dateChangedWed" minDate=dateCurrent}} {{/md-datepicker}}<br>
+                {{#md-datepicker placeholder="Your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}<br>
+
+              <div style="padding: 20px 0 40px 0;">
+                  {{#mdl-button isRaised=true isAccent=true action="prevSection"}}Back{{/mdl-button}}
+                  {{#mdl-button isRaised=true disabled=isCreating action="submitAccount"}}Submit {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+              </div>
+            </div>
+          {{/if}}
+          {{paper-progress-linear value=percentLoaded}}
+            </div>
+          </div>  
+    </div>
+
+    {{!-- <div class="row text-center container-fluid"  style="padding-top: 40px;">
       <div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
         <i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.email}}
         <i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.cell}}<br>
@@ -19,7 +61,7 @@
       <div style="padding: 20px 0px 40px 0px;">
         {{mdl-button isRaised=true text='CONFIRM' action='saveUser'}}
       </div>
-    </div>
+    </div> --}}
   </div>
     {{partial 'partials/footer'}}
   {{notification-container position="bottom"}}
