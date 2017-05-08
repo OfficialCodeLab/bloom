@@ -91,7 +91,7 @@ export default Ember.Route.extend({
 	    			scope: scope,
 				}
 			}).then((data) => {
-				_this.completeLogin();
+				_this.completeLogin(data);
 			}, (error) => {
 				console.log(error);
 				var errorCode = error.code;
@@ -531,13 +531,16 @@ export default Ember.Route.extend({
 		} catch(ex) {}
 	},
 	generateUid: function() {
-
-        let provData = this.get("session.currentUser").providerData[0];
-        if(this.get("session.provider") === "password") {
-        	Ember.set(provData, '_uid', this.get("session.currentUser").uid);      
-		} else {					
-        	Ember.set(provData, '_uid', this.get("session.currentUser").providerData[0].uid);   
-		}
+		let _this = this;
+		return new Promise(function(resolve, reject) {
+	        let provData = _this.get("session.currentUser").providerData[0];
+	        if(_this.get("session.provider") === "password") {
+	        	Ember.set(provData, '_uid', _this.get("session.currentUser").uid);      
+			} else {					
+	        	Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);   
+			}
+			resolve();
+		});
 	},
 	updateUser: function(name) {
 		let _this = this;
@@ -563,48 +566,51 @@ export default Ember.Route.extend({
 		});
 	  // Update successful.
 	},
-	completeLogin(){
+	completeLogin(data){
 		let _this = this;
-		this.generateUid();
-		this.store.findRecord('user', this.get('session').currentUser.providerData[0].uid).then((user)=>{
-			if(!this.get('vendorId')){
-				this.transitionTo('index');
-				window.scrollTo(0,0);
-				this.controller.get('notifications').info('Logged in successfully.',{
-		          autoClear: true
-	      		});
-  			} else {
-  				user.get('vendorAccount').then((ven)=>{
-	      			if(ven === null || ven === undefined) {
-								this.joinAccounts(user);		      				
-	      			} else {
-    					this.get('session').close().then(()=> {
-							_this.resetVendorSignup();
-				      		this.controller.get('notifications').error('Account already has vendor account!',{
-					          autoClear: true
-				      		});
-				      	});
-						this.transitionTo('login');
-						this.set('vendorId', null);		      				
-      				}
-  				}, ()=>{});
-  			}
-		}, ()=> {			
-			if(this.get('vendorId')){
-				this.createVendor();	
-			} else {
-				this.controller.get('notifications').info('User account created.',{
-		      autoClear: true
-      	});
-        		_this.generateUid();
-				this.transitionTo('user.new');
-			}
+		this.generateUid().then(()=>{
+			_this.store.findRecord('user', data.currentUser.providerData[0]._uid).then((user)=>{
+				if(!_this.get('vendorId')){
+					_this.transitionTo('index');
+					window.scrollTo(0,0);
+					_this.controller.get('notifications').info('Logged in successfully.',{
+			          autoClear: true
+		      		});
+	  			} else {
+	  				user.get('vendorAccount').then((ven)=>{
+		      			if(ven === null || ven === undefined) {
+							_this.joinAccounts(user);		      				
+		      			} else {
+	    					_this.get('session').close().then(()=> {
+								_this.resetVendorSignup();
+					      		_this.controller.get('notifications').error('Account already has vendor account!',{
+						          autoClear: true
+					      		});
+					      	});
+							_this.transitionTo('login');
+							_this.set('vendorId', null);		      				
+	      				}
+	  				}, ()=>{});
+	  			}
+			}, ()=> {			
+				if(_this.get('vendorId')){
+					_this.createVendor();	
+				} else {
+					_this.controller.get('notifications').info('User account created.',{
+			      autoClear: true
+	      	});
+	        		_this.generateUid();
+					_this.transitionTo('user.new');
+				}
+			});
+
+			
 		});
 	},
 	loginRedirect: function(provider, scope) {
 		let _this = this;
 		this.get('session').open('firebase', { provider: provider, redirect: true, settings: { scope: scope } }).then(function(result) {
-			_this.completeLogin();
+			_this.completeLogin(result);
 		}, function(error) {
 			console.log(error);
 			var errorCode = error.code;
