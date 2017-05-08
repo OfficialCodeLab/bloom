@@ -255,9 +255,17 @@ export default Ember.Route.extend({
 	    },
 	    openContactModal: function(vname, vemail, vid){
 	    	let contact = this.store.createRecord('contact');
+	    	if(this.get('session.isAuthenticated')){
+	    		let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+	    		contact.set('email', user.get('email'));
+	    	}
 	    	if (typeof vname !== 'undefined') { contact.set('vendor', vname); }
 	    	if (typeof vemail !== 'undefined') { contact.set('vendorEmail', vemail); }
-	    	if (typeof vid !== 'undefined') { contact.set('vendorId', vid); }
+	    	if (typeof vid !== 'undefined') { 
+	    		contact.set('vendorId', vid); 
+	    		contact.set('sendInfo', true);
+	    		contact.set('subject', 'New contact request from Bloom User');
+	    	}
 	    	this.controller.set("messageN", contact);
 	    	this.send('showModal', 'modal-contact', contact);
 	    },
@@ -346,7 +354,8 @@ export default Ember.Route.extend({
 					  from: contact.get('email'),
 					  subject: subject,
 					  html: contact.get('message'),
-					  senderId: user_id
+					  senderId: user_id,
+					  sendInfo: contact.get('sendInfo')
 					});
 					message.save();
 

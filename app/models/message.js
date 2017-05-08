@@ -14,5 +14,8 @@ export default Model.extend({
 
   //Vendor name
   receiverName: attr('string'),
-  receiverId: attr('string')
+  receiverId: attr('string'),
+
+  //Information
+  sendInfo: attr('bool')  
 });
