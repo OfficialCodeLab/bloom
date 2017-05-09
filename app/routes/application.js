@@ -19,15 +19,16 @@ export default Ember.Route.extend({
 
         //Filthy hackaround for password authentication ;)
 
-        sesh.then((s)=> {
+        return sesh.then((s)=> {
         	console.log(_this.get('session'));
 	  		if(!_this.get('session.isAuthenticated')){
 	  		} else {
-		        _this.generateUid();
+		        return _this.generateUid().then((session)=>{
+		        	return session;
+		        });
+
 	        }
         });
-
-        return sesh;
     },
 	model: function() {
 		//check server for the record of self
@@ -542,13 +543,19 @@ export default Ember.Route.extend({
 	generateUid: function() {
 		let _this = this;
 		return new Promise(function(resolve, reject) {
-	        let provData = _this.get("session.currentUser").providerData[0];
-	        if(_this.get("session.provider") === "password") {
-	        	Ember.set(provData, '_uid', _this.get("session.currentUser").uid);      
-			} else {					
-	        	Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);   
+			if(_this.get("session.currentUser")) {
+		        let provData = _this.get("session.currentUser").providerData[0];
+		        if(_this.get("session.provider") === "password") {
+		        	Ember.set(provData, '_uid', _this.get("session.currentUser").uid);      
+				} else {					
+		        	Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);   
+				}
+				resolve(_this.get("session"));				
+			} else {
+    			_this.get('session').close().then(()=> {				
+					resolve(_this.get("session"));	
+				});
 			}
-			resolve();
 		});
 	},
 	updateUser: function(name) {
