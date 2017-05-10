@@ -15,6 +15,13 @@ export default Ember.Route.extend({
 	},
 	actions: {
 
+		notImplemented() {
+			this.controller.get('notifications').info('This does nothing :)',{
+	            autoClear: true
+	        });	
+
+		},
+
 		linkAccounts(id) {
 			let user = this.store.peekRecord('user', id);
 			let vendorIdCurrent = user.get("vendorAccount").get('id');

@@ -1,55 +1,32 @@
 <div class="header-top"><h1>Users</h1></div>
+<div style='text-align: center'>
+  <p>User count: {{model.length}}</p>
+</div>
 
-
-{{!-- <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-          <th>Full Name</th>
-          <th>E-mail</th>
-          <th>Facebook</th>
-          <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-    {{#each model as |user|}}
-        <tr>
-            <td>{{user.name}} {{user.surname}}</td>
-            <td>{{user.email}}</td>
-            <td><a href="http://facebook.com/{{user.id}}">View Profile</a></td>
-            <td><div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div></td>
-        </tr>
-    {{/each}}
-
-    </tbody>
-</table> --}}
 <div class="container">
-
 {{#mdl-table content=model as |user|}}
-  {{#mdl-table-col label='Full Name'}}
-    {{user.name}} {{user.surname}}
-  {{/mdl-table-col}}
-  {{#mdl-table-col label='E-mail'}}
-    {{user.email}}
-  {{/mdl-table-col}}
-{{!--   {{#mdl-table-col label='Contact Number'}}
+    {{#mdl-table-col label='Full Name'}}
+      {{user.name}} {{user.surname}}
+    {{/mdl-table-col}}
 
-  {{/mdl-table-col}} --}}
-  {{#mdl-table-col label="Accounts"}}
-      <a href="http://facebook.com/{{user.id}}">
-          <i style="font-size: 24px;" class="fa fa-facebook-square"></i>
-      </a>&nbsp;&nbsp;
+    {{#mdl-table-col label='E-mail'}}
+      {{user.email}}
+    {{/mdl-table-col}}
+
+      {{#mdl-table-col label="Accounts"}}
+        <div style="text-align: left">
       <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
           <i style="font-size: 24px;" class="fa fa-database"></i>
       </a>&nbsp;&nbsp;
-      {{!-- <a href="#" {{action "linkAccounts" user.id}}>
-          <i style="font-size: 24px;" class="fa fa-link"></i>
-      </a> --}}
-  {{/mdl-table-col}}
- {{!--  {{#mdl-table-col label='Attending'}}
+      {{#if user.vendorAccount}}
+        {{#link-to 'vendor-profile' user.vendorAccount.id}}<i style="font-size: 24px;" class="fa fa-truck"></i>{{/link-to}}
+      {{else}}
+        <a href='' {{action "notImplemented"}}><i style="font-size: 24px;" class="fa fa-diamond"></i></a>
+      {{/if}}</div>
+    {{/mdl-table-col}}
 
-  {{/mdl-table-col}} --}}
-  {{#mdl-table-col label='Delete'}}
-    <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
-  {{/mdl-table-col}}
+    {{#mdl-table-col label='Delete'}}
+      <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+    {{/mdl-table-col}}
 {{/mdl-table}}
 </div>

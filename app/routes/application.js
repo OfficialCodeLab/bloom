@@ -360,17 +360,21 @@ export default Ember.Route.extend({
 					});
 					message.save();
 
-					contact.save().then(() => {
+					// contact.save().then(() => {
 					  //this.trackEvent('contact', 'send', contact.get('email'), 1);
-					  this.controller.get('notifications').info('Message sent successfully!',{
-					    autoClear: true
-					  });
-
-					  
-					  _this.storeContactRequest(contact.get('vendorId'), contact.get('vendorEmail'), user_id);
-					  
-	    			  contact.deleteRecord();
+					this.controller.get('notifications').info('Message sent successfully!',{
+						autoClear: true
 					});
+
+
+					_this.storeContactRequest(contact.get('vendorId'), contact.get('vendorEmail'), user_id);
+
+					if(to) { //Send to Bloom Support
+						contact.save();
+					} else {
+						contact.deleteRecord();
+					}
+					// });
 				} else {
 					this.controller.get('notifications').error('CAPTCHA form invalid!',{
 					    autoClear: true
