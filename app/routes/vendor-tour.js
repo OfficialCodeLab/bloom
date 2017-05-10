@@ -10,5 +10,10 @@ export default Ember.Route.extend({
 	  		let sorted = items.sortBy('id');
 	      return sorted;
 	    });
+	  },
+	  actions: {
+	  	revealPhoneNumber() {
+	  		this.controller.set('phoneNumVisible', true);
+	  	}
 	  }
 });

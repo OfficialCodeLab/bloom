@@ -1,6 +1,7 @@
 <div class="container">
 
 <div class="header-top"><h1>Vendors</h1></div>
+<p style="text-align: center;">Vendor count: {{model.length}}</p>
 
 {{!-- <table class="table table-bordered table-striped">
     <thead>
@@ -49,6 +50,9 @@
   {{/mdl-table-col}}
   {{#mdl-table-col label='Details'}}
     <div {{action "showLoggedInUsers" vendor.id}} class="tb-btn">{{mdl-button icon="people"}}</div>
+  {{/mdl-table-col}}
+  {{#mdl-table-col label='Listing'}}
+    {{#if vendor.catItems}}{{mdl-button icon="check"}}{{else}}{{/if}}
   {{/mdl-table-col}}
   {{#mdl-table-col label='Delete'}}
     <div {{action "destroyVendor" vendor.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
