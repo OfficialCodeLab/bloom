@@ -701,7 +701,7 @@ export default Ember.Route.extend({
 				vendorLogin.save().then(()=>{
 					user.save().then(()=>{
 						vendorStats.save().then(()=>{
-							this.transitionTo('index');
+							this.transitionTo('index.vendor');
 							this.sendVerificationEmail();
 							this.controller.get('notifications').info('Vendor account created.',{
 					          autoClear: true
@@ -744,7 +744,7 @@ export default Ember.Route.extend({
 			vendorLogin.save().then(()=>{
 				user.save().then(()=>{
 					vendorStats.save().then(()=>{
-						this.transitionTo('index');
+						this.transitionTo('index.vendor');
 						this.controller.get('notifications').info('Vendor account created.',{
 				          autoClear: true
 				      	});

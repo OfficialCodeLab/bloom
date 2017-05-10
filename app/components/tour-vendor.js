@@ -138,12 +138,41 @@ const TourVendorComponent = Ember.Component.extend({
 				    }
 				  },
 				  {
-				    id: 'outro',
+				    id: 'branding-tour',
 				    options: {				    	
 				      attachTo: {
 						  element: '#nav-vendor-branding',
 						  on: 'bottom'
 						},
+				      builtInButtons: [
+				        {
+				          classes: 'shepherd-button-primary',
+				          text: 'Back',
+				          type: 'back'
+				        },
+				        {
+				          classes: 'shepherd-button-primary',
+				          text: 'Next',
+				          type: 'next'
+				        }
+				      ],
+				  	  disableScroll: true,
+				      title: 'Upload your branding',
+				      text: ['Help users identify you better.<br>So that they know to come to you first.'],
+				      when: {
+				        cancel: () => {
+				        	this.completeTour();
+				        }
+				      }
+				    }
+				  },
+				  {
+				    id: 'outro',
+				    options: {				    	
+				  //     attachTo: {
+						//   element: '#nav-vendor-branding',
+						//   on: 'bottom'
+						// },
 				      builtInButtons: [
 				        {
 				          classes: 'shepherd-button-secondary',
@@ -152,8 +181,8 @@ const TourVendorComponent = Ember.Component.extend({
 				        }
 				      ],
 				  	  disableScroll: true,
-				      title: 'Upload your branding',
-				      text: ['Help users identify you better.<br>So that they know to come to you first.'],
+				      title: 'Finalize your listing',
+				      text: ['Just one more step to get you seen by users on Bloom.<br>Click the ADD SERVICE button below to get started!'],
 				      when: {
 				      	hide: () => {
 				        	this.completeTour();				      		
