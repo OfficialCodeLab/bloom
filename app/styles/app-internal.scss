@@ -2494,6 +2494,29 @@ $font_0: FontAwesome;
   \___/ \__|_|_|_|\__|\__, |
                       |___/
 \*==============================================================================*/
+
+.search-box button {	
+    border-radius: 50%;
+    font-size: 24px;
+    height: 32px;
+    margin-left: 0;
+    margin-right: 0;
+    min-width: 32px;
+    width: 36px;
+    padding: 0;
+    overflow: hidden;
+    color: inherit;
+    line-height: 20px;
+    color: $color-main !important;
+    box-shadow: none !important;
+    background-color: white !important;
+}
+
+.search-box {
+	md-input-container {
+		width: 100% !important;
+	}
+}
 .showOnMobile{
 	display: none;
 }

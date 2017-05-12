@@ -1,55 +1,28 @@
 import Ember from 'ember';
+import { EKMixin } from 'ember-keyboard';
+import { keyUp, keyDown } from 'ember-keyboard';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(EKMixin, {
 	model(){
 		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		return this.store.findRecord('user', _id);				
 	},
+	activateKeyboard: Ember.on('init', function() {
+	    this.set('keyboardActivated', true);
+	}),
+	aFunction: Ember.on(keyUp('Enter'), function(event) {
+		if(this.controller.get('searchPartial')) {
+	  		this.searchUser(event);
+		}
+	}),
 	actions: {
-		searchUser(){
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-			let _name = this.controller.get('name') + "";
-			_name = _name.toLowerCase();
-			let _oldname = this.controller.get('oldname') + "";
-			_oldname = _oldname.toLowerCase();
-			let key = 0;
-			if(_name !== '' && _name !== " " && _name !== _oldname){
-				this.controller.set('responseMessage', "");
-				//console.log("SEARCHING FOR: " + _name);
-				let searchResults = [];
-				this.controller.set('searching', true);
-				this.store.query('user',  {}).then((users) =>{
-				  	users.forEach(function(user){
-						let fullname = user.get('name') + " " + user.get('surname'); 	
-						if(~fullname.toLowerCase().indexOf(_name)){
-							searchResults.pushObject({
-								name: fullname,
-								id: user.get("id"),
-								response: '',
-								adding: '',
-								key: key
-							});
-							key++;
-						}
-					});
-					if(JSON.stringify(searchResults) === "[]"){
-						this.controller.get('notifications').warning('No Users with that name were found.',{
-				            autoClear: true
-				        });
-					}
-					this.controller.set('oldname', _name);
-					this.controller.set('searchResults', searchResults);
-					this.controller.set('searching', false);
-					let _this = this;
-					Ember.run.next(function () {
-						_this.controller.get('scroller').scrollVertical("#searchRes", {duration:800});
-				    });
-  					this.store.unloadAll('user');
-		  			this.store.findRecord('user', _id);
-				});
-			} else {
-
+		enterKeyPress(event) {
+			if(this.controller.get('searchPartial')) {
+		  		this.searchUser(event);
 			}
+		},
+		searchUser(event){
+			this.searchUser(event);
 		},
 		ok: function () {
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
@@ -82,30 +55,42 @@ export default Ember.Route.extend({
 						let len = circle.get('length');	
 						let i = 0;	
 						var BreakException = {}; //  For lazy hackaround to break .forEach() loop
-						try{
-							circle.forEach(function(c){
-					  			i++;
-					  			if(c.id === stats.id){
-					  				that.controller.get('notifications').warning('User is already in your inner circle!',{
-										autoClear: true
-									});
-									Ember.set(searchRes, 'adding', '');								
-	    							throw BreakException; // Yep I am a monster
-					  			} else if (len === i) {
-									user.get('innercircle').pushObject(stats);
-									user.save().then(()=>{
-										that.controller.get('notifications').success('User added successfully!',{
-										  autoClear: true
+						if(len === 0) {
+							user.get('innercircle').pushObject(stats);
+							user.save().then(()=>{
+								that.controller.get('notifications').success('User added successfully!',{
+								  autoClear: true
+								});
+								that.sendMail(user, _user);
+								Ember.set(searchRes, 'adding', '');
+							});
+						} else {
+							try{
+								circle.forEach(function(c){
+						  			i++;
+						  			if(c.id === stats.id){
+						  				that.controller.get('notifications').warning('User is already in your inner circle!',{
+											autoClear: true
 										});
-										that.sendMail(user, _user);
-										Ember.set(searchRes, 'adding', '');
-									});
-					  			}
-					  		});
-						} catch (ex){
-							if (ex !== BreakException) {
-								throw ex;
+										Ember.set(searchRes, 'adding', '');								
+		    							throw BreakException; // Yep I am a monster
+						  			} else if (len === i) {
+										user.get('innercircle').pushObject(stats);
+										user.save().then(()=>{
+											that.controller.get('notifications').success('User added successfully!',{
+											  autoClear: true
+											});
+											that.sendMail(user, _user);
+											Ember.set(searchRes, 'adding', '');
+										});
+						  			}
+						  		});
+							} catch (ex){
+								if (ex !== BreakException) {
+									throw ex;
+								}
 							}
+
 						}
 						
 					});
@@ -165,6 +150,10 @@ export default Ember.Route.extend({
 			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
   			this.store.findRecord('user', _id);
 		}
+	},
+	searchUser: function(event) {		
+        // var controller = this.controllerFor(this);
+        this.get('controller').send('enterKeyPress', event);
 	},
 	sendMail: function (user, _user){
 		this.store.findRecord('user', _user.id).then((__user) => {

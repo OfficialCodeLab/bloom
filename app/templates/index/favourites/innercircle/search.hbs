@@ -1,15 +1,30 @@
 <div class="container-fluid" style="padding: 0px 10px 60px 10px; text-align: center;">
 	<div class="row">
 			<div class="col-sm-6 col-sm-offset-3" style="padding-top:5px">
-				<div class="row">
-					<div class="col-xs-2" style="padding-top: 20px;">
-						{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}
+				<div class="row search-box">
+					{{!-- <div class="col-xs-2" style="padding-top: 20px;">
+						
 					</div>
 					<div class="col-xs-8">
 						{{mdl-textfield disabled=searching label='Name to search for' value=name}}
 					</div>
 					<div class="col-xs-2" style="padding-top: 20px;">
 						{{mdl-button icon="search" action="searchUser" disabled=searching}}
+					</div> --}}
+					<div class="col-xs-2" style="padding-top: 20px;">
+						{{mdl-button icon="arrow_back" action="backBtn" disabled=isDisabled}}						
+					</div>
+					<div class="col-xs-10">
+						{{#paper-form onSubmit=(action "enterKeyPress") as |form|}}
+						<form onsubmit={{action form.onSubmit}}>
+							<div class="col-xs-10">{{form.input label="Name" value=name onChange=(action (mut name))
+							                             isTouched=true}}</div>
+							<div class="col-xs-2" style="padding-top: 10px;">{{#form.submit-button raised=true primary=true
+							                                      onClick=(action "enterKeyPress")}}
+							<i class="material-icons">search</i>
+							 {{/form.submit-button}}</div>
+							</form>
+						{{/paper-form}}
 					</div>
 				</div>
 			</div>
@@ -20,32 +35,27 @@
     		{{mdl-spinner}}
 		</div>
 	</div>
-	{{/if}}
-	{{#if responseMessage}}
-		<div class="row text-center">
-		    <div class="col-sm-offset-2 col-sm-8 alert alert-warning" {{action 'closeMessage'}}>{{responseMessage}}
-		    <p class="tiny-text">Tap this message to close it</p></div>
-	    </div>
-	{{/if}}
-	{{#if searchResults}}
-		<div id="searchRes" class="row">
-			<h3>Search Results</h3>
-			{{#mdl-table content=searchResults as |user|}}
-		      {{#mdl-table-col label='Full Name'}}
-		        {{user.name}}
-		      {{/mdl-table-col}}
-		      {{#mdl-table-col label='Send Request'}}
-		      	<div {{action "addInnerCircle" user}} class="text-center">
-		      		{{#if user.adding}}
-		      			<div style="padding-top: 10px;">
-		      				{{mdl-spinner}}
-		      			</div>
-		      		{{else}}
-						{{mdl-button icon="person_add" disabled=user.adding}}
-		      		{{/if}}
-		      	</div>
-		      {{/mdl-table-col}}
-		    {{/mdl-table}}
-		</div>
+	{{else}}
+		{{#if searchResults}}
+			<div id="searchRes" class="row">
+				<h3>Search Results</h3>
+				{{#mdl-table content=searchResults as |user|}}
+			      {{#mdl-table-col label='Full Name'}}
+			        {{user.name}}
+			      {{/mdl-table-col}}
+			      {{#mdl-table-col label='Send Request'}}
+			      	<div {{action "addInnerCircle" user}} class="text-center">
+			      		{{#if user.adding}}
+			      			<div style="padding-top: 10px;">
+			      				{{mdl-spinner}}
+			      			</div>
+			      		{{else}}
+							{{mdl-button icon="person_add" disabled=user.adding}}
+			      		{{/if}}
+			      	</div>
+			      {{/mdl-table-col}}
+			    {{/mdl-table}}
+			</div>
+		{{/if}}
 	{{/if}}
 </div>
