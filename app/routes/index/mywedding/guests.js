@@ -1,16 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	model(){		
+	model(){
 		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-		return this.store.findRecord('wedding', _id);	
+		return this.store.findRecord('wedding', _id);
 	},
 	actions: {
 		ok: function () {
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			switch(_modalData.get('action')) {
 				case 'delete':
-					
+
 					let model = this.store.peekRecord('guest', this.controller.get('guestId'));
 					model.destroyRecord().then(()=>{
 						this.controller.get('notifications').info('Guest has been removed!',{
@@ -18,7 +18,6 @@ export default Ember.Route.extend({
 						});
 
 					});
-
 					break;
 			}
 		},
@@ -32,14 +31,14 @@ export default Ember.Route.extend({
 			// Clean up dirty attributes
 			if(this.get('isGuestSaved') === false){
 				let id = this.controller.get('guestEditId');
-	    		let guest = this.store.peekRecord('guest', id); 
+	    		let guest = this.store.peekRecord('guest', id);
 	    		guest.rollbackAttributes();
 			}
 
 			this.send('closedGuestModal');
 		},
 		editGuest: function(id){
-    		let guest = this.store.peekRecord('guest', id); 
+    		let guest = this.store.peekRecord('guest', id);
 			this.send('openGuestModal', guest);
 			this.controller.set('guestEditId', id);
 			this.set('isGuestSaved', false);
@@ -61,7 +60,7 @@ export default Ember.Route.extend({
 	    			this.controller.get('notifications').info('Guest updated successfully!',{
 					    autoClear: true
 					});
-	    		});				
+	    		});
 			}
 		},
 	    select0: function(){
@@ -89,5 +88,5 @@ export default Ember.Route.extend({
 	        this.controller.set('isSelected3', true);
 	    },
 	}
-        
+
 });

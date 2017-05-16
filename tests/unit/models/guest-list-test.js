@@ -2,7 +2,7 @@ import { moduleForModel, test } from 'ember-qunit';
 
 moduleForModel('guest-list', 'Unit | Model | guest list', {
   // Specify the other units that are required for this test.
-  needs: ['model:guest']
+  needs: []
 });
 
 test('it exists', function(assert) {

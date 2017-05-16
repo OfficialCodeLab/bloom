@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	name: '',
-	searching: '',
 	responseMessage: '',
 	searchPartial: '',
 	searching: false,
@@ -32,7 +31,7 @@ export default Ember.Controller.extend({
 			let searchResults = [];
 			this.store.query('user',  {}).then((users) =>{
 			  	users.forEach(function(user){
-					let fullname = user.get('name') + " " + user.get('surname'); 	
+					let fullname = user.get('name') + " " + user.get('surname');
 					if(~fullname.toLowerCase().indexOf(_name)){
 						searchResults.pushObject({
 							name: fullname,
@@ -54,7 +53,7 @@ export default Ember.Controller.extend({
 				this.set('searching', false);
 				let _this = this;
 				Ember.run.next(function () {
-					_this.set('searching', false)
+					_this.set('searching', false);
 					_this.get('scroller').scrollVertical("#searchRes", {duration:800});
 			    }, 50);
 					this.store.unloadAll('user');
