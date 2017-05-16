@@ -14,12 +14,12 @@ export default Ember.Route.extend({
           let user = this.store.peekRecord('user', _id);
           user.get('vendorAccount').then((ven)=>{
             if(ven === null || ven === undefined) {
-              this.transitionTo('index.vendor.login');     
+              this.transitionTo('index.vendor.login');
             }
-          }, ()=>{ 
-            this.transitionTo('index.vendor.login');     
+          }, ()=>{
+            this.transitionTo('index.vendor.login');
           });
-          
+
 
           return sesh;
     },
@@ -40,18 +40,20 @@ export default Ember.Route.extend({
   	    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
         let user = this.store.peekRecord('user', _id);
   	    let vendorId = user.get('vendorAccount').get('id');
-     	this.store.findRecord('vendor-stat', vendorId).then((vs)=>{
+     	this.store.findRecord('vendor-stat', vendorId, { reload: true }).then((vs)=>{
 
      		//If vendor is willing to travel, autopopulate
      		let willingToTravel = vs.get('willingToTravel');
      		if(willingToTravel === 'true'){
      			let maxTravelDist = vs.get('maxTravelDist');
-     			controller.set('maxDist', maxTravelDist);
-     			controller.set('willingToTravel', '1');     			
-     		} else if(willingToTravel === 'false') { 
+          if(maxTravelDist) { //YES
+       			controller.set('maxDist', maxTravelDist);
+       			controller.set('willingToTravel', '1');
+          } else {  //Online
+         		controller.set('willingToTravel', '3');
+          }
+     		} else { //NO
      			controller.set('willingToTravel', '2');
-     		} else {
-     			controller.set('willingToTravel', '3');
      		}
 
      		//If vendor has selected one category, auto select it for them
@@ -67,7 +69,7 @@ export default Ember.Route.extend({
           controller.set('category', null);
         }
 
-			this.store.findRecord('vendor', vendorId).then((vendor)=>{
+			this.store.findRecord('vendor', vendorId, { reload: true }).then((vendor)=>{
 	     		//If auto listing, fill in description
 	     		if(controller.get('isAutoListing') === 'true') {
 	     			controller.set('desc', vs.get('servicesDesc'));
@@ -79,7 +81,7 @@ export default Ember.Route.extend({
 	     				Ember.run.next(function () {
 	     					controller.set('refreshFields', true);
 					    });
-	     		} 
+	     		}
 
      			//If province is set up, fill in
 	     		if(vendor.get('province')) {
@@ -151,8 +153,8 @@ export default Ember.Route.extend({
 			this.controller.set('confirmTransition', 1);
 
 
-			if(_blob){		
-		    	this.destroyBlob(_blob);    
+			if(_blob){
+		    	this.destroyBlob(_blob);
 			}
 			// console.log(_transition);
 			this.transitionTo(_transition);
@@ -173,7 +175,7 @@ export default Ember.Route.extend({
 					        //console.log("Removed");
 					      }
 					    );
-		            } 
+		            }
 	            	_that.controller.set('imgBlob', Blob);
 	            	_that.controller.set('imageURL', Blob.url);
 		        });
@@ -190,14 +192,14 @@ export default Ember.Route.extend({
 		            let _modalData;
 		            let modalDataId;
 		            if(this.controller.get('modalDataId')){
-						_modalData = this.store.peekRecord('modal-data', this.controller.get('modaDataId'));	
-		            	this.send('showModal', 'modal-confirm', _modalData);	            	
+						_modalData = this.store.peekRecord('modal-data', this.controller.get('modaDataId'));
+		            	this.send('showModal', 'modal-confirm', _modalData);
 		            } else {
 				    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "You have unsaved changes."});
 				     	this.controller.set('modalDataId', _modalData.get('id'));
 		            	this.send('showModal', 'modal-confirm', _modalData);
-		            }    
-					// let modalData = this.store.peekRecord('modelDataId', this.controller.get('modalDataId'));  
+		            }
+					// let modalData = this.store.peekRecord('modelDataId', this.controller.get('modalDataId'));
 		            // this.controller.set('tempTransition', transition);
 	    		} else {
 	    			this.controller.set('confirmTransition', 0);
@@ -216,13 +218,13 @@ export default Ember.Route.extend({
 							// this.controller.set('imgBlob', '');
 							// this.controller.set('isCreating', false);
 
-			    // 	if(_blob){		
-		     //        	this.destroyBlob(_blob);    
+			    // 	if(_blob){
+		     //        	this.destroyBlob(_blob);
 			    // 	}
 		    	// } else {
 			    //       transition.abort();
-		     //    }	    		
-	    	} 
+		     //    }
+	    	}
 	    	// else {
 	    	// 	this.controller.set('itemCreated', true);
 	    	// }
@@ -236,7 +238,7 @@ export default Ember.Route.extend({
 				let _blob = this.controller.get('imgBlob');
 				let _imgurl = this.controller.get('imageURL');
 				let province = this.controller.get('province');
-				let provinceCode = "";				
+				let provinceCode = "";
 				let shortCode = province.get('code').split('_');
 				provinceCode = shortCode[1].toUpperCase();
 
@@ -254,11 +256,11 @@ export default Ember.Route.extend({
                   if(this.controller.get('province')) {
                     let travelObj = this.retrieveTravelInfo();
                     let priceObj = this.retrievePriceInfo();
-                    let newItem = this.store.createRecord('cat-item', {   
-                      name: this.controller.get('name'),      
-                      desc: this.controller.get('desc'),      
-                      price: priceObj.price,    
-                      minPrice: priceObj.minPrice,    
+                    let newItem = this.store.createRecord('cat-item', {
+                      name: this.controller.get('name'),
+                      desc: this.controller.get('desc'),
+                      price: priceObj.price,
+                      minPrice: priceObj.minPrice,
                       maxPrice: priceObj.maxPrice,
                       city: this.controller.get('city'),
                       country: 'South Africa',
@@ -278,16 +280,16 @@ export default Ember.Route.extend({
                         province.get('catItems').pushObject(newItem);
                         province.save().then(()=>{
                           vndr.get('catItems').pushObject(newItem);
-                          vndr.save().then(()=>{     
+                          vndr.save().then(()=>{
                             this.controller.set('itemCreated', true);
                             this.set('listingCreated', true);
 
                             if(this.get('uploadsComplete') === true && this.controller.get('isCreating') === true) {
                               this.completeListing();
                             }
-                          });                     
-                        }); 
-                      }); 
+                          });
+                        });
+                      });
                     });
 
                   } else {
@@ -302,43 +304,43 @@ export default Ember.Route.extend({
                   this.controller.set('isCreating', false);
                   this.controller.get('notifications').error('Please select a category for your listing',{
                       autoClear: true
-                  }); 
-                }	
+                  });
+                }
 
 							} else {
                 this.setSection(1);
 								this.controller.set('isCreating', false);
 								this.controller.get('notifications').error('Please enter a name for your listing',{
 		                autoClear: true
-		            });  							
-							}						
+		            });
+							}
 						} else {
 							this.controller.set('isCreating', false);
 							this.controller.get('notifications').error('Please select a main image for your listing.',{
 	                autoClear: true
-	            });  							
+	            });
 						}
 					} else {
 						this.controller.set('isCreating', false);
 						this.controller.get('notifications').error('You have reached maximum listings.\nPlease upgrade your plan to post more.',{
                 autoClear: true
-            });  
+            });
 					}
 
-					
+
 				});
 			} catch(ex){
 				this.controller.set('isCreating', false);
 				this.controller.get('notifications').error('Please select a category or there was a problem.',{
             autoClear: true
-        }); 
+        });
 			}
 		}
 	},
 	isItemCreated(){
 		 if(this.controller.get('name') || this.controller.get('price') || this.controller.get('desc') || this.controller.get('imageURL')){
 			return true;
-		}	
+		}
 
 		return false;
 
@@ -398,7 +400,7 @@ export default Ember.Route.extend({
         _this.controller.set('isCreating', false);
         _this.controller.get('notifications').error('There was a problem uploading your images, please try again.',{
             autoClear: true
-        }); 
+        });
 				//ERROR
 			}, function() {
 				//COMPLETE
@@ -411,7 +413,7 @@ export default Ember.Route.extend({
 				let catItem = _this.store.peekRecord('cat-item', itemId);
 				catItem.set('imageURL', downloadURL);
 				catItem.save().then(()=>{
-					if(tasksComplete === tasksToDo){					
+					if(tasksComplete === tasksToDo){
 						_this.set('uploadsComplete', true);
 						// console.log("Complete");
 
@@ -438,7 +440,7 @@ export default Ember.Route.extend({
           _this.controller.set('isCreating', false);
           _this.controller.get('notifications').error('There was a problem uploading your images, please try again.',{
               autoClear: true
-          }); 
+          });
 				}, function() {
 					//COMPLETE
 					var downloadURL = upload.snapshot.downloadURL;
@@ -449,7 +451,7 @@ export default Ember.Route.extend({
 					let catItem = _this.store.peekRecord('cat-item', itemId);
 					catItem.set(imageNum, downloadURL);
 					catItem.save().then(()=>{
-						if(tasksComplete === tasksToDo){					
+						if(tasksComplete === tasksToDo){
 							_this.set('uploadsComplete', true);
 							// console.log("Complete");
 
@@ -558,7 +560,7 @@ export default Ember.Route.extend({
         this.controller.set('isCreating', false);
     	this.controller.get('notifications').info('Listing created successfully!',{
             autoClear: true
-        }); 
+        });
         this.transitionTo('index.vendor');
 	},
 	retrieveTravelInfo: function(){
@@ -583,7 +585,7 @@ export default Ember.Route.extend({
         }
 
         return {
-        	willingTravel: willingTravel, 
+        	willingTravel: willingTravel,
         	travelDist: travelDist
         };
 	},
@@ -603,7 +605,7 @@ export default Ember.Route.extend({
             break;
 
             default: //Na
-                
+
             break;
         }
 

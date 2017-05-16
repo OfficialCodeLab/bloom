@@ -36,31 +36,34 @@ export default Ember.Route.extend({
 
  		//If vendor is willing to travel, autopopulate
  		let willingToTravel = catItem.get('willingToTravel');
- 		if(willingToTravel === 'true'){
- 			controller.set('maxDist', catItem.get('maxTravelDist'));
- 			controller.set('willingToTravel', '1');     			
- 		} else if(willingToTravel === 'false') { 
- 			controller.set('willingToTravel', '2');
- 		} else {
- 			controller.set('willingToTravel', '3');
- 		}
+		if(willingToTravel === 'true'){
+			let maxTravelDist = catItem.get('maxTravelDist');
+			if(maxTravelDist) { //YES
+				controller.set('maxDist', maxTravelDist);
+				controller.set('willingToTravel', '1');
+			} else {  //Online
+				controller.set('willingToTravel', '3');
+			}
+		} else { //NO
+			controller.set('willingToTravel', '2');
+		}
 
  		//Set up and select price
  		let price = catItem.get('price');
  		let minPrice = catItem.get('minPrice');
  		let maxPrice = catItem.get('maxPrice');
- 		if(price){ 
+ 		if(price){
  			// controller.set('maxDist', maxTravelDist);
  			controller.set('pricingOption', '1');
- 			controller.set('price', price);     			
- 		} else if(minPrice || maxPrice) { 
+ 			controller.set('price', price);
+ 		} else if(minPrice || maxPrice) {
  			controller.set('pricingOption', '2');
- 			controller.set('minPrice', minPrice);   
- 			controller.set('maxPrice', maxPrice);   
+ 			controller.set('minPrice', minPrice);
+ 			controller.set('maxPrice', maxPrice);
  		} else {
  			controller.set('pricingOption', '3');
  		}
-     	
+
      	//If province is set up, fill in
      	if(catItem.get('province')) {
  			//Load province
@@ -68,7 +71,7 @@ export default Ember.Route.extend({
 				controller.set('province', p);
 			});
  			// controller.set('province', vendor.get('province'));
- 		}   	
+ 		}
 		// let prov_code = catItem.get('provinceCode');
 		// this.store.findRecord('country', 'south_africa').then((_country=>{
 	 //        let provinces = _country.get('province');
@@ -98,8 +101,8 @@ export default Ember.Route.extend({
 						this.deleteImages();
 						this.controller.get('notifications').info('Item listing has been removed!',{
 			                autoClear: true
-			            }); 
-						
+			            });
+
 					});
 
 					break;
@@ -133,15 +136,15 @@ export default Ember.Route.extend({
 			let _modalData;
 			if(this.controller.get('modalDataId')){
 				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-				_modalData.set('mainMessage', 'This deletion is permeanent.');	
-				_modalData.set('action', 'delete');	
-            	this.send('showModal', 'modal-confirm', _modalData);	            	
+				_modalData.set('mainMessage', 'This deletion is permeanent.');
+				_modalData.set('action', 'delete');
+            	this.send('showModal', 'modal-confirm', _modalData);
             } else {
 		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'This deletion is permeanent.', 'action': 'delete'});
 		     	this.controller.set('modalDataId', _modalData.get('id'));
             	this.send('showModal', 'modal-confirm', _modalData);
-            } 
-	        
+            }
+
 		},
 		updateItem: function(){
 			let _cat = this.controller.get('category');
@@ -171,7 +174,7 @@ export default Ember.Route.extend({
 						oldprov.get('catItems').removeObject(_item);
 						prov.get('catItems').pushObject(_item);
 						_item.set('province', prov);
-						let provinceCode = "";				
+						let provinceCode = "";
 						let shortCode = prov.get('code').split('_');
 						provinceCode = shortCode[1].toUpperCase();
 						_item.set('provinceCode', provinceCode);
@@ -180,7 +183,7 @@ export default Ember.Route.extend({
 							prov.save().then(() => {
 								resolve();
 							});
-						});				
+						});
 					} else {
 						resolve();
 					}
@@ -202,12 +205,12 @@ export default Ember.Route.extend({
 							cat.save().then(() => {
 								resolve();
 							});
-						});				
+						});
 					} else {
 						resolve();
 					}
 
-			 	});				
+			 	});
 			}
 
 
@@ -220,10 +223,10 @@ export default Ember.Route.extend({
 		    		_this.controller.get('notifications').success('Product info has been saved!',{
 			            autoClear: true
 			          });
-				});				
+				});
 			});
 
-			
+
 		},
 		setMainImage: function(){
 			let currentSlide = this.controller.get('currentSlide');
@@ -311,7 +314,7 @@ export default Ember.Route.extend({
 					_this.controller.set("isUploading", false);
 					_this.controller.get('notifications').error('Something went wrong, please try again.',{
 			            autoClear: true
-			        }); 
+			        });
 					//ERROR
 				}, function() {
 					//COMPLETE
@@ -322,9 +325,9 @@ export default Ember.Route.extend({
 					catItem.save().then(()=>{
 						_this.controller.get('notifications').success('Image uploaded successfully!',{
 				            autoClear: true
-				        }); 
+				        });
 
-						_this.controller.set("isUploading", false);						
+						_this.controller.set("isUploading", false);
 						_this.controller.set("showImageUploader", false);
 			    		selectedImage.src = null;
 					});
@@ -333,7 +336,7 @@ export default Ember.Route.extend({
 			} else {
 				this.controller.get('notifications').error('Please select an image',{
 		            autoClear: true
-		        }); 
+		        });
 			}
 
 		},
@@ -343,27 +346,27 @@ export default Ember.Route.extend({
 			if (model.get('hasDirtyAttributes')) {
 				// let confirmation = confirm("Your changes haven't saved yet. Would you like to leave this form?");
 				if(this.controller.get('confirmTransition') === 0) {
-	    		
+
 					let _modalData;
 		            this.controller.set('tempTransition', transition.intent.name);
 					transition.abort();
 					if(this.controller.get('modalDataId')){
 						_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-						_modalData.set('mainMessage', 'Your changes haven\'t saved yet. Would you like to leave this form?');	
-						_modalData.set('action', 'transition');	
-		            	this.send('showModal', 'modal-confirm', _modalData);	            	
+						_modalData.set('mainMessage', 'Your changes haven\'t saved yet. Would you like to leave this form?');
+						_modalData.set('action', 'transition');
+		            	this.send('showModal', 'modal-confirm', _modalData);
 		            } else {
 				    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Your changes haven\'t saved yet. Would you like to leave this form?', 'action': 'transition'});
 				     	this.controller.set('modalDataId', _modalData.get('id'));
 		            	this.send('showModal', 'modal-confirm', _modalData);
-		            } 
-					  
+		            }
+
 				} else {
 					model.rollbackAttributes();
 		    		this.controller.set('confirmTransition', 0);
 		    	}
 
-				
+
 			}
 	      // rollbackAttributes() removes the record from the store
 	      // if the model 'isNew'
@@ -382,7 +385,7 @@ export default Ember.Route.extend({
 					        //console.log("Removed");
 					      }
 					    );
-		            } 
+		            }
 	            	catItem.set('imageBlob', Blob);
 	            	catItem.set('imageURL', Blob.url);
 		        });
@@ -430,7 +433,7 @@ export default Ember.Route.extend({
 		    		currentSlide = 0;
 		    	} else {
 		    		currentSlide++;
-		    	}			    	
+		    	}
 
 		    	let imageSuffix = '';
 		    	if(currentSlide === 0) {
@@ -449,7 +452,7 @@ export default Ember.Route.extend({
 		    	// 	if(breakThis >= 4){
 		    	// 		isRunning = false;
 		    	// 	}
-		    	// }	    		
+		    	// }
 	    	}
 	    }
 	},
@@ -471,7 +474,7 @@ export default Ember.Route.extend({
 		    if (_blob.url !== _imgurl){
 				this.destroyBlob(_blob);
 		  	    //this.destroyBlob(_blob);
-		    }					
+		    }
 		} catch(ex){}
 	},
 	destroyBlob(blob){
@@ -483,7 +486,7 @@ export default Ember.Route.extend({
 		        //console.log("Removed");
 		      }
 		    );
-        }); 
+        });
 	},
 	retrieveProvinceCode: function(provinceName){
 		let provinces = this.store.peekAll('province');
@@ -516,7 +519,7 @@ export default Ember.Route.extend({
         }
 
         return {
-        	willingTravel: willingTravel, 
+        	willingTravel: willingTravel,
         	travelDist: travelDist
         };
 	},
@@ -536,7 +539,7 @@ export default Ember.Route.extend({
             break;
 
             default: //Na
-                
+
             break;
         }
 

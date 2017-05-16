@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 	tempId: '',
 	beforeModel: function() {
         var sesh = this.get("session").fetch().catch(function() {});
-        if(this.get('session.isAuthenticated')){            
+        if(this.get('session.isAuthenticated')){
              this.get('session').close().then(()=> {
                 this.controller.get('notifications').info('Logged out successfully.',{
                   autoClear: true
@@ -106,8 +106,8 @@ export default Ember.Route.extend({
                                                     postalcode: this.controller.get('postalcode'),
                                                     cell: this.controller.get('cell'),
                                                     maxItems: "15"
-                                                });	
-            									let _vendorid = vendor.get('id');													
+                                                });
+            									let _vendorid = vendor.get('id');
                                             	vendorLogin.set('vendorID', _vendorid);							//Add id to vendorLogin
                                                 this.send('storeEmailPass', email, this.controller.get('password'));
         										this.assignToUser(vendor, vendorLogin);							//Add id to user
@@ -146,10 +146,10 @@ export default Ember.Route.extend({
                                             postalcode: this.controller.get('postalcode'),
                                             cell: this.controller.get('cell'),
                                             maxItems: "15"
-                                        });	
+                                        });
         								let _vendorid = vendor.get('id');
-                                    	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin	
-                                        this.send('storeEmailPass', email, this.controller.get('password'));									
+                                    	vendorLogin.set('vendorID', _vendorid);									//Add id to vendorLogin
+                                        this.send('storeEmailPass', email, this.controller.get('password'));
                                     	this.assignToUser(vendor, vendorLogin);									//Add id to user
                                     });
                                 }
@@ -197,14 +197,14 @@ export default Ember.Route.extend({
             if(checked === true){
                 this.controller.set(checkedId, false);
             } else {
-                this.controller.set(checkedId, true);                
+                this.controller.set(checkedId, true);
             }
         },
         selectCat: function(_cat){
 
-            let cat = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
-            let isChecked = Ember.get(cat, 'isChecked');   
-            let checked = false;        
+            let cat = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");
+            let isChecked = Ember.get(cat, 'isChecked');
+            let checked = false;
             if(isChecked === false){
                 checked = true;
             }
@@ -215,9 +215,9 @@ export default Ember.Route.extend({
             let catIds = [];
             let selectedCats = [];
             let _this = this;
-            cats.forEach(function(cat){            
-                // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
-                let isChecked = Ember.get(cat, 'isChecked');        
+            cats.forEach(function(cat){
+                // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");
+                let isChecked = Ember.get(cat, 'isChecked');
                 if(isChecked === true){
                     let id = Ember.get(cat, 'id');
                     // alert(id);
@@ -230,7 +230,7 @@ export default Ember.Route.extend({
         fieldDisabled: function(){
             this.controller.get('notifications').error('Sign up is temporarily disabled, please try again soon!',{
                 autoClear: true
-            });            
+            });
         }
     },
     hashCode: function(str) {  //String to hash function
@@ -246,7 +246,7 @@ export default Ember.Route.extend({
             chr = str.charCodeAt(i);
             hash = ((hash << 5) - hash) + chr;
             hash |= 0; // Convert to 32bit integer
-        }            
+        }
         return hash;
     },
     assignToUser: function(vendor, vendorLogin){
@@ -271,11 +271,11 @@ export default Ember.Route.extend({
             break;
 
             case '3': //Na
-                willingTravel = null;
+                willingTravel = true;
             break;
 
             default: //Na
-                willingTravel = null;
+                willingTravel = true;
             break;
         }
 
@@ -286,9 +286,9 @@ export default Ember.Route.extend({
         let catIds = [];
         let selectedCats = [];
         let _this = this;
-        cats.forEach(function(cat){            
-            // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");     
-            let isChecked = Ember.get(cat, 'isChecked');        
+        cats.forEach(function(cat){
+            // let cats = Ember.get(this.controller.get('categoryItems'), _cat.index+ "");
+            let isChecked = Ember.get(cat, 'isChecked');
             if(isChecked === true){
                 let id = Ember.get(cat, 'id');
                 let selectedCat = _this.store.peekRecord('category', id);
