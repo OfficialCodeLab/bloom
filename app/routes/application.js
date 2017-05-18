@@ -25,7 +25,9 @@ export default Ember.Route.extend({
 	  		} else {
 		        return _this.generateUid().then((session)=>{
 		        	return session;
-		        });
+		        },()=>{
+							return this.transitionTo('logout');
+						});
 
 	        }
         });
@@ -35,9 +37,9 @@ export default Ember.Route.extend({
 		try
 		{
 			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-			return this.store.findRecord('user', _id);			
+			return this.store.findRecord('user', _id);
 		} catch(ex) {}
-		
+
 	    // return new Ember.RSVP.Promise(function(resolve) {
 	    //   setTimeout(resolve, 3000);
 	    // });
@@ -63,7 +65,7 @@ export default Ember.Route.extend({
 				//console.log("TEST" + this.controller);
 			}
 		},
-		
+
 		didTransition() {
 			Ember.$('#menu-overlay').fadeOut("slow");
 			Ember.$('#menu-icon-c').fadeOut(0);
@@ -71,10 +73,10 @@ export default Ember.Route.extend({
 			this.controller.set('menuOpen', false);
 		},
 		login: function(provider) {
-			Ember.$('#s2-overlay3').fadeOut("fast");	
+			Ember.$('#s2-overlay3').fadeOut("fast");
 			Ember.$('#s2-overlay4').fadeOut("fast");
 			let email = "";
-			let password = "";	
+			let password = "";
 			let _this = this;
 			let scope = "";
 
@@ -84,8 +86,8 @@ export default Ember.Route.extend({
 		    	email = this.get('emailStored');
 		    	password = this.get('passwordStored');
 			}
-	        this.get("session").open("firebase", { 
-	        	provider: provider, 
+	        this.get("session").open("firebase", {
+	        	provider: provider,
 				email: email,
 				password: password,
 	        	settings: {
@@ -103,12 +105,12 @@ export default Ember.Route.extend({
 					_this.resetVendorSignup();
 					_this.controller.get('notifications').error(errorMessage,{
 					    autoClear: true
-					});			  		
+					});
 			  	}
           	});
 	    },
 		createAccount: function(provider) {
-			Ember.$('#s2-overlay4').fadeOut("fast");	
+			Ember.$('#s2-overlay4').fadeOut("fast");
 			let _this = this;
 	    	let email = this.get('emailStored');
 	    	let password = this.get('passwordStored');
@@ -139,8 +141,8 @@ export default Ember.Route.extend({
 			}
 	    },
 	    loadSignupPage: function() {
-			Ember.$('#s2-overlay3').fadeOut("fast");	
-			Ember.$('#s2-overlay4').fadeOut("fast");	
+			Ember.$('#s2-overlay3').fadeOut("fast");
+			Ember.$('#s2-overlay4').fadeOut("fast");
 	    	this.transitionTo('user-signup');
 	    },
 	    logout: function() {
@@ -200,10 +202,10 @@ export default Ember.Route.extend({
    				Ember.$('#menu-icon-o').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
 	    	}
-			Ember.$('#s2-overlay3').fadeIn("fast");	    	
+			Ember.$('#s2-overlay3').fadeIn("fast");
 	    },
 	    hideLogins: function(){
-			Ember.$('#s2-overlay3').fadeOut("fast"); 
+			Ember.$('#s2-overlay3').fadeOut("fast");
 	    },
 	    showVendorLogins: function(){
 	    	if(this.controller.get('menuOpen')) {
@@ -212,11 +214,11 @@ export default Ember.Route.extend({
    				Ember.$('#menu-icon-o').fadeIn("fast");
 				this.controller.toggleProperty('menuOpen');
 	    	}
-			Ember.$('#s2-overlay4').fadeIn("fast");	    	
+			Ember.$('#s2-overlay4').fadeIn("fast");
 	    },
 	    hideVendorLogins: function(){
 	    	this.resetVendorSignup();
-			Ember.$('#s2-overlay4').fadeOut("fast"); 
+			Ember.$('#s2-overlay4').fadeOut("fast");
 	    },
 	    showModal: function(name, model) {
 	      this.render(name, {
@@ -262,8 +264,8 @@ export default Ember.Route.extend({
 	    	}
 	    	if (typeof vname !== 'undefined') { contact.set('vendor', vname); }
 	    	if (typeof vemail !== 'undefined') { contact.set('vendorEmail', vemail); }
-	    	if (typeof vid !== 'undefined') { 
-	    		contact.set('vendorId', vid); 
+	    	if (typeof vid !== 'undefined') {
+	    		contact.set('vendorId', vid);
 	    		contact.set('sendInfo', true);
 	    		contact.set('subject', 'New contact request from Bloom User');
 	    	}
@@ -277,7 +279,7 @@ export default Ember.Route.extend({
 	    		contact.deleteRecord();
 	    	}
 	    	this.controller.set("messageN", "");
-	    },	    
+	    },
 	    openTodoModal: function(task){
 	    	this.send('showModal', 'modal-todo', task);
 	    },
@@ -293,10 +295,10 @@ export default Ember.Route.extend({
 	  //   	}
 			// this.set('isTodoSubmitted', false);
 	    	this.send('removeModal');
-	    },  
+	    },
 	    openGuestModal: function(guest){
 	    	this.set('isGuestSubmitted', false);
-	    	this.send('showModal', 'modal-guest-edit', guest);	    	
+	    	this.send('showModal', 'modal-guest-edit', guest);
 	    },
 	    closedGuestModal: function(){
 	    	// if(this.get('isGuestSubmitted') === false){
@@ -304,7 +306,7 @@ export default Ember.Route.extend({
 	   			// guest.rollbackAttributes();
 	    		this.send('removeModal');
 	    	// }
-	    },			
+	    },
 	    storeTransition: function (){
 
 	    },
@@ -338,7 +340,7 @@ export default Ember.Route.extend({
 					user_id = this.get("session").get('currentUser').providerData[0]._uid;
 				} else {
 					user_id = "Anonymous user";
-				}				
+				}
 		    	if (contact.get('subject')){
 					subject = contact.get('subject');
 		    	} else {
@@ -381,7 +383,7 @@ export default Ember.Route.extend({
 					});
 	    			contact.deleteRecord();
 				}
-	    		
+
 	    	}
 	    },
 		storeContactInfoRequest: function(vendorId, userId){
@@ -437,12 +439,12 @@ export default Ember.Route.extend({
 		   // alert("loading: " + controller.get('currentlyLoading'));
 	    //   });
 	    // }
-	
+
 
 
 
 		/*
-		login: function (provider){	
+		login: function (provider){
 			var ref = new Firebase("https://pear-server.firebaseio.com");
 			ref.authWithOAuthPopup(provider, function(error, authData) {
 			  if (error) {
@@ -451,10 +453,10 @@ export default Ember.Route.extend({
 			    // the access token will allow us to make Open Graph API calls
 			    console.log("LOGGED IN AS: " + authData.name);
 			  }
-			});		
+			});
 		    // this.get("session").open("firebase", { provider: provider}).then((data) => {
 		    //   this.transitionTo('index');
-		  //}); 
+		  //});
 		}*/
 		// login: function(provider) {
   //   	  this.get("session").open("firebase", { provider: provider}).then((data) => {
@@ -490,8 +492,8 @@ export default Ember.Route.extend({
     },
     logInWithEmail: function(email, password) {
     	let _this = this;
-        _this.get("session").open("firebase", { 
-        	provider: "password", 
+        _this.get("session").open("firebase", {
+        	provider: "password",
 			email: email,
 			password: password
 		}).then((d) => {
@@ -499,7 +501,7 @@ export default Ember.Route.extend({
       			user.get('vendorAccount').then((ven)=>{
 	      			if(ven === null || ven === undefined) {
 	    				_this.generateUid();
-						_this.joinAccounts(user);		      				
+						_this.joinAccounts(user);
 	      			} else {
     					_this.get('session').close().then(()=> {
 		  					_this.resetVendorSignup();
@@ -507,17 +509,17 @@ export default Ember.Route.extend({
 					          autoClear: true
 				      		});
 				      	});
-						_this.set('vendorId', null);		      				
+						_this.set('vendorId', null);
 	      			}
 					}, ()=>{
 	  					_this.resetVendorSignup();
 			      		_this.controller.get('notifications').error('An unknown error occurred. Please contact support.',{
 				          autoClear: true
 			      		});
-      				});				      	
-			}, ()=> {			
+      				});
+			}, ()=> {
 				if(_this.get('vendorId')){
-					_this.createVendor(d.uid);	
+					_this.createVendor(d.uid);
 				} else {
 	    			_this.generateUid();
 					_this.controller.get('notifications').info('User account created.',{
@@ -538,7 +540,7 @@ export default Ember.Route.extend({
 		  // ...
 		});
 	},
-	resetVendorSignup: function () {	
+	resetVendorSignup: function () {
     	this.store.unloadAll();
 		try {
 	    	this.controllerFor('vendor-signup').set('isCreating', false);
@@ -548,16 +550,16 @@ export default Ember.Route.extend({
 		let _this = this;
 		return new Promise(function(resolve, reject) {
 			if(_this.get("session.currentUser")) {
-		        let provData = _this.get("session.currentUser").providerData[0];
-		        if(_this.get("session.provider") === "password") {
-		        	Ember.set(provData, '_uid', _this.get("session.currentUser").uid);      
-				} else {					
-		        	Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);   
+        let provData = _this.get("session.currentUser").providerData[0];
+        if(_this.get("session.provider") === "password") {
+		        	Ember.set(provData, '_uid', _this.get("session.currentUser").uid);
+				} else {
+		        	Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);
 				}
-				resolve(_this.get("session"));				
+				resolve(_this.get("session"));
 			} else {
-    			_this.get('session').close().then(()=> {				
-					resolve(_this.get("session"));	
+    			_this.get('session').close().then(()=> {
+					reject();
 				});
 			}
 		});
@@ -599,7 +601,7 @@ export default Ember.Route.extend({
 	  			} else {
 	  				user.get('vendorAccount').then((ven)=>{
 		      			if(ven === null || ven === undefined) {
-							_this.joinAccounts(user);		      				
+							_this.joinAccounts(user);
 		      			} else {
 	    					_this.get('session').close().then(()=> {
 								_this.resetVendorSignup();
@@ -608,13 +610,13 @@ export default Ember.Route.extend({
 					      		});
 					      	});
 							_this.transitionTo('login');
-							_this.set('vendorId', null);		      				
+							_this.set('vendorId', null);
 	      				}
 	  				}, ()=>{});
 	  			}
-			}, ()=> {			
+			}, ()=> {
 				if(_this.get('vendorId')){
-					_this.createVendor();	
+					_this.createVendor();
 				} else {
 					_this.controller.get('notifications').info('User account created.',{
 			      autoClear: true
@@ -624,7 +626,7 @@ export default Ember.Route.extend({
 				}
 			});
 
-			
+
 		});
 	},
 	loginRedirect: function(provider, scope) {
@@ -638,11 +640,11 @@ export default Ember.Route.extend({
 			_this.resetVendorSignup();
 			_this.controller.get('notifications').error(errorMessage,{
 			    autoClear: true
-			});	
+			});
 		});
     },
 
-    createVendor: function(uniqueID){	    
+    createVendor: function(uniqueID){
         this.generateUid();
     	let _id = uniqueID || this.get("session").get('currentUser').providerData[0]._uid;
 		let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
@@ -668,9 +670,9 @@ export default Ember.Route.extend({
 		  mustTourFavourites: true,
 		  mustTourVendor: true,
 		  accountType: "vendor"
-		});				
+		});
 
-		let wedding = this.store.createRecord('wedding', 
+		let wedding = this.store.createRecord('wedding',
 			{
 				id: _id,
 				user: user
@@ -757,12 +759,12 @@ export default Ember.Route.extend({
 			});
 		});
     },
-	
+
 	/*setupController: function(controller, model) {
 		this.controller.set('menuOpen', false)
 		console.log("TEST" + this.controller.get('menuOpen'));
 		Ember.$('#menu-overlay').fadeOut("slow");
-		
+
 
   	}*/
 });
