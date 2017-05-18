@@ -555,10 +555,13 @@ export default Ember.Route.extend({
     return new Promise(function(resolve, reject) {
       if (_this.get("session.currentUser")) {
         let provData = _this.get("session.currentUser").providerData[0];
+				let _uid;
         if (_this.get("session.provider") === "password") {
-          Ember.set(provData, '_uid', _this.get("session.currentUser").uid);
+					_uid =  _this.get("session.currentUser").uid;
+          Ember.set(provData, '_uid', _uid);
         } else {
-          Ember.set(provData, '_uid', _this.get("session.currentUser").providerData[0].uid);
+					_uid =  _this.get("session.currentUser").providerData[0].uid;
+          Ember.set(provData, '_uid', _uid);
         }
         resolve(_this.get("session"));
       } else {
@@ -595,7 +598,7 @@ export default Ember.Route.extend({
   completeLogin(data) {
     let _this = this;
     this.generateUid().then((session) => {
-      _this.store.findRecord('user', session.currentUser.providerData[0]._uid).then((user) => {
+      _this.store.findRecord('user', session.content.currentUser.providerData[0]._uid).then((user) => {
         if (!_this.get('vendorId')) {
           _this.transitionTo('index');
           window.scrollTo(0, 0);
