@@ -133,14 +133,14 @@ const month6 = ["Search for make up artists and hair stylists",
 "Decide on the MC",
 "List potential honeymoon options"];
 
-const month7 = ["Contact photographers & videographers", 
-"Research caterers", 
-"Contact caterers", 
-"Book Photographer & videographer", 
-"Pay deposit for Photographer & Videographer", 
-"Book caterer", 
-"Pay deposit for Caterer", 
-"Schedule engagement photos", 
+const month7 = ["Contact photographers & videographers",
+"Research caterers",
+"Contact caterers",
+"Book Photographer & videographer",
+"Pay deposit for Photographer & Videographer",
+"Book caterer",
+"Pay deposit for Caterer",
+"Schedule engagement photos",
 "Search for Bridal Dress vendors and arrange appointments"];
 
 const month8 = [
@@ -150,33 +150,33 @@ const month8 = [
 "Search for photographers & videographers",
 "Choose Bridal Party"];
 
-const month9 = ["Estimate total guests to attend", 
-"Narrow down and choose a few venues to see", 
-"Schedule venue tours", 
-"Book wedding venue", 
-"Pay deposit for venue", 
-"Plan a health and fitness regime", 
-"Gather postal and email addresses for invitations & save the date", 
-"Search designers for wedding stationery and invites", 
-"Brief designer on save-the-date design", 
-"Order save-the-dates", 
-"Book out accomodation for family and friends attending", 
-"Book accomodation for the wedding night", 
-"Send your save-the-dates", 
-"Search for photographers & videographers", 
+const month9 = ["Estimate total guests to attend",
+"Narrow down and choose a few venues to see",
+"Schedule venue tours",
+"Book wedding venue",
+"Pay deposit for venue",
+"Plan a health and fitness regime",
+"Gather postal and email addresses for invitations & save the date",
+"Search designers for wedding stationery and invites",
+"Brief designer on save-the-date design",
+"Order save-the-dates",
+"Book out accomodation for family and friends attending",
+"Book accomodation for the wedding night",
+"Send your save-the-dates",
+"Search for photographers & videographers",
 "Choose Bridal Party"];
 
-const month10 = ["Plan an engagement party", 
-"Start venue search", 
-"Decide on city & season", 
-"Decide on your budget", 
-"Begin compiling guest list", 
-"Create your wedding budget with the budget calculator", 
-"Send engagement announcements", 
-"Decide on the theme and colours", 
-"Insure engagement ring"]; 
+const month10 = ["Plan an engagement party",
+"Start venue search",
+"Decide on city & season",
+"Decide on your budget",
+"Begin compiling guest list",
+"Create your wedding budget with the budget calculator",
+"Send engagement announcements",
+"Decide on the theme and colours",
+"Insure engagement ring"];
 
-const month11 =  ["Start saving wedding inspiration ideas", 
+const month11 =  ["Start saving wedding inspiration ideas",
 "Find wedding dress inpiration pics"];
 
 const monthsArr = [month0, month1, month2, month3, month4, month5, month6, month7, month8, month9, month10, month11];
@@ -197,9 +197,9 @@ const monthAfter = [
 export default Ember.Route.extend({
 	monthKeys: {},
 	monthKeysReverse: {},
-	model(){		
+	model(){
 		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-		return this.store.findRecord('wedding', _id);	
+		return this.store.findRecord('wedding', _id);
 	},
 	setupController: function (controller, model) {
 		this._super(controller, model);
@@ -228,11 +228,11 @@ export default Ember.Route.extend({
     if(model.get('weddingDate')) {
     	this.processTodoList(controller, model);
     } else {
-    	this.openDatePicker(controller);	    	
+    	this.openDatePicker(controller);
     	// Open wedding date picker
     }
 
-	    
+
 	},
 	actions: {
 		allClick: function(){
@@ -254,10 +254,10 @@ export default Ember.Route.extend({
 				status = "complete.";
 			}
 			task.set('completed', completed);
-			task.save().then(()=>{					
+			task.save().then(()=>{
 				this.controller.get('notifications').success('Task has been marked as ' + status,{
 					autoClear: true
-				});							
+				});
 			});
 		},
 		destroyTask: function(id){
@@ -265,22 +265,22 @@ export default Ember.Route.extend({
 			this.controller.set('taskId', id);
 			if(this.controller.get('modalDataId')){
 				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-				_modalData.set('mainMessage', 'Do you want to remove this task?');	
-				_modalData.set('action', 'delete');	
-            	this.send('showModal', 'modal-confirm', _modalData);	            	
+				_modalData.set('mainMessage', 'Do you want to remove this task?');
+				_modalData.set('action', 'delete');
+            	this.send('showModal', 'modal-confirm', _modalData);
             } else {
 		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Do you want to remove this task?', 'action': 'delete'});
 		     	this.controller.set('modalDataId', _modalData.get('id'));
             	this.send('showModal', 'modal-confirm', _modalData);
-            } 
+            }
 
 		},
 		ok: function() {
 			let _this = this;
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			switch(_modalData.get('action')) {
-				case 'delete':					
-					
+				case 'delete':
+
 			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
@@ -339,18 +339,18 @@ export default Ember.Route.extend({
 	    	let date = this.store.peekRecord('modal-data', dateId);
 	    	if(date !== ''){
 	    		if(date.get('mainMessage')) {
-	    		} else {	    			
+	    		} else {
 						this.controller.get('notifications').error('Pleae select a wedding date. Tasks will not be shown without this.',{
 							autoClear: true
 						});
 	    		}
      			date.deleteRecord();
      		}
-     		
+
 	    	this.send('removeModal');
     },
 		editTask: function(id){
-    	let task = this.store.peekRecord('task', id); 
+    	let task = this.store.peekRecord('task', id);
 			this.send('openTodoModal', task);
 			this.controller.set('todoEditId', id);
 		},
@@ -363,17 +363,17 @@ export default Ember.Route.extend({
 				//Double check
 				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 			    this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	// if(customer.get("todoList") === true){	
+			    	// if(customer.get("todoList") === true){
 			    	if(true){ //Temporarily give all clients access
 						let task = this.store.createRecord('task');
 				    	this.send('openTodoModal', task);
-						this.controller.set('newTaskId', task.get('id'));		    	
+						this.controller.set('newTaskId', task.get('id'));
 			    	} else {
-	    				this.rejectCustomer();	
+	    				this.rejectCustomer();
 			    	}
 			    }, function(reason) {
-	    			this.rejectCustomer();	
-				});			
+	    			this.rejectCustomer();
+				});
 			}
 	    	// this.controller.set('taskCurrent', task);
 			// alert(this.controller.get('newTaskId'));
@@ -404,11 +404,11 @@ export default Ember.Route.extend({
   					newMonth--;
 	    			if(newMonth < 0) {
 	    				newMonth = "After";
-	    			} 
+	    			}
 
 	    			if(oldTaskMonth < 0) {
 	    				oldTaskMonth = "After";
-	    			} 
+	    			}
 
 
 	    			let controllerProp1 = "month" + oldTaskMonth;
@@ -422,11 +422,11 @@ export default Ember.Route.extend({
 	  				let taskMonths2 = Ember.get(selectedObj2, 'items');
 		    		taskMonths2.pushObject(task);
 	    		}
-    		});  
+    		});
 			} else if (this.controller.get('newTaskId')) {
 			    // this.store.findRecord('customer', _id, { reload: true }).then((customer)=>{
-			    	// if(customer.get("todoList") === true){			
-			    	if(true){  //Temporarily give all clients access   		
+			    	// if(customer.get("todoList") === true){
+			    	if(true){  //Temporarily give all clients access
 							let taskId = this.controller.get('newTaskId');
 							this.controller.set('newTaskId', null);
 							let task = this.store.peekRecord('task', taskId);
@@ -459,11 +459,11 @@ export default Ember.Route.extend({
 			    			});
 			    		});
 			    	} else {
-	    				this.rejectCustomer();	
+	    				this.rejectCustomer();
 			    	}
 
 			    // }, function(reason) {
-	    			// this.rejectCustomer();	
+	    			// this.rejectCustomer();
 				// });
 			}
 
@@ -494,8 +494,8 @@ export default Ember.Route.extend({
     		monthStr = "0" + x;
     	}
 
-    	let dateObj = { 
-    		dateDiff: dateDiff, 
+    	let dateObj = {
+    		dateDiff: dateDiff,
     		monthStr: monthStr,
     		setYear: setYear
     	};
@@ -518,7 +518,7 @@ export default Ember.Route.extend({
 		let _modalData = this.store.createRecord('modal-data', {'mainMessage': '', 'action': 'add'});
    	this.controller.set('weddingDateId', _modalData.get('id'));
   	this.send('showModal', 'modal-date-pick', _modalData);
-    
+
 	},
 	calculateDueDate: function(task, wedding) {
 		let _this = this;
@@ -527,7 +527,7 @@ export default Ember.Route.extend({
 
 		let dateObj;
 		let dueDate;
-		let dueMonth;		
+		let dueMonth;
 		let dueMonthStr;
 		let monthX = parseInt(moment(task.get('due')).format("MM"));
 		dateObj = _this.calculateDateDiff(weddingMonth, weddingY, monthX);
@@ -538,7 +538,7 @@ export default Ember.Route.extend({
 				dueMonth = -1;
 	    	dueDate = moment(task.get('due'));
 				dueMonthStr = "After";
-			} else {			    		
+			} else {
 	    	dueDate = moment(task.get('due'));
 	    	let monthS = moment(task.get('due')).format("MMMM");
 	    	for(var i = 0; i < 12; i++){
@@ -557,7 +557,7 @@ export default Ember.Route.extend({
 			let selectedM = this.controller.get(currentMonth);
 			dueMonth = selectedM.get('index') + 1;
 			dueDate = moment();
-			dueMonthStr = parseInt(dueMonth) - 1;	
+			dueMonthStr = parseInt(dueMonth) - 1;
 		}
 
 		let obj = {
@@ -575,6 +575,32 @@ export default Ember.Route.extend({
 		let monthString = monthKeys.get(xVal + "");
 		return monthString;
 	},
+	destroyAllTasks: function(controller, model) {
+		this._super(controller, model);
+		let _this = this;
+		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		return new Promise (function(resolve, reject) {
+				model.get('tasks').then((tasks)=>{
+					let tasksLength = tasks.get('length');
+					let count = 0;
+					function checkCompletetion() {
+						count++;
+						if(count >= tasksLength){
+							resolve();
+						}
+					}
+					checkCompletetion();
+					tasks.forEach((task)=>{
+						let taskId = task.get('id');
+						_this.store.findRecord('task', taskId).then((t)=>{
+							t.destroyRecord().then(()=>{
+								checkCompletetion();
+							});
+						});
+					});
+				});
+		});
+	},
 	processTodoList: function (controller, model) {
 		this._super(controller, model);
 		let _this = this;
@@ -583,7 +609,7 @@ export default Ember.Route.extend({
    	var promisesArr = [];
    	var savesArr = [];
 
-    /* 
+    /*
     		- Get current month & wedding month
     		- Set up all months based on this
     */
@@ -594,7 +620,7 @@ export default Ember.Route.extend({
     let weddingMonth = parseInt(moment(model.get('weddingDate')).format('MM'));
     let weddingY = parseInt(moment(model.get('weddingDate')).format('YYYY'));
     let currentY = parseInt(moment().format('YYYY'));
-		    
+
 		    if(model.get('weddingDateChanged')) {
 		    	//If wedding date has changed: run through all tasks
 		    	// - calculate date diff
@@ -608,7 +634,7 @@ export default Ember.Route.extend({
 					createMonths(true).then(()=> {
 						shuffleMonths(months, years).then(()=>{
 							model.set('weddingDateChanged', null);
-							model.save();			
+							model.save();
 		    			arrangeTasks();
 						});
 					});
@@ -618,11 +644,13 @@ export default Ember.Route.extend({
 		    		createMonths(false).then(()=>{arrangeTasks();});
 		    	} else {
 		    		// console.log("Generating Tasks");
-		    		createMonths(false).then(()=>{
-		    			generateTasks().then(()=>{		    				
-		    				arrangeTasks();
-		    			});
-		    		});
+						_this.destroyAllTasks(controller, model).then(()=>{
+			    		createMonths(false).then(()=>{
+			    			generateTasks().then(()=>{
+			    				arrangeTasks();
+			    			});
+			    		});
+						});
 		    	}
 		    }
 
@@ -638,15 +666,15 @@ export default Ember.Route.extend({
 		    						newDue = moment(due).add(months, "months");
 		    					} else if (months < 0) { //Subtract
 		    						let monthsAbs = Math.abs(months);
-		    						newDue = moment(due).subtract(monthsAbs, "months");		  						
+		    						newDue = moment(due).subtract(monthsAbs, "months");
 		    					}
 
 		    					if (years > 0) { //Add
-		    						newDue = moment(newDue).add(years, "years");		    						
+		    						newDue = moment(newDue).add(years, "years");
 		    					} else if (years < 0) {  // Subtract
 		    						let yearsAbs = Math.abs(years);
-		    						newDue = moment(newDue).subtract(yearsAbs, "years");   
-		    					} 
+		    						newDue = moment(newDue).subtract(yearsAbs, "years");
+		    					}
 
 		    					task.set('due', newDue);
 
@@ -656,32 +684,32 @@ export default Ember.Route.extend({
 				    						resolve();
 				    					});
 				    			});
-				    			
+
 				    			savesArr.pushObject(promise);
 
 				    			if(currentIndex + 1 >= len) {
 						    		Promise.all(savesArr).then(() => {
 					    				resolve();
-										});	
+										});
 				    			}
 			    				/* jshint ignore:end */
 		    				} else {
 				    			if(currentIndex + 1 >= len) {
 						    		Promise.all(savesArr).then(() => {
 					    				resolve();
-										});	
-				    			}		    					
+										});
+				    			}
 		    				}
 		    			});
 		    		});
 		    	});
 		    }
 
-		    function generateTasks() {		    	
+		    function generateTasks() {
 		    	return new Promise (function(resolve, reject) {
 
 		    		//Generate Tasks
-		    		for (var i = 0; i < monthsArr.length; i++){ 
+		    		for (var i = 0; i < monthsArr.length; i++){
 		    			let x = i + 1;
 		    			let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, x);
 							let monthName = _this.getMonthName(dateObj.monthStr);
@@ -705,7 +733,7 @@ export default Ember.Route.extend({
 			    						resolve();
 			    					});
 			    				});
-		    				
+
 		    				promisesArr.pushObject(promise);
 		 						/* jshint ignore:end */
 		    			}
@@ -725,7 +753,7 @@ export default Ember.Route.extend({
 		    					createdOn: moment().unix()*1000,
 		    					createdBy: _id,
 		    					completed: false,
-		    					month: -1    				
+		    					month: -1
 		    			});
 	    				model.get('tasks').pushObject(task);
 
@@ -735,7 +763,7 @@ export default Ember.Route.extend({
 		    						resolve();
 		    					});
 		    				});
-		    			
+
 		    			promisesArr.pushObject(promise);
 	    				/* jshint ignore:end */
 		    		}
@@ -745,9 +773,9 @@ export default Ember.Route.extend({
 		    			model.save().then(()=>{
 		    				resolve();
 		    			});
-						});	
+						});
 
-		    	});						
+		    	});
 		    }
 
 		    function createMonths(dateChanged) {
@@ -772,7 +800,7 @@ export default Ember.Route.extend({
 					});
 					_this.set('monthKeysReverse', monthKeysReverse);
 			    for(var i = 12; i >= 1; i--) {
-						
+
 						let dateObj = _this.calculateDateDiff(weddingMonth, weddingY, i);
 						let mStr = i;
 						if(i < 10) {
@@ -788,7 +816,7 @@ export default Ember.Route.extend({
 			    		isSelected = true;
 			    		_this.controller.set('selectedMonth', controllerProp);
 			    	}
-			    	let obj = Ember.Object.create({ 
+			    	let obj = Ember.Object.create({
 								title: monthName,
 								selected: isSelected,
 								past: isPast,
@@ -810,7 +838,7 @@ export default Ember.Route.extend({
 			    	isSelected = true;
 			    }
 
-			    let monthAfter = Ember.Object.create({ 
+			    let monthAfter = Ember.Object.create({
 								title: "After",
 								selected: isSelected,
 								past: false,
@@ -847,7 +875,7 @@ export default Ember.Route.extend({
 				    			  // monthDiff = 12 - month;
 				    			  let monObj = _this.calculateDateDiff(weddingMonth, weddingY, month); //parseInt(moment(task.get('due')).format("MM"))-1;
 				    			  let monthNum = parseInt(monObj.monthStr)-1;
-				    				monthStr = "month" + monthNum;		    				
+				    				monthStr = "month" + monthNum;
 				    			}
 
 				    			year = parseInt(moment(task.get('due')).format("YYYY"));
@@ -894,7 +922,7 @@ export default Ember.Route.extend({
 			    });
 			  }
 
- 				
+
  			}
-        
+
 });
