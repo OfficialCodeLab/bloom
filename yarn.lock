@@ -3259,6 +3259,12 @@ ember-inject-script@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/ember-inject-script/-/ember-inject-script-0.0.2.tgz#88358cf455a6d67f49df9d49e7be6c688e028395"
 
+ember-keyboard@2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/ember-keyboard/-/ember-keyboard-2.1.10.tgz#b885a572a560c52b9d52a1053c59d548d4100fbe"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 ember-lazy-image@0.0.15:
   version "0.0.15"
   resolved "https://registry.yarnpkg.com/ember-lazy-image/-/ember-lazy-image-0.0.15.tgz#0eff997c255bb98947299a24704c85e793d8fa9c"
@@ -8548,9 +8554,9 @@ toposort@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-1.0.3.tgz#f02cd8a74bd8be2fc0e98611c3bacb95a171869c"
 
-torii@^0.8.0:
-  version "0.8.2"
-  resolved "https://registry.yarnpkg.com/torii/-/torii-0.8.2.tgz#60688b5ce0bc148dedf764df3c4c41f55da3f866"
+torii@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.yarnpkg.com/torii/-/torii-0.8.3.tgz#26bbf8e3776455ecf869b18654d7b65a99e8f925"
   dependencies:
     broccoli-funnel "^1.0.1"
     broccoli-merge-trees "^1.1.1"

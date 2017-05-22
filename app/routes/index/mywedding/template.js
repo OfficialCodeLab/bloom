@@ -102,27 +102,36 @@ export default Ember.Route.extend({
         // console.log(detailsJSON);
         wedding.get('guests').then((guests) => {
           if (guests.length > 0) {
-            let list = this.store.createRecord('guest-list', {
-              id: _id,
-              dateSent: moment() + "",
-              guestCount: guests.length,
-              details: detailsJSON,
-              completed: false,
-              errors: {}
-            });
+            if (guests.length <= 200) {
+              let list = this.store.createRecord('guest-list', {
+                id: _id,
+                dateSent: moment() + "",
+                guestCount: guests.length,
+                details: detailsJSON,
+                completed: false,
+                errors: {}
+              });
 
-            list.save().then(() => {
+              list.save().then(() => {
+                this.set('sendingInvites', false);
+                this.controller.get('notifications').info('Invites are being sent, please await email confirmation on completion.', {
+                  autoClear: true
+                });
+              }).catch((e) => {
+                console.log(e.errors);
+                this.set('sendingInvites', false);
+                this.controller.get('notifications').error('An unknown error occured, please contact support.', {
+                  autoClear: true
+                });
+              });
+
+
+            } else {
               this.set('sendingInvites', false);
-              this.controller.get('notifications').info('Invites are being sent, please await email confirmation on completion.', {
+              this.controller.get('notifications').warning('Your guest list exceeds your limit of 200 entries, please contact support to have this limit changed.', {
                 autoClear: true
               });
-            }).catch((e) => {
-              console.log(e.errors);
-              this.set('sendingInvites', false);
-              this.controller.get('notifications').error('An unknown error occured, please contact support.', {
-                autoClear: true
-              });
-            });
+            }
           } else {
             this.set('sendingInvites', false);
             this.controller.get('notifications').warning('You have no guests. Please fill out your guest list!', {

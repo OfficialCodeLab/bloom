@@ -14,29 +14,30 @@ export default Ember.Route.extend({
   metrics: Ember.inject.service(),
   firebaseApp: Ember.inject.service(),
   beforeModel: function() {
-    var sesh = this.get("session").fetch().catch(function() {});
-    let _this = this;
+    return this.get("session").fetch().catch(function() {});
 
-    //Filthy hackaround for password authentication ;)
-
-    return sesh.then((s) => {
-      console.log(_this.get('session'));
-      if (!_this.get('session.isAuthenticated')) {} else {
-        return _this.generateUid().then((session) => {
-          return session;
-        }, () => {
-          return this.transitionTo('logout');
-        });
-
-      }
-    });
   },
   model: function() {
+    let _this = this;
+      //Filthy hackaround for password authentication ;)
+      try {
+        if (!_this.get('session.isAuthenticated')) {} else {
+          return _this.generateUid().then((session) => {
+            let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+            console.log(session);
+            return this.store.findRecord('user', _id);
+          }, () => {
+            this.transitionTo('logout');
+          });
+
+        }
+      } catch (ex) {}
+
     //check server for the record of self
-    try {
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-      return this.store.findRecord('user', _id);
-    } catch (ex) {}
+    // try {
+    //   let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    //   return this.store.findRecord('user', _id);
+    // } catch (ex) {}
 
     // return new Ember.RSVP.Promise(function(resolve) {
     //   setTimeout(resolve, 3000);

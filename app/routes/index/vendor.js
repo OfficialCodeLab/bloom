@@ -13,7 +13,7 @@ export default Ember.Route.extend({
         if(!user.get('accountType')){
   			this.transitionTo('/404');
     	} else {
-    		//Second tier auth
+    		//Second tier auth (check if user is logged into vendor account)
     	}
 
         return sesh;
