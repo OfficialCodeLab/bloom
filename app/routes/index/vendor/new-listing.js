@@ -576,7 +576,7 @@ export default Ember.Route.extend({
             break;
 
             case '2': //No
-                willingTravel = false;
+                // willingTravel = false;
             break;
 
             default: //Na

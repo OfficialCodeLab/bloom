@@ -24,7 +24,6 @@ export default Ember.Route.extend({
         if (!_this.get('session.isAuthenticated')) {} else {
           return _this.generateUid().then((session) => {
             let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-            console.log(session);
             return this.store.findRecord('user', _id);
           }, () => {
             this.transitionTo('logout');

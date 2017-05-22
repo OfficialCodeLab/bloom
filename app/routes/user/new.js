@@ -3,16 +3,17 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 	model() {
 		//Before creating the record, clear the DS Store
-		this.store.unloadAll('user');
+		// this.store.unloadAll('user');
 		let _this = this;
     	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			console.log(_id);
     	return new Promise (function(resolve, reject) {
 
 	    	_this.store.findRecord('user', _id, {reload: true}).then((response) => {
 				 // this.transitionTo('index');
 				 _this.set('foundUser', true);
 				 _this.store.findRecord('wedding', _this.get("session").get('currentUser').providerData[0]._uid);
-				// alert('user found');
+				 alert('user found');
 				resolve(response);
 	     	}, () => {
 				Ember.$('#usernew').fadeIn("fast");  //Run relevant jquery methods in component
@@ -21,7 +22,12 @@ export default Ember.Route.extend({
 		            ///return response;
 		        	//console.log(request);
 		        	//let surname = this.get("session").get('currentUser').providerData[0].last_name;
-		        	let full_name = _this.get("session").get('currentUser').providerData[0].displayName;
+		        	let full_name;
+							if( _this.get("session").get('currentUser').providerData[0].displayName) {
+								full_name = _this.get("session").get('currentUser').providerData[0].displayName;
+							} else {
+								full_name = _this.get("session").get('currentUser').providerData[0].displayNameTemp;
+							}
 		        	let x = full_name.indexOf(" ");
 		        	let name = full_name.substring(0, x);
 		        	let surname = full_name.substring(x+1, full_name.length);
@@ -36,7 +42,7 @@ export default Ember.Route.extend({
 					  isNewToBloom: true
 					});
 
-					let wedding = _this.store.createRecord('wedding', 
+					let wedding = _this.store.createRecord('wedding',
 						{
 							id: _id,
 							user: user
@@ -50,10 +56,14 @@ export default Ember.Route.extend({
 
 				} catch(ex){
 					//If any problems occur, just navigate to index
-					_this.transitionTo('index');
+		    	this.controller.get('notifications').error('An error occured: ' + ex,{
+					  	autoClear: true
+					});
+					console.log(ex);
+					//_this.transitionTo('index');
 				}
 
-			
+
 	 		}).catch((err)=>{});
     	});
     },
@@ -61,10 +71,12 @@ export default Ember.Route.extend({
     	//Get the user ID
 	    var sesh = this.get("session").fetch().catch(function() {});
 	    if(!this.get('session.isAuthenticated')){
-	        // transition.abort();
+	        //transition.abort();
 	        // Default back to homepage
 	        this.transitionTo('login');
-	    } 
+	    } else {
+				return sesh;
+			}
 
     	//Check the local store first for record of the user
    //  	var localusr = this.store.peekRecord('user', _id);
@@ -74,7 +86,7 @@ export default Ember.Route.extend({
 
     	//Else check server for the record
 
-    	
+
   },
   setupController(controller, model) {
   	this._super(controller, model);
@@ -96,7 +108,7 @@ export default Ember.Route.extend({
         },
 
 		dateChanged: function (date, valid){
-			if(valid){              
+			if(valid){
 				this.controller.set('birthday', date);
 				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let user = this.store.peekRecord('user', _id);
@@ -106,8 +118,8 @@ export default Ember.Route.extend({
 		},
 
 		dateChangedWed: function (date, valid){
-			if(valid){         
-				this.controller.set('weddingDate', date);     
+			if(valid){
+				this.controller.set('weddingDate', date);
 				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 				let oldWeddingDate = wedding.get('weddingDate');
@@ -132,9 +144,9 @@ export default Ember.Route.extend({
 			});
 
 		},
-    	
+
 		//If the save user button is clicked
-		saveUser() { 
+		saveUser() {
     		window.scrollTo(0,0);
 			this.transitionTo('index');
 		},
