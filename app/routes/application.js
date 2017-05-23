@@ -189,6 +189,7 @@ export default Ember.Route.extend({
       Ember.Logger.error(error);
       this.get("session").close();
       this.transitionTo('login');
+      this.controller.get('notifications').error("Please contact support with this error: " + error);
     },
     notimplemented: function() {
       alert("Sorry this feature is still under contruction!");
