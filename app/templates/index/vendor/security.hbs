@@ -31,11 +31,21 @@
 	    </div>
 	    <div class="form-group">
 	        <div class="col-sm-offset-4 col-sm-4">
+						{{#if isSpecial}}
+							{{#mdl-button isRaised=true action="lockAccount" isAccent=true}}Lock Account{{/mdl-button}}
+						{{else}}
+							{{#mdl-button isRaised=true action="unlockAccount" isAccent=true}}Unlock Account{{/mdl-button}}
+						{{/if}}
+				{{!-- <button class="btn btn-default" style="width:150px;" {{action 'logout'}}>Log out</button> --}}
+	        </div>
+	    </div>
+	    <div class="form-group">
+	        <div class="col-sm-offset-4 col-sm-4">
 				{{#mdl-button isRaised=true action="logout" isAccent=true}}Log out{{/mdl-button}}
 				{{!-- <button class="btn btn-default" style="width:150px;" {{action 'logout'}}>Log out</button> --}}
 	        </div>
 	    </div>
     </div>
     {{/if}}
-	        
+
 </div>

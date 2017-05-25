@@ -3,32 +3,40 @@
 	<div class="row pear-index-top" style="min-height: 570px;">
 		<div class="splash-overlay" style="min-height: 570px;">
 			<div class="col-sm-3">
-					
+
 			</div>
 			<div id="index-center-page" class="col-sm-6 text-center index-logo-container" style="margin-top: 100px;">
 				{{!-- <div class="index-profile-image-container">
 					{{#link-to 'myaccount'}}<img src={{model.userext.imgurl}} class="img-responsive" style="background-color:white !important;">{{/link-to}}
 				</div> --}}
-				{{#link-to 'myaccount'}}<div class="profile-pic-outer">
-			    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
-			    </div>{{/link-to}}
-				<h1 class="h1-name" style="margin: 0px; color:white;">{{model.user.name}}&nbsp;<span style="color:#E3B1B7">{{model.user.surname}}</span></h1>
-				{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
+				{{#link-to 'myaccount'}}
+					<div class="profile-pic-outer">
+						<div class="profile-pic"><img src= {{model.userext.imgurl}}></div>
+					</div>
+				{{/link-to}}
+				<h1 class="h1-name" style="margin: 0px; color:white;">{{model.user.name}}&nbsp;<span style="color:#E3B1B7">{{model.user.surname}}</span></h1>{{!-- <h1 class="pear-text-logo unselectable">pear</h1> --}}
 			</div>
 			<div class="col-sm-3 text-center hideOnMobile">
 				<img src="../assets/images/bloom-bg3.png" class="pear-splash-hub img-responsive">
-				
 			</div>
 		</div>
 	</div>
 	<div class="pear-main-well">
-	    <ul class="nav nav-pills pear-main-pills unselectable" data-tabs="tabs">
-	    	{{#link-to 'index.favourites' tagName="li" class="font-century"}}<a href="#" data-toggle="tab"><i class="fa fa-heart-o i-padding-1"></i><span class="hideOnMobile">&nbsp;&nbsp;Favourites</span></a>{{/link-to}}
-			{{#link-to 'index.mywedding' tagName="li" class="font-century"}}<a href="#" data-toggle="tab"><i class="fa fa-diamond i-padding-2"></i><span class="hideOnMobile">&nbsp;&nbsp;Wedding</span></a>{{/link-to}}
-			{{#if model.user.accountType}}{{#link-to 'index.vendor' tagName="li" class="font-century"}}<a href="#" data-toggle="tab"><i class="fa fa-truck i-padding-3"></i><span class="hideOnMobile">&nbsp;&nbsp;Vendor</span></a>{{/link-to}}{{/if}}
-	    </ul>
+		<ul class="nav nav-pills pear-main-pills unselectable" data-tabs="tabs">
+			{{#if model.user.accountType}}
+				{{#if model.user.specialAccount}}
+					{{#link-to 'index.favourites' tagName="li" class="font-century" }}<a href="#" data-toggle="tab"><i class="fa fa-heart-o i-padding-1"></i><span class="hideOnMobile">&nbsp;&nbsp;Favourites</span></a>{{/link-to}}
+					{{#link-to 'index.mywedding' tagName="li" class="font-century" }}<a href="#" data-toggle="tab"><i class="fa fa-diamond i-padding-2"></i><span class="hideOnMobile">&nbsp;&nbsp;Wedding</span></a>{{/link-to}}
+				{{/if}}
+			{{else}}
+				{{#link-to 'index.favourites' tagName="li" class="font-century" }}<a href="#" data-toggle="tab"><i class="fa fa-heart-o i-padding-1"></i><span class="hideOnMobile">&nbsp;&nbsp;Favourites</span></a>{{/link-to}}
+				{{#link-to 'index.mywedding' tagName="li" class="font-century" }}<a href="#" data-toggle="tab"><i class="fa fa-diamond i-padding-2"></i><span class="hideOnMobile">&nbsp;&nbsp;Wedding</span></a>{{/link-to}}
+			{{/if}}
+			{{#if model.user.accountType}}
+				{{#link-to 'index.vendor' tagName="li" class="font-century" }}<a href="#" data-toggle="tab"><i class="fa fa-truck i-padding-3"></i><span class="hideOnMobile">&nbsp;&nbsp;Vendor</span></a>{{/link-to}}
+			{{/if}}
+		</ul>
 	</div>
-		
-	{{outlet}}
-	{{partial 'partials/footer'}}
+
+	{{outlet}} {{partial 'partials/footer'}}
 </div>

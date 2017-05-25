@@ -18,32 +18,36 @@ export default Ember.Route.extend({
 		let user = this.store.peekRecord('user', _id);
 		user.get('vendorAccount').then((ven)=>{
       if(ven === null || ven === undefined) {
-        this.transitionTo('index.vendor.login');     
+        this.transitionTo('index.vendor.login');
       }
-    }, ()=>{ 
-      this.transitionTo('index.vendor.login');     
+    }, ()=>{
+      this.transitionTo('index.vendor.login');
     });
-		
+
 		return sesh;
     },
     model() {
 	    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 		let user = this.store.peekRecord('user', _id);
-    	return user.get('vendorAccount');
+    	return this.store.peekRecord('vendor', user.get('vendorAccount'));
     },
     afterModel(){
     	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
     	let user = this.store.peekRecord('user', _id);
     	let vendor = user.get('vendorAccount');
 		let items = vendor.get('catItems');
-		this.set('itemsCount', items.get('length'));
-		this.resetLoadCount();
-		return;
+    if(items) {
+  		this.set('itemsCount', items.get('length'));
+  		this.resetLoadCount();
+  		return;
+    } else {
+      return;
+    }
     },
     handleResize: function() {
 	    try{
 	        var $container = this.controller.get('masonryRef');
-	        $container.layout();        
+	        $container.layout();
 	    } catch(ex){}
 	},
 	bindResizeEvent: function() {
@@ -51,7 +55,7 @@ export default Ember.Route.extend({
 	    Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
 	}.on('init'),
     actions: {
-	    loadedImg: function() {     
+	    loadedImg: function() {
 		      let c = this.get('loadCount');
 		      let la = this.get('loadAmount');
 		      c++;
@@ -69,7 +73,7 @@ export default Ember.Route.extend({
 		      }
 		      try{
 		          var $container = this.controller.get('masonryRef');
-		          $container.layout();        
+		          $container.layout();
 		      } catch(ex){}
 
 
@@ -86,6 +90,6 @@ export default Ember.Route.extend({
          Ember.$('#masonry-items').fadeOut(0);
          Ember.$('#loading-spinner').fadeIn(0);
       } catch(ex){}
-      this.set('loadCount', 0);    
+      this.set('loadCount', 0);
   }
 });

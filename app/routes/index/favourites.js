@@ -24,7 +24,13 @@ export default Ember.Route.extend({
       var sesh = this.get("session").fetch().catch(function() {});
       if(!this.get('session.isAuthenticated')){
           this.transitionTo('login');
-        }
+        } else {
+		        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0]._uid).then((user)=>{
+							if (user.get('accountType') === 'vendor' && !(user.get('specialAccount'))) {
+								this.transitionTo('index.vendor');
+							}
+						});
+				}
         return sesh;
     },
 });

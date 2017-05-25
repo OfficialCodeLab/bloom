@@ -38,7 +38,7 @@ export default Ember.Route.extend({
             i, chr, len;
         if (str.length === 0) {
             return hash;
-        }   
+        }
         for (i = 0, len = str.length; i < len; i++) {
             chr = str.charCodeAt(i);
             hash = ((hash << 5) - hash) + chr;
@@ -47,16 +47,20 @@ export default Ember.Route.extend({
         return hash;
     },
     assignToUser: function(id){
-        //window.scrollTo(0,0);       
+        //window.scrollTo(0,0);
     	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
         this.store.findRecord('vendor', id).then((vendor) => {
             user.set('vendorAccount', vendor);
-            user.save().then(()=> {      
-                this.transitionTo('index.vendor');                          
-                this.controller.get('notifications').success('Logged in successfully!',{
-                    autoClear: true
-                });              
-            }); 
+            let loggedUsers = vendor.get('loggedInUsers');
+            loggedUsers.pushObject(user);
+            vendor.save().then(()=>{
+              user.save().then(()=> {
+                  this.transitionTo('index.vendor');
+                  this.controller.get('notifications').success('Logged in successfully!',{
+                      autoClear: true
+                  });
+              });
+            });
         });
     }
 });
