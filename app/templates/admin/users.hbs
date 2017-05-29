@@ -1,9 +1,36 @@
-<div class="header-top"><h1>Users</h1></div>
+<div class="header-top">
+  <h1>Users</h1></div>
 <div style='text-align: center'>
   <p>User count: {{model.length}}</p>
 </div>
+<div style='text-align: center; padding-bottom: 30px;' class="container">
+  {{!-- {{#paper-switch value=hideVendors onChange=(action (mut hideVendors))}}
+    {{displayType}}
+  {{/paper-switch}} --}}
+  <div class="col-sm-6 col-sm-offset-3">
+  Account Type to Display:
+  <br />
+  <div class="col-xs-6" {{action "toggleCheck" "Users"}}>
+    {{#if showUsers}}
+      {{mdl-button icon="check_box"}}
+    {{else}}
+      {{mdl-button icon="check_box_outline_blank"}}
+    {{/if}}<br />USERS
 
-<div class="container">
+  </div>
+
+  <div class="col-xs-6" {{action "toggleCheck" "Vendors"}}>
+    {{#if showVendors}}
+      {{mdl-button icon="check_box"}}
+    {{else}}
+      {{mdl-button icon="check_box_outline_blank"}}
+    {{/if}}<br />VENDORS
+
+  </div>
+  </div>
+</div>
+
+{{!-- <div class="container">
 {{#mdl-table content=model as |user|}}
     {{#mdl-table-col label='Full Name'}}
       {{user.name}} {{user.surname}}
@@ -29,4 +56,68 @@
       <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
     {{/mdl-table-col}}
 {{/mdl-table}}
+</div> --}}
+
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>E-mail</th>
+        <th>Accounts</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |user|}}
+          {{#if user.vendorAccount}}
+            {{#if showVendors}}
+            <tr>
+              <td>
+                {{user.name}} {{user.surname}}
+              </td>
+              <td>
+                {{user.email}}
+              </td>
+              <td>
+                <div style="text-align: left">
+                  <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
+                  <i style="font-size: 24px;" class="fa fa-database"></i>
+              </a>&nbsp;&nbsp;
+                    {{#link-to 'vendor-profile' user.vendorAccount.id}}<i style="font-size: 24px;" class="fa fa-truck"></i>{{/link-to}}
+                </div>
+              </td>
+              <td>
+                <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+              </td>
+            </tr>
+
+            {{/if}}
+          {{else}}
+            {{#if showUsers}}
+            <tr>
+              <td>
+                {{user.name}} {{user.surname}}
+              </td>
+              <td>
+                {{user.email}}
+              </td>
+              <td>
+                <div style="text-align: left">
+                  <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
+                  <i style="font-size: 24px;" class="fa fa-database"></i>
+              </a>&nbsp;&nbsp;
+                    <a href='' {{action "notImplemented"}}><i style="font-size: 24px;" class="fa fa-diamond"></i></a>
+                </div>
+              </td>
+              <td>
+                <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+              </td>
+            </tr>
+            {{/if}}
+          {{/if}}
+      {{/each}}
+    </tbody>
+  </table>
+
 </div>

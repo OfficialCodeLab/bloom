@@ -14,11 +14,21 @@ export default Ember.Route.extend({
 	    });
 	},
 	actions: {
+		toggleCheck: function(suffix) {
+			let fetchStr = "show" + suffix;
+			let toChange = this.controller.get(fetchStr);
+			if(toChange) {
+				this.controller.set(fetchStr, false);
+			} else {
+				this.controller.set(fetchStr, true);
+			}
+
+		},
 
 		notImplemented() {
 			this.controller.get('notifications').info('This does nothing :)',{
 	            autoClear: true
-	        });	
+	        });
 
 		},
 
@@ -34,15 +44,15 @@ export default Ember.Route.extend({
 					user.save().then(()=>{
 		    		this.controller.get('notifications').success('User has been updated successfully.',{
 		            autoClear: true
-		        });	
+		        });
 					});
 				});
 			});
-			
+
 		},
 		addWedding(id){
 			let user = this.store.peekRecord('user', id);
-			let wedding = this.store.createRecord('wedding', 
+			let wedding = this.store.createRecord('wedding',
 				{
 					id: id,
 					user: user
@@ -61,8 +71,8 @@ export default Ember.Route.extend({
 
 				this.store.findRecord('wedding', id).then((wedding)=>{
 
-					function removeFavs() {	
-						console.log("Removing Favs");		
+					function removeFavs() {
+						console.log("Removing Favs");
 					 	return new Promise(function(resolve, reject) {
 							user.get("favourites").then((favs) => {
 								let favsCount = 0;
@@ -80,13 +90,13 @@ export default Ember.Route.extend({
 												resolve();
 											}
 										});
-									});									
+									});
 								}
 							}, ()=>{
 								console.log("No Favs");
 					 			resolve();
-							}); 	
-						});			
+							});
+						});
 					}
 
 					function removeGuests() {
@@ -107,14 +117,14 @@ export default Ember.Route.extend({
 												resolve();
 											}
 										});
-									});									
+									});
 								}
 							}, ()=>{
 								console.log("No Guests");
 					 			resolve();
-							});			 			
-					 			
-						});	
+							});
+
+						});
 					}
 
 					function removeTasks() {
@@ -125,7 +135,7 @@ export default Ember.Route.extend({
 								let tasksTotal = tasks.length;
 								if (tasksTotal === 0) {
 									console.log("No Tasks");
-						 			resolve();									
+						 			resolve();
 								} else {
 									tasks.forEach(function(task){
 										task.destroyRecord().then(()=>{
@@ -135,14 +145,14 @@ export default Ember.Route.extend({
 												resolve();
 											}
 										});
-									});									
+									});
 								}
 							}, ()=>{
 								console.log("No Tasks");
 					 			resolve();
-							});			 			
-					 			
-						});	
+							});
+
+						});
 					}
 
 					function removeBudget() {
@@ -157,7 +167,7 @@ export default Ember.Route.extend({
 								console.log("No Budget");
 					 			resolve();
 					 		});
-						});	
+						});
 					}
 
 					function removeUser() {
@@ -167,7 +177,7 @@ export default Ember.Route.extend({
 								console.log("Removed User");
 					 			resolve();
 							});
-						});	
+						});
 					}
 
 					function removeWedding() {
@@ -177,7 +187,7 @@ export default Ember.Route.extend({
 								console.log("Removed Wedding");
 					 			resolve();
 							});
-						});	
+						});
 					}
 
 					Promise.all([
@@ -190,17 +200,17 @@ export default Ember.Route.extend({
 							removeWedding().then(()=>{
 					    		_this.controller.get('notifications').success('User has been removed successfully.',{
 						            autoClear: true
-						        });	
+						        });
 						        _this.refresh();
 
-					        });										
-						});	
+					        });
+						});
 					});
 
 
 
 				});
-				
+
 			}
 
 		}

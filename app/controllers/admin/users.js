@@ -2,9 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 	notifications: Ember.inject.service('notification-messages'),
-	onlyUsers: false,
-	displayType: Ember.computed('onlyUsers', function(){
-        if (this.get('onlyUsers')) {
+	showVendors: true,
+	showUsers: true,
+	hideVendors: false,
+	displayType: Ember.computed('hideVendors', function(){
+        if (this.get('hideVendors')) {
             return "Only displaying users";
         } else {
             return "Displaying users & vendors";
