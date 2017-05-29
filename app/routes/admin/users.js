@@ -13,6 +13,25 @@ export default Ember.Route.extend({
 	      return items.sortBy('name');
 	    });
 	},
+  setupController(controller, model) {
+      this._super(controller, model);
+			let userCount = 0;
+			let vendorCount = 0;
+			let adminCount = 0;
+      model.forEach(function(user) {
+				if(user.get('accountType') === 'vendor') {
+					vendorCount++;
+					controller.set('vendorCount', vendorCount);
+				} else if(user.get('accountType') === 'admin'){
+					adminCount++;
+					controller.set('adminCount', adminCount);					
+				} else {
+					userCount++;
+					controller.set('userCount', userCount);
+				}
+			});
+  },
+
 	actions: {
 		toggleCheck: function(suffix) {
 			let fetchStr = "show" + suffix;

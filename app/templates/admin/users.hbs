@@ -1,30 +1,34 @@
 <div class="header-top">
   <h1>Users</h1></div>
-<div style='text-align: center'>
-  <p>User count: {{model.length}}</p>
-</div>
-<div style='text-align: center; padding-bottom: 30px;' class="container">
+<div style='padding-bottom: 30px;' class="container">
   {{!-- {{#paper-switch value=hideVendors onChange=(action (mut hideVendors))}}
     {{displayType}}
   {{/paper-switch}} --}}
-  <div class="col-sm-6 col-sm-offset-3">
-  Account Type to Display:
-  <br />
-  <div class="col-xs-6" {{action "toggleCheck" "Users"}}>
+  <div class="col-sm-6" style="text-align: right;">
+      <strong>Account Totals</strong><br /><br />
+      <p>Total accounts: {{model.length}}</p>
+      <p>User count: {{userCount}}</p>
+      <p>Vendor count: {{vendorCount}}</p>
+      <p>Admin count: {{adminCount}}</p>
+  </div>
+  <div class="col-sm-6" style="text-align: left;">
+  <strong>Account Type to Display</strong>
+  <br /><br />
+  <div {{action "toggleCheck" "Users"}}>
     {{#if showUsers}}
       {{mdl-button icon="check_box"}}
     {{else}}
       {{mdl-button icon="check_box_outline_blank"}}
-    {{/if}}<br />USERS
+    {{/if}}USERS
 
   </div>
 
-  <div class="col-xs-6" {{action "toggleCheck" "Vendors"}}>
+  <div {{action "toggleCheck" "Vendors"}}>
     {{#if showVendors}}
       {{mdl-button icon="check_box"}}
     {{else}}
       {{mdl-button icon="check_box_outline_blank"}}
-    {{/if}}<br />VENDORS
+    {{/if}}VENDORS
 
   </div>
   </div>
