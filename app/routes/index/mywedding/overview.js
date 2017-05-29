@@ -4,24 +4,26 @@ import moment from 'moment';
 export default Ember.Route.extend({
 	cdata: null,
 	isSubmitted: false,
-	model(){		
+	model(){
 		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-		return this.store.findRecord('wedding', _id);	
+		return this.store.findRecord('wedding', _id);
 	},
 	setupController: function (controller, model) {
 		this._super(controller, model);
 		let weddingDate = model.get('weddingDate');
 	  	controller.set('selectedDate', weddingDate);
-		this.dateDiff(controller.get('computedSelected'), controller.get('dateCurrent'), controller);		
-	    this.store.find('topVendor', 'topvendor').then((vendor)=> {
-	    	let vendors = vendor.get('vendors');
-	    	let numberOne = vendors.objectAt(0).id;
-	    	this.store.find('vendor', numberOne).then((v)=>{
-	    		controller.set('topVendor', v);
-	    	});
-	    });
+		this.dateDiff(controller.get('computedSelected'), controller.get('dateCurrent'), controller);
+	    // this.store.find('topVendor', 'topvendor').then((vendor)=> {
+	    // 	let vendors = vendor.get('vendors');
+	    // 	let numberOne = vendors.objectAt(0).id;
+	    // 	this.store.find('vendor', numberOne).then((v)=>{
+	    // 		controller.set('topVendor', v);
+	    // 	});
+	    // });
 		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 	    let user = this.store.peekRecord('user', _id);
+	    controller.set('name', user.get('name'));
+	    controller.set('surname', user.get('surname'));
 	    controller.set('spouse', user.get('spouse'));
 	    controller.set('email', user.get('email'));
 	    controller.set('cell', user.get('cell'));
@@ -89,7 +91,7 @@ export default Ember.Route.extend({
 				this.store.query('user',  {}).then((users) =>{
 				  // Do something with `peters`
 				  	users.forEach(function(user){
-						let fullname = user.get('name') + " " + user.get('surname'); 	
+						let fullname = user.get('name') + " " + user.get('surname');
 						if(~fullname.toLowerCase().indexOf(_name)){
 							searchResults.pushObject({
 								name: fullname,
@@ -130,7 +132,7 @@ export default Ember.Route.extend({
 				let oldBudget = this.controller.get('oldTotal');
 				let oldUsed = this.controller.get('oldUsed');
 				wedding.set('budgetTotal', oldBudget);
-				wedding.set('budgetUsed', oldUsed);	
+				wedding.set('budgetUsed', oldUsed);
 			}
 			this.set('isSubmitted', false);
 	    	this.send('removeModal');
@@ -148,26 +150,26 @@ export default Ember.Route.extend({
 				    });
 			    	this.controller.get('notifications').success('Budget has been updated!',{
 		                autoClear: true
-		            });  	
+		            });
 				});
 			} else {
 				let oldBudget = this.controller.get('oldTotal');
 				let oldUsed = this.controller.get('oldUsed');
 				wedding.set('budgetTotal', oldBudget);
-				wedding.set('budgetUsed', oldUsed);				
+				wedding.set('budgetUsed', oldUsed);
 		    	this.controller.get('notifications').error('Total budget cannot be less than used budget!',{
 	                autoClear: true
-	            });	
-			}	
+	            });
+			}
 
 		},
 		dateChanged: function (date, valid){
-			if(valid){              
+			if(valid){
 				this.controller.set('selectedDate', date);
 				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 				let oldWeddingDate = wedding.get('weddingDate');
-				this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	
+				this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));
 				if(wedding.get('tasksGenerated')) {
 					wedding.set('weddingDateChanged', oldWeddingDate);
 				} else {
@@ -182,14 +184,14 @@ export default Ember.Route.extend({
 			this.controller.set('taskId', id);
 			if(this.controller.get('modalDataId')){
 				_modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
-				_modalData.set('mainMessage', 'Do you want to remove this task?');	
-				_modalData.set('action', 'delete');	
-            	this.send('showModal', 'modal-confirm', _modalData);	            	
+				_modalData.set('mainMessage', 'Do you want to remove this task?');
+				_modalData.set('action', 'delete');
+            	this.send('showModal', 'modal-confirm', _modalData);
             } else {
 		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': 'Do you want to remove this task?', 'action': 'delete'});
 		     	this.controller.set('modalDataId', _modalData.get('id'));
             	this.send('showModal', 'modal-confirm', _modalData);
-            } 
+            }
 		},
 		checkBox: function(id){
 			let task = this.store.peekRecord('task', id);
@@ -203,17 +205,17 @@ export default Ember.Route.extend({
 				status = "complete.";
 			}
 			task.set('completed', completed);
-			task.save().then(()=>{					
+			task.save().then(()=>{
 				this.controller.get('notifications').success('Task has been marked as ' + status,{
 					autoClear: true
-				});							
+				});
 			});
 		},
 		ok: function() {
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			switch(_modalData.get('action')) {
-				case 'delete':					
-					
+				case 'delete':
+
 			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
@@ -235,7 +237,7 @@ export default Ember.Route.extend({
 			}
 		},
 		editTask: function(id){
-    		let task = this.store.peekRecord('task', id); 
+    		let task = this.store.peekRecord('task', id);
 			this.send('openTodoModal', task);
 			this.controller.set('todoEditId', id);
 		},
@@ -249,7 +251,7 @@ export default Ember.Route.extend({
 	    			this.controller.get('notifications').info('Task updated successfully!',{
 					    autoClear: true
 					});
-	    		});  
+	    		});
 			}
 		}
 

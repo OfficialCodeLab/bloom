@@ -1,6 +1,7 @@
 <div class="container-fluid">
    {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
-    <h1 class="font-times-header" style="color: #4C4C4E;">Overview</h1><br>
+    <h1 class="font-times-header" style="color: #4C4C4E;">Overview</h1>
+    <p style="font-style: italic; text-align: center;">Welcome,&nbsp;<span style="color:#E3B1B7">{{name}}</span></p>
     <hr>
 
     <div style="padding-bottom:60px;">
@@ -25,7 +26,7 @@
                         {{/if}}
 
                         <div class="overview-box-bottom {{if selectedDate "padding-25" "padding-75"}}">
-                            {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}                        
+                            {{#md-datepicker placeholder="Pick your wedding date" selectedDate=selectedDate dateChanged="dateChanged" minDate=dateCurrent}} {{/md-datepicker}}
                         </div>
                     </div>
 
@@ -51,23 +52,23 @@
                         </div>
 
                         <div class="overlay-box-bottom-sm">
-                            {{#link-to 'myaccount'}}{{mdl-button text="Edit Account"}}{{/link-to}}                      
+                            {{#link-to 'myaccount'}}{{mdl-button text="Edit Account"}}{{/link-to}}
                         </div>
                     </div>
 
                 </div>
             </div>
             <div class="col-md-4 col-sm-6">
-                {{#link-to 'vendor-profile' topVendor.id}}<div class="pear-profile-card guide-xs-card overview-block" id="overview-card-3">
+                {{#link-to 'listings'}}<div class="pear-profile-card guide-xs-card overview-block" id="overview-card-3">
                     <div class="overview-lg-block" style="background-image: url(../assets/images/overview3.jpg)">
                         <div class="overlay-pink">
                         </div>
 
                     </div>
                     <div class="overview-white-text" style="padding-top: 100px;">
-                        <h4>{{topVendor.name}}</h4>
+                        <h4>Explore Suppliers</h4>
                         <div style="position: absolute; width: 100%; height: 50px; bottom: 10px; text-align: center">
-                            <p>[ Vendor of the day ]</p>
+                            <p>Find everything you need for your big day!</p>
                         </div>
                     </div>
                 </div>{{/link-to}}
@@ -89,7 +90,7 @@
                         <p style="font-size: 60px; font-weight: 600;">{{model.guestsTotal}}</p>
 
                         <div class="overview-box-bottom" style="text-align: center !important; padding-top: 60px;">
-                            {{#link-to 'index.mywedding.guests'}}{{mdl-button text="Guest List"}}{{/link-to}}                      
+                            {{#link-to 'index.mywedding.guests'}}{{mdl-button text="Guest List"}}{{/link-to}}
                         </div>
                     </div>
                 </div>
@@ -97,7 +98,7 @@
             <div class="col-md-4 col-sm-6">
                 <div class="pear-profile-card guide-xs-card overview-block" id="overview-card-5">
                     <div class="overview-action-add">
-                        {{#link-to 'index.mywedding.budget'}}{{mdl-button icon="add_circle"}}{{/link-to}}  
+                        {{#link-to 'index.mywedding.budget'}}{{mdl-button icon="add_circle"}}{{/link-to}}
                     </div>
                     <div class="overview-md-block">
                         <h5>Budget</h5>
@@ -202,10 +203,10 @@
                 </div>
             </div>
         </div>
-        
+
             {{!-- {{mdl-button icon="check_box"}}
             {{mdl-button icon="check_box_outline_blank"}} --}}
-        
+
             {{!-- <div class="row">
             	<div class="col-md-8">
             		<h3>Welcome to your overview</h3>
@@ -226,11 +227,11 @@
                     <p>Features Coming soon: </p>
                     <p><i class="fa fa-envelope-o" aria-hidden="true"></i> Chat with suppliers and your inner circle</p>
                     <p><i class="fa fa-tasks" aria-hidden="true"></i> Assign Tasks to your inner circle members</p>
-                    <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr> 
-            		
+                    <p><i class="fa fa-comments-o" aria-hidden="true"></i> Get feedback on your ideas from your friends</p><hr>
+
             	</div>
                 <div class="col-md-4">
-                    <h3 class="text-center">Guest Attendance:</h3> 
+                    <h3 class="text-center">Guest Attendance:</h3>
 
                     <div class="row pie-label" style="padding-top: 10px;">
                     	<div class="col-xs-6 pie-label-right">
@@ -249,12 +250,12 @@
                     	</div>
                     </div>
                     {{mdl-button text="Refresh" action='refreshButton'}}
-                </div> 
+                </div>
             </div>
 
         <div class="col-md-6">
-        
+
         </div>--}}
     </div>
 </div>
-{{#tour-wedding session.currentUser.providerData.0._uid}} {{/tour-wedding}} 
+{{#tour-wedding session.currentUser.providerData.0._uid}} {{/tour-wedding}}

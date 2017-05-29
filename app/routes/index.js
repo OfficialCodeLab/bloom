@@ -13,7 +13,7 @@ export default Ember.Route.extend( {
       }
       return sesh;
   },
-  
+
   setupController(controller, model) {
       this._super(controller, model);
       Ember.set(controller, 'userext', model.userext);
@@ -33,7 +33,7 @@ export default Ember.Route.extend( {
       } else {
         if(this.get("session").get('currentUser').providerData[0].photoURL) {
           let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
-          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);          
+          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
         } else {
           imgStr = '../favicon.png';
         }
@@ -50,7 +50,14 @@ export default Ember.Route.extend( {
   actions: {
       showSingle: function(){
         this.transitionTo('index.item-single');
+      },
+      toggleOpenBanner: function() {
+        this.controller.set('isTransitionHappening', true);
+        this.controller.toggleProperty('isBannerOpen');
+        let _this = this;
+        Ember.run.later(this, function() {
+          _this.controller.set('isTransitionHappening', false);
+        }, 1200);
       }
   }
 });
- 
