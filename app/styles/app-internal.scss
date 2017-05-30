@@ -1651,6 +1651,61 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 
 #overview-card-3 {
 	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	.overview-hidden-text {
+		width: 100%;
+		transition: all 0.4s ease;
+		h4 {
+			text-align: center;
+			color: white;
+		}
+		p {
+			color: white;
+			text-align: center;
+			padding-top: 5px;
+		}
+		position: absolute;
+		bottom: -150px;
+	}
+	.overview-move-text1 {
+		transition: all 0.4s ease;
+	}
+	.overview-move-text2 {
+		transition: all 0.4s ease;
+	}
+	.overlay-pink {
+		transition: all 0.3s ease;
+	}
+	&:hover {
+		.overlay-pink {
+			background-color: black;
+			opacity: 0.7;
+			transition: all 0.5s ease;
+		}
+		.overview-hidden-text {
+			z-index: 4;
+			transform: translateY(-250px);
+			-webkit-transform: translateY(-250px);
+			-ms-transform: translateY(-250px);
+			transition: all 0.6s ease;
+		}
+
+		.overview-move-text1 {
+				transform: translateX(-320px);
+				-webkit-transform: translateX(-320px);
+				-ms-transform: translateX(-320px);
+				transition: all 0.4s ease;
+		}
+
+		.overview-move-text2 {
+				transform: translateX(350px);
+				-webkit-transform: translateX(350px);
+				-ms-transform: translateX(350px);
+				transition: all 0.3s ease;
+		}
+
+	}
 }
 
 #overview-card-6, #overview-card-5, #overview-card-4, #overview-card-3, #overview-card-2 {

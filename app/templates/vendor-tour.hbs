@@ -43,7 +43,7 @@
 	</div>
 
 
-	
+
 
 	<div class="form-group container" style="padding-top: 80px;">
 		{{!-- <div style="padding-top: 10px; padding-bottom: 60px;">
@@ -66,7 +66,7 @@
 			        <h5>Signing up for Bloom is as easy as it gets!</h5>
 			        <p>Simply follow the link below to sign up:<br>
 					{{#link-to 'vendor-signup'}}Vendor Signup Form{{/link-to}}<br>
-					When you have filled in your details and clicked sign up, you will be prompted to log in via social media.</p>					
+					When you have filled in your details and clicked sign up, you will be prompted to log in via social media.</p>
 			        <br>
 					    {{#cp-panels class='u-margin-bottom' accordion=true as |ps|}}
 					      {{#ps.panel as |p|}}
@@ -132,7 +132,7 @@
 			      <p><i class="material-icons">call</i>&nbsp;&nbsp;Check Contact Details</p>
 			    {{/panel.toggle}}
 			    {{#panel.body}}
-			      <div>			      
+			      <div>
 			        <h5>Make sure users find you</h5>
 			        <p>Head over to your vendor hub and then to the profile tab<br>
 			        Here you will be able to double check and update all your profile information and contact details<br>
@@ -210,23 +210,47 @@
 			</div>
 
 
-			<p>Instead of paying a monthly rate with no guarantee, our payment structure is geared towards only being charged for the traffic you receive.{{!--  This is monitored through favInstead of paying a monthly subscription with no guarantee, our payment structure is geared towards only being charged for the traffic and bookings you receive. --}} This is monitored through favouriting, direct messaging and vendor listing visits.{{!-- ouriting, contact number requests and direct messaging. --}}</p>
+  		<div class="row vendor-tour-works" style="padding-top: 20px;">
+        <div class="col-sm-4 border-box">
+          <i class="material-icons">lightbulb_outline</i>
+          <h4>User Insight</h4>
+          <p>You only pay for the value you receive – a direct message from a user. That direct message will contain contact details as well as high level details about the wedding (size and taste of wedding).</p>
+        </div>
+
+        <div class="col-sm-4 border-box">
+          <i class="material-icons">thumb_up</i>
+          <h4>No Traffic?</h4>
+          <p>If you don’t get traffic, you don’t pay a cent and your listing will still be shown to all our users.</p></div>
+
+        <div class="col-sm-4 border-box">
+          <i class="material-icons">receipt</i>
+          <h4>Save with Bloom</h4>
+          <p>You will not become a victim of your own success, we’ll never charge you more than R1500 (or 75 direct messages). You will however continue to receive messages, we just won’t charge you for those.</p></div>
+
+      </div>
+
+      {{!-- <p>
+        You only pay for the value you receive – a direct message from a user. That direct message will contain contact details as well as high level details about the wedding (size and taste of wedding).<br /><br />If you don’t get traffic, you don’t pay a cent.<br /><br />You will not become a victim of your own success, we’ll never charge you more than R1500 (or 75 direct messages). You will however continue to receive messages, we just won’t charge you for those.
+      </p> --}}
+
+
+			{{!-- <p>Instead of paying a monthly rate with no guarantee, our payment structure is geared towards only being charged for the traffic you receive. This is monitored through favouriting, direct messaging and vendor listing visits.</p>
 			<div class="form-group" style="padding-top: 50px; padding-bottom: 50px; text-align: center;">
 				<a href='../assets/docs/Bloom-rates-2017.pdf' download>{{mdl-button isRaised=true text='View Rates'}}</a>
 				<p style="font-style: italic; padding-top: 5px;">Free until 1st July 2017!</p>
-			</div>		
-	    	<div class="container pear-profile-card" style="padding: 20px; position: relative;">	
-				<p style="text-align: left;">
-				It is our priority to drive value to the vendor and the user.
-				<br><br>No subscription fees and you can leave the platform at any time.
-				<br><br>Inquiries are sent directly to your inbox.
-				<br><br>Without enquiries, favouriting or vendor listing visits no costs will be added to you
-				<br><br>You will never pay more than your capped monthly spend and still receive the traffic as usual.
-				<br><br>We aim to offer a fully transparent service that shows you the traffic you receive with itemized billing.
-				<br><br>Along with your bill, you will receive a monthly analytics report.
-				<br><br>This valuable information provides insights into your profile, such as how to increase traffic to your listing along with so much more.			
-				<br><br>Our targeted marketing strategy helps you gain exposure to couples that are in the market for wedding vendors. As a digital business we put a huge focus on online marketing in order to drive maximum user traffic to our platform and ultimately your products and services.</p>
 			</div>
+	    	<div class="container pear-profile-card" style="padding: 20px; position: relative;">
+  				<p style="text-align: left;">
+  				It is our priority to drive value to the vendor and the user.
+  				<br><br>No subscription fees and you can leave the platform at any time.
+  				<br><br>Inquiries are sent directly to your inbox.
+  				<br><br>Without enquiries, favouriting or vendor listing visits no costs will be added to you
+  				<br><br>You will never pay more than your capped monthly spend and still receive the traffic as usual.
+  				<br><br>We aim to offer a fully transparent service that shows you the traffic you receive with itemized billing.
+  				<br><br>Along with your bill, you will receive a monthly analytics report.
+  				<br><br>This valuable information provides insights into your profile, such as how to increase traffic to your listing along with so much more.
+  				<br><br>Our targeted marketing strategy helps you gain exposure to couples that are in the market for wedding vendors. As a digital business we put a huge focus on online marketing in order to drive maximum user traffic to our platform and ultimately your products and services.</p>
+  			</div> --}}
 			<div class="form-group" style="padding-top: 50px; padding-bottom: 80px;">
 				{{#link-to 'vendor-signup'}}{{mdl-button isRaised=true text='Sign Up'}}{{/link-to}}
 			</div><hr>
