@@ -104,12 +104,13 @@ export default Ember.Route.extend({
     },
     setupController(controller, model) {
       this._super(controller, model);
-      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
-      if (user.get('specialAccount')) {
-        controller.set('isSpecial', true);
-      } else {
-        controller.set('isSpecial', false);
-      }
+      this.store.findRecord('user', this.get("currentUser.uid")).then((user)=>{
+        if (user.get('specialAccount')) {
+          controller.set('isSpecial', true);
+        } else {
+          controller.set('isSpecial', false);
+        }        
+      });
 
     },
 

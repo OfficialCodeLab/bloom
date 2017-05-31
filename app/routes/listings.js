@@ -18,14 +18,14 @@ export default Ember.Route.extend({
   handleResize: function() {
     try{
         var $container = this.controller.get('masonryRef');
-        $container.layout();        
+        $container.layout();
     } catch(ex){}
   },
   bindResizeEvent: function() {
     this._super();
     Ember.$(window).on('resize', Ember.run.bind(this, this.handleResize));
   }.on('init'),
-  setupController: function(controller, model){    
+  setupController: function(controller, model){
     this._super(...arguments);
     this.locatePage(controller);
     var items = this.store.peekAll('cat-item');
@@ -33,24 +33,24 @@ export default Ember.Route.extend({
   },
   model () {
     return this.store.findAll('cat-item', {reload: true}).then((items) => {
+      let sorted = items.sortBy('favouritedBy.length').reverse();
       if (!(this.get('startAt'))) {
         this.resetIndexes();
       }
       this.resetLoadCount();
-
-      return items.slice(this.get('startAt'), this.get('endAt'));
+      return sorted.slice(this.get('startAt'), this.get('endAt'));
     });
   },
 
   actions: {
-  	
+
 
     prev: function() {
       var id = this.get('currentModel').get('firstObject.id');
       if(this.get('startAt') - PAGE_SIZE >= 0){
         this.controller.set('percentLoaded', 0);
         this.decrementPage();
-        this.resetLoadCount();  
+        this.resetLoadCount();
         let diff = this.get('endAt') - this.get('startAt');
         if(diff < PAGE_SIZE){
           this.set('endAt', this.get('startAt'));
@@ -61,7 +61,7 @@ export default Ember.Route.extend({
         this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
-      } else {      
+      } else {
         this.resetIndexes();
       }
 
@@ -73,7 +73,7 @@ export default Ember.Route.extend({
       if(this.get('startAt') + PAGE_SIZE < items.get('length')){
         this.controller.set('percentLoaded', 0);
         this.incrementPage();
-        this.resetLoadCount();  
+        this.resetLoadCount();
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
         if(this.get('endAt') + PAGE_SIZE < items.get('length')){
@@ -84,10 +84,10 @@ export default Ember.Route.extend({
         this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
-      } 
+      }
 
     },
-    loadedImg: function() {     
+    loadedImg: function() {
       let c = this.get('loadCount');
       let la = this.get('loadAmount');
       c++;
@@ -101,7 +101,7 @@ export default Ember.Route.extend({
       }
       try{
           var $container = this.controller.get('masonryRef');
-          $container.layout();        
+          $container.layout();
       } catch(ex){}
 
 
@@ -121,7 +121,7 @@ export default Ember.Route.extend({
     if(this.get('startAt') - PAGE_SIZE < 0) {
       //AT FIRST PAGE
       controller.set('isFirst', true);
-    } else {      
+    } else {
       controller.set('isFirst', false);
     }
 
@@ -130,19 +130,19 @@ export default Ember.Route.extend({
     let x = this.controller.get('pageNum');
     x++;
     this.controller.set('pageNum', x);
-  },   
+  },
   decrementPage: function(){
     let x = this.controller.get('pageNum');
     x--;
     this.controller.set('pageNum', x);
-  }, 
-  resetIndexes: function() { 
-      var items = this.store.peekAll('cat-item');   
+  },
+  resetIndexes: function() {
+      var items = this.store.peekAll('cat-item');
       this.set('startAt', 0);
       //console.log("ITEMS: " + items.get('length'));\
       this.set('pageTotal', Math.ceil(items.get('length')/PAGE_SIZE));
       // try{}
-      if(PAGE_SIZE < items.get('length')){        
+      if(PAGE_SIZE < items.get('length')){
         this.set('endAt', PAGE_SIZE);
       }
       else{
@@ -157,13 +157,13 @@ export default Ember.Route.extend({
       } catch(ex){}
       let loadAmount = this.get('endAt') - this.get('startAt');
       this.set('loadAmount', loadAmount);
-      this.set('loadCount', 0);    
+      this.set('loadCount', 0);
   },
-  scrollToTop: function(controller) {    
+  scrollToTop: function(controller) {
     try{
     Ember.run.next(function () {
       controller.get('scroller').scrollVertical("#scrollTopPos", {duration:800});
     }); } catch(ex){}
   }
-  	  
+
 });
