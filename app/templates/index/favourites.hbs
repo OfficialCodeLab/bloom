@@ -6,9 +6,9 @@
    </ul>
 </div>
 <div class="container">
-   <div class="row" style="padding-top: 15px">  
+   <div class="row" style="padding-top: 15px">
       {{outlet}}
    </div>
 </div>
 {{notification-container position="bottom"}}
-{{#tour-favourites session.currentUser.providerData.0._uid}} {{/tour-favourites}} 
+{{#tour-favourites currentUser.uid}} {{/tour-favourites}} 

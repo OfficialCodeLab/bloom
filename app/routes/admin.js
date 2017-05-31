@@ -25,7 +25,7 @@ export default Ember.Route.extend({
 				let _this = this;
         //First tier authentication:
         return new Promise(function(resolve, reject) {
-	        let id = _this.get("session").get('currentUser').providerData[0]._uid;
+	        let id = _this.get("currentUser.uid");
 	        let user = _this.store.peekRecord('user', id);
 	        if(user.get('accountType') !== 'admin'){
 	            _this.transitionTo('/404');

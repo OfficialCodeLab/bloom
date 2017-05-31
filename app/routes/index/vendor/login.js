@@ -10,7 +10,7 @@ export default Ember.Route.extend({
           return sesh;
     },
       model () {
-        let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+        let _id = this.get("currentUser.uid") + "";
         return this.store.peekRecord('user', _id);
       },
 	actions: {
@@ -48,7 +48,7 @@ export default Ember.Route.extend({
     },
     assignToUser: function(id){
         //window.scrollTo(0,0);
-    	let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+    	let user = this.store.peekRecord('user', this.get("currentUser.uid"));
         this.store.findRecord('vendor', id).then((vendor) => {
             user.set('vendorAccount', vendor);
             let loggedUsers = vendor.get('loggedInUsers');

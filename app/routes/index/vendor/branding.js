@@ -26,7 +26,7 @@ export default Ember.Route.extend({
 		};
 
 		var storageRef = this.get('firebaseApp').storage().ref();
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		let _id = this.get("currentUser.uid") + "";
 		let user = this.store.peekRecord('user', _id);
 		let vendorId = user.get('vendorAccount').get('id');
 		//PATH : userId / branding

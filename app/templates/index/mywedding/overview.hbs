@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="overview-white-text">
-                        {{#guest-counter session.currentUser.providerData.0._uid}}{{/guest-counter}}
+                        {{#guest-counter currentUser.uid}}{{/guest-counter}}
                         <p style="padding-top: 20px;">Attending</p>
                         <p style="font-size: 60px; font-weight: 600;">{{model.guestsAttending}}</p>
                         <p style="padding-top: 20px;">Invited</p>
@@ -110,7 +110,7 @@
                         <div style="padding-top: 15px; text-align: center;">
                             {{#if model.hasBudget}}
                                 {{#if refresh}}
-                                    {{#ember-pie session.currentUser.providerData.0._uid}} {{/ember-pie}}
+                                    {{#ember-pie currentUser.uid}} {{/ember-pie}}
                                 {{else}}
                                     {{mdl-spinner}}
                                 {{/if}}
@@ -263,4 +263,4 @@
         </div>--}}
     </div>
 </div>
-{{#tour-wedding session.currentUser.providerData.0._uid}} {{/tour-wedding}}
+{{#tour-wedding currentUser.uid}} {{/tour-wedding}}

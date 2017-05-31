@@ -18,7 +18,7 @@ export default Ember.Route.extend({
     // saveContact(newContact) {
     //   let user_id;
     //   if (this.get("session").get('currentUser') !== undefined){
-    //     user_id = this.get("session").get('currentUser').providerData[0]._uid;
+    //     user_id = this.get("currentUser.uid");
     //   } else {
     //     user_id = "Anonymous user";
     //   }

@@ -22,7 +22,7 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     this._super(controller, model);
 
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
     this.store.findRecord('user', _id).then((currentUser)=>{
       this.controller.set('from', currentUser.get('email'));
     }, ()=>{});
@@ -30,7 +30,7 @@ export default Ember.Route.extend({
 
   actions: {
     didTransition: function() {
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let _id = this.get("currentUser.uid") + "";
       this.store.findRecord('user', _id).then((currentUser) => {
         this.controller.set('from', currentUser.get('email'));
       }, () => {});
@@ -38,7 +38,7 @@ export default Ember.Route.extend({
 
     sendMessage() {
       //Store the current user in a temporary variable
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let _id = this.get("currentUser.uid") + "";
       let currentUser = this.store.findRecord('user', _id).then((currentUser) => {
         //Create a message to be sent through
         let message = this.store.createRecord('message', {

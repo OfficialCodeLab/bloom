@@ -44,7 +44,7 @@ export default Ember.Route.extend({
 	  		this.controller.set('section0', true);
 	  	},
 	  	changeEmail() {
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
 	    	let firebase = this.get('firebaseApp');
 	    	let _this = this;
 	  		var user = firebase.auth().currentUser;

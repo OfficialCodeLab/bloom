@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 	cdata: null,
 	isSubmitted: false,
 	model(){
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		let _id = this.get("currentUser.uid") + "";
 		return this.store.findRecord('wedding', _id);
 	},
 	setupController: function (controller, model) {
@@ -20,7 +20,7 @@ export default Ember.Route.extend({
 	    // 		controller.set('topVendor', v);
 	    // 	});
 	    // });
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		let _id = this.get("currentUser.uid") + "";
 	    let user = this.store.peekRecord('user', _id);
 	    controller.set('name', user.get('name'));
 	    controller.set('surname', user.get('surname'));
@@ -117,7 +117,7 @@ export default Ember.Route.extend({
 			this.set('cdata', ref);
 		},
 		openBudget: function(){
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 			let oldTotal = wedding.get('budgetTotal');
 			let oldUsed = wedding.get('budgetUsed');
@@ -127,7 +127,7 @@ export default Ember.Route.extend({
 		},
 		closeBudgetModal: function(){
 			if(this.get('isSubmitted') === false){
-				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+				let _id = this.get("currentUser.uid") + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 				let oldBudget = this.controller.get('oldTotal');
 				let oldUsed = this.controller.get('oldUsed');
@@ -138,7 +138,7 @@ export default Ember.Route.extend({
 	    	this.send('removeModal');
 		},
 		submitBudget: function (){
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 			this.set('isSubmitted', true);
 			if(parseInt(wedding.get('budgetTotal')) > parseInt(wedding.get('budgetUsed'))){
@@ -166,7 +166,7 @@ export default Ember.Route.extend({
 		dateChanged: function (date, valid){
 			if(valid){
 				this.controller.set('selectedDate', date);
-				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+				let _id = this.get("currentUser.uid") + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 				let oldWeddingDate = wedding.get('weddingDate');
 				this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));
@@ -216,7 +216,7 @@ export default Ember.Route.extend({
 			switch(_modalData.get('action')) {
 				case 'delete':
 
-			    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			    let _id = this.get("currentUser.uid") + "";
 					let wedding = this.store.peekRecord('wedding', _id);
 					let taskId = this.controller.get('taskId');
 					let task = this.store.peekRecord('task', taskId);

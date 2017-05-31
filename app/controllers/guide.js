@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
 	        	} else if (numvalue > 20) {
 	        		this.set('guests', 20);
 	        		this.set('guestsValue', '20');
-	        	}        		
+	        	}
         	}
         } else {
     		this.set('guestsValue', num + "");
@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
 			if(_item){
 				this.set(item, false);
 			} else {
-				this.set(item, true);				
+				this.set(item, true);
 			}
 		},
 		incrementNumber(){
@@ -74,14 +74,14 @@ export default Ember.Controller.extend({
 			this.set('guestsValue', '0');
 			this.get('notifications').success('Guest has been added to your list!',{
                 autoClear: true
-            }); 
+            });
 		},
 		closeMessage(){
 			this.set('responseMessage', '');
 		},
 		// addGuest(){
 		// 	this.set('addingGuest', true);
-  //     		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+  //     		let _id = this.get("currentUser.uid") + "";
 		// 	let wedding = this.store.peekRecord('wedding', _id);
 		// 	let guest = this.store.createRecord('guest', {
 		// 		name: this.get('name'),
@@ -100,7 +100,7 @@ export default Ember.Controller.extend({
 		// 			this.set('guests', 0);
 		// 			this.set('guestsValue', '0');
 		// 		});
-		// 	});		
+		// 	});
 		// },
 		// checkBox(id){
 		// 	let model = this.store.peekRecord('guest', id);
@@ -118,13 +118,13 @@ export default Ember.Controller.extend({
             let modalDataId;
             this.set('guestToDestroy', guest);
             if(this.get('modalDataId')){
-				_modalData = this.store.peekRecord('modal-data', this.get('modaDataId'));	
-            	this.send('showModal', 'modal-confirm', _modalData);	            	
+				_modalData = this.store.peekRecord('modal-data', this.get('modaDataId'));
+            	this.send('showModal', 'modal-confirm', _modalData);
             } else {
 		    	let _modalData = this.store.createRecord('modal-data', {'mainMessage': "This will remove the guest from your guest list."});
 		     	this.set('modalDataId', _modalData.get('id'));
             	this.send('showModal', 'modal-confirm', _modalData);
-            }    
+            }
 		},
 		checkBox(guest){
 			let msg = "";
@@ -137,7 +137,7 @@ export default Ember.Controller.extend({
 			}
 			this.get('notifications').info(msg,{
                 autoClear: true
-            }); 
+            });
 		}
 	},
 });

@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export default Ember.Route.extend({
   model(params) {
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
 
     return this.store.findRecord('user', _id);
   },
@@ -74,7 +74,7 @@ export default Ember.Route.extend({
     },
   },
   sendAllInvites: function() {
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
 
     this.store.findRecord('guest-list', _id, {
       reload: true

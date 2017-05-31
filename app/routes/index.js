@@ -8,7 +8,7 @@ export default Ember.Route.extend( {
   	if(!this.get('session.isAuthenticated')){
         this.transitionTo('login');
       } else{
-        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0]._uid).then(()=>{},()=>this.transitionTo('user.new'));
+        this.store.findRecord('user', this.get("currentUser.uid")).then(()=>{},()=>this.transitionTo('user.new'));
 
       }
       return sesh;
@@ -25,11 +25,11 @@ export default Ember.Route.extend( {
     //Before creating the record, clear the DS Store
 
     //this.store.unloadAll('userext');
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let _id = this.get("currentUser.uid") + "";
       let providerId = this.get("session").get('currentUser').providerData[0].providerId;
       let imgStr;
       if(providerId === "facebook.com"){
-        imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0]._uid + "/picture?type=large";
+        imgStr = "http://graph.facebook.com/" + this.get("currentUser.uid") + "/picture?type=large";
       } else {
         if(this.get("session").get('currentUser').providerData[0].photoURL) {
           let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;

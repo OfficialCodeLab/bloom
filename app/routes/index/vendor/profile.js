@@ -8,7 +8,7 @@ export default Ember.Route.extend({
       this.transitionTo('login');
     }
 
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
     let user = this.store.peekRecord('user', _id);
     user.get('vendorAccount').then((ven) => {
       if (ven === null || ven === undefined) {
@@ -20,7 +20,7 @@ export default Ember.Route.extend({
     return sesh;
   },
   model() {
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
     let user = this.store.peekRecord('user', _id);
     return Ember.RSVP.hash({
       vendor: user.get('vendorAccount'),

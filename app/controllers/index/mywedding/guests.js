@@ -69,7 +69,7 @@ export default Ember.Controller.extend({
     },
     addGuest() {
       this.set('addingGuest', true);
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let _id = this.get("currentUser.uid") + "";
       let wedding = this.store.peekRecord('wedding', _id);
       let guest = this.store.createRecord('guest', {
         name: this.get('name'),
@@ -95,7 +95,7 @@ export default Ember.Controller.extend({
       });
     },
     checkBox(id) {
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+      let _id = this.get("currentUser.uid") + "";
       let wedding = this.store.peekRecord('wedding', _id);
       let model = this.store.peekRecord('guest', id);
       let rsvp = model.get('rsvp');

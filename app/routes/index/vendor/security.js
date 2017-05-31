@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
     unlockAccount: function() {
-      let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
       user.set('specialAccount', true);
       this.controller.set('isSpecial', true);
       user.save().then(() => {
@@ -15,7 +15,7 @@ export default Ember.Route.extend({
 
     },
     lockAccount: function() {
-      let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
       user.set('specialAccount', false);
       this.controller.set('isSpecial', false);
       user.save().then(() => {
@@ -31,7 +31,7 @@ export default Ember.Route.extend({
       let _pass = this.controller.get('passwordConfirm');
       if (pass === _pass) {
         //alert(this.hashCode(pass));
-        let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+        let _id = this.get("currentUser.uid") + "";
         let passhash = this.hashCode(pass);
         let user = this.store.peekRecord('user', _id);
         let vendorAccount = user.get('vendorAccount').get('id');
@@ -68,7 +68,7 @@ export default Ember.Route.extend({
       }).then(() => { //Check if email is in use
         alert("Email address already in use");
       }, () => {
-        let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+        let _id = this.get("currentUser.uid") + "";
         let user = this.store.peekRecord('user', _id);
         let vendorAccount = user.get('vendorAccount').get('id');
         this.controller.set('email', '');
@@ -104,7 +104,7 @@ export default Ember.Route.extend({
     },
     setupController(controller, model) {
       this._super(controller, model);
-      let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
       if (user.get('specialAccount')) {
         controller.set('isSpecial', true);
       } else {
@@ -114,7 +114,7 @@ export default Ember.Route.extend({
     },
 
     logout: function() {
-      let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
       user.set('vendorAccount', null);
       user.save();
       this.transitionTo('index.vendor.login');

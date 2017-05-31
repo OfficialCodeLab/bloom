@@ -131,7 +131,7 @@
 							</div>
 							<div class="col-xs-6 si-right">
 								<div style="padding-right: 10px;">
-									{{#favourite-button model.id session.currentUser.providerData.0._uid}}{{/favourite-button}}
+									{{#favourite-button model.id currentUser.uid}}{{/favourite-button}}
 								</div>
 							</div>
 							<hr>
@@ -241,7 +241,7 @@
 										<p>Favourite</p>
 									</td>
 									<td>
-										{{#favourite-button model.id session.currentUser.providerData.0._uid}}{{/favourite-button}}
+										{{#favourite-button model.id currentUser.uid}}{{/favourite-button}}
 									</td>
 								</tr>
 							</tbody>

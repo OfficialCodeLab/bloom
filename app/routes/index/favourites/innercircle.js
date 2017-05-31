@@ -4,7 +4,7 @@ import { keyUp, keyDown } from 'ember-keyboard';
 
 export default Ember.Route.extend(EKMixin, {
 	model(){
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		let _id = this.get("currentUser.uid") + "";
 		return this.store.findRecord('user', _id);				
 	},
 	activateKeyboard: Ember.on('init', function() {
@@ -29,7 +29,7 @@ export default Ember.Route.extend(EKMixin, {
 			switch(_modalData.get('action')) {
 				case 'delete':
 					
-					let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+					let _id = this.get("currentUser.uid") + "";
 					let user = this.store.peekRecord('user', _id);
 					// let _user = this.store.peekRecord(this.controller.get('user'));
 					user.get('innercircle').removeObject(this.controller.get('user'));
@@ -45,7 +45,7 @@ export default Ember.Route.extend(EKMixin, {
 		addInnerCircle(_user){
 			let searchRes = Ember.get(this.controller.get('searchResults'), _user.key+ "");
 			Ember.set(searchRes, 'adding', true);
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
 			let user = this.store.peekRecord('user', _id);
 			let that = this;
 			this.store.findRecord('userstat', _user.id).then((stats)=>{
@@ -147,7 +147,7 @@ export default Ember.Route.extend(EKMixin, {
 			if(_modalData){
 				_modalData.deleteRecord();
 			}
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
   			this.store.findRecord('user', _id);
 		}
 	},

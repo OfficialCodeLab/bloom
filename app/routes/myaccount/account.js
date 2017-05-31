@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
     model () {
-		let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		let _id = this.get("currentUser.uid") + "";
 		return Ember.RSVP.hash({
 	      user: this.store.peekRecord('user', _id)
 	    });
@@ -26,7 +26,7 @@ export default Ember.Route.extend({
 		dateChanged: function (date, valid){
 			if(valid){              
 				this.controller.set('birthday', date);
-				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+				let _id = this.get("currentUser.uid") + "";
 				let user = this.store.peekRecord('user', _id);
 				user.set('birthday', date);
 				// this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));	

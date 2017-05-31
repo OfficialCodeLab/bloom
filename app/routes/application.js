@@ -13,6 +13,7 @@ export default Ember.Route.extend({
   isOverlay: false,
   metrics: Ember.inject.service(),
   firebaseApp: Ember.inject.service(),
+  // uid: Ember.inject.service(),
   beforeModel: function() {
     return this.get("session").fetch().catch(function() {});
 
@@ -23,7 +24,7 @@ export default Ember.Route.extend({
       try {
         if (!_this.get('session.isAuthenticated')) {} else {
           return _this.generateUid().then((session) => {
-            let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+            let _id = this.get("currentUser.uid") + "";
             return this.store.findRecord('user', _id);
           }, () => {
             this.transitionTo('logout');
@@ -34,7 +35,7 @@ export default Ember.Route.extend({
 
     //check server for the record of self
     // try {
-    //   let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    //   let _id = this.get("currentUser.uid") + "";
     //   return this.store.findRecord('user', _id);
     // } catch (ex) {}
 
@@ -173,14 +174,14 @@ export default Ember.Route.extend({
       this.transitionTo("categories");
     },
     addFavourite: function(id) {
-      let _id = this.get("session").get('currentUser').providerData[0]._uid;
+      let _id = this.get("currentUser.uid");
       let user = this.store.peekRecord('user', _id);
       let item = this.store.peekRecord('cat-item', id);
       let vendor = item.get('vendor');
       user.get('favourites').pushObject(item);
     },
     removeFavourite: function(id) {
-      let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+      let user = this.store.peekRecord('user', this.get("currentUser.uid"));
       let item = this.store.peekRecord('cat-item', id);
       user.get('favourites').removeObject(item);
       user.save();
@@ -258,7 +259,7 @@ export default Ember.Route.extend({
     openContactModal: function(vname, vemail, vid) {
       let contact = this.store.createRecord('contact');
       if (this.get('session.isAuthenticated')) {
-        let user = this.store.peekRecord('user', this.get("session").get('currentUser').providerData[0]._uid);
+        let user = this.store.peekRecord('user', this.get("currentUser.uid"));
         contact.set('email', user.get('email'));
       }
       if (typeof vname !== 'undefined') {
@@ -340,7 +341,7 @@ export default Ember.Route.extend({
         contact.deleteRecord();
       } else {
         if (this.get("session").get('currentUser') !== undefined) {
-          user_id = this.get("session").get('currentUser').providerData[0]._uid;
+          user_id = this.get("currentUser.uid");
         } else {
           user_id = "Anonymous user";
         }
@@ -662,7 +663,7 @@ export default Ember.Route.extend({
   createVendor: function(uniqueID) {
     this.generateUid().then(() => {
 
-      let _id = uniqueID || this.get("session").get('currentUser').providerData[0]._uid;
+      let _id = uniqueID || this.get("currentUser.uid");
       let _vendorStats = this.store.peekRecord('vendorStat', this.get('vendorStatsId'));
       let vendor = this.get('vendorAcc');
       let vendorLogin = this.get('vendorLog');

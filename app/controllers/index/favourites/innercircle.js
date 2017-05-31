@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
     }
   },
   searchUser() {
-    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    let _id = this.get("currentUser.uid") + "";
     let _name = this.get('name') + "";
     _name = _name.toLowerCase();
     let _oldname = this.get('oldname') + "";

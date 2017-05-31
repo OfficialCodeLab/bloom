@@ -14,7 +14,7 @@ export default Ember.Route.extend({
         if(!this.get('session.isAuthenticated')){
             this.transitionTo('login');
 		}
-		    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+		    let _id = this.get("currentUser.uid") + "";
 		let user = this.store.peekRecord('user', _id);
 		user.get('vendorAccount').then((ven)=>{
       if(ven === null || ven === undefined) {
@@ -27,12 +27,12 @@ export default Ember.Route.extend({
 		return sesh;
     },
     model() {
-	    let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+	    let _id = this.get("currentUser.uid") + "";
 		let user = this.store.peekRecord('user', _id);
     	return this.store.peekRecord('vendor', user.get('vendorAccount'));
     },
     afterModel(){
-    	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    	let _id = this.get("currentUser.uid") + "";
     	let user = this.store.peekRecord('user', _id);
     	let vendor = user.get('vendorAccount');
 		let items = vendor.get('catItems');

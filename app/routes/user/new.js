@@ -5,20 +5,20 @@ export default Ember.Route.extend({
 		//Before creating the record, clear the DS Store
 		// this.store.unloadAll('user');
 		let _this = this;
-    	let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+    	let _id = this.get("currentUser.uid") + "";
 			console.log(_id);
     	return new Promise (function(resolve, reject) {
 
 	    	_this.store.findRecord('user', _id, {reload: true}).then((response) => {
 				 // this.transitionTo('index');
 				 _this.set('foundUser', true);
-				 _this.store.findRecord('wedding', _this.get("session").get('currentUser').providerData[0]._uid);
+				 _this.store.findRecord('wedding', _this.get("currentUser.uid"));
 				 alert('user found');
 				resolve(response);
 	     	}, () => {
 				Ember.$('#usernew').fadeIn("fast");  //Run relevant jquery methods in component
 		        try {
-		        	// let _id = this.get("session").get('currentUser').providerData[0]._uid;
+		        	// let _id = this.get("currentUser.uid");
 		            ///return response;
 		        	//console.log(request);
 		        	//let surname = this.get("session").get('currentUser').providerData[0].last_name;
@@ -110,7 +110,7 @@ export default Ember.Route.extend({
 		dateChanged: function (date, valid){
 			if(valid){
 				this.controller.set('birthday', date);
-				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+				let _id = this.get("currentUser.uid") + "";
 				let user = this.store.peekRecord('user', _id);
 				user.set('birthday', date);
 				user.save();
@@ -120,7 +120,7 @@ export default Ember.Route.extend({
 		dateChangedWed: function (date, valid){
 			if(valid){
 				this.controller.set('weddingDate', date);
-				let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+				let _id = this.get("currentUser.uid") + "";
 				let wedding = this.store.peekRecord('wedding', _id);
 				let oldWeddingDate = wedding.get('weddingDate');
 				if(wedding.get('tasksGenerated')) {
@@ -134,7 +134,7 @@ export default Ember.Route.extend({
 		},
 		submitAccount() {
 			this.controller.set('isCreating', true);
-			let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
+			let _id = this.get("currentUser.uid") + "";
 			let wedding = this.store.peekRecord('wedding', _id);
 			let estGuests = this.controller.get('estimatedGuests');
 			wedding.set('estimatedGuests', estGuests);

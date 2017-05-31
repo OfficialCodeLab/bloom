@@ -4,8 +4,8 @@ export default Ember.Route.extend({
   model () {
     //Before creating the record, clear the DS Store
     this.store.unloadAll('userext');
-      let _id = this.get("session").get('currentUser').providerData[0]._uid + "";
-      let imgStr = "http://graph.facebook.com/" + this.get("session").get('currentUser').providerData[0]._uid + "/picture?type=large";
+      let _id = this.get("currentUser.uid") + "";
+      let imgStr = "http://graph.facebook.com/" + this.get("currentUser.uid") + "/picture?type=large";
     return Ember.RSVP.hash({
         userext: this.store.createRecord('userext', {
         imgurl: imgStr
@@ -25,7 +25,7 @@ export default Ember.Route.extend({
       if(!this.get('session.isAuthenticated')){
           this.transitionTo('login');
         } else {
-		        this.store.findRecord('user', this.get("session").get('currentUser').providerData[0]._uid).then((user)=>{
+		        this.store.findRecord('user', this.get("currentUser.uid")).then((user)=>{
 							if (user.get('accountType') === 'vendor' && !(user.get('specialAccount'))) {
 								this.transitionTo('index.vendor');
 							}
