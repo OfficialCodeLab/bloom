@@ -21,6 +21,6 @@ export default Model.extend({
   maxItems: attr('string'),
   backgroundImage: attr('string'),
   brandImage: attr('string'),
-  loggedInUsers: hasMany('user', {inverse: 'vendorAccount', async: true}),
   catItems: hasMany('cat-item', {inverse: 'vendor', async: true}),
+  loggedInUsers: hasMany('user', {inverse: 'vendorAccount', async: true}),
 });

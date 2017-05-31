@@ -28,21 +28,25 @@ export default Ember.Route.extend({
     },
     model() {
 	    let _id = this.get("currentUser.uid") + "";
-		let user = this.store.peekRecord('user', _id);
-    	return this.store.peekRecord('vendor', user.get('vendorAccount'));
+		  return this.store.findRecord('user', _id).then((user)=>{
+    	   return user.get('vendorAccount').then((va)=>{
+           return this.store.findRecord('vendor', va.id);
+         });
+      });
     },
     afterModel(){
     	let _id = this.get("currentUser.uid") + "";
     	let user = this.store.peekRecord('user', _id);
     	let vendor = user.get('vendorAccount');
-		let items = vendor.get('catItems');
-    if(items) {
-  		this.set('itemsCount', items.get('length'));
-  		this.resetLoadCount();
-  		return;
-    } else {
-      return;
-    }
+		vendor.get('catItems').then((items)=>{
+      if(items) {
+    		this.set('itemsCount', items.get('length'));
+    		this.resetLoadCount();
+    		return;
+      } else {
+        return;
+      }
+    });
     },
     handleResize: function() {
 	    try{
