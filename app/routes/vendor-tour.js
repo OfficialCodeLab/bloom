@@ -8,7 +8,7 @@ export default Ember.Route.extend({
     var sesh = this.get("session").fetch().catch(function() {});
     return sesh;
   },
-  model(params) {
+  model() {
 
     return Ember.RSVP.hash({
       category: this.store.findAll('category', {
