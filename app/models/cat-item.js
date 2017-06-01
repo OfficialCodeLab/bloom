@@ -26,6 +26,7 @@ export default Model.extend({
   countryCode: attr('string'),
   willingToTravel: attr('string'),
   maxTravelDist: attr('string'),
+  priority: attr('number', { defaultValue: 0 }),
   isNumber: Ember.computed.match('price', /^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/),
   isValidNumber: Ember.computed.and('isNumber', 'price'),
   isLongName: Ember.computed.gte('name.length', 5),

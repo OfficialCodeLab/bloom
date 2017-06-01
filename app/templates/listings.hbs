@@ -4,7 +4,7 @@
 			<h1 class="font-times-header"><i class="material-icons">view_list</i>Listings</h1>
 			<p class="font-times-subheader">Go wild. Be inspired.</p>
 			<hr>
-		</div><br>	
+		</div><br>
 		<div class="text-center hideOnPhones">
 			<div id="masonry-items">
 		         {{#masonry-grid items=model isFitWidth=true columnWidth=360 storeMasonryRef="storeMasonryRef" gutter=8 as |cat-item|}}
@@ -32,7 +32,7 @@
 
 		                  <div class="cat-bot-box-r col-xs-6">
 		                  	<div class="cat-location">
-			                  {{#if cat-item.willingToTravel}} 
+			                  {{#if cat-item.willingToTravel}}
 			                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
 			                        <div class="cat-i-div">
 			                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -49,7 +49,7 @@
 			                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
 			                           {{tooltip-on-element side="bottom" text="Online Business"}}
 			                        </div>
-			                     {{/if}} 
+			                     {{/if}}
 			                  {{else}} {{!-- NO --}}
 			                     {{#if cat-item.city}}
 	                        {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -62,16 +62,20 @@
 		               </div>
 		            </div>
 		         </div>
-		         {{/masonry-grid}} 
-		         <div class="nav-arrows">
-	         		{{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
+		         {{/masonry-grid}}
+		          <div class="nav-arrows">
+								{{#if allLoaded}}
+								{{#mdl-button action="loadMore" disabled=true}}No More Listings{{/mdl-button}}
+								{{else}}
+								{{#mdl-button action="loadMore" disabled=loadingMore isRaised=true}}Load More  {{#if loadingMore}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+								 {{/if}}
 		         </div>
 		      </div>
 
 			{{#if model}}
 			<div id="loading-spinner">
 				<br>
-				  {{paper-progress-linear value=percentLoaded}}		
+				  {{paper-progress-linear value=percentLoaded}}
 			</div>
 			{{/if}}
 		</div>
@@ -87,7 +91,7 @@
 	               		<img src="{{cat-item.imageURL}}" class="img-responsive mobile-image">
 	               {{/link-to}}
 	               <div class="cat-overlay-2">
-	                  
+
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <div class="cat-bot-box-l col-xs-6">
@@ -96,7 +100,7 @@
 
 		                  <div class="cat-bot-box-r col-xs-6">
 		                  	<div class="cat-location">
-			                  {{#if cat-item.willingToTravel}} 
+			                  {{#if cat-item.willingToTravel}}
 					                     {{#if cat-item.maxTravelDist}} {{!-- YES --}}
 			                        <div class="cat-i-div">
 			                           <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -113,7 +117,7 @@
 			                           <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
 			                           {{tooltip-on-element side="bottom" text="Online Business"}}
 			                        </div>
-	                   			  {{/if}} 
+	                   			  {{/if}}
 			                  {{else}} {{!-- NO --}}
 			                     {{#if cat-item.city}}
 	                        {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -128,11 +132,13 @@
 	         </div>
 	      {{/each}}
 	      <div class="nav-arrows">
-	         {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
+					{{#if allLoaded}}
+					{{#mdl-button action="loadMore" disabled=true}}No More Listings{{/mdl-button}}
+					{{else}}
+					{{#mdl-button action="loadMore" disabled=loadingMore isRaised=true}}Load More  {{#if loadingMore}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+					 {{/if}}
 	      </div>
-	   </div> 
-   </div> 
+	   </div>
+   </div>
 </div>
 {{partial 'partials/footer'}}
-
-

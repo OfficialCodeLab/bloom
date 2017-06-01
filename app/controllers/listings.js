@@ -9,6 +9,9 @@ export default Ember.Controller.extend({
 	isLast: false,
 	pageTotal: 0,
 	pageNum: 1,
+	allLoaded: false,
+	queryParams: ['itemCount'],
+	itemCount: 10,
 	scroller: Ember.inject.service(),
 	pgNum: Ember.computed('pageNum', function() {
 		if(this.get('pageNum') < 10){
@@ -31,7 +34,7 @@ export default Ember.Controller.extend({
 		// loadedImg(){
 		// 	try{
 		// 	  	var $container = this.get('masonryRef');
-		// 	  	$container.layout();				
+		// 	  	$container.layout();
 		// 	} catch(ex){}
 		// 	//console.log("THIS WORKS");
 		// },

@@ -27,23 +27,62 @@ export default Ember.Route.extend({
   }.on('init'),
   setupController: function(controller, model){
     this._super(...arguments);
+    controller.set('allLoaded', false);
     this.locatePage(controller);
     var items = this.store.peekAll('cat-item');
     controller.set('pageTotal', Math.ceil(items.get('length')/PAGE_SIZE));
   },
-  model () {
-    return this.store.findAll('cat-item', {reload: true}).then((items) => {
-      let sorted = items.sortBy('favouritedBy.length').reverse();
-      if (!(this.get('startAt'))) {
-        this.resetIndexes();
-      }
-      this.resetLoadCount();
-      return sorted.slice(this.get('startAt'), this.get('endAt'));
+  model (params) {
+    let loadCount = 10;
+    if (params.itemCount) {
+      loadCount = params.itemCount;
+    }
+    return this.store.query('cat-item', {
+      orderBy: 'priority',
+      limitToLast: loadCount
+    }).then((items)=>{
+      let reversed = items.toArray().reverse();
+      this.resetLoadCount(0, reversed.get('length'));
+      return reversed;
     });
+    // return this.store.findAll('cat-item', {reload: true}).then((items) => {
+    //   let sorted = items.sortBy('favouritedBy.length').reverse();
+    //   // let filtered = sorted.filterBy('name', 'i');
+    //   if (!(this.get('startAt'))) {
+    //     this.resetIndexes();
+    //   }
+    //   this.resetLoadCount();
+    //   return filtered.slice(this.get('startAt'), this.get('endAt'));
+    // });
   },
 
   actions: {
 
+    loadMore: function() {
+      this.controller.set('loadingMore', true);
+      var items = this.controller.get('model');
+      let count = items.get('length');
+      let loaded = count;
+      count = count + 10;
+      this.store.query('cat-item', {
+        orderBy: 'priority',
+        limitToLast: count
+      }).then((items)=>{
+        let reversed = items.toArray().reverse();
+        this.resetLoadCount(loaded);
+        let itemTotal = reversed.get('length');
+        if (itemTotal < count) {
+          this.controller.set('allLoaded', true);
+        }
+
+        if(itemTotal === loaded-10){ // This should work... probably
+          this.controller.set('allLoaded', true);
+        } else {
+          this.controller.set('model', reversed);
+        }
+        this.controller.set('loadingMore', false);
+      });
+    },
 
     prev: function() {
       var id = this.get('currentModel').get('firstObject.id');
@@ -137,7 +176,7 @@ export default Ember.Route.extend({
     this.controller.set('pageNum', x);
   },
   resetIndexes: function() {
-      var items = this.store.peekAll('cat-item');
+      var items = this.controller.get('model');
       this.set('startAt', 0);
       //console.log("ITEMS: " + items.get('length'));\
       this.set('pageTotal', Math.ceil(items.get('length')/PAGE_SIZE));
@@ -149,13 +188,19 @@ export default Ember.Route.extend({
         this.set('endAt', items.get('length'));
       }
   },
-  resetLoadCount: function (){
+  resetLoadCount: function (loaded, x){
       try{
          this.controller.set('isLoaded', false);
          Ember.$('#masonry-items').fadeOut(0);
          Ember.$('#loading-spinner').fadeIn(0);
       } catch(ex){}
-      let loadAmount = this.get('endAt') - this.get('startAt');
+      let loadAmount = 0;
+      if(x) {
+        loadAmount = x;
+      } else {
+          let items = this.controller.get('model');
+          loadAmount = items.get('length') - loaded;
+      }
       this.set('loadAmount', loadAmount);
       this.set('loadCount', 0);
   },

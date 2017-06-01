@@ -161,6 +161,9 @@ export default Ember.Route.extend({
       this.set('emailStored', email);
       this.set('passwordStored', pass);
     },
+    storeModalValueData: function(id) {
+      this.controller.set('modelValueDataId', id);
+    },
     storeVendorStatsId: function(vendorStatsId) {
       this.set('vendorStatsId', vendorStatsId);
     },
@@ -226,6 +229,27 @@ export default Ember.Route.extend({
         outlet: 'modal',
         model: model
       });
+    },
+
+    saveValue(){
+      this.set('isSavingValue', true);
+      let dataId = this.controller.get('modelValueDataId');
+      let data = this.store.peekRecord('edit-value-modal', dataId);
+      let item = this.store.peekRecord(data.get('type'), data.get('_id'));
+      item.set(data.get('field'), data.get('value'));
+      item.save().then(()=>{
+        this.set('isSavingValue', false);
+        data.deleteRecord();
+        this.send('removeModal');
+      });
+    },
+    closeEditValue() {
+      if(this.get('isSavingValue') === false) { //Clear Dirty Model
+        let dataId = this.controller.get('modelValueDataId');
+        let data = this.store.peekRecord('edit-value-modal', dataId);
+        data.deleteRecord();
+      }
+      this.send('removeModal');
     },
     priceClickTest: function() {
       let metrics = Ember.get(this, 'metrics');

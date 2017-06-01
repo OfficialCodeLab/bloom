@@ -1,0 +1,39 @@
+<div class="header-top">
+  <h1>Listings</h1></div>
+  <p style="text-align: center;">Listing count: {{model.length}}</p>
+  <div class="container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Owner</th>
+          <th>Points</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model as |item|}}
+              <tr>
+                <td>
+                  {{#link-to 'single-item' item.id}}{{item.name}}{{/link-to}}
+                </td>
+                <td>
+                  <a href="https://console.firebase.google.com/project/pear-server/database/data/vendors/{{item.vendor.id}}">
+                    {{item.vendor.name}}
+                  </a>
+                </td>
+                <td>
+                  <div style="text-align: center;">
+                    <span>{{#if item.priority}}{{item.priority}}{{else}}0{{/if}}</span>&nbsp;&nbsp;
+                  <div style="display: inline" {{action "editValue" item.id}} class="tb-btn">{{mdl-button icon="add"}}</div>
+                  </div>
+                </td>
+                <td>
+                  <div {{action "notImplemented"}} class="tb-btn">{{mdl-button icon="delete"}}</div>
+                </td>
+              </tr>
+        {{/each}}
+      </tbody>
+    </table>
+
+  </div>

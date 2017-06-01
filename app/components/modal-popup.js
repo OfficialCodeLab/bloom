@@ -8,44 +8,51 @@ actions: {
     },
     close: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('removeModal');      
+      this.sendAction('removeModal');
     },
     submitBudget: function(){
-      this.sendAction('submitBudget'); 
+      this.sendAction('submitBudget');
     },
     submit: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('submitMsg');      
+      this.sendAction('submitMsg');
     },
     closeContactModal: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeContactModal');       
+      this.sendAction('closeContactModal');
     },
     closeBudgetModal: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeBudgetModal');       
+      this.sendAction('closeBudgetModal');
     },
     closeTodoModal: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeTodoModal');       
+      this.sendAction('closeTodoModal');
     },
     saveTodo: function(){
       this.sendAction('saveTodo');
     },
     closeGuestModal: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeGuestModal');       
+      this.sendAction('closeGuestModal');
     },
     saveGuest: function(){
       this.sendAction('saveTodo');
     },
+    saveValue: function() {
+      this.sendAction('saveValue');      
+    },
+    closeEditValue: function() {
+      this.$('.modal').modal('hide');
+      this.sendAction('closeEditValue');
+    },
     captchaComplete: function(data){
       alert("THIS WORKED");
-      this.sendAction('captchaComplete');   
+      this.sendAction('captchaComplete');
     },
     closeDate: function(){
       this.$('.modal').modal('hide');
-      this.sendAction('closeDate');       
+      this.sendAction('closeDate');
     },
     okDate: function(){
       this.sendAction('okDate');

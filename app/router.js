@@ -79,6 +79,7 @@ Router.map(function() {
       this.route('category');
       this.route('vendor', function() {});
     });
+    this.route('listings');
   });
   this.route('listings');
   this.route('not-found', { path: '/*path' });

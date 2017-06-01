@@ -16,7 +16,7 @@ const FavouriteButtonComponent = Ember.Component.extend({
 			if(favourite.get('id') === _itemid){
 				_that.set('favourited', true);
 				return;
-			} 
+			}
 		});
 
 	},
@@ -27,20 +27,28 @@ const FavouriteButtonComponent = Ember.Component.extend({
         	let store = this.get('storeName');
 	    	let user = store.peekRecord('user', _id);
 	    	let item = store.peekRecord('cat-item', _itemid);
-	    	
+
 			if(this.get('favourited')){
 				this.set('favourited', false);
 	    		user.get('favourites').removeObject(item);
 	    		item.get('favouritedBy').removeObject(user);
-			} else {				
+          let priority = item.get('priority');
+          priority--;
+          item.set('priority', priority);
+          console.log(item.get('priority'));
+			} else {
 				this.set('favourited', true);
 	    		user.get('favourites').pushObject(item);
-	    		item.get('favouritedBy').pushObject(user);	
+	    		item.get('favouritedBy').pushObject(user);
+          let priority = item.get('priority');
+          priority++;
+          item.set('priority',priority);
+          console.log(item.get('priority'));
 	    		item.get('vendor').then((vendor) =>{
 	    			let _vendorId = vendor.get('id');
 		    		this.storeFavourite(_vendorId, _id, _itemid);
-		    	});    		
-	    		
+		    	});
+
 			}
     		user.save().then(()=>{
     			item.save();
@@ -51,7 +59,7 @@ const FavouriteButtonComponent = Ember.Component.extend({
 	storeFavourite: function(vendorId, userId, itemId){
 		let prop = userId + " favourited: " + itemId;
     	let metrics = Ember.get(this, 'metrics');
-		
+
 		metrics.trackEvent('GoogleAnalytics', {
 		    // (required) The name you supply for the group of objects you want to track.
 		   category: vendorId,
