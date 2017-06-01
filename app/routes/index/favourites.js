@@ -10,7 +10,7 @@ export default Ember.Route.extend({
         userext: this.store.createRecord('userext', {
         imgurl: imgStr
       }),
-        user: this.store.peekRecord('user', _id),
+        user: this.store.findRecord('user', _id),
         wedding: this.store.findRecord('wedding', _id)
       });
   },

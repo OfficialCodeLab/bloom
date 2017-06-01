@@ -72,12 +72,14 @@
 		         </div>
 		      </div>
 
-			{{#if model}}
-			<div id="loading-spinner">
-				<br>
-				  {{paper-progress-linear value=percentLoaded}}
-			</div>
-			{{/if}}
+		</div>
+		<div style="padding-top: 200px;">
+				{{#if model}}
+				<div id="loading-spinner">
+					<br>
+					  {{paper-progress-linear value=percentLoaded}}
+				</div>
+				{{/if}}
 		</div>
 		<div class="container-fluid text-center showOnPhones">
 	      {{#each model as |cat-item|}}

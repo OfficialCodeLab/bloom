@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 	model(){
 		let _id = this.get("currentUser.uid") + "";
-		// return this.store.findRecord('user', _id);	
+		// return this.store.findRecord('user', _id);
 		return Ember.RSVP.hash({
-	      user: this.store.peekRecord('user', _id),
+	      user: this.store.findRecord('user', _id),
 	      userstat: this.store.findRecord('userstat', _id)
-	    });		
+	    });
 	},
 	setupController(controller, model) {
 	    this._super(controller, model);
@@ -27,7 +27,7 @@ export default Ember.Route.extend({
 		// }, ()=>{});
 	},
 	actions:{
-		
+
 		updateStats(){
 			let _id = this.get("currentUser.uid") + "";
 			let userstats = this.store.peekRecord('userstat', _id);
@@ -36,7 +36,7 @@ export default Ember.Route.extend({
 					  autoClear: true
 					});
 			});
-			
+
 
 
 		},

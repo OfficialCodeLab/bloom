@@ -42,7 +42,7 @@ export default Ember.Route.extend({
       limitToLast: loadCount
     }).then((items)=>{
       let reversed = items.toArray().reverse();
-      this.resetLoadCount(0, reversed.get('length'));
+      this.resetLoadCount(reversed.get('length'));
       return reversed;
     });
     // return this.store.findAll('cat-item', {reload: true}).then((items) => {
@@ -67,10 +67,10 @@ export default Ember.Route.extend({
       this.store.query('cat-item', {
         orderBy: 'priority',
         limitToLast: count
-      }).then((items)=>{
-        let reversed = items.toArray().reverse();
-        this.resetLoadCount(loaded);
+      }).then((cats)=>{
+        let reversed = cats.toArray().reverse();
         let itemTotal = reversed.get('length');
+        this.resetLoadCount(itemTotal - loaded);
         if (itemTotal < count) {
           this.controller.set('allLoaded', true);
         }
@@ -188,7 +188,7 @@ export default Ember.Route.extend({
         this.set('endAt', items.get('length'));
       }
   },
-  resetLoadCount: function (loaded, x){
+  resetLoadCount: function (x){
       try{
          this.controller.set('isLoaded', false);
          Ember.$('#masonry-items').fadeOut(0);
@@ -199,7 +199,7 @@ export default Ember.Route.extend({
         loadAmount = x;
       } else {
           let items = this.controller.get('model');
-          loadAmount = items.get('length') - loaded;
+          loadAmount = items.get('length');
       }
       this.set('loadAmount', loadAmount);
       this.set('loadCount', 0);

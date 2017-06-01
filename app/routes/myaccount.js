@@ -7,7 +7,7 @@ export default Ember.Route.extend({
 	        // transition.abort();
 	        // Default back to homepage
 	        this.transitionTo('login');
-	    } 
+	    }
 	    return sesh;
   	},
 
@@ -23,7 +23,7 @@ export default Ember.Route.extend({
 		} else {
 			if(this.get("session").get('currentUser').providerData[0].photoURL) {
 	          let imgStrSM = this.get("session").get('currentUser').providerData[0].photoURL;
-	          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);          
+	          imgStr = imgStrSM.substring(0, imgStrSM.length-11) + imgStrSM.substring(imgStrSM.length-4, imgStrSM.length);
 	        } else {
 	          imgStr = '../favicon.png';
 	        }
@@ -32,7 +32,7 @@ export default Ember.Route.extend({
 	      userext: this.store.createRecord('userext', {
 			  imgurl: imgStr
 			}),
-	      user: this.store.peekRecord('user', _id)
+	      user: this.store.findRecord('user', _id)
 	    });
 	},
 	setupController(controller, model) {
@@ -43,7 +43,7 @@ export default Ember.Route.extend({
 	    model.user.save();
 	  },
 	  actions : {
-	  	saveUser() { 
+	  	saveUser() {
 		  let _id = this.get("currentUser.uid") + "";
 		  let usr = this.store.peekRecord('user', _id);
 	      usr.save().then(() => {
@@ -83,7 +83,7 @@ export default Ember.Route.extend({
 				this.controller.get('notifications').success('Saved successfully!',{
 					  autoClear: true
 				});
-				
+
 			});
 		}
 	  }
