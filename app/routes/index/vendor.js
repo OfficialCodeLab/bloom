@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 	      }
 
 		let id = this.get("currentUser.uid");
-        let user = this.store.findRecord('user', id);
+        let user = this.store.peekRecord('user', id);
         //First tier auth
         if(!user.get('accountType')){
   			this.transitionTo('/404');
