@@ -54,6 +54,9 @@
   {{#mdl-table-col label='Listing'}}
     {{#if vendor.catItems}}{{mdl-button icon="check"}}{{else}}{{/if}}
   {{/mdl-table-col}}
+  {{#mdl-table-col label='Log In'}}
+    <div {{action "logIntoAccount" vendor.id}} class="tb-btn">{{mdl-button icon="vpn_key"}}</div>
+  {{/mdl-table-col}}
   {{#mdl-table-col label='Delete'}}
     <div {{action "destroyVendor" vendor.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
   {{/mdl-table-col}}

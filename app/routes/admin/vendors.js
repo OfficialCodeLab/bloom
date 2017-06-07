@@ -185,6 +185,32 @@ export default Ember.Route.extend({
         });
       });
     },
+    logIntoAccount: function(id) {
+      let _this = this;
+      let vendor = this.store.peekRecord('vendor', id);
+      this.store.findRecord('user', this.get("currentUser.uid")).then((user)=>{
+        user.get('vendorAccount').then((venAcc)=>{
+          try{
+            let _vendor = this.store.peekRecord('vendor', venAcc);
+            let _loggedInUsers = _vendor.get('loggedInUsers');
+            _loggedInUsers.removeObject(user);      
+            _vendor.save();    
+          } catch (ex) {}
+          user.set('vendorAccount', vendor);
+          let loggedInUsers = vendor.get('loggedInUsers');
+          loggedInUsers.pushObject(user);
+          vendor.save().then(()=>{
+            user.save().then(()=> {
+                this.transitionTo('index.vendor');
+                this.controller.get('notifications').success('Logged in successfully!',{
+                    autoClear: true
+                });
+            });
+          });
+        });
+
+      });
+    },
 
     destroyVendor: function(id) {
       let _this = this;
