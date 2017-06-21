@@ -525,12 +525,12 @@ export default Ember.Route.extend({
       email: email,
       password: password
     }).then((d) => {
-      _this.store.findRecord('user', d.uid).then((user) => {
+      _this.store.findRecord('user', this.get('session.currentUser').uid).then((user) => {
         user.get('vendorAccount').then((ven) => {
           if (ven === null || ven === undefined) {
-            _this.generateUid().then(()=>{
+            // _this.generateUid().then(()=>{
             	_this.joinAccounts(user);
-						});
+						// });
           } else {
             _this.get('session').close().then(() => {
               _this.resetVendorSignup();
@@ -550,12 +550,12 @@ export default Ember.Route.extend({
         if (_this.get('vendorId')) {
           _this.createVendor(d.uid);
         } else {
-          _this.generateUid().then(()=>{
+          // _this.generateUid().then(()=>{
 	          _this.controller.get('notifications').info('User account created.', {
 	            autoClear: true
 	          });
 	          _this.transitionTo('user.new');
-					});
+					// });
         }
       });
 
@@ -624,7 +624,7 @@ export default Ember.Route.extend({
   completeLogin(data) {
     let _this = this;
     this.generateUid().then((session) => {
-      _this.store.findRecord('user', session.content.currentUser.providerData[0]._uid).then((user) => {
+      _this.store.findRecord('user', this.get('currentUser').uid).then((user) => {
         if (!_this.get('vendorId')) {
           _this.transitionTo('index');
           window.scrollTo(0, 0);

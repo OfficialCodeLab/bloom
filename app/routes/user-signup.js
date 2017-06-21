@@ -160,24 +160,24 @@ export default Ember.Route.extend({
   },
   completeLogin: function(d) {
     let _this = this;
-    _this.store.findRecord('user', d.uid).then((user) => {
+    _this.store.findRecord('user', this.get('session.currentUser').uid).then((user) => {
       _this.controller.get('notifications').info('Logged in successfully!.', {
         autoClear: true
       });
-      _this.generateUid().then(() => {
+      // _this.generateUid().then(() => {
         _this.resetSignup();
         _this.transitionTo('index');
-      });
+      // });
     }, () => {
       _this.controller.get('notifications').info('User account created.', {
         autoClear: true
       });
-      _this.generateUid().then(() => {
+      // _this.generateUid().then(() => {
 				_this.fillInAccountDetails().then(()=>{
 	        _this.resetSignup();
 	        _this.transitionTo('user.new');
 				});
-      });
+      // });
     });
   },
   fillInAccountDetails: function() {

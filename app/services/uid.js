@@ -5,7 +5,7 @@ export default Ember.Service.extend({
   uid: Ember.computed('session', function(){
       if (this.get('session.currentUser')) {
         let provData = this.get('session.currentUser').providerData[0];
-        if (this.get('session').provider === "password") {
+        if (this.get('session.provider') === "password") {
           return this.get('session.currentUser').uid;
         } else {
           return this.get('session.currentUser').providerData[0].uid;
