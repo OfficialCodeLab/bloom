@@ -623,8 +623,8 @@ export default Ember.Route.extend({
   },
   completeLogin(data) {
     let _this = this;
-    this.generateUid().then((session) => {
-      _this.store.findRecord('user', session.content.currentUser.providerData[0]._uid).then((user) => {
+    // this.generateUid().then((session) => {
+      _this.store.findRecord('user', this.get('session.currentUser').uid).then((user) => {
         if (!_this.get('vendorId')) {
           _this.transitionTo('index');
           window.scrollTo(0, 0);
@@ -661,7 +661,7 @@ export default Ember.Route.extend({
       });
 
 
-    });
+    // });
   },
   loginRedirect: function(provider, scope) {
     let _this = this;
