@@ -1,11 +1,11 @@
 <div class="index-main" style="text-align:center; overflow-x: hidden;">
-	
+
 	{{!-- {{#if session.isAuthenticated}}
 	{{else}}
 		<div class="navbar-padding"></div>
 	{{/if}} --}}
-	<div class="tour-image-backdrop tour-text-shadow" style="background: url('../assets/images/banners/guided-tour-top.jpg'); background-position: 45% 50%; min-height: 600px; background-size: cover;">
-		<div class="" style="min-height: 600px">
+	<div class="tour-image-backdrop tour-text-shadow" style="background: url('../assets/images/banners/guided-tour-lake.jpg'); background-position: 45% 50%; min-height: 600px; background-size: cover;">
+		<div class="" style="min-height: 600px; background-color: rgba(255, 255, 255, 0.11);">
 			<div class="container tour-block-padding">
 
 				<img src='../assets/images/bloom-tour.png' class="guided-tour-top-img">
@@ -16,7 +16,7 @@
 
 	<div class="container" style="padding-top: 40px; padding-bottom: 20px;">
 	<h1>The Bloom Proposal</h1>
-		<p style="font-size: 20px;">Dream. Create. Inspire. Bloom invites you to build and celebrate your magical day with flawless wedding planning that spares no detail. We’ll show you all the ropes to help you tie the knot.</p>
+		<p style="font-size: 20px;">Dream. Create. Inspire. Bloom invites you to build and celebrate your magical day with flawless wedding planning that spares no detail. We’ll show you all the ropes to help you tie the knot. And the best news is that Bloom is free!</p>
 		<br>
 		<p style="font-style: italic;">Scroll down for a preview of all Bloom’s’ wedding bells and whistles.</p><br>
 	</div>
@@ -27,8 +27,8 @@
 		<div class="container tour-block-padding">
 			<h1>Visual Vendor Listings</h1><br>
 			<p>You’ve got the ring and you’ve said Yes, now is the time to plan the rest.<br>
-			Browse our visually inspired vendor listings to reveal the “chosen ones”.<br>With direct 
-			messaging it’s so easy to get in touch. 
+			Browse our visually inspired vendor listings to reveal the “chosen ones”.<br>With direct
+			messaging it’s so easy to get in touch.
 			</p>
 		    <div class="form-group" style="padding-top: 60px;">
 				{{#link-to 'categories'}}{{mdl-button isRaised=true text='Categories'}}{{/link-to}}
@@ -45,7 +45,7 @@
 		<p>With Listings to visually inspire and fill all your heart’s desires.<br>Fear not you won’t forget a thing from all those vendors that you love. Hit the favourite button and all will be saved to your hub.</p>
 		<p style="font-style: italic;">Try favouriting some items below.</p><br>
 		<div style="padding-top: 50px; padding-bottom: 60px;" class="row guide-row">
-			<div class="col-lg-4 col-md-6">	
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               <span class="cat-title">Beautiful Dress</span>
@@ -73,14 +73,14 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
-			</div>	
-			<div class="col-lg-4 col-md-6">	
+	         </div>
+			</div>
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               {{!-- <div style="display: inline-block">
-		               <div class="cat-overlay-1">	
-		               		<img class="overlay-vendor" src="../assets/images/logo1055.png">                 
+		               <div class="cat-overlay-1">
+		               		<img class="overlay-vendor" src="../assets/images/logo1055.png">
 		               </div>
 		            </div> --}}
 	               <span class="cat-title">Delicious Food</span>
@@ -96,7 +96,7 @@
 	               <div class="img-backdrop"  style="background-image: url('../assets/images/culinary-vendor.png');">
 	               		<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
 	               </div>
-	               <div class="cat-overlay-2">	                  
+	               <div class="cat-overlay-2">
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Culinary</span>
@@ -109,9 +109,9 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
+	         </div>
 			</div>
-			<div class="col-lg-4 col-md-6">	
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               <span class="cat-title">Stunning Venue</span>
@@ -127,7 +127,7 @@
 	               <div class="img-backdrop"  style="background-image: url('../assets/images/venue-vendor.png');">
 	               		<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
 	               </div>
-	               <div class="cat-overlay-2">	                  
+	               <div class="cat-overlay-2">
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Venues</span>
@@ -139,8 +139,8 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
-			</div>		
+	         </div>
+			</div>
 		</div>
 	</div>
 	<div class="container"><hr><br>
@@ -153,7 +153,7 @@
 		<h1>Your Favourites</h1>
 		<p>Click the hearts to unfavourite</p>
 		{{#if dress}}
-			<div class="col-lg-4 col-md-6">	
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               <span class="cat-title">Beautiful Dress</span>
@@ -169,7 +169,7 @@
 	               <div class="img-backdrop"  style="background-image: url('../assets/images/dresses-vendor.png');">
 		               	<img src="../assets/images/sample-content/dress.jpg" class="img-responsive guide-image">
 		            </div>
-	               <div class="cat-overlay-2">	                  
+	               <div class="cat-overlay-2">
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Dresses</span>
@@ -182,11 +182,11 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
-			</div>	
+	         </div>
+			</div>
 			{{/if}}
 			{{#if culinary}}
-			<div class="col-lg-4 col-md-6">	
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               <span class="cat-title">Delicious Food</span>
@@ -202,7 +202,7 @@
 	               <div class="img-backdrop"  style="background-image: url('../assets/images/culinary-vendor.png');">
 	               		<img src="../assets/images/sample-content/culinary.jpg" class="img-responsive guide-image">
 	               </div>
-	               <div class="cat-overlay-2">	                  
+	               <div class="cat-overlay-2">
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Culinary</span>
@@ -215,11 +215,11 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
+	         </div>
 			</div>
 			{{/if}}
           	{{#if venue}}
-			<div class="col-lg-4 col-md-6">	
+			<div class="col-lg-4 col-md-6">
 				<div style="display: inline-block;">
 	            <div class="category-block">
 	               <span class="cat-title">Stunning Venue</span>
@@ -235,7 +235,7 @@
 	               <div class="img-backdrop"  style="background-image: url('../assets/images/venue-vendor.png');">
 	               		<img src="../assets/images/sample-content/venue.jpg" class="img-responsive guide-image">
 	               </div>
-	               <div class="cat-overlay-2">	                  
+	               <div class="cat-overlay-2">
 	               </div>
 	               <div class="cat-bottom-box">
 	                  <span class="cat-category">Venues</span>
@@ -247,7 +247,7 @@
 	               		</div>
                		</div>
 	            </div>
-	         </div>	
+	         </div>
 			</div>
 			{{/if}}
 		</div>
@@ -353,7 +353,7 @@
 				          {{/if}}
 				         </div>
 						{{!-- <div class="col-xs-9" style="text-align: left;">RSVP: 	<input type="checkbox" onclick={{action "checkBox" guest}}></div> --}}
-						
+
 					</div>
 				</div>
 			{{/each}}
@@ -403,7 +403,7 @@
 			        <tr>
 			            <td>{{guest.name}}</td>
 			            <td>{{guest.email}}<br>{{guest.cell}}</td>
-			            <td>{{guest.guests}}</td>            
+			            <td>{{guest.guests}}</td>
 			      		<td><input type="checkbox"></td>
 			            <td><button class="btn btn-danger" {{action "destroyGuest" guest}}>X</button></td>
 			        </tr>
@@ -439,7 +439,7 @@
 	    <span class="credits-sm">&copy; Page &amp; Holmes Photography - White Lilly Bridal</span>
 	</div>
 
-	
+
 	{{partial 'partials/footer'}}
 	{{notification-container position="bottom"}}
 </div>
