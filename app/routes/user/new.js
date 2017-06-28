@@ -13,7 +13,7 @@ export default Ember.Route.extend({
 				 // this.transitionTo('index');
 				 _this.set('foundUser', true);
 				 _this.store.findRecord('wedding', _this.get("currentUser.uid"));
-				 alert('user found');
+				//  alert('user found');
 				resolve(response);
 	     	}, () => {
 				Ember.$('#usernew').fadeIn("fast");  //Run relevant jquery methods in component
