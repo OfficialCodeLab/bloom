@@ -81,10 +81,10 @@ export default Ember.Component.extend({
     grecaptcha.render(this.$().prop('id'), {
       'sitekey': this.get('siteKey'),
       'size': this.get('size'),
-      'callback': this.verifyCallback,
-      'expired-callback': this.expiredCallback
+      'callback': this.verifyCallback
     });
     this.set('_isSetup', true);
+    grecaptcha.execute();
   },
 
   /**
@@ -119,7 +119,7 @@ export default Ember.Component.extend({
    */
   init: function () {
     this._super();
-
+// https://www.google.com/recaptcha/api.js?&render=explicit&hl=
     var self = this;
     $.getScript("https://www.google.com/recaptcha/api.js?&render=explicit&hl=" + self.get('lang'), function (/*data, textStatus, jqxhr*/) {
       self.pollForObject();

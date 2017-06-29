@@ -21,7 +21,7 @@
             <br /><p style="text-align: center">
               <strong>Additional Information:</strong>
             </p>
-            <div class="contact-switch">            
+            <div class="contact-switch">
              {{#paper-switch value=model.sendInfo onChange=(action (mut model.sendInfo))}}
                 {{model.sendInfoText}}
              {{/paper-switch}}
@@ -31,6 +31,7 @@
           {{/if}}
           <br>
           <div>
+            {{!-- {{g-recaptcha-invisible onResponse=(mut captchaVerified) reset=reset}} --}}
             {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired" }}{{/ember-grecaptcha}}
             <br>
           </div>
