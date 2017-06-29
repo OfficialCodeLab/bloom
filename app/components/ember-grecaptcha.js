@@ -14,11 +14,13 @@ export default Ember.Component.extend({
   /**
    * Attribute bindings of the rendered DOM element
    */
-  attributeBindings: ['siteKey:data-sitekey', 'data-theme', 'data-size', 'data-callback', 'data-expired-callback', 'data-tabindex'],
+  attributeBindings: ['siteKey:data-sitekey', 'data-theme', 'size:data-size', 'data-callback', 'data-expired-callback', 'data-tabindex'],
   /**
    * Site Key for reCaptcha Challenge
    */
-  siteKey: '6Lfn9SATAAAAABptk3qIcDbWXJ8jMUqcCiwRnnAL',
+  siteKey: '6LexUycUAAAAAFjIJoCO-pKIQp1JG3TnpTTLxAOi',
+
+  size: 'invisible',
   /**
    * Language to display reCaptcha in
    */
@@ -60,7 +62,7 @@ export default Ember.Component.extend({
     //Use previously stored global reference as the callback function loses context of the component when called by the Captcha
     //Send Success Event to parent component/route for handling the event
     //this.log(JSON.stringify(window.captchaComponent));
-    window.captchaComponent.sendAction('captchaComplete', data);	
+    window.captchaComponent.sendAction('captchaComplete', data);
   },
 
   /**
@@ -78,6 +80,7 @@ export default Ember.Component.extend({
   setupGrecaptcha: function () {
     grecaptcha.render(this.$().prop('id'), {
       'sitekey': this.get('siteKey'),
+      'size': this.get('size'),
       'callback': this.verifyCallback,
       'expired-callback': this.expiredCallback
     });

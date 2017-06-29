@@ -2843,6 +2843,12 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	margin-top: -5px;
 }
 
+.contact-switch {
+	md-switch {
+		white-space: normal;
+	}
+}
+
 /*==============================================================================*\
    Accordion Styles
 \*==============================================================================*/
@@ -3092,6 +3098,13 @@ md-input-container.md-input-focused label:not(.md-no-float), md-input-container.
 	}
 }
 @media (max-width:481px) { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+
+	.contact-switch {
+		md-switch .md-label {
+	    padding-left: 10px;
+	    line-height: 20px;
+		}
+	}
 
 	.todo-middle{
 		width: 50%

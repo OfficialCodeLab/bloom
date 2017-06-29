@@ -1,33 +1,34 @@
 {{#modal-popup title='Contact us' ok="submit" close='closeContactModal'}}
-  
+
       <div class="form-horizontal form-group form-group-lg row">
         <div style="margin-left: 15px; margin-right 15px; padding-right: 15px;">
           <!-- Vendor Name -->
           {{#if model.vendor}}
           <div class="input-group pear-max-width">
             <p><strong>To: {{model.vendor}}</strong></p>
-          </div><br><hr>
-          <div class="input-group pear-max-width">
-            <strong>Send wedding date &amp; amount of guests?</strong><br><br>
-            <div>
-             {{#paper-switch value=model.sendInfo onChange=(action (mut model.sendInfo))}}
-                {{model.sendInfoText}}
-             {{/paper-switch}}
-            </div>
-
           </div><br>
           {{/if}}
             <div class="input-group">
               {{mdl-textfield label="Your e-mail address." value=model.email}}
             </div>
-            <span class="glyphicon glyphicon-ok form-control-feedback email-tick {{if model.isValid 'visible' 'hidden'}}"></span>
           <br>
-          {{#if model.vendor}}
-          {{/if}}
-          <div class="{{if model.isLong 'has-success'}}">
+          <div>
             {{mdl-textarea label="Your message. (At least 5 characters.)" value=model.message}}
             {{!-- {{textarea class="form-control" value=model.message placeholder="Your message. (At least 5 characters.)" rows="7"}} --}}
+          </div><br>
+          {{#if model.vendor}}<hr style="margin: 1em auto; max-width: 60px;"/>
+          <div class="input-group pear-max-width">
+            <br /><p style="text-align: center">
+              <strong>Additional Information:</strong>
+            </p>
+            <div class="contact-switch">            
+             {{#paper-switch value=model.sendInfo onChange=(action (mut model.sendInfo))}}
+                {{model.sendInfoText}}
+             {{/paper-switch}}
+            </div>
+
           </div>
+          {{/if}}
           <br>
           <div>
             {{#ember-grecaptcha captchaComplete="captchaComplete" captchaExpired="captchaExpired" }}{{/ember-grecaptcha}}

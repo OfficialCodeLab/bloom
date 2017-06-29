@@ -17,10 +17,9 @@ export default Model.extend({
 	isDisabled: Ember.computed.not('isEnabled'),
 	sendInfoText: Ember.computed('sendInfo', function(){
         if (this.get('sendInfo')) {
-            return "Yes Please!";
+            return "Send my wedding information for a better response";
         } else {
-            return "No thanks";
+            return "Keep my wedding stats private";
         }
     }),
 });
- 
