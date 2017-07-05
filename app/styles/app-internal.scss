@@ -1944,7 +1944,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 }
 
 .catitem-desc {
-	text-align: center; 
+	text-align: center;
 	font-size: 16px;
 }
 
@@ -1958,7 +1958,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 	.card-material {
 		margin-bottom: 30px;
 		cursor: pointer;
-		height: 300px;
+		height: 360px;
 		transition: all 0.3s;
 		&:hover {
 	  		box-shadow: 0 5px 5px 0 rgba(0,0,0,.14),0 4px 5px -2px rgba(0,0,0,.2),0 3px 8px 0 rgba(0,0,0,.12);
@@ -1979,7 +1979,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 		}
 
 	.catitem-card-overlay-black {
-		padding-top: 80px;
+		padding-top: 100px;
 		height: 100%;
 	}
 	text-align: center;
@@ -1997,7 +1997,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 }
 
 .catitem-contact {
-	height: 257px !important;
+	height: 307px !important;
 	padding-top: 60px;
 	padding-bottom: 80px;
 	text-align: center;
@@ -2009,6 +2009,11 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 	}
 	h4 {
 			color: $color-main;
+	}
+
+	p{
+		color:#E91E63;
+		padding: 15px;
 	}
 
 	&:hover {
@@ -2035,7 +2040,7 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
-    margin-top: -70px;
+    margin-top: -73px;
 
 	}
 	h6:before{
@@ -2053,7 +2058,19 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 }
 
 .catitem-category {
-	padding-top: 70px;
+	// padding-top: 70px;
+	position: relative;
+	h4{
+		color: white;
+		padding-bottom: 30px;
+	}
+	.cat-subtext-bottom {
+		color: white;
+		bottom: 0px;
+		width: 100%;
+		transform: scale(1) !important;
+		position: absolute;
+	}
 	i{
 		color: white;
 		font-size: 100px;
@@ -2068,6 +2085,71 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 			transition: all 0.4s;
 			transform: scale(1.1);
 
+		}
+	}
+}
+
+.catitem-contact-info{
+	text-align: left;
+	h5{
+    margin-top: 10px;
+    padding-left: 10px;
+		font-weight: 600;
+	}
+}
+
+.catitem-favs{
+	padding: 0px !important;
+	.favs-header{
+		background-image: url('../assets/images/hearts.jpg');
+		background-size: cover;
+		height: 120px;
+		border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+		margin-bottom: 50px;
+		p{
+			text-transform: uppercase;
+			color: white;
+			font-size: 20px;
+			padding-top: 85px;
+		}
+	}
+	hr {
+    width: 40px;
+		margin: 1em auto;
+	}
+}
+
+.catitem-shop{
+	background-size: cover;
+	position: relative;
+	padding: 0px !important;
+	.catitem-fulloverlay{
+		padding-top: 80px;
+		i {
+			color: white;
+			font-size: 80px;
+		}
+		height: 100%;
+		border-radius: 2px;
+		background: rgba(0,0,0,0.4);
+		.catitem-location p {
+			padding-top: 10px;
+			font-size: 24px;
+			color: white;
+		}
+	}
+	.catitem-travel{
+		background: rgba(255,255,255,1);
+		position: absolute;
+		width: 100%;
+		bottom: 0;
+		border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+		p{
+			margin-top: 5px;
+			font-size: 14px !important;
+			color: #4C4C4C !important;
 		}
 	}
 }

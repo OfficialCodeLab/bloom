@@ -65,56 +65,133 @@
 						<div class="row">
 							<div class="catitem-cards">
 								<div class="col-md-4 col-sm-6">
-									<div class="card-material catitem-card-vendor" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-default.jpg' }});">
+									{{#link-to 'vendor-profile' model.vendor.id}}<div class="card-material catitem-card-vendor" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-default.jpg' }});">
 										<div class="catitem-card-overlay-black">
 											<h4>{{model.vendor.name}}</h4>
 											<p>
 												Visit Vendor Profile
 											</p>
 										</div>
-									</div>
+									</div>{{/link-to}}
 								</div>
-								<div class="col-md-4 col-sm-6" style="height: 330px;">
+								<div class="col-md-4 col-sm-6" style="height: 390px;">
 									<div class="card-material catitem-contact">
 										<i class="material-icons">message</i>
+										<p>
+											Contact {{model.vendor.name}} right now with Bloom's direct messaging!
+										</p>
 										{{!-- <h4>Send a Message</h4> --}}
 
 										<h6>Send A Message</h6>
 									</div>
 								</div>
 
-									<div class="col-md-4 col-sm-6">
-										<div class="card-material catitem-category" style={{model.category.style}}>
-											<i class={{model.category.icon}}>{{model.category.iconName}}</i>
-											<p class="cat-heading">{{model.category.name}}</p>
-										</div>
-									</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="card-material catitem-contact-info">
+											<h5>Vendor Information</h5>
+												<div style="padding-top: 10px;">
+														<div class="col-xs-2 overview-info"><i class="material-icons">mail_outline</i></div>
+														<div class="col-xs-10 overview-info">
+															{{#if contactInfoVisible}}
+															<a href="mailto:bloom+{{model.vendor.email}}?cc=support@bloomweddings.co.za" target="_top">{{model.vendor.email}}</a>
+															{{else}}
+																****
+															{{/if}}
+														</div>
+														<div class="col-xs-2 overview-info"><i class="material-icons">call</i></div>
+														<div class="col-xs-10 overview-info">
+															{{#if contactInfoVisible}}
+																{{model.vendor.cell}}
+															{{else}}
+																****
+															{{/if}}
+
+														</div>
+														<div class="col-xs-2 overview-info"><i class="material-icons">laptop</i></div>
+														<div class="col-xs-10 overview-info"><a href={{websiteUrl}} target="_blank">{{website}}</a></div>
+														<div class="col-xs-2 overview-info"><i class="material-icons">home</i></div>
+														<div class="col-xs-10 overview-info">{{model.vendor.city}}</div>
+														<div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
+														<div class="col-xs-10 overview-info">{{model.vendor.province.name}}</div>
+												</div>
+												<div class="overlay-box-bottom">
+														<div style="padding: 5px;">{{mdl-button action='showContactInfo' isRaised=true text="Show Contact Info"}}</div>
+											 </div>
+								 </div>
+							 </div>
 
 								<div class="col-md-4 col-sm-6">
 									<div class="card-material catitem-category" style={{model.category.style}}>
+										<h4>Category</h4>
 										<i class={{model.category.icon}}>{{model.category.iconName}}</i>
 										<p class="cat-heading">{{model.category.name}}</p>
+										<p class="cat-subtext-bottom">
+											See more from this category
+										</p>
 									</div>
 								</div>
 
+
 									<div class="col-md-4 col-sm-6">
-										<div class="card-material catitem-card-vendor" style="background-image: url({{if model.vendor.backgroundImage model.vendor.backgroundImage '../assets/images/sample-content/vendor-default.jpg' }});">
-											<div class="catitem-card-overlay-black">
-												<h4>{{model.vendor.name}}</h4>
+										<div class="card-material catitem-favs">
+											<div class="favs-header">
 												<p>
-													Visit Vendor Profile
+													Favourites
 												</p>
+											</div>
+											<p style="padding-bottom: 20px;">
+												{{peopleStr}}
+											</p><hr /><p style="padding-top: 20px;">
+												Add to your favourites
+											</p>{{#favourite-button model.id currentUser.uid}}{{/favourite-button}}
+										</div>
+									</div>
+
+									<div class="col-md-4 col-sm-6">
+										<div class="card-material catitem-shop" style="background-image: url({{if notOnline '../assets/images/overview3.jpg' '../assets/images/online-bg.jpg' }});">
+											<div class="catitem-fulloverlay">
+
+												{{#if model.willingToTravel}}
+													{{#if model.maxTravelDist}}
+															<i class="material-icons">place</i>
+															<div class="catitem-location">
+																{{#if model.city}}
+																<p>{{model.city}}, {{model.provinceCode}}</p>
+																{{else}}
+																<p>{{model.province.name}}</p>
+																{{/if}}
+																<div class="catitem-travel">
+																	<p>
+																		Vendor is willing to travel up to {{model.maxTravelDist}} km
+																	</p>
+																</div>
+															</div>
+
+													{{else}}
+													<div class="cat-i-div">
+														 <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
+														 {{tooltip-on-element side="left" text="Online Business"}}
+
+ 														<div class="catitem-location">
+															<p>Online</p>
+														</div>
+													</div>
+													{{/if}}
+													{{else}}
+													<i class="material-icons">place</i>
+													<div class="catitem-location">
+														<p>
+															{{model.province.name}}
+														</p>
+													</div>
+												{{/if}}
+
 											</div>
 										</div>
 									</div>
-									<div class="col-md-4 col-sm-6" style="height: 330px;">
-										<div class="card-material catitem-contact">
-											<i class="material-icons">message</i>
-											{{!-- <h4>Send a Message</h4> --}}
 
-											<h6>Send A Message</h6>
-										</div>
-									</div>
+
+
 
 							</div>
 						</div>

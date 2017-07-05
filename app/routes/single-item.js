@@ -14,10 +14,23 @@ export default Ember.Route.extend({
     	return this.store.findRecord('catItem', params.catItem_id);
   	},
   	setupController(controller, model) {
+			let _this = this;
 	    this._super(controller, model);
-
-	    // controller.set('title', 'Edit library');
-	    // controller.set('buttonLabel', 'Save changes');
+     	controller.set('contactInfoVisible', false);
+	    let id = this.get("currentUser.uid");
+			let willingToTravel = model.get('willingToTravel');
+			let maxTravelDist = model.get('maxTravelDist');
+			if(willingToTravel && !maxTravelDist) {
+				controller.set('notOnline', false);
+			} else {
+				controller.set('notOnline', true);
+			}
+	    model.get('vendor').then((ven)=>{
+			  this.send('storeVendorProfileVisited', ven.get('id'), id);
+				this.store.findRecord('vendor-stat', ven.get('id')).then((venstat)=>{
+	      	controller.set('website', venstat.get('website'));
+				});
+			});
   	},
 	actions: {
 		goBack: function(){
@@ -28,6 +41,12 @@ export default Ember.Route.extend({
 	    	window.scrollTo(0, 0);
 			// let id = this.controller.get('model.vendor.id')
 			// this.send('vendorClick', id);
+		},
+		showContactInfo: function(){
+			let userId = this.get("currentUser.uid");
+			let vendorId = this.controller.get('model.id');
+			this.controller.set('contactInfoVisible', true);
+			this.send('storeContactInfoRequest', vendorId, userId);
 		},
 
 	    openContactModalInit: function(){
@@ -78,7 +97,7 @@ export default Ember.Route.extend({
 		    		currentSlide = 0;
 		    	} else {
 		    		currentSlide++;
-		    	}			    	
+		    	}
 
 		    	let imageSuffix = '';
 		    	if(currentSlide === 0) {
@@ -97,7 +116,7 @@ export default Ember.Route.extend({
 		    		if(breakThis >= MAX_IMAGES+1){
 		    			isRunning = false;
 		    		}
-		    	}	    		
+		    	}
 	    	}
 	    }
 	},
