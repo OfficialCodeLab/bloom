@@ -3,6 +3,7 @@ import Ember from 'ember';
 const MAX_IMAGES = 5;
 
 export default Ember.Route.extend({
+scroller: Ember.inject.service(),
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
 	  	if(!this.get('session.isAuthenticated')){
@@ -35,6 +36,12 @@ export default Ember.Route.extend({
 	actions: {
 		goBack: function(){
 			window.history.go(-1);
+		},
+		scrollTo: function(position){
+			this.get('scroller').scrollVertical("#" + position, {
+				offset: -100,
+				duration: 800
+			});
 		},
 		priceClick: function(){
 			alert("TEST");

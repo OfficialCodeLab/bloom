@@ -1,10 +1,10 @@
 <div class="index-main" id="single-item">
 	<div class="pear-sub-well catitem-subnav hideOnPhones">
 		<ul class="nav nav-pills unselectable pear-sidebar">
-			{{#link-to 'myaccount.account' tagName="li"}}<a href style="color: white;">IMAGES</a>{{/link-to}}
-			{{#link-to 'myaccount.vendor' tagName="li"}}<a href>DESCRIPTION</a>{{/link-to}}
-			{{#link-to 'myaccount.security' tagName="li"}}<a href>CONTACT</a>{{/link-to}}
-			{{#link-to 'myaccount.notifications' tagName="li"}}<a href>MORE INFO</a>{{/link-to}}
+			<li><a id="#href-item-images" href {{action 'scrollTo' 'item-images'}}>IMAGES</a></li>
+			<li><a id="#href-item-description" href {{action 'scrollTo' 'item-description'}}>DESCRIPTION</a></li>
+			<li><a id="#href-item-contact" href {{action 'scrollTo' 'item-contact'}}>CONTACT</a></li>
+			<li><a id="#href-item-more" href {{action 'scrollTo' 'item-more'}}>MORE INFO</a></li>
 		</ul>
 	</div>
 	<div class="container catitem-padding"><br /><br />
@@ -15,7 +15,7 @@
 		</div><br> --}}
 		<div class="row text-center">
 			<div class="col-lg-12 single-item-imageheader unselectable">
-				<div class="single-img-container card-material guide-xs-card">
+				<div class="single-img-container card-material guide-xs-card" id="item-images">
 					<h4 class="single-item-title">{{model.name}}</h4>
 
 					<div style="z-index: 5">
@@ -53,7 +53,7 @@
 				{{#mdl-button isRaised=true isAccent=true action="imgPrev"}}Prev{{/mdl-button}}
 				{{#mdl-button isRaised=true action="imgNext"}}Next{{/mdl-button}}
 				</div>
-					<div style="padding-top: 40px; padding-bottom: 40px;">
+					<div style="padding-top: 40px; padding-bottom: 40px;" id="item-description">
 						{{!-- <h4 style="text-align: left; font-weight: 600;">Description</h4> --}}
 						{{#if model.desc}}
 						<p class="catitem-desc">{{model.desc}}</p>
@@ -75,7 +75,7 @@
 									</div>{{/link-to}}
 								</div>
 								<div class="col-md-4 col-sm-6" style="height: 390px;">
-									<div class="card-material catitem-contact">
+									<div class="card-material catitem-contact" {{action 'openContactModalInit'}}>
 										<i class="material-icons">message</i>
 										<p>
 											Contact {{model.vendor.name}} right now with Bloom's direct messaging!
@@ -86,7 +86,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 col-sm-6">
+								<div class="col-md-4 col-sm-6"  id="item-contact">
 									<div class="card-material catitem-contact-info">
 											<h5>Vendor Information</h5>
 												<div style="padding-top: 10px;">
@@ -120,15 +120,15 @@
 								 </div>
 							 </div>
 
-								<div class="col-md-4 col-sm-6">
-									<div class="card-material catitem-category" style={{model.category.style}}>
+								<div class="col-md-4 col-sm-6"  id="item-more">
+									{{#link-to 'category' model.category.id}}<div class="card-material catitem-category" style={{model.category.style}}>
 										<h4>Category</h4>
 										<i class={{model.category.icon}}>{{model.category.iconName}}</i>
 										<p class="cat-heading">{{model.category.name}}</p>
 										<p class="cat-subtext-bottom">
 											See more from this category
 										</p>
-									</div>
+									</div>{{/link-to}}
 								</div>
 
 

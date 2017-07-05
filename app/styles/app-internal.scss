@@ -1938,7 +1938,11 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 
 
 //CAT ITEM CARDS
-
+.nav-pills {
+	a .highlighted-section {
+		color: white;
+	}
+}
 .catitem-padding {
 	padding-top: 60px;
 }
@@ -1965,6 +1969,10 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 
 		}
 	}
+
+		a{
+	    text-decoration: none !important;
+		}
 }
 
 .catitem-card-vendor {
