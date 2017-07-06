@@ -1,0 +1,44 @@
+<div class="container" style="text-align: center">
+  <br /><h1>Frequently Asked Questions</h1>
+  <p style="font-style: italic;">
+    All the usual questions and all the quickest solutions.
+  </p>
+  <hr />
+
+    {{mdl-button text="Users" isRaised='true' isAccent=isVendors action="toggleIsUsers"}}
+    {{mdl-button text="Vendors" isRaised='true' isAccent=isNotVendors action="toggleIsVendors"}}
+  <div style="padding-top: 60px;">
+  {{#if isVendors}}
+    {{#cp-panels accordion=true as |panels|}}
+      {{#each vendorFaq as |faq|}}
+        {{#panels.panel as |panel|}}
+          {{#panel.toggle}}
+            <p><strong>{{faq.question}}</strong></p>
+          {{/panel.toggle}}
+          {{#panel.body}}
+            <div>{{faq.answer}}
+            </div>
+          {{/panel.body}}
+        {{/panels.panel}}
+      {{/each}}
+    {{/cp-panels}}
+  {{else}}
+    {{#cp-panels accordion=true as |panels|}}
+      {{#each userFaq as |faq|}}
+        {{#panels.panel as |panel|}}
+          {{#panel.toggle}}
+            <p><strong>{{faq.question}}</strong></p>
+          {{/panel.toggle}}
+          {{#panel.body}}
+            <div>{{faq.answer}}
+            </div>
+          {{/panel.body}}
+        {{/panels.panel}}
+      {{/each}}
+    {{/cp-panels}}
+  {{/if}}
+
+
+  </div>
+
+</div>

@@ -1,0 +1,12 @@
+<div class="index-main">
+  <div class="pear-sub-well">
+  	<ul class="nav nav-pills unselectable pear-sidebar">
+  		{{#link-to 'help.articles' tagName="li"}}<a href>ARTICLES</a>{{/link-to}}
+  		{{#link-to 'help.faq' tagName="li"}}<a href>FAQ</a>{{/link-to}}
+  		{{#link-to 'help.support' tagName="li"}}<a href>SUPPORT</a>{{/link-to}}
+  	</ul>
+  </div>
+
+  {{outlet}}
+  {{partial 'partials/footer'}}
+</div>

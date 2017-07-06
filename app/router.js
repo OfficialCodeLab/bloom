@@ -80,6 +80,7 @@ Router.map(function() {
       this.route('vendor', function() {});
     });
     this.route('listings');
+    this.route('faq');
   });
   this.route('listings');
   this.route('not-found', { path: '/*path' });
@@ -90,6 +91,12 @@ Router.map(function() {
   this.route('user-signup');
   this.route('vendor-signup');
   this.route('mywedding');
+  this.route('help', function() {
+    this.route('faq');
+    this.route('articles');
+    this.route('hub', { path: '/' });
+    this.route('support');
+  });
 });
 
 export default Router;
