@@ -710,7 +710,8 @@ export default Ember.Route.extend({
         mustTourWedding: true,
         mustTourFavourites: true,
         mustTourVendor: true,
-        accountType: "vendor"
+        accountType: "vendor",
+        created: moment()
       });
 
       let wedding = this.store.createRecord('wedding', {

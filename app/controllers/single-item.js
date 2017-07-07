@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 export default Ember.Controller.extend({
 	img0: true,
@@ -17,10 +18,18 @@ export default Ember.Controller.extend({
 			}
 		}),
 		peopleStr: Ember.computed('model.favouritedBy.length', function() {
-			if(this.get('model.favouritedBy.length') === 1) {
-				return `${this.get('model.favouritedBy.length')} person has favourited this`;
-			} else {
-				return `${this.get('model.favouritedBy.length')} people have favourited this`;
-			}
+			let _this = this;
+
+			let calcFavs = new Promise(function(resolve, reject) {
+				Ember.run.next(_this, function() {
+					if(_this.get('model.favouritedBy.length') === 1) {
+						resolve(`${_this.get('model.favouritedBy.length')} person has favourited this`);
+					} else {
+						resolve(`${_this.get('model.favouritedBy.length')} people have favourited this`);
+					}
+				});
+			});
+
+			return DS.PromiseObject.create({ promise: calcFavs });
 		})
 });

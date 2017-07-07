@@ -20,7 +20,7 @@ export default Model.extend({
   hasGender: attr('boolean'),
   vendorRequest: attr('boolean'),
   vendorAccount: belongsTo('vendor', {inverse: 'loggedInUsers', async: true}),
-  innercircle: hasMany('userstats'), 
+  innercircle: hasMany('userstats'),
   isNewToBloom: attr('boolean'),
   imgurl: attr('string'),
   preference: attr('string'),
@@ -29,6 +29,6 @@ export default Model.extend({
   mustTourWedding: attr('boolean'),
   mustTourVendor: attr('boolean'),
   mustTourFavourites: attr('boolean'),
-  created: attr('date'),
+  created: attr('string'),
   wedding: hasMany('wedding', {inverse: 'user', async: true})
 });

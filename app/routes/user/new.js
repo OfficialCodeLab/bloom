@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import moment from 'moment';
 
 export default Ember.Route.extend({
 	model() {
@@ -39,7 +40,8 @@ export default Ember.Route.extend({
 					  mustTourWedding: true,
 					  mustTourFavourites: true,
 					  mustTourVendor: true,
-					  isNewToBloom: true
+					  isNewToBloom: true,
+						created: moment()
 					});
 
 					let wedding = _this.store.createRecord('wedding',
