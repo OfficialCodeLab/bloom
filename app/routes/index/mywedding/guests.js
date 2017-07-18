@@ -6,6 +6,11 @@ export default Ember.Route.extend({
 		return this.store.findRecord('wedding', _id);
 	},
 	actions: {
+		comingSoon: function() {
+			this.controller.get('notifications').info('Feature coming very soon!',{
+				autoClear: true
+			});
+		},
 		ok: function () {
 			let _modalData = this.store.peekRecord('modal-data', this.controller.get('modalDataId'));
 			switch(_modalData.get('action')) {

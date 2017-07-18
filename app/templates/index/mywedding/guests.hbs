@@ -1,7 +1,7 @@
 <div style="text-align: center" class="container">
 
       <h1 class="font-times-header" style="color: #4C4C4E;">Guest List</h1>
-      <p style="font-style: italic; text-align: center;">Add, edit or remove entries for your guest list. Features coming soon: Upload or choose from Bloom templates for your “Save the Date” and “Invite”.</p>
+      <p style="font-style: italic; text-align: center;">Add, edit or remove entries for your guest list. FEATURES COMING SOON: Upload or choose from Bloom templates for your “Save the Date” and “Invite”.</p>
       <br>
       <hr>
    {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
@@ -16,28 +16,28 @@
 
         <div class="col-sm-8 col-sm-offset-2">
             <div class="col-xs-3">
-                {{mdl-button icon="view_list" action="select0" isRaised=isSelected0 isColored=isSelected0}}       
+                {{mdl-button icon="view_list" action="select0" isRaised=isSelected0 isColored=isSelected0}}
                 <a href="#" {{action 'select0'}} class="hideOnPhones">
                     <p  class="{{if isSelected0 'pink-text'}}">Guest List</p>
                 </a>
             </div>
 
             <div class="col-xs-3">
-                {{mdl-button icon="person_add" action="select1" isRaised=isSelected1 isColored=isSelected1}}                
+                {{mdl-button icon="person_add" action="select1" isRaised=isSelected1 isColored=isSelected1}}
                 <a href="#" {{action 'select1'}} class="hideOnPhones">
                     <p class="{{if isSelected1 'pink-text'}}">Add Guests</p>
                 </a>
             </div>
 
             <div class="col-xs-3">
-                {{mdl-button icon="insert_invitation" action="select2" isRaised=isSelected2 isColored=isSelected2}}       
+                {{mdl-button icon="insert_invitation" action="select2" isRaised=isSelected2 isColored=isSelected2}}
                 <a href="#" {{action 'select2'}} class="hideOnPhones">
                     <p class="{{if isSelected2 'pink-text'}}">Save-the-date</p>
                 </a>
             </div>
 
             <div class="col-xs-3">
-                {{mdl-button icon="mail_outline" action="select3" isRaised=isSelected3 isColored=isSelected3}}       
+                {{mdl-button icon="mail_outline" action="select3" isRaised=isSelected3 isColored=isSelected3}}
                 <a href="#" {{action 'select3'}} class="hideOnPhones">
                     <p class="{{if isSelected3 'pink-text'}}">Wedding Invites</p>
                 </a>
@@ -59,7 +59,7 @@
 		    {{/if}}
 	    {{/if}}
     {{/if}}
-	    
+
 	{{!-- {{#if showAdd}}
 		{{partial 'index/mywedding/guests/add'}}
 	{{else}}
