@@ -1371,6 +1371,20 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 	}
 }
 
+.vendor-list-img{
+	max-height: 160px;
+	padding: 10px;
+	transition: all 0.3s ease-in;
+	-webkit-transition: all 0.3s ease-in; /* Safari */
+
+	&:hover {
+		cursor: pointer;
+		@include transform (scale(1.4));
+		transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in; /* Safari */
+	}
+}
+
 .tour-block-padding{
 	padding-top: 80px;
 	padding-bottom: 80px;
