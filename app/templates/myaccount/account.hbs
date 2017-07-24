@@ -6,7 +6,7 @@
     	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
     </div>
     <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3>
-    
+
     <div class="form-horizontal">
 	    <div class="col-sm-4 col-sm-offset-4">
 	    	<i class="fa fa-heart i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Name of Your Spouse' value=model.user.spouse}}
@@ -15,7 +15,11 @@
     </div>
 </div>
 <hr>
-
+{{!-- VECTOR ARTWORK ZODIAC SIGNS <a href='http://www.freepik.com/free-vector/horoscope-icon-design_1096967.htm'>Designed by Freepik</a>
+FEMALE ELEMENTS <a href='http://www.freepik.com/free-vector/woman-four-elements_1087700.htm'>Designed by Freepik</a>
+ANIMALS <a href='http://www.freepik.com/free-vector/coloured-animals-collection_1070097.htm'>Designed by Freepik</a>
+FRUITS <a href='http://www.freepik.com/free-vector/coloured-fruits-collectio_1070165.htm'>Designed by Freepik</a>
+--}}
 <div class="row">
 	<div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
 		<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.user.email disabled=isPasswordAccount}}
@@ -28,4 +32,5 @@
 </div>
 <div style="padding: 20px 0px 40px 0px;">
 	{{mdl-button isRaised=true text='UPDATE' action="saveUser"}}
+  	{{mdl-button isRaised=true text='MODAL' action="createIcon"}}
 </div>

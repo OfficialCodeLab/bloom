@@ -1,0 +1,37 @@
+
+<div class="pear-sub-well">
+	<ul class="nav nav-pills unselectable pear-sidebar">
+		{{#link-to 'myaccount.account' tagName="li"}}<a href>ACCOUNT</a>{{/link-to}}
+		{{#link-to 'myaccount.vendor' tagName="li"}}<a href>VENDOR</a>{{/link-to}}
+		{{#link-to 'myaccount.security' tagName="li"}}<a href>SECURITY</a>{{/link-to}}
+		{{#link-to 'myaccount.notifications' tagName="li"}}<a href>NOTIFICATIONS</a>{{/link-to}}
+		{{#link-to 'myaccount.payments' tagName="li"}}<a href>PAYMENTS</a>{{/link-to}}
+		{{#link-to 'myaccount.support' tagName="li"}}<a href>SUPPORT</a>{{/link-to}}
+	</ul>
+</div>
+
+<div class="account-container">
+   {{!-- {{bread-crumbs tagName="ol" outputStyle="bootstrap" linkable=true}} --}}
+	{{!-- <div class="card pear-profile-card"> --}}
+	<div class="container">
+
+	    {{!-- <div class="col-lg-2 col-md-3 nav-account-sidebar" style="background-color: #FFCC67;">
+			<div class="pear-sidebar-well">
+				<ul class="nav nav-pills unselectable pear-account-sidebar">
+					{{#link-to 'myaccount.account' tagName="li"}}<a href>ACCOUNT</a>{{/link-to}}
+					{{#link-to 'myaccount.privacy' tagName="li"}}<a href>PRIVACY</a>{{/link-to}}
+					{{#link-to 'myaccount.security' tagName="li"}}<a href>SECURITY</a>{{/link-to}}
+					{{#link-to 'myaccount.notifications' tagName="li"}}<a href>NOTIFICATIONS</a>{{/link-to}}
+					{{#link-to 'myaccount.payments' tagName="li"}}<a href>PAYMENTS</a>{{/link-to}}
+					{{#link-to 'myaccount.support' tagName="li"}}<a href>SUPPORT</a>{{/link-to}}
+				</ul>
+			</div>
+	    </div> --}}
+		{{!-- <div class="col-lg-10 col-md-9"> --}}
+	    	{{outlet}}
+	    {{!-- </div> --}}
+		{{notification-container position="bottom"}}
+	</div>
+	{{!-- </div> --}}
+</div>
+{{partial 'partials/footer'}}

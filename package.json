@@ -38,6 +38,7 @@
     "ember-cli-inject-live-reload": "^1.4.0",
     "ember-cli-jshint": "^1.0.0",
     "ember-cli-lazy-load": "0.2.2",
+    "ember-cli-markdown-editor": "0.1.0-beta.2",
     "ember-cli-moment-shim": "2.2.1",
     "ember-cli-notifications": "4.0.9",
     "ember-cli-pagination": "2.2.1",
@@ -61,7 +62,7 @@
     "ember-load": "0.0.11",
     "ember-load-initializers": "^0.5.1",
     "ember-masonry-grid": "1.1.0",
-    "ember-material-design-datepicker": "^1.1.4",
+    "ember-material-design-datepicker": "^1.1.6",
     "ember-material-design-icons-shim": "0.1.10",
     "ember-material-lite": "0.2.5",
     "ember-metrics": "0.7.0",
@@ -80,7 +81,8 @@
     "loader.js": "^4.0.1",
     "phantomjs": "2.1.7",
     "torii": "^0.9.5",
-    "ui-dropzone": "0.7.4"
+    "ui-dropzone": "0.7.4",
+    "ui-markdown": "0.1.12"
   },
   "dependencies": {
     "lodash": "^4.12.0",

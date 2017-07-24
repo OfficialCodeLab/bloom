@@ -1,14 +1,37 @@
-<div class="">
-	{{!-- Main content of the site goes here  --}}{{!-- 
+<div class="container">
+	{{!-- Main content of the site goes here  --}}{{!--
 	<div class="well pear-main-well"> --}}
-	<div style="text-align:center;">
-	    <ul class="nav nav-pills pear-main-pills unselectable">
-	      {{#link-to 'admin.seeder.cat-item' tagName="li"}}<a href>Cat Item</a>{{/link-to}}
-	      {{#link-to 'admin.seeder.category' tagName="li"}}<a href>Category</a>{{/link-to}}
-	      {{#link-to 'admin.seeder.vendor' tagName="li"}}<a href>Vendor</a>{{/link-to}}
-	    </ul>
+	<div class="header-top"><h1>Select Item</h1></div>
+	<div class="row" style="margin-top: 60px; text-align: center;">
+	    <div class="col-sm-8 col-sm-offset-2">
+	        <div class="col-xs-3">
+	            {{#link-to 'admin.seeder.faq'}}{{mdl-button icon="info_outline" isRaised='false' isColored='false'}}
+	            <a href="#" class="hideOnPhones">
+	                <p class="pink-text'">FAQ Q&amp;A</p>
+	            </a>{{/link-to}}
+	        </div>
+
+	        <div class="col-xs-3">
+	            {{#link-to 'admin.seeder.faq-article'}}{{mdl-button icon="flip_to_front" isRaised='false' isColored='false'}}
+	            <a href="#" class="hideOnPhones">
+	                <p>FAQ Article</p>
+	            </a>{{/link-to}}
+	        </div>
+
+	        <div class="col-xs-3">
+	            {{mdl-button icon="clear" action='unimplemented' disabled='true' isRaised='false' isColored='false'}}
+	            <a href="#" {{action 'unimplemented'}} class="hideOnPhones">
+	                <p>Nothing</p>
+	            </a>
+	        </div>
+
+	        <div class="col-xs-3">
+	            {{mdl-button icon="clear" action='unimplemented' disabled='true' isRaised='false' isColored='false'}}
+	            <a href="#" {{action 'unimplemented'}} class="hideOnPhones">
+	                <p>Nothing</p>
+	            </a>
+	        </div>
+	    </div>
 	</div>
 	{{outlet}}
 </div>
-
-

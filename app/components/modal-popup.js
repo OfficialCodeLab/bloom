@@ -40,7 +40,7 @@ actions: {
       this.sendAction('saveTodo');
     },
     saveValue: function() {
-      this.sendAction('saveValue');      
+      this.sendAction('saveValue');
     },
     closeEditValue: function() {
       this.$('.modal').modal('hide');
@@ -56,6 +56,13 @@ actions: {
     },
     okDate: function(){
       this.sendAction('okDate');
+    },
+    closeIcon: function(){
+      this.$('.modal').modal('hide');
+      this.sendAction('closeIcon');
+    },
+    okIcon: function(){
+      this.sendAction('okIcon');
     }
   },
   show: function() {

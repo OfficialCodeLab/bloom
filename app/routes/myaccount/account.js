@@ -23,15 +23,28 @@ export default Ember.Route.extend({
 	    } catch (ex) {}
 	  },
 	  actions: {
-		dateChanged: function (date, valid){
-			if(valid){
-				this.controller.set('birthday', date);
-				let _id = this.get("currentUser.uid") + "";
-				let user = this.store.peekRecord('user', _id);
-				user.set('birthday', date);
-				// this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));
-				// wedding.save();
-			}
-		}
+  		dateChanged: function (date, valid){
+  			if(valid){
+  				this.controller.set('birthday', date);
+  				let _id = this.get("currentUser.uid") + "";
+  				let user = this.store.peekRecord('user', _id);
+  				user.set('birthday', date);
+  				// this.dateDiff(this.controller.get('computedSelected'), this.controller.get('dateCurrent'));
+  				// wedding.save();
+  			}
+  		},
+      openModal: function() {
+        this.send('showModal', 'modal-icon-picker', task);
+
+      },
+      createIcon: function() {
+        let icon = this.store.createRecord('icon', {
+          'title': '1',
+          'desc': '1',
+          'imageUrl': '1',
+          'category': '1'
+        });
+        icon.save();
+      }
 	  }
 });

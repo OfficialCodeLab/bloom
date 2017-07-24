@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="header-top"><h1>FAQ Article</h1></div>
+  <div style="text-align: center;" class='faq-create'>
+    <p>
+      Add a new question and answer.
+    </p>
+    {{mdl-textfield label='Question/Title' value=question}}<br>
+    {{markdown-editor
+    rows='8'
+    placeholder="Post Answer"
+    value=answer
+  }}<br /><br />
+    {{#mdl-button isRaised=true action="createFaq" disabled=isCreating}}Create {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+    {{#if showPreview}}
+      <h4>PREVIEW:</h4>
+      <div style="text-align: left;">
+        {{markdown-convert content=answer}}
+      </div><br />
+    {{else}}
+        <br /><br />{{#mdl-button isRaised=true action="showPreview" isAccent=true}}Show Preview{{/mdl-button}}
+    {{/if}}
+
+  </div>
+
+
+</div>

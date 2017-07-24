@@ -78,6 +78,8 @@ Router.map(function() {
       this.route('cat-item');
       this.route('category');
       this.route('vendor', function() {});
+      this.route('faq');
+      this.route('faq-article');
     });
     this.route('listings');
     this.route('faq');

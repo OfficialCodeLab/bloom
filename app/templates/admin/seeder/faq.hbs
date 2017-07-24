@@ -1,0 +1,22 @@
+
+<div class="container">
+<div class="header-top"><h1>Frequently Asked Questions</h1></div>
+<div style="text-align: center;" class='faq-create'>
+  <p>
+    Add a new question and answer.
+  </p>
+  {{mdl-textfield label='Question' value=question}}<br>
+  {{mdl-textfield label='Answer' value=answer}}<br><br />
+  {{#paper-radio-group
+    groupValue=(readonly selectedType)
+    onChange=(action (mut selectedType)) as |group|}}
+    {{#group.radio value="User" primary=true}} User {{/group.radio}}
+    {{#group.radio value="Vendor" warn=true}} Vendor {{/group.radio}}
+  {{/paper-radio-group}}<br /><br /><br />
+  {{#mdl-button isRaised=true action="createFaq" disabled=isCreating}}Create {{#if isCreating}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+</div>
+
+
+</div>
+
+{{outlet}}

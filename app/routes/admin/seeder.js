@@ -8,4 +8,12 @@ beforeModel: function() {
 	      }
 	      return sesh;
     },
+		actions: {
+			unimplemented: function() {
+
+				this.controller.get('notifications').warning('This goes nowhere at the moment :)',{
+						autoClear: true
+				});
+			}
+		}
 });
