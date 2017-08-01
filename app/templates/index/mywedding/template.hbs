@@ -3,7 +3,7 @@
 <p style="font-style: italic; text-align: center;">Edit your invites before sending them out.</p>
 
 <div class="pear-profile-card unselectable" style="max-width: 700px; margin: 0 auto;">
-    <div>
+    <div id="capture-dom">
 		{{partial 'partials/templates/default'}}
 	</div>
 </div>
@@ -21,6 +21,8 @@
 {{mdl-textfield disabled=sendingInvites label='Information Line 2' value=info2}}<br>
 {{mdl-textfield disabled=sendingInvites label='Information Line 3' value=info3}}<br>
 {{mdl-textfield disabled=sendingInvites label='Contact details' value=contact}}<br>
-{{#mdl-button isRaised=true action="sendInvites" disabled=sendingInvites}}Send Invites {{#if sendingInvites}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
-
+{{#mdl-button isRaised=true action="capture" disabled=sendingInvites}}Send Invites {{#if sendingInvites}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+<div>
+  <img id="image-preview"  hidden='true'/>
+</div>
 </div>

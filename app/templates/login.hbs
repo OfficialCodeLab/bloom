@@ -2,7 +2,7 @@
 - ADD LOG OUT BUTTON IF USER IS LOGGED IN --}}
 {{#background-scroller}}{{outlet}}{{/background-scroller}}
 <main id="panel" style="margin-top: -50px !important; OVERFLOW-x: hidden;">
-	
+
 	<div class="fullscreen" id="section1">
 		<div id="section1-bg" class="fullscreen">
 		</div>
@@ -24,13 +24,13 @@
 		<!-- Columns for the cheeseburger menu and search bar -->
 		<!-- End of columns for top elements -->
 		<div id="splash-content">
-			
+
 			<div id="s1-overlay1">
 
 			</div>
-			
+
 	<div class="bottom-center">
-		{{!-- 
+		{{!--
 		<h2 class="white unselectable">PLAN MY WEDDING</h2>
 		<div class="">
 			<!-- data-toggle="modal" data-target="#myModal" -->
@@ -39,8 +39,8 @@
 			</a>{{/link-to}}
 		</div>
 		--}}
-		{{#if session.isAuthenticated}}   
-		 	<div>         
+		{{#if session.isAuthenticated}}
+		 	<div>
             	<h3 style="text-align:center; color:#fff">Logging in</h3>{{mdl-spinner}}
             </div>
         {{else}}
@@ -54,13 +54,13 @@
 			</div>
 			{{#link-to 'vendor-signup'}}<div class="vendor-login-text">Register as a vendor</div>{{/link-to}}
             {{!-- <button class="btn btn-default clbutton-grey"{{action "showLogins"}}>S I G N&nbsp;&nbsp;&nbsp;&nbsp;I N</button> --}}
-        {{/if}}  
+        {{/if}}
 	</div>
     <div class="splash-footer">
     	<div class="social-media-icons-white">
-		  	<a href="http://facebook.com/bloomweddings" target="_blank"><i class="fa fa-2x fa-facebook"></i></a> 
-		  	<a href="http://instagram.com/bloomweddings" target="_blank"><i class="fa fa-2x fa-instagram"></i></a> 
-		  	<a href="http://twitter.com/bloomplanner" target="_blank"><i class="fa fa-2x fa-twitter"></i></a> 
+		  	<a href="http://facebook.com/bloomweddings" target="_blank"><i class="fa fa-2x fa-facebook"></i></a>
+		  	<a href="http://instagram.com/bloomweddings" target="_blank"><i class="fa fa-2x fa-instagram"></i></a>
+		  	<a href="http://twitter.com/bloomplanner" target="_blank"><i class="fa fa-2x fa-twitter"></i></a>
 		  	<a href="http://pinterest.com/bloomplanner" target="_blank"><i class="fa fa-2x fa-pinterest"></i></a>
 		</div>
     	<span><hr>COPYRIGHT &copy; 2016&nbsp;&nbsp;|&nbsp;&nbsp;BLOOM.</span>

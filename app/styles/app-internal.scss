@@ -686,10 +686,11 @@ Guest List
 	h1 {
 		font-size: 92px !important;
 		font-family: "Great Vibes", cursive !important;
-		background: -webkit-radial-gradient(#EFCAC1, #D5A29E);
 		line-height: 80px;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
+		color: #EFCAC1;
+		// background: -webkit-radial-gradient(#EFCAC1, #D5A29E);
+		// -webkit-background-clip: text;
+		// -webkit-text-fill-color: transparent;
 		padding-bottom: 40px;
 		padding-top: 40px;
 		margin: 0px;
@@ -699,6 +700,7 @@ Guest List
 
 .default-main-body {
 	padding-top: 50px;
+	background-color: white;
 }
 
 .default-section-1 {
