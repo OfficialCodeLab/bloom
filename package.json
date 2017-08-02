@@ -76,7 +76,7 @@
     "ember-tooltips": "2.9.0-beta.0",
     "ember-truth-helpers": "^1.2.0",
     "emberfire": "2.0.5",
-    "firebase-tools": "3.0.0",
+    "firebase-tools": "^3.9.1",
     "liquid-fire": "0.27.3",
     "loader.js": "^4.0.1",
     "phantomjs": "2.1.7",
@@ -85,6 +85,8 @@
     "ui-markdown": "0.1.12"
   },
   "dependencies": {
+    "firebase": "^4.2.0",
+    "global": "^4.3.2",
     "lodash": "^4.12.0",
     "moment": "^2.15.2"
   }

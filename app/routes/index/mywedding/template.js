@@ -85,7 +85,7 @@ export default Ember.Route.extend({
             switch (_modalData.get('action')) {
 
                 case 'sendInvites':
-                    this.sendAllInvites();
+                    this.uploadAllFiles();
                     break;
             }
         },

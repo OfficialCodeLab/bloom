@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
 	// willTravel: Ember.computed('willingToTravel', function() {
 	// 	if(${this.get('firstName')} === 1){
 	// 		return true
-	// 	} 
+	// 	}
 	//     return false;
  //    }),
     actions: {
@@ -71,11 +71,11 @@ export default Ember.Controller.extend({
     		} else if (img2.src === dataURL) {
     			img2.src = null;
     		} else if (img3.src === dataURL) {
-    			img3.src = null;  		
+    			img3.src = null;
 			} else if (img4.src === dataURL) {
-    			img4.src = null;  		
+    			img4.src = null;
 			} else if (img5.src === dataURL) {
-    			img5.src = null;  		
+    			img5.src = null;
 			}
     	});
 
@@ -117,7 +117,7 @@ export default Ember.Controller.extend({
         var int32View = new Int32Array(dataURL);
         var mimeType;
         switch(int32View[0]) {
-            case 1196314761: 
+            case 1196314761:
                 mimeType = "image/png";
                 break;
             case 944130375:
@@ -156,7 +156,7 @@ export default Ember.Controller.extend({
 
             function sizeExceeds(that, width, height) {
                 var imageCompressor = new ImageCompressor();
-                
+
                 var compressorSettings = {
                     toWidth : width,
                     toHeight : height,
@@ -170,10 +170,10 @@ export default Ember.Controller.extend({
 
                 function proceedCompressedImage (compressedSrc) {
                   that.src = compressedSrc;
-                }      
-            }  
+                }
+            }
           };
-			
+
     	});
 		reader.readAsDataURL(file);
 
@@ -197,7 +197,7 @@ export default Ember.Controller.extend({
           var int32View = new Int32Array(dataURL);
           var mimeType;
           switch(int32View[0]) {
-              case 1196314761: 
+              case 1196314761:
                   mimeType = "image/png";
                   break;
               case 944130375:
@@ -235,7 +235,7 @@ export default Ember.Controller.extend({
 
             function sizeExceeds(that, width, height) {
                 var imageCompressor = new ImageCompressor();
-                
+
                 var compressorSettings = {
                     toWidth : width,
                     toHeight : height,
@@ -249,40 +249,13 @@ export default Ember.Controller.extend({
 
                 function proceedCompressedImage (compressedSrc) {
                   that.src = compressedSrc;
-                }      
-            }  
-          
+                }
+            }
+
           };
     		});
     		 //debugger;
     		reader.readAsDataURL(file);
 		 //debugger;
-		 
-
-    //     return new Promise(function(resolve, reject){
-		  //   var _xhr = file.get('xhr');
-		  //   _xhr.onreadystatechange = handler;
-		  //   _xhr.send();
-
-		  //   function handler() {
-		  //     if (this.readyState === this.DONE) {
-		  //       if (this.status === 200) {
-		  //         resolve(console.log(file.status));
-		  //       } else {
-		  //         reject(new Error('getJSON: `' + url + '` failed with status: [' + this.status + ']'));
-		  //       }
-		  //     }
-		  //   };
-		  // });
-// file.done((response)=>{
-// 	console.log("TEST");
-// });
-        // while(file.status !== "success"){
-
-        // }
-         // file.xhr.onload = () => {
-         // 	console.log(file.status);
-         // };
-        // console.log(file.contents);
     }
 });

@@ -54,6 +54,7 @@ Router.map(function() {
       // this.route('innercircle');
       this.route('todo');
       this.route('budget');
+      this.route('upload-wedding-invite');
     });
     this.route('vendor', function() {
       this.route('signup');

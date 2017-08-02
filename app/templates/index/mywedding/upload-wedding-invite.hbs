@@ -1,0 +1,44 @@
+
+<h1 class="font-times-header" style="color: #4C4C4E;">Upload Own Invite</h1>
+<p style="font-style: italic; text-align: center;">Upload your own invite to send to all your guests.</p>
+
+{{!-- <div class="pear-profile-card unselectable" style="max-width: 700px; margin: 0 auto;"> --}}
+
+{{!-- </div> --}}
+    {{!-- UPLOADER --}}
+    <div style="text-align: center;">
+
+    {{#drop-zone
+        addRemoveLinks=true
+        onAddedFile=storeMainImage
+        keepLocal=true
+        onRemovedFile=removeMainImage
+        acceptedFiles='.jpg,.jpeg,.png'
+        maxFiles='1'
+        as |register|
+      }}
+        {{#default-message register=register}}
+          <span class="fa fa-files-o"></span><br>
+          Drop Files Here to Upload
+        {{/default-message}}
+        {{#invalid-file-type register=register}}
+          Invalid File Type! We only accept jpg and png images
+        {{/invalid-file-type}}
+      {{/drop-zone}}
+    </div>
+
+<div class="container text-center">
+<h3>Edit Settings</h3>
+<p style="font-style: italic; text-align: center;">Please fill in all these fields to help your guests.</p>
+
+{{mdl-textfield disabled=sendingInvites label='Top Name' value=name1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Bottom Name' value=name2}}<br>
+{{mdl-textfield disabled=sendingInvites label='Wedding Date' value=date}}<br>
+{{mdl-textfield disabled=sendingInvites label='Address' value=addressL1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Address Cont.' value=addressL2}}<br>
+{{mdl-textfield disabled=sendingInvites label='Contact details' value=contact}}<br>
+{{#mdl-button isRaised=true action="sendInvitesConfirm" disabled=sendingInvites}}Send Invites {{#if sendingInvites}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+<div>
+  <img id="image-preview"  hidden='true'/>
+</div>
+</div>
