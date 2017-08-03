@@ -1,2 +1,39 @@
-<h1 class="font-times-header" style="color: #4C4C4E;">Save-the-Date</h1>
-    <p style="font-style: italic; text-align: center;">Feature coming soon!</p>
+<div class="container-fluid">
+	<p style="font-style: italic; text-align: center;">Send up to 200 free emails to your guests all in one go!</p><br>
+
+	<h3>Select a template below</h3><br>
+
+	<div class="row">
+		<div class="col-sm-4">
+            {{#link-to "index.mywedding.save-the-date"}}<div class="pear-profile-card guide-xs-card invites-bg" style="background-image: url(../assets/images/sample-content/save-date.jpg);">
+	            <div class="guest-invites-block">
+	            	<div style="padding-top: 100px;">
+	            		<h4>Default Template</h4>
+	            	</div>
+	            </div>
+            </div>{{/link-to}}
+		</div>
+
+		<div class="col-sm-4">
+            {{#link-to "index.mywedding.upload-save-the-date"}}<div class="pear-profile-card guide-xs-card invites-bg" style="background-image: url(../assets/images/sample-content/blank.png);" >
+	            <div class="guest-invites-block">
+					<div style="padding-top: 100px;">
+	            		<h4>Custom File</h4>
+	            		<br>
+	            		<i class="material-icons">backup</i>
+	            	</div>
+	            </div>
+            </div>{{/link-to}}
+		</div>
+
+		<div class="col-sm-4">
+            <div class="pear-profile-card guide-xs-card invites-bg" style="background-color: #F8BBD0" >
+	            <div class="guest-invites-block">
+					<div style="padding-top: 100px;">
+	            		<h4>More coming soon!</h4>
+            	</div>
+	            </div>
+            </div>
+		</div>
+	</div>
+</div>

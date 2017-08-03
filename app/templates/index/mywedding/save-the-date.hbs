@@ -1,1 +1,23 @@
-{{outlet}}
+
+<h1 class="font-times-header" style="color: #4C4C4E;">Default Template</h1>
+<p style="font-style: italic; text-align: center;">Edit your invites before sending them out.</p>
+
+<div class="pear-profile-card unselectable container">
+    <div id="capture-dom">
+		{{partial 'partials/templates/default-save-the-date'}}
+	</div>
+</div>
+
+<div class="container text-center">
+<h3>Edit Settings</h3>
+
+{{mdl-textfield disabled=sendingInvites label='Name 1' value=name1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Name 2' value=name2}}<br>
+{{mdl-textfield disabled=sendingInvites label='Wedding Date' value=date}}<br>
+{{mdl-textfield disabled=sendingInvites label='Location' value=addressL1}}<br>
+{{mdl-textfield disabled=sendingInvites label='Information Line 1' value=info1}}<br>
+{{#mdl-button isRaised=true action="sendInvitesConfirm" disabled=sendingInvites}}Send Invites {{#if sendingInvites}}<i class="fa fa-spinner fa-spin"></i>{{/if}}{{/mdl-button}}
+<div>
+  <img id="image-preview"  hidden='true'/>
+</div>
+</div>

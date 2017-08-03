@@ -1,0 +1,67 @@
+//TEMPLATES
+
+//DEFAULT SAVE THE DATE
+
+@font-face {
+    font-family: beaurencourt;
+    src: url(fonts/BeaurencourtFY-Light_S.otf);
+}
+
+@font-face {
+    font-family: rufina;
+    src: url(fonts/rufina-regular.otf);
+}
+
+.default-sd-main-body {
+  position: relative;
+  padding: 5px;
+}
+
+.default-sd-border {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0px;
+}
+
+.default-sd-content {
+  padding-left: 40px;
+  padding-right: 40px;
+
+  h2{
+    margin-top: 60px;
+    margin-bottom: 60px;
+    line-height: 90px;
+    font-family: 'beaurencourt', cursive !important;
+    font-size: 6em !important;
+    color: #A2A2A2 !important;
+  }
+
+  h3 {
+    margin-top: 120px;
+    margin-bottom: 100px;
+    line-height: 70px;
+    font-family: 'rufina', serif !important;
+    font-size: 4.8em !important;
+    color: #A2A2A2 !important;
+    text-transform: uppercase !important;
+  }
+
+  p {
+    line-height: 30px;
+    font-family: 'rufina', serif !important;
+    font-size: 2em !important;
+    color: #A2A2A2 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+
+}
+
+.default-sd-heading {
+  margin-top: 80px;
+  width: 70%;
+  margin-bottom: 20px;
+  height: auto;
+}

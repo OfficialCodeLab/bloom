@@ -3,7 +3,6 @@ import moment from 'moment';
 
 export default Ember.Route.extend({
 
-    html2Canvas: Ember.inject.service('html2-canvas-service'),
     firebaseApp: Ember.inject.service(),
     model(params) {
         let _id = this.get("currentUser.uid") + "";
@@ -85,7 +84,7 @@ export default Ember.Route.extend({
             switch (_modalData.get('action')) {
 
                 case 'sendInvites':
-                    this.uploadAllFiles();
+                    this.sendAllInvites();
                     break;
             }
         },
@@ -102,7 +101,7 @@ export default Ember.Route.extend({
             });
         },
     },
-    sendAllInvites: function(downloadURL) {
+    sendAllInvites: function() {
         let _id = this.get("currentUser.uid") + "";
 
         this.store.findRecord("wedding", _id).then((wedding) => {
@@ -117,7 +116,6 @@ export default Ember.Route.extend({
                 'info2': this.controller.get('info2'),
                 'info3': this.controller.get('info3'),
                 'contact': this.controller.get('contact'),
-                'downloadURL': downloadURL,
                 'templateId': '1'
             };
             // console.log(detailsJSON);
