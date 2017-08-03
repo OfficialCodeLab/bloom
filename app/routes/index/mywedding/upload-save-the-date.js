@@ -76,8 +76,6 @@ export default Ember.Route.extend({
               'name2': this.controller.get('name2'),
               'date': this.controller.get('date'),
               'addressL1': this.controller.get('addressL1'),
-              'addressL2': this.controller.get('addressL2'),
-              'contact': this.controller.get('contact'),
               'downloadURL': downloadURL,
               'templateId': '0'
           };
