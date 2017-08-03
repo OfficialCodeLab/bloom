@@ -34,7 +34,7 @@ export default Ember.Route.extend({
   			}
   		},
       openModal: function() {
-        this.send('showModal', 'modal-icon-picker', task);
+        // this.send('showModal', 'modal-icon-picker', task);
 
       },
       createIcon: function() {

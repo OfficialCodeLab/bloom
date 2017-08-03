@@ -1,9 +1,28 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	model(){
+	/*  Route param processor:
+		- change routeKeys to different values
+    - set up queryParams in controller
+		- model(params) -> this.set('params', params)
+		- in setupController -> this.processParams
+	*/
+	params: null,
+	routeKeys: {
+		'guestList': 0,
+		'addGuests': 1,
+		'saveTheDate': 2,
+		'weddingInvites': 3
+	},
+
+	model(params){
+		this.set('params', params);
 		let _id = this.get("currentUser.uid") + "";
 		return this.store.findRecord('wedding', _id);
+	},
+	setupController: function(controller, model) {
+		this._super(controller, model);
+		this.processParams(this.get('params'));
 	},
 	actions: {
 		comingSoon: function() {
@@ -68,30 +87,41 @@ export default Ember.Route.extend({
 	    		});
 			}
 		},
-	    select0: function(){
-	        this.controller.set('isSelected0', true);
-	        this.controller.set('isSelected1', false);
-	        this.controller.set('isSelected2', false);
-	        this.controller.set('isSelected3', false);
-	    },
-	    select1: function(){
-	        this.controller.set('isSelected0', false);
-	        this.controller.set('isSelected1', true);
-	        this.controller.set('isSelected2', false);
-	        this.controller.set('isSelected3', false);
-	    },
-	    select2: function(){
-	        this.controller.set('isSelected0', false);
-	        this.controller.set('isSelected1', false);
-	        this.controller.set('isSelected2', true);
-	        this.controller.set('isSelected3', false);
-	    },
-	    select3: function(){
-	        this.controller.set('isSelected0', false);
-	        this.controller.set('isSelected1', false);
-	        this.controller.set('isSelected2', false);
-	        this.controller.set('isSelected3', true);
-	    },
-	}
+		select: function(params) {
+			this.select(params);
+		}
+	},
 
+	processParams: function(params) {
+		for (var key in params) {
+			if (params.hasOwnProperty(key)) {
+				if(params[key]) {
+					this.select(key);
+				}
+			}
+		}
+	},
+	select: function(param) {
+		let allParams = this.get('routeKeys');
+		for (var key in allParams) {
+			if (allParams.hasOwnProperty(key)) {
+				let setFalse = 'isSelected' + allParams[key];
+				this.controller.set(setFalse, false);
+			}
+		}
+
+		let num = allParams[param];
+		let selectStr = 'isSelected' + num;
+		this.controller.set(selectStr, true);
+		this.setParams(param);
+	},
+	setParams: function(param) {
+		let allParams = this.get('routeKeys');
+		for (var key in allParams) {
+			if (allParams.hasOwnProperty(key)) {
+				this.controller.set(key + "", null);
+			}
+		}
+		this.controller.set(param + "", true);
+	}
 });

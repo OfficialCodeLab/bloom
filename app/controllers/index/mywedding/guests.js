@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   showPartial: Ember.computed.or('showAdd', 'showList'),
   notifications: Ember.inject.service('notification-messages'),
+  queryParams: ['addGuests', 'saveTheDate', 'weddingInvites'],
+  addGuests: null,
+  saveTheDate: null,
+  weddingInvites: null,
   showAdd: '',
   isSelected0: true,
   isSelected1: false,
@@ -44,6 +48,12 @@ export default Ember.Controller.extend({
 
   // }),
   actions: {
+
+    select(param) {
+      return true;
+      // let route = this.routeFor(this);
+      // route.select(param);
+    },
 
     showGuestAdd() {
       this.set('showAdd', true);

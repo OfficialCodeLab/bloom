@@ -55,6 +55,8 @@ Router.map(function() {
       this.route('todo');
       this.route('budget');
       this.route('upload-wedding-invite');
+      this.route('save-the-date');
+      this.route('upload-save-the-date');
     });
     this.route('vendor', function() {
       this.route('signup');
