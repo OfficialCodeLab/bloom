@@ -1,0 +1,47 @@
+<div class="index-main text-center" style="overflow-x: hidden;">
+  <div class="container" style="padding-top: 100px; padding-bottom: 30px;">
+    <div class="card-material wedding-invite-accept" style="padding: 0px;">
+      <div class="wedding-accept-top">
+        <img style="width: 100%; height: auto; max-width: 80px; margin-bottom: 30px;" src="../assets/images/bloom-logo-white.png"/>
+      </div>
+      <div class="wedding-accept-inner">
+        {{#if isProcessed}}
+          {{#if isAttending}}
+            <h5>You have confirmed! Enjoy the wedding :)</h5>
+            <hr class="style-two"/><br />
+            <p style="font-style: italic;">
+              Changed your mind?
+            </p>
+            {{mdl-button isRaised=true text='Decline Invite' action="declineInvite"}}
+          {{else}}
+            <h5>You have declined. Sorry that you can't make it :(</h5>
+            <hr class="style-two"/><br />
+            <p style="font-style: italic;">
+              Changed your mind?
+            </p>
+            {{mdl-button isRaised=true text='Accept Invite' action="acceptInvite"}}
+          {{/if}}
+        {{else}}
+          {{#if noParams}}
+            <h5>Something went wrong</h5>
+            <hr class="style-two"/><br />
+            <p style="font-style: italic;">
+              You may have come here by mistake, or your link is broken
+            </p>
+            <a href="#"  {{action "openContactModal"}}>{{mdl-button isRaised=true text='Contact Support'}} </a>
+          {{else}}
+          <h5>Processing your request, please hold tight</h5>
+          <hr class="style-two"/><br />
+          <p style="font-style: italic;">
+            Crunching data...
+          </p>
+          {{mdl-spinner}}
+          {{/if}}
+        {{/if}}
+      </div>
+      {{!-- <div style="padding-top: 120px">{{mdl-spinner}}</div> --}}
+    </div>
+  </div>
+	{{partial 'partials/footer'}}
+	{{notification-container position="bottom"}}
+</div>

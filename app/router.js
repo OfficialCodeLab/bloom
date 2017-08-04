@@ -102,6 +102,7 @@ Router.map(function() {
     this.route('hub', { path: '/' });
     this.route('support');
   });
+  this.route('wedding-invite');
 });
 
 export default Router;

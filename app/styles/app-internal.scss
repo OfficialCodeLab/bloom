@@ -2987,6 +2987,29 @@ $font_0: FontAwesome;
 	background: $color-main;
 }
 
+// Wedding Invite Accept page
+
+.wedding-invite-accept {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.wedding-accept-top {
+	height: 170px;
+	padding-top: 25px;
+	border-top-right-radius: 2px;
+	border-top-left-radius: 2px;
+	background-color: $color-main;
+}
+
+.wedding-accept-inner {
+	padding: 5px;
+	padding-bottom: 40px;
+
+	h5 {
+		padding-bottom: 10px;
+	}
+}
 
 /*====================================================================*\
 	Material design custom
