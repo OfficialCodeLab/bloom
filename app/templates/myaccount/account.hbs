@@ -25,7 +25,9 @@
   <div class="row">
     <div class="col-sm-6" style="padding-top: 30px;">
         <div class="profile-pic-outer-white" {{action 'showIconSelection'}}>
-          <div class="profile-pic"><img class="icon-responsive" src={{model.user.icon.imageUrl}}></div>
+          <div class="profile-pic">
+            <img class="icon-responsive" src={{if model.user.icon model.user.icon.imageUrl '../assets/images/edit-icon.png'}}>
+          </div>
         </div>
         <h3 class="subheader-italic">{{model.user.name}}</h3>
         <h3 class="subheader-italic">&amp;</h3>
