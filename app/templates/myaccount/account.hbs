@@ -1,35 +1,82 @@
+{{#if showAccount}}
+<div>
 
-<h1 class="font-times-header" style="color: #4C4C4E;">My Account</h1><br>
-<hr>
-<div class="row">
-    <div class="profile-pic-outer-grey">
-    	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
-    </div>
-    <h3 class="subheader-italic">{{model.user.name}} {{model.user.surname}}</h3>
+  <h1 class="font-times-header" style="color: #4C4C4E;">My Account</h1><br>
+  <hr>
 
-    <div class="form-horizontal">
-	    <div class="col-sm-4 col-sm-offset-4">
-	    	<i class="fa fa-heart i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Name of Your Spouse' value=model.user.spouse}}
-	    	{{#md-datepicker placeholder="Pick your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}
-    	</div>
+
+
+      {{!-- <div class="col-sm-6">
+          <div class="profile-pic-outer-grey">
+          	<div class="profile-pic"><img src={{model.userext.imgurl}}></div>
+          </div>
+          <h3 class="subheader-italic">{{model.user.spouse}}</h3>
+      </div>
+    </div> --}}
+
+      {{!-- <div class="form-horizontal row">
+        <hr>
+  	    <div class="col-sm-4 col-sm-offset-4">
+  	    	<i class="fa fa-heart i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Name of Your Spouse' value=model.user.spouse}}
+
+      	</div>
+      </div> --}}
+
+  <div class="row">
+    <div class="col-sm-6" style="padding-top: 30px;">
+        <div class="profile-pic-outer-white" {{action 'showIconSelection'}}>
+          <div class="profile-pic"><img class="icon-responsive" src={{model.user.icon.imageUrl}}></div>
+        </div>
+        <h3 class="subheader-italic">{{model.user.name}}</h3>
+        <h3 class="subheader-italic">&amp;</h3>
+        <h3 class="subheader-italic">{{model.user.spouse}}</h3>
+        <div style="padding: 71px 0px 40px 0px;">
+        	{{mdl-button isRaised=true text='EDIT' action="editSpouse"}}
+        </div>
     </div>
+    <div class="col-sm-6 border-grey-left myaccount-side" style="padding-top: 30px;">
+    	<div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
+      	{{#md-datepicker placeholder="Pick your birthday" selectedDate=birthday dateChanged="dateChanged" maxDate=dateCurrent}} {{/md-datepicker}}<br />
+    		{{mdl-textfield label='Email Address' value=model.user.email disabled=isPasswordAccount}}<br>
+    		{{mdl-textfield label='Contact number' value=model.user.cell}}<br>
+    		{{mdl-textfield label='Physical Address' value=model.user.addressL1}}<br>
+    		{{mdl-textfield label='City' value=model.user.city}}<br>
+    		{{mdl-textfield label='Postal Code' value=model.user.postalcode}}<br>
+    		{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
+        </div>
+        <div style="padding: 20px 0px 40px 0px;">
+        	{{mdl-button isRaised=true text='UPDATE' action="saveUser"}}
+        </div>
+
+    </div>
+  </div>
+
 </div>
-<hr>
+
+{{else}}
+<div>
+  <h1 class="font-times-header" style="color: #4C4C4E;">Select Your Icon</h1><br>
+  <hr>
+
+  <div class="select-icons">
+    <div class="row">
+      {{#each model.icon as |icon|}}
+        <div class="col-sm-4">
+          <img class="icon-responsive" src={{icon.imageUrl}} {{action 'saveIcon' icon.id}}/>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div style="padding-bottom: 40px;">
+    {{mdl-button isRaised=true isAccent=true text='BACK' action="hideIconSelection"}}
+    {{!-- {{mdl-button isRaised=true text='UPDATE' action="saveIcon"}} --}}
+  </div>
+</div>
+
+{{/if}}
 {{!-- VECTOR ARTWORK ZODIAC SIGNS <a href='http://www.freepik.com/free-vector/horoscope-icon-design_1096967.htm'>Designed by Freepik</a>
 FEMALE ELEMENTS <a href='http://www.freepik.com/free-vector/woman-four-elements_1087700.htm'>Designed by Freepik</a>
 ANIMALS <a href='http://www.freepik.com/free-vector/coloured-animals-collection_1070097.htm'>Designed by Freepik</a>
 FRUITS <a href='http://www.freepik.com/free-vector/coloured-fruits-collectio_1070165.htm'>Designed by Freepik</a>
 --}}
-<div class="row">
-	<div class="form-horizontal form-padding-bottom" style="padding-top: 20px;">
-		<i class="fa fa-envelope-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Email Address' value=model.user.email disabled=isPasswordAccount}}
-		<i class="fa fa-phone i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Contact number' value=model.user.cell}}<br>
-		<i class="fa fa-map-marker i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Physical Address' value=model.user.addressL1}}
-		<i class="fa fa-home i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='City' value=model.user.city}}<br>
-		<i class="fa fa-map-o i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Postal Code' value=model.user.postalcode}}
-		<i class="fa fa-globe i-lbl" aria-hidden="true"></i>&nbsp;&nbsp;{{mdl-textfield label='Country' value="South Africa" disabled=true}}<br>
-    </div>
-</div>
-<div style="padding: 20px 0px 40px 0px;">
-	{{mdl-button isRaised=true text='UPDATE' action="saveUser"}}
-</div>

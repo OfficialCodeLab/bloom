@@ -30,5 +30,6 @@ export default Model.extend({
   mustTourVendor: attr('boolean'),
   mustTourFavourites: attr('boolean'),
   created: attr('string'),
-  wedding: hasMany('wedding', {inverse: 'user', async: true})
+  wedding: hasMany('wedding', {inverse: 'user', async: true}),
+  icon: belongsTo('icon')
 });
