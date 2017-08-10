@@ -2298,15 +2298,15 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 	transform: scale(1);
 	transition: 0.3s all;
 
-	.selected-icon {
-
-	}
-
 	&:hover{
 		cursor: pointer;
 		transform: scale(1.05);
 		transition: 0.3s all;
 	}
+}
+
+.copyright-icons {
+	font-size: 11px;
 }
 /*==============================================================================*\
   ______          _
