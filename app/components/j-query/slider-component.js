@@ -8,6 +8,12 @@ export default Ember.Component.extend({
 			autoplaySpeed: 3000
 		  });
 
+			this.$('.hub-slider').slick({
+			arrows: true,
+			autoplay: true,
+			autoplaySpeed: 8000
+		  });
+
 	},
 	actions: {
 		test: function(){

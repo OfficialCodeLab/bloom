@@ -58,6 +58,10 @@ export default Ember.Route.extend( {
         Ember.run.later(this, function() {
           _this.controller.set('isTransitionHappening', false);
         }, 1200);
+      },
+      openListing: function(id){
+	    	this.transitionTo('single-item', id);
+
       }
   }
 });

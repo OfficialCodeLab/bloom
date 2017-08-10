@@ -406,6 +406,116 @@ body {
 	}
 }
 
+.hub-slider-container{
+
+}
+.hub-slider{
+	// min-height: 33vh;
+}
+.pear-slide-1{
+
+}
+.hub-intro{
+	font-family: 'Lora', serif;
+	font-size: 2em;
+}
+.hub-intro-header{
+	font-size: 4em;
+}
+.hub-slide{
+	background-color: rgba(0,0,0,0.8);
+	color: white;
+	&:hover {
+		cursor: pointer;
+	}
+	.slide-h1{
+		color: white;
+		font-size: 10em;
+		font-weight: 600;
+		margin: 0px;
+	}
+	.slide-sub {
+		color: white;
+		font-size: 2em;
+		line-height: 1.2em;
+		font-style: italic;
+		font-weight: 300;
+	}
+}
+.hub-slide-2, .hub-slide-3{
+	background-color: rgba(0,0,0,0.8);
+	color: white;
+	h1{
+		color: white;
+		font-size: 13em;
+		// font-family: 'Abel', sans-serif;
+		font-weight: 300;
+		// font-style: italic;
+		margin: 0px;
+	}
+	h4{
+		color: white;
+		font-size: 2em;
+		// font-family: 'Open Sans', sans-serif;
+		font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
+		font-style: italic;
+		font-weight: 300;
+	}
+}
+.hub-center-me{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.hub-font-stretch{
+    display:inline-block;
+    // -webkit-transform:scale(1,1.2); /* Safari and Chrome */
+    // -moz-transform:scale(1,1.2); /* Firefox */
+    // -ms-transform:scale(1,1.2); /* IE 9 */
+    // -o-transform:scale(1,1.2); /* Opera */
+    // transform:scale(1,1.2); /* W3C */
+}
+.hub-slide-content{
+	height: 580px;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+
+.hub-slide-img1 {
+	background-image: url("../assets/images/hub-slider/vonve1.jpg");
+}
+
+.hub-vonve-logo-container{
+	background-image: url("../assets/images/hub-slider/vonve-logo.png");
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center center;
+	background-size: contain;
+	height: 50%;
+	transform: translateY(50%);
+}
+
+.hub-slide-logo {
+	text-align: center;
+
+}
+
+.hub-slide-img2 {
+	background-image: url("../assets/images/hub-slider/rand-club.jpg");
+}
+
+.hub-slide-img3 {
+	background-image: url("../assets/images/hub-slider/vonve2.jpg");
+
+}
+
+.hub-banner-overlay{
+	height: 100%;
+	background-color: rgba(0,0,0,0.14);
+}
+
 .fixed-button-arrows {
 	position: absolute;
 	text-align: center;
