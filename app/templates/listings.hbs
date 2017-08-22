@@ -17,12 +17,8 @@
 		               <div  class="text-center cat-img-container" {{!-- style="background-image: url('../assets/images/dresses-vendor.png');" --}}>
 		                  {{#link-to 'single-item' cat-item.id tagname='div'}}
                   		  <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
-		                  	{{#if cat-item.imageURL}}
-		                        {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-		                     {{else}}
-		                        {{#image-component loadedImg="loadedImg" src="placeholder-square.png" class="img-responsive cat-image"}}{{/image-component}}
-		                     {{/if}}
-		                  </div>
+		                       {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
+		                  	</div>
 		                  {{/link-to}}
 		               </div>
 		               <div class="cat-bottom-box">

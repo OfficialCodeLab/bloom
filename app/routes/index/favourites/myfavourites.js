@@ -18,7 +18,7 @@ export default Ember.Route.extend({
   handleResize: function() {
     try{
         var $container = this.controller.get('masonryRef');
-        $container.layout();        
+        $container.layout();
     } catch(ex){}
   },
   bindResizeEvent: function() {
@@ -36,7 +36,7 @@ export default Ember.Route.extend({
   model () {
   	//this.store.unloadAll('cat-item');
   	let _id = this.get("currentUser.uid") + "";
-	//return this.store.findRecord('user', _id);	
+	//return this.store.findRecord('user', _id);
     return this.store.findRecord('user', _id).then((user) => {
       let favourites = user.get('favourites');
       this.set('favsCount', favourites.get('length'));
@@ -56,8 +56,8 @@ export default Ember.Route.extend({
       var id = this.get('currentModel').get('firstObject.id');
       //var items = this.store.peekAll('cat-item');
       if(this.get('startAt') - PAGE_SIZE >= 0){
-        this.resetLoadCount();  
-        this.decrementPage(); 
+        this.resetLoadCount();
+        this.decrementPage();
         let diff = this.get('endAt') - this.get('startAt');
         if(diff < PAGE_SIZE){
           this.set('endAt', this.get('startAt'));
@@ -67,7 +67,7 @@ export default Ember.Route.extend({
         this.set('startAt', this.get('startAt') - PAGE_SIZE);
         this.locatePage(this.controller);
         this.refresh();
-      } else {      
+      } else {
         this.resetIndexes();
       }
 
@@ -80,7 +80,7 @@ export default Ember.Route.extend({
   	  let fc = this.get('favsCount');
       if(this.get('startAt') + PAGE_SIZE < fc){
         this.resetLoadCount();
-        this.incrementPage();   
+        this.incrementPage();
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
         if(this.get('endAt') + PAGE_SIZE < fc){
@@ -90,29 +90,30 @@ export default Ember.Route.extend({
         }
         this.locatePage(this.controller);
         this.refresh();
-      } 
+      }
       //console.log("START AT: " + this.get('startAt') + "\nEND AT: " + this.get('endAt'));
 
     },
-    loadedImg: function() {     
+    loadedImg: function(src) {
       let c = this.get('loadCount');
       let la = this.get('loadAmount');
       c++;
       let percentLoaded = (c / la) * 100;
       percentLoaded = parseInt(percentLoaded);
       this.controller.set('percentLoaded', percentLoaded);
-      //console.log("loaded image");
+      // console.log("loaded image");
       this.set('loadCount', c);
 
+      // console.log(c + " / " + la);
      // }
      if(c >= la){
-        //console.log("loading complete");
+        // console.log("loading complete");
         Ember.$('#masonry-items').fadeIn("fast");
         Ember.$('#loading-spinner').fadeOut("fast");
       }
       try{
           var $container = this.controller.get('masonryRef');
-          $container.layout();        
+          $container.layout();
       } catch(ex){}
 
 
@@ -120,7 +121,7 @@ export default Ember.Route.extend({
 
   },
   locatePage: function(controller){
-    var fc = this.get('favsCount'); 
+    var fc = this.get('favsCount');
     if(this.get('startAt') + PAGE_SIZE >= fc){
       //AT LAST PAGE
       controller.set('isLast', true);
@@ -131,7 +132,7 @@ export default Ember.Route.extend({
     if(this.get('startAt') - PAGE_SIZE < 0) {
       //AT FIRST PAGE
       controller.set('isFirst', true);
-    } else {      
+    } else {
       controller.set('isFirst', false);
     }
 
@@ -140,17 +141,17 @@ export default Ember.Route.extend({
     let x = this.controller.get('pageNum');
     x++;
     this.controller.set('pageNum', x);
-  },   
+  },
   decrementPage: function(){
     let x = this.controller.get('pageNum');
     x--;
     this.controller.set('pageNum', x);
-  }, 
-  resetIndexes: function() { 
+  },
+  resetIndexes: function() {
   	let fc = this.get('favsCount');
 	  this.set('startAt', 0);
     this.set('pageTotal', Math.ceil(fc/PAGE_SIZE));
-  	if(PAGE_SIZE < fc){        
+  	if(PAGE_SIZE < fc){
   		this.set('endAt', PAGE_SIZE);
   	}
   	else{
@@ -170,6 +171,6 @@ export default Ember.Route.extend({
       } catch(ex){}
       let loadAmount = this.get('endAt') - this.get('startAt');
       this.set('loadAmount', loadAmount);
-      this.set('loadCount', 0);    
+      this.set('loadCount', 0);
   }
 });

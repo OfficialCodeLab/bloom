@@ -3,7 +3,7 @@
 	<hr>
 </div>
 
-   
+
    {{#if model}}
    <div class="text-center hideOnPhones">
       <div id="masonry-items">
@@ -18,16 +18,12 @@
                   {{#link-to 'single-item' cat-item.id tagname='div'}}
 
                   <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
-                     {{#if cat-item.imageURL}}
-                        {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-                     {{else}}
-                        {{#image-component loadedImg="loadedImg" src="placeholder-square.png" class="img-responsive cat-image"}}{{/image-component}}
-                     {{/if}}
+                     {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
                   </div>
                   {{/link-to}}
                </div>
                <div class="cat-overlay-2">
-                  
+
                </div>
                <div class="cat-bottom-box">
                   <div class="cat-bot-box-l col-xs-6">
@@ -36,7 +32,7 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                      <div class="cat-location">
-                     {{#if cat-item.willingToTravel}} 
+                     {{#if cat-item.willingToTravel}}
                         {{#if cat-item.maxTravelDist}} {{!-- YES --}}
                            <div class="cat-i-div">
                               <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -53,7 +49,7 @@
                               <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
                               {{tooltip-on-element side="bottom" text="Online Business"}}
                            </div>
-                        {{/if}} 
+                        {{/if}}
                      {{else}} {{!-- NO --}}
                         {{#if cat-item.city}}
                            {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -66,7 +62,7 @@
                </div>
             </div>
          </div>
-         {{/masonry-grid}} 
+         {{/masonry-grid}}
          <div class="nav-arrows">
             {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
          </div>
@@ -74,7 +70,7 @@
       {{#if model}}
       <div id="loading-spinner">
          <br>
-           {{paper-progress-linear value=percentLoaded}} 
+           {{paper-progress-linear value=percentLoaded}}
       </div>
       {{/if}}
    </div>
@@ -92,7 +88,7 @@
                   </div>
                {{/link-to}}
                <div class="cat-overlay-2">
-                  
+
                </div>
                <div class="cat-bottom-box">
                   <div class="cat-bot-box-l col-xs-6">
@@ -101,7 +97,7 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                      <div class="cat-location">
-                     {{#if cat-item.willingToTravel}} 
+                     {{#if cat-item.willingToTravel}}
                         {{#if cat-item.maxTravelDist}} {{!-- YES --}}
                            <div class="cat-i-div">
                               <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -118,7 +114,7 @@
                               <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
                               {{tooltip-on-element side="bottom" text="Online Business"}}
                            </div>
-                        {{/if}}  
+                        {{/if}}
                      {{else}} {{!-- NO --}}
                         {{#if cat-item.city}}
                            {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -135,7 +131,7 @@
       <div class="nav-arrows">
          {{mdl-button icon="chevron_left" action="prev" disabled=isFirst}} Page {{pgNum}}/{{pgTotal}} {{mdl-button icon="chevron_right" action="next" disabled=isLast}}
       </div>
-   </div>    
+   </div>
    {{else}}
    <div class="text-center">
       <p>It looks like you don't have any favourites yet!</p>

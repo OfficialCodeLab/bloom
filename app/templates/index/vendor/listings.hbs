@@ -12,11 +12,7 @@
                {{#link-to 'index.vendor.services.item' cat-item.id tagname='div' class="text-center cat-img-container"}}
 
                <div class="img-backdrop-m"  style="background-image: url({{cat-item.vendor.brandImage}});">
-                  {{#if cat-item.imageURL}}
-                     {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
-                  {{else}}
-                     {{#image-component loadedImg="loadedImg" src="placeholder-square.png" class="img-responsive cat-image"}}{{/image-component}}
-                  {{/if}}
+                 {{#image-component loadedImg="loadedImg" src=cat-item.imageURL class="img-responsive cat-image"}}{{/image-component}}
                </div>
                {{/link-to}}
                <div class="cat-overlay-2">
@@ -28,7 +24,7 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                      <div class="cat-location">
-                     {{#if cat-item.willingToTravel}} 
+                     {{#if cat-item.willingToTravel}}
                         {{#if cat-item.maxTravelDist}} {{!-- YES --}}
                            <div class="cat-i-div">
                               <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -45,7 +41,7 @@
                               <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
                               {{tooltip-on-element side="bottom" text="Online Business"}}
                            </div>
-                        {{/if}} 
+                        {{/if}}
                      {{else}} {{!-- NO --}}
                         {{#if cat-item.city}}
                            {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -58,7 +54,7 @@
                </div>
             </div>
          </div>
-         {{/masonry-grid}} 
+         {{/masonry-grid}}
       </div>
       {{#if model.catItems}}
       <div id="loading-spinner">
@@ -84,7 +80,7 @@
 
                   <div class="cat-bot-box-r col-xs-6">
                      <div class="cat-location">
-                     {{#if cat-item.willingToTravel}} 
+                     {{#if cat-item.willingToTravel}}
                         {{#if cat-item.maxTravelDist}} {{!-- YES --}}
                            <div class="cat-i-div">
                               <i class="fa fa-plane cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
@@ -101,7 +97,7 @@
                               <i class="fa fa-shopping-basket cat-travel-i" aria-hidden="true"></i>&nbsp;&nbsp;
                               {{tooltip-on-element side="bottom" text="Online Business"}}
                            </div>
-                        {{/if}} 
+                        {{/if}}
                      {{else}} {{!-- NO --}}
                         {{#if cat-item.city}}
                            {{cat-item.city}}, {{cat-item.provinceCode}}
@@ -124,4 +120,4 @@
    </div>
    {{/if}}
 </div>
-{{#tour-vendor currentUser.uid}} {{/tour-vendor}} 
+{{#tour-vendor currentUser.uid}} {{/tour-vendor}}

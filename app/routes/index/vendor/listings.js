@@ -9,6 +9,12 @@ export default Ember.Route.extend({
   loadCount: 0,
   itemsCount: 0,
 
+  setupController: function (controller, model) {
+    this._super(controller, model);
+    var ic = this.get('itemsCount');
+    console.log(ic);
+    this.set('loadAmount', Math.ceil(ic/PAGE_SIZE));
+  },
 	beforeModel: function() {
         var sesh = this.get("session").fetch().catch(function() {});
         if(!this.get('session.isAuthenticated')){
@@ -30,23 +36,19 @@ export default Ember.Route.extend({
 	    let _id = this.get("currentUser.uid") + "";
 		  return this.store.findRecord('user', _id).then((user)=>{
     	   return user.get('vendorAccount').then((va)=>{
-           return this.store.findRecord('vendor', va.id);
+           return this.store.findRecord('vendor', va.id).then((v)=>{
+             return v.get('catItems').then((items)=>{
+               if(items) {
+             		this.set('itemsCount', items.get('length'));
+             		this.resetLoadCount();
+             		return v;
+               } else {
+                 return v;
+               }
+             });
+           });
          });
       });
-    },
-    afterModel(){
-    	let _id = this.get("currentUser.uid") + "";
-    	let user = this.store.peekRecord('user', _id);
-    	let vendor = user.get('vendorAccount');
-		vendor.get('catItems').then((items)=>{
-      if(items) {
-    		this.set('itemsCount', items.get('length'));
-    		this.resetLoadCount();
-    		return;
-      } else {
-        return;
-      }
-    });
     },
     handleResize: function() {
 	    try{
@@ -66,12 +68,13 @@ export default Ember.Route.extend({
 		      let percentLoaded = (c / la) * 100;
 		      percentLoaded = parseInt(percentLoaded);
 		      this.controller.set('percentLoaded', percentLoaded);
-		      //console.log("loaded image");
+		      // console.log("loaded image");
 		      this.set('loadCount', c);
 
+          // console.log(c + " / " + la);
 		     // }
 		     if(c >= la){
-		        //console.log("loading complete");
+		        // console.log("loading complete");
 		        Ember.$('#masonry-items').fadeIn("fast");
 		        Ember.$('#loading-spinner').fadeOut("fast");
 		      }
