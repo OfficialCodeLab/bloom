@@ -22,8 +22,8 @@ export default Ember.Component.extend({
         this.$().off('load', 'error');
     },
     imageLoaded: function(event){
+			console.log("loaded the image didn't I!");
     	this.sendAction('loadedImg');
-        console.log("loaded the image didn't I!");
     },
     imageError: function(event){
         this.set('src', "placeholder-square.png");

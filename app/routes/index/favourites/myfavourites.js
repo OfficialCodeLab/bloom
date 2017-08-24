@@ -30,6 +30,7 @@ export default Ember.Route.extend({
     this._super(controller, model);
     this.locatePage(controller);
     var fc = this.get('favsCount');
+    this.resetLoadCount();
     controller.set('pageTotal', Math.ceil(fc/PAGE_SIZE));
   },
 
@@ -104,10 +105,11 @@ export default Ember.Route.extend({
       // console.log("loaded image");
       this.set('loadCount', c);
 
-      // console.log(c + " / " + la);
+      console.log(c + " / " + la);
      // }
      if(c >= la){
-        // console.log("loading complete");
+        console.log("loading complete");
+
         Ember.$('#masonry-items').fadeIn("fast");
         Ember.$('#loading-spinner').fadeOut("fast");
       }

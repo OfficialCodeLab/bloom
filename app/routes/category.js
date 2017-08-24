@@ -22,7 +22,7 @@ export default Ember.Route.extend({
   handleResize: function() {
     try{
         var $container = this.controller.get('masonryRef');
-        $container.layout();        
+        $container.layout();
     } catch(ex){}
   },
   bindResizeEvent: function() {
@@ -35,22 +35,25 @@ export default Ember.Route.extend({
   	let _id = params.category_id;
 
     return this.store.find('category', _id).then((cat) => {
-      let catItems = cat.get('catItems');
-      // console.log(catItems.get('length'));
-      // console.log(catItems);
-      this.set('catCount', catItems.get('length'));
-      this.set('name', cat.get('name'));
-      this.set('desc', cat.get('desc'));
-      this.set('icon', cat.get('icon'));
-      this.set('iconName', cat.get('iconName'));
-      if (!(this.get('startAt'))) {
-        this.resetIndexes();
-      }
-      //let sorted = items.sortBy('name');
-      this.resetLoadCount();
-      console.log(this.get('startAt') + " => " + this.get('endAt'));
+      return cat.get('catItems').then((catItems)=>{
 
-      return catItems.slice(this.get('startAt'), this.get('endAt'));
+        // console.log(catItems.get('length'));
+        // console.log(catItems);
+        this.set('catCount', catItems.get('length'));
+        console.log(catItems.get('length'));
+        this.set('name', cat.get('name'));
+        this.set('desc', cat.get('desc'));
+        this.set('icon', cat.get('icon'));
+        this.set('iconName', cat.get('iconName'));
+        if (!(this.get('startAt'))) {
+          this.resetIndexes();
+        }
+        //let sorted = items.sortBy('name');
+        this.resetLoadCount();
+        console.log(this.get('startAt') + " => " + this.get('endAt'));
+
+        return catItems.slice(this.get('startAt'), this.get('endAt'));
+      });
     });
   },
   setupController: function (controller, model) {
@@ -62,16 +65,18 @@ export default Ember.Route.extend({
     this.locatePage(controller);
     var cc = this.get('catCount');
     controller.set('pageTotal', Math.ceil(cc/PAGE_SIZE));
+    this.resetLoadCount();
+    console.log(this.get('loadAmount'));
   },
 
   actions: {
-  	
+
 
     prev: function() {
       var id = this.get('currentModel').get('firstObject.id');
       //var items = this.store.peekAll('cat-item');
       if(this.get('startAt') - PAGE_SIZE >= 0){
-        this.resetLoadCount();  
+        this.resetLoadCount();
         this.decrementPage();
         let diff = this.get('endAt') - this.get('startAt');
         if(diff < PAGE_SIZE){
@@ -83,7 +88,7 @@ export default Ember.Route.extend({
         this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
-      } else {      
+      } else {
         this.resetIndexes();
       }
 
@@ -95,8 +100,8 @@ export default Ember.Route.extend({
       var id = this.get('currentModel').get('lastObject.id');
       var cc = this.get('catCount');
       if(this.get('startAt') + PAGE_SIZE < cc){
-        this.resetLoadCount(); 
-        this.incrementPage(); 
+        this.resetLoadCount();
+        this.incrementPage();
         //this.resetLoadCount();
         this.set('startAt', this.get('startAt') + PAGE_SIZE);
         if(this.get('endAt') + PAGE_SIZE < cc){
@@ -107,11 +112,11 @@ export default Ember.Route.extend({
         this.scrollToTop(this.controller);
         this.locatePage(this.controller);
         this.refresh();
-      } 
+      }
       //console.log("START AT: " + this.get('startAt') + "\nEND AT: " + this.get('endAt'));
 
     },
-    loadedImg: function() {     
+    loadedImg: function() {
       let c = this.get('loadCount');
       let la = this.get('loadAmount');
       c++;
@@ -119,13 +124,14 @@ export default Ember.Route.extend({
       percentLoaded = parseInt(percentLoaded);
       this.controller.set('percentLoaded', percentLoaded);
       this.set('loadCount', c);
+      console.log (c + " / " + la);
      if(c >= la){
         Ember.$('#masonry-items').fadeIn("fast");
         Ember.$('#loading-spinner').fadeOut("fast");
       }
       try{
           var $container = this.controller.get('masonryRef');
-          $container.layout();        
+          $container.layout();
       } catch(ex){}
 
 
@@ -133,7 +139,7 @@ export default Ember.Route.extend({
 
   },
   locatePage: function(controller){
-    var cc = this.get('catCount'); 
+    var cc = this.get('catCount');
     if(this.get('startAt') + PAGE_SIZE >= cc){
       //AT LAST PAGE
       controller.set('isLast', true);
@@ -144,7 +150,7 @@ export default Ember.Route.extend({
     if(this.get('startAt') - PAGE_SIZE < 0) {
       //AT FIRST PAGE
       controller.set('isFirst', true);
-    } else {      
+    } else {
       controller.set('isFirst', false);
     }
   },
@@ -152,17 +158,17 @@ export default Ember.Route.extend({
     let x = this.controller.get('pageNum');
     x++;
     this.controller.set('pageNum', x);
-  },   
+  },
   decrementPage: function(){
     let x = this.controller.get('pageNum');
     x--;
     this.controller.set('pageNum', x);
-  }, 
-  resetIndexes: function() { 
-      var cc = this.get('catCount');    	
+  },
+  resetIndexes: function() {
+      var cc = this.get('catCount');
       this.set('startAt', 0);
-      this.set('pageTotal', Math.ceil(cc/PAGE_SIZE));
-      if(PAGE_SIZE < cc){ 
+      this.set('loadAmount', Math.ceil(cc/PAGE_SIZE));
+      if(PAGE_SIZE < cc){
         this.set('endAt', PAGE_SIZE);
       }
       else{
@@ -178,13 +184,13 @@ export default Ember.Route.extend({
       } catch(ex){}
       let loadAmount = this.get('endAt') - this.get('startAt');
       this.set('loadAmount', loadAmount);
-      this.set('loadCount', 0);    
+      this.set('loadCount', 0);
   },
-  scrollToTop: function(controller) {    
+  scrollToTop: function(controller) {
     try{
     Ember.run.next(function () {
       controller.get('scroller').scrollVertical("#scrollTopPos", {duration:800});
     }); } catch(ex){}
   }
-  	  
+
 });

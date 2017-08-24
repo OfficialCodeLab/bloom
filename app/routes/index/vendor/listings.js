@@ -12,8 +12,9 @@ export default Ember.Route.extend({
   setupController: function (controller, model) {
     this._super(controller, model);
     var ic = this.get('itemsCount');
-    console.log(ic);
-    this.set('loadAmount', Math.ceil(ic/PAGE_SIZE));
+    // console.log(ic);
+    this.resetLoadCount();
+    controller.set('pageCount', Math.ceil(ic/PAGE_SIZE));
   },
 	beforeModel: function() {
         var sesh = this.get("session").fetch().catch(function() {});
