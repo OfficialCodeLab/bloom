@@ -24,7 +24,7 @@ export default Ember.Route.extend({
 					controller.set('vendorCount', vendorCount);
 				} else if(user.get('accountType') === 'admin'){
 					adminCount++;
-					controller.set('adminCount', adminCount);					
+					controller.set('adminCount', adminCount);
 				} else {
 					userCount++;
 					controller.set('userCount', userCount);
@@ -33,6 +33,14 @@ export default Ember.Route.extend({
   },
 
 	actions: {
+		onButtonClick: function (id){
+
+				alert(id);
+		},
+
+		testingThis: function(id){
+			alert(id);
+		},
 		toggleCheck: function(suffix) {
 			let fetchStr = "show" + suffix;
 			let toChange = this.controller.get(fetchStr);

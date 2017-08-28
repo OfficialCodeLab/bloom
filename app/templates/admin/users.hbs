@@ -34,6 +34,7 @@
   </div>
 </div>
 
+
 {{!-- <div class="container">
 {{#mdl-table content=model as |user|}}
     {{#mdl-table-col label='Full Name'}}
@@ -63,7 +64,29 @@
 </div> --}}
 
 <div class="container">
-  <table class="table table-bordered">
+  <div style="text-align: right;">
+
+    <div class="form-horizontal form-padding-bottom icon-form" style="padding-top: 20px;">
+      <i class="material-icons">search</i>{{mdl-textfield label='Filter...' value=filterKey}}
+    </div>
+  </div>
+
+  {{#eb-table
+        pageSize=20
+        content=model
+        columns=columns
+        filterKey=filterKey}}
+
+        {{!-- {{#eb-table-navbar}}
+        <div class="table-search input-group pull-right">
+             {{input class="form-control table-search" type='text' value=filterKey placeholder="Filter..." size=40}}
+         </div>
+         <div style="clear:both;"></div>
+        {{/eb-table-navbar}} --}}
+  {{/eb-table}}
+
+
+  {{!-- <table class="table table-bordered">
     <thead>
       <tr>
         <th>Full Name</th>
@@ -122,6 +145,6 @@
           {{/if}}
       {{/each}}
     </tbody>
-  </table>
+  </table> --}}
 
 </div>

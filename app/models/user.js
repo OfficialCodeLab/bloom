@@ -2,6 +2,9 @@ import Model from 'ember-data/model';
 import attr from 'ember-data/attr';
 import { hasMany, belongsTo } from 'ember-data/relationships';
 import Ember from 'ember';
+import format from 'ember-moment/computeds/format';
+import moment from 'moment';
+// import momentComputed from 'ember-moment/computeds/moment';
 
 export default Model.extend({
   name: attr('string'),
@@ -31,5 +34,15 @@ export default Model.extend({
   mustTourFavourites: attr('boolean'),
   created: attr('string'),
   wedding: hasMany('wedding', {inverse: 'user', async: true}),
-  icon: belongsTo('icon')
+  icon: belongsTo('icon'),
+  fullName: Ember.computed('name', 'surname', function() {
+    return `${this.get('name')} ${this.get('surname')}`;
+  }),
+  joinedDate: Ember.computed('created', function() {
+    if(this.get('created')){
+      return moment(this.get('created')).format('YYYY-MM-DD');
+    } else {
+      return moment('01-01-2017').format('YYYY-MM-DD');
+    }
+  })
 });

@@ -51,7 +51,7 @@ export default Ember.Route.extend({
     });
   },
   declineInvite: function(id) {
-  this.controller.set('isProcessed', false);
+    this.controller.set('isProcessed', false);
     this.set('guestId', id);
     this.store.findRecord('guest', id).then((guest)=>{
       guest.set('rsvp', false);

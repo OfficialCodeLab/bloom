@@ -28,6 +28,7 @@ module.exports = function(defaults) {
   app.import('bower_components/bootstrap-social/bootstrap-social.css');
   app.import('vendor/image-compressor/image-compressor.js');
   app.import('vendor/html2canvas/html2canvas.js');
+  app.import('bower_components/ember/ember-template-compiler.js');
 
 
   // Use `app.import` to add additional libraries to the generated
