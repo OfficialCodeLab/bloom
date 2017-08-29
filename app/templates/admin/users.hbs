@@ -1,20 +1,21 @@
 <div class="header-top">
-  <h1>Users</h1></div>
+    <strong>Account Totals</strong></div>
 <div style='padding-bottom: 30px;' class="container">
   {{!-- {{#paper-switch value=hideVendors onChange=(action (mut hideVendors))}}
     {{displayType}}
   {{/paper-switch}} --}}
+  {{!-- <div class="text-align: center; padding-top: 40px;">
+    <strong>Account Totals</strong>
+  </div> --}}
   <div class="col-sm-6" style="text-align: right;">
-      <strong>Account Totals</strong><br /><br />
+      <br />
       <p>Total accounts: {{model.length}}</p>
       <p>User count: {{userCount}}</p>
-      <p>Vendor count: {{vendorCount}}</p>
-      <p>Admin count: {{adminCount}}</p>
   </div>
   <div class="col-sm-6" style="text-align: left;">
-  <strong>Account Type to Display</strong>
-  <br /><br />
-  <div {{action "toggleCheck" "Users"}}>
+  {{!-- <strong>Account Type to Display</strong> --}}
+  <br />
+  {{!-- <div {{action "toggleCheck" "Users"}}>
     {{#if showUsers}}
       {{mdl-button icon="check_box"}}
     {{else}}
@@ -30,40 +31,17 @@
       {{mdl-button icon="check_box_outline_blank"}}
     {{/if}}VENDORS
 
-  </div>
+  </div> --}}
+
+  <p>Vendor count: {{vendorCount}}</p>
+  <p>Admin count: {{adminCount}}</p>
   </div>
 </div>
 
-{{!-- <div class="container">
-{{#mdl-table content=model as |user|}}
-    {{#mdl-table-col label='Full Name'}}
-      {{user.name}} {{user.surname}}
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='E-mail'}}
-      {{user.email}}
-    {{/mdl-table-col}}
-
-      {{#mdl-table-col label="Accounts"}}
-        <div style="text-align: left">
-      <a href="https://console.firebase.google.com/project/pear-server/database/data/users/{{user.id}}">
-          <i style="font-size: 24px;" class="fa fa-database"></i>
-      </a>&nbsp;&nbsp;
-      {{#if user.vendorAccount}}
-        {{#link-to 'vendor-profile' user.vendorAccount.id}}<i style="font-size: 24px;" class="fa fa-truck"></i>{{/link-to}}
-      {{else}}
-        <a href='' {{action "notImplemented"}}><i style="font-size: 24px;" class="fa fa-diamond"></i></a>
-      {{/if}}</div>
-    {{/mdl-table-col}}
-
-    {{#mdl-table-col label='Delete'}}
-      <div {{action "destroyUser" user.id}} class="tb-btn">{{mdl-button icon="delete"}}</div>
-    {{/mdl-table-col}}
-{{/mdl-table}}
-</div> --}}
-
 <div class="container">
-  <table class="table table-bordered">
+    {{user-table model=model}}
+
+  {{!-- <table class="table table-bordered">
     <thead>
       <tr>
         <th>Full Name</th>
@@ -122,6 +100,6 @@
           {{/if}}
       {{/each}}
     </tbody>
-  </table>
+  </table> --}}
 
 </div>

@@ -11,5 +11,6 @@ export default Ember.Controller.extend({
         } else {
             return "Displaying users & vendors";
         }
-    })
+    }),
+
 });

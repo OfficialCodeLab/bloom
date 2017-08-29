@@ -24,7 +24,7 @@ export default Ember.Route.extend({
 					controller.set('vendorCount', vendorCount);
 				} else if(user.get('accountType') === 'admin'){
 					adminCount++;
-					controller.set('adminCount', adminCount);					
+					controller.set('adminCount', adminCount);
 				} else {
 					userCount++;
 					controller.set('userCount', userCount);
@@ -33,6 +33,9 @@ export default Ember.Route.extend({
   },
 
 	actions: {
+		// test(row){
+		// 	console.log(row.get('id'));
+		// },
 		toggleCheck: function(suffix) {
 			let fetchStr = "show" + suffix;
 			let toChange = this.controller.get(fetchStr);
@@ -81,7 +84,8 @@ export default Ember.Route.extend({
 			user.get('wedding').pushObject(wedding);
 			user.save();
 		},
-		destroyUser(id){
+		destroyUser(row){
+			let id = row.get('id');
 			let confirmation = confirm('Are you sure?');
 
 			if (confirmation) {
