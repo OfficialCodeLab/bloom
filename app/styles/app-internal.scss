@@ -2885,35 +2885,6 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 		color: white !important;
 	}
 }
-
-/*
-	ADMIN PAGES
-*/
-
-
-.icon-form {
-	i{
-		transform: translateY(7px);
-	}
-}
-
-.table-header-row {
-	background-color: $color-main;
-}
-
-.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
-    background-color: $color-main;
-    border-color: $color-main;
-}
-
-.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
- color: $color-main;
-}
-
-.pagination > li > a, .pagination > li > span {
-	color: $color-main;
-}
-
 /*==============================================================================*\
 	Leave these
 \*==============================================================================*/
@@ -3198,6 +3169,12 @@ $font_0: FontAwesome;
 #single-item{
 	.mdl-button{
 		width: auto !important;
+	}
+}
+
+.icon-form {
+	i{
+		transform: trans
 	}
 }
 
