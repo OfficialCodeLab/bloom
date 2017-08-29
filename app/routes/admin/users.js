@@ -84,8 +84,7 @@ export default Ember.Route.extend({
 			user.get('wedding').pushObject(wedding);
 			user.save();
 		},
-		destroyUser(row){
-			let id = row.get('id');
+		destroyUser(id){
 			let confirmation = confirm('Are you sure?');
 
 			if (confirmation) {
