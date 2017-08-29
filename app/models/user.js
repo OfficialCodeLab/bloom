@@ -44,5 +44,12 @@ export default Model.extend({
     } else {
       return moment('01-01-2017').format('YYYY-MM-DD');
     }
-  })
+  }),
+  accType: Ember.computed('vendorAccount', 'accountType', function() {
+    if(this.get('accountType')){
+      return `${this.get('accountType')}`;
+    } else {
+      return 'user';
+    }
+  }),
 });

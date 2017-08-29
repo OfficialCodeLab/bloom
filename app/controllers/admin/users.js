@@ -54,8 +54,15 @@ export default Ember.Controller.extend({
 							isFilterable: false,
               columnComponentName: 'user-delete'
           });
+          var col6 = ColumnDefinition.create({
+              header: 'Account Type',
+							isSortable: false,
+							contentPath: 'accType',
+							textAlign: 'left',
+							isFilterable: true
+          });
 
-          return [col1, col2, col3, col4, col5];
+          return [col1, col2, col3, col4, col5, col6];
       }),
 			actions: {
 				testingThis: function(id){
