@@ -12,7 +12,7 @@ export default Ember.Route.extend({
             vendor: this.store.findRecord('vendor', params.vendor_id),
             vendorStat: this.store.findRecord('vendor-stat', params.vendor_id)
         });
-		
+
 
 	},
 	afterModel(){
@@ -35,6 +35,11 @@ export default Ember.Route.extend({
   		window.scrollTo(0,0);
   	},
   	actions: {
+			websiteOpened: function(){
+				let userId = this.get("currentUser.uid");
+		    let vendorId = this.get('vendorId');
+				this.send('storeWebsiteClick', vendorId, userId);
+			},
 	    openContactModalInit: function(){
 	    	let venId = this.controller.get('model.vendor.id');
 	    	let venName = this.controller.get('model.vendor.name');
@@ -42,7 +47,7 @@ export default Ember.Route.extend({
 	    	this.send('openContactModal', venName, venEmail, venId);
 	    },
 
-	    loadedImg: function() {     
+	    loadedImg: function() {
 	      let c = this.get('loadCount');
 	      let la = this.get('loadAmount');
 	      c++;
@@ -56,7 +61,7 @@ export default Ember.Route.extend({
 	      }
 	      try{
 	          var $container = this.controller.get('masonryRef');
-	          $container.layout();        
+	          $container.layout();
 	      } catch(ex){}
 
 
@@ -73,8 +78,8 @@ export default Ember.Route.extend({
 	     this.controller.set('percentLoaded', 0);
 	     this.controller.set('isLoaded', false);
 	     Ember.$('#masonry-items').fadeOut(0);
-	     Ember.$('#loading-spinner').fadeIn(0); 
+	     Ember.$('#loading-spinner').fadeIn(0);
 	  } catch(ex){}
-     this.set('loadCount', 0);   
+     this.set('loadCount', 0);
 	}
 });

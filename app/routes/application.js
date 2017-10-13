@@ -454,6 +454,27 @@ export default Ember.Route.extend({
         'custom-property2': userId
       });
     },
+    storeWebsiteClick: function(vendorId, userId) {
+        let prop = "Website visited by: " + userId;
+        let metrics = Ember.get(this, 'metrics');
+        metrics.trackEvent('GoogleAnalytics', {
+          // (required) The name you supply for the group of objects you want to track.
+          category: vendorId,
+          // (required) A string that is uniquely paired with each category, and commonly used to define the type of user interaction for the web object.
+          action: 'Website Visit',
+          // (optional) string to provide additional dimensions to the event data.
+          label: prop,
+          // (optional) An integer that you can use to provide numerical data about the user event.
+          value: 1
+          // (optional) boolean that when set to true, indicates that the event hit will not be used in bounce-rate calculation.
+          //noninteraction: false
+        });
+        metrics.trackEvent('Mixpanel', {
+          'event': 'Website Visit',
+          'custom-property1': vendorId,
+          'custom-property2': prop
+        });
+    },
     // loading: function(transition, originRoute) {
     // //this.controller.set('currentlyLoading', true);
     // let controller = this.controllerFor('loading');
@@ -496,7 +517,6 @@ export default Ember.Route.extend({
     //      this.transitionTo('index');
     //    }
   }, //ACTIONS
-
   storeContactRequest: function(vendorId, vendorEmail, userId) {
     let prop = vendorEmail + " contacted by: " + userId;
     let metrics = Ember.get(this, 'metrics');

@@ -108,7 +108,7 @@
 
 														</div>
 														<div class="col-xs-2 overview-info"><i class="material-icons">laptop</i></div>
-														<div class="col-xs-10 overview-info"><a href={{websiteUrl}} target="_blank">{{website}}</a></div>
+														<div class="col-xs-10 overview-info"><a href={{websiteUrl}} target="_blank" {{action 'websiteOpened' preventDefault=false}}>{{website}}</a></div>
 														<div class="col-xs-2 overview-info"><i class="material-icons">home</i></div>
 														<div class="col-xs-10 overview-info">{{model.vendor.city}}</div>
 														<div class="col-xs-2 overview-info"><i class="material-icons">place</i></div>
