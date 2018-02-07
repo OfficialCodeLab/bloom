@@ -47,7 +47,7 @@ export default Model.extend({
   }),
   accType: Ember.computed('vendorAccount', 'accountType', function() {
     if(this.get('accountType')){
-      return `${this.get('accountType')}`;
+     return `${this.get('accountType')}`;
     } else {
       return 'user';
     }

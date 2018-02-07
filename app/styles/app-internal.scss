@@ -511,6 +511,20 @@ body {
 
 }
 
+.hub-slide-img4 {
+	background-image: url("../assets/images/hub-slider/wrapistry1.jpg");
+}
+
+.hub-wrapistry-logo-container{
+	background-image: url("../assets/images/hub-slider/wrapistry-logo.png");
+	background-repeat: no-repeat;
+	// background-attachment
+	background-position: center center;
+	background-size: contain;
+	height: 30%;
+	transform: translateY(70%);
+}
+
 .hub-banner-overlay{
 	height: 100%;
 	background-color: rgba(0,0,0,0.14);
@@ -2885,6 +2899,9 @@ md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused .md-
 		color: white !important;
 	}
 }
+
+
+
 /*==============================================================================*\
 	Leave these
 \*==============================================================================*/

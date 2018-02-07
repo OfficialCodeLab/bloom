@@ -33,14 +33,9 @@ export default Ember.Route.extend({
   },
 
 	actions: {
-		onButtonClick: function (id){
-
-				alert(id);
-		},
-
-		testingThis: function(id){
-			alert(id);
-		},
+		// test(row){
+		// 	console.log(row.get('id'));
+		// },
 		toggleCheck: function(suffix) {
 			let fetchStr = "show" + suffix;
 			let toChange = this.controller.get(fetchStr);

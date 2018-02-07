@@ -1,0 +1,42 @@
+<div class="card card-1">
+  <div class="panel-heading">
+    <h4 class="panel-title">Users</h4>
+  </div>
+  {{#light-table table height='65vh' as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconSortable='fa fa-sort'
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    resizeOnDrag=true
+    fixed=true
+  }}
+
+  {{#t.body
+    canSelect=false
+    onScroll=(action (mut currentScrollOffset))
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+  {{/t.body}}
+
+  {{#t.foot fixed=true as |columns|}}
+  <tr>
+      <td class="align-center" colspan={{columns.length}} style="padding: 20px;">
+        <div style="transform: translateY(9px); display: inline-block;">
+          {{#paper-select options=possibleFilters label="Filters" selected=selectedFilter onChange=(action (mut selectedFilter)) as |filter|}}
+          {{filter.label}}
+        {{/paper-select}}</div>
+        {{mdl-textfield label='Search...' value=query}}
+        {{#mdl-button isRaised=true action="resetSearch"}}Clear{{/mdl-button}}
+      </td>
+    </tr>
+  {{/t.foot}}
+  {{/light-table}}
+</div>

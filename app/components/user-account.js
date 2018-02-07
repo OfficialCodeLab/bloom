@@ -1,3 +1,4 @@
+
 //users-table-delete-column.js
 import Ember from 'ember';
 import VcaTableColumn from 'ember-bootstrap-table/components/eb-table-column';

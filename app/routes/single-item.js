@@ -34,6 +34,11 @@ scroller: Ember.inject.service(),
 			});
   	},
 	actions: {
+		websiteOpened: function(){
+			let userId = this.get("currentUser.uid");
+			let vendorId = this.controller.get('model.id');
+			this.send('storeWebsiteClick', vendorId, userId);
+		},
 		goBack: function(){
 			window.history.go(-1);
 		},
