@@ -18,6 +18,8 @@
           </div><br>
           {{#if model.vendor}}<hr style="margin: 1em auto; max-width: 60px;"/>
           <div class="input-group pear-max-width">
+
+            {{#if session.isAuthenticated}}
             <br /><p style="text-align: center">
               <strong>Additional Information:</strong>
             </p>
@@ -26,6 +28,7 @@
                 {{model.sendInfoText}}
              {{/paper-switch}}
             </div>
+            {{/if}}
 
           </div>
           {{/if}}

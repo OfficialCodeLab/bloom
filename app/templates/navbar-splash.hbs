@@ -3,7 +3,7 @@
       <i id="menu-icon-c" style="display:none">{{mdl-icon icon='close'}}</i>
   </a>
 <nav id="navbar-g" class="navbar navbar-default navbar-fixed-top">
-  
+
   <div id="nav-content" class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -23,6 +23,35 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{!-- {{#nav-link-to 'admin'}}Admin{{/nav-link-to}} --}}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" {{action "navigateCat"}}><i class="fa fa-plus-square"></i>&nbsp;DIRECTORY {{!-- <b class="caret"></b> --}}</a>
+          <ul class="dropdown-menu" role="menu">
+            {{#nav-link-to 'category' 'bar-services'}}Bar Services{{/nav-link-to}}
+            {{#nav-link-to 'category' 'cakes'}}Cakes{{/nav-link-to}}
+            {{#nav-link-to 'category' 'celebrants'}}Celebrants{{/nav-link-to}}
+            {{#nav-link-to 'category' 'culinary'}}Culinary{{/nav-link-to}}
+            {{#nav-link-to 'category' 'décor'}}Décor{{/nav-link-to}}
+            {{#nav-link-to 'category' 'dresses'}}Dresses{{/nav-link-to}}
+            {{#nav-link-to 'category' 'entertainment'}}Entertainment{{/nav-link-to}}
+            {{#nav-link-to 'category' 'flowers'}}Flowers{{/nav-link-to}}
+            {{#nav-link-to 'category' 'hire'}}For Hire{{/nav-link-to}}
+            {{#nav-link-to 'category' 'makeup&hair'}}Make-up &amp; Hair {{/nav-link-to}}
+            {{#nav-link-to 'category' 'honeymoon'}}Honeymoon{{/nav-link-to}}
+            {{#nav-link-to 'category' 'jewellery'}}Jewellery{{/nav-link-to}}
+            {{#nav-link-to 'category' 'legal'}}Legal{{/nav-link-to}}
+            {{#nav-link-to 'category' 'mens-apparel'}}Men's Apparel{{/nav-link-to}}
+            {{#nav-link-to 'category' 'miscellaneous'}}Miscellaneous{{/nav-link-to}}
+            {{#nav-link-to 'category' 'photography'}}Photography{{/nav-link-to}}
+            {{#nav-link-to 'category' 'registries'}}Registries{{/nav-link-to}}
+            {{#nav-link-to 'category' 'stationery'}}Stationery{{/nav-link-to}}
+            {{#nav-link-to 'category' 'transport'}}Transport{{/nav-link-to}}
+            {{#nav-link-to 'category' 'venues'}}Venues{{/nav-link-to}}
+            {{#nav-link-to 'category' 'videography'}}Videography{{/nav-link-to}}
+            {{#nav-link-to 'category' 'wedding-planners'}}Wedding Planners{{/nav-link-to}}
+            <li role="separator" class="divider"></li>
+            {{#nav-link-to 'listings'}}All Listings{{/nav-link-to}}
+          </ul>
+        </li>
         {{#nav-link-to 'vendor-tour'}}VENDOR TOUR{{/nav-link-to}}
         <li><a href="#" {{action 'openContactModal'}}>CONTACT US</a></li>
         <li class="nav-highlight"><a href="#" {{action "showLogins"}}>LOG IN</a></li>

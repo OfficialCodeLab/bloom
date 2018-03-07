@@ -16,6 +16,7 @@ export default Ember.Route.extend({
 
 	},
 	afterModel(){
+    console.log("TEST", this.get('vendorId'));
 		let vendor = this.store.peekRecord('vendor', this.get('vendorId'));
 		let catItems = vendor.get('catItems');
 		this.set('loadAmount', catItems.get('length'));
@@ -26,7 +27,7 @@ export default Ember.Route.extend({
      	controller.set('vendor', model.vendor);
      	controller.set('vendorStat', model.vendorStat);
      	controller.set('contactInfoVisible', false);
-	    let id = this.get("currentUser.uid");
+	    let id = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 	    let vendorId = this.get('vendorId');
 		this.send('storeVendorProfileVisited', vendorId, id);
       controller.set('website', model.vendorStat.get('website'));
@@ -36,7 +37,7 @@ export default Ember.Route.extend({
   	},
   	actions: {
 			websiteOpened: function(){
-				let userId = this.get("currentUser.uid");
+				let userId = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 		    let vendorId = this.get('vendorId');
 				this.send('storeWebsiteClick', vendorId, userId);
 			},
@@ -67,7 +68,7 @@ export default Ember.Route.extend({
 
 	    },
 	    showContactInfo: function(){
-	    	let userId = this.get("currentUser.uid");
+	    	let userId = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 	    	let vendorId = this.controller.get('model.id');
 	    	this.controller.set('contactInfoVisible', true);
 	    	this.send('storeContactInfoRequest', vendorId, userId);

@@ -3,13 +3,12 @@
     overflow: hidden;
   }
 .panel-heading {
-  background: $color-main;
+  background: #F8BBD0;
   margin-bottom: 20px;
-  h4{
-    color: #f9f9f9;
-  }
 }
-
+.panel-heading h4 {
+  color: #f9f9f9;
+}
 .tb-spinner {
   text-align: center;
   padding: 50px 10px 10px 10px;

@@ -6,9 +6,9 @@ export default Ember.Route.extend({
 scroller: Ember.inject.service(),
 	beforeModel: function() {
 	  	var sesh = this.get("session").fetch().catch(function() {});
-	  	if(!this.get('session.isAuthenticated')){
-	        this.transitionTo('login');
-	      }
+	  	// if(!this.get('session.isAuthenticated')){
+	    //     this.transitionTo('login');
+	    //   }
 	      return sesh;
     },
     model(params) {
@@ -18,7 +18,7 @@ scroller: Ember.inject.service(),
 			let _this = this;
 	    this._super(controller, model);
      	controller.set('contactInfoVisible', false);
-	    let id = this.get("currentUser.uid");
+	    let id = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 			let willingToTravel = model.get('willingToTravel');
 			let maxTravelDist = model.get('maxTravelDist');
 			if(willingToTravel && !maxTravelDist) {
@@ -35,7 +35,7 @@ scroller: Ember.inject.service(),
   	},
 	actions: {
 		websiteOpened: function(){
-			let userId = this.get("currentUser.uid");
+			let userId = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 			let vendorId = this.controller.get('model.id');
 			this.send('storeWebsiteClick', vendorId, userId);
 		},
@@ -55,7 +55,7 @@ scroller: Ember.inject.service(),
 			// this.send('vendorClick', id);
 		},
 		showContactInfo: function(){
-			let userId = this.get("currentUser.uid");
+			let userId = this.get("currentUser") ? this.get("currentUser.uid") : "anonymous";
 			let vendorId = this.controller.get('model.id');
 			this.controller.set('contactInfoVisible', true);
 			this.send('storeContactInfoRequest', vendorId, userId);

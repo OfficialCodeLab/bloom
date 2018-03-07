@@ -141,9 +141,13 @@
 											</div>
 											<p style="padding-bottom: 20px; min-height:44px">
 												{{peopleStr.content}}
-											</p><hr /><p style="padding-top: 20px;">
+											</p><hr />
+
+                      {{#if session.isAuthenticated}}
+                      <p style="padding-top: 20px;">
 												Add to your favourites
 											</p>{{#favourite-button model.id currentUser.uid}}{{/favourite-button}}
+                      {{/if}}
 										</div>
 									</div>
 

@@ -386,7 +386,7 @@ export default Ember.Route.extend({
             subject: subject,
             html: contact.get('message'),
             senderId: user_id,
-            sendInfo: contact.get('sendInfo')
+            sendInfo: this.get("session").get('currentUser') ? contact.get('sendInfo') : false
           });
           message.save();
 
