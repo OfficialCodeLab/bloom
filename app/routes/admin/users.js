@@ -18,6 +18,7 @@ export default Ember.Route.extend({
 			let userCount = 0;
 			let vendorCount = 0;
 			let adminCount = 0;
+      console.log("TEST", model);
       model.forEach(function(user) {
 				if(user.get('accountType') === 'vendor') {
 					vendorCount++;
